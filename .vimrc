@@ -84,6 +84,7 @@ Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
+Bundle 'https://github.com/tpope/vim-abolish.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -240,9 +241,11 @@ set shortmess=I
 " Set up a dictionary so that I can do word completion by looking up words!
 set dictionary+=/usr/share/dict/american-english
 
-" Set up the enter key to ensure that after completing words a return is not pressed
-inoremap <expr> <Space> pumvisible() ? "\<C-y>" : " "
+" Note that this help for tab completion breaks the abolish plugin because it remaps space, needed to remove it!
+" This does not seem to break the setup for the use of tab completion in either latex or Java source code.
+" inoremap <expr> <Space> pumvisible() ? "\<C-y>" : " "
 
+" Set up the enter key to ensure that after completing words a return is not pressed
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
