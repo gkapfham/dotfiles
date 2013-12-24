@@ -82,7 +82,7 @@ let maplocalleader=","
 
           " Tell VAM which plugins to fetch & load -- this is a long list! -- scroll to the right to see them all!
       	  " call vam#ActivateAddons(["FuzzyFinder", "SuperTab%182", 	"The_NERD_Commenter", "tComment", "LaTeX_Box", "Bookmarking", "vim-signature", "fugitive", "csv", "vimproc", "SQLComplete"], {'auto_install' : 0})
-		  call vam#ActivateAddons(["FuzzyFinder", "The_NERD_Commenter", "Bookmarking", "vim-signature", "fugitive", "csv", "vimproc", "SQLComplete"], {'auto_install' : 0})
+		  call vam#ActivateAddons(["FuzzyFinder", "The_NERD_Commenter", "vim-signature", "fugitive", "csv", "vimproc", "SQLComplete"], {'auto_install' : 0})
 	  endfun
     call SetupVAM()
 
@@ -99,7 +99,8 @@ let maplocalleader=","
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
     Bundle 'gmarik/vundle'
-    " Add any bundles that you want to install to this location
+
+	" These are all of the Bundles that we use to enhance the behavior of Vim
 	Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 	Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
 	Bundle 'https://github.com/Valloric/MatchTagAlways.git'
@@ -133,12 +134,14 @@ let maplocalleader=","
   	Bundle 'https://github.com/tomtom/tlib_vim'
   	Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
 	Bundle 'https://github.com/vim-scripts/tComment.git'
+	Bundle 'https://github.com/dterei/VimBookmarking.git'
 
 	" Various vim plugins that did not work the way that I wanted them to, discarding for now
 	" Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
 	" Bundle 'https://github.com/Lokaltog/vim-easymotion'
 	" Bundle 'https://github.com/SirVer/ultisnips.git'
 	" Bundle 'https://github.com/Townk/vim-autoclose.git'
+	" Bundle 'https://github.com/airblade/vim-gitgutter.git'
 	" Bundle 'https://github.com/gcmt/tag-surfer.git'
 	" Bundle 'https://github.com/gerw/vim-latex-suite.git'
 	" Bundle 'https://github.com/goldfeld/vim-seek.git'
@@ -150,8 +153,6 @@ let maplocalleader=","
 	" Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
 	" Bundle 'https://github.com/vim-scripts/taglist.vim.git'
 	" I found that this plugin seemed to slow down the screen redraws and thus I no longer use it
-	" Bundle 'https://github.com/airblade/vim-gitgutter.git'
-
 	" if iCanHazVundle == 0
     "     echo "Installing Bundles, please ignore key map error messages"
     "     echo ""
@@ -194,6 +195,11 @@ autocmd FileType tex let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 " the autocompletion output that is available in gvim
 set cot=menu
 set completeopt=longest,menuone
+
+" set up some commands for adding, removing, and navigating bookmarks inside of vim; very useful
+map <silent> bb :ToggleBookmark<CR>
+map <silent> bn :NextBookmark<CR>
+map <silent> bp :PreviousBookmark<CR>
 
 " Adding in a bunch of additional commands from: 
 " http://nvie.com/posts/how-i-boosted-my-vim/  
