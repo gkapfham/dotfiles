@@ -65,6 +65,7 @@ Bundle 'https://github.com/onza/vim-snippets'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
 Bundle 'https://github.com/scrooloose/syntastic.git'
 Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
+Bundle 'https://github.com/tommcdo/vim-lion.git'
 Bundle 'https://github.com/tomtom/tlib_vim'
 Bundle 'https://github.com/tpope/vim-abolish.git'
 Bundle 'https://github.com/tpope/vim-fugitive.git'
@@ -83,6 +84,13 @@ Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
+
+if iCanHazVundle == 0
+    echo "Installing Bundles, please ignore key map error messages"
+    echo ""
+    :BundleInstall
+endif
+
 " Various vim plugins that did not work the way that I wanted them to, discarding for now
 " Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
 " Bundle 'https://github.com/Lokaltog/vim-easymotion'
@@ -99,12 +107,6 @@ Bundle 'https://github.com/yuratomo/gmail.vim.git'
 " Bundle 'https://github.com/rking/vim-detailed.git'
 " Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
 " Bundle 'https://github.com/vim-scripts/taglist.vim.git'
-" I found that this plugin seemed to slow down the screen redraws and thus I no longer use it
-" if iCanHazVundle == 0
-"     echo "Installing Bundles, please ignore key map error messages"
-"     echo ""
-"     :BundleInstall
-" endif
 
 " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
@@ -160,10 +162,8 @@ set shiftwidth=4  " number of spaces to use for autoindenting
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set showmatch     " set show matching parenthesis
 set ignorecase    " ignore case when searching
-set smartcase     " ignore case if search pattern is all lowercase,
-                  "    case-sensitive otherwise
-set smarttab      " insert tabs on the start of a line according to
-                  "    shiftwidth, not tabstop
+set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
+set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop
 set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 set history=1000  " remember more commands and search history
