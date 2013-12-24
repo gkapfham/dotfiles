@@ -158,7 +158,8 @@ let maplocalleader=","
     "     :BundleInstall
     " endif
 
-" Latex Box Plugin that is useful for editing LaTeX in Vim
+" Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
+" enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
 let g:LatexBox_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
 let g:LatexBox_output_type="pdf"
 let g:Tex_MultipleCompileFormats = 'pdf'
@@ -179,12 +180,15 @@ let g:tex_nine_config = {
 noremap <buffer><silent> <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
 noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
 
-" Add some configurations for SuperTab182 to support tab completion is git
-" commit messages and with many other types of files. You have to say which one you want to use in some situations,
-" though.  Note that we use SuperTab for different types of tab completion -- Java, LaTeX, others
-" let g:SuperTabDefaultCompletionType = "<c-x><c-u>,<c-x><c-o>,<c-x><c-n>,<c-x><c-k>"
+" Configure SuperTab so that it detects the context for tab completion, if it
+" cannot do so, then use standard auto-completion with words in the buffer
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-p>"
+
+" We want to use special tab completion for Java -- with eclim -- and tex --with omni completion 
+" based on the other plugins that are available for LaTeX. Tested and works very well.
+autocmd FileType java let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
+autocmd FileType tex let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " note that menu provides a substantially better configuration for viewing
 " the autocompletion output that is available in gvim
