@@ -82,7 +82,7 @@ let maplocalleader=","
 
           " Tell VAM which plugins to fetch & load -- this is a long list! -- scroll to the right to see them all!
       	  " call vam#ActivateAddons(["FuzzyFinder", "SuperTab%182", 	"The_NERD_Commenter", "tComment", "LaTeX_Box", "Bookmarking", "vim-signature", "fugitive", "csv", "vimproc", "SQLComplete"], {'auto_install' : 0})
-		  call vam#ActivateAddons(["FuzzyFinder", "The_NERD_Commenter", "vim-signature", "fugitive", "csv", "vimproc", "SQLComplete"], {'auto_install' : 0})
+		  call vam#ActivateAddons(["FuzzyFinder", "The_NERD_Commenter", "csv", "vimproc", "SQLComplete"], {'auto_install' : 0})
 	  endfun
     call SetupVAM()
 
@@ -135,6 +135,10 @@ let maplocalleader=","
   	Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
 	Bundle 'https://github.com/vim-scripts/tComment.git'
 	Bundle 'https://github.com/dterei/VimBookmarking.git'
+	Bundle 'https://github.com/kshenoy/vim-signature.git'
+	Bundle 'https://github.com/tpope/vim-fugitive.git'
+	Bundle 'https://github.com/vim-scripts/csv.vim.git'
+	Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
 
 	" Various vim plugins that did not work the way that I wanted them to, discarding for now
 	" Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
@@ -319,14 +323,14 @@ let g:SexyScroller_EasingStyle = 1
 
 " Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing
 set tags=./tags;
-let g:ctrlp_extensions = ['tag', 'buffertag']
 let g:easytags_ignored_filetypes = ''
 let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
+let g:ctrlp_extensions = ['tag', 'buffertag']
 nmap <C-t> :!ctags -R<CR>
 
 " Adding in a command that will open up the :MarksBrowser easily
-nmap <C-m> :MarksBrowser<CR>
+" nmap <C-m> :MarksBrowser<CR>
 
 " set the status line to contain additional information (displayed during
 " save, etc)
