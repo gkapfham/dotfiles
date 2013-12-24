@@ -170,7 +170,7 @@ let g:LatexBox_autojump=1
 
 " Recommended for xelatex users who wants SyncTeX support
 let g:tex_nine_config = {
-        \'compiler': 'xelatex',
+        \'compiler': 'latexmk',
         \'synctex': 1
 \}
 
@@ -183,7 +183,7 @@ noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
 " though.  Note that we use SuperTab for different types of tab completion -- Java, LaTeX, others
 " let g:SuperTabDefaultCompletionType = "<c-x><c-u>,<c-x><c-o>,<c-x><c-n>,<c-x><c-k>"
 let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>,<c-x><c-u>"
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
 " let g:acp_behaviorSnipmateLength = 1
 
