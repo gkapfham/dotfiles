@@ -82,7 +82,7 @@ let maplocalleader=","
 
           " Tell VAM which plugins to fetch & load -- this is a long list! -- scroll to the right to see them all!
       	  " call vam#ActivateAddons(["FuzzyFinder", "SuperTab%182", 	"The_NERD_Commenter", "tComment", "LaTeX_Box", "Bookmarking", "vim-signature", "fugitive", "csv", "vimproc", "SQLComplete"], {'auto_install' : 0})
-		  call vam#ActivateAddons(["FuzzyFinder", "The_NERD_Commenter", "tComment", "Bookmarking", "vim-signature", "fugitive", "csv", "vimproc", "SQLComplete"], {'auto_install' : 0})
+		  call vam#ActivateAddons(["FuzzyFinder", "The_NERD_Commenter", "Bookmarking", "vim-signature", "fugitive", "csv", "vimproc", "SQLComplete"], {'auto_install' : 0})
 	  endfun
     call SetupVAM()
 
@@ -132,7 +132,8 @@ let maplocalleader=","
   	Bundle 'https://github.com/onza/vim-snippets'
   	Bundle 'https://github.com/tomtom/tlib_vim'
   	Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
-	
+	Bundle 'https://github.com/vim-scripts/tComment.git'
+
 	" Various vim plugins that did not work the way that I wanted them to, discarding for now
 	" Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
 	" Bundle 'https://github.com/Lokaltog/vim-easymotion'
@@ -183,9 +184,7 @@ noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
 " though.  Note that we use SuperTab for different types of tab completion -- Java, LaTeX, others
 " let g:SuperTabDefaultCompletionType = "<c-x><c-u>,<c-x><c-o>,<c-x><c-n>,<c-x><c-k>"
 let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-
-" let g:acp_behaviorSnipmateLength = 1
+let g:SuperTabContextDefaultCompletionType = "<c-p>"
 
 " note that menu provides a substantially better configuration for viewing
 " the autocompletion output that is available in gvim
