@@ -168,7 +168,7 @@ set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 set history=1000  " remember more commands and search history
 set undolevels=1000 " use many muchos levels of undo
-set pastetoggle=<C-F12> " allow vim to paste a large amount of source code or tex
+set pastetoggle=<F2> " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10 " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,] " wrap when you get to the end of a line and you are using the arrow keys
 
@@ -209,6 +209,7 @@ au BufNewFile,BufRead,BufEnter *.sql    set nospell
 
 " Give a special key for turning on and off the Tagbar, a great feature for browsing source code, such as Java programs
 nmap <F12> :TagbarToggle<CR>
+nnoremap <silent> <F11> :TlistToggle<CR>
 
 " This is the extra line of code that the Tagbar needs to get LaTeX outlines to work correctly. Also. code in .ctags!
 let g:tagbar_type_tex = {
