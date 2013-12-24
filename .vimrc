@@ -30,138 +30,81 @@ set wildignore+=*/tmp/*
 " change the mapleader from \ to , -- this makes it easier to perform compilation in LaTeX 
 let maplocalleader=","
 
-" " VAM is a plugin management system for Vim and it is one of the ones that I will demonstrate the use of
-"        fun! EnsureVamIsOnDisk(plugin_root_dir)
-"           " windows users may want to use http://mawercer.de/~marc/vam/index.php
-"           " to fetch VAM, VAM-known-repositories and the listed plugins
-"           " without having to install curl, 7-zip and git tools first
-"           " -> BUG [4] (git-less installation)
-"           let vam_autoload_dir = a:plugin_root_dir.'/vim-addon-manager/autoload'
-"           if isdirectory(vam_autoload_dir)
-"             return 1
-"           else
-"             if 1 == confirm("Clone VAM into ".a:plugin_root_dir."?","&Y\n&N")
-"               " I'm sorry having to add this reminder. Eventually it'll pay off.
-"               call confirm("Remind yourself that most plugins ship with ".
-"                           \"documentation (README*, doc/*.txt). It is your ".
-"                           \"first source of knowledge. If you can't find ".
-"                           \"the info you're looking for in reasonable ".
-"                           \"time ask maintainers to improve documentation")
-"               call mkdir(a:plugin_root_dir, 'p')
-"               execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '.
-"                           \       shellescape(a:plugin_root_dir, 1).'/vim-addon-manager'
-"               " VAM runs helptags automatically when you install or update 
-"               " plugins
-"               exec 'helptags '.fnameescape(a:plugin_root_dir.'/vim-addon-manager/doc')
-"             endif
-"             return isdirectory(vam_autoload_dir)
-"           endif
-"         endfun
-" 
-    "     fun! SetupVAM()
-    "       " Set advanced options like this:
-    "       " let g:vim_addon_manager = {}
-    "       " let g:vim_addon_manager.key = value
-    "       "     Pipe all output into a buffer which gets written to disk
-    "       " let g:vim_addon_manager.log_to_buf =1
+" Setting up Vundle -- the vim plugin bundler -- and another plugin management tool that I will demonstrate
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+	echo "Installing Vundle.."
+	echo ""
+	silent !mkdir -p ~/.vim/bundle
+	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+	let iCanHazVundle=0
+endif
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
 
-    "       " Example: drop git sources unless git is in PATH. Same plugins can
-    "       " be installed from www.vim.org. Lookup MergeSources to get more control
-    "       " let g:vim_addon_manager.drop_git_sources = !executable('git')
-    "       " let g:vim_addon_manager.debug_activation = 1
-
-    "       " VAM install location:
-    "       let c = get(g:, 'vim_addon_manager', {})
-    "       let g:vim_addon_manager = c
-    "       let c.plugin_root_dir = expand('$HOME/.vim/vim-addons', 1)
-    "       if !EnsureVamIsOnDisk(c.plugin_root_dir)
-    "         echohl ErrorMsg | echomsg "No VAM found!" | echohl NONE
-    "         return
-    "       endif
-    "       let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
-
-    "       " Tell VAM which plugins to fetch & load -- this is a long list! -- scroll to the right to see them all!
-    "   	  " call vam#ActivateAddons(["FuzzyFinder", "SuperTab%182", 	"The_NERD_Commenter", "tComment", "LaTeX_Box", "Bookmarking", "vim-signature", "fugitive", "csv", "vimproc", "SQLComplete"], {'auto_install' : 0})
-		  call vam#ActivateAddons(["FuzzyFinder", "The_NERD_Commenter", "csv", "vimproc", "SQLComplete"], {'auto_install' : 0})
-	  endfun
-    " call SetupVAM()
-
-	" Setting up Vundle -- the vim plugin bundler -- and another plugin management tool that I will demonstrate
-    let iCanHazVundle=1
-    let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-    if !filereadable(vundle_readme)
-        echo "Installing Vundle.."
-        echo ""
-        silent !mkdir -p ~/.vim/bundle
-        silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-        let iCanHazVundle=0
-    endif
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
-    Bundle 'gmarik/vundle'
-
-	" These are all of the Bundles that we use to enhance the behavior of Vim
-	Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
-	Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
-	Bundle 'https://github.com/Valloric/MatchTagAlways.git'
-	Bundle 'https://github.com/altercation/vim-colors-solarized.git'
-	Bundle 'https://github.com/bling/vim-airline.git'
-	Bundle 'https://github.com/ervandew/supertab.git'
-	Bundle 'https://github.com/gregsexton/gitv.git'
-	Bundle 'https://github.com/int3/vim-extradite.git'
-	Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
-	Bundle 'https://github.com/justinmk/vim-sneak.git'
-	Bundle 'https://github.com/kablamo/vim-git-log.git'
-	Bundle 'https://github.com/kien/ctrlp.vim.git'
-	Bundle 'https://github.com/majutsushi/tagbar'
-	Bundle 'https://github.com/scrooloose/nerdtree.git'
-	Bundle 'https://github.com/scrooloose/syntastic.git'
-	Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
-	Bundle 'https://github.com/tpope/vim-abolish.git'
-	Bundle 'https://github.com/tpope/vim-surround.git'
-	Bundle 'https://github.com/vim-scripts/AutoTag.git'
-	Bundle 'https://github.com/vim-scripts/CSApprox.git'
-	Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
-	Bundle 'https://github.com/vim-scripts/TeX-9.git'
-	Bundle 'https://github.com/vim-scripts/Xoria256m.git'
-	Bundle 'https://github.com/vim-scripts/dbext.vim.git'
-	Bundle 'https://github.com/xolox/vim-easytags.git'
-	Bundle 'https://github.com/xolox/vim-misc.git'
-	Bundle 'https://github.com/xolox/vim-session.git'
-	Bundle 'https://github.com/yuratomo/gmail.vim.git'
-  	Bundle 'https://github.com/garbas/vim-snipmate'
-  	Bundle 'https://github.com/onza/vim-snippets'
-  	Bundle 'https://github.com/tomtom/tlib_vim'
-  	Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
-	Bundle 'https://github.com/vim-scripts/tComment.git'
-	Bundle 'https://github.com/dterei/VimBookmarking.git'
-	Bundle 'https://github.com/kshenoy/vim-signature.git'
-	Bundle 'https://github.com/tpope/vim-fugitive.git'
-	Bundle 'https://github.com/vim-scripts/csv.vim.git'
-	Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
-
-	" Various vim plugins that did not work the way that I wanted them to, discarding for now
-	" Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
-	" Bundle 'https://github.com/Lokaltog/vim-easymotion'
-	" Bundle 'https://github.com/SirVer/ultisnips.git'
-	" Bundle 'https://github.com/Townk/vim-autoclose.git'
-	" Bundle 'https://github.com/airblade/vim-gitgutter.git'
-	" Bundle 'https://github.com/gcmt/tag-surfer.git'
-	" Bundle 'https://github.com/gerw/vim-latex-suite.git'
-	" Bundle 'https://github.com/goldfeld/vim-seek.git'
-	" Bundle 'https://github.com/hlissner/vim-multiedit.git'
-	" Bundle 'https://github.com/jcf/vim-latex.git'
-	" Bundle 'https://github.com/mhinz/vim-startify.git'
-	" Bundle 'https://github.com/othree/vim-autocomplpop.git'
-	" Bundle 'https://github.com/rking/vim-detailed.git'
-	" Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
-	" Bundle 'https://github.com/vim-scripts/taglist.vim.git'
-	" I found that this plugin seemed to slow down the screen redraws and thus I no longer use it
-	" if iCanHazVundle == 0
-    "     echo "Installing Bundles, please ignore key map error messages"
-    "     echo ""
-    "     :BundleInstall
-    " endif
+" These are all of the Bundles that we use to enhance the behavior of Vim
+Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
+Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
+Bundle 'https://github.com/Valloric/MatchTagAlways.git'
+Bundle 'https://github.com/altercation/vim-colors-solarized.git'
+Bundle 'https://github.com/bling/vim-airline.git'
+Bundle 'https://github.com/dterei/VimBookmarking.git'
+Bundle 'https://github.com/ervandew/supertab.git'
+Bundle 'https://github.com/garbas/vim-snipmate'
+Bundle 'https://github.com/gregsexton/gitv.git'
+Bundle 'https://github.com/int3/vim-extradite.git'
+Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
+Bundle 'https://github.com/justinmk/vim-sneak.git'
+Bundle 'https://github.com/kablamo/vim-git-log.git'
+Bundle 'https://github.com/kien/ctrlp.vim.git'
+Bundle 'https://github.com/kshenoy/vim-signature.git'
+Bundle 'https://github.com/majutsushi/tagbar'
+Bundle 'https://github.com/onza/vim-snippets'
+Bundle 'https://github.com/scrooloose/nerdtree.git'
+Bundle 'https://github.com/scrooloose/syntastic.git'
+Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
+Bundle 'https://github.com/tomtom/tlib_vim'
+Bundle 'https://github.com/tpope/vim-abolish.git'
+Bundle 'https://github.com/tpope/vim-fugitive.git'
+Bundle 'https://github.com/tpope/vim-surround.git'
+Bundle 'https://github.com/vim-scripts/AutoTag.git'
+Bundle 'https://github.com/vim-scripts/CSApprox.git'
+Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
+Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
+Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
+Bundle 'https://github.com/vim-scripts/TeX-9.git'
+Bundle 'https://github.com/vim-scripts/Xoria256m.git'
+Bundle 'https://github.com/vim-scripts/csv.vim.git'
+Bundle 'https://github.com/vim-scripts/dbext.vim.git'
+Bundle 'https://github.com/vim-scripts/tComment.git'
+Bundle 'https://github.com/xolox/vim-easytags.git'
+Bundle 'https://github.com/xolox/vim-misc.git'
+Bundle 'https://github.com/xolox/vim-session.git'
+Bundle 'https://github.com/yuratomo/gmail.vim.git'
+" Various vim plugins that did not work the way that I wanted them to, discarding for now
+" Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
+" Bundle 'https://github.com/Lokaltog/vim-easymotion'
+" Bundle 'https://github.com/SirVer/ultisnips.git'
+" Bundle 'https://github.com/Townk/vim-autoclose.git'
+" Bundle 'https://github.com/airblade/vim-gitgutter.git'
+" Bundle 'https://github.com/gcmt/tag-surfer.git'
+" Bundle 'https://github.com/gerw/vim-latex-suite.git'
+" Bundle 'https://github.com/goldfeld/vim-seek.git'
+" Bundle 'https://github.com/hlissner/vim-multiedit.git'
+" Bundle 'https://github.com/jcf/vim-latex.git'
+" Bundle 'https://github.com/mhinz/vim-startify.git'
+" Bundle 'https://github.com/othree/vim-autocomplpop.git'
+" Bundle 'https://github.com/rking/vim-detailed.git'
+" Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
+" Bundle 'https://github.com/vim-scripts/taglist.vim.git'
+" I found that this plugin seemed to slow down the screen redraws and thus I no longer use it
+" if iCanHazVundle == 0
+"     echo "Installing Bundles, please ignore key map error messages"
+"     echo ""
+"     :BundleInstall
+" endif
 
 " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
