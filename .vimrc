@@ -85,6 +85,7 @@ Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
 Bundle 'https://github.com/tpope/vim-abolish.git'
+Bundle 'https://github.com/scrooloose/nerdtree.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -212,7 +213,9 @@ au BufNewFile,BufRead,BufEnter *.sql    set nospell
 
 " Give a special key for turning on and off the Tagbar, a great feature for browsing source code, such as Java programs
 nmap <F12> :TagbarToggle<CR>
-nnoremap <silent> <F11> :TlistToggle<CR>
+
+" Give a special key for turning on and off the NERDTree, a great feature for browsing the entire file system
+nmap <F11> :NERDTreeToggle<CR>
 
 " This is the extra line of code that the Tagbar needs to get LaTeX outlines to work correctly. Also. code in .ctags!
 let g:tagbar_type_tex = {
