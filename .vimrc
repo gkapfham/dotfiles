@@ -136,10 +136,12 @@ noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-p>"
 
-" We want to use special tab completion for Java -- with eclim -- and tex --with omni completion 
-" based on the other plugins that are available for LaTeX. Tested and works very well.
-autocmd FileType java let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
+" We want to use special tab completion for the plugins that are available for LaTeX. Tested and works very well.
 autocmd FileType tex let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+autocmd FileType tex let g:SuperTabContextDefaultCompletionType = "<c-p>"
+
+" It turns out that Java tab completion works correctly without using something special, so this is not needed
+" autocmd FileType java let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
 
 " note that menu provides a substantially better configuration for viewing
 " the autocompletion output that is available in gvim
@@ -226,10 +228,10 @@ let g:tagbar_type_tex = {
         \ }
 
 " Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!
-" set lazyredraw
 set nocursorcolumn
 set nocursorline
 " syntax sync minlines=256
+" set lazyredraw
 
 " Make the source code history browsing feature open windows horizontally, as this supports better browsing
 let g:Gitv_OpenHorizontal=1
