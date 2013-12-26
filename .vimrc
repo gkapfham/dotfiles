@@ -109,6 +109,7 @@ endif
 " Bundle 'https://github.com/rking/vim-detailed.git'
 " Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
 " Bundle 'https://github.com/vim-scripts/taglist.vim.git'
+" Bundle 'https://github.com/mhinz/vim-signify.git'
 
 " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
