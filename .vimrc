@@ -177,12 +177,6 @@ set pastetoggle=<F2> " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10 " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,] " wrap when you get to the end of a line and you are using the arrow keys
 
-" This is a nice feature, but it takes to long for the screen to redraw when using it
-" set relativenumber 
-
-" ULtimately, I decided that it was better for us to not use this feature by default
-"set hidden        " allow a new buffer to be opened even if current one is not saved
-
 " do not prompt to save for the session management each time
 let g:session_autosave = 'no'
 
@@ -217,6 +211,9 @@ nmap <F12> :TagbarToggle<CR>
 
 " Give a special key for turning on and off the NERDTree, a great feature for browsing the entire file system
 nmap <F11> :NERDTreeToggle<CR>
+
+" Set up the NERDTree so that it does not display the silly help message at the top, this is not minimal enough.
+let NERDTreeMinimalUI=1
 
 " This is the extra line of code that the Tagbar needs to get LaTeX outlines to work correctly. Also. code in .ctags!
 let g:tagbar_type_tex = {
@@ -281,6 +278,13 @@ let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
 let g:ctrlp_extensions = ['tag', 'buffertag']
 nmap <C-t> :!ctags -R<CR>
+
+" This is a nice feature, but it takes to long for the screen to redraw when using it
+" set relativenumber 
+
+" ULtimately, I decided that it was better for us to not use this feature by default
+"set hidden        " allow a new buffer to be opened even if current one is not saved
+
 
 " Adding in a command that will open up the :MarksBrowser easily
 " nmap <C-m> :MarksBrowser<CR>
