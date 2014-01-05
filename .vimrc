@@ -17,6 +17,7 @@ colorscheme hybrid
 " define some commands for wrapping and not wrapping a line or paragraph
 command Wrap set textwidth=120
 command NoWrap set textwidth=0
+command StandardWrap set textwidth=80
 
 " Make sure that you can load the dot files when you are searching the file system
 let g:ctrlp_show_hidden = 1
@@ -138,12 +139,12 @@ noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-p>"
 
+" Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type
+set complete-=k complete+=k
+
 " We want to use special tab completion for the plugins that are available for LaTeX. Tested and works very well.
 autocmd FileType tex let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 autocmd FileType tex let g:SuperTabContextDefaultCompletionType = "<c-p>"
-
-" It turns out that Java tab completion works correctly without using something special, so this is not needed
-" autocmd FileType java let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
 
 " note that menu provides a substantially better configuration for viewing
 " the autocompletion output that is available in gvim
@@ -279,6 +280,13 @@ let g:easytags_updatetime_warn = 0
 let g:ctrlp_extensions = ['tag', 'buffertag']
 nmap <C-t> :!ctags -R<CR>
 
+" We want to use next word tab completion for email and then use the dictionary otherwise. Testing now, seems fine.
+" autocmd FileType mail let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
+" autocmd FileType mail let g:SuperTabContextDefaultCompletionType = "<c-x><c-k>"
+" 
+
+" It turns out that Java tab completion works correctly without using something special, so this is not needed
+" autocmd FileType java let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
 " This is a nice feature, but it takes to long for the screen to redraw when using it
 " set relativenumber 
 
