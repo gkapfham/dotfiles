@@ -30,6 +30,7 @@ set wildignore+=*/tmp/*
 
 " change the mapleader from \ to , -- this makes it easier to perform compilation in LaTeX 
 let maplocalleader=","
+let mapleader=","
 
 " Setting up Vundle -- the vim plugin bundler -- and another plugin management tool that I will demonstrate
 let iCanHazVundle=1
@@ -48,6 +49,7 @@ Bundle 'gmarik/vundle'
 " These are all of the Bundles that we use to enhance the behavior of Vim
 Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
+Bundle 'https://github.com/Valloric/ListToggle.git'
 Bundle 'https://github.com/Valloric/MatchTagAlways.git'
 Bundle 'https://github.com/altercation/vim-colors-solarized.git'
 Bundle 'https://github.com/bling/vim-airline.git'
@@ -56,6 +58,7 @@ Bundle 'https://github.com/ervandew/supertab.git'
 Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/gregsexton/gitv.git'
 Bundle 'https://github.com/int3/vim-extradite.git'
+Bundle 'https://github.com/itchyny/calendar.vim.git'
 Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Bundle 'https://github.com/justinmk/vim-sneak.git'
 Bundle 'https://github.com/kablamo/vim-git-log.git'
@@ -111,6 +114,7 @@ endif
 " Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
 " Bundle 'https://github.com/vim-scripts/taglist.vim.git'
 " Bundle 'https://github.com/mhinz/vim-signify.git'
+" Bundle 'https://github.com/milkypostman/vim-togglelist.git'
 
 " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
@@ -279,6 +283,8 @@ let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
 let g:ctrlp_extensions = ['tag', 'buffertag']
 nmap <C-t> :!ctags -R<CR>
+
+let g:calendar_google_calendar = 1
 
 " We want to use next word tab completion for email and then use the dictionary otherwise. Testing now, seems fine.
 " autocmd FileType mail let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
