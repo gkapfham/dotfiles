@@ -61,6 +61,7 @@ source $ZSH/oh-my-zsh.sh
 # load the special plugin that is needed to create the git-stacular prompt showing status 
 source ~/.zsh/git-prompt/zshrc.sh
 
+# allow for the editing of the command-line in vim by pressing the "v" key in the terminal window
 export KEYTIMEOUT=1
 autoload edit-command-line
 zle -N edit-command-line
