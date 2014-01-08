@@ -285,6 +285,7 @@ let g:easytags_updatetime_warn = 0
 let g:ctrlp_extensions = ['tag', 'buffertag']
 nmap <C-t> :!ctags -R<CR>
 
+" Configure the Calendar plugin so that it can access the Google calendar, nice for viewing your schedule
 let g:calendar_google_calendar = 1
 
 " We want to use next word tab completion for email and then use the dictionary otherwise. Testing now, seems fine.
