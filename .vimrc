@@ -140,17 +140,17 @@ let g:tex_nine_config = {
 noremap <buffer><silent> <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
 noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
 
+" Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type
+set complete-=k complete+=k
+
 " Configure SuperTab so that it detects the context for tab completion, if it
 " cannot do so, then use standard auto-completion with words in the buffer
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-p>"
-
-" Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type
-set complete-=k complete+=k
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 
 " We want to use special tab completion for the plugins that are available for LaTeX. Tested and works very well.
 autocmd FileType tex let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-autocmd FileType tex let g:SuperTabContextDefaultCompletionType = "<c-p>"
 
 " note that menu provides a substantially better configuration for viewing
 " the autocompletion output that is available in gvim
@@ -249,6 +249,7 @@ let g:Gitv_OpenHorizontal=1
 set shortmess=I
 
 " Set up a dictionary so that I can do word completion by looking up words!
+set dictionary-=/usr/share/dict/american-english
 set dictionary+=/usr/share/dict/american-english
 
 " Note that this help for tab completion breaks the abolish plugin because it remaps space, needed to remove it!
