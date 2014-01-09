@@ -1,4 +1,4 @@
- Indicate that vim should run our plugins and always use syntax highlighting for all identified file types
+" Indicate that vim should run our plugins and always use syntax highlighting for all identified file types
 set nocompatible | filetype indent plugin on | syn on
 
 " set the completion function for a variety of different file types
