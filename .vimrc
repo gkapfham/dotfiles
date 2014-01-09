@@ -1,4 +1,4 @@
-" Indicate that vim should run our plugins and always use syntax highlighting for all identified file types
+ Indicate that vim should run our plugins and always use syntax highlighting for all identified file types
 set nocompatible | filetype indent plugin on | syn on
 
 " set the completion function for a variety of different file types
@@ -61,6 +61,7 @@ Bundle 'https://github.com/gregsexton/gitv.git'
 Bundle 'https://github.com/int3/vim-extradite.git'
 Bundle 'https://github.com/itchyny/calendar.vim.git'
 Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
+Bundle 'https://github.com/junegunn/vim-easy-align.git'
 Bundle 'https://github.com/justinmk/vim-sneak.git'
 Bundle 'https://github.com/kablamo/vim-git-log.git'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
@@ -287,6 +288,12 @@ nmap <C-t> :!ctags -R<CR>
 
 " Configure the Calendar plugin so that it can access the Google calendar, nice for viewing your schedule
 let g:calendar_google_calendar = 1
+
+" Start interactive EasyAlign in visual mode
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign with a Vim movement
+nmap <Leader>a <Plug>(EasyAlign)
 
 " We want to use next word tab completion for email and then use the dictionary otherwise. Testing now, seems fine.
 " autocmd FileType mail let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
