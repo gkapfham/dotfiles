@@ -14,8 +14,9 @@ endfunction
 " when the GUI is running, that is GVim is being used, then we should call the maximization function
 au GUIEnter * call Maximize_Window()
 
-" remove the right side scroll bar, which is not really needed in Gvim
-set guioptions-=r 
+" remove the right side and left side scroll bar, which is not really needed in Gvim, more of a minimal look this way
+set guioptions-=r
+set guioptions-=L
 
 " Configure the airline status bar replacement that provides some delightful context 
 " set laststatus=2
