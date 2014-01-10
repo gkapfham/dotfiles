@@ -148,7 +148,7 @@ set smartindent
 noremap <buffer><silent> <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
 noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
 
-" Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type
+" Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type)
 set complete-=k complete+=k
 
 " Configure SuperTab so that it detects the context for tab completion, if it
@@ -198,8 +198,7 @@ let g:session_autosave = 'no'
 " to use the sessions program, you need to uncomment this line and change it to something in your home account
 " let g:session_directory = '/home/gkapfham/.vim/sessions'
 
-" database connections for work with SchemaAnalyst and different database
-" applications (e.g., TweetComplete) 
+" database connections for work with SchemaAnalyst and different database applications (e.g., TweetComplete) 
 
 " SQLite
 let g:dbext_default_profile_sqlite_customer = 'type=SQLITE:dbname=/home/gkapfham/working/databases/customer.db'
@@ -274,9 +273,8 @@ let g:airline_powerline_fonts = 1
 let g:airline_detect_whitespace=0
 set nosmd " turn of the status line that shows the silly word insert, airline is much better!
 
-" Configure the way that colors are displayed for the sneak feature of
-" searching in the text, seems to work very nicely
-hi link SneakPluginTarget Type
+" Configure the way that colors are displayed for the sneak feature of searching in the text, seems to work very nicely
+hi link SneakPluginTarget Type 
 hi link SneakPluginScope Visual
 
 " Configure scrolling in the window; breaks with the mouse flick but fine with the keyboard
