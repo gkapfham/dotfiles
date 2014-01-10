@@ -7,6 +7,10 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
+" Set up a dictionary so that I can do word completion by looking up words!
+set dictionary-=/usr/share/dict/american-english
+set dictionary+=/usr/share/dict/american-english
+
 " Set the encoding to utf 8, the most common encoding used for text
 set encoding=utf-8
 
@@ -51,6 +55,7 @@ Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Bundle 'https://github.com/Valloric/ListToggle.git'
 Bundle 'https://github.com/Valloric/MatchTagAlways.git'
+Bundle 'https://github.com/aaronbieber/quicktask.git'
 Bundle 'https://github.com/altercation/vim-colors-solarized.git'
 Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/dterei/VimBookmarking.git'
@@ -118,8 +123,8 @@ endif
 " Bundle 'https://github.com/mhinz/vim-signify.git'
 " Bundle 'https://github.com/milkypostman/vim-togglelist.git'
 
-" Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
-" enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
+" " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
+" " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
 let g:LatexBox_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
 let g:LatexBox_output_type="pdf"
 let g:Tex_MultipleCompileFormats = 'pdf'
@@ -130,11 +135,14 @@ let Tex_FoldedEnvironments=""
 let Tex_FoldedMisc=""
 let g:LatexBox_autojump=1
 
-" Recommended for xelatex users who wants SyncTeX support
+" Recommended for xelatex users who wants SyncTeX support, using the Tex-9 plugin for forward and reverse searching
 let g:tex_nine_config = {
         \'compiler': 'latexmk',
         \'synctex': 1
 \}
+
+" Turn on smart indentation with the LaTeX-Box plugin, nice and very helpful
+set smartindent
 
 " Commands that allow for the invocation of the SyncTex support
 noremap <buffer><silent> <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
@@ -248,10 +256,6 @@ let g:Gitv_OpenHorizontal=1
 " with no specified file
 set shortmess=I
 
-" Set up a dictionary so that I can do word completion by looking up words!
-set dictionary-=/usr/share/dict/american-english
-set dictionary+=/usr/share/dict/american-english
-
 " Note that this help for tab completion breaks the abolish plugin because it remaps space, needed to remove it!
 " This does not seem to break the setup for the use of tab completion in either latex or Java source code.
 " inoremap <expr> <Space> pumvisible() ? "\<C-y>" : " "
@@ -296,10 +300,12 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign with a Vim movement
 nmap <Leader>a <Plug>(EasyAlign)
 
+" Indicate that a file with the quicktask extension should always put us into QuickTask mode for editing task listings
+autocmd BufNewFile,BufRead *.quicktask setf quicktask
+
 " We want to use next word tab completion for email and then use the dictionary otherwise. Testing now, seems fine.
 " autocmd FileType mail let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
 " autocmd FileType mail let g:SuperTabContextDefaultCompletionType = "<c-x><c-k>"
-" 
 
 " It turns out that Java tab completion works correctly without using something special, so this is not needed
 " autocmd FileType java let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
