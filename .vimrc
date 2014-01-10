@@ -315,7 +315,6 @@ autocmd BufNewFile,BufRead *.quicktask setf quicktask
 " ULtimately, I decided that it was better for us to not use this feature by default
 "set hidden        " allow a new buffer to be opened even if current one is not saved
 
-
 " Adding in a command that will open up the :MarksBrowser easily
 " nmap <C-m> :MarksBrowser<CR>
 
