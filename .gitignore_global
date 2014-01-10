@@ -132,3 +132,7 @@ local.properties
 *-Ex.R
 *.Rdata
 *.Rhistory
+
+# CTags #
+######################
+tags
