@@ -6,6 +6,10 @@ set omnifunc=syntaxcomplete#Complete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType todo set syntax=todo
+
+" Set it so that the todo mode is always run when editing the file called todo.txt or Todo.txt
+autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
 
 " Set up a dictionary so that I can do word completion by looking up words!
 set dictionary-=/usr/share/dict/american-english
@@ -55,11 +59,11 @@ Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Bundle 'https://github.com/Valloric/ListToggle.git'
 Bundle 'https://github.com/Valloric/MatchTagAlways.git'
-Bundle 'https://github.com/aaronbieber/quicktask.git'
 Bundle 'https://github.com/altercation/vim-colors-solarized.git'
 Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/dterei/VimBookmarking.git'
 Bundle 'https://github.com/ervandew/supertab.git'
+Bundle 'https://github.com/freitass/todo.txt-vim.git'
 Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/godlygeek/tabular.git'
 Bundle 'https://github.com/gregsexton/gitv.git'
@@ -122,6 +126,7 @@ endif
 " Bundle 'https://github.com/vim-scripts/taglist.vim.git'
 " Bundle 'https://github.com/mhinz/vim-signify.git'
 " Bundle 'https://github.com/milkypostman/vim-togglelist.git'
+ " Bundle 'https://github.com/aaronbieber/quicktask.git'
 
 " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
@@ -299,7 +304,7 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
 " Indicate that a file with the quicktask extension should always put us into QuickTask mode for editing task listings
-autocmd BufNewFile,BufRead *.quicktask setf quicktask
+" autocmd BufNewFile,BufRead todo.txt setf todo.txt
 
 " We want to use next word tab completion for email and then use the dictionary otherwise. Testing now, seems fine.
 " autocmd FileType mail let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
