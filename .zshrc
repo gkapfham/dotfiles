@@ -10,6 +10,9 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="norm-gkapfham"
 
+# Make it faster to load the todo.txt file used for my todo list.
+alias vt="vim ~/Public/working/todo/todo.txt"
+
 # autoload -Uz vcs_info
 # zstyle ':vcs_info:*' enable git svn
 # precmd() {
