@@ -303,6 +303,22 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign with a Vim movement
 nmap <Leader>a <Plug>(EasyAlign)
 
+" Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
+fu! TexQuotes()
+        let line = getline(".")
+        let curpos = col(".")-1
+        let insert = "''"
+        
+        let left = strpart(line, curpos-1, 1)
+
+        if (left == ' ' || left == '        ' || left == '')
+                let insert = '``'
+        endif
+
+        return insert        
+endfu
+autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
+
 " Indicate that a file with the quicktask extension should always put us into QuickTask mode for editing task listings
 " autocmd BufNewFile,BufRead todo.txt setf todo.txt
 
