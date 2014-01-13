@@ -159,7 +159,7 @@ set complete-=k complete+=k
 " Configure SuperTab so that it detects the context for tab completion, if it
 " cannot do so, then use standard auto-completion with words in the buffer
 let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-p>"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 
 " We want to use special tab completion for the plugins that are available for LaTeX. Tested and works very well.
