@@ -154,16 +154,38 @@ noremap <buffer><silent> <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
 noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
 
 " Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type)
+" set complete=.,b,u,]
 set complete-=k complete+=k
 
-" Configure SuperTab so that it detects the context for tab completion, if it
-" cannot do so, then use standard auto-completion with words in the buffer
+" This is the default context completion that will be used if there is not a separate autocommand configuration
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 
+" LaTeX needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
+" other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS WELL
+autocmd FileType tex
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-n>") |
+    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+    \ endif
+
+" HTML needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
+" other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS WELL
+autocmd FileType html
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-n>") |
+    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+    \ endif
+
+" Java autocompletion must use the completefunc (ctrl-x ctrl-u) to work correctly, so set it separately 
+autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
+autocmd FileType java let g:SuperTabContextDefaultCompletionType = "<c-n>"
+autocmd FileType java let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
+
 " We want to use special tab completion for the plugins that are available for LaTeX. Tested and works very well.
-autocmd FileType tex let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+" autocmd FileType tex let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+" autocmd FileType todo let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " note that menu provides a substantially better configuration for viewing
 " the autocompletion output that is available in gvim
@@ -260,16 +282,15 @@ let g:Gitv_OpenHorizontal=1
 " with no specified file
 set shortmess=I
 
-" Note that this help for tab completion breaks the abolish plugin because it remaps space, needed to remove it!
-" This does not seem to break the setup for the use of tab completion in either latex or Java source code.
-" inoremap <expr> <Space> pumvisible() ? "\<C-y>" : " "
-
 " Set up the enter key to ensure that after completing words a return is not pressed
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+" inoremap <expr> <tab> pumvisible() ? '<tab>' :
+"   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 " Configure the airline status bar replacement that provides some delightful context 
 set laststatus=2
