@@ -161,6 +161,7 @@ set complete-=k complete+=k
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabLongestEnhanced = 1
 
 " LaTeX needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
 " other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS WELL
@@ -182,6 +183,8 @@ autocmd FileType html
 autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
 autocmd FileType java let g:SuperTabContextDefaultCompletionType = "<c-n>"
 autocmd FileType java let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
+
+
 
 " We want to use special tab completion for the plugins that are available for LaTeX. Tested and works very well.
 " autocmd FileType tex let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
