@@ -184,8 +184,6 @@ autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
 autocmd FileType java let g:SuperTabContextDefaultCompletionType = "<c-n>"
 autocmd FileType java let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
 
-
-
 " We want to use special tab completion for the plugins that are available for LaTeX. Tested and works very well.
 " autocmd FileType tex let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 " autocmd FileType todo let g:SuperTabDefaultCompletionType = "<c-n>"
