@@ -1,11 +1,16 @@
 " Indicate that vim should run our plugins and always use syntax highlighting for all identified file types
 set nocompatible | filetype indent plugin on | syn on
 
-" set the completion function for a variety of different file types
-set omnifunc=syntaxcomplete#Complete
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" Set the completion function for a variety of different file types
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType tex set omnifunc=LatexBox_Complete
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+
+" Set the completion function in general if there is not a specific type
+set omnifunc=syntaxcomplete#Complete
+
+" Set the syntax for the todo file so that the file highlighting is correct
 autocmd FileType todo set syntax=todo
 
 " Set it so that the todo mode is always run when editing the file called todo.txt or Todo.txt
@@ -167,6 +172,8 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 let g:SuperTabLongestEnhanced = 1
+
+" LatexBox_Complete
 
 " LaTeX needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
 " other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS WELL
