@@ -1,3 +1,4 @@
+" Always use syntax highlighting.
 syntax on
 
 " pick one of the color schemes that is available for use; I customized hybrid further
