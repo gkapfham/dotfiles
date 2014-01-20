@@ -7,6 +7,7 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=LatexBox_Complete
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
+
 " Set the completion function in general if there is not a specific type
 set omnifunc=syntaxcomplete#Complete
 
@@ -166,6 +167,7 @@ nmap <C-l> :call tex_nine#ForwardSearch()<CR>
 " Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type)
 " set complete=.,b,u,]
 set complete-=k complete+=k
+set complete+=kspell
 
 " This is the default context completion that will be used if there is not a separate autocommand configuration
 let g:SuperTabDefaultCompletionType = "context"
@@ -222,6 +224,7 @@ set shiftwidth=4  " number of spaces to use for autoindenting
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set showmatch     " set show matching parenthesis
 set ignorecase    " ignore case when searching
+set infercase     " predict the case that is needed when doing auto completion
 set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
 set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop
 set hlsearch      " highlight search terms
