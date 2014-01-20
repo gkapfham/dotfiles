@@ -150,9 +150,13 @@ let g:tex_nine_config = {
 " Turn on smart indentation with the LaTeX-Box plugin, nice and very helpful
 set smartindent
 
+" " Commands that allow for the invocation of the SyncTex support
+" noremap <buffer><silent> <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
+" noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
+
 " Commands that allow for the invocation of the SyncTex support
-noremap <buffer><silent> <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
-noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
+nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
+nmap <C-l> :call tex_nine#ForwardSearch()<CR>
 
 " Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type)
 " set complete=.,b,u,]
