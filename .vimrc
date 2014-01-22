@@ -218,7 +218,6 @@ set nowrap        " don't wrap lines
 set wrap          " go ahead and allow the wrapping of long lines to take place 
 set linebreak     " make sure that you break the lines in a way that preserves words
 set showbreak=━━  " set an ellipse character so that you can tell when lines are wrapped
-set formatoptions=a " automatically reformat paragraphs when going beyond textwidth; good but not perfect 
 set tabstop=4     " a tab is four spaces
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set autoindent    " always set autoindenting on
@@ -237,6 +236,10 @@ set undolevels=1000 " use many muchos levels of undo
 set pastetoggle=<F2> " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10 " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,] " wrap when you get to the end of a line and you are using the arrow keys
+
+autocmd FileType tex set formatoptions=a " ALL automatically reformat paragraphs when going beyond textwidth; good but not perfect 
+autocmd FileType mail set formatoptions=t " TEXT automatically reformat paragraphs when going beyond textwidth; good but not perfect 
+autocmd FileType java set formatoptions=c " COMM automatically reformat paragraphs when going beyond textwidth; good but not perfect 
 
 " do not prompt to save for the session management each time
 let g:session_autosave = 'no'
