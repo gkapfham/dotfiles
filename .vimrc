@@ -7,7 +7,6 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=LatexBox_Complete
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
-
 " Set the completion function in general if there is not a specific type
 set omnifunc=syntaxcomplete#Complete
 
@@ -219,6 +218,7 @@ set nowrap        " don't wrap lines
 set wrap          " go ahead and allow the wrapping of long lines to take place 
 set linebreak     " make sure that you break the lines in a way that preserves words
 set showbreak=━━  " set an ellipse character so that you can tell when lines are wrapped
+set formatoptions=a " automatically reformat paragraphs when going beyond textwidth; good but not perfect 
 set tabstop=4     " a tab is four spaces
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set autoindent    " always set autoindenting on
