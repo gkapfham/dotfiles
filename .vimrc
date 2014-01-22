@@ -216,6 +216,9 @@ map <silent> bp :PreviousBookmark<CR>
 " http://nvie.com/posts/how-i-boosted-my-vim/  
 
 set nowrap        " don't wrap lines
+set wrap          " go ahead and allow the wrapping of long lines to take place 
+set linebreak     " make sure that you break the lines in a way that preserves words
+set showbreak=━━  " set an ellipse character so that you can tell when lines are wrapped
 set tabstop=4     " a tab is four spaces
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set autoindent    " always set autoindenting on
