@@ -28,7 +28,7 @@ set encoding=utf-8
 colorscheme hybrid
 
 " define some commands for wrapping and not wrapping a line or paragraph
-command Wrap set textwidth=120
+command Wrap set textwidth=130
 command NoWrap set textwidth=0
 command StandardWrap set textwidth=80
 
@@ -362,6 +362,41 @@ fu! TexQuotes()
         return insert        
 endfu
 autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
+
+map gqb vip:join<CR>0:call SplitLineBySentence()<CR>
+
+" Define function (! means it will redefine it if it exists)
+function! SplitLineBySentence()
+     " Set variables to hold current cursor line and column
+
+
+     let lastline=line('.')
+     let lastcol=col('.')
+     " Run normal command ) that moves to end of paragraph
+     normal )
+     " while the current column has changed, but not the line, and the cursor
+     " is not on the last character of the line (nor beyond it)...
+
+     while lastline==line('.') && lastcol!=col('.') && col('.')<col('$')-1
+        " ':execute" the following expression as a command...
+        " :normal -- run normal mode commands
+        " h -- cursor left
+        " viw -- visually select inner word (actually selects the whitespace)
+        " s -- change character normal mode command...like 'cl'
+        " \<CR> -- Enter. \< inside double quotes is used to include special
+        " characters in a string.
+        " \<Esc> -- Escape. To exit insert mode (that 's' puts us into)
+
+		exe "normal hvi\<CR>\<Esc>"
+        " We are on a new line now, so update the variables
+
+        let lastline=line('.')
+        let lastcol=col('.')
+        normal )
+     endwhile
+     " normal mode {+ -- move to previous paragraph then down one line
+     normal {+
+endfunction
 
 " Indicate that a file with the quicktask extension should always put us into QuickTask mode for editing task listings
 " autocmd BufNewFile,BufRead todo.txt setf todo.txt
