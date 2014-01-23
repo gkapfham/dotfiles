@@ -145,6 +145,7 @@ let Tex_FoldedSections=""
 let Tex_FoldedEnvironments=""
 let Tex_FoldedMisc=""
 let g:LatexBox_autojump=1
+let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compilation, great for the issta paper
 
 " Recommended for xelatex users who wants SyncTeX support, using the Tex-9 plugin for forward and reverse searching
 let g:tex_nine_config = {
@@ -237,9 +238,9 @@ set pastetoggle=<F2> " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10 " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,] " wrap when you get to the end of a line and you are using the arrow keys
 
-autocmd FileType tex set formatoptions=a " ALL automatically reformat paragraphs when going beyond textwidth; good but not perfect 
-autocmd FileType mail set formatoptions=t " TEXT automatically reformat paragraphs when going beyond textwidth; good but not perfect 
-autocmd FileType java set formatoptions=c " COMM automatically reformat paragraphs when going beyond textwidth; good but not perfect 
+" autocmd FileType tex set formatoptions=t " ALL automatically reformat paragraphs when going beyond textwidth; good but not perfect 
+" autocmd FileType mail set formatoptions=t " TEXT automatically reformat paragraphs when going beyond textwidth; good but not perfect 
+" autocmd FileType java set formatoptions=c " COMM automatically reformat paragraphs when going beyond textwidth; good but not perfect 
 
 " do not prompt to save for the session management each time
 let g:session_autosave = 'no'
@@ -255,7 +256,7 @@ let g:dbext_default_profile_sqlite_tweetcomplete_testing = 'type=SQLITE:dbname=/
 let g:dbext_default_profile_sqlite_tweetcomplete = 'type=SQLITE:dbname=/home/gkapfham/working/software/TweetComplete/databases/tweetcomplete.db'
 
 " turn on spell checking so that I can do this for Latex documents
-set spell spelllang=en_us
+set spell spelllang=en_us,en_gb
 set mousemodel=popup
 
 " turn of spell checking for some types of buffers, mostly Java and other
