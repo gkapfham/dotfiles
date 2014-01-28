@@ -68,10 +68,12 @@ Bundle 'https://github.com/altercation/vim-colors-solarized.git'
 Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/dterei/VimBookmarking.git'
 Bundle 'https://github.com/ervandew/supertab.git'
+Bundle 'https://github.com/flazz/vim-colorschemes.git'
 Bundle 'https://github.com/freitass/todo.txt-vim.git'
 Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/godlygeek/tabular.git'
 Bundle 'https://github.com/gregsexton/gitv.git'
+Bundle 'https://github.com/honza/vim-snippets'
 Bundle 'https://github.com/int3/vim-extradite.git'
 Bundle 'https://github.com/itchyny/calendar.vim.git'
 Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
@@ -81,7 +83,6 @@ Bundle 'https://github.com/kablamo/vim-git-log.git'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
 Bundle 'https://github.com/kshenoy/vim-signature.git'
 Bundle 'https://github.com/majutsushi/tagbar'
-Bundle 'https://github.com/honza/vim-snippets'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
 Bundle 'https://github.com/scrooloose/syntastic.git'
 Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
@@ -105,9 +106,9 @@ Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
-
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
+
     echo ""
     :BundleInstall
 endif
