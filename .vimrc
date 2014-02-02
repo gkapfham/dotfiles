@@ -93,7 +93,7 @@ Bundle 'https://github.com/tpope/vim-fugitive.git'
 Bundle 'https://github.com/tpope/vim-surround.git'
 Bundle 'https://github.com/tsaleh/vim-matchit.git'
 Bundle 'https://github.com/vim-scripts/AutoTag.git'
-Bundle 'https://github.com/vim-scripts/CSApprox.git'
+" Bundle 'https://github.com/vim-scripts/CSApprox.git'
 Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
 Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
 Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
@@ -102,10 +102,18 @@ Bundle 'https://github.com/vim-scripts/Xoria256m.git'
 Bundle 'https://github.com/vim-scripts/csv.vim.git'
 Bundle 'https://github.com/vim-scripts/dbext.vim.git'
 Bundle 'https://github.com/vim-scripts/tComment.git'
-Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
+Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
+" Bundle 'https://github.com/w0ng/vim-hybrid.git'
+" Bundle 'https://github.com/skroll/vim-taghighlight.git'
+Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
+Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
+Bundle 'https://github.com/Yggdroot/indentLine.git'
+Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
+Bundle 'https://github.com/Raimondi/delimitMate.git'
+
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
 
@@ -219,6 +227,7 @@ set wrap          " go ahead and allow the wrapping of long lines to take place
 set linebreak     " make sure that you break the lines in a way that preserves words
 set showbreak=━━  " set an ellipse character so that you can tell when lines are wrapped
 set tabstop=4     " a tab is four spaces
+ set expandtab
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
@@ -334,6 +343,7 @@ set tags=./tags;
 let g:easytags_ignored_filetypes = ''
 let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
+let g:easytags_always_enabled = 1
 let g:ctrlp_extensions = ['tag', 'buffertag']
 nmap <C-t> :!ctags -R<CR>
 
@@ -362,6 +372,25 @@ fu! TexQuotes()
 endfu
 autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 
+map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+map <F5> :call SyntaxAttr()<CR>
+
+" if you write function declarations that are always indented by either
+" a tab, 8 spaces or 2 spaces you may want to set >
+
+" let java_highlight_functions="indent"
+let delimitMate_expand_cr = 2
+
+" However, if you follow the Java guidelines about how functions and classes are
+" supposed to be named (with respect to upper and lowercase), use >
+ let java_highlight_functions="style"
+
+" let g:indentLine_color_term = 239
+" let g:indentLine_color_gui = '#FFFFFF'
+ let g:indentLine_char = '│'
+" 
 " let @b = 'vap:s/\./\.^V^M/^M:noh^I^M'  
 " map gqb @b
 
