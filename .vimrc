@@ -49,11 +49,11 @@ let mapleader=","
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
 if !filereadable(vundle_readme)
-	echo "Installing Vundle.."
-	echo ""
-	silent !mkdir -p ~/.vim/bundle
-	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-	let iCanHazVundle=0
+    echo "Installing Vundle.."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    let iCanHazVundle=0
 endif
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -108,11 +108,12 @@ Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
 " Bundle 'https://github.com/w0ng/vim-hybrid.git'
 " Bundle 'https://github.com/skroll/vim-taghighlight.git'
-Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
+" Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
 Bundle 'https://github.com/Yggdroot/indentLine.git'
 Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
 Bundle 'https://github.com/Raimondi/delimitMate.git'
+Bundle 'https://github.com/guns/xterm-color-table.vim.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -139,7 +140,7 @@ endif
 " Bundle 'https://github.com/vim-scripts/taglist.vim.git'
 " Bundle 'https://github.com/mhinz/vim-signify.git'
 " Bundle 'https://github.com/milkypostman/vim-togglelist.git'
- " Bundle 'https://github.com/aaronbieber/quicktask.git'
+" Bundle 'https://github.com/aaronbieber/quicktask.git'
 
 " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
@@ -156,9 +157,9 @@ let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compila
 
 " Recommended for xelatex users who wants SyncTeX support, using the Tex-9 plugin for forward and reverse searching
 let g:tex_nine_config = {
-        \'compiler': 'latexmk',
-        \'synctex': 1
-\}
+            \'compiler': 'latexmk',
+            \'synctex': 1
+            \}
 
 " Turn on smart indentation with the LaTeX-Box plugin, nice and very helpful
 set smartindent
@@ -187,18 +188,18 @@ let g:SuperTabLongestEnhanced = 1
 " LaTeX needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
 " other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS WELL
 autocmd FileType tex
-    \ if &omnifunc != '' |
-    \   call SuperTabChain(&omnifunc, "<c-n>") |
-    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-    \ endif
+            \ if &omnifunc != '' |
+            \   call SuperTabChain(&omnifunc, "<c-n>") |
+            \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+            \ endif
 
 " HTML needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
 " other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS WELL
 autocmd FileType html
-    \ if &omnifunc != '' |
-    \   call SuperTabChain(&omnifunc, "<c-n>") |
-    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-    \ endif
+            \ if &omnifunc != '' |
+            \   call SuperTabChain(&omnifunc, "<c-n>") |
+            \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+            \ endif
 
 " Java autocompletion must use the completefunc (ctrl-x ctrl-u) to work correctly, so set it separately 
 autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
@@ -227,7 +228,7 @@ set wrap          " go ahead and allow the wrapping of long lines to take place
 set linebreak     " make sure that you break the lines in a way that preserves words
 set showbreak=━━  " set an ellipse character so that you can tell when lines are wrapped
 set tabstop=4     " a tab is four spaces
- set expandtab
+set expandtab    " insert spaces whenever the tab key is pressed, helps with formatting Java code
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
@@ -291,14 +292,14 @@ let NERDTreeMinimalUI=1
 let g:tagbar_type_tex = {
             \ 'ctagstype' : 'latex',
             \ 'kinds'     : [
-                \ 's:sections',
-                \ 'g:graphics:0:0',
-                \ 'l:labels',
-                \ 'r:refs:1:0',
-                \ 'p:pagerefs:1:0'
+            \ 's:sections',
+            \ 'g:graphics:0:0',
+            \ 'l:labels',
+            \ 'r:refs:1:0',
+            \ 'p:pagerefs:1:0'
             \ ],
             \ 'sort'    : 0
-        \ }
+            \ }
 
 " Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!
 set nocursorcolumn
@@ -315,10 +316,10 @@ set shortmess=I
 
 " Set up the enter key to ensure that after completing words a return is not pressed
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+            \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+            \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 " inoremap <expr> <tab> pumvisible() ? '<tab>' :
 "   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
@@ -338,14 +339,17 @@ hi link SneakPluginScope Visual
 let g:SexyScroller_MaxTime = 500
 let g:SexyScroller_EasingStyle = 1
 
-" Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing
+" Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
 set tags=./tags;
 let g:easytags_ignored_filetypes = ''
 let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
-let g:easytags_always_enabled = 1
 let g:ctrlp_extensions = ['tag', 'buffertag']
 nmap <C-t> :!ctags -R<CR>
+" let g:easytags_always_enabled = 1
+
+" This did not seem to work correctly to get the syntax highlighting quickly in Java
+" autocmd FileType java let g:easytags_always_enabled = 1
 
 " Configure the Calendar plugin so that it can access the Google calendar, nice for viewing your schedule
 let g:calendar_google_calendar = 1
@@ -358,42 +362,47 @@ nmap <Leader>a <Plug>(EasyAlign)
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 fu! TexQuotes()
-        let line = getline(".")
-        let curpos = col(".")-1
-        let insert = "''"
-        
-        let left = strpart(line, curpos-1, 1)
+    let line = getline(".")
+    let curpos = col(".")-1
+    let insert = "''"
 
-        if (left == ' ' || left == '        ' || left == '')
-                let insert = '``'
-        endif
-
-        return insert        
+    let left = strpart(line, curpos-1, 1)
+    if (left == ' ' || left == '        ' || left == '')
+        let insert = '``'
+    endif
+    return insert        
 endfu
 autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 
+" Define a function that allows you to determine what syntax group is being used
 map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr()<CR>
 
-" if you write function declarations that are always indented by either
-" a tab, 8 spaces or 2 spaces you may want to set >
-
-" let java_highlight_functions="indent"
+" Control how the delimitmate handles the return character, does not seem to work correctly
 let delimitMate_expand_cr = 2
+" let delimitMate_expand_space = 1
 
 " However, if you follow the Java guidelines about how functions and classes are
 " supposed to be named (with respect to upper and lowercase), use >
- let java_highlight_functions="style"
+" Basically, make the syntax highlighting for method declarations a lot better
+let java_highlight_functions="style"
+" let java_highlight_functions="indent"
 
-" let g:indentLine_color_term = 239
-" let g:indentLine_color_gui = '#FFFFFF'
- let g:indentLine_char = '│'
+" Configure the identing line plugin so that it will use the correct colors and symbols
+let g:indentLine_color_term = 239
+let g:indentLine_color_gui = "#707880"
+let g:indentLine_char = '│'
+
+" autocmd BufRead java set efm=%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%#
+" autocmd BufRead java set makeprg=ant\ -find\ build.xml compile
 " 
-" let @b = 'vap:s/\./\.^V^M/^M:noh^I^M'  
-" map gqb @b
+" 2>&1| tee /tmp/v4iZDP3/24
 
+" autocmd BufRead *.java set makeprg=ant\ -find\ build.xml compile
+
+" !ant -find build.xml compile 2>&1| tee /tmp/vO3vLMp/32
 " map gqb vip:join<CR>0:call SplitLineBySentence()<CR>
 
 " nmap gqb vip:s/\./\./ 
