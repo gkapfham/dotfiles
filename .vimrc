@@ -59,11 +59,14 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
+
 " These are all of the Bundles that we use to enhance the behavior of Vim
 Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
+Bundle 'https://github.com/Raimondi/delimitMate.git'
 Bundle 'https://github.com/Valloric/ListToggle.git'
 Bundle 'https://github.com/Valloric/MatchTagAlways.git'
+Bundle 'https://github.com/Yggdroot/indentLine.git'
 Bundle 'https://github.com/altercation/vim-colors-solarized.git'
 Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/dterei/VimBookmarking.git'
@@ -73,6 +76,7 @@ Bundle 'https://github.com/freitass/todo.txt-vim.git'
 Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/godlygeek/tabular.git'
 Bundle 'https://github.com/gregsexton/gitv.git'
+Bundle 'https://github.com/guns/xterm-color-table.vim.git'
 Bundle 'https://github.com/honza/vim-snippets'
 Bundle 'https://github.com/int3/vim-extradite.git'
 Bundle 'https://github.com/itchyny/calendar.vim.git'
@@ -83,6 +87,7 @@ Bundle 'https://github.com/kablamo/vim-git-log.git'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
 Bundle 'https://github.com/kshenoy/vim-signature.git'
 Bundle 'https://github.com/majutsushi/tagbar'
+Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
 Bundle 'https://github.com/scrooloose/syntastic.git'
 Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
@@ -93,27 +98,19 @@ Bundle 'https://github.com/tpope/vim-fugitive.git'
 Bundle 'https://github.com/tpope/vim-surround.git'
 Bundle 'https://github.com/tsaleh/vim-matchit.git'
 Bundle 'https://github.com/vim-scripts/AutoTag.git'
-" Bundle 'https://github.com/vim-scripts/CSApprox.git'
 Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
 Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
 Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
+Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
 Bundle 'https://github.com/vim-scripts/TeX-9.git'
 Bundle 'https://github.com/vim-scripts/Xoria256m.git'
 Bundle 'https://github.com/vim-scripts/csv.vim.git'
 Bundle 'https://github.com/vim-scripts/dbext.vim.git'
 Bundle 'https://github.com/vim-scripts/tComment.git'
-Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
+Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
-" Bundle 'https://github.com/w0ng/vim-hybrid.git'
-" Bundle 'https://github.com/skroll/vim-taghighlight.git'
-" Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
-Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
-Bundle 'https://github.com/Yggdroot/indentLine.git'
-Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
-Bundle 'https://github.com/Raimondi/delimitMate.git'
-Bundle 'https://github.com/guns/xterm-color-table.vim.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -127,20 +124,24 @@ endif
 " Bundle 'https://github.com/Lokaltog/vim-easymotion'
 " Bundle 'https://github.com/SirVer/ultisnips.git'
 " Bundle 'https://github.com/Townk/vim-autoclose.git'
+" Bundle 'https://github.com/aaronbieber/quicktask.git'
 " Bundle 'https://github.com/airblade/vim-gitgutter.git'
 " Bundle 'https://github.com/gcmt/tag-surfer.git'
 " Bundle 'https://github.com/gerw/vim-latex-suite.git'
 " Bundle 'https://github.com/goldfeld/vim-seek.git'
+" Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 " Bundle 'https://github.com/hlissner/vim-multiedit.git'
 " Bundle 'https://github.com/jcf/vim-latex.git'
+" Bundle 'https://github.com/mhinz/vim-signify.git'
 " Bundle 'https://github.com/mhinz/vim-startify.git'
+" Bundle 'https://github.com/milkypostman/vim-togglelist.git'
 " Bundle 'https://github.com/othree/vim-autocomplpop.git'
 " Bundle 'https://github.com/rking/vim-detailed.git'
+" Bundle 'https://github.com/skroll/vim-taghighlight.git'
+" Bundle 'https://github.com/vim-scripts/CSApprox.git'
 " Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
 " Bundle 'https://github.com/vim-scripts/taglist.vim.git'
-" Bundle 'https://github.com/mhinz/vim-signify.git'
-" Bundle 'https://github.com/milkypostman/vim-togglelist.git'
-" Bundle 'https://github.com/aaronbieber/quicktask.git'
+" Bundle 'https://github.com/w0ng/vim-hybrid.git'
 
 " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
@@ -395,6 +396,18 @@ let g:indentLine_color_term = 239
 let g:indentLine_color_gui = "#707880"
 let g:indentLine_char = '│'
 
+" The Silver Searcher
+" if executable('ag')
+"     " Use ag over grep
+"     set grepprg=ag\ --nogroup\ --nocolor
+" 
+"     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"     " let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+" 
+"     " ag is fast enough that CtrlP doesn't need to cache
+"     let g:ctrlp_use_caching = 0
+" endif
+" 
 " autocmd BufRead java set efm=%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%#
 " autocmd BufRead java set makeprg=ant\ -find\ build.xml compile
 " 
