@@ -13,9 +13,12 @@ ZSH_THEME="norm-gkapfham"
 # Make it faster to load the todo.txt file used for my todo list.
 alias vt="vim ~/working/todo/todo.txt"
 
+# Note that you can use CTRL-R and CTRL-S to do this if not using vi-mode
+
 # bindkey "^R" history-incremental-search-backward
 # bindkey "^[[A" history-search-backward
 # bindkey "^[[B" history-search-forward
+
 # 
 # autoload -Uz vcs_info
 # zstyle ':vcs_info:*' enable git svn
