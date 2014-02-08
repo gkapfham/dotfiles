@@ -350,7 +350,7 @@ let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
 let g:ctrlp_extensions = ['tag', 'buffertag']
 nmap <C-t> :!ctags -R<CR>
-" let g:easytags_always_enabled = 1
+let g:easytags_always_enabled = 1
 
 " This did not seem to work correctly to get the syntax highlighting quickly in Java
 " autocmd FileType java let g:easytags_always_enabled = 1
