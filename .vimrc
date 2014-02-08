@@ -111,6 +111,9 @@ Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
+Bundle 'https://github.com/timcharper/wordnet.vim.git'
+
+" Bundle 'https://github.com/reedes/vim-wordy.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -395,6 +398,9 @@ let java_highlight_functions="style"
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = "#707880"
 let g:indentLine_char = '│'
+
+" Add in the path to the WordNet binary, allowing for a <Leader>wnd command to easily run
+let g:wordnet_path = "/usr/bin/"
 
 " The Silver Searcher
 " if executable('ag')
