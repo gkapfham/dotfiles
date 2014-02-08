@@ -13,6 +13,23 @@ ZSH_THEME="norm-gkapfham"
 # Make it faster to load the todo.txt file used for my todo list.
 alias vt="vim ~/working/todo/todo.txt"
 
+# Adding these lines of code enables the searching of partially completed commands with the arrow keys
+autoload -Uz up-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '\eOA' up-line-or-beginning-search
+bindkey '\e[A' up-line-or-beginning-search
+bindkey '\eOB' down-line-or-beginning-search
+bindkey '\e[B' down-line-or-beginning-search
+autoload -U history-search-end
+
+# # zle -N history-beginning-search-backward-end history-search-end
+# # zle -N history-beginning-search-forward-end history-search-end
+# # 
+# bindkey "\e[A" history-beginning-search-backward-end
+# bindkey "\e[B" history-beginning-search-forward-end
+# 
 # Note that you can use CTRL-R and CTRL-S to do this if not using vi-mode
 
 # bindkey "^R" history-incremental-search-backward
