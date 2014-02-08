@@ -11,8 +11,12 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="norm-gkapfham"
 
 # Make it faster to load the todo.txt file used for my todo list.
-alias vt="vim ~/Public/working/todo/todo.txt"
+alias vt="vim ~/working/todo/todo.txt"
 
+# bindkey "^R" history-incremental-search-backward
+# bindkey "^[[A" history-search-backward
+# bindkey "^[[B" history-search-forward
+# 
 # autoload -Uz vcs_info
 # zstyle ':vcs_info:*' enable git svn
 # precmd() {
@@ -57,7 +61,7 @@ alias vt="vim ~/Public/working/todo/todo.txt"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ant sudo web-search dircycle vundle wd zsh-syntax-highlighting vi-mode)
+plugins=(git ant sudo web-search dircycle vundle wd zsh-syntax-highlighting)
 . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source $ZSH/oh-my-zsh.sh
 
@@ -65,14 +69,18 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh/git-prompt/zshrc.sh
 
 # allow for the editing of the command-line in vim by pressing the "v" key in the terminal window
-export KEYTIMEOUT=1
-autoload edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
+# export KEYTIMEOUT=1
+# autoload edit-command-line
+# zle -N edit-command-line
+# bindkey -M vicmd v edit-command-line
+# 
 
 # User configuration
 
-export PATH="/home/gkapfham/working/software/TweetComplete/run:/home/gkapfham/.eclipse/org.eclipse.platform_3.8_155965261:/usr/local/texlive/2011/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+# export PATH="/home/gkapfham/working/software/TweetComplete/run:/home/gkapfham/.eclipse/org.eclipse.platform_3.8_155965261:/usr/local/texlive/2011/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+
+export PATH="/opt/eclipse:/home/gkapfham/working/software/TweetComplete/run:/usr/local/texlive/2011/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # PROMPT='$(battery_pct_remaining)'
