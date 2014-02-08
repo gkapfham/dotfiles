@@ -2,7 +2,7 @@
 syntax on
 
 " pick one of the color schemes that is available for use; I customized hybrid further
-colorscheme hybrid
+colorscheme hybrid 
 
 " pick the Monaco font at size 11, note that it might not be installed, then the default looks bad, go to Ubuntu Mono then
 set guifont=Monaco\ 11  
