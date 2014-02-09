@@ -401,6 +401,7 @@ let g:indentLine_char = '│'
 
 " Add in the path to the WordNet binary, allowing for a <Leader>wnd command to easily run
 let g:wordnet_path = "/usr/bin/"
+nmap wnd "wyiw:call WordNetOverviews(@w)<CR>
 
 " The Silver Searcher
 " if executable('ag')
