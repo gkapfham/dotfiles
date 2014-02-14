@@ -59,7 +59,6 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
-
 " These are all of the Bundles that we use to enhance the behavior of Vim
 Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
@@ -112,6 +111,7 @@ Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
 Bundle 'https://github.com/timcharper/wordnet.vim.git'
+Bundle 'https://github.com/sjl/gundo.vim.git'
 
 " Bundle 'https://github.com/reedes/vim-wordy.git'
 
@@ -325,8 +325,8 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
             \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-" inoremap <expr> <tab> pumvisible() ? '<tab>' :
-"   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <tab> pumvisible() ? '<tab>' :
+            \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 " Configure the airline status bar replacement that provides some delightful context 
 set laststatus=2
@@ -340,8 +340,8 @@ hi link SneakPluginTarget Type
 hi link SneakPluginScope Visual
 
 " Configure scrolling in the window; breaks with the mouse flick but fine with the keyboard
-let g:SexyScroller_MaxTime = 500
-let g:SexyScroller_EasingStyle = 1
+let g:SexyScroller_MaxTime = 250 
+let g:SexyScroller_EasingStyle = 0
 
 " Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
 set tags=./tags;
@@ -359,10 +359,10 @@ let g:easytags_always_enabled = 1
 let g:calendar_google_calendar = 1
 
 " Start interactive EasyAlign in visual mode
-vmap <Enter> <Plug>(EasyAlign)
+" vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign with a Vim movement
-nmap <Leader>a <Plug>(EasyAlign)
+" nmap <Leader>a <Plug>(EasyAlign)
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 fu! TexQuotes()
@@ -385,7 +385,8 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 map <F5> :call SyntaxAttr()<CR>
 
 " Control how the delimitmate handles the return character, does not seem to work correctly
-let delimitMate_expand_cr = 2
+" IMPORTANT NOTE: Adding the first line will cause tab completion with supertab not to work correctly
+" let delimitMate_expand_cr = 2
 " let delimitMate_expand_space = 1
 
 " However, if you follow the Java guidelines about how functions and classes are
@@ -402,6 +403,10 @@ let g:indentLine_char = '│'
 " Add in the path to the WordNet binary, allowing for a <Leader>wnd command to easily run
 let g:wordnet_path = "/usr/bin/"
 nmap wnd "wyiw:call WordNetOverviews(@w)<CR>
+
+" Call the GUndo plugin Toggle to see the version history with the F5 key
+nnoremap <F6> :GundoToggle<CR>
+let g:gundo_help=0
 
 " The Silver Searcher
 " if executable('ag')
