@@ -5,7 +5,7 @@ syntax on
 colorscheme hybrid 
 
 " pick the Monaco font at size 11, note that it might not be installed, then the default looks bad, go to Ubuntu Mono then
-set guifont=Monaco\ 11  
+set guifont=Ubuntu\ Mono\ 13  
 
 " define a function that will maximize the window to full screen; only works on Ubuntu when the wmctrl program is installed
 function Maximize_Window()
