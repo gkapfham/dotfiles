@@ -13,6 +13,12 @@ set omnifunc=syntaxcomplete#Complete
 " Set the syntax for the todo file so that the file highlighting is correct
 autocmd FileType todo set syntax=todo
 
+" Set the syntax for the markdown files so that the file highlighting is correct
+au BufRead,BufNewFile *.md set filetype=markdown
+
+au BufRead,BufNewFile *.html set filetype=html
+let g:html_indent_inctags = "html,body,head,tbody,div"
+
 " Set it so that the todo mode is always run when editing the file called todo.txt or Todo.txt
 autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
 
@@ -28,7 +34,7 @@ set encoding=utf-8
 colorscheme hybrid
 
 " define some commands for wrapping and not wrapping a line or paragraph
-command Wrap set textwidth=130
+command Wrap set textwidth=120
 command NoWrap set textwidth=0
 command StandardWrap set textwidth=80
 
@@ -60,6 +66,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " These are all of the Bundles that we use to enhance the behavior of Vim
+Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
 Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Bundle 'https://github.com/Raimondi/delimitMate.git'
@@ -89,11 +96,15 @@ Bundle 'https://github.com/majutsushi/tagbar'
 Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
 Bundle 'https://github.com/scrooloose/syntastic.git'
+Bundle 'https://github.com/sjl/gundo.vim.git'
 Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
+Bundle 'https://github.com/timcharper/wordnet.vim.git'
 Bundle 'https://github.com/tommcdo/vim-lion.git'
 Bundle 'https://github.com/tomtom/tlib_vim'
 Bundle 'https://github.com/tpope/vim-abolish.git'
 Bundle 'https://github.com/tpope/vim-fugitive.git'
+Bundle 'https://github.com/tpope/vim-markdown'
+Bundle 'https://github.com/tpope/vim-ragtag.git'
 Bundle 'https://github.com/tpope/vim-surround.git'
 Bundle 'https://github.com/tsaleh/vim-matchit.git'
 Bundle 'https://github.com/vim-scripts/AutoTag.git'
@@ -110,10 +121,6 @@ Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
-Bundle 'https://github.com/timcharper/wordnet.vim.git'
-Bundle 'https://github.com/sjl/gundo.vim.git'
-
-" Bundle 'https://github.com/reedes/vim-wordy.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -122,9 +129,11 @@ if iCanHazVundle == 0
     :BundleInstall
 endif
 
+
 " Various vim plugins that did not work the way that I wanted them to, discarding for now
 " Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
 " Bundle 'https://github.com/Lokaltog/vim-easymotion'
+" Bundle 'https://github.com/Rykka/colorv.vim.git'
 " Bundle 'https://github.com/SirVer/ultisnips.git'
 " Bundle 'https://github.com/Townk/vim-autoclose.git'
 " Bundle 'https://github.com/aaronbieber/quicktask.git'
@@ -133,13 +142,16 @@ endif
 " Bundle 'https://github.com/gerw/vim-latex-suite.git'
 " Bundle 'https://github.com/goldfeld/vim-seek.git'
 " Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
+" Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 " Bundle 'https://github.com/hlissner/vim-multiedit.git'
 " Bundle 'https://github.com/jcf/vim-latex.git'
 " Bundle 'https://github.com/mhinz/vim-signify.git'
 " Bundle 'https://github.com/mhinz/vim-startify.git'
 " Bundle 'https://github.com/milkypostman/vim-togglelist.git'
 " Bundle 'https://github.com/othree/vim-autocomplpop.git'
+" Bundle 'https://github.com/reedes/vim-wordy.git'
 " Bundle 'https://github.com/rking/vim-detailed.git'
+" Bundle 'https://github.com/skammer/vim-css-color.git'
 " Bundle 'https://github.com/skroll/vim-taghighlight.git'
 " Bundle 'https://github.com/vim-scripts/CSApprox.git'
 " Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
@@ -402,7 +414,7 @@ let g:indentLine_char = '│'
 
 " Add in the path to the WordNet binary, allowing for a <Leader>wnd command to easily run
 let g:wordnet_path = "/usr/bin/"
-nmap wnd "wyiw:call WordNetOverviews(@w)<CR>
+nmap <Leader>wnd "wyiw:call WordNetOverviews(@w)<CR>
 
 " Call the GUndo plugin Toggle to see the version history with the F5 key
 nnoremap <F6> :GundoToggle<CR>
