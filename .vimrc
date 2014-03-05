@@ -320,8 +320,10 @@ let g:tagbar_type_tex = {
 " Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!
 set nocursorcolumn
 set nocursorline
-" syntax sync minlines=256
-" set lazyredraw
+syntax sync minlines=256
+set lazyredraw
+set synmaxcol=128
+set ttyfast
 
 " Make the source code history browsing feature open windows horizontally, as this supports better browsing
 let g:Gitv_OpenHorizontal=1
