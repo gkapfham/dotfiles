@@ -129,7 +129,6 @@ if iCanHazVundle == 0
     :BundleInstall
 endif
 
-
 " Various vim plugins that did not work the way that I wanted them to, discarding for now
 " Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
 " Bundle 'https://github.com/Lokaltog/vim-easymotion'
