@@ -88,7 +88,7 @@ Bundle 'https://github.com/int3/vim-extradite.git'
 Bundle 'https://github.com/itchyny/calendar.vim.git'
 Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Bundle 'https://github.com/junegunn/vim-easy-align.git'
-Bundle 'https://github.com/justinmk/vim-sneak.git'
+" Bundle 'https://github.com/justinmk/vim-sneak.git'
 Bundle 'https://github.com/kablamo/vim-git-log.git'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
 Bundle 'https://github.com/kshenoy/vim-signature.git'
@@ -109,7 +109,6 @@ Bundle 'https://github.com/tpope/vim-surround.git'
 Bundle 'https://github.com/tsaleh/vim-matchit.git'
 Bundle 'https://github.com/vim-scripts/AutoTag.git'
 Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
-Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
 Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
 Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
 Bundle 'https://github.com/vim-scripts/TeX-9.git'
@@ -121,7 +120,9 @@ Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
-
+Bundle 'https://github.com/rking/ag.vim.git'
+Bundle 'https://github.com/tacahiroy/ctrlp-funky.git'
+Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
 
@@ -156,6 +157,9 @@ endif
 " Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
 " Bundle 'https://github.com/vim-scripts/taglist.vim.git'
 " Bundle 'https://github.com/w0ng/vim-hybrid.git'
+" Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
+" Bundle 'https://github.com/jeetsukumaran/vim-markology.git'
+" Bundle 'https://github.com/gcmt/wildfire.vim.git'
 
 " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
@@ -254,7 +258,7 @@ set ignorecase    " ignore case when searching
 set infercase     " predict the case that is needed when doing auto completion
 set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
 set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop
-set hlsearch      " highlight search terms
+" set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 set history=1000  " remember more commands and search history
 set undolevels=1000 " use many muchos levels of undo
@@ -324,6 +328,9 @@ set lazyredraw
 set synmaxcol=128
 set ttyfast
 
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+
 " Make the source code history browsing feature open windows horizontally, as this supports better browsing
 let g:Gitv_OpenHorizontal=1
 
@@ -351,6 +358,22 @@ set nosmd " turn of the status line that shows the silly word insert, airline is
 " Configure the way that colors are displayed for the sneak feature of searching in the text, seems to work very nicely
 hi link SneakPluginTarget Type 
 hi link SneakPluginScope Visual
+" let g:sneak#streak = 1
+
+" map <Leader> <Plug>(easymotion-prefix)
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+
+" change the default EasyMotion shading to something more readable with Solarized
+hi link EasyMotionTarget Type
+hi link EasyMotionShade Comment
+hi link EasyMotionIncSearch Type
+hi link EasyMotionIncCursor Type
+hi link EasyMotionMoveHL Type
 
 " Configure scrolling in the window; breaks with the mouse flick but fine with the keyboard
 let g:SexyScroller_MaxTime = 250 
@@ -361,9 +384,11 @@ set tags=./tags;
 let g:easytags_ignored_filetypes = ''
 let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
-let g:ctrlp_extensions = ['tag', 'buffertag']
+let g:ctrlp_extensions = ['funky', 'tag', 'buffertag']
 nmap <C-t> :!ctags -R<CR>
 let g:easytags_always_enabled = 1
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_funky_syntax_highlight = 1
 
 " This did not seem to work correctly to get the syntax highlighting quickly in Java
 " autocmd FileType java let g:easytags_always_enabled = 1
