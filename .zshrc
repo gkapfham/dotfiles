@@ -120,3 +120,4 @@ export PATH="/opt/eclipse:/home/gkapfham/working/software/TweetComplete/run:/usr
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+# source ~/.fzf.zsh
