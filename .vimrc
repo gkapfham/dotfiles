@@ -449,7 +449,8 @@ nmap <Leader>wnd "wyiw:call WordNetOverviews(@w)<CR>
 nnoremap <F6> :GundoToggle<CR>
 let g:gundo_help=0
 
-" The Silver Searcher
+" The Silver Searcher -- could not get it to work in the past, it is fine, I
+" think, now
 " if executable('ag')
 "     " Use ag over grep
 "     set grepprg=ag\ --nogroup\ --nocolor
