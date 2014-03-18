@@ -385,10 +385,13 @@ let g:easytags_ignored_filetypes = ''
 let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
 let g:ctrlp_extensions = ['funky', 'tag', 'buffertag']
-nmap <C-t> :!ctags -R<CR>
 let g:easytags_always_enabled = 1
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_funky_syntax_highlight = 1
+let g:ctrlp_use_caching = 0
+
+" Set a command that allows for the creation of a tags file for exuberant ctags
+nmap <C-t> :!ctags -R<CR>
 
 " This did not seem to work correctly to get the syntax highlighting quickly in Java
 " autocmd FileType java let g:easytags_always_enabled = 1
