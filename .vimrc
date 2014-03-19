@@ -122,6 +122,7 @@ Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
+Bundle 'https://github.com/tpope/vim-unimpaired.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -387,7 +388,7 @@ let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
 let g:ctrlp_extensions = ['funky', 'tag', 'buffertag']
 let g:easytags_always_enabled = 1
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_use_caching = 0
 
@@ -449,6 +450,13 @@ nmap <Leader>wnd "wyiw:call WordNetOverviews(@w)<CR>
 " Call the GUndo plugin Toggle to see the version history with the F5 key
 nnoremap <F6> :GundoToggle<CR>
 let g:gundo_help=0
+
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
 
 " The Silver Searcher -- could not get it to work in the past, it is fine, I
 " think, now
