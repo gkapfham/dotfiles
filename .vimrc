@@ -458,6 +458,11 @@ nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
+" Create a mapping that allows for the insertion of a blank line without
+" having to enter insert mode and then leave it. Works nicely!
+nmap <C-Enter> O<Esc>
+nmap <CR> o<Esc>
+
 " The Silver Searcher -- could not get it to work in the past, it is fine, I
 " think, now
 " if executable('ag')
