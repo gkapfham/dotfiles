@@ -123,6 +123,7 @@ Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
 Bundle 'https://github.com/tpope/vim-unimpaired.git'
+Bundle 'https://github.com/justinmk/vim-sneak.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -148,7 +149,6 @@ endif
 " Bundle 'https://github.com/hlissner/vim-multiedit.git'
 " Bundle 'https://github.com/jcf/vim-latex.git'
 " Bundle 'https://github.com/jeetsukumaran/vim-markology.git'
-" Bundle 'https://github.com/justinmk/vim-sneak.git'
 " Bundle 'https://github.com/mhinz/vim-signify.git'
 " Bundle 'https://github.com/mhinz/vim-startify.git'
 " Bundle 'https://github.com/milkypostman/vim-togglelist.git'
@@ -363,19 +363,22 @@ hi link SneakPluginScope Visual
 " let g:sneak#streak = 1
 
 " map <Leader> <Plug>(easymotion-prefix)
-nmap s <Plug>(easymotion-s2)
+" nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 
-" change the default EasyMotion shading to something more readable with Solarized
+" change the default EasyMotion shading to something more readable 
 hi link EasyMotionTarget Type
 hi link EasyMotionShade Comment
 hi link EasyMotionIncSearch Type
 hi link EasyMotionIncCursor Type
 hi link EasyMotionMoveHL Type
+
+" Create the shaded background ; seems the better choice, but not perfect
+let g:EasyMotion_do_shade = 1
 
 " Configure scrolling in the window; breaks with the mouse flick but fine with the keyboard
 let g:SexyScroller_MaxTime = 250 
@@ -460,7 +463,7 @@ vmap <C-Down> ]egv
 
 " Create a mapping that allows for the insertion of a blank line without
 " having to enter insert mode and then leave it. Works nicely!
-nmap <C-Enter> O<Esc>
+nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
 " The Silver Searcher -- could not get it to work in the past, it is fine, I
