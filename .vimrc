@@ -377,8 +377,12 @@ hi link EasyMotionIncSearch Type
 hi link EasyMotionIncCursor Type
 hi link EasyMotionMoveHL Type
 
-" Create the shaded background ; seems the better choice, but not perfect
-let g:EasyMotion_do_shade = 1
+" Don't create the shaded background ; seems the better choice, but not perfect
+let g:EasyMotion_do_shade = 0
+
+" Tell EasyMotion to use capital letter since these are easier to see 
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 
 " Configure scrolling in the window; breaks with the mouse flick but fine with the keyboard
 let g:SexyScroller_MaxTime = 250 
