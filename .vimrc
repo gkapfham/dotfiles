@@ -4,6 +4,7 @@ set nocompatible | filetype indent plugin on | syn on
 " Set the completion function for a variety of different file types
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType html set omnifunc=emmet#completeTag 
 autocmd FileType tex set omnifunc=LatexBox_Complete
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
@@ -16,6 +17,7 @@ autocmd FileType todo set syntax=todo
 " Set the syntax for the markdown files so that the file highlighting is correct
 au BufRead,BufNewFile *.md set filetype=markdown
 
+"Set indenting to work correctly for the HTML file type (may not be need now)
 au BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = "html,body,head,tbody,div"
 
@@ -89,10 +91,12 @@ Bundle 'https://github.com/int3/vim-extradite.git'
 Bundle 'https://github.com/itchyny/calendar.vim.git'
 Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Bundle 'https://github.com/junegunn/vim-easy-align.git'
+Bundle 'https://github.com/justinmk/vim-sneak.git'
 Bundle 'https://github.com/kablamo/vim-git-log.git'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
 Bundle 'https://github.com/kshenoy/vim-signature.git'
 Bundle 'https://github.com/majutsushi/tagbar'
+Bundle 'https://github.com/mattn/emmet-vim.git'
 Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
 Bundle 'https://github.com/rking/ag.vim.git'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
@@ -108,6 +112,7 @@ Bundle 'https://github.com/tpope/vim-fugitive.git'
 Bundle 'https://github.com/tpope/vim-markdown'
 Bundle 'https://github.com/tpope/vim-ragtag.git'
 Bundle 'https://github.com/tpope/vim-surround.git'
+Bundle 'https://github.com/tpope/vim-unimpaired.git'
 Bundle 'https://github.com/tsaleh/vim-matchit.git'
 Bundle 'https://github.com/vim-scripts/AutoTag.git'
 Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
@@ -121,9 +126,8 @@ Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
+Bundle 'https://github.com/xuhdev/SingleCompile.git'
 Bundle 'https://github.com/yuratomo/gmail.vim.git'
-Bundle 'https://github.com/tpope/vim-unimpaired.git'
-Bundle 'https://github.com/justinmk/vim-sneak.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -221,6 +225,7 @@ autocmd FileType html
             \   call SuperTabChain(&omnifunc, "<c-n>") |
             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
             \ endif
+
 
 " Java autocompletion must use the completefunc (ctrl-x ctrl-u) to work correctly, so set it separately 
 autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
@@ -469,6 +474,20 @@ vmap <C-Down> ]egv
 " having to enter insert mode and then leave it. Works nicely!
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
+
+" Configure the SingleCompile plugin so that 
+map <Leader>c :SCCompile<cr>
+nmap <Leader>e :SCCompileRun<cr>
+
+" Extra code that is not needed or did not work correctly.
+
+" let g:user_emmet_complete_tag = 1
+" let g:user_emmet_mode='a'    "enable all function in all mode.
+" imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+" let g:user_emmet_expandabbr_key = '<Tab>'
+" let g:use_emmet_complete_tag = 1
+" let user_emmet_expandabbr_key = '<c-y>'
+
 
 " The Silver Searcher -- could not get it to work in the past, it is fine, I
 " think, now
