@@ -139,4 +139,4 @@ tags
 
 # Extra files #
 ######################
-.xmi
+*.xmi
