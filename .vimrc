@@ -76,7 +76,6 @@ Bundle 'https://github.com/Raimondi/delimitMate.git'
 Bundle 'https://github.com/Valloric/ListToggle.git'
 Bundle 'https://github.com/Valloric/MatchTagAlways.git'
 Bundle 'https://github.com/Yggdroot/indentLine.git'
-Bundle 'https://github.com/altercation/vim-colors-solarized.git'
 Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/dterei/VimBookmarking.git'
 Bundle 'https://github.com/ervandew/supertab.git'
@@ -126,8 +125,6 @@ Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
-Bundle 'https://github.com/xuhdev/SingleCompile.git'
-Bundle 'https://github.com/yuratomo/gmail.vim.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -144,6 +141,8 @@ endif
 " Bundle 'https://github.com/Townk/vim-autoclose.git'
 " Bundle 'https://github.com/aaronbieber/quicktask.git'
 " Bundle 'https://github.com/airblade/vim-gitgutter.git'
+" Bundle 'https://github.com/altercation/vim-colors-solarized.git'
+" Bundle 'https://github.com/ap/vim-css-color.git'
 " Bundle 'https://github.com/gcmt/tag-surfer.git'
 " Bundle 'https://github.com/gcmt/wildfire.vim.git'
 " Bundle 'https://github.com/gerw/vim-latex-suite.git'
@@ -160,12 +159,15 @@ endif
 " Bundle 'https://github.com/reedes/vim-wordy.git'
 " Bundle 'https://github.com/rking/vim-detailed.git'
 " Bundle 'https://github.com/skammer/vim-css-color.git'
+" Bundle 'https://github.com/skammer/vim-css-color.git'
 " Bundle 'https://github.com/skroll/vim-taghighlight.git'
 " Bundle 'https://github.com/vim-scripts/CSApprox.git'
 " Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
 " Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
 " Bundle 'https://github.com/vim-scripts/taglist.vim.git'
 " Bundle 'https://github.com/w0ng/vim-hybrid.git'
+" Bundle 'https://github.com/xuhdev/SingleCompile.git'
+" Bundle 'https://github.com/yuratomo/gmail.vim.git'
 
 " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
@@ -487,7 +489,7 @@ nmap <Leader>e :SCCompileRun<cr>
 " let g:user_emmet_expandabbr_key = '<Tab>'
 " let g:use_emmet_complete_tag = 1
 " let user_emmet_expandabbr_key = '<c-y>'
-
+" let g:user_emmet_expandabbr_key = '<Leader>e'
 
 " The Silver Searcher -- could not get it to work in the past, it is fine, I
 " think, now
