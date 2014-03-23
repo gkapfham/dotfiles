@@ -12,6 +12,7 @@ ZSH_THEME="norm-gkapfham"
 
 # Make it faster to load the todo.txt file used for my todo list.
 alias vt="vim ~/working/todo/todo.txt"
+alias gvt="gvim ~/working/todo/todo.txt"
 
 # Adding these lines of code enables the searching of partially completed commands with the arrow keys
 autoload -Uz up-line-or-beginning-search
