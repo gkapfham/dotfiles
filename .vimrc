@@ -475,13 +475,16 @@ vmap <C-Down> ]egv
 " Create a mapping that allows for the insertion of a blank line without
 " having to enter insert mode and then leave it. Works nicely!
 nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
 
 " Configure the SingleCompile plugin so that 
 map <Leader>c :SCCompile<cr>
 nmap <Leader>e :SCCompileRun<cr>
 
 " Extra code that is not needed or did not work correctly.
+
+" This will not work because of the fact that I have to press enter in the
+" quick fix window to go to the entry! 
+" nmap <CR> o<Esc>
 
 " let g:user_emmet_complete_tag = 1
 " let g:user_emmet_mode='a'    "enable all function in all mode.
