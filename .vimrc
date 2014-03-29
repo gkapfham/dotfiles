@@ -4,7 +4,6 @@ set nocompatible | filetype indent plugin on | syn on
 " Set the completion function for a variety of different file types
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType html set omnifunc=emmet#completeTag 
 autocmd FileType tex set omnifunc=LatexBox_Complete
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
@@ -191,10 +190,6 @@ let g:tex_nine_config = {
 " Turn on smart indentation with the LaTeX-Box plugin, nice and very helpful
 set smartindent
 
-" " Commands that allow for the invocation of the SyncTex support
-" noremap <buffer><silent> <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
-" noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
-
 " Commands that allow for the invocation of the SyncTex support
 nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
 nmap <C-l> :call tex_nine#ForwardSearch()<CR>
@@ -227,7 +222,6 @@ autocmd FileType html
             \   call SuperTabChain(&omnifunc, "<c-n>") |
             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
             \ endif
-
 
 " Java autocompletion must use the completefunc (ctrl-x ctrl-u) to work correctly, so set it separately 
 autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
@@ -329,12 +323,12 @@ let g:tagbar_type_tex = {
             \ 'sort'    : 0
             \ }
 
-" Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!
+" Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!                 
 set nocursorcolumn
 set nocursorline
 syntax sync minlines=256
 set lazyredraw
-set synmaxcol=128
+set synmaxcol=145
 set ttyfast
 
 " turn off search highlight
@@ -415,13 +409,8 @@ nmap <C-t> :!ctags -R<CR>
 " Configure the Calendar plugin so that it can access the Google calendar, nice for viewing your schedule
 let g:calendar_google_calendar = 1
 
-" Start interactive EasyAlign in visual mode
-" vmap <Enter> <Plug>(EasyAlign)
-
-" Start interactive EasyAlign with a Vim movement
-" nmap <Leader>a <Plug>(EasyAlign)
-
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
+" Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
 fu! TexQuotes()
     let line = getline(".")
     let curpos = col(".")-1
@@ -476,11 +465,24 @@ vmap <C-Down> ]egv
 " having to enter insert mode and then leave it. Works nicely!
 nmap <S-Enter> O<Esc>
 
-" Configure the SingleCompile plugin so that 
-map <Leader>c :SCCompile<cr>
-nmap <Leader>e :SCCompileRun<cr>
-
 " Extra code that is not needed or did not work correctly.
+
+" autocmd FileType html set omnifunc=emmet#completeTag 
+
+" " Commands that allow for the invocation of the SyncTex support
+" noremap <buffer><silent> <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
+" noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
+
+
+" Start interactive EasyAlign in visual mode
+" vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign with a Vim movement
+" nmap <Leader>a <Plug>(EasyAlign)
+
+" Configure the SingleCompile plugin so that 
+" map <Leader>c :SCCompile<cr>
+" nmap <Leader>e :SCCompileRun<cr>
 
 " This will not work because of the fact that I have to press enter in the
 " quick fix window to go to the entry! 
