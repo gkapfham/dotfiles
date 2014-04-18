@@ -19,6 +19,9 @@ au GUIEnter * call Maximize_Window()
 set guioptions-=r
 set guioptions-=L
 
+" Remove the toolbar at the top of the page so that the extra icons are not visible, more minimal again
+set guioptions-=T 
+
 " Configure the airline status bar replacement that provides some delightful context 
 " set laststatus=2
 " let g:airline_theme='base16'
