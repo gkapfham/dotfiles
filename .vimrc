@@ -181,7 +181,7 @@ let Tex_FoldedMisc=""
 let g:LatexBox_autojump=1
 let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compilation, great for the issta paper
 
-" Recommended for xelatex users who wants SyncTeX support, using the Tex-9 plugin for forward and reverse searching
+" " Recommended for xelatex users who wants SyncTeX support, using the Tex-9 plugin for forward and reverse searching
 let g:tex_nine_config = {
             \'compiler': 'latexmk',
             \'synctex': 1

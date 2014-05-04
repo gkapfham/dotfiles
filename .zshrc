@@ -14,6 +14,9 @@ ZSH_THEME="norm-gkapfham"
 alias vt="vim ~/working/todo/todo.txt"
 alias gvt="gvim ~/working/todo/todo.txt"
 
+# create an alias that allows for loading a large fill screen terminal designed for text editing
+alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
+
 # Adding these lines of code enables the searching of partially completed commands with the arrow keys
 autoload -Uz up-line-or-beginning-search
 autoload -Uz down-line-or-beginning-search
