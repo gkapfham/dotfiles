@@ -465,6 +465,9 @@ vmap <C-Down> ]egv
 " having to enter insert mode and then leave it. Works nicely!
 nmap <S-Enter> O<Esc>
 
+" Always show the hidden files inside of the NerdTree
+let NERDTreeShowHidden=1
+
 " Extra code that is not needed or did not work correctly.
 
 " autocmd FileType html set omnifunc=emmet#completeTag 
