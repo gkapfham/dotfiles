@@ -124,6 +124,7 @@ Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
+Bundle 'https://github.com/amiorin/ctrlp-z.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -300,6 +301,10 @@ au BufNewFile,BufRead,BufEnter *.java   set nospell
 au BufNewFile,BufRead,BufEnter *.sh     set nospell
 au BufNewFile,BufRead,BufEnter *.xml    set nospell
 au BufNewFile,BufRead,BufEnter *.sql    set nospell
+au BufNewFile,BufRead,BufEnter *.bib    set nospell
+
+" Allow spelling to be easily toggled on and off
+nmap <silent> <leader>s :set spell!<CR>
 
 " Give a special key for turning on and off the Tagbar, a great feature for browsing source code, such as Java programs
 nmap <F12> :TagbarToggle<CR>
@@ -394,11 +399,18 @@ set tags=./tags;
 let g:easytags_ignored_filetypes = ''
 let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
-let g:ctrlp_extensions = ['funky', 'tag', 'buffertag']
+" let g:ctrlp_extensions = ['funky', 'tag', 'buffertag', 'F']
+" let g:ctrlp_extensions = ['Z', 'F']
+" let g:ctrlp_extensions = ['F']
 let g:easytags_always_enabled = 1
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_use_caching = 0
+let g:ctrlp_z_nerdtree = 1
+
+" I could not get this to work as a CTRL-P extension, so I had to map to separate commands, which does seem to work
+nnoremap zd :CtrlPZ<Cr>
+nnoremap zf :CtrlPF<Cr> 
 
 " Set a command that allows for the creation of a tags file for exuberant ctags
 nmap <C-t> :!ctags -R<CR>
