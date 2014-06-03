@@ -88,12 +88,23 @@ autoload -U history-search-end
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ant sudo web-search dircycle vundle wd zsh-syntax-highlighting)
+plugins=(git ant sudo web-search dircycle vundle wd zsh-syntax-highlighting fasd)
 . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source $ZSH/oh-my-zsh.sh
 
 # load the special plugin that is needed to create the git-stacular prompt showing status 
 source ~/.zsh/git-prompt/zshrc.sh
+
+# create the FASD cache so that the terminal loads quickly but I still get all of the FASD features
+fasd_cache="$HOME/.fasd-init-zsh"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
+
+# this was the first way that I tried to load fasd and it works, but it might be a little too slow
+# eval "$(fasd --init auto)"
 
 # allow for the editing of the command-line in vim by pressing the "v" key in the terminal window
 # export KEYTIMEOUT=1
