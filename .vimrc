@@ -181,6 +181,7 @@ let Tex_FoldedEnvironments=""
 let Tex_FoldedMisc=""
 let g:LatexBox_autojump=1
 let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compilation, great for the issta paper
+let g:LatexBox_latexmk_async=1 " handles the weird screen flashing issue with compilation and other errors
 
 " " Recommended for xelatex users who wants SyncTeX support, using the Tex-9 plugin for forward and reverse searching
 let g:tex_nine_config = {
