@@ -203,32 +203,16 @@ set complete-=k complete+=k
 set complete+=kspell
 
 " This is the default context completion that will be used if there is not a separate autocommand configuration
-" let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 let g:SuperTabLongestEnhanced = 1
-let g:SuperTabDefaultCompletionType = '<S-Tab>'
 
 " LatexBox_Complete
 
 " LaTeX needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
 " other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS WELL
 autocmd FileType tex
-            \ if &omnifunc != '' |
-            \   call SuperTabChain(&omnifunc, "<c-n>") |
-            \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-            \ endif
-
-let g:ycm_filetype_blacklist = {
-      \ 'notes' : 1,
-      \ 'markdown' : 1,
-      \ 'text' : 0,
-      \ 'tex' : 1,
-      \}
-
-" HTML needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
-" other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS WELL
-autocmd FileType html
             \ if &omnifunc != '' |
             \   call SuperTabChain(&omnifunc, "<c-n>") |
             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
@@ -337,7 +321,7 @@ let NERDTreeMinimalUI=1
 "             \ ],
 "             \ 'sort'    : 0
 "             \ }
-" 
+ 
 " Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!                 
 set nocursorcolumn
 set nocursorline
@@ -452,6 +436,23 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr()<CR>
 
+" let g:SuperTabDefaultCompletionType = '<S-Tab>'
+
+" let g:ycm_filetype_blacklist = {
+"       \ 'notes' : 1,
+"       \ 'markdown' : 1,
+"       \ 'text' : 0,
+"       \ 'tex' : 1,
+"       \}
+" 
+" HTML needs to have a chained completion function 
+autocmd FileType html
+            \ if &omnifunc != '' |
+            \   call SuperTabChain(&omnifunc, "<c-n>") |
+            \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+            \ endif
+
+
 " Control how the delimitmate handles the return character, does not seem to work correctly
 " IMPORTANT NOTE: Adding the first line will cause tab completion with supertab not to work correctly
 " let delimitMate_expand_cr = 2
@@ -490,6 +491,12 @@ nmap <S-Enter> O<Esc>
 " Always show the hidden files inside of the NerdTree
 let NERDTreeShowHidden=1
 
+" let g:ycm_complete_in_comments = 1
+" let g:ycm_collect_identifiers_from_comments_and_strings = 1
+" let g:ycm_collect_identifiers_from_tags_files = 1
+" let g:ycm_seed_identifiers_with_syntax = 1
+" let g:ycm_cache_omnifunc = 1
+" 
 " Extra code that is not needed or did not work correctly.
 
 " autocmd FileType html set omnifunc=emmet#completeTag 
