@@ -86,7 +86,6 @@ Bundle 'https://github.com/gregsexton/gitv.git'
 Bundle 'https://github.com/guns/xterm-color-table.vim.git'
 Bundle 'https://github.com/honza/vim-snippets'
 Bundle 'https://github.com/int3/vim-extradite.git'
-Bundle 'https://github.com/itchyny/calendar.vim.git'
 Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Bundle 'https://github.com/junegunn/vim-easy-align.git'
 Bundle 'https://github.com/justinmk/vim-sneak.git'
@@ -103,7 +102,6 @@ Bundle 'https://github.com/sjl/gundo.vim.git'
 Bundle 'https://github.com/tacahiroy/ctrlp-funky.git'
 Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
 Bundle 'https://github.com/timcharper/wordnet.vim.git'
-Bundle 'https://github.com/tommcdo/vim-lion.git'
 Bundle 'https://github.com/tomtom/tlib_vim'
 Bundle 'https://github.com/tpope/vim-abolish.git'
 Bundle 'https://github.com/tpope/vim-fugitive.git'
@@ -125,7 +123,6 @@ Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/amiorin/ctrlp-z.git'
-" Bundle 'https://github.com/Valloric/YouCompleteMe.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -135,6 +132,9 @@ if iCanHazVundle == 0
 endif
 
 " Various vim plugins that did not work the way that I wanted them to, discarding for now
+" Bundle 'https://github.com/tommcdo/vim-lion.git'
+" Bundle 'https://github.com/Valloric/YouCompleteMe.git'
+" Bundle 'https://github.com/itchyny/calendar.vim.git'
 " Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
 " Bundle 'https://github.com/Lokaltog/vim-easymotion'
 " Bundle 'https://github.com/Rykka/colorv.vim.git'
