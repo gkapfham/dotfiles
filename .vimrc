@@ -125,6 +125,7 @@ Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
 Bundle 'https://github.com/amiorin/ctrlp-z.git'
+" Bundle 'https://github.com/Valloric/YouCompleteMe.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -202,10 +203,11 @@ set complete-=k complete+=k
 set complete+=kspell
 
 " This is the default context completion that will be used if there is not a separate autocommand configuration
-let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 let g:SuperTabLongestEnhanced = 1
+let g:SuperTabDefaultCompletionType = '<S-Tab>'
 
 " LatexBox_Complete
 
@@ -216,6 +218,13 @@ autocmd FileType tex
             \   call SuperTabChain(&omnifunc, "<c-n>") |
             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
             \ endif
+
+let g:ycm_filetype_blacklist = {
+      \ 'notes' : 1,
+      \ 'markdown' : 1,
+      \ 'text' : 0,
+      \ 'tex' : 1,
+      \}
 
 " HTML needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
 " other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS WELL
@@ -316,19 +325,19 @@ nmap <F11> :NERDTreeToggle<CR>
 " Set up the NERDTree so that it does not display the silly help message at the top, this is not minimal enough.
 let NERDTreeMinimalUI=1
 
-" This is the extra line of code that the Tagbar needs to get LaTeX outlines to work correctly. Also. code in .ctags!
-let g:tagbar_type_tex = {
-            \ 'ctagstype' : 'latex',
-            \ 'kinds'     : [
-            \ 's:sections',
-            \ 'g:graphics:0:0',
-            \ 'l:labels',
-            \ 'r:refs:1:0',
-            \ 'p:pagerefs:1:0'
-            \ ],
-            \ 'sort'    : 0
-            \ }
-
+" " This is the extra line of code that the Tagbar needs to get LaTeX outlines to work correctly. Also. code in .ctags!
+" let g:tagbar_type_tex = {
+"             \ 'ctagstype' : 'latex',
+"             \ 'kinds'     : [
+"             \ 's:sections',
+"             \ 'g:graphics:0:0',
+"             \ 'l:labels',
+"             \ 'r:refs:1:0',
+"             \ 'p:pagerefs:1:0'
+"             \ ],
+"             \ 'sort'    : 0
+"             \ }
+" 
 " Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!                 
 set nocursorcolumn
 set nocursorline
