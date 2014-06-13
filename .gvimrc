@@ -5,7 +5,8 @@ syntax on
 colorscheme hybrid 
 
 " pick the Monaco font at size 11, note that it might not be installed, then the default looks bad, go to Ubuntu Mono then
-set guifont=Ubuntu\ Mono\ 13  
+" set guifont=Ubuntu\ Mono\ 13  
+set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 13 
 
 " define a function that will maximize the window to full screen; only works on Ubuntu when the wmctrl program is installed
 function Maximize_Window()
@@ -13,7 +14,9 @@ function Maximize_Window()
 endfunction
 
 " when the GUI is running, that is GVim is being used, then we should call the maximization function
-au GUIEnter * call Maximize_Window()
+" In Ubuntu 14.04, this cases the terminal to maximize sometimes, creating problems. Now, I am using
+" the Compiz Place Windows plugin to achieve the same functionality, and it seems to be faster.
+" au GUIEnter * call Maximize_Window()
 
 " remove the right side and left side scroll bar, which is not really needed in Gvim, more of a minimal look this way
 set guioptions-=r
