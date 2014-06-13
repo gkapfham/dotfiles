@@ -75,6 +75,7 @@ Bundle 'https://github.com/Raimondi/delimitMate.git'
 Bundle 'https://github.com/Valloric/ListToggle.git'
 Bundle 'https://github.com/Valloric/MatchTagAlways.git'
 Bundle 'https://github.com/Yggdroot/indentLine.git'
+Bundle 'https://github.com/amiorin/ctrlp-z.git'
 Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/dterei/VimBookmarking.git'
 Bundle 'https://github.com/ervandew/supertab.git'
@@ -122,7 +123,6 @@ Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/xolox/vim-session.git'
-Bundle 'https://github.com/amiorin/ctrlp-z.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -132,14 +132,12 @@ if iCanHazVundle == 0
 endif
 
 " Various vim plugins that did not work the way that I wanted them to, discarding for now
-" Bundle 'https://github.com/tommcdo/vim-lion.git'
-" Bundle 'https://github.com/Valloric/YouCompleteMe.git'
-" Bundle 'https://github.com/itchyny/calendar.vim.git'
 " Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
 " Bundle 'https://github.com/Lokaltog/vim-easymotion'
 " Bundle 'https://github.com/Rykka/colorv.vim.git'
 " Bundle 'https://github.com/SirVer/ultisnips.git'
 " Bundle 'https://github.com/Townk/vim-autoclose.git'
+" Bundle 'https://github.com/Valloric/YouCompleteMe.git'
 " Bundle 'https://github.com/aaronbieber/quicktask.git'
 " Bundle 'https://github.com/airblade/vim-gitgutter.git'
 " Bundle 'https://github.com/altercation/vim-colors-solarized.git'
@@ -151,6 +149,7 @@ endif
 " Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 " Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 " Bundle 'https://github.com/hlissner/vim-multiedit.git'
+" Bundle 'https://github.com/itchyny/calendar.vim.git'
 " Bundle 'https://github.com/jcf/vim-latex.git'
 " Bundle 'https://github.com/jeetsukumaran/vim-markology.git'
 " Bundle 'https://github.com/mhinz/vim-signify.git'
@@ -162,6 +161,8 @@ endif
 " Bundle 'https://github.com/skammer/vim-css-color.git'
 " Bundle 'https://github.com/skammer/vim-css-color.git'
 " Bundle 'https://github.com/skroll/vim-taghighlight.git'
+" Bundle 'https://github.com/taiansu/nerdtree-ag.git'
+" Bundle 'https://github.com/tommcdo/vim-lion.git'
 " Bundle 'https://github.com/vim-scripts/CSApprox.git'
 " Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
 " Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
@@ -169,7 +170,6 @@ endif
 " Bundle 'https://github.com/w0ng/vim-hybrid.git'
 " Bundle 'https://github.com/xuhdev/SingleCompile.git'
 " Bundle 'https://github.com/yuratomo/gmail.vim.git'
-
 " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
 let g:LatexBox_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
