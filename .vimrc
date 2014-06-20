@@ -155,6 +155,9 @@ endif
 " Bundle 'https://github.com/jeetsukumaran/vim-markology.git'
 " Bundle 'https://github.com/mhinz/vim-signify.git'
 " Bundle 'https://github.com/mhinz/vim-startify.git'
+" Bundle 'https://github.com/michalliu/jsoncodecs.vim.git'
+" Bundle 'https://github.com/michalliu/jsruntime.vim.git'
+" Bundle 'https://github.com/michalliu/sourcebeautify.vim.git'
 " Bundle 'https://github.com/milkypostman/vim-togglelist.git'
 " Bundle 'https://github.com/othree/vim-autocomplpop.git'
 " Bundle 'https://github.com/reedes/vim-wordy.git'
@@ -171,6 +174,7 @@ endif
 " Bundle 'https://github.com/w0ng/vim-hybrid.git'
 " Bundle 'https://github.com/xuhdev/SingleCompile.git'
 " Bundle 'https://github.com/yuratomo/gmail.vim.git'
+
 " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
 let g:LatexBox_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
