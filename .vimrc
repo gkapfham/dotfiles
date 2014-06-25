@@ -33,6 +33,7 @@ set encoding=utf-8
 " set the hybrid color scheme for vim running in the terminal window
 " let g:hybrid_use_Xresources = 1
 colorscheme hybrid
+" set background=dark
 
 " define some commands for wrapping and not wrapping a line or paragraph
 command Wrap set textwidth=120
@@ -67,6 +68,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " These are all of the Bundles that we use to enhance the behavior of Vim
+Bundle 'https://github.com/Chiel92/vim-autoformat.git'
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
 Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
@@ -74,39 +76,36 @@ Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Bundle 'https://github.com/Raimondi/delimitMate.git'
 Bundle 'https://github.com/Valloric/ListToggle.git'
 Bundle 'https://github.com/Valloric/MatchTagAlways.git'
-Bundle 'https://github.com/Yggdroot/indentLine.git'
 Bundle 'https://github.com/amiorin/ctrlp-z.git'
 Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/dterei/VimBookmarking.git'
 Bundle 'https://github.com/ervandew/supertab.git'
-Bundle 'https://github.com/flazz/vim-colorschemes.git'
 Bundle 'https://github.com/freitass/todo.txt-vim.git'
 Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/godlygeek/tabular.git'
 Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 Bundle 'https://github.com/gregsexton/gitv.git'
-Bundle 'https://github.com/guns/xterm-color-table.vim.git'
 Bundle 'https://github.com/honza/vim-snippets'
 Bundle 'https://github.com/int3/vim-extradite.git'
 Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
-Bundle 'https://github.com/junegunn/vim-easy-align.git'
 Bundle 'https://github.com/justinmk/vim-sneak.git'
 Bundle 'https://github.com/kablamo/vim-git-log.git'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
-Bundle 'https://github.com/kshenoy/vim-signature.git'
 Bundle 'https://github.com/majutsushi/tagbar'
 Bundle 'https://github.com/mattn/emmet-vim.git'
+Bundle 'https://github.com/mbadran/headlights.git'
 Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
 Bundle 'https://github.com/rking/ag.vim.git'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
 Bundle 'https://github.com/scrooloose/syntastic.git'
 Bundle 'https://github.com/sjl/gundo.vim.git'
-Bundle 'https://github.com/tacahiroy/ctrlp-funky.git'
+Bundle 'https://github.com/tejr/nextag.git'
 Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
 Bundle 'https://github.com/timcharper/wordnet.vim.git'
 Bundle 'https://github.com/tomtom/tlib_vim'
 Bundle 'https://github.com/tpope/vim-abolish.git'
 Bundle 'https://github.com/tpope/vim-fugitive.git'
+Bundle 'https://github.com/tpope/vim-liquid.git'
 Bundle 'https://github.com/tpope/vim-markdown'
 Bundle 'https://github.com/tpope/vim-ragtag.git'
 Bundle 'https://github.com/tpope/vim-surround.git'
@@ -117,13 +116,10 @@ Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
 Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
 Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
 Bundle 'https://github.com/vim-scripts/TeX-9.git'
-Bundle 'https://github.com/vim-scripts/Xoria256m.git'
 Bundle 'https://github.com/vim-scripts/csv.vim.git'
-Bundle 'https://github.com/vim-scripts/dbext.vim.git'
 Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
-Bundle 'https://github.com/xolox/vim-session.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -139,20 +135,25 @@ endif
 " Bundle 'https://github.com/SirVer/ultisnips.git'
 " Bundle 'https://github.com/Townk/vim-autoclose.git'
 " Bundle 'https://github.com/Valloric/YouCompleteMe.git'
+" Bundle 'https://github.com/Yggdroot/indentLine.git'
 " Bundle 'https://github.com/aaronbieber/quicktask.git'
 " Bundle 'https://github.com/airblade/vim-gitgutter.git'
 " Bundle 'https://github.com/altercation/vim-colors-solarized.git'
 " Bundle 'https://github.com/ap/vim-css-color.git'
+" Bundle 'https://github.com/flazz/vim-colorschemes.git'
 " Bundle 'https://github.com/gcmt/tag-surfer.git'
 " Bundle 'https://github.com/gcmt/wildfire.vim.git'
 " Bundle 'https://github.com/gerw/vim-latex-suite.git'
 " Bundle 'https://github.com/goldfeld/vim-seek.git'
 " Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 " Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
+" Bundle 'https://github.com/guns/xterm-color-table.vim.git'
 " Bundle 'https://github.com/hlissner/vim-multiedit.git'
 " Bundle 'https://github.com/itchyny/calendar.vim.git'
 " Bundle 'https://github.com/jcf/vim-latex.git'
 " Bundle 'https://github.com/jeetsukumaran/vim-markology.git'
+" Bundle 'https://github.com/junegunn/vim-easy-align.git'
+" Bundle 'https://github.com/kshenoy/vim-signature.git'
 " Bundle 'https://github.com/mhinz/vim-signify.git'
 " Bundle 'https://github.com/mhinz/vim-startify.git'
 " Bundle 'https://github.com/michalliu/jsoncodecs.vim.git'
@@ -165,15 +166,27 @@ endif
 " Bundle 'https://github.com/skammer/vim-css-color.git'
 " Bundle 'https://github.com/skammer/vim-css-color.git'
 " Bundle 'https://github.com/skroll/vim-taghighlight.git'
+" Bundle 'https://github.com/tacahiroy/ctrlp-funky.git'
 " Bundle 'https://github.com/taiansu/nerdtree-ag.git'
 " Bundle 'https://github.com/tommcdo/vim-lion.git'
 " Bundle 'https://github.com/vim-scripts/CSApprox.git'
 " Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
+" Bundle 'https://github.com/vim-scripts/Xoria256m.git'
 " Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
+" Bundle 'https://github.com/vim-scripts/dbext.vim.git'
 " Bundle 'https://github.com/vim-scripts/taglist.vim.git'
 " Bundle 'https://github.com/w0ng/vim-hybrid.git'
+" Bundle 'https://github.com/xolox/vim-session.git'
 " Bundle 'https://github.com/xuhdev/SingleCompile.git'
 " Bundle 'https://github.com/yuratomo/gmail.vim.git'
+
+" Configuration for the Tabularize program to work on the = and : for tabularization
+if exists(":Tabularize")
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
 
 " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
@@ -274,18 +287,18 @@ set whichwrap+=<,>,h,l,[,] " wrap when you get to the end of a line and you are 
 " autocmd FileType java set formatoptions=c " COMM automatically reformat paragraphs when going beyond textwidth; good but not perfect 
 
 " do not prompt to save for the session management each time
-let g:session_autosave = 'no'
+" let g:session_autosave = 'no'
 
 " to use the sessions program, you need to uncomment this line and change it to something in your home account
 " let g:session_directory = '/home/gkapfham/.vim/sessions'
 
 " database connections for work with SchemaAnalyst and different database applications (e.g., TweetComplete) 
 
-" SQLite
-let g:dbext_default_profile_sqlite_customer = 'type=SQLITE:dbname=/home/gkapfham/working/databases/customer.db'
-let g:dbext_default_profile_sqlite_tweetcomplete_testing = 'type=SQLITE:dbname=/home/gkapfham/working/software/TweetComplete/databases/tweetcomplete-testing.db'
-let g:dbext_default_profile_sqlite_tweetcomplete = 'type=SQLITE:dbname=/home/gkapfham/working/software/TweetComplete/databases/tweetcomplete.db'
-
+" " SQLite
+" let g:dbext_default_profile_sqlite_customer = 'type=SQLITE:dbname=/home/gkapfham/working/databases/customer.db'
+" let g:dbext_default_profile_sqlite_tweetcomplete_testing = 'type=SQLITE:dbname=/home/gkapfham/working/software/TweetComplete/databases/tweetcomplete-testing.db'
+" let g:dbext_default_profile_sqlite_tweetcomplete = 'type=SQLITE:dbname=/home/gkapfham/working/software/TweetComplete/databases/tweetcomplete.db'
+" 
 " turn on spell checking so that I can do this for Latex documents
 set spell spelllang=en_us,en_gb
 set mousemodel=popup
@@ -398,12 +411,9 @@ set tags=./tags;
 let g:easytags_ignored_filetypes = ''
 let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
-" let g:ctrlp_extensions = ['funky', 'tag', 'buffertag', 'F']
-" let g:ctrlp_extensions = ['Z', 'F']
-" let g:ctrlp_extensions = ['F']
+
 let g:easytags_always_enabled = 1
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_use_caching = 0
 let g:ctrlp_z_nerdtree = 1
 
@@ -469,10 +479,23 @@ autocmd FileType html
 let java_highlight_functions="style"
 " let java_highlight_functions="indent"
 
-" Configure the identing line plugin so that it will use the correct colors and symbols
-let g:indentLine_color_term = 239
-let g:indentLine_color_gui = "#707880"
-let g:indentLine_char = '│'
+" " Configure the identing line plugin so that it will use the correct colors and symbols
+" let g:indentLine_color_term = 239
+" let g:indentLine_color_gui = "#707880"
+" let g:indentLine_char = '│'
+" 
+
+" Configure a different indenting plugin that has smooth lines
+let g:indent_guides_guide_size=1
+let g:indent_guides_start_level=1
+let g:indent_guides_enable_on_vim_startup = 0
+" let g:indent_guides_space_guides = 1
+" let g:indent_guides_soft_pattern = ' '
+
+if !has("gui_running")
+    let g:indent_guides_auto_colors = 0
+    hi IndentGuidesEven ctermbg=darkgrey
+endif
 
 " Add in the path to the WordNet binary, allowing for a <Leader>wnd command to easily run
 let g:wordnet_path = "/usr/bin/"
@@ -495,6 +518,11 @@ nmap <S-Enter> O<Esc>
 
 " Always show the hidden files inside of the NerdTree
 let NERDTreeShowHidden=1
+
+" let g:ctrlp_extensions = ['funky', 'tag', 'buffertag', 'F']
+" let g:ctrlp_extensions = ['Z', 'F']
+" let g:ctrlp_extensions = ['F']
+" let g:ctrlp_funky_syntax_highlight = 1
 
 " let g:ycm_complete_in_comments = 1
 " let g:ycm_collect_identifiers_from_comments_and_strings = 1
