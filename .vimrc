@@ -4,7 +4,7 @@ set nocompatible | filetype indent plugin on | syn on
 " Set the completion function for a variety of different file types
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType tex set omnifunc=LatexBox_Complete
+" autocmd FileType tex set omnifunc=latex#complete
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
 " Set the completion function in general if there is not a specific type
@@ -195,18 +195,18 @@ nmap <Leader>f :Autoformat<CR><CR>
 
 " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
-let g:LatexBox_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
-let g:LatexBox_output_type="pdf"
-let g:Tex_MultipleCompileFormats = 'pdf'
-let g:Tex_CompileRule_pdf = 'latexmk -pdf $*'
-let g:Tex_DefaultTargetFormat='pdf'
-let Tex_FoldedSections=""
-let Tex_FoldedEnvironments=""
-let Tex_FoldedMisc=""
-let g:LatexBox_autojump=1
-let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compilation, great for the issta paper
-let g:LatexBox_latexmk_async=1 " handles the weird screen flashing issue with compilation and other errors
-
+" let g:LatexBox_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
+" let g:LatexBox_output_type="pdf"
+" let g:Tex_MultipleCompileFormats = 'pdf'
+" let g:Tex_CompileRule_pdf = 'latexmk -pdf $*'
+" let g:Tex_DefaultTargetFormat='pdf'
+" let Tex_FoldedSections=""
+" let Tex_FoldedEnvironments=""
+" let Tex_FoldedMisc=""
+" let g:LatexBox_autojump=1
+" let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compilation, great for the issta paper
+" let g:LatexBox_latexmk_async=1 " handles the weird screen flashing issue with compilation and other errors
+" 
 " Setting up SyncTex and compilation support for Tex-9
 let g:tex_nine_config = {
             \'compiler': 'latexmk',
@@ -215,6 +215,8 @@ let g:tex_nine_config = {
 
 " Starting to use vim-latex and it needs several configurations to work correctly
 let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
+let g:latex_fold_enabled = 0
+let g:latex_quickfix_open_on_warning = 0
 
 " Turn on smart indentation with the LaTeX-Box plugin, nice and very helpful
 set smartindent
