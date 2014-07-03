@@ -70,7 +70,7 @@ Bundle 'gmarik/vundle'
 " These are all of the Bundles that we use to enhance the behavior of Vim
 Bundle 'https://github.com/Chiel92/vim-autoformat.git'
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
-Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
+" Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Bundle 'https://github.com/Raimondi/delimitMate.git'
@@ -120,6 +120,8 @@ Bundle 'https://github.com/vim-scripts/csv.vim.git'
 Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
+Bundle 'https://github.com/kshenoy/vim-signature.git'
+Bundle 'https://github.com/lervag/vim-latex.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -188,12 +190,15 @@ if exists(":Tabularize")
     vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
 
+" Configuration for the Autoformat program that will make HMTL, CSS, many others format correctly
+nmap <Leader>f :Autoformat<CR><CR>
+
 " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
 let g:LatexBox_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
 let g:LatexBox_output_type="pdf"
 let g:Tex_MultipleCompileFormats = 'pdf'
-let g:Tex_CompileRule_pdf = 'latexmk -pdf -pvc $*'
+let g:Tex_CompileRule_pdf = 'latexmk -pdf $*'
 let g:Tex_DefaultTargetFormat='pdf'
 let Tex_FoldedSections=""
 let Tex_FoldedEnvironments=""
@@ -202,11 +207,14 @@ let g:LatexBox_autojump=1
 let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compilation, great for the issta paper
 let g:LatexBox_latexmk_async=1 " handles the weird screen flashing issue with compilation and other errors
 
-" " Recommended for xelatex users who wants SyncTeX support, using the Tex-9 plugin for forward and reverse searching
+" Setting up SyncTex and compilation support for Tex-9
 let g:tex_nine_config = {
             \'compiler': 'latexmk',
             \'synctex': 1
             \}
+
+" Starting to use vim-latex and it needs several configurations to work correctly
+let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
 
 " Turn on smart indentation with the LaTeX-Box plugin, nice and very helpful
 set smartindent
