@@ -4,7 +4,6 @@ set nocompatible | filetype indent plugin on | syn on
 " Set the completion function for a variety of different file types
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType tex set omnifunc=latex#complete
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
 " Set the completion function in general if there is not a specific type
@@ -33,7 +32,6 @@ set encoding=utf-8
 " set the hybrid color scheme for vim running in the terminal window
 " let g:hybrid_use_Xresources = 1
 colorscheme hybrid
-" set background=dark
 
 " define some commands for wrapping and not wrapping a line or paragraph
 command Wrap set textwidth=120
@@ -362,7 +360,7 @@ let NERDTreeMinimalUI=1
 "             \ ],
 "             \ 'sort'    : 0
 "             \ }
- 
+
 " Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!                 
 set nocursorcolumn
 set nocursorline
@@ -434,7 +432,6 @@ set tags=./tags;
 let g:easytags_ignored_filetypes = ''
 let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
-
 let g:easytags_always_enabled = 1
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_use_caching = 0
@@ -449,9 +446,6 @@ nmap <C-t> :!ctags -R<CR>
 
 " This did not seem to work correctly to get the syntax highlighting quickly in Java
 " autocmd FileType java let g:easytags_always_enabled = 1
-
-" Configure the Calendar plugin so that it can access the Google calendar, nice for viewing your schedule
-let g:calendar_google_calendar = 1
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 " Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
@@ -509,11 +503,10 @@ set autowrite
 let java_highlight_functions="style"
 " let java_highlight_functions="indent"
 
-" " Configure the identing line plugin so that it will use the correct colors and symbols
+" Configure the identing line plugin so that it will use the correct colors and symbols ; deprecated
 " let g:indentLine_color_term = 239
 " let g:indentLine_color_gui = "#707880"
 " let g:indentLine_char = '│'
-" 
 
 " Configure a different indenting plugin that has smooth lines
 let g:indent_guides_guide_size=1
@@ -552,6 +545,12 @@ nmap <S-Enter> O<Esc>
 " Always show the hidden files inside of the NerdTree
 let NERDTreeShowHidden=1
 
+" No longer needed because the new latex plugin does this correctly for you
+" autocmd FileType tex set omnifunc=latex#complete
+
+" Configure the Calendar plugin so that it can access the Google calendar, nice for viewing your schedule
+" let g:calendar_google_calendar = 1
+" 
 " let g:ctrlp_extensions = ['funky', 'tag', 'buffertag', 'F']
 " let g:ctrlp_extensions = ['Z', 'F']
 " let g:ctrlp_extensions = ['F']
