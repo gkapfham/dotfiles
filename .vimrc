@@ -68,34 +68,40 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " These are all of the Bundles that we use to enhance the behavior of Vim
+
 Bundle 'https://github.com/Chiel92/vim-autoformat.git'
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
-" Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Bundle 'https://github.com/Raimondi/delimitMate.git'
 Bundle 'https://github.com/Valloric/ListToggle.git'
 Bundle 'https://github.com/Valloric/MatchTagAlways.git'
+Bundle 'https://github.com/Wolfy87/vim-enmasse.git'
+Bundle 'https://github.com/airblade/vim-gitgutter.git'
 Bundle 'https://github.com/amiorin/ctrlp-z.git'
 Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/dterei/VimBookmarking.git'
+Bundle 'https://github.com/ervandew/ag.git'
 Bundle 'https://github.com/ervandew/supertab.git'
 Bundle 'https://github.com/freitass/todo.txt-vim.git'
 Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/godlygeek/tabular.git'
 Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 Bundle 'https://github.com/gregsexton/gitv.git'
+Bundle 'https://github.com/henrik/vim-qargs.git'
 Bundle 'https://github.com/honza/vim-snippets'
 Bundle 'https://github.com/int3/vim-extradite.git'
 Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Bundle 'https://github.com/justinmk/vim-sneak.git'
 Bundle 'https://github.com/kablamo/vim-git-log.git'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
+Bundle 'https://github.com/kshenoy/vim-signature.git'
+Bundle 'https://github.com/lervag/vim-latex.git'
 Bundle 'https://github.com/majutsushi/tagbar'
 Bundle 'https://github.com/mattn/emmet-vim.git'
 Bundle 'https://github.com/mbadran/headlights.git'
 Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
-Bundle 'https://github.com/rking/ag.vim.git'
+Bundle 'https://github.com/osyo-manga/vim-over.git'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
 Bundle 'https://github.com/scrooloose/syntastic.git'
 Bundle 'https://github.com/sjl/gundo.vim.git'
@@ -120,8 +126,6 @@ Bundle 'https://github.com/vim-scripts/csv.vim.git'
 Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
-Bundle 'https://github.com/kshenoy/vim-signature.git'
-Bundle 'https://github.com/lervag/vim-latex.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -131,7 +135,9 @@ if iCanHazVundle == 0
 endif
 
 " Various vim plugins that did not work the way that I wanted them to, discarding for now
+
 " Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
+" Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 " Bundle 'https://github.com/Lokaltog/vim-easymotion'
 " Bundle 'https://github.com/Rykka/colorv.vim.git'
 " Bundle 'https://github.com/SirVer/ultisnips.git'
@@ -164,6 +170,7 @@ endif
 " Bundle 'https://github.com/milkypostman/vim-togglelist.git'
 " Bundle 'https://github.com/othree/vim-autocomplpop.git'
 " Bundle 'https://github.com/reedes/vim-wordy.git'
+" Bundle 'https://github.com/rking/ag.vim.git'
 " Bundle 'https://github.com/rking/vim-detailed.git'
 " Bundle 'https://github.com/skammer/vim-css-color.git'
 " Bundle 'https://github.com/skammer/vim-css-color.git'
@@ -217,6 +224,8 @@ let g:tex_nine_config = {
 let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
 let g:latex_fold_enabled = 0
 let g:latex_quickfix_open_on_warning = 0
+let g:latex_toc_resize = 0
+let g:latex_toc_hide_help = 1
 
 " Turn on smart indentation with the LaTeX-Box plugin, nice and very helpful
 set smartindent
@@ -259,6 +268,10 @@ autocmd FileType java let g:SuperTabContextTextOmniPrecedence = ['&completefunc'
 " the autocompletion output that is available in gvim
 set cot=menu
 set completeopt=longest,menuone
+
+" start using the wildmenu to complete different commands in command-mode
+set wildmenu
+set wildmode=longest:full,full
 
 " set up some commands for adding, removing, and navigating bookmarks inside of vim; very useful
 map <silent> bb :ToggleBookmark<CR>
@@ -359,7 +372,7 @@ set synmaxcol=145
 set ttyfast
 
 " turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
+" nnoremap <leader><space> :nohlsearch<CR>
 
 " Make the source code history browsing feature open windows horizontally, as this supports better browsing
 let g:Gitv_OpenHorizontal=1
@@ -477,6 +490,13 @@ autocmd FileType html
             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
             \ endif
 
+" I am not using GitGutter in the signs column because I don't like the slight delay;
+" but, I am using it to display information inside of the Airline at the bottom of Vim
+let g:gitgutter_signs = 0
+
+" Automatically save changes before switching buffer with some
+" commands, like :cnfile. Very useful when running Qdo on a QuickFix list
+set autowrite
 
 " Control how the delimitmate handles the return character, does not seem to work correctly
 " IMPORTANT NOTE: Adding the first line will cause tab completion with supertab not to work correctly
@@ -506,6 +526,9 @@ if !has("gui_running")
     let g:indent_guides_auto_colors = 0
     hi IndentGuidesEven ctermbg=darkgrey
 endif
+
+" Make a separate key binding that allows for the toggling of the indent guides
+nmap <Leader>g :IndentGuidesToggle<CR>
 
 " Add in the path to the WordNet binary, allowing for a <Leader>wnd command to easily run
 let g:wordnet_path = "/usr/bin/"
