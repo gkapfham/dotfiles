@@ -22,6 +22,9 @@ let g:html_indent_inctags = "html,body,head,tbody,div"
 " Set it so that the todo mode is always run when editing the file called todo.txt or Todo.txt
 autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
 
+" Set it so that the CSV mode is always run when editing this type of file (does not autodetect?)
+autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
+
 " Set up a dictionary so that I can do word completion by looking up words!
 set dictionary-=/usr/share/dict/american-english
 set dictionary+=/usr/share/dict/american-english
@@ -120,10 +123,11 @@ Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
 Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
 Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
 Bundle 'https://github.com/vim-scripts/TeX-9.git'
-Bundle 'https://github.com/vim-scripts/csv.vim.git'
+" Bundle 'https://github.com/vim-scripts/csv.vim.git'
 Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
+Bundle 'https://github.com/chrisbra/csv.vim.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -544,6 +548,9 @@ nmap <S-Enter> O<Esc>
 
 " Always show the hidden files inside of the NerdTree
 let NERDTreeShowHidden=1
+
+" Do not go to the next line with a comment when you press enter
+" set formatoptions-=or
 
 " No longer needed because the new latex plugin does this correctly for you
 " autocmd FileType tex set omnifunc=latex#complete
