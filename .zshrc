@@ -18,7 +18,7 @@ alias gvt="gvim ~/working/todo/todo.txt"
 alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 
 # create an alias that runs the hubic sync program
-alias hs="hubic synchronize"
+# alias hs="hubic synchronize"
 
 # Adding these lines of code enables the searching of partially completed commands with the arrow keys
 autoload -Uz up-line-or-beginning-search
@@ -88,7 +88,7 @@ autoload -U history-search-end
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ant sudo web-search dircycle vundle wd zsh-syntax-highlighting fasd)
+plugins=(git ant sudo web-search dircycle vundle wd zsh-syntax-highlighting fasd tmux)
 . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source $ZSH/oh-my-zsh.sh
 
