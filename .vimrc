@@ -15,6 +15,9 @@ autocmd FileType todo set syntax=todo
 " Set the syntax for the markdown files so that the file highlighting is correct
 au BufRead,BufNewFile *.md set filetype=markdown
 
+" Set the syntax for the markdown files so that the file highlighting is correct
+" au BufRead,BufNewFile *.md set filetype=liquid
+"
 "Set indenting to work correctly for the HTML file type (may not be need now)
 au BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = "html,body,head,tbody,div"
@@ -70,7 +73,7 @@ Bundle 'gmarik/vundle'
 
 " These are all of the Bundles that we use to enhance the behavior of Vim
 
-Bundle 'https://github.com/Chiel92/vim-autoformat.git'
+" Bundle 'https://github.com/Chiel92/vim-autoformat.git'
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
@@ -81,6 +84,7 @@ Bundle 'https://github.com/Wolfy87/vim-enmasse.git'
 Bundle 'https://github.com/airblade/vim-gitgutter.git'
 Bundle 'https://github.com/amiorin/ctrlp-z.git'
 Bundle 'https://github.com/bling/vim-airline.git'
+Bundle 'https://github.com/chrisbra/csv.vim.git'
 Bundle 'https://github.com/dterei/VimBookmarking.git'
 Bundle 'https://github.com/ervandew/ag.git'
 Bundle 'https://github.com/ervandew/supertab.git'
@@ -113,7 +117,6 @@ Bundle 'https://github.com/tomtom/tlib_vim'
 Bundle 'https://github.com/tpope/vim-abolish.git'
 Bundle 'https://github.com/tpope/vim-fugitive.git'
 Bundle 'https://github.com/tpope/vim-liquid.git'
-Bundle 'https://github.com/tpope/vim-markdown'
 Bundle 'https://github.com/tpope/vim-ragtag.git'
 Bundle 'https://github.com/tpope/vim-surround.git'
 Bundle 'https://github.com/tpope/vim-unimpaired.git'
@@ -123,11 +126,12 @@ Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
 Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
 Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
 Bundle 'https://github.com/vim-scripts/TeX-9.git'
-" Bundle 'https://github.com/vim-scripts/csv.vim.git'
 Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
-Bundle 'https://github.com/chrisbra/csv.vim.git'
+" Bundle 'https://github.com/gabrielelana/vim-markdown.git'
+" Bundle 'https://github.com/tpope/vim-markdown.git'
+Bundle 'https://github.com/edkolev/tmuxline.vim.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -168,7 +172,7 @@ endif
 " Bundle 'https://github.com/mhinz/vim-startify.git'
 " Bundle 'https://github.com/michalliu/jsoncodecs.vim.git'
 " Bundle 'https://github.com/michalliu/jsruntime.vim.git'
-" Bundle 'https://github.com/michalliu/sourcebeautify.vim.git'
+" Bundle 'https://github.com/michalliu/sourceeautify.vim.git'
 " Bundle 'https://github.com/milkypostman/vim-togglelist.git'
 " Bundle 'https://github.com/othree/vim-autocomplpop.git'
 " Bundle 'https://github.com/reedes/vim-wordy.git'
@@ -184,6 +188,7 @@ endif
 " Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
 " Bundle 'https://github.com/vim-scripts/Xoria256m.git'
 " Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
+" Bundle 'https://github.com/vim-scripts/csv.vim.git'
 " Bundle 'https://github.com/vim-scripts/dbext.vim.git'
 " Bundle 'https://github.com/vim-scripts/taglist.vim.git'
 " Bundle 'https://github.com/w0ng/vim-hybrid.git'
@@ -218,16 +223,18 @@ nmap <Leader>f :Autoformat<CR><CR>
 " 
 " Setting up SyncTex and compilation support for Tex-9
 let g:tex_nine_config = {
-            \'compiler': 'latexmk',
+            \'compiler': "latexmk",
             \'synctex': 1
             \}
 
 " Starting to use vim-latex and it needs several configurations to work correctly
-let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
+let g:latex_latexmk_options="-pdf -pvc -pdflatex='pdflatex -file-line-error -synctex=1'"
 let g:latex_fold_enabled = 0
 let g:latex_quickfix_open_on_warning = 0
 let g:latex_toc_resize = 0
 let g:latex_toc_hide_help = 1
+let g:latex_indent_enabled = 1
+let g:latex_latexmk_enabled = 1
 
 " Turn on smart indentation with the LaTeX-Box plugin, nice and very helpful
 set smartindent
@@ -480,7 +487,7 @@ map <F5> :call SyntaxAttr()<CR>
 "       \ 'text' : 0,
 "       \ 'tex' : 1,
 "       \}
-" 
+
 " HTML needs to have a chained completion function 
 autocmd FileType html
             \ if &omnifunc != '' |
