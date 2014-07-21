@@ -7,7 +7,7 @@
 # Here you can configure your printer
 # To print in a file, use the following entry:
 # PRINTER="TO_FILE:/home/berwal/test.ps"
-PRINTER="Toshiba"
+PRINTER="TOSHIBA-ColorMFP-X4"
 
 #
 # Here you can set the print command
