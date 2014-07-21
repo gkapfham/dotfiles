@@ -19,7 +19,7 @@ endfunction
 " au GUIEnter * call Maximize_Window()
 
 " remove the right side and left side scroll bar, which is not really needed in Gvim, more of a minimal look this way
-" set guioptions-=r
+set guioptions-=r
 set guioptions-=L
 
 " Remove the toolbar at the top of the page so that the extra icons are not visible, more minimal again
