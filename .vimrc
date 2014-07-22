@@ -1,5 +1,6 @@
 " Indicate that vim should run our plugins and always use syntax highlighting for all identified file types
-set nocompatible | filetype indent plugin on | syn on
+" set nocompatible | filetype indent plugin on | syn on
+set nocompatible 
 
 " Set the completion function for a variety of different file types
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
@@ -90,7 +91,7 @@ Bundle 'https://github.com/dterei/VimBookmarking.git'
 Bundle 'https://github.com/ervandew/ag.git'
 Bundle 'https://github.com/ervandew/supertab.git'
 Bundle 'https://github.com/freitass/todo.txt-vim.git'
-Bundle 'https://github.com/garbas/vim-snipmate'
+" Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/godlygeek/tabular.git'
 Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 Bundle 'https://github.com/gregsexton/gitv.git'
@@ -131,6 +132,7 @@ Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/tpope/vim-git.git'
+" Bundle 'https://github.com/Shougo/neocomplete.vim.git'
 
 " Bundle 'https://github.com/gabrielelana/vim-markdown.git'
 " Bundle 'https://github.com/tpope/vim-markdown.git'
@@ -150,9 +152,10 @@ endif
 " Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 " Bundle 'https://github.com/Lokaltog/vim-easymotion'
 " Bundle 'https://github.com/Rykka/colorv.vim.git'
-" Bundle 'https://github.com/SirVer/ultisnips.git'
+Bundle 'https://github.com/SirVer/ultisnips.git'
+" Bundle 'https://github.com/honza/vim-snippets'
 " Bundle 'https://github.com/Townk/vim-autoclose.git'
-" Bundle 'https://github.com/Valloric/YouCompleteMe.git'
+Bundle 'https://github.com/Valloric/YouCompleteMe.git'
 " Bundle 'https://github.com/Yggdroot/indentLine.git'
 " Bundle 'https://github.com/aaronbieber/quicktask.git'
 " Bundle 'https://github.com/airblade/vim-gitgutter.git'
@@ -200,6 +203,8 @@ endif
 " Bundle 'https://github.com/xolox/vim-session.git'
 " Bundle 'https://github.com/xuhdev/SingleCompile.git'
 " Bundle 'https://github.com/yuratomo/gmail.vim.git'
+
+filetype indent plugin on 
 
 " Configuration for the Tabularize program to work on the = and : for tabularization
 if exists(":Tabularize")
@@ -256,6 +261,7 @@ set complete+=]
 
 " This is the default context completion that will be used if there is not a separate autocommand configuration
 let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 let g:SuperTabLongestEnhanced = 1
@@ -266,11 +272,48 @@ let g:SuperTabLongestEnhanced = 1
 " other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS SORTA WELL
             " \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
 
-autocmd FileType tex
-            \ if &omnifunc != '' |
-            \   call SuperTabChain(&omnifunc, "<c-n>") |
-            \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-            \ endif
+" autocmd FileType tex
+"             \ if &omnifunc != '' |
+"             \   call SuperTabChain(&omnifunc, "<c-n>") |
+"             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+"             \ endif
+
+let g:ycm_semantic_triggers = {
+\  'tex'  : ['\cite{', '\ref{'],
+\ }
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+" let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
+let g:ycm_filetype_blacklist = {
+        \ 'tagbar' : 1,
+        \ 'qf' : 1,
+        \ 'notes' : 1,
+        \ 'markdown' : 1,
+        \ 'unite' : 1,
+        \ 'text' : 1,
+        \ 'vimwiki' : 1,
+        \ 'pandoc' : 1,
+        \ 'infolog' : 1,
+        \ 'mail' : 1
+        \}
+let g:ycm_use_ultisnips_completer = 1
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" " better key bindings for UltiSnipsExpandTrigger
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<ctrl-tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<tab>"
+" " let g:ycm_add_preview_to_completeopt = 0
+" " set completeopt=menu
 
 " Java autocompletion must use the completefunc (ctrl-x ctrl-u) to work correctly, so set it separately 
 autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
