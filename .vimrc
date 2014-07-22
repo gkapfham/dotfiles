@@ -5,6 +5,7 @@ set nocompatible | filetype indent plugin on | syn on
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType tex set omnifunc=latex#complete#omnifunc 
 
 " Set the completion function in general if there is not a specific type
 set omnifunc=syntaxcomplete#Complete
@@ -129,9 +130,12 @@ Bundle 'https://github.com/vim-scripts/TeX-9.git'
 Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
+Bundle 'https://github.com/tpope/vim-git.git'
+
 " Bundle 'https://github.com/gabrielelana/vim-markdown.git'
 " Bundle 'https://github.com/tpope/vim-markdown.git'
-Bundle 'https://github.com/edkolev/tmuxline.vim.git'
+" Bundle 'https://github.com/edkolev/tmuxline.vim.git'
+" Bundle 'https://github.com/Shougo/neocomplcache.vim.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
@@ -174,6 +178,7 @@ endif
 " Bundle 'https://github.com/michalliu/jsruntime.vim.git'
 " Bundle 'https://github.com/michalliu/sourceeautify.vim.git'
 " Bundle 'https://github.com/milkypostman/vim-togglelist.git'
+" Bundle 'L9'
 " Bundle 'https://github.com/othree/vim-autocomplpop.git'
 " Bundle 'https://github.com/reedes/vim-wordy.git'
 " Bundle 'https://github.com/rking/ag.vim.git'
@@ -247,6 +252,7 @@ nmap <C-l> :call tex_nine#ForwardSearch()<CR>
 " set complete=.,b,u,]
 set complete-=k complete+=k
 set complete+=kspell
+set complete+=]
 
 " This is the default context completion that will be used if there is not a separate autocommand configuration
 let g:SuperTabDefaultCompletionType = "context"
@@ -257,7 +263,9 @@ let g:SuperTabLongestEnhanced = 1
 " LatexBox_Complete
 
 " LaTeX needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
-" other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS WELL
+" other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS SORTA WELL
+            " \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
+
 autocmd FileType tex
             \ if &omnifunc != '' |
             \   call SuperTabChain(&omnifunc, "<c-n>") |
@@ -399,7 +407,7 @@ inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
 
 inoremap <expr> <tab> pumvisible() ? '<tab>' :
             \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
+ 
 " Configure the airline status bar replacement that provides some delightful context 
 set laststatus=2
 let g:airline_theme='base16'
