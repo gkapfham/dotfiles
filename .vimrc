@@ -240,6 +240,7 @@ let g:tex_nine_config = {
 " Starting to use vim-latex and it needs several configurations to work correctly
 let g:latex_latexmk_options="-pdf -pvc -pdflatex='pdflatex -file-line-error -synctex=1'"
 let g:latex_fold_enabled = 0
+let g:latex_quickfix_mode = 2
 let g:latex_quickfix_open_on_warning = 0
 let g:latex_toc_resize = 0
 let g:latex_toc_hide_help = 1
