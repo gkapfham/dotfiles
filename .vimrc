@@ -131,7 +131,7 @@ Bundle 'https://github.com/vim-scripts/TeX-9.git'
 Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
-Bundle 'https://github.com/tpope/vim-git.git'
+" Bundle 'https://github.com/tpope/vim-git.git'
 " Bundle 'https://github.com/Shougo/neocomplete.vim.git'
 
 " Bundle 'https://github.com/gabrielelana/vim-markdown.git'
@@ -206,13 +206,13 @@ Bundle 'https://github.com/Valloric/YouCompleteMe.git'
 
 filetype indent plugin on 
 
-" Configuration for the Tabularize program to work on the = and : for tabularization
-if exists(":Tabularize")
-    nmap <Leader>a= :Tabularize /=<CR>
-    vmap <Leader>a= :Tabularize /=<CR>
-    nmap <Leader>a: :Tabularize /:\zs<CR>
-    vmap <Leader>a: :Tabularize /:\zs<CR>
-endif
+" " Configuration for the Tabularize program to work on the = and : for tabularization
+" if exists(":Tabularize")
+"     nmap <Leader>a= :Tabularize /=<CR>
+"     vmap <Leader>a= :Tabularize /=<CR>
+"     nmap <Leader>a: :Tabularize /:\zs<CR>
+"     vmap <Leader>a: :Tabularize /:\zs<CR>
+" endif
 
 " Configuration for the Autoformat program that will make HMTL, CSS, many others format correctly
 nmap <Leader>f :Autoformat<CR><CR>
@@ -273,39 +273,39 @@ let g:SuperTabLongestEnhanced = 1
 " other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS SORTA WELL
             " \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
 
-" autocmd FileType tex
-"             \ if &omnifunc != '' |
-"             \   call SuperTabChain(&omnifunc, "<c-n>") |
-"             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-"             \ endif
+autocmd FileType tex
+            \ if &omnifunc != '' |
+            \   call SuperTabChain(&omnifunc, "<c-n>") |
+            \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+            \ endif
 
 let g:ycm_semantic_triggers = {
 \  'tex'  : ['\cite{', '\ref{'],
 \ }
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
-" let g:ycm_key_list_select_completion = ['<C-TAB>', '<Down>']
+" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_filetype_blacklist = {
         \ 'tagbar' : 1,
         \ 'qf' : 1,
         \ 'notes' : 1,
-        \ 'markdown' : 1,
         \ 'unite' : 1,
         \ 'text' : 1,
         \ 'vimwiki' : 1,
         \ 'pandoc' : 1,
         \ 'infolog' : 1,
-        \ 'mail' : 1
         \}
 let g:ycm_use_ultisnips_completer = 1
 
 " make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " let g:SuperTabDefaultCompletionType = '<C-n>'
+" let g:ycm_key_list_select_completion=[]
+" let g:ycm_key_list_previous_completion=[]
 
 " " better key bindings for UltiSnipsExpandTrigger
-" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsExpandTrigger = "<s-tab>"
 " let g:UltiSnipsJumpForwardTrigger = "<tab>"
 " let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
@@ -443,6 +443,7 @@ let g:Gitv_OpenHorizontal=1
 set shortmess=I
 
 " Set up the enter key to ensure that after completing words a return is not pressed
+
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
             \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
