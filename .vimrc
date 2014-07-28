@@ -2,6 +2,89 @@
 " set nocompatible | filetype indent plugin on | syn on
 set nocompatible 
 
+" Setting up Vundle -- the vim plugin bundler -- and another plugin management tool that I will demonstrate
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+    echo "Installing Vundle.."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    let iCanHazVundle=0
+endif
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+
+" These are all of the Bundles that we use to enhance the behavior of Vim
+
+Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
+Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
+Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
+Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
+Bundle 'https://github.com/Raimondi/delimitMate.git'
+Bundle 'https://github.com/SirVer/ultisnips.git'
+Bundle 'https://github.com/Valloric/ListToggle.git'
+Bundle 'https://github.com/Valloric/MatchTagAlways.git'
+Bundle 'https://github.com/Valloric/YouCompleteMe.git'
+Bundle 'https://github.com/Wolfy87/vim-enmasse.git'
+Bundle 'https://github.com/airblade/vim-gitgutter.git'
+Bundle 'https://github.com/amiorin/ctrlp-z.git'
+Bundle 'https://github.com/bling/vim-airline.git'
+Bundle 'https://github.com/chrisbra/csv.vim.git'
+Bundle 'https://github.com/dterei/VimBookmarking.git'
+Bundle 'https://github.com/ervandew/ag.git'
+Bundle 'https://github.com/ervandew/supertab.git'
+Bundle 'https://github.com/freitass/todo.txt-vim.git'
+Bundle 'https://github.com/godlygeek/tabular.git'
+Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
+Bundle 'https://github.com/gregsexton/gitv.git'
+Bundle 'https://github.com/henrik/vim-qargs.git'
+Bundle 'https://github.com/honza/vim-snippets'
+Bundle 'https://github.com/int3/vim-extradite.git'
+Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
+Bundle 'https://github.com/justinmk/vim-sneak.git'
+Bundle 'https://github.com/kablamo/vim-git-log.git'
+Bundle 'https://github.com/kien/ctrlp.vim.git'
+Bundle 'https://github.com/kshenoy/vim-signature.git'
+Bundle 'https://github.com/lervag/vim-latex.git'
+Bundle 'https://github.com/majutsushi/tagbar'
+Bundle 'https://github.com/mattn/emmet-vim.git'
+Bundle 'https://github.com/mbadran/headlights.git'
+Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
+Bundle 'https://github.com/osyo-manga/vim-over.git'
+Bundle 'https://github.com/scrooloose/nerdtree.git'
+Bundle 'https://github.com/scrooloose/syntastic.git'
+Bundle 'https://github.com/sjl/gundo.vim.git'
+Bundle 'https://github.com/tejr/nextag.git'
+Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
+Bundle 'https://github.com/timcharper/wordnet.vim.git'
+Bundle 'https://github.com/tomtom/tlib_vim'
+Bundle 'https://github.com/tpope/vim-abolish.git'
+Bundle 'https://github.com/tpope/vim-fugitive.git'
+Bundle 'https://github.com/tpope/vim-liquid.git'
+Bundle 'https://github.com/tpope/vim-ragtag.git'
+Bundle 'https://github.com/tpope/vim-surround.git'
+Bundle 'https://github.com/tpope/vim-unimpaired.git'
+Bundle 'https://github.com/tsaleh/vim-matchit.git'
+Bundle 'https://github.com/vim-scripts/AutoTag.git'
+Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
+Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
+Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
+Bundle 'https://github.com/vim-scripts/TeX-9.git'
+Bundle 'https://github.com/vim-scripts/tComment.git'
+Bundle 'https://github.com/xolox/vim-easytags.git'
+Bundle 'https://github.com/xolox/vim-misc.git'
+
+if iCanHazVundle == 0
+    echo "Installing Bundles, please ignore key map error messages"
+
+    echo ""
+    :BundleInstall
+endif
+
+filetype indent plugin on 
+
 " Set the completion function for a variety of different file types
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
@@ -59,163 +142,6 @@ set wildignore+=*/tmp/*
 let maplocalleader=","
 let mapleader=","
 
-" Setting up Vundle -- the vim plugin bundler -- and another plugin management tool that I will demonstrate
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-if !filereadable(vundle_readme)
-    echo "Installing Vundle.."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-    let iCanHazVundle=0
-endif
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-
-" These are all of the Bundles that we use to enhance the behavior of Vim
-
-" Bundle 'https://github.com/Chiel92/vim-autoformat.git'
-Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
-Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
-Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
-Bundle 'https://github.com/Raimondi/delimitMate.git'
-Bundle 'https://github.com/Valloric/ListToggle.git'
-Bundle 'https://github.com/Valloric/MatchTagAlways.git'
-Bundle 'https://github.com/Wolfy87/vim-enmasse.git'
-Bundle 'https://github.com/airblade/vim-gitgutter.git'
-Bundle 'https://github.com/amiorin/ctrlp-z.git'
-Bundle 'https://github.com/bling/vim-airline.git'
-Bundle 'https://github.com/chrisbra/csv.vim.git'
-Bundle 'https://github.com/dterei/VimBookmarking.git'
-Bundle 'https://github.com/ervandew/ag.git'
-Bundle 'https://github.com/ervandew/supertab.git'
-Bundle 'https://github.com/freitass/todo.txt-vim.git'
-" Bundle 'https://github.com/garbas/vim-snipmate'
-Bundle 'https://github.com/godlygeek/tabular.git'
-Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
-Bundle 'https://github.com/gregsexton/gitv.git'
-Bundle 'https://github.com/henrik/vim-qargs.git'
-Bundle 'https://github.com/honza/vim-snippets'
-Bundle 'https://github.com/int3/vim-extradite.git'
-Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
-Bundle 'https://github.com/justinmk/vim-sneak.git'
-Bundle 'https://github.com/kablamo/vim-git-log.git'
-Bundle 'https://github.com/kien/ctrlp.vim.git'
-Bundle 'https://github.com/kshenoy/vim-signature.git'
-" Bundle 'https://github.com/lervag/vim-latex.git'
-Bundle 'https://github.com/majutsushi/tagbar'
-Bundle 'https://github.com/mattn/emmet-vim.git'
-Bundle 'https://github.com/mbadran/headlights.git'
-Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
-Bundle 'https://github.com/osyo-manga/vim-over.git'
-Bundle 'https://github.com/scrooloose/nerdtree.git'
-Bundle 'https://github.com/scrooloose/syntastic.git'
-Bundle 'https://github.com/sjl/gundo.vim.git'
-Bundle 'https://github.com/tejr/nextag.git'
-Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
-Bundle 'https://github.com/timcharper/wordnet.vim.git'
-Bundle 'https://github.com/tomtom/tlib_vim'
-Bundle 'https://github.com/tpope/vim-abolish.git'
-Bundle 'https://github.com/tpope/vim-fugitive.git'
-Bundle 'https://github.com/tpope/vim-liquid.git'
-Bundle 'https://github.com/tpope/vim-ragtag.git'
-Bundle 'https://github.com/tpope/vim-surround.git'
-Bundle 'https://github.com/tpope/vim-unimpaired.git'
-Bundle 'https://github.com/tsaleh/vim-matchit.git'
-Bundle 'https://github.com/vim-scripts/AutoTag.git'
-Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
-Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
-Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
-Bundle 'https://github.com/vim-scripts/TeX-9.git'
-Bundle 'https://github.com/vim-scripts/tComment.git'
-Bundle 'https://github.com/xolox/vim-easytags.git'
-Bundle 'https://github.com/xolox/vim-misc.git'
-" Bundle 'https://github.com/tpope/vim-git.git'
-" Bundle 'https://github.com/Shougo/neocomplete.vim.git'
-
-" Bundle 'https://github.com/gabrielelana/vim-markdown.git'
-" Bundle 'https://github.com/tpope/vim-markdown.git'
-" Bundle 'https://github.com/edkolev/tmuxline.vim.git'
-" Bundle 'https://github.com/Shougo/neocomplcache.vim.git'
-
-if iCanHazVundle == 0
-    echo "Installing Bundles, please ignore key map error messages"
-
-    echo ""
-    :BundleInstall
-endif
-
-" Various vim plugins that did not work the way that I wanted them to, discarding for now
-
-" Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
-Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
-" Bundle 'https://github.com/Lokaltog/vim-easymotion'
-" Bundle 'https://github.com/Rykka/colorv.vim.git'
-Bundle 'https://github.com/SirVer/ultisnips.git'
-" Bundle 'https://github.com/honza/vim-snippets'
-" Bundle 'https://github.com/Townk/vim-autoclose.git'
-Bundle 'https://github.com/Valloric/YouCompleteMe.git'
-" Bundle 'https://github.com/Yggdroot/indentLine.git'
-" Bundle 'https://github.com/aaronbieber/quicktask.git'
-" Bundle 'https://github.com/airblade/vim-gitgutter.git'
-" Bundle 'https://github.com/altercation/vim-colors-solarized.git'
-" Bundle 'https://github.com/ap/vim-css-color.git'
-" Bundle 'https://github.com/flazz/vim-colorschemes.git'
-" Bundle 'https://github.com/gcmt/tag-surfer.git'
-" Bundle 'https://github.com/gcmt/wildfire.vim.git'
-" Bundle 'https://github.com/gerw/vim-latex-suite.git'
-" Bundle 'https://github.com/goldfeld/vim-seek.git'
-" Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
-" Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
-" Bundle 'https://github.com/guns/xterm-color-table.vim.git'
-" Bundle 'https://github.com/hlissner/vim-multiedit.git'
-" Bundle 'https://github.com/itchyny/calendar.vim.git'
-" Bundle 'https://github.com/jcf/vim-latex.git'
-" Bundle 'https://github.com/jeetsukumaran/vim-markology.git'
-" Bundle 'https://github.com/junegunn/vim-easy-align.git'
-" Bundle 'https://github.com/kshenoy/vim-signature.git'
-" Bundle 'https://github.com/mhinz/vim-signify.git'
-" Bundle 'https://github.com/mhinz/vim-startify.git'
-" Bundle 'https://github.com/michalliu/jsoncodecs.vim.git'
-" Bundle 'https://github.com/michalliu/jsruntime.vim.git'
-" Bundle 'https://github.com/michalliu/sourceeautify.vim.git'
-" Bundle 'https://github.com/milkypostman/vim-togglelist.git'
-" Bundle 'L9'
-" Bundle 'https://github.com/othree/vim-autocomplpop.git'
-" Bundle 'https://github.com/reedes/vim-wordy.git'
-" Bundle 'https://github.com/rking/ag.vim.git'
-" Bundle 'https://github.com/rking/vim-detailed.git'
-" Bundle 'https://github.com/skammer/vim-css-color.git'
-" Bundle 'https://github.com/skammer/vim-css-color.git'
-" Bundle 'https://github.com/skroll/vim-taghighlight.git'
-" Bundle 'https://github.com/tacahiroy/ctrlp-funky.git'
-" Bundle 'https://github.com/taiansu/nerdtree-ag.git'
-" Bundle 'https://github.com/tommcdo/vim-lion.git'
-" Bundle 'https://github.com/vim-scripts/CSApprox.git'
-" Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
-" Bundle 'https://github.com/vim-scripts/Xoria256m.git'
-" Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
-" Bundle 'https://github.com/vim-scripts/csv.vim.git'
-" Bundle 'https://github.com/vim-scripts/dbext.vim.git'
-" Bundle 'https://github.com/vim-scripts/taglist.vim.git'
-" Bundle 'https://github.com/w0ng/vim-hybrid.git'
-" Bundle 'https://github.com/xolox/vim-session.git'
-" Bundle 'https://github.com/xuhdev/SingleCompile.git'
-" Bundle 'https://github.com/yuratomo/gmail.vim.git'
-
-filetype indent plugin on 
-
-" " Configuration for the Tabularize program to work on the = and : for tabularization
-" if exists(":Tabularize")
-"     nmap <Leader>a= :Tabularize /=<CR>
-"     vmap <Leader>a= :Tabularize /=<CR>
-"     nmap <Leader>a: :Tabularize /:\zs<CR>
-"     vmap <Leader>a: :Tabularize /:\zs<CR>
-" endif
-
-" Configuration for the Autoformat program that will make HMTL, CSS, many others format correctly
-" nmap <Leader>f :Autoformat<CR><CR>
 
 " " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
@@ -264,10 +190,10 @@ set complete+=]
 
 " This is the default context completion that will be used if there is not a separate autocommand configuration
 let g:SuperTabDefaultCompletionType = "context"
-" let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 let g:SuperTabLongestEnhanced = 1
+" let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " LatexBox_Complete
 
@@ -281,12 +207,12 @@ autocmd FileType tex
             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
             \ endif
 
+" You Complete Me configuration
 let g:ycm_semantic_triggers = {
 \  'tex'  : ['\cite{', '\ref{'],
 \ }
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
-" let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_filetype_blacklist = {
         \ 'tagbar' : 1,
         \ 'qf' : 1,
@@ -305,18 +231,6 @@ let g:ycm_use_ultisnips_completer = 1
 " let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
-
-" " better key bindings for UltiSnipsExpandTrigger
-" let g:UltiSnipsExpandTrigger = "<s-tab>"
-" let g:UltiSnipsJumpForwardTrigger = "<tab>"
-" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-" " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<ctrl-tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<tab>"
-" " let g:ycm_add_preview_to_completeopt = 0
-" " set completeopt=menu
 
 " Java autocompletion must use the completefunc (ctrl-x ctrl-u) to work correctly, so set it separately 
 autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
@@ -368,10 +282,6 @@ set pastetoggle=<F2> " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10 " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,] " wrap when you get to the end of a line and you are using the arrow keys
 
-" autocmd FileType tex set formatoptions=t " ALL automatically reformat paragraphs when going beyond textwidth; good but not perfect 
-" autocmd FileType mail set formatoptions=t " TEXT automatically reformat paragraphs when going beyond textwidth; good but not perfect 
-" autocmd FileType java set formatoptions=c " COMM automatically reformat paragraphs when going beyond textwidth; good but not perfect 
-
 " do not prompt to save for the session management each time
 " let g:session_autosave = 'no'
 
@@ -380,11 +290,6 @@ set whichwrap+=<,>,h,l,[,] " wrap when you get to the end of a line and you are 
 
 " database connections for work with SchemaAnalyst and different database applications (e.g., TweetComplete) 
 
-" " SQLite
-" let g:dbext_default_profile_sqlite_customer = 'type=SQLITE:dbname=/home/gkapfham/working/databases/customer.db'
-" let g:dbext_default_profile_sqlite_tweetcomplete_testing = 'type=SQLITE:dbname=/home/gkapfham/working/software/TweetComplete/databases/tweetcomplete-testing.db'
-" let g:dbext_default_profile_sqlite_tweetcomplete = 'type=SQLITE:dbname=/home/gkapfham/working/software/TweetComplete/databases/tweetcomplete.db'
-" 
 " turn on spell checking so that I can do this for Latex documents
 set spell spelllang=en_us,en_gb
 set mousemodel=popup
@@ -510,9 +415,6 @@ nnoremap zf :CtrlPF<Cr>
 " Set a command that allows for the creation of a tags file for exuberant ctags
 nmap <C-t> :!ctags -R<CR>
 
-" This did not seem to work correctly to get the syntax highlighting quickly in Java
-" autocmd FileType java let g:easytags_always_enabled = 1
-
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 " Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
 fu! TexQuotes()
@@ -534,15 +436,6 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr()<CR>
 
-" let g:SuperTabDefaultCompletionType = '<S-Tab>'
-
-" let g:ycm_filetype_blacklist = {
-"       \ 'notes' : 1,
-"       \ 'markdown' : 1,
-"       \ 'text' : 0,
-"       \ 'tex' : 1,
-"       \}
-
 " HTML needs to have a chained completion function 
 autocmd FileType html
             \ if &omnifunc != '' |
@@ -558,10 +451,6 @@ let g:gitgutter_signs = 0
 " commands, like :cnfile. Very useful when running Qdo on a QuickFix list
 set autowrite
 
-" Control how the delimitmate handles the return character, does not seem to work correctly
-" IMPORTANT NOTE: Adding the first line will cause tab completion with supertab not to work correctly
-" let delimitMate_expand_cr = 2
-" let delimitMate_expand_space = 1
 
 " However, if you follow the Java guidelines about how functions and classes are
 " supposed to be named (with respect to upper and lowercase), use >
@@ -569,10 +458,6 @@ set autowrite
 let java_highlight_functions="style"
 " let java_highlight_functions="indent"
 
-" Configure the identing line plugin so that it will use the correct colors and symbols ; deprecated
-" let g:indentLine_color_term = 239
-" let g:indentLine_color_gui = "#707880"
-" let g:indentLine_char = '│'
 
 " Configure a different indenting plugin that has smooth lines
 let g:indent_guides_guide_size=1
@@ -610,6 +495,17 @@ nmap <S-Enter> O<Esc>
 
 " Always show the hidden files inside of the NerdTree
 let NERDTreeShowHidden=1
+
+"
+" Configure the identing line plugin so that it will use the correct colors and symbols ; deprecated
+" let g:indentLine_color_term = 239
+" let g:indentLine_color_gui = "#707880"
+" let g:indentLine_char = '│'
+
+" Control how the delimitmate handles the return character, does not seem to work correctly
+" IMPORTANT NOTE: Adding the first line will cause tab completion with supertab not to work correctly
+" let delimitMate_expand_cr = 2
+" let delimitMate_expand_space = 1
 
 " Do not go to the next line with a comment when you press enter
 " set formatoptions-=or
@@ -779,4 +675,78 @@ let NERDTreeShowHidden=1
 " saved this is a very important feature for me to use regularly
 
 "set cot-=preview
+
+" Various vim plugins that did not work the way that I wanted them to, discarding for now
+" Bundle 'L9'
+" Bundle 'https://github.com/Chiel92/vim-autoformat.git'
+" Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
+" Bundle 'https://github.com/Lokaltog/vim-easymotion'
+" Bundle 'https://github.com/Rykka/colorv.vim.git'
+" Bundle 'https://github.com/Shougo/neocomplcache.vim.git'
+" Bundle 'https://github.com/Shougo/neocomplete.vim.git'
+" Bundle 'https://github.com/Townk/vim-autoclose.git'
+" Bundle 'https://github.com/Yggdroot/indentLine.git'
+" Bundle 'https://github.com/aaronbieber/quicktask.git'
+" Bundle 'https://github.com/airblade/vim-gitgutter.git'
+" Bundle 'https://github.com/altercation/vim-colors-solarized.git'
+" Bundle 'https://github.com/ap/vim-css-color.git'
+" Bundle 'https://github.com/edkolev/tmuxline.vim.git'
+" Bundle 'https://github.com/flazz/vim-colorschemes.git'
+" Bundle 'https://github.com/gabrielelana/vim-markdown.git'
+" Bundle 'https://github.com/garbas/vim-snipmate'
+" Bundle 'https://github.com/gcmt/tag-surfer.git'
+" Bundle 'https://github.com/gcmt/wildfire.vim.git'
+" Bundle 'https://github.com/gerw/vim-latex-suite.git'
+" Bundle 'https://github.com/goldfeld/vim-seek.git'
+" Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
+" Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
+" Bundle 'https://github.com/guns/xterm-color-table.vim.git'
+" Bundle 'https://github.com/hlissner/vim-multiedit.git'
+" Bundle 'https://github.com/honza/vim-snippets'
+" Bundle 'https://github.com/itchyny/calendar.vim.git'
+" Bundle 'https://github.com/jcf/vim-latex.git'
+" Bundle 'https://github.com/jeetsukumaran/vim-markology.git'
+" Bundle 'https://github.com/junegunn/vim-easy-align.git'
+" Bundle 'https://github.com/kshenoy/vim-signature.git'
+" Bundle 'https://github.com/mhinz/vim-signify.git'
+" Bundle 'https://github.com/mhinz/vim-startify.git'
+" Bundle 'https://github.com/michalliu/jsoncodecs.vim.git'
+" Bundle 'https://github.com/michalliu/jsruntime.vim.git'
+" Bundle 'https://github.com/michalliu/sourceeautify.vim.git'
+" Bundle 'https://github.com/milkypostman/vim-togglelist.git'
+" Bundle 'https://github.com/othree/vim-autocomplpop.git'
+" Bundle 'https://github.com/reedes/vim-wordy.git'
+" Bundle 'https://github.com/rking/ag.vim.git'
+" Bundle 'https://github.com/rking/vim-detailed.git'
+" Bundle 'https://github.com/skammer/vim-css-color.git'
+" Bundle 'https://github.com/skammer/vim-css-color.git'
+" Bundle 'https://github.com/skroll/vim-taghighlight.git'
+" Bundle 'https://github.com/tacahiroy/ctrlp-funky.git'
+" Bundle 'https://github.com/taiansu/nerdtree-ag.git'
+" Bundle 'https://github.com/tommcdo/vim-lion.git'
+" Bundle 'https://github.com/tpope/vim-git.git'
+" Bundle 'https://github.com/tpope/vim-markdown.git'
+" Bundle 'https://github.com/vim-scripts/CSApprox.git'
+" Bundle 'https://github.com/vim-scripts/Marks-Browser.git'
+" Bundle 'https://github.com/vim-scripts/Xoria256m.git'
+" Bundle 'https://github.com/vim-scripts/colorsupport.vim.git' 
+" Bundle 'https://github.com/vim-scripts/csv.vim.git'
+" Bundle 'https://github.com/vim-scripts/dbext.vim.git'
+" Bundle 'https://github.com/vim-scripts/taglist.vim.git'
+" Bundle 'https://github.com/w0ng/vim-hybrid.git'
+" Bundle 'https://github.com/xolox/vim-session.git'
+" Bundle 'https://github.com/xuhdev/SingleCompile.git'
+" Bundle 'https://github.com/yuratomo/gmail.vim.git'
+
+" " Configuration for the Tabularize program to work on the = and : for tabularization
+" if exists(":Tabularize")
+"     nmap <Leader>a= :Tabularize /=<CR>
+"     vmap <Leader>a= :Tabularize /=<CR>
+"     nmap <Leader>a: :Tabularize /:\zs<CR>
+"     vmap <Leader>a: :Tabularize /:\zs<CR>
+" endif
+
+" Configuration for the Autoformat program that will make HMTL, CSS, many others format correctly
+" nmap <Leader>f :Autoformat<CR><CR>
+
 
