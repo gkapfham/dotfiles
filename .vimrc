@@ -6,7 +6,7 @@ set nocompatible
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType tex set omnifunc=latex#complete#omnifunc 
+" autocmd FileType tex set omnifunc=latex#complete#omnifunc 
 
 " Set the completion function in general if there is not a specific type
 set omnifunc=syntaxcomplete#Complete
@@ -103,7 +103,7 @@ Bundle 'https://github.com/justinmk/vim-sneak.git'
 Bundle 'https://github.com/kablamo/vim-git-log.git'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
 Bundle 'https://github.com/kshenoy/vim-signature.git'
-Bundle 'https://github.com/lervag/vim-latex.git'
+" Bundle 'https://github.com/lervag/vim-latex.git'
 Bundle 'https://github.com/majutsushi/tagbar'
 Bundle 'https://github.com/mattn/emmet-vim.git'
 Bundle 'https://github.com/mbadran/headlights.git'
@@ -149,7 +149,7 @@ endif
 " Various vim plugins that did not work the way that I wanted them to, discarding for now
 
 " Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
-" Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
+Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 " Bundle 'https://github.com/Lokaltog/vim-easymotion'
 " Bundle 'https://github.com/Rykka/colorv.vim.git'
 Bundle 'https://github.com/SirVer/ultisnips.git'
@@ -215,37 +215,39 @@ filetype indent plugin on
 " endif
 
 " Configuration for the Autoformat program that will make HMTL, CSS, many others format correctly
-nmap <Leader>f :Autoformat<CR><CR>
+" nmap <Leader>f :Autoformat<CR><CR>
 
-" " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
-" " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
-" let g:LatexBox_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
-" let g:LatexBox_output_type="pdf"
-" let g:Tex_MultipleCompileFormats = 'pdf'
-" let g:Tex_CompileRule_pdf = 'latexmk -pdf $*'
-" let g:Tex_DefaultTargetFormat='pdf'
+" " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
+" " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
+" " let g:LatexBox_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
+" " let g:LatexBox_output_type="pdf"
+" " let g:Tex_MultipleCompileFormats = 'pdf'
+" " let g:Tex_CompileRule_pdf = 'latexmk -pdf $*'
+" " let g:Tex_DefaultTargetFormat='pdf'
 " let Tex_FoldedSections=""
 " let Tex_FoldedEnvironments=""
 " let Tex_FoldedMisc=""
-" let g:LatexBox_autojump=1
-" let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compilation, great for the issta paper
+" " let g:LatexBox_autojump=1
+" " let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compilation, great for the issta paper
 " let g:LatexBox_latexmk_async=1 " handles the weird screen flashing issue with compilation and other errors
-" 
-" Setting up SyncTex and compilation support for Tex-9
-let g:tex_nine_config = {
-            \'compiler': "latexmk",
-            \'synctex': 1
-            \}
+" " 
 
-" Starting to use vim-latex and it needs several configurations to work correctly
-let g:latex_latexmk_options="-pdf -pvc -pdflatex='pdflatex -file-line-error -synctex=1'"
-let g:latex_fold_enabled = 0
-let g:latex_quickfix_mode = 2
-let g:latex_quickfix_open_on_warning = 0
-let g:latex_toc_resize = 0
-let g:latex_toc_hide_help = 1
-let g:latex_indent_enabled = 1
-let g:latex_latexmk_enabled = 1
+" " Setting up SyncTex and compilation support for Tex-9
+" let g:tex_nine_config = {
+"             \'compiler': "pdflatex",
+"             \'synctex': 1
+"             \}
+
+" " Starting to use vim-latex and it needs several configurations to work correctly
+" let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
+" let g:latex_fold_enabled = 0
+" let g:latex_quickfix_mode = 2
+" let g:latex_quickfix_open_on_warning = 0
+" let g:latex_toc_resize = 0
+" let g:latex_toc_hide_help = 1
+" let g:latex_indent_enabled = 1
+" let g:latex_latexmk_enabled = 1
+" let g:latex_latexmk_callback = 1
 
 " Turn on smart indentation with the LaTeX-Box plugin, nice and very helpful
 set smartindent
