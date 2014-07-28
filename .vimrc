@@ -19,7 +19,7 @@ Bundle 'gmarik/vundle'
 " These are all of the Bundles that we use to enhance the behavior of Vim
 
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
-Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
+" Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Bundle 'https://github.com/Raimondi/delimitMate.git'
@@ -47,7 +47,7 @@ Bundle 'https://github.com/justinmk/vim-sneak.git'
 Bundle 'https://github.com/kablamo/vim-git-log.git'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
 Bundle 'https://github.com/kshenoy/vim-signature.git'
-Bundle 'https://github.com/lervag/vim-latex.git'
+" Bundle 'https://github.com/lervag/vim-latex.git'
 Bundle 'https://github.com/majutsushi/tagbar'
 Bundle 'https://github.com/mattn/emmet-vim.git'
 Bundle 'https://github.com/mbadran/headlights.git'
@@ -89,7 +89,7 @@ filetype indent plugin on
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-" autocmd FileType tex set omnifunc=latex#complete#omnifunc 
+autocmd FileType tex set omnifunc=latex#complete#omnifunc 
 
 " Set the completion function in general if there is not a specific type
 set omnifunc=syntaxcomplete#Complete
@@ -142,7 +142,6 @@ set wildignore+=*/tmp/*
 let maplocalleader=","
 let mapleader=","
 
-
 " " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
 " " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
 " " let g:LatexBox_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
@@ -164,16 +163,16 @@ let mapleader=","
 "             \'synctex': 1
 "             \}
 
-" " Starting to use vim-latex and it needs several configurations to work correctly
-" let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
-" let g:latex_fold_enabled = 0
-" let g:latex_quickfix_mode = 2
-" let g:latex_quickfix_open_on_warning = 0
-" let g:latex_toc_resize = 0
-" let g:latex_toc_hide_help = 1
-" let g:latex_indent_enabled = 1
-" let g:latex_latexmk_enabled = 1
-" let g:latex_latexmk_callback = 1
+" Starting to use vim-latex and it needs several configurations to work correctly
+let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
+let g:latex_fold_enabled = 0
+let g:latex_quickfix_mode = 2
+let g:latex_quickfix_open_on_warning = 0
+let g:latex_toc_resize = 0
+let g:latex_toc_hide_help = 1
+let g:latex_indent_enabled = 1
+let g:latex_latexmk_enabled = 1
+let g:latex_latexmk_callback = 1
 
 " Turn on smart indentation with the LaTeX-Box plugin, nice and very helpful
 set smartindent
@@ -401,9 +400,10 @@ let g:SexyScroller_EasingStyle = 0
 " Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
 set tags=./tags;
 let g:easytags_ignored_filetypes = ''
-let g:easytags_dynamic_files = 1
+" let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
-let g:easytags_always_enabled = 1
+" let g:easytags_always_enabled = 1
+let g:easytags_async = 1
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_z_nerdtree = 1
