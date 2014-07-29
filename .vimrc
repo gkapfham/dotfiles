@@ -18,6 +18,7 @@ Bundle 'gmarik/vundle'
 
 " These are all of the Bundles that we use to enhance the behavior of Vim
 
+Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
@@ -431,11 +432,11 @@ set autowrite
 let java_highlight_functions="style"
 
 " Configure a different indenting plugin that has smooth lines
+" let g:indent_guides_soft_pattern = ' '
+" let g:indent_guides_space_guides = 1
+let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=1
-let g:indent_guides_enable_on_vim_startup = 0
-" let g:indent_guides_space_guides = 1
-" let g:indent_guides_soft_pattern = ' '
 
 if !has("gui_running")
     let g:indent_guides_auto_colors = 0
