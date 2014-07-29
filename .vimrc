@@ -71,14 +71,13 @@ Bundle 'https://github.com/vim-scripts/AutoTag.git'
 Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
 Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
 Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
-Bundle 'https://github.com/vim-scripts/TeX-9.git'
+" Bundle 'https://github.com/vim-scripts/TeX-9.git'
 Bundle 'https://github.com/vim-scripts/tComment.git'
-Bundle 'https://github.com/xolox/vim-easytags.git'
+" Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
-
     echo ""
     :BundleInstall
 endif
@@ -89,7 +88,7 @@ filetype indent plugin on
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType tex set omnifunc=latex#complete#omnifunc 
+" autocmd FileType tex set omnifunc=latex#complete#omnifunc 
 
 " Set the completion function in general if there is not a specific type
 set omnifunc=syntaxcomplete#Complete
@@ -102,7 +101,7 @@ au BufRead,BufNewFile *.md set filetype=markdown
 
 " Set the syntax for the markdown files so that the file highlighting is correct
 " au BufRead,BufNewFile *.md set filetype=liquid
-"
+
 "Set indenting to work correctly for the HTML file type (may not be need now)
 au BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = "html,body,head,tbody,div"
@@ -163,23 +162,38 @@ let mapleader=","
 "             \'synctex': 1
 "             \}
 
-" Starting to use vim-latex and it needs several configurations to work correctly
-let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
-let g:latex_fold_enabled = 0
-let g:latex_quickfix_mode = 2
-let g:latex_quickfix_open_on_warning = 0
-let g:latex_toc_resize = 0
-let g:latex_toc_hide_help = 1
-let g:latex_indent_enabled = 1
-let g:latex_latexmk_enabled = 1
-let g:latex_latexmk_callback = 1
+" " Starting to use vim-latex and it needs several configurations to work correctly
+" let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
+" let g:latex_fold_enabled = 0
+" let g:latex_quickfix_mode = 2
+" let g:latex_quickfix_open_on_warning = 0
+" let g:latex_toc_resize = 0
+" let g:latex_toc_hide_help = 1
+" let g:latex_indent_enabled = 1
+" let g:latex_latexmk_enabled = 1
+" let g:latex_latexmk_callback = 1
+
+" Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
+" Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
+fu! TexQuotes()
+    let line = getline(".")
+    let curpos = col(".")-1
+    let insert = "''"
+
+    let left = strpart(line, curpos-1, 1)
+    if (left == ' ' || left == '        ' || left == '')
+        let insert = '``'
+    endif
+    return insert        
+endfu
+autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 
 " Turn on smart indentation with the LaTeX-Box plugin, nice and very helpful
 set smartindent
 
-" Commands that allow for the invocation of the SyncTex support
-nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
-nmap <C-l> :call tex_nine#ForwardSearch()<CR>
+" " Commands that allow for the invocation of the SyncTex support
+" nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
+" nmap <C-l> :call tex_nine#ForwardSearch()<CR>
 
 " Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type)
 " set complete=.,b,u,]
@@ -200,11 +214,12 @@ let g:SuperTabLongestEnhanced = 1
 " other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS SORTA WELL
             " \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
 
-autocmd FileType tex
-            \ if &omnifunc != '' |
-            \   call SuperTabChain(&omnifunc, "<c-n>") |
-            \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-            \ endif
+" autocmd FileType tex
+"             \ if &omnifunc != '' |
+"             \   call SuperTabChain(&omnifunc, "<c-n>") |
+"
+"             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+"             \ endif
 
 " You Complete Me configuration
 let g:ycm_semantic_triggers = {
@@ -235,10 +250,6 @@ let g:ycm_key_list_previous_completion=[]
 autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
 autocmd FileType java let g:SuperTabContextDefaultCompletionType = "<c-n>"
 autocmd FileType java let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
-
-" We want to use special tab completion for the plugins that are available for LaTeX. Tested and works very well.
-" autocmd FileType tex let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-" autocmd FileType todo let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " note that menu provides a substantially better configuration for viewing
 " the autocompletion output that is available in gvim
@@ -281,14 +292,6 @@ set pastetoggle=<F2> " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10 " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,] " wrap when you get to the end of a line and you are using the arrow keys
 
-" do not prompt to save for the session management each time
-" let g:session_autosave = 'no'
-
-" to use the sessions program, you need to uncomment this line and change it to something in your home account
-" let g:session_directory = '/home/gkapfham/.vim/sessions'
-
-" database connections for work with SchemaAnalyst and different database applications (e.g., TweetComplete) 
-
 " turn on spell checking so that I can do this for Latex documents
 set spell spelllang=en_us,en_gb
 set mousemodel=popup
@@ -316,19 +319,6 @@ nmap <F11> :NERDTreeToggle<CR>
 
 " Set up the NERDTree so that it does not display the silly help message at the top, this is not minimal enough.
 let NERDTreeMinimalUI=1
-
-" " This is the extra line of code that the Tagbar needs to get LaTeX outlines to work correctly. Also. code in .ctags!
-" let g:tagbar_type_tex = {
-"             \ 'ctagstype' : 'latex',
-"             \ 'kinds'     : [
-"             \ 's:sections',
-"             \ 'g:graphics:0:0',
-"             \ 'l:labels',
-"             \ 'r:refs:1:0',
-"             \ 'p:pagerefs:1:0'
-"             \ ],
-"             \ 'sort'    : 0
-"             \ }
 
 " Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!                 
 set nocursorcolumn
@@ -403,7 +393,7 @@ let g:easytags_ignored_filetypes = ''
 " let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
 " let g:easytags_always_enabled = 1
-let g:easytags_async = 1
+" let g:easytags_async = 1
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_z_nerdtree = 1
@@ -414,21 +404,6 @@ nnoremap zf :CtrlPF<Cr>
 
 " Set a command that allows for the creation of a tags file for exuberant ctags
 nmap <C-t> :!ctags -R<CR>
-
-" Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
-" Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
-fu! TexQuotes()
-    let line = getline(".")
-    let curpos = col(".")-1
-    let insert = "''"
-
-    let left = strpart(line, curpos-1, 1)
-    if (left == ' ' || left == '        ' || left == '')
-        let insert = '``'
-    endif
-    return insert        
-endfu
-autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 
 " Define a function that allows you to determine what syntax group is being used
 map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -451,13 +426,11 @@ let g:gitgutter_signs = 0
 " commands, like :cnfile. Very useful when running Qdo on a QuickFix list
 set autowrite
 
-
 " However, if you follow the Java guidelines about how functions and classes are
 " supposed to be named (with respect to upper and lowercase), use >
 " Basically, make the syntax highlighting for method declarations a lot better
-let java_highlight_functions="style"
 " let java_highlight_functions="indent"
-
+let java_highlight_functions="style"
 
 " Configure a different indenting plugin that has smooth lines
 let g:indent_guides_guide_size=1
@@ -496,7 +469,6 @@ nmap <S-Enter> O<Esc>
 " Always show the hidden files inside of the NerdTree
 let NERDTreeShowHidden=1
 
-"
 " Configure the identing line plugin so that it will use the correct colors and symbols ; deprecated
 " let g:indentLine_color_term = 239
 " let g:indentLine_color_gui = "#707880"
@@ -749,4 +721,26 @@ let NERDTreeShowHidden=1
 " Configuration for the Autoformat program that will make HMTL, CSS, many others format correctly
 " nmap <Leader>f :Autoformat<CR><CR>
 
+" We want to use special tab completion for the plugins that are available for LaTeX. Tested and works very well.
+" autocmd FileType tex let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+" autocmd FileType todo let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" do not prompt to save for the session management each time
+" let g:session_autosave = 'no'
+" to use the sessions program, you need to uncomment this line and change it to something in your home account
+" let g:session_directory = '/home/gkapfham/.vim/sessions'
+" database connections for work with SchemaAnalyst and different database applications (e.g., TweetComplete) 
+
+" " This is the extra line of code that the Tagbar needs to get LaTeX outlines to work correctly. Also. code in .ctags!
+" let g:tagbar_type_tex = {
+"             \ 'ctagstype' : 'latex',
+"             \ 'kinds'     : [
+"             \ 's:sections',
+"             \ 'g:graphics:0:0',
+"             \ 'l:labels',
+"             \ 'r:refs:1:0',
+"             \ 'p:pagerefs:1:0'
+"             \ ],
+"             \ 'sort'    : 0
+"             \ }
 
