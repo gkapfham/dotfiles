@@ -1,5 +1,4 @@
-" Indicate that vim should run our plugins and always use syntax highlighting for all identified file types
-" set nocompatible | filetype indent plugin on | syn on
+" Set Vim to run in not compatible mode
 set nocompatible 
 
 " Setting up Vundle -- the vim plugin bundler -- and another plugin management tool that I will demonstrate
@@ -18,7 +17,6 @@ Bundle 'gmarik/vundle'
 
 " These are all of the Bundles that we use to enhance the behavior of Vim
 
-Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
@@ -36,6 +34,7 @@ Bundle 'https://github.com/dterei/VimBookmarking.git'
 Bundle 'https://github.com/ervandew/ag.git'
 Bundle 'https://github.com/ervandew/supertab.git'
 Bundle 'https://github.com/freitass/todo.txt-vim.git'
+Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/godlygeek/tabular.git'
 Bundle 'https://github.com/gorodinskiy/vim-coloresque.git'
 Bundle 'https://github.com/gregsexton/gitv.git'
@@ -75,12 +74,14 @@ Bundle 'https://github.com/vim-scripts/TeX-9.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 
+" Install all of the bundles that are not already installed
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
     :BundleInstall
 endif
 
+" Automatically identify the filetype for the plugins and always use syntax highlighting
 filetype indent plugin on | syn on
 
 " Set the completion function for a variety of different file types
@@ -95,18 +96,15 @@ set omnifunc=syntaxcomplete#Complete
 " Set the syntax for the todo file so that the file highlighting is correct
 autocmd FileType todo set syntax=todo
 
+" Set it so that the todo mode is always run when editing the file called todo.txt or Todo.txt
+autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
+
 " Set the syntax for the markdown files so that the file highlighting is correct
 au BufRead,BufNewFile *.md set filetype=markdown
 
-" Set the syntax for the markdown files so that the file highlighting is correct
-" au BufRead,BufNewFile *.md set filetype=liquid
-
-"Set indenting to work correctly for the HTML file type (may not be need now)
+" Set indenting to work correctly for the HTML file type (may not be need now)
 au BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = "html,body,head,tbody,div"
-
-" Set it so that the todo mode is always run when editing the file called todo.txt or Todo.txt
-autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
 
 " Set it so that the CSV mode is always run when editing this type of file (does not autodetect?)
 autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
@@ -140,21 +138,6 @@ set wildignore+=*/tmp/*
 let maplocalleader=","
 let mapleader=","
 
-" Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
-" enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
-
-" let g:LatexBox_latexmk_options="-pvc -pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
-" let g:LatexBox_output_type="pdf"
-" let g:Tex_MultipleCompileFormats = 'pdf'
-" " let g:Tex_CompileRule_pdf = 'latexmk -pdf $*'
-" let g:Tex_DefaultTargetFormat='pdf'
-" let Tex_FoldedSections=""
-" let Tex_FoldedEnvironments=""
-" let Tex_FoldedMisc=""
-" let g:LatexBox_autojump=1
-" let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compilation, great for the issta paper
-" let g:LatexBox_latexmk_async=1 " handles the weird screen flashing issue with compilation and other errors
-
 " Setting up SyncTex and compilation support for Tex-9
 let g:tex_nine_config = {
             \'compiler': "latexmk",
@@ -172,8 +155,6 @@ let g:latex_indent_enabled = 1
 let g:latex_latexmk_enabled = 1
 let g:latex_latexmk_callback = 0
 
-" nnoremap <leader>t :w<CR>:!rubber --pdf --warn all %<CR>
-
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 " Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
 fu! TexQuotes()
@@ -189,7 +170,7 @@ fu! TexQuotes()
 endfu
 autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 
-" Turn on smart indentation with the LaTeX-Box plugin, nice and very helpful
+" Turn on smart indentation with the Latex plugins, nice and very helpful
 set smartindent
 
 " " Commands that allow for the invocation of the SyncTex support
@@ -203,29 +184,24 @@ set complete+=kspell
 set complete+=]
 
 " This is the default context completion that will be used if there is not a separate autocommand configuration
-let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabLongestEnhanced = 1
-" let g:SuperTabDefaultCompletionType = "<c-n>"
 
-" LaTeX needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
-" other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS SORTA WELL
-            " \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
-
-" autocmd FileType tex
-"             \ if &omnifunc != '' |
-"             \   call SuperTabChain(&omnifunc, "<c-n>") |
-"
-"             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-"             \ endif
-
-" You Complete Me configuration
+" You Complete Me configuration for LaTeX, using the vim-latex plugin
 let g:ycm_semantic_triggers = {
 \  'tex'  : ['\cite{', '\ref{'],
 \ }
+
+" You Complete Me configuration
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_use_ultisnips_completer = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
 let g:ycm_filetype_blacklist = {
         \ 'tagbar' : 1,
         \ 'qf' : 1,
@@ -236,7 +212,6 @@ let g:ycm_filetype_blacklist = {
         \ 'pandoc' : 1,
         \ 'infolog' : 1,
         \}
-let g:ycm_use_ultisnips_completer = 1
 
 " make YCM compatible with UltiSnips (using supertab)
 " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -250,8 +225,8 @@ autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
 autocmd FileType java let g:SuperTabContextDefaultCompletionType = "<c-n>"
 autocmd FileType java let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
 
-" note that menu provides a substantially better configuration for viewing
-" the autocompletion output that is available in gvim
+" note that menu provides a substantially better configuration for viewing the autocompletion output that is available
+" in gvim
 set cot=menu
 set completeopt=longest,menuone
 
@@ -283,7 +258,6 @@ set ignorecase    " ignore case when searching
 set infercase     " predict the case that is needed when doing auto completion
 set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
 set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop
-" set hlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 set history=1000  " remember more commands and search history
 set undolevels=1000 " use many muchos levels of undo
@@ -295,8 +269,7 @@ set whichwrap+=<,>,h,l,[,] " wrap when you get to the end of a line and you are 
 set spell spelllang=en_us,en_gb
 set mousemodel=popup
 
-" turn of spell checking for some types of buffers, mostly Java and other
-" programming languages
+" turn of spell checking for some types of buffers, mostly Java and other programming languages
 au BufNewFile,BufRead,BufEnter *.c      set nospell
 au BufNewFile,BufRead,BufEnter *.h      set nospell
 au BufNewFile,BufRead,BufEnter *.cpp    set nospell
@@ -319,6 +292,9 @@ nmap <F11> :NERDTreeToggle<CR>
 " Set up the NERDTree so that it does not display the silly help message at the top, this is not minimal enough.
 let NERDTreeMinimalUI=1
 
+" Always show the hidden files inside of the NerdTree
+let NERDTreeShowHidden=1
+
 " Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!                 
 " set lazyredraw
 " set synmaxcol=145
@@ -327,9 +303,6 @@ set nocursorcolumn
 set nocursorline
 set ttyfast
 
-" turn off search highlight
-" nnoremap <leader><space> :nohlsearch<CR>
-
 " Make the source code history browsing feature open windows horizontally, as this supports better browsing
 let g:Gitv_OpenHorizontal=1
 
@@ -337,8 +310,8 @@ let g:Gitv_OpenHorizontal=1
 " with no specified file
 set shortmess=I
 
-" Set up the enter key to ensure that after completing words a return is not pressed
-
+" Set up the enter key to ensure that after completing words a return is not pressed; this was all used with the
+" standard SuperTab completion and now I am leaving it even though I primarily use YouCompleteMe
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
             \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
@@ -356,9 +329,9 @@ let g:airline_detect_whitespace=0
 set nosmd " turn of the status line that shows the silly word insert, airline is much better!
 
 " Configure the way that colors are displayed for the sneak feature of searching in the text, seems to work very nicely
-hi link SneakPluginTarget Type 
-hi link SneakPluginScope Visual
 " let g:sneak#streak = 1
+hi link SneakPluginScope Visual
+hi link SneakPluginTarget Type 
 
 " map <Leader> <Plug>(easymotion-prefix)
 " nmap s <Plug>(easymotion-s2)
@@ -438,6 +411,7 @@ let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_guide_size=1
 let g:indent_guides_start_level=1
 
+" An extra configuration to handle the use of the indent guides when running GVim
 if !has("gui_running")
     let g:indent_guides_auto_colors = 0
     hi IndentGuidesEven ctermbg=darkgrey
@@ -457,16 +431,14 @@ let g:gundo_help=0
 " Bubble single lines
 nmap <C-Up> [e
 nmap <C-Down> ]e
+
 " Bubble multiple lines
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
 " Create a mapping that allows for the insertion of a blank line without
-" having to enter insert mode and then leave it. Works nicely!
+" having to enter insert mode and then leave it. Works nicely, but only in GVim
 nmap <S-Enter> O<Esc>
-
-" Always show the hidden files inside of the NerdTree
-let NERDTreeShowHidden=1
 
 " Configure the identing line plugin so that it will use the correct colors and symbols ; deprecated
 " let g:indentLine_color_term = 239
@@ -747,4 +719,38 @@ let NERDTreeShowHidden=1
 "             \ ],
 "             \ 'sort'    : 0
 "             \ }
+
+" Set the syntax for the markdown files so that the file highlighting is correct
+" au BufRead,BufNewFile *.md set filetype=liquid
+
+" Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
+" enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
+" let g:LatexBox_latexmk_options="-pvc -pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
+" let g:LatexBox_output_type="pdf"
+" let g:Tex_MultipleCompileFormats = 'pdf'
+" " let g:Tex_CompileRule_pdf = 'latexmk -pdf $*'
+" let g:Tex_DefaultTargetFormat='pdf'
+" let Tex_FoldedSections=""
+" let Tex_FoldedEnvironments=""
+" let Tex_FoldedMisc=""
+" let g:LatexBox_autojump=1
+" let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compilation, great for the issta paper
+" let g:LatexBox_latexmk_async=1 " handles the weird screen flashing issue with compilation and other errors
+
+" nnoremap <leader>t :w<CR>:!rubber --pdf --warn all %<CR>
+
+" LaTeX needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
+" other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS SORTA WELL
+            " \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
+" autocmd FileType tex
+"             \ if &omnifunc != '' |
+"             \   call SuperTabChain(&omnifunc, "<c-n>") |
+"
+"             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+"             \ endif
+
+" set hlsearch      " highlight search terms
+
+" turn off search highlight
+" nnoremap <leader><space> :nohlsearch<CR>
 
