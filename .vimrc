@@ -19,8 +19,6 @@ Bundle 'gmarik/vundle'
 " These are all of the Bundles that we use to enhance the behavior of Vim
 
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
-" Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
-" Bundle 'https://github.com/coot/atp_vim.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Bundle 'https://github.com/Raimondi/delimitMate.git'
@@ -51,17 +49,17 @@ Bundle 'https://github.com/kshenoy/vim-signature.git'
 Bundle 'https://github.com/lervag/vim-latex.git'
 Bundle 'https://github.com/majutsushi/tagbar'
 Bundle 'https://github.com/mattn/emmet-vim.git'
-Bundle 'https://github.com/mbadran/headlights.git'
 Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
 Bundle 'https://github.com/osyo-manga/vim-over.git'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
-Bundle 'https://github.com/scrooloose/syntastic.git'
 Bundle 'https://github.com/sjl/gundo.vim.git'
 Bundle 'https://github.com/tejr/nextag.git'
 Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
 Bundle 'https://github.com/timcharper/wordnet.vim.git'
+Bundle 'https://github.com/tomtom/tcomment_vim.git'
 Bundle 'https://github.com/tomtom/tlib_vim'
 Bundle 'https://github.com/tpope/vim-abolish.git'
+Bundle 'https://github.com/tpope/vim-commentary.git'
 Bundle 'https://github.com/tpope/vim-fugitive.git'
 Bundle 'https://github.com/tpope/vim-liquid.git'
 Bundle 'https://github.com/tpope/vim-ragtag.git'
@@ -73,7 +71,6 @@ Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
 Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
 Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
 Bundle 'https://github.com/vim-scripts/TeX-9.git'
-Bundle 'https://github.com/vim-scripts/tComment.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 
@@ -83,7 +80,7 @@ if iCanHazVundle == 0
     :BundleInstall
 endif
 
-filetype indent plugin on 
+filetype indent plugin on | syn on
 
 " Set the completion function for a variety of different file types
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
@@ -142,20 +139,20 @@ set wildignore+=*/tmp/*
 let maplocalleader=","
 let mapleader=","
 
-" " " Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
-" " " enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
-" " let g:LatexBox_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
-" " let g:LatexBox_output_type="pdf"
-" " let g:Tex_MultipleCompileFormats = 'pdf'
+" Latex Box Plugin that is useful for editing LaTeX in Vim; note that the first line is the one that 
+" enables the using of forward and inverse skimming with Vim and Evince (you must use synctex)
+
+" let g:LatexBox_latexmk_options="-pvc -pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
+" let g:LatexBox_output_type="pdf"
+" let g:Tex_MultipleCompileFormats = 'pdf'
 " " let g:Tex_CompileRule_pdf = 'latexmk -pdf $*'
-" " let g:Tex_DefaultTargetFormat='pdf'
+" let g:Tex_DefaultTargetFormat='pdf'
 " let Tex_FoldedSections=""
 " let Tex_FoldedEnvironments=""
 " let Tex_FoldedMisc=""
-" " let g:LatexBox_autojump=1
-" " let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compilation, great for the issta paper
+" let g:LatexBox_autojump=1
+" let g:LatexBox_show_warnings=0 " don't show all of the warnings in latex compilation, great for the issta paper
 " let g:LatexBox_latexmk_async=1 " handles the weird screen flashing issue with compilation and other errors
-" " 
 
 " Setting up SyncTex and compilation support for Tex-9
 let g:tex_nine_config = {
@@ -174,7 +171,7 @@ let g:latex_indent_enabled = 1
 let g:latex_latexmk_enabled = 1
 let g:latex_latexmk_callback = 0
 
-nnoremap <leader>t :w<CR>:!rubber --pdf --warn all %<CR>
+" nnoremap <leader>t :w<CR>:!rubber --pdf --warn all %<CR>
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 " Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
@@ -210,8 +207,6 @@ let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 let g:SuperTabLongestEnhanced = 1
 " let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" LatexBox_Complete
 
 " LaTeX needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
 " other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS SORTA WELL
@@ -712,6 +707,11 @@ let NERDTreeShowHidden=1
 " Bundle 'https://github.com/xolox/vim-session.git'
 " Bundle 'https://github.com/xuhdev/SingleCompile.git'
 " Bundle 'https://github.com/yuratomo/gmail.vim.git'
+" Bundle 'https://github.com/coot/atp_vim.git'
+" Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
+" Bundle 'https://github.com/mbadran/headlights.git'
+" Bundle 'https://github.com/scrooloose/syntastic.git'
+" Bundle 'https://github.com/vim-scripts/tComment.git'
 
 " " Configuration for the Tabularize program to work on the = and : for tabularization
 " if exists(":Tabularize")
