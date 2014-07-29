@@ -20,6 +20,7 @@ Bundle 'gmarik/vundle'
 
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
 " Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
+" Bundle 'https://github.com/coot/atp_vim.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Bundle 'https://github.com/Raimondi/delimitMate.git'
@@ -54,7 +55,7 @@ Bundle 'https://github.com/mbadran/headlights.git'
 Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
 Bundle 'https://github.com/osyo-manga/vim-over.git'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
-" Bundle 'https://github.com/scrooloose/syntastic.git'
+Bundle 'https://github.com/scrooloose/syntastic.git'
 Bundle 'https://github.com/sjl/gundo.vim.git'
 Bundle 'https://github.com/tejr/nextag.git'
 Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
@@ -156,22 +157,24 @@ let mapleader=","
 " let g:LatexBox_latexmk_async=1 " handles the weird screen flashing issue with compilation and other errors
 " " 
 
-" " Setting up SyncTex and compilation support for Tex-9
-" let g:tex_nine_config = {
-"             \'compiler': "pdflatex",
-"             \'synctex': 1
-"             \}
+" Setting up SyncTex and compilation support for Tex-9
+let g:tex_nine_config = {
+            \'compiler': "latexmk",
+            \'synctex': 1
+            \}
 
 " Starting to use vim-latex and it needs several configurations to work correctly
 let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
 let g:latex_fold_enabled = 0
 let g:latex_quickfix_mode = 2
-let g:latex_quickfix_open_on_warning = 0
+let g:latex_quickfix_open_on_warning = 1
 let g:latex_toc_resize = 0
 let g:latex_toc_hide_help = 1
 let g:latex_indent_enabled = 1
 let g:latex_latexmk_enabled = 1
-let g:latex_latexmk_callback = 1
+let g:latex_latexmk_callback = 0
+
+nnoremap <leader>t :w<CR>:!rubber --pdf --warn all %<CR>
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 " Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
@@ -192,8 +195,8 @@ autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 set smartindent
 
 " " Commands that allow for the invocation of the SyncTex support
-" nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
-" nmap <C-l> :call tex_nine#ForwardSearch()<CR>
+nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
+nmap <C-l> :call tex_nine#ForwardSearch()<CR>
 
 " Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type)
 " set complete=.,b,u,]
@@ -321,11 +324,11 @@ nmap <F11> :NERDTreeToggle<CR>
 let NERDTreeMinimalUI=1
 
 " Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!                 
+" set lazyredraw
+" set synmaxcol=145
+" syntax sync minlines=256
 set nocursorcolumn
 set nocursorline
-syntax sync minlines=256
-set lazyredraw
-set synmaxcol=145
 set ttyfast
 
 " turn off search highlight
