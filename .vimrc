@@ -47,14 +47,14 @@ Bundle 'https://github.com/justinmk/vim-sneak.git'
 Bundle 'https://github.com/kablamo/vim-git-log.git'
 Bundle 'https://github.com/kien/ctrlp.vim.git'
 Bundle 'https://github.com/kshenoy/vim-signature.git'
-" Bundle 'https://github.com/lervag/vim-latex.git'
+Bundle 'https://github.com/lervag/vim-latex.git'
 Bundle 'https://github.com/majutsushi/tagbar'
 Bundle 'https://github.com/mattn/emmet-vim.git'
 Bundle 'https://github.com/mbadran/headlights.git'
 Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
 Bundle 'https://github.com/osyo-manga/vim-over.git'
 Bundle 'https://github.com/scrooloose/nerdtree.git'
-Bundle 'https://github.com/scrooloose/syntastic.git'
+" Bundle 'https://github.com/scrooloose/syntastic.git'
 Bundle 'https://github.com/sjl/gundo.vim.git'
 Bundle 'https://github.com/tejr/nextag.git'
 Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
@@ -71,9 +71,9 @@ Bundle 'https://github.com/vim-scripts/AutoTag.git'
 Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
 Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
 Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
-" Bundle 'https://github.com/vim-scripts/TeX-9.git'
+Bundle 'https://github.com/vim-scripts/TeX-9.git'
 Bundle 'https://github.com/vim-scripts/tComment.git'
-" Bundle 'https://github.com/xolox/vim-easytags.git'
+Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 
 if iCanHazVundle == 0
@@ -88,7 +88,7 @@ filetype indent plugin on
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-" autocmd FileType tex set omnifunc=latex#complete#omnifunc 
+autocmd FileType tex set omnifunc=latex#complete#omnifunc 
 
 " Set the completion function in general if there is not a specific type
 set omnifunc=syntaxcomplete#Complete
@@ -162,16 +162,16 @@ let mapleader=","
 "             \'synctex': 1
 "             \}
 
-" " Starting to use vim-latex and it needs several configurations to work correctly
-" let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
-" let g:latex_fold_enabled = 0
-" let g:latex_quickfix_mode = 2
-" let g:latex_quickfix_open_on_warning = 0
-" let g:latex_toc_resize = 0
-" let g:latex_toc_hide_help = 1
-" let g:latex_indent_enabled = 1
-" let g:latex_latexmk_enabled = 1
-" let g:latex_latexmk_callback = 1
+" Starting to use vim-latex and it needs several configurations to work correctly
+let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
+let g:latex_fold_enabled = 0
+let g:latex_quickfix_mode = 2
+let g:latex_quickfix_open_on_warning = 0
+let g:latex_toc_resize = 0
+let g:latex_toc_hide_help = 1
+let g:latex_indent_enabled = 1
+let g:latex_latexmk_enabled = 1
+let g:latex_latexmk_callback = 1
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 " Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
@@ -390,10 +390,10 @@ let g:SexyScroller_EasingStyle = 0
 " Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
 set tags=./tags;
 let g:easytags_ignored_filetypes = ''
-" let g:easytags_dynamic_files = 1
+let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
-" let g:easytags_always_enabled = 1
-" let g:easytags_async = 1
+let g:easytags_always_enabled = 1
+let g:easytags_async = 1
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_z_nerdtree = 1
