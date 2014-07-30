@@ -184,9 +184,9 @@ set complete+=]
 " " This is the default context completion that will be used if there is not a separate autocommand configuration
 " " let g:SuperTabDefaultCompletionType = "<c-n>"
 " let g:SuperTabContextDefaultCompletionType = "<c-n>"
-" let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-" let g:SuperTabDefaultCompletionType = "context"
-" let g:SuperTabLongestEnhanced = 1
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabLongestEnhanced = 1
 
 " You Complete Me configuration for LaTeX, using the vim-latex plugin
 let g:ycm_semantic_triggers = {
@@ -214,8 +214,8 @@ let g:ycm_filetype_blacklist = {
 " make YCM compatible with UltiSnips 
 let g:UltiSnipsExpandTrigger="<C-Tab>"
 let g:UltiSnipsListSnippets = "<C-l>"
-let g:ycm_key_list_previous_completion=[]
-let g:ycm_key_list_select_completion=[]
+" let g:ycm_key_list_previous_completion=[]
+" let g:ycm_key_list_select_completion=[]
 
 " let g:SuperTabDefaultCompletionType = '<C-Tab>'
 " let g:ycm_key_list_previous_completion = ['<C-S-Tab>', '<Up>']
@@ -384,12 +384,19 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr()<CR>
 
-" HTML needs to have a chained completion function 
-autocmd FileType html
-            \ if &omnifunc != '' |
-            \   call SuperTabChain(&omnifunc, "<c-n>") |
-            \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-            \ endif
+" " HTML needs to have a chained completion function 
+" autocmd FileType html
+"             \ if &omnifunc != '' |
+"             \   call SuperTabChain(&omnifunc, "<c-n>") |
+"             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+"             \ endif
+
+" " HTML needs to have a chained completion function 
+" autocmd FileType mail 
+"             \ if &omnifunc != '' |
+"             \   call SuperTabChain(&omnifunc, "<c-n>") |
+"             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+"             \ endif
 
 " I am not using GitGutter in the signs column because I don't like the slight delay;
 " but, I am using it to display information inside of the Airline at the bottom of Vim
