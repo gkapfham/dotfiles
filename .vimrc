@@ -17,6 +17,7 @@ Bundle 'gmarik/vundle'
 
 " These are all of the Bundles that we use to enhance the behavior of Vim
 
+Bundle 'https://github.com/ervandew/supertab.git'
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
@@ -32,7 +33,6 @@ Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/chrisbra/csv.vim.git'
 Bundle 'https://github.com/dterei/VimBookmarking.git'
 Bundle 'https://github.com/ervandew/ag.git'
-" Bundle 'https://github.com/ervandew/supertab.git'
 Bundle 'https://github.com/freitass/todo.txt-vim.git'
 Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/godlygeek/tabular.git'
@@ -184,9 +184,9 @@ set complete+=]
 " " This is the default context completion that will be used if there is not a separate autocommand configuration
 " " let g:SuperTabDefaultCompletionType = "<c-n>"
 " let g:SuperTabContextDefaultCompletionType = "<c-n>"
-" let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-" let g:SuperTabDefaultCompletionType = "context"
-" let g:SuperTabLongestEnhanced = 1
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabLongestEnhanced = 1
 
 " You Complete Me configuration for LaTeX, using the vim-latex plugin
 let g:ycm_semantic_triggers = {
@@ -214,6 +214,7 @@ let g:ycm_filetype_blacklist = {
 " make YCM compatible with UltiSnips 
 let g:UltiSnipsExpandTrigger="<C-k>"
 let g:UltiSnipsListSnippets = "<C-l>"
+let g:UltiSnipsJumpBackwardTrigger=""
 
 " let g:ycm_key_list_previous_completion=[]
 " let g:ycm_key_list_select_completion=[]
@@ -222,9 +223,9 @@ let g:UltiSnipsListSnippets = "<C-l>"
 " let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
 
 " Java autocompletion must use the completefunc (ctrl-x ctrl-u) to work correctly, so set it separately 
-autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
-autocmd FileType java let g:SuperTabContextDefaultCompletionType = "<c-n>"
-autocmd FileType java let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
+" autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
+" autocmd FileType java let g:SuperTabContextDefaultCompletionType = "<c-n>"
+" autocmd FileType java let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
 
 " note that menu provides a substantially better configuration for viewing the autocompletion output that is available
 " in gvim
