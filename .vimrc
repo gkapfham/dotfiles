@@ -32,7 +32,7 @@ Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/chrisbra/csv.vim.git'
 Bundle 'https://github.com/dterei/VimBookmarking.git'
 Bundle 'https://github.com/ervandew/ag.git'
-Bundle 'https://github.com/ervandew/supertab.git'
+" Bundle 'https://github.com/ervandew/supertab.git'
 Bundle 'https://github.com/freitass/todo.txt-vim.git'
 Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/godlygeek/tabular.git'
@@ -184,9 +184,9 @@ set complete+=]
 " " This is the default context completion that will be used if there is not a separate autocommand configuration
 " " let g:SuperTabDefaultCompletionType = "<c-n>"
 " let g:SuperTabContextDefaultCompletionType = "<c-n>"
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabLongestEnhanced = 1
+" let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+" let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabLongestEnhanced = 1
 
 " You Complete Me configuration for LaTeX, using the vim-latex plugin
 let g:ycm_semantic_triggers = {
@@ -212,11 +212,11 @@ let g:ycm_filetype_blacklist = {
         \}
 
 " make YCM compatible with UltiSnips 
-let g:UltiSnipsExpandTrigger="<C-Tab>"
+let g:UltiSnipsExpandTrigger="<C-k>"
 let g:UltiSnipsListSnippets = "<C-l>"
+
 " let g:ycm_key_list_previous_completion=[]
 " let g:ycm_key_list_select_completion=[]
-
 " let g:SuperTabDefaultCompletionType = '<C-Tab>'
 " let g:ycm_key_list_previous_completion = ['<C-S-Tab>', '<Up>']
 " let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
