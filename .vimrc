@@ -266,6 +266,8 @@ set undolevels=1000 " use many muchos levels of undo
 set pastetoggle=<F2> " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10 " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,] " wrap when you get to the end of a line and you are using the arrow keys
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:. "highlight problematic whitespace
+set list " also required to ensure that problematic whitespace is highlighted correctly 
 
 " turn on spell checking so that I can do this for Latex documents
 set spell spelllang=en_us,en_gb
