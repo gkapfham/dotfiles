@@ -17,7 +17,6 @@ Bundle 'gmarik/vundle'
 
 " These are all of the Bundles that we use to enhance the behavior of Vim
 
-Bundle 'https://github.com/ervandew/supertab.git'
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
@@ -33,6 +32,7 @@ Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/chrisbra/csv.vim.git'
 Bundle 'https://github.com/dterei/VimBookmarking.git'
 Bundle 'https://github.com/ervandew/ag.git'
+Bundle 'https://github.com/ervandew/supertab.git'
 Bundle 'https://github.com/freitass/todo.txt-vim.git'
 Bundle 'https://github.com/garbas/vim-snipmate'
 Bundle 'https://github.com/godlygeek/tabular.git'
@@ -184,9 +184,9 @@ set complete+=]
 " " This is the default context completion that will be used if there is not a separate autocommand configuration
 " " let g:SuperTabDefaultCompletionType = "<c-n>"
 " let g:SuperTabContextDefaultCompletionType = "<c-n>"
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabLongestEnhanced = 1
+" let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+" let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabLongestEnhanced = 1
 
 " You Complete Me configuration for LaTeX, using the vim-latex plugin
 let g:ycm_semantic_triggers = {
@@ -526,7 +526,7 @@ nmap <S-Enter> O<Esc>
 " autocmd BufRead java set efm=%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%#
 " autocmd BufRead java set makeprg=ant\ -find\ build.xml compile
 " 
-" 2>&1| tee /tmp/v4iZDP3/24
+" 2>&1| tee /tmp/llv4iZDP3/24
 
 " autocmd BufRead *.java set makeprg=ant\ -find\ build.xml compile
 
@@ -753,12 +753,12 @@ nmap <S-Enter> O<Esc>
 " LaTeX needs to have a chained completion function for both LaTeX Box to handle cites and refs and to get all of the
 " other types of insertions (buffer, dictionary, etc) with the other types of completion -- WORKS SORTA WELL
             " \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
-" autocmd FileType tex
-"             \ if &omnifunc != '' |
-"             \   call SuperTabChain(&omnifunc, "<c-n>") |
-"
-"             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-"             \ endif
+            "
+ " autocmd FileType tex
+ "             \ if &omnifunc != '' |
+ "             \   call SuperTabChain(&omnifunc, "<c-n>") |
+             " \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+             " \ endif
 
 " set hlsearch      " highlight search terms
 
