@@ -16,7 +16,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " These are all of the Bundles that we use to enhance the behavior of Vim
-
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
@@ -123,6 +122,10 @@ command Wrap set textwidth=120
 command NoWrap set textwidth=0
 command StandardWrap set textwidth=80
 
+" set up vim so that it displays line numbers in a hybrid fashion
+set relativenumber 
+set number
+"
 " Make sure that you can load the dot files when you are searching the file system
 let g:ctrlp_show_hidden = 1
 
@@ -237,9 +240,9 @@ set wildmenu
 set wildmode=longest:full,full
 
 " set up some commands for adding, removing, and navigating bookmarks inside of vim; very useful
-map <silent> bb :ToggleBookmark<CR>
-map <silent> bn :NextBookmark<CR>
-map <silent> bp :PreviousBookmark<CR>
+" map <silent> bb :ToggleBookmark<CR>
+" map <silent> bn :NextBookmark<CR>
+" map <silent> bp :PreviousBookmark<CR>
 
 " Adding in a bunch of additional commands from: 
 " http://nvie.com/posts/how-i-boosted-my-vim/  
@@ -488,7 +491,6 @@ nmap <S-Enter> O<Esc>
 " " Commands that allow for the invocation of the SyncTex support
 " noremap <buffer><silent> <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
 " noremap <buffer><silent> <C-l> :call tex_nine#ForwardSearch()<CR>
-
 
 " Start interactive EasyAlign in visual mode
 " vmap <Enter> <Plug>(EasyAlign)
