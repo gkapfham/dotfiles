@@ -70,6 +70,8 @@ Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
 Bundle 'https://github.com/vim-scripts/TeX-9.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
+Bundle 'https://github.com/jgdavey/tslime.vim.git'
+Bundle 'https://github.com/wellle/tmux-complete.vim.git'
 
 " Install all of the bundles that are not already installed
 if iCanHazVundle == 0
@@ -125,6 +127,11 @@ command StandardWrap set textwidth=80
 " set up vim so that it displays line numbers in a hybrid fashion
 set relativenumber 
 set number
+
+" tmux configuration
+vmap <C-c><C-c> <Plug>SendSelectionToTmux
+nmap <C-c><C-c> <Plug>NormalModeSendToTmux
+nmap <C-c>r <Plug>SetTmuxVars
 
 " Make sure that you can load the dot files when you are searching the file system
 let g:ctrlp_show_hidden = 1
@@ -218,6 +225,13 @@ let g:ycm_filetype_blacklist = {
 let g:UltiSnipsExpandTrigger="<C-k>"
 let g:UltiSnipsListSnippets = "<C-l>"
 let g:UltiSnipsJumpBackwardTrigger=""
+
+" make YCM compatible with the tmux-complete
+let g:tmuxcomplete#trigger = 'omnifunc'
+
+" allow CTRLP to show fifteen total matches, helping in cases where there are
+" many matches that we still want to display and consider
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15' 
 
 " let g:ycm_key_list_previous_completion=[]
 " let g:ycm_key_list_select_completion=[]
