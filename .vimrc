@@ -72,6 +72,7 @@ Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/jgdavey/tslime.vim.git'
 Bundle 'https://github.com/wellle/tmux-complete.vim.git'
+Bundle 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 
 " Install all of the bundles that are not already installed
 if iCanHazVundle == 0
@@ -135,6 +136,9 @@ nmap <C-c>r <Plug>SetTmuxVars
 
 " Make sure that you can load the dot files when you are searching the file system
 let g:ctrlp_show_hidden = 1
+
+" Configure ctrlp so that it uses a faster matcher
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " Ignore these directories in all programs like ctrlp
 set wildignore+=*/build/**
