@@ -125,7 +125,7 @@ command StandardWrap set textwidth=80
 " set up vim so that it displays line numbers in a hybrid fashion
 set relativenumber 
 set number
-"
+
 " Make sure that you can load the dot files when you are searching the file system
 let g:ctrlp_show_hidden = 1
 

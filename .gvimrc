@@ -25,6 +25,10 @@ set guioptions-=L
 " Remove the toolbar at the top of the page so that the extra icons are not visible, more minimal again
 set guioptions-=T 
 
+" set up vim so that it displays line numbers in a hybrid fashion
+" set relativenumber 
+" set number
+
 " Configure the airline status bar replacement that provides some delightful context 
 " set laststatus=2
 " let g:airline_theme='base16'
