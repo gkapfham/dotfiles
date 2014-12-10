@@ -426,6 +426,7 @@ map <F5> :call SyntaxAttr()<CR>
 " I am not using GitGutter in the signs column because I don't like the slight delay;
 " but, I am using it to display information inside of the Airline at the bottom of Vim
 let g:gitgutter_signs = 0
+" let g:gitgutter_sign_column_always = 1
 
 " adding in some extra features for the GitGutter, let's see if this works correctly
 " let g:gitgutter_realtime = 1
