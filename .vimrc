@@ -73,6 +73,7 @@ Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/jgdavey/tslime.vim.git'
 Bundle 'https://github.com/wellle/tmux-complete.vim.git'
 Bundle 'https://github.com/FelikZ/ctrlp-py-matcher.git'
+Bundle 'https://github.com/airblade/vim-rooter.git'
 
 " Install all of the bundles that are not already installed
 if iCanHazVundle == 0
@@ -425,6 +426,10 @@ map <F5> :call SyntaxAttr()<CR>
 " I am not using GitGutter in the signs column because I don't like the slight delay;
 " but, I am using it to display information inside of the Airline at the bottom of Vim
 let g:gitgutter_signs = 0
+
+" adding in some extra features for the GitGutter, let's see if this works correctly
+" let g:gitgutter_realtime = 1
+" let g:gitgutter_eager = 1
 
 " Automatically save changes before switching buffer with some
 " commands, like :cnfile. Very useful when running Qdo on a QuickFix list
