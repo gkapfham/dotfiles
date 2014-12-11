@@ -477,6 +477,7 @@ vmap <C-Down> ]egv
 " Create a mapping that allows for the insertion of a blank line without
 " having to enter insert mode and then leave it. Works nicely, but only in GVim
 nmap <S-Enter> O<Esc>
+nmap oo O<Esc>
 
 " Configure the identing line plugin so that it will use the correct colors and symbols ; deprecated
 " let g:indentLine_color_term = 239
