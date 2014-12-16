@@ -479,6 +479,7 @@ vmap <C-Down> ]egv
 nmap <S-Enter> O<Esc>
 nmap oo O<Esc>
 
+" This function will allow you to rename a file inside of vim, works correctly
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
