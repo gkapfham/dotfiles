@@ -17,6 +17,7 @@ Bundle 'gmarik/vundle'
 
 " These are all of the Bundles that we use to enhance the behavior of Vim
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
+Bundle 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
 Bundle 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Bundle 'https://github.com/Raimondi/delimitMate.git'
@@ -26,6 +27,7 @@ Bundle 'https://github.com/Valloric/MatchTagAlways.git'
 Bundle 'https://github.com/Valloric/YouCompleteMe.git'
 Bundle 'https://github.com/Wolfy87/vim-enmasse.git'
 Bundle 'https://github.com/airblade/vim-gitgutter.git'
+Bundle 'https://github.com/airblade/vim-rooter.git'
 Bundle 'https://github.com/amiorin/ctrlp-z.git'
 Bundle 'https://github.com/bling/vim-airline.git'
 Bundle 'https://github.com/chrisbra/csv.vim.git'
@@ -40,6 +42,9 @@ Bundle 'https://github.com/gregsexton/gitv.git'
 Bundle 'https://github.com/henrik/vim-qargs.git'
 Bundle 'https://github.com/honza/vim-snippets'
 Bundle 'https://github.com/int3/vim-extradite.git'
+Bundle 'https://github.com/jalvesaq/VimCom.git'
+Bundle 'https://github.com/jcfaria/Vim-R-plugin.git'
+Bundle 'https://github.com/jgdavey/tslime.vim.git'
 Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Bundle 'https://github.com/justinmk/vim-sneak.git'
 Bundle 'https://github.com/kablamo/vim-git-log.git'
@@ -68,12 +73,9 @@ Bundle 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
 Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
 Bundle 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
 Bundle 'https://github.com/vim-scripts/TeX-9.git'
+Bundle 'https://github.com/wellle/tmux-complete.vim.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
-Bundle 'https://github.com/jgdavey/tslime.vim.git'
-Bundle 'https://github.com/wellle/tmux-complete.vim.git'
-Bundle 'https://github.com/FelikZ/ctrlp-py-matcher.git'
-Bundle 'https://github.com/airblade/vim-rooter.git'
 
 " Install all of the bundles that are not already installed
 if iCanHazVundle == 0
@@ -489,7 +491,7 @@ function! RenameFile()
         redraw!
     endif
 endfunction
-map <leader>r :call RenameFile()<cr>
+map <leader>m :call RenameFile()<cr>
 
 " Configure the identing line plugin so that it will use the correct colors and symbols ; deprecated
 " let g:indentLine_color_term = 239
@@ -670,6 +672,7 @@ map <leader>r :call RenameFile()<cr>
 "set cot-=preview
 
 " Bundle 'L9'
+"
 " Bundle 'https://github.com/Chiel92/vim-autoformat.git'
 " Bundle 'https://github.com/Keithbsmiley/investigate.vim.git'
 " Bundle 'https://github.com/LaTeX-Box-Team/LaTeX-Box.git'
