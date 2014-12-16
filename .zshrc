@@ -4,6 +4,8 @@ export TERM="xterm-256color"
 # exporting the LANG environment variable so that the character coding is correct 
 export LANG="en_US.UTF8"
 
+export EDITOR="vim"
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -87,11 +89,10 @@ autoload -U history-search-end
 # yyyy-mm-dd
 # HIST_STAMPS="mm/dd/yyyy"
 
-# 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ant sudo web-search dircycle vundle wd zsh-syntax-highlighting fasd tmux)
+plugins=(git ant sudo vundle zsh-syntax-highlighting fasd tmux tmuxinator)
 . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source $ZSH/oh-my-zsh.sh
 
@@ -117,6 +118,7 @@ unset fasd_cache
 # 
 
 # User configuration
+export DISABLE_AUTO_TITLE=true
 
 # export PATH="/home/gkapfham/working/software/TweetComplete/run:/home/gkapfham/.eclipse/org.eclipse.platform_3.8_155965261:/usr/local/texlive/2011/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
