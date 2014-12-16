@@ -479,6 +479,17 @@ vmap <C-Down> ]egv
 nmap <S-Enter> O<Esc>
 nmap oo O<Esc>
 
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>r :call RenameFile()<cr>
+
 " Configure the identing line plugin so that it will use the correct colors and symbols ; deprecated
 " let g:indentLine_color_term = 239
 " let g:indentLine_color_gui = "#707880"
