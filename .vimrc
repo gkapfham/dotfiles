@@ -16,7 +16,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " These are all of the Bundles that we use to enhance the behavior of Vim
-
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
 Bundle 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
@@ -77,7 +76,6 @@ Bundle 'https://github.com/vim-scripts/TeX-9.git'
 Bundle 'https://github.com/wellle/tmux-complete.vim.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
-Bundle 'https://github.com/christoomey/vim-tmux-navigator.git'
 
 " Install all of the bundles that are not already installed
 if iCanHazVundle == 0
