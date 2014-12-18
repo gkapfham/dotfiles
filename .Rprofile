@@ -1,5 +1,5 @@
 library(colorout)
-setOutputColors256(normal=240, number=166, negnum=124, date=166, string=178, const=53, stderror=70, error=70, verbose=TRUE)
+setOutputColors256(normal=240, number=166, negnum=124, date=166, string=178, const=53, stderror=70, error=70, verbose=FALSE)
 if(interactive()){
        # Get startup messages of three packages and set Vim as R pager:
        options(setwidth.verbose = 1,
@@ -21,7 +21,7 @@ if(interactive()){
            # Choose the colors for R output among 256 options.
            # You should run show256Colors() and help(setOutputColors256) to
            # know how to change the colors according to your taste:
-           setOutputColors256(normal=240, number=166, negnum=124, date=166, string=178, const=53, stderror=70, error=70, verbose=TRUE)
+           setOutputColors256(normal=240, number=166, negnum=124, date=166, string=178, const=53, stderror=70, error=70, verbose=FALSE)
        }
        # Load the setwidth library:
        library(setwidth)
