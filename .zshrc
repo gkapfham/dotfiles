@@ -19,6 +19,9 @@ ZSH_THEME="norm-gkapfham"
 alias vt="vim ~/working/todo/todo.txt"
 alias gvt="gvim ~/working/todo/todo.txt"
 
+# make it easier to run htop in monochrome mode
+alias htop="htop -C"
+
 # create an alias that allows for loading a large fill screen terminal designed for text editing
 alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 
