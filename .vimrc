@@ -93,6 +93,12 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=latex#complete#omnifunc 
 
+" Disable the arrow keys so that I keep my fingers on home row during programming
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 " Set the completion function in general if there is not a specific type
 set omnifunc=syntaxcomplete#Complete
 
@@ -314,6 +320,25 @@ nmap <silent> <leader>s :set spell!<CR>
 " Give a special key for turning on and off the Tagbar, a great feature for browsing source code, such as Java programs
 nmap <F12> :TagbarToggle<CR>
 
+" Configure the Tagbar so that it can handle the Markdown language
+let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+        \ 'h:Heading_L1',
+        \ 'i:Heading_L2',
+        \ 'k:Heading_L3'
+    \ ]
+\ }
+
+" Configure the Tagbar so that it can handle the R language
+let g:tagbar_type_r = {
+    \ 'ctagstype' : 'r',
+    \ 'kinds'     : [
+        \ 'f:Functions',
+        \ 'g:GlobalVariables',
+        \ 'v:FunctionVariables',
+    \ ]
+\ }
 " Give a special key for turning on and off the NERDTree, a great feature for browsing the entire file system
 nmap <F11> :NERDTreeToggle<CR>
 
