@@ -339,6 +339,25 @@ let g:tagbar_type_r = {
         \ 'v:FunctionVariables',
     \ ]
 \ }
+
+" Configure the Tagbar so that it can handle the UltiSnips format
+let g:tagbar_type_snippets = {
+    \ 'ctagstype' : 'snippets',
+    \ 'kinds' : [
+        \ 's:snippets',
+    \ ]
+\ }
+
+" Configure the Tagbar so that it can handle the CSS format
+let g:tagbar_type_css = {
+\ 'ctagstype' : 'Css',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 's:selectors',
+        \ 'i:identities'
+    \ ]
+\ }
+
 " Give a special key for turning on and off the NERDTree, a great feature for browsing the entire file system
 nmap <F11> :NERDTreeToggle<CR>
 
