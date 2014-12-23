@@ -28,16 +28,13 @@ alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 # create an alias that runs the hubic sync program
 # alias hs="hubic synchronize"
 
-# Adding these lines of code enables the searching of partially completed commands with the arrow keys
-autoload -Uz up-line-or-beginning-search
-autoload -Uz down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey '\eOA' up-line-or-beginning-search
-bindkey '\e[A' up-line-or-beginning-search
-bindkey '\eOB' down-line-or-beginning-search
-bindkey '\e[B' down-line-or-beginning-search
-autoload -U history-search-end
+
+# # bindkey -v
+
+# bindkey '^k' up-line-or-beginning-search
+# bindkey '^j' down-line-or-beginning-search
+# autoload -U history-search-end
+
 
 # # zle -N history-beginning-search-backward-end history-search-end
 # # zle -N history-beginning-search-forward-end history-search-end
@@ -95,12 +92,13 @@ autoload -U history-search-end
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ant sudo vundle zsh-syntax-highlighting fasd tmux tmuxinator)
+plugins=(git ant sudo vundle zsh-syntax-highlighting fasd tmux tmuxinator vi-mode)
 . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source $ZSH/oh-my-zsh.sh
 
 # load the special plugin that is needed to create the git-stacular prompt showing status 
 source ~/.zsh/git-prompt/zshrc.sh
+
 
 # create the FASD cache so that the terminal loads quickly but I still get all of the FASD features
 fasd_cache="$HOME/.fasd-init-zsh"
@@ -110,8 +108,27 @@ fi
 source "$fasd_cache"
 unset fasd_cache
 
+# Adding these lines of code enables the searching of partially completed commands with the arrow keys
+autoload -Uz up-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '\eOA' up-line-or-beginning-search
+bindkey '\e[A' up-line-or-beginning-search
+bindkey '\eOB' down-line-or-beginning-search
+bindkey '\e[B' down-line-or-beginning-search
+autoload -U history-search-end
+bindkey "^k" history-incremental-search-backward
+bindkey "^j" history-incremental-search-backward
+
 # this was the first way that I tried to load fasd and it works, but it might be a little too slow
 # eval "$(fasd --init auto)"
+# bindkey '^k' up-line-or-beginning-search
+# bindkey '^k' up-line-or-beginning-search
+# bindkey '^j' down-line-or-beginning-search
+# autoload -U history-search-end
+# bindkey '^j' down-line-or-beginning-search
+# autoload -U history-search-end
 
 # allow for the editing of the command-line in vim by pressing the "v" key in the terminal window
 # export KEYTIMEOUT=1
