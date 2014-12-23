@@ -130,6 +130,7 @@ local.properties
 # R #
 ######################
 *-Ex.R
+*.RData
 *.Rdata
 *.Rhistory
 
