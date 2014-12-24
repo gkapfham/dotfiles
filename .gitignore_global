@@ -133,6 +133,7 @@ local.properties
 *.RData
 *.Rdata
 *.Rhistory
+*.Rincr_history
 
 # CTags #
 ######################
