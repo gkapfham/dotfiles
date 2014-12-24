@@ -28,13 +28,9 @@ alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 # create an alias that runs the hubic sync program
 # alias hs="hubic synchronize"
 
-
-# # bindkey -v
-
 # bindkey '^k' up-line-or-beginning-search
 # bindkey '^j' down-line-or-beginning-search
 # autoload -U history-search-end
-
 
 # # zle -N history-beginning-search-backward-end history-search-end
 # # zle -N history-beginning-search-forward-end history-search-end
