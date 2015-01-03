@@ -140,6 +140,14 @@ export DISABLE_AUTO_TITLE=true
 
 export PATH="/opt/eclipse:/home/gkapfham/working/software/TweetComplete/run:/usr/local/texlive/2011/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
+man() {
+  vim -c "SuperMan $*"
+
+  if [ "$?" != "0" ]; then
+    echo "No manual entry for $*"
+  fi
+}
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # PROMPT='$(battery_pct_remaining)'
