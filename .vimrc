@@ -429,8 +429,8 @@ let g:EasyMotion_use_upper = 1
 let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 
 " Configure scrolling in the window; breaks with the mouse flick but fine with the keyboard
-let g:SexyScroller_MaxTime = 250 
-let g:SexyScroller_EasingStyle = 0
+let g:SexyScroller_MaxTime = 500 
+let g:SexyScroller_EasingStyle = 3
 
 " Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
 set tags=./tags;
