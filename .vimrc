@@ -538,6 +538,10 @@ function! RenameFile()
 endfunction
 map <leader>m :call RenameFile()<cr>
 
+" Allow the Vim-R-Plugin to create the R assignment, but only with two
+" underscore presses when writing code in Vim
+let vimrplugin_assign = 2
+
 " nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 " nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 " nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
