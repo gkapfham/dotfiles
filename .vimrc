@@ -49,7 +49,8 @@ Bundle 'https://github.com/jgdavey/tslime.vim.git'
 Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Bundle 'https://github.com/justinmk/vim-sneak.git'
 Bundle 'https://github.com/kablamo/vim-git-log.git'
-Bundle 'https://github.com/kien/ctrlp.vim.git'
+" Bundle 'https://github.com/kien/ctrlp.vim.git'
+Bundle 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Bundle 'https://github.com/kshenoy/vim-signature.git'
 Bundle 'https://github.com/lervag/vim-latex.git'
 Bundle 'https://github.com/majutsushi/tagbar'
@@ -77,6 +78,8 @@ Bundle 'https://github.com/vim-scripts/TeX-9.git'
 Bundle 'https://github.com/wellle/tmux-complete.vim.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
+Bundle 'https://github.com/ivalkeen/vim-ctrlp-tjump.git'
+Bundle 'https://github.com/sgur/ctrlp-extensions.vim.git'
 
 " Install all of the bundles that are not already installed
 if iCanHazVundle == 0
@@ -246,6 +249,18 @@ let g:tmuxcomplete#trigger = 'omnifunc'
 " allow CTRLP to show fifteen total matches, helping in cases where there are
 " many matches that we still want to display and consider
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15' 
+let g:ctrlp_extensions = ['quickfix', 'changes', 'cmdline', 'yankring']
+nnoremap <c-]> :CtrlPtjump<cr>
+vnoremap <c-]> :CtrlPtjumpVisual<cr>
+
+" let g:ctrlp_buftag_types = {
+" \ 'go'     	   : '--language-force=go --golang-types=ftv',
+" \ 'coffee'     : '--language-force=coffee --coffee-types=cmfvf',
+" \ 'markdown'   : '--language-force=markdown --markdown-types=hik',
+" \ 'objc'       : '--language-force=objc --objc-types=mpci',
+" \ 'rc'         : '--language-force=rust --rust-types=fTm',
+" \ 'r'          : '--language-force=r --r-types=fgv'
+" \ }
 
 " let g:ycm_key_list_previous_completion=[]
 " let g:ycm_key_list_select_completion=[]
@@ -442,10 +457,12 @@ let g:easytags_async = 1
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_z_nerdtree = 1
+" let g:ctrlp_cmd = 'CtrlPBuffer'
 
 " I could not get this to work as a CTRL-P extension, so I had to map to separate commands, which does seem to work
 nnoremap zd :CtrlPZ<Cr>
 nnoremap zf :CtrlPF<Cr> 
+nnoremap <Tab> :CtrlPBuffer<Cr>
 
 " Set a command that allows for the creation of a tags file for exuberant ctags
 nmap <C-t> :!ctags -R<CR>
