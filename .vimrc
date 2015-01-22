@@ -562,6 +562,8 @@ let vimrplugin_assign = 2
 " Add in a command that will allow me to remove the trailing white space
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
+" nmap <Leader>z <Plug>MarksQF
+
 " nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 " nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 " nnoremap <silent> <c-k> :TmuxNavigateUp<cr>

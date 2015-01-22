@@ -1,5 +1,5 @@
 # run the bash shell in 256 color mode, better for vim!
-export TERM="xterm-256color"
+export TERM="xterm-256color-italic"
 
 # exporting the LANG environment variable so that the character coding is correct 
 export LANG="en_US.UTF8"
