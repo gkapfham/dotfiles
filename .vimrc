@@ -79,6 +79,7 @@ Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/ivalkeen/vim-ctrlp-tjump.git'
 Bundle 'https://github.com/sgur/ctrlp-extensions.vim.git'
+Bundle 'https://github.com/scrooloose/syntastic.git'
 
 " Install all of the bundles that are not already installed
 if iCanHazVundle == 0
@@ -95,6 +96,9 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=latex#complete#omnifunc 
+
+" Allow syntastic to populate a list of problems for a given file
+let g:syntastic_always_populate_loc_list = 1
 
 " Disable the arrow keys so that I keep my fingers on home row during programming
 noremap <Up> <NOP>
