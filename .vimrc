@@ -219,8 +219,11 @@ set complete+=]
 " let g:SuperTabLongestEnhanced = 1
 
 " You Complete Me configuration for LaTeX, using the vim-latex plugin
+" Note that the last one does not work correctly even though I think that
+" it should! An alternative is to type ctrl-space for the second reference and
+" this will ensure that I can still search through for references
 let g:ycm_semantic_triggers = {
-\  'tex'  : ['\cite{', '\ref{'],
+\  'tex'  : ['\cite{', '\ref{', '!re\\cite([^]]*\])?\{([^}]*,)*[^}]*'],
 \ }
 
 " You Complete Me configuration
@@ -403,12 +406,11 @@ set shortmess=I
 
 " Set up the enter key to ensure that after completing words a return is not pressed; this was all used with the
 " standard SuperTab completion and now I am leaving it even though I primarily use YouCompleteMe
+
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
             \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
             \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
 inoremap <expr> <tab> pumvisible() ? '<tab>' :
             \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
  
