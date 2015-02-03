@@ -56,7 +56,7 @@ Bundle 'https://github.com/majutsushi/tagbar'
 Bundle 'https://github.com/mattn/emmet-vim.git'
 Bundle 'https://github.com/nathanaelkane/vim-indent-guides'
 Bundle 'https://github.com/osyo-manga/vim-over.git'
-Bundle 'https://github.com/scrooloose/nerdtree.git'
+" Bundle 'https://github.com/scrooloose/nerdtree.git'
 Bundle 'https://github.com/sjl/gundo.vim.git'
 Bundle 'https://github.com/tejr/nextag.git'
 Bundle 'https://github.com/terryma/vim-multiple-cursors.git'
@@ -80,6 +80,7 @@ Bundle 'https://github.com/xolox/vim-misc.git'
 Bundle 'https://github.com/ivalkeen/vim-ctrlp-tjump.git'
 Bundle 'https://github.com/sgur/ctrlp-extensions.vim.git'
 Bundle 'https://github.com/scrooloose/syntastic.git'
+Bundle 'https://github.com/jeetsukumaran/vim-filebeagle.git'
 
 " Install all of the bundles that are not already installed
 if iCanHazVundle == 0
@@ -380,14 +381,12 @@ let g:tagbar_type_css = {
     \ ]
 \ }
 
-" Give a special key for turning on and off the NERDTree, a great feature for browsing the entire file system
-nmap <F11> :NERDTreeToggle<CR>
-
-" Set up the NERDTree so that it does not display the silly help message at the top, this is not minimal enough.
-let NERDTreeMinimalUI=1
-
-" Always show the hidden files inside of the NerdTree
-let NERDTreeShowHidden=1
+" " Give a special key for turning on and off the NERDTree, a great feature for browsing the entire file system
+" nmap <F11> :NERDTreeToggle<CR>
+" " Set up the NERDTree so that it does not display the silly help message at the top, this is not minimal enough.
+" let NERDTreeMinimalUI=1
+" " Always show the hidden files inside of the NerdTree
+" let NERDTreeShowHidden=1
 
 " Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!                 
 " set lazyredraw
