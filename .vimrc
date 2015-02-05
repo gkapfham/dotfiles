@@ -527,9 +527,9 @@ endif
 " Make a separate key binding that allows for the toggling of the indent guides
 nmap <Leader>g :IndentGuidesToggle<CR>
 
-" Add in the path to the WordNet binary, allowing for a <Leader>wnd command to easily run
-let g:wordnet_path = "/usr/bin/"
-nmap <Leader>wnd "wyiw:call WordNetOverviews(@w)<CR>
+" " Add in the path to the WordNet binary, allowing for a <Leader>wnd command to easily run
+" let g:wordnet_path = "/usr/bin/"
+" nmap <Leader>wnd "wyiw:call WordNetOverviews(@w)<CR>
 
 " Call the GUndo plugin Toggle to see the version history with the F5 key
 nnoremap <F6> :GundoToggle<CR>
