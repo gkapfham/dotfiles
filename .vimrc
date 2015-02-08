@@ -83,6 +83,7 @@ Bundle 'https://github.com/vim-scripts/TeX-9.git'
 Bundle 'https://github.com/wellle/tmux-complete.vim.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
+Bundle 'https://github.com/jeetsukumaran/vim-gazetteer.git'
 
 " Install all of the bundles that are not already installed
 if iCanHazVundle == 0
@@ -175,6 +176,12 @@ let g:tex_nine_config = {
             \'synctex': 1
             \}
 
+" Adding in the conceal option for latex. Trying this out to see if I like the rendering of mathematics
+set cole=2
+let g:tex_conceal= 'adgms'
+hi Conceal guifg=234 guifg=143
+hi Conceal ctermbg=234 ctermfg=143
+
 " Starting to use vim-latex and it needs several configurations to work correctly
 let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
 let g:latex_fold_enabled = 0
@@ -258,9 +265,16 @@ let g:tmuxcomplete#trigger = 'omnifunc'
 " allow CTRLP to show fifteen total matches, helping in cases where there are
 " many matches that we still want to display and consider
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15' 
-let g:ctrlp_extensions = ['quickfix', 'changes', 'cmdline', 'yankring']
+let g:ctrlp_extensions = ['buffertag', 'quickfix']
+
+" This allows you to jump to the definition of a function using CtrlP
 nnoremap <c-]> :CtrlPtjump<cr>
 vnoremap <c-]> :CtrlPtjumpVisual<cr>
+
+" Very exciting, this allows for Ctrl-P to automatically generate tags for LaTeX using e-ctags
+let g:ctrlp_buftag_types = {
+    \ 'tex'          : '--language-force=latex'
+\ }
 
 " let g:ctrlp_buftag_types = {
 " \ 'go'     	   : '--language-force=go --golang-types=ftv',
