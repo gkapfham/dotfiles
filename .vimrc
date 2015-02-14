@@ -179,7 +179,6 @@ let g:tex_nine_config = {
 " Adding in the conceal option for latex. Trying this out to see if I like the rendering of mathematics
 set cole=2
 let g:tex_conceal= 'adgms'
-hi Conceal guifg=234 guifg=143
 hi Conceal ctermbg=234 ctermfg=143
 
 " Starting to use vim-latex and it needs several configurations to work correctly
