@@ -88,13 +88,12 @@ alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ant sudo vundle zsh-syntax-highlighting fasd tmux tmuxinator vi-mode)
+plugins=(git git-extras ant sudo vundle zsh-syntax-highlighting fasd tmux tmuxinator vi-mode zsh_reload)
 . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source $ZSH/oh-my-zsh.sh
 
 # load the special plugin that is needed to create the git-stacular prompt showing status 
 source ~/.zsh/git-prompt/zshrc.sh
-
 
 # create the FASD cache so that the terminal loads quickly but I still get all of the FASD features
 fasd_cache="$HOME/.fasd-init-zsh"
