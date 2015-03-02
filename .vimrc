@@ -182,7 +182,7 @@ let g:tex_conceal= 'adgms'
 hi Conceal ctermbg=234 ctermfg=143
 
 " Starting to use vim-latex and it needs several configurations to work correctly
-let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
+let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -synctex=1'"
 let g:latex_fold_enabled = 0
 let g:latex_quickfix_mode = 2
 let g:latex_quickfix_open_on_warning = 1

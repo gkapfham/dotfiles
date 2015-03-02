@@ -126,6 +126,7 @@ local.properties
 *.ear
 *.jar
 *.war
+*.ant_targets
 
 # R #
 ######################
