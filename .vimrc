@@ -1,20 +1,6 @@
 " Set Vim to run in not compatible mode
 set nocompatible 
 
-" " Setting up Vundle -- the vim plugin plugr -- and another plugin management tool that I will demonstrate
-" let iCanHazVundle=1
-" let vundle_readme=expand('~/.vim/plug/vundle/README.md')
-" if !filereadable(vundle_readme)
-"     echo "Installing Vundle.."
-"     echo ""
-"     silent !mkdir -p ~/.vim/plug
-"     silent !git clone https://github.com/gmarik/vundle ~/.vim/plug/vundle
-"     let iCanHazVundle=0
-" endif
-" set rtp+=~/.vim/plug/vundle/
-" call vundle#rc()
-" Plug 'gmarik/vundle'
-
 call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
@@ -83,13 +69,6 @@ Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
 
 call plug#end()
-
-" " Install all of the plugs that are not already installed
-" if iCanHazVundle == 0
-"     echo "Installing Plugs, please ignore key map error messages"
-"     echo ""
-"     :PlugInstall
-" endif
 
 " Automatically identify the filetype for the plugins and always use syntax highlighting
 filetype indent plugin on | syn on
