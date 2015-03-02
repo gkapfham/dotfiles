@@ -17,10 +17,6 @@ Bundle 'gmarik/vundle'
 
 " These are all of the Bundles that we use to enhance the behavior of Vim
 
-" Bundle 'https://github.com/osyo-manga/vim-over.git'
-" Bundle 'https://github.com/scrooloose/nerdtree.git'
-" Bundle 'https://github.com/vim-scripts/SQLComplete.vim.git'
-
 Bundle 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
 Bundle 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 Bundle 'https://github.com/Lokaltog/vim-easymotion.git'
@@ -53,6 +49,7 @@ Bundle 'https://github.com/ivalkeen/vim-ctrlp-tjump.git'
 Bundle 'https://github.com/jalvesaq/VimCom.git'
 Bundle 'https://github.com/jcfaria/Vim-R-plugin.git'
 Bundle 'https://github.com/jeetsukumaran/vim-filebeagle.git'
+Bundle 'https://github.com/jeetsukumaran/vim-gazetteer.git'
 Bundle 'https://github.com/jgdavey/tslime.vim.git'
 Bundle 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Bundle 'https://github.com/justinmk/vim-sneak.git'
@@ -83,7 +80,7 @@ Bundle 'https://github.com/vim-scripts/TeX-9.git'
 Bundle 'https://github.com/wellle/tmux-complete.vim.git'
 Bundle 'https://github.com/xolox/vim-easytags.git'
 Bundle 'https://github.com/xolox/vim-misc.git'
-Bundle 'https://github.com/jeetsukumaran/vim-gazetteer.git'
+Bundle 'https://github.com/deris/vim-shot-f.git'
 
 " Install all of the bundles that are not already installed
 if iCanHazVundle == 0
@@ -276,7 +273,7 @@ let g:ctrlp_buftag_types = {
 \ }
 
 " let g:ctrlp_buftag_types = {
-" \ 'go'     	   : '--language-force=go --golang-types=ftv',
+" \ 'go'           : '--language-force=go --golang-types=ftv',
 " \ 'coffee'     : '--language-force=coffee --coffee-types=cmfvf',
 " \ 'markdown'   : '--language-force=markdown --markdown-types=hik',
 " \ 'objc'       : '--language-force=objc --objc-types=mpci',
@@ -581,8 +578,6 @@ let vimrplugin_assign = 2
 " Add in a command that will allow me to remove the trailing white space
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
-" nmap <Leader>z <Plug>MarksQF
-
 " nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 " nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 " nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
@@ -696,7 +691,7 @@ nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 "         " characters in a string.
 "         " \<Esc> -- Escape. To exit insert mode (that 's' puts us into)
 " 
-" 		exe "normal hvi\<CR>\<Esc>"
+"       exe "normal hvi\<CR>\<Esc>"
 "         " We are on a new line now, so update the variables
 " 
 "         let lastline=line('.')
