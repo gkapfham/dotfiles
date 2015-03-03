@@ -20,7 +20,7 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/airblade/vim-rooter.git'
 Plug 'https://github.com/amiorin/ctrlp-z.git'
 Plug 'https://github.com/bling/vim-airline.git'
-Plug 'https://github.com/bling/vim-bufferline.git'
+" Plug 'https://github.com/bling/vim-bufferline.git'
 Plug 'https://github.com/chrisbra/csv.vim.git', {'for': 'csv'}
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'https://github.com/dterei/VimBookmarking.git'
@@ -407,7 +407,7 @@ inoremap <expr> <tab> pumvisible() ? '<tab>' :
 
 " Configure the airline status bar replacement that provides some delightful context
 set laststatus=2
-let g:airline_theme='jellybeans'
+let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
 set nosmd " turn of the status line that shows the silly word insert, airline is much better!
