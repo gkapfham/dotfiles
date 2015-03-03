@@ -281,11 +281,6 @@ set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest:full,full
 
-" set up some commands for adding, removing, and navigating bookmarks inside of vim; very useful
-" map <silent> bb :ToggleBookmark<CR>
-" map <silent> bn :NextBookmark<CR>
-" map <silent> bp :PreviousBookmark<CR>
-
 " Adding in a bunch of additional commands from:
 " http://nvie.com/posts/how-i-boosted-my-vim/
 
