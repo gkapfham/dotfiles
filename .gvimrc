@@ -2,12 +2,12 @@
 syntax on
 
 " pick one of the color schemes that is available for use; I customized hybrid further
-colorscheme hybrid 
+colorscheme hybrid
 hi Conceal guibg=Grey11 guifg=DarkKhaki
 
 " pick the Monaco font at size 11, note that it might not be installed, then the default looks bad, go to Ubuntu Mono then
-" set guifont=Ubuntu\ Mono\ 13  
-set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 13 
+" set guifont=Ubuntu\ Mono\ 13
+set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 13
 
 " define a function that will maximize the window to full screen; only works on Ubuntu when the wmctrl program is installed
 function Maximize_Window()
@@ -24,15 +24,6 @@ set guioptions-=r
 set guioptions-=L
 
 " Remove the toolbar at the top of the page so that the extra icons are not visible, more minimal again
-set guioptions-=T 
+set guioptions-=T
 
-" set up vim so that it displays line numbers in a hybrid fashion
-" set relativenumber 
-" set number
 
-" Configure the airline status bar replacement that provides some delightful context 
-" set laststatus=2
-" let g:airline_theme='base16'
-" let g:airline_powerline_fonts = 1
-" let g:airline_detect_whitespace=0
-" 
