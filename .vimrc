@@ -1,5 +1,5 @@
 " Set Vim to run in not compatible mode
-set nocompatible 
+set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
@@ -61,7 +61,7 @@ Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/tpope/vim-unimpaired.git'
 Plug 'https://github.com/vim-scripts/AutoTag.git', {'for': 'html'}
 Plug 'https://github.com/vim-scripts/HTML-AutoCloseTag.git', {'for': 'html'}
-Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
+Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
 Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
@@ -76,7 +76,7 @@ filetype indent plugin on | syn on
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType tex set omnifunc=latex#complete#omnifunc 
+autocmd FileType tex set omnifunc=latex#complete#omnifunc
 
 " Allow syntastic to populate a list of problems for a given file
 let g:syntastic_always_populate_loc_list = 1
@@ -123,7 +123,7 @@ command NoWrap set textwidth=0
 command StandardWrap set textwidth=80
 
 " set up vim so that it displays line numbers in a hybrid fashion
-set relativenumber 
+set relativenumber
 set number
 
 " tmux configuration
@@ -143,7 +143,7 @@ set wildignore+=*/.git/*
 set wildignore+=*.class
 set wildignore+=*/tmp/*
 
-" change the mapleader from \ to , -- this makes it easier to perform compilation in LaTeX 
+" change the mapleader from \ to , -- this makes it easier to perform compilation in LaTeX
 let maplocalleader=","
 let mapleader=","
 
@@ -180,7 +180,7 @@ fu! TexQuotes()
     if (left == ' ' || left == '        ' || left == '')
         let insert = '``'
     endif
-    return insert        
+    return insert
 endfu
 autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 
@@ -230,7 +230,7 @@ let g:ycm_filetype_blacklist = {
         \ 'infolog' : 1,
         \}
 
-" make YCM compatible with UltiSnips 
+" make YCM compatible with UltiSnips
 let g:UltiSnipsExpandTrigger="<C-k>"
 let g:UltiSnipsListSnippets = "<C-l>"
 let g:UltiSnipsJumpBackwardTrigger=""
@@ -240,7 +240,7 @@ let g:tmuxcomplete#trigger = 'omnifunc'
 
 " allow CTRLP to show fifteen total matches, helping in cases where there are
 " many matches that we still want to display and consider
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15' 
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
 let g:ctrlp_extensions = ['buffertag', 'quickfix']
 
 " This allows you to jump to the definition of a function using CtrlP
@@ -267,7 +267,7 @@ let g:ctrlp_buftag_types = {
 " let g:ycm_key_list_previous_completion = ['<C-S-Tab>', '<Up>']
 " let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
 
-" Java autocompletion must use the completefunc (ctrl-x ctrl-u) to work correctly, so set it separately 
+" Java autocompletion must use the completefunc (ctrl-x ctrl-u) to work correctly, so set it separately
 " autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
 " autocmd FileType java let g:SuperTabContextDefaultCompletionType = "<c-n>"
 " autocmd FileType java let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
@@ -286,11 +286,11 @@ set wildmode=longest:full,full
 " map <silent> bn :NextBookmark<CR>
 " map <silent> bp :PreviousBookmark<CR>
 
-" Adding in a bunch of additional commands from: 
-" http://nvie.com/posts/how-i-boosted-my-vim/  
+" Adding in a bunch of additional commands from:
+" http://nvie.com/posts/how-i-boosted-my-vim/
 
 set nowrap        " don't wrap lines
-set wrap          " go ahead and allow the wrapping of long lines to take place 
+set wrap          " go ahead and allow the wrapping of long lines to take place
 set linebreak     " make sure that you break the lines in a way that preserves words
 set showbreak=━━  " set an ellipse character so that you can tell when lines are wrapped
 set tabstop=4     " a tab is four spaces
@@ -312,7 +312,7 @@ set pastetoggle=<F2> " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10 " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,] " wrap when you get to the end of a line and you are using the arrow keys
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. "highlight problematic whitespace
-set list " also required to ensure that problematic whitespace is highlighted correctly 
+set list " also required to ensure that problematic whitespace is highlighted correctly
 
 " turn on spell checking so that I can do this for Latex documents
 set spell spelllang=en_us,en_gb
@@ -380,7 +380,7 @@ let g:tagbar_type_css = {
 " " Always show the hidden files inside of the NerdTree
 " let NERDTreeShowHidden=1
 
-" Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!                 
+" Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!
 " set lazyredraw
 " set synmaxcol=145
 " syntax sync minlines=256
@@ -404,8 +404,8 @@ inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
             \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 inoremap <expr> <tab> pumvisible() ? '<tab>' :
             \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
- 
-" Configure the airline status bar replacement that provides some delightful context 
+
+" Configure the airline status bar replacement that provides some delightful context
 set laststatus=2
 let g:airline_theme='jellybeans'
 let g:airline_powerline_fonts = 1
@@ -415,7 +415,7 @@ set nosmd " turn of the status line that shows the silly word insert, airline is
 " Configure the way that colors are displayed for the sneak feature of searching in the text, seems to work very nicely
 " let g:sneak#streak = 1
 hi link SneakPluginScope Visual
-hi link SneakPluginTarget Type 
+hi link SneakPluginTarget Type
 
 "replace 'f' with 1-char Sneak
     nmap f <Plug>Sneak_f
@@ -440,7 +440,7 @@ omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 
-" change the default EasyMotion shading to something more readable 
+" change the default EasyMotion shading to something more readable
 hi link EasyMotionTarget Type
 hi link EasyMotionShade Comment
 hi link EasyMotionIncSearch Type
@@ -450,12 +450,12 @@ hi link EasyMotionMoveHL Type
 " Don't create the shaded background ; seems the better choice, but not perfect
 let g:EasyMotion_do_shade = 0
 
-" Tell EasyMotion to use capital letter since these are easier to see 
+" Tell EasyMotion to use capital letter since these are easier to see
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 
 " Configure scrolling in the window; breaks with the mouse flick but fine with the keyboard
-let g:SexyScroller_MaxTime = 500 
+let g:SexyScroller_MaxTime = 500
 let g:SexyScroller_EasingStyle = 3
 
 " Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
@@ -472,7 +472,7 @@ let g:ctrlp_z_nerdtree = 1
 
 " I could not get this to work as a CTRL-P extension, so I had to map to separate commands, which does seem to work
 nnoremap zd :CtrlPZ<Cr>
-nnoremap zf :CtrlPF<Cr> 
+nnoremap zf :CtrlPF<Cr>
 nnoremap <Tab> :CtrlPBuffer<Cr>
 
 " Set a command that allows for the creation of a tags file for exuberant ctags
@@ -483,20 +483,6 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr()<CR>
-
-" " HTML needs to have a chained completion function 
-" autocmd FileType html
-"             \ if &omnifunc != '' |
-"             \   call SuperTabChain(&omnifunc, "<c-n>") |
-"             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-"             \ endif
-
-" " HTML needs to have a chained completion function 
-" autocmd FileType mail 
-"             \ if &omnifunc != '' |
-"             \   call SuperTabChain(&omnifunc, "<c-n>") |
-"             \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-"             \ endif
 
 " I am not using GitGutter in the signs column because I don't like the slight delay;
 " but, I am using it to display information inside of the Airline at the bottom of Vim
