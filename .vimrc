@@ -5,7 +5,8 @@ call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
-Plug 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
+" Plug 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
+" Plug 'https://github.com/tejr/nextag.git'
 Plug 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
 Plug 'https://github.com/MarcWeber/vim-addon-mw-utils'
@@ -14,13 +15,13 @@ Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'https://github.com/Valloric/ListToggle.git'
 Plug 'https://github.com/Valloric/MatchTagAlways.git'
 Plug 'https://github.com/Valloric/YouCompleteMe.git'
-Plug 'https://github.com/Wolfy87/vim-enmasse.git'
 Plug 'https://github.com/Z1MM32M4N/vim-superman.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/airblade/vim-rooter.git'
 Plug 'https://github.com/amiorin/ctrlp-z.git'
 Plug 'https://github.com/bling/vim-airline.git'
-Plug 'https://github.com/chrisbra/csv.vim.git'
+Plug 'https://github.com/bling/vim-bufferline.git'
+Plug 'https://github.com/chrisbra/csv.vim.git', {'for': 'csv'}
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'https://github.com/dterei/VimBookmarking.git'
 Plug 'https://github.com/ervandew/ag.git'
@@ -37,20 +38,18 @@ Plug 'https://github.com/ivalkeen/vim-ctrlp-tjump.git'
 Plug 'https://github.com/jalvesaq/VimCom.git'
 Plug 'https://github.com/jcfaria/Vim-R-plugin.git'
 Plug 'https://github.com/jeetsukumaran/vim-filebeagle.git'
-Plug 'https://github.com/jeetsukumaran/vim-gazetteer.git'
 Plug 'https://github.com/jgdavey/tslime.vim.git'
 Plug 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kablamo/vim-git-log.git'
 Plug 'https://github.com/kshenoy/vim-signature.git'
-Plug 'https://github.com/lervag/vim-latex.git'
+Plug 'https://github.com/lervag/vim-latex.git', {'for': 'tex'}
 Plug 'https://github.com/majutsushi/tagbar'
-Plug 'https://github.com/mattn/emmet-vim.git'
+Plug 'https://github.com/mattn/emmet-vim.git', {'for': 'html'}
 Plug 'https://github.com/nathanaelkane/vim-indent-guides'
 Plug 'https://github.com/scrooloose/syntastic.git'
 Plug 'https://github.com/sgur/ctrlp-extensions.vim.git'
-Plug 'https://github.com/sjl/gundo.vim.git'
-Plug 'https://github.com/tejr/nextag.git'
+Plug 'https://github.com/sjl/gundo.vim.git', {'on': 'GundoToggle'}
 Plug 'https://github.com/terryma/vim-multiple-cursors.git'
 Plug 'https://github.com/tomtom/tlib_vim'
 Plug 'https://github.com/tpope/vim-abolish.git'
@@ -60,14 +59,14 @@ Plug 'https://github.com/tpope/vim-liquid.git'
 Plug 'https://github.com/tpope/vim-ragtag.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/tpope/vim-unimpaired.git'
-Plug 'https://github.com/vim-scripts/AutoTag.git'
-Plug 'https://github.com/vim-scripts/HTML-AutoCloseTag.git'
+Plug 'https://github.com/vim-scripts/AutoTag.git', {'for': 'html'}
+Plug 'https://github.com/vim-scripts/HTML-AutoCloseTag.git', {'for': 'html'}
 Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git' 
-Plug 'https://github.com/vim-scripts/TeX-9.git'
+Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
-
+Plug 'https://github.com/chrisbra/CheckAttach.git'
 call plug#end()
 
 " Automatically identify the filetype for the plugins and always use syntax highlighting
@@ -408,9 +407,9 @@ inoremap <expr> <tab> pumvisible() ? '<tab>' :
  
 " Configure the airline status bar replacement that provides some delightful context 
 set laststatus=2
-let g:airline_theme='base16'
+let g:airline_theme='jellybeans'
 let g:airline_powerline_fonts = 1
-let g:airline_detect_whitespace=0
+let g:airline#extensions#whitespace#enabled = 0
 set nosmd " turn of the status line that shows the silly word insert, airline is much better!
 
 " Configure the way that colors are displayed for the sneak feature of searching in the text, seems to work very nicely
@@ -578,3 +577,6 @@ nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
+
+let g:checkattach_filebrowser = 'ranger'
+let g:checkattach_once = 'y'
