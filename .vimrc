@@ -121,6 +121,7 @@ colorscheme hybrid
 command Wrap set textwidth=120
 command NoWrap set textwidth=0
 command StandardWrap set textwidth=80
+set wrap linebreak nolist
 
 " set up vim so that it displays line numbers in a hybrid fashion
 set relativenumber
@@ -284,8 +285,8 @@ set wildmode=longest:full,full
 " Adding in a bunch of additional commands from:
 " http://nvie.com/posts/how-i-boosted-my-vim/
 
-set nowrap        " don't wrap lines
-set wrap          " go ahead and allow the wrapping of long lines to take place
+" set nowrap        " don't wrap lines
+" set wrap          " go ahead and allow the wrapping of long lines to take place
 set linebreak     " make sure that you break the lines in a way that preserves words
 set showbreak=━━  " set an ellipse character so that you can tell when lines are wrapped
 set tabstop=4     " a tab is four spaces
