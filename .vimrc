@@ -406,6 +406,8 @@ set laststatus=2
 let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
+let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
 set nosmd " turn of the status line that shows the silly word insert, airline is much better!
 
 " Configure the way that colors are displayed for the sneak feature of searching in the text, seems to work very nicely
