@@ -5,9 +5,6 @@ call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
-" Plug 'https://github.com/ChrisYip/Better-CSS-Syntax-for-Vim.git'
-" Plug 'https://github.com/bling/vim-bufferline.git'
-" Plug 'https://github.com/tejr/nextag.git'
 Plug 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
 Plug 'https://github.com/MarcWeber/vim-addon-mw-utils'
@@ -21,7 +18,6 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/airblade/vim-rooter.git'
 Plug 'https://github.com/amiorin/ctrlp-z.git'
 Plug 'https://github.com/bling/vim-airline.git'
-Plug 'https://github.com/chrisbra/CheckAttach.git'
 Plug 'https://github.com/chrisbra/csv.vim.git', {'for': 'csv'}
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'https://github.com/dterei/VimBookmarking.git'
@@ -67,6 +63,7 @@ Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
+
 call plug#end()
 
 " Automatically identify the filetype for the plugins and always use syntax highlighting
