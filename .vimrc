@@ -326,6 +326,7 @@ au BufNewFile,BufRead,BufEnter *.bib    set nospell
 
 " Allow spelling to be easily toggled on and off
 nmap <silent> <leader>s :set spell!<CR>
+syntax spell toplevel
 
 " Give a special key for turning on and off the Tagbar, a great feature for browsing source code, such as Java programs
 nmap <F12> :TagbarToggle<CR>
