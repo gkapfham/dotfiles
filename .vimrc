@@ -40,7 +40,8 @@ Plug 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kablamo/vim-git-log.git'
 Plug 'https://github.com/kshenoy/vim-signature.git'
-Plug 'https://github.com/lervag/vim-latex.git', {'for': 'tex'}
+" Plug 'https://github.com/lervag/vim-latex.git', {'for': 'tex'}
+Plug 'https://github.com/lervag/vimtex.git', {'for': 'tex'}
 Plug 'https://github.com/majutsushi/tagbar'
 Plug 'https://github.com/mattn/emmet-vim.git', {'for': 'html'}
 Plug 'https://github.com/nathanaelkane/vim-indent-guides'
@@ -95,6 +96,7 @@ autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
 
 " Set the syntax for the markdown files so that the file highlighting is correct
 au BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
 
 " Set indenting to work correctly for the HTML file type (may not be need now)
 au BufRead,BufNewFile *.html set filetype=html
@@ -158,16 +160,19 @@ hi Conceal ctermbg=234 ctermfg=143
 
 " Starting to use vim-latex and it needs several configurations to work correctly
 " let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -synctex=1'"
-let g:latex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
-let g:latex_fold_enabled = 0
-let g:latex_quickfix_mode = 2
-let g:latex_quickfix_open_on_warning = 1
-let g:latex_toc_resize = 0
-let g:latex_toc_hide_help = 1
-let g:latex_indent_enabled = 1
-let g:latex_latexmk_enabled = 1
-let g:latex_latexmk_callback = 0
-let g:latex_complete_recursive_bib = 0
+let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
+let g:vimtex_fold_enabled = 0
+let g:vimtex_quickfix_mode = 2
+let g:vimtex_quickfix_open_on_warning = 1
+let g:vimtex_toc_resize = 0
+let g:vimtex_toc_hide_help = 1
+let g:vimtex_indent_enabled = 1
+let g:vimtex_latexmk_enabled = 1
+let g:vimtex_latexmk_callback = 0
+let g:vimtex_complete_recursive_bib = 0
+"
+" let g:vimtex_view_method = 'evince'
+" let g:tex_flavor='latex'
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 " Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
@@ -185,11 +190,12 @@ endfu
 autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 
 " Turn on smart indentation with the Latex plugins, nice and very helpful
-set smartindent
+" set smartindent
 
 " " Commands that allow for the invocation of the SyncTex support
 nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
 nmap <C-l> :call tex_nine#ForwardSearch()<CR>
+" let b:did_tex_nine_indent = 0
 
 " Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type)
 " set complete=.,b,u,]
@@ -293,7 +299,7 @@ set expandtab    " insert spaces whenever the tab key is pressed, helps with for
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
-set shiftwidth=4  " number of spaces to use for autoindenting
+set shiftwidth=2  " number of spaces to use for autoindenting
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set showmatch     " set show matching parenthesis
 set ignorecase    " ignore case when searching
