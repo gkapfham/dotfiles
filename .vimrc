@@ -195,7 +195,7 @@ autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 " " Commands that allow for the invocation of the SyncTex support
 nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
 nmap <C-l> :call tex_nine#ForwardSearch()<CR>
-" let b:did_tex_nine_indent = 0
+let b:did_tex_nine_indent = 0
 
 " Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type)
 " set complete=.,b,u,]
@@ -290,30 +290,28 @@ set wildmode=longest:full,full
 " Adding in a bunch of additional commands from:
 " http://nvie.com/posts/how-i-boosted-my-vim/
 
-" set nowrap        " don't wrap lines
-" set wrap          " go ahead and allow the wrapping of long lines to take place
-set linebreak     " make sure that you break the lines in a way that preserves words
-set showbreak=━━  " set an ellipse character so that you can tell when lines are wrapped
-set tabstop=4     " a tab is four spaces
-set expandtab    " insert spaces whenever the tab key is pressed, helps with formatting Java code
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
-set autoindent    " always set autoindenting on
-set copyindent    " copy the previous indentation on autoindenting
-set shiftwidth=2  " number of spaces to use for autoindenting
-set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
-set showmatch     " set show matching parenthesis
-set ignorecase    " ignore case when searching
-set infercase     " predict the case that is needed when doing auto completion
-set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
-set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop
-set incsearch     " show search matches as you type
-set history=1000  " remember more commands and search history
-set undolevels=1000 " use many muchos levels of undo
-set pastetoggle=<F2> " allow vim to paste a large amount of source code or tex
-set timeout timeoutlen=1000 ttimeoutlen=10 " make the escape key function faster in the terminal window
-set whichwrap+=<,>,h,l,[,] " wrap when you get to the end of a line and you are using the arrow keys
-set listchars=tab:›\ ,trail:•,extends:#,nbsp:. "highlight problematic whitespace
-set list " also required to ensure that problematic whitespace is highlighted correctly
+set linebreak                                  " make sure that you break the lines in a way that preserves words
+set showbreak=━━                               " set an ellipse character so that you can tell when lines are wrapped
+set tabstop=4                                  " a tab is four spaces
+set expandtab                                  " insert spaces whenever the tab key is pressed, helps with formatting Java code
+set backspace=indent,eol,start                 " allow backspacing over everything in insert mode
+set autoindent                                 " always set autoindenting on
+set copyindent                                 " copy the previous indentation on autoindenting
+set shiftwidth=2                               " number of spaces to use for autoindenting
+set shiftround                                 " use multiple of shiftwidth when indenting with '<' and '>'
+set showmatch                                  " set show matching parenthesis
+set ignorecase                                 " ignore case when searching
+set infercase                                  " predict the case that is needed when doing auto completion
+set smartcase                                  " ignore case if search pattern is all lowercase, case-sensitive otherwise
+set smarttab                                   " insert tabs on the start of a line according to shiftwidth, not tabstop
+set incsearch                                  " show search matches as you type
+set history=1000                               " remember more commands and search history
+set undolevels=1000                            " use many muchos levels of undo
+set pastetoggle=<F2>                           " allow vim to paste a large amount of source code or tex
+set timeout timeoutlen=1000 ttimeoutlen=10     " make the escape key function faster in the terminal window
+set whichwrap+=<,>,h,l,[,]                     " wrap when you get to the end of a line and you are using the arrow keys
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " highlight problematic whitespace
+set list                                       " also required to ensure that problematic whitespace is highlighted correctly
 
 " turn on spell checking so that I can do this for Latex documents
 set spell spelllang=en_us,en_gb
