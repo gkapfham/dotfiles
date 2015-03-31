@@ -40,7 +40,6 @@ Plug 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kablamo/vim-git-log.git'
 Plug 'https://github.com/kshenoy/vim-signature.git'
-" Plug 'https://github.com/lervag/vim-latex.git', {'for': 'tex'}
 Plug 'https://github.com/lervag/vimtex.git', {'for': 'tex'}
 Plug 'https://github.com/majutsushi/tagbar'
 Plug 'https://github.com/mattn/emmet-vim.git', {'for': 'html'}
