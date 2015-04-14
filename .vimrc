@@ -73,7 +73,7 @@ filetype indent plugin on | syn on
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType tex set omnifunc=latex#complete#omnifunc
+autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
 
 " Allow syntastic to populate a list of problems for a given file
 let g:syntastic_always_populate_loc_list = 1
