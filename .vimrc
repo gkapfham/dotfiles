@@ -39,7 +39,7 @@ Plug 'https://github.com/jgdavey/tslime.vim.git'
 Plug 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kablamo/vim-git-log.git'
-Plug 'https://github.com/kshenoy/vim-signature.git'
+" Plug 'https://github.com/kshenoy/vim-signature.git'
 Plug 'https://github.com/lervag/vimtex.git', {'for': 'tex'}
 Plug 'https://github.com/majutsushi/tagbar'
 Plug 'https://github.com/mattn/emmet-vim.git', {'for': 'html'}
@@ -63,6 +63,7 @@ Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
+Plug 'https://github.com/ludovicchabant/vim-gutentags.git'
 
 call plug#end()
 
@@ -168,7 +169,7 @@ let g:vimtex_indent_enabled = 1
 let g:vimtex_latexmk_enabled = 1
 let g:vimtex_latexmk_callback = 0
 let g:vimtex_complete_recursive_bib = 0
-let g:vimtex_view_method = 'zathura'
+" let g:vimtex_view_method = 'zathura'
 " let g:tex_flavor='latex'
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
