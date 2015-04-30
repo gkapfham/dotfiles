@@ -207,21 +207,6 @@ set complete+=]
 " let g:SuperTabDefaultCompletionType = "context"
 " let g:SuperTabLongestEnhanced = 1
 
-" You Complete Me configuration for LaTeX, using the vim-latex plugin
-" Note that the last one does not work correctly even though I think that
-" it should! An alternative is to type ctrl-space for the second reference and
-" this will ensure that I can still search through for references
-
-" let g:ycm_semantic_triggers = {
-" \  'tex'  : ['\cite{', '\ref{', '!re\\cite([^]]*\])?\{([^}]*,)*[^}]*'],
-" \ }
-
-if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-  endif
-  let g:ycm_semantic_triggers.tex = [
-        \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
-        \ ]
 
 " You Complete Me configuration
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
@@ -248,6 +233,14 @@ let g:UltiSnipsJumpBackwardTrigger=""
 
 " make YCM compatible with the tmux-complete
 let g:tmuxcomplete#trigger = 'omnifunc'
+
+" make YCM compatible with the vimtex package
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+  endif
+  let g:ycm_semantic_triggers.tex = [
+        \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
+        \ ]
 
 " allow CTRLP to show fifteen total matches, helping in cases where there are
 " many matches that we still want to display and consider
