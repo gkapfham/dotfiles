@@ -159,7 +159,6 @@ hi Conceal ctermbg=234 ctermfg=143
 
 " Starting to use vim-latex and it needs several configurations to work correctly
 let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -synctex=1'"
-" let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -synctex=1'"
 let g:vimtex_fold_enabled = 0
 let g:vimtex_quickfix_mode = 2
 let g:vimtex_quickfix_open_on_warning = 1
