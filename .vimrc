@@ -168,8 +168,7 @@ let g:vimtex_indent_enabled = 1
 let g:vimtex_latexmk_enabled = 1
 let g:vimtex_latexmk_callback = 0
 let g:vimtex_complete_recursive_bib = 0
-"
-" let g:vimtex_view_method = 'evince'
+let g:vimtex_view_method = 'zathura'
 " let g:tex_flavor='latex'
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
@@ -212,9 +211,17 @@ set complete+=]
 " Note that the last one does not work correctly even though I think that
 " it should! An alternative is to type ctrl-space for the second reference and
 " this will ensure that I can still search through for references
-let g:ycm_semantic_triggers = {
-\  'tex'  : ['\cite{', '\ref{', '!re\\cite([^]]*\])?\{([^}]*,)*[^}]*'],
-\ }
+
+" let g:ycm_semantic_triggers = {
+" \  'tex'  : ['\cite{', '\ref{', '!re\\cite([^]]*\])?\{([^}]*,)*[^}]*'],
+" \ }
+
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+  endif
+  let g:ycm_semantic_triggers.tex = [
+        \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
+        \ ]
 
 " You Complete Me configuration
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
