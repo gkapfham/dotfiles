@@ -64,6 +64,7 @@ Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
 Plug 'https://github.com/ludovicchabant/vim-gutentags.git'
+Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'
 
 call plug#end()
 
