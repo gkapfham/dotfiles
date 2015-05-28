@@ -205,14 +205,6 @@ set complete-=k complete+=k
 set complete+=kspell
 set complete+=]
 
-" " This is the default context completion that will be used if there is not a separate autocommand configuration
-" " let g:SuperTabDefaultCompletionType = "<c-n>"
-" let g:SuperTabContextDefaultCompletionType = "<c-n>"
-" let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-" let g:SuperTabDefaultCompletionType = "context"
-" let g:SuperTabLongestEnhanced = 1
-
-
 " You Complete Me configuration
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
