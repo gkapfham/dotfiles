@@ -66,6 +66,7 @@ Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
+Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 call plug#end()
 
@@ -121,9 +122,9 @@ set encoding=utf-8
 colorscheme hybrid
 
 " define some commands for wrapping and not wrapping a line or paragraph
-command Wrap set textwidth=120
-command NoWrap set textwidth=0
-command StandardWrap set textwidth=80
+command! Wrap set textwidth=120
+command! NoWrap set textwidth=0
+command! StandardWrap set textwidth=80
 set wrap linebreak nolist
 
 " set up vim so that it displays line numbers in a hybrid fashion
@@ -560,3 +561,8 @@ nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
+
+" Configure the GitHub dashboard plugin
+let g:github_dashboard = {
+\ 'username': 'gkapfham'
+\ }
