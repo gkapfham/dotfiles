@@ -1,11 +1,14 @@
 set nocompatible
-" let &rtp = '~/.vim/bundle/vimtex,' . &rtp
 filetype plugin indent on
 syntax enable
 set iskeyword+=:
 
+" change the mapleader from \ to , -- this makes it easier to perform compilation in LaTeX
+let maplocalleader=","
+let mapleader=","
+
 call plug#begin('~/.vim/bundle')
 Plug 'https://github.com/lervag/vimtex.git', {'for': 'tex'}
+call plug#end()
 
-let g:tex_flavor = "latex"
-let g:vimtex_view_method = 'zathura'
+
