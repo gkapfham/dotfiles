@@ -174,7 +174,7 @@ let g:vimtex_indent_enabled = 1
 let g:vimtex_latexmk_enabled = 1
 let g:vimtex_latexmk_callback = 0
 let g:vimtex_complete_recursive_bib = 0
-" let g:vimtex_view_method = 'zathura'
+let g:vimtex_view_method = 'mupdf'
 " let g:tex_flavor='latex'
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
