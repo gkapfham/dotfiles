@@ -17,7 +17,7 @@ Plug 'https://github.com/Valloric/YouCompleteMe.git'
 Plug 'https://github.com/Z1MM32M4N/vim-superman.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/airblade/vim-rooter.git'
-Plug 'https://github.com/amiorin/ctrlp-z.git'
+" Plug 'https://github.com/amiorin/ctrlp-z.git'
 Plug 'https://github.com/bling/vim-airline.git'
 Plug 'https://github.com/chrisbra/csv.vim.git', {'for': 'csv'}
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
@@ -444,11 +444,6 @@ let g:easytags_async = 1
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_z_nerdtree = 1
-
-" I could not get this to work as a CTRL-P extension, so I had to map to separate commands, which does seem to work
-nnoremap zd :CtrlPZ<Cr>
-nnoremap zf :CtrlPF<Cr>
-nnoremap <Tab> :CtrlPBuffer<Cr>
 
 " Set a command that allows for the creation of a tags file for exuberant ctags
 nmap <C-t> :!ctags -R<CR>
