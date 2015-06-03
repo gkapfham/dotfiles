@@ -5,7 +5,6 @@ call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
-" Plug 'https://github.com/kshenoy/vim-signature.git'
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'
 Plug 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
@@ -24,7 +23,7 @@ Plug 'https://github.com/chrisbra/csv.vim.git', {'for': 'csv'}
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'https://github.com/dterei/VimBookmarking.git'
 Plug 'https://github.com/ervandew/ag.git'
-Plug 'https://github.com/ervandew/supertab.git'
+" Plug 'https://github.com/ervandew/supertab.git'
 Plug 'https://github.com/freitass/todo.txt-vim.git'
 Plug 'https://github.com/garbas/vim-snipmate'
 Plug 'https://github.com/godlygeek/tabular.git'
@@ -202,8 +201,7 @@ nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
 nmap <C-l> :call tex_nine#ForwardSearch()<CR>
 let b:did_tex_nine_indent = 0
 
-" Configure completion (and thus SuperTab so that it include the dictionary in the p and n completion type)
-" set complete=.,b,u,]
+" Configure completion so that it includes the dictionary
 set complete-=k complete+=k
 set complete+=kspell
 set complete+=]
@@ -265,19 +263,7 @@ let g:ctrlp_buftag_types = {
 " \ 'r'          : '--language-force=r --r-types=fgv'
 " \ }
 
-" let g:ycm_key_list_previous_completion=[]
-" let g:ycm_key_list_select_completion=[]
-" let g:SuperTabDefaultCompletionType = '<C-Tab>'
-" let g:ycm_key_list_previous_completion = ['<C-S-Tab>', '<Up>']
-" let g:ycm_key_list_select_completion = ['<C-Tab>', '<Down>']
-
-" Java autocompletion must use the completefunc (ctrl-x ctrl-u) to work correctly, so set it separately
-" autocmd FileType java let g:SuperTabDefaultCompletionType = "context"
-" autocmd FileType java let g:SuperTabContextDefaultCompletionType = "<c-n>"
-" autocmd FileType java let g:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
-
-" note that menu provides a substantially better configuration for viewing the autocompletion output that is available
-" in gvim
+" note that menu provides a substantially better configuration for viewing the autocompletion output that is available in gvim
 set cot=menu
 set completeopt=longest,menuone
 
@@ -371,17 +357,7 @@ let g:tagbar_type_css = {
     \ ]
 \ }
 
-" " Give a special key for turning on and off the NERDTree, a great feature for browsing the entire file system
-" nmap <F11> :NERDTreeToggle<CR>
-" " Set up the NERDTree so that it does not display the silly help message at the top, this is not minimal enough.
-" let NERDTreeMinimalUI=1
-" " Always show the hidden files inside of the NerdTree
-" let NERDTreeShowHidden=1
-
-" Stop vim from redrawing the screen during complex operations, supposed to make the user interface much smoother, let's try!
-" set lazyredraw
-" set synmaxcol=145
-" syntax sync minlines=256
+" These are some configurations that seem to make vim screen redraws faster
 set nocursorcolumn
 set nocursorline
 set ttyfast
@@ -395,7 +371,6 @@ set shortmess=I
 
 " Set up the enter key to ensure that after completing words a return is not pressed; this was all used with the
 " standard SuperTab completion and now I am leaving it even though I primarily use YouCompleteMe
-
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
             \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
@@ -418,19 +393,20 @@ hi link SneakPluginScope Visual
 hi link SneakPluginTarget Type
 
 "replace 'f' with 1-char Sneak
-    nmap f <Plug>Sneak_f
-    nmap F <Plug>Sneak_F
-    xmap f <Plug>Sneak_f
-    xmap F <Plug>Sneak_F
-    omap f <Plug>Sneak_f
-    omap F <Plug>Sneak_F
-    "replace 't' with 1-char Sneak
-    nmap t <Plug>Sneak_t
-    nmap T <Plug>Sneak_T
-    xmap t <Plug>Sneak_t
-    xmap T <Plug>Sneak_T
-    omap t <Plug>Sneak_t
-    omap T <Plug>Sneak_T
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+xmap f <Plug>Sneak_f
+xmap F <Plug>Sneak_F
+omap f <Plug>Sneak_f
+omap F <Plug>Sneak_F
+
+"replace 't' with 1-char Sneak
+nmap t <Plug>Sneak_t
+nmap T <Plug>Sneak_T
+xmap t <Plug>Sneak_t
+xmap T <Plug>Sneak_T
+omap t <Plug>Sneak_t
+omap T <Plug>Sneak_T
 
 " map <Leader> <Plug>(easymotion-prefix)
 " nmap s <Plug>(easymotion-s2)
@@ -468,7 +444,6 @@ let g:easytags_async = 1
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_z_nerdtree = 1
-" let g:ctrlp_cmd = 'CtrlPBuffer'
 
 " I could not get this to work as a CTRL-P extension, so I had to map to separate commands, which does seem to work
 nnoremap zd :CtrlPZ<Cr>
