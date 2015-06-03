@@ -5,6 +5,8 @@ call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
+" Plug 'https://github.com/amiorin/ctrlp-z.git'
+" Plug 'https://github.com/ervandew/supertab.git'
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'
 Plug 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
@@ -17,13 +19,11 @@ Plug 'https://github.com/Valloric/YouCompleteMe.git'
 Plug 'https://github.com/Z1MM32M4N/vim-superman.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/airblade/vim-rooter.git'
-" Plug 'https://github.com/amiorin/ctrlp-z.git'
 Plug 'https://github.com/bling/vim-airline.git'
 Plug 'https://github.com/chrisbra/csv.vim.git', {'for': 'csv'}
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'https://github.com/dterei/VimBookmarking.git'
 Plug 'https://github.com/ervandew/ag.git'
-" Plug 'https://github.com/ervandew/supertab.git'
 Plug 'https://github.com/freitass/todo.txt-vim.git'
 Plug 'https://github.com/garbas/vim-snipmate'
 Plug 'https://github.com/godlygeek/tabular.git'
@@ -35,10 +35,11 @@ Plug 'https://github.com/int3/vim-extradite.git'
 Plug 'https://github.com/ivalkeen/vim-ctrlp-tjump.git'
 Plug 'https://github.com/jalvesaq/VimCom.git'
 Plug 'https://github.com/jcfaria/Vim-R-plugin.git'
-Plug 'https://github.com/jdelkins/vim-correction.git'
+Plug 'https://github.com/jdelkins/vim-correction.git', {'for': ['csv', 'html', 'markdown', 'tex']}
 Plug 'https://github.com/jeetsukumaran/vim-filebeagle.git'
 Plug 'https://github.com/jgdavey/tslime.vim.git'
 Plug 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
+Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kablamo/vim-git-log.git'
 Plug 'https://github.com/lervag/vimtex.git', {'for': 'tex'}
@@ -55,7 +56,7 @@ Plug 'https://github.com/tpope/vim-abolish.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/tpope/vim-liquid.git'
-Plug 'https://github.com/tpope/vim-ragtag.git'
+Plug 'https://github.com/tpope/vim-ragtag.git', {'for': 'html'}
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/tpope/vim-unimpaired.git'
 Plug 'https://github.com/vim-scripts/AutoTag.git', {'for': 'html'}
@@ -65,7 +66,6 @@ Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 call plug#end()
 
