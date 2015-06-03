@@ -66,6 +66,8 @@ Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
+" Plug 'https://github.com/suan/vim-instant-markdown.git'
+Plug 'https://github.com/shime/vim-livedown.git'
 
 call plug#end()
 
@@ -101,6 +103,10 @@ autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
 " Set the syntax for the markdown files so that the file highlighting is correct
 au BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
+let g:livedown_autorun = 0
+let g:livedown_open = 1
+let g:livedown_port = 1337
+nmap gmd :LivedownPreview<CR>
 
 " Set indenting to work correctly for the HTML file type (may not be need now)
 au BufRead,BufNewFile *.html set filetype=html
@@ -173,9 +179,9 @@ let g:vimtex_indent_enabled = 1
 let g:vimtex_latexmk_enabled = 1
 let g:vimtex_latexmk_callback = 0
 let g:vimtex_complete_recursive_bib = 0
+"
 " let g:vimtex_view_method = 'mupdf'
 " let g:latex_view_mupdf_options = '-r 96'
-
 " let g:tex_flavor='latex'
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
@@ -246,6 +252,7 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
 let g:ctrlp_extensions = ['buffertag', 'quickfix']
 
 " This allows you to jump to the definition of a function using CtrlP
+nnoremap <Tab> :CtrlPBuffer<Cr>
 nnoremap <c-]> :CtrlPtjump<cr>
 vnoremap <c-]> :CtrlPtjumpVisual<cr>
 
@@ -276,6 +283,7 @@ set wildmode=longest:full,full
 
 set linebreak                                  " make sure that you break the lines in a way that preserves words
 set showbreak=━━                               " set an ellipse character so that you can tell when lines are wrapped
+set breakindent                                " indent after linebreaks occur and there are wraps (only Vim 7.4 later patches)
 set tabstop=4                                  " a tab is four spaces
 set expandtab                                  " insert spaces whenever the tab key is pressed, helps with formatting Java code
 set backspace=indent,eol,start                 " allow backspacing over everything in insert mode
@@ -290,7 +298,7 @@ set smartcase                                  " ignore case if search pattern i
 set smarttab                                   " insert tabs on the start of a line according to shiftwidth, not tabstop
 set incsearch                                  " show search matches as you type
 set history=1000                               " remember more commands and search history
-set undolevels=1000                            " use many muchos levels of undo
+set undolevels=1000                            " use many many levels of undo
 set pastetoggle=<F2>                           " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10     " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,]                     " wrap when you get to the end of a line and you are using the arrow keys
@@ -504,7 +512,7 @@ nmap oo O<Esc>
 
 " This function will allow you to rename a file inside of vim, works correctly
 function! RenameFile()
-    let old_name = expand('%')
+  let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
     if new_name != '' && new_name != old_name
         exec ':saveas ' . new_name
@@ -512,7 +520,7 @@ function! RenameFile()
         redraw!
     endif
 endfunction
-map <leader>m :call RenameFile()<cr>
+map <Leader>mf :call RenameFile()<cr>
 
 " Allow the Vim-R-Plugin to create the R assignment, but only with two
 " underscore presses when writing code in Vim
