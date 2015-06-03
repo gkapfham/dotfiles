@@ -459,10 +459,6 @@ map <F5> :call SyntaxAttr()<CR>
 let g:gitgutter_signs = 0
 " let g:gitgutter_sign_column_always = 1
 
-" adding in some extra features for the GitGutter, let's see if this works correctly
-" let g:gitgutter_realtime = 1
-" let g:gitgutter_eager = 1
-
 " Automatically save changes before switching buffer with some
 " commands, like :cnfile. Very useful when running Qdo on a QuickFix list
 set autowrite
@@ -488,10 +484,6 @@ endif
 
 " Make a separate key binding that allows for the toggling of the indent guides
 nmap <Leader>g :IndentGuidesToggle<CR>
-
-" " Add in the path to the WordNet binary, allowing for a <Leader>wnd command to easily run
-" let g:wordnet_path = "/usr/bin/"
-" nmap <Leader>wnd "wyiw:call WordNetOverviews(@w)<CR>
 
 " Call the GUndo plugin Toggle to see the version history with the F5 key
 nnoremap <F6> :GundoToggle<CR>
