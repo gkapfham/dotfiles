@@ -35,7 +35,7 @@ Plug 'https://github.com/int3/vim-extradite.git'
 Plug 'https://github.com/ivalkeen/vim-ctrlp-tjump.git'
 Plug 'https://github.com/jalvesaq/VimCom.git'
 Plug 'https://github.com/jcfaria/Vim-R-plugin.git'
-Plug 'https://github.com/jdelkins/vim-correction.git', {'for': ['csv', 'html', 'markdown', 'tex']}
+Plug 'https://github.com/jdelkins/vim-correction.git', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
 Plug 'https://github.com/jeetsukumaran/vim-filebeagle.git'
 Plug 'https://github.com/jgdavey/tslime.vim.git'
 Plug 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
@@ -169,7 +169,7 @@ let g:tex_conceal= 'adgms'
 hi Conceal ctermbg=234 ctermfg=143
 
 " Starting to use vim-latex and it needs several configurations to work correctly
-" let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -synctex=1'"
+let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -synctex=1'"
 let g:vimtex_fold_enabled = 0
 let g:vimtex_quickfix_mode = 2
 let g:vimtex_quickfix_open_on_warning = 1
@@ -177,10 +177,10 @@ let g:vimtex_toc_resize = 0
 let g:vimtex_toc_hide_help = 1
 let g:vimtex_indent_enabled = 1
 let g:vimtex_latexmk_enabled = 1
-let g:vimtex_latexmk_callback = 0
+let g:vimtex_latexmk_callback = 1
 let g:vimtex_complete_recursive_bib = 0
-"
-" let g:vimtex_view_method = 'mupdf'
+
+" let g:vimtex_view_method = 'zathura'
 " let g:latex_view_mupdf_options = '-r 96'
 " let g:tex_flavor='latex'
 
@@ -304,6 +304,7 @@ set timeout timeoutlen=1000 ttimeoutlen=10     " make the escape key function fa
 set whichwrap+=<,>,h,l,[,]                     " wrap when you get to the end of a line and you are using the arrow keys
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " highlight problematic whitespace
 set list                                       " also required to ensure that problematic whitespace is highlighted correctly
+set hidden
 
 " turn on spell checking so that I can do this for Latex documents
 set spell spelllang=en_us,en_gb
@@ -319,6 +320,9 @@ au BufNewFile,BufRead,BufEnter *.sh     set nospell
 au BufNewFile,BufRead,BufEnter *.xml    set nospell
 au BufNewFile,BufRead,BufEnter *.sql    set nospell
 au BufNewFile,BufRead,BufEnter *.bib    set nospell
+
+" Turn on spell checking for Git commits
+autocmd FileType gitcommit setlocal spell
 
 " Allow spelling to be easily toggled on and off
 nmap <silent> <leader>s :set spell!<CR>

@@ -18,9 +18,9 @@ push @generated_exts, "run.xml";
 $latex = 'latex --src-specials %O %S';
 $pdflatex = 'pdflatex -file-line-error -synctex=1 -interaction=nonstopmode -shell-escape %O %S';
 
-# $pdf_previewer = 'mupdf -r 96';
+$pdf_previewer = 'mupdf -r 96';
 # Set pdf viewer as in 'start VIEWER'
-# $pdf_previewer = 'start mupdf';
+# $pdf_previewer = 'start zathura';
 
 # If zero, check for a previously running previewer on the same file and update it.  If nonzero, always start a new previewer.
 $new_viewer_always = 0;
