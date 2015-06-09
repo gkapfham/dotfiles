@@ -300,7 +300,7 @@ set undolevels=1000                            " use many many levels of undo
 set pastetoggle=<F2>                           " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10     " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,]                     " wrap when you get to the end of a line and you are using the arrow keys
-set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⍚ " highlight problematic whitespace
+set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⍛ " highlight problematic whitespace
 set list                                       " also required to ensure that problematic whitespace is highlighted correctly
 set hidden                                     " this option is required for the vimtex plugin to work correctly
 
