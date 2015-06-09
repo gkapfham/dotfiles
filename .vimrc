@@ -302,7 +302,7 @@ set timeout timeoutlen=1000 ttimeoutlen=10     " make the escape key function fa
 set whichwrap+=<,>,h,l,[,]                     " wrap when you get to the end of a line and you are using the arrow keys
 set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⍚ " highlight problematic whitespace
 set list                                       " also required to ensure that problematic whitespace is highlighted correctly
-set hidden
+set hidden                                     " this option is required for the vimtex plugin to work correctly
 
 " turn on spell checking so that I can do this for Latex documents
 set spell spelllang=en_us,en_gb
