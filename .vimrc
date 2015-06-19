@@ -170,7 +170,7 @@ hi Conceal ctermbg=234 ctermfg=143
 let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -synctex=1'"
 let g:vimtex_fold_enabled = 0
 let g:vimtex_quickfix_mode = 2
-let g:vimtex_quickfix_open_on_warning = 1
+let g:vimtex_quickfix_open_on_warning = 0
 let g:vimtex_toc_resize = 0
 let g:vimtex_toc_hide_help = 1
 let g:vimtex_indent_enabled = 1
@@ -178,7 +178,9 @@ let g:vimtex_latexmk_enabled = 1
 let g:vimtex_latexmk_callback = 1
 let g:vimtex_complete_recursive_bib = 0
 
-let g:vimtex_view_method = 'mupdf'
+let g:vimtex_view_method = 'zathura'
+" let g:vimtex_view_general_viewer = 'xdg-open'
+
 " let g:latex_view_mupdf_options = '-r 96'
 " let g:tex_flavor='latex'
 
@@ -300,7 +302,7 @@ set undolevels=1000                            " use many many levels of undo
 set pastetoggle=<F2>                           " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10     " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,]                     " wrap when you get to the end of a line and you are using the arrow keys
-set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⍛ " highlight problematic whitespace
+set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻ " highlight problematic whitespace
 set list                                       " also required to ensure that problematic whitespace is highlighted correctly
 set hidden                                     " this option is required for the vimtex plugin to work correctly
 
