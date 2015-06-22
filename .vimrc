@@ -178,7 +178,7 @@ let g:vimtex_latexmk_enabled = 1
 let g:vimtex_latexmk_callback = 1
 let g:vimtex_complete_recursive_bib = 0
 
-let g:vimtex_view_method = 'zathura'
+" let g:vimtex_view_method = 'zathura'
 " let g:vimtex_view_general_viewer = 'xdg-open'
 
 " let g:latex_view_mupdf_options = '-r 96'
