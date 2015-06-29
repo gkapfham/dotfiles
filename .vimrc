@@ -62,7 +62,7 @@ Plug 'https://github.com/tpope/vim-unimpaired.git'
 Plug 'https://github.com/vim-scripts/AutoTag.git', {'for': 'html'}
 Plug 'https://github.com/vim-scripts/HTML-AutoCloseTag.git', {'for': 'html'}
 Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
-Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
+" Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
@@ -203,9 +203,11 @@ autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 " set smartindent
 
 " " Commands that allow for the invocation of the SyncTex support
-nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
-nmap <C-l> :call tex_nine#ForwardSearch()<CR>
-let b:did_tex_nine_indent = 0
+" nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
+" nmap <C-l> :call tex_nine#ForwardSearch()<CR>
+" let b:did_tex_nine_indent = 0
+" nmap <C-l> :call vimtex#vimtex-view()
+" nmap <silent><buffer> <C-l> <plug>(vimtex-view)<CR>
 
 " Configure completion so that it includes the dictionary
 set complete-=k complete+=k
