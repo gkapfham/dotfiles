@@ -62,7 +62,7 @@ Plug 'https://github.com/tpope/vim-unimpaired.git'
 Plug 'https://github.com/vim-scripts/AutoTag.git', {'for': 'html'}
 Plug 'https://github.com/vim-scripts/HTML-AutoCloseTag.git', {'for': 'html'}
 Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
-" Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
+Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
@@ -175,11 +175,11 @@ let g:vimtex_toc_resize = 0
 let g:vimtex_toc_hide_help = 1
 let g:vimtex_indent_enabled = 1
 let g:vimtex_latexmk_enabled = 1
-let g:vimtex_latexmk_callback = 1
+let g:vimtex_latexmk_callback = 0
 let g:vimtex_complete_recursive_bib = 0
 
-let g:vimtex_view_method = 'mupdf'
-" let g:vimtex_view_general_viewer = 'xdg-open'
+" let g:vimtex_view_method = 'general'
+" let g:vimtex_view_general_viewer = 'evince'
 
 " let g:latex_view_mupdf_options = '-r 96'
 " let g:tex_flavor='latex'
@@ -204,7 +204,8 @@ autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 
 " " Commands that allow for the invocation of the SyncTex support
 " nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
-" nmap <C-l> :call tex_nine#ForwardSearch()<CR>
+nmap <localleader>lv :call tex_nine#ForwardSearch()<CR>
+nmap <C-l> :call tex_nine#ForwardSearch()<CR>
 " let b:did_tex_nine_indent = 0
 " nmap <C-l> :call vimtex#vimtex-view()
 " nmap <silent><buffer> <C-l> <plug>(vimtex-view)<CR>
@@ -306,7 +307,7 @@ set timeout timeoutlen=1000 ttimeoutlen=10     " make the escape key function fa
 set whichwrap+=<,>,h,l,[,]                     " wrap when you get to the end of a line and you are using the arrow keys
 set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻ " highlight problematic whitespace
 set list                                       " also required to ensure that problematic whitespace is highlighted correctly
-set hidden                                     " this option is required for the vimtex plugin to work correctly
+" set hidden                                     " this option is required for the vimtex plugin to work correctly
 
 " turn on spell checking so that I can do this for Latex documents
 set spell spelllang=en_us,en_gb
