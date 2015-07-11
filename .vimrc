@@ -178,7 +178,7 @@ let g:vimtex_latexmk_enabled = 1
 let g:vimtex_latexmk_callback = 0
 let g:vimtex_complete_recursive_bib = 0
 
-" let g:vimtex_view_method = 'general'
+" let g:vimtex_view_method = 'zathura'
 " let g:vimtex_view_general_viewer = 'evince'
 
 " let g:latex_view_mupdf_options = '-r 96'
@@ -307,7 +307,7 @@ set timeout timeoutlen=1000 ttimeoutlen=10     " make the escape key function fa
 set whichwrap+=<,>,h,l,[,]                     " wrap when you get to the end of a line and you are using the arrow keys
 set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻ " highlight problematic whitespace
 set list                                       " also required to ensure that problematic whitespace is highlighted correctly
-" set hidden                                     " this option is required for the vimtex plugin to work correctly
+set hidden                                     " this option is required for the vimtex plugin to work correctly
 
 " turn on spell checking so that I can do this for Latex documents
 set spell spelllang=en_us,en_gb
