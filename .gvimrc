@@ -7,7 +7,7 @@ hi Conceal guibg=Grey11 guifg=DarkKhaki
 
 " pick the Monaco font at size 11, note that it might not be installed, then the default looks bad, go to Ubuntu Mono then
 " set guifont=Ubuntu\ Mono\ 13
-set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 13
+set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 14
 " set guifont=Ubuntu\ Mono\ for\ VimPowerline\ 14
 
 " define a function that will maximize the window to full screen; only works on Ubuntu when the wmctrl program is installed
