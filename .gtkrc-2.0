@@ -1,33 +1,6 @@
 # GTK theme preferences
-style"gtk-theme-config-panel"{
-bg[NORMAL]="#333333"
-bg[PRELIGHT]=shade(1.1,"#333333")
-bg[ACTIVE]=shade(0.9,"#333333")
-bg[SELECTED]=shade(0.97,"#333333")
-fg[NORMAL]="#cccccc"
-fg[PRELIGHT]="#cccccc"
-fg[SELECTED]="#cccccc"
-fg[ACTIVE]="#cccccc"
-}
-widget "*PanelWidget*" style "gtk-theme-config-panel"
-widget "*PanelApplet*" style "gtk-theme-config-panel"
-widget "*fast-user-switch*" style "gtk-theme-config-panel"
-widget "*CPUFreq*Applet*" style "gtk-theme-config-panel"
-widget "*indicator-applet*" style "gtk-theme-config-panel"
-class "PanelApp*" style "gtk-theme-config-panel"
-class "PanelToplevel*" style "gtk-theme-config-panel"
-widget_class "*PanelToplevel*" style "gtk-theme-config-panel"
-widget_class "*notif*" style "gtk-theme-config-panel"
-widget_class "*Notif*" style "gtk-theme-config-panel"
-widget_class "*Tray*" style "gtk-theme-config-panel" 
-widget_class "*tray*" style "gtk-theme-config-panel"
-widget_class "*computertemp*" style "gtk-theme-config-panel"
-widget_class "*Applet*Tomboy*" style "gtk-theme-config-panel"
-widget_class "*Applet*Netstatus*" style "gtk-theme-config-panel"
-widget "*gdm-user-switch-menubar*" style "gtk-theme-config-panel"
-widget "*Xfce*Panel*" style "gtk-theme-config-panel"
-class "*Xfce*Panel*" style "gtk-theme-config-panel"
+
 style "vimfix" {
-  bg[NORMAL] = "#1d1f21" # this matches my gvim theme 'Normal' bg color.
+  bg[NORMAL] = "#1c1c1c" # this matches my gvim theme 'Normal' bg color.
 }
 widget "vim-main-window.*GtkForm" style "vimfix"

@@ -117,9 +117,15 @@ local.properties
 
 # Vim #
 ######################
-*.swp
-*.swo
+# *.swp
+# *.swo
 *.project.vim
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
 
 # Java #
 ######################
@@ -139,6 +145,7 @@ local.properties
 # CTags #
 ######################
 tags
+.tags
 
 # Extra files #
 ######################

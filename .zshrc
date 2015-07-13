@@ -1,7 +1,7 @@
 # run the bash shell in 256 color mode, better for vim!
-export TERM="xterm-256color-italic"
+export TERM="xterm-256color"
 
-# exporting the LANG environment variable so that the character coding is correct 
+# exporting the LANG environment variable so that the character coding is correct
 export LANG="en_US.UTF8"
 
 export EDITOR="vim"
@@ -34,17 +34,17 @@ alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 
 # # zle -N history-beginning-search-backward-end history-search-end
 # # zle -N history-beginning-search-forward-end history-search-end
-# # 
+# #
 # bindkey "\e[A" history-beginning-search-backward-end
 # bindkey "\e[B" history-beginning-search-forward-end
-# 
+#
 # Note that you can use CTRL-R and CTRL-S to do this if not using vi-mode
 
 # bindkey "^R" history-incremental-search-backward
 # bindkey "^[[A" history-search-backward
 # bindkey "^[[B" history-search-forward
 
-# 
+#
 # autoload -Uz vcs_info
 # zstyle ':vcs_info:*' enable git svn
 # precmd() {
@@ -80,7 +80,7 @@ alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment following line if you want to  shown in the command execution time stamp 
+# Uncomment following line if you want to  shown in the command execution time stamp
 # in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
 # yyyy-mm-dd
 # HIST_STAMPS="mm/dd/yyyy"
@@ -92,7 +92,7 @@ plugins=(git git-extras ant sudo vundle zsh-syntax-highlighting fasd tmux tmuxin
 . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source $ZSH/oh-my-zsh.sh
 
-# load the special plugin that is needed to create the git-stacular prompt showing status 
+# load the special plugin that is needed to create the git-stacular prompt showing status
 source ~/.zsh/git-prompt/zshrc.sh
 
 # create the FASD cache so that the terminal loads quickly but I still get all of the FASD features
@@ -130,7 +130,7 @@ bindkey "^j" history-incremental-search-backward
 # autoload edit-command-line
 # zle -N edit-command-line
 # bindkey -M vicmd v edit-command-line
-# 
+#
 
 # User configuration
 export DISABLE_AUTO_TITLE=true
