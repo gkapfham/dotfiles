@@ -103,6 +103,12 @@ fi
 source "$fasd_cache"
 unset fasd_cache
 
+# unset the option of Java tools, avoiding the stange debugging message in Ubutu 15.04
+unset JAVA_TOOL_OPTIONS
+
+# fpath=($HOME/.zsh/twitter-t/ $fpath)
+# source ~/.zsh/twitter-t/t-completion.zsh
+
 # Adding these lines of code enables the searching of partially completed commands with the arrow keys
 autoload -Uz up-line-or-beginning-search
 autoload -Uz down-line-or-beginning-search
