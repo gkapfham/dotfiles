@@ -451,7 +451,7 @@ let g:SexyScroller_MaxTime = 500
 let g:SexyScroller_EasingStyle = 3
 
 " Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
-set tags=./tags;
+set tags=./tags;/,tags;/
 let g:easytags_ignored_filetypes = ''
 let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
