@@ -1,4 +1,4 @@
-" Set Vim to run in not compatible mode
+" -output-directory=sections Set Vim to run in not compatible mode
 set nocompatible
 
 call plug#begin('~/.vim/bundle')
@@ -167,7 +167,7 @@ let g:tex_conceal= 'adgms'
 hi Conceal ctermbg=234 ctermfg=143
 
 " Starting to use vim-latex and it needs several configurations to work correctly
-let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -synctex=1'"
+let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -synctex=1 -output-directory=sections'"
 let g:vimtex_fold_enabled = 0
 let g:vimtex_quickfix_mode = 2
 let g:vimtex_quickfix_open_on_warning = 0
@@ -178,7 +178,7 @@ let g:vimtex_latexmk_enabled = 1
 let g:vimtex_latexmk_callback = 0
 let g:vimtex_complete_recursive_bib = 0
 
-" let g:vimtex_view_method = 'zathura'
+" let g:vimtex_view_method = 'mupdf'
 " let g:vimtex_view_general_viewer = 'evince'
 
 " let g:latex_view_mupdf_options = '-r 96'
@@ -252,7 +252,7 @@ let g:ycm_semantic_triggers.tex = [
 " allow CTRLP to show fifteen total matches, helping in cases where there are
 " many matches that we still want to display and consider
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
-let g:ctrlp_extensions = ['buffertag', 'quickfix']
+let g:ctrlp_extensions = ['tag', 'quickfix']
 
 " This allows you to jump to the definition of a function using CtrlP
 nnoremap <Tab> :CtrlPBuffer<Cr>
@@ -340,7 +340,8 @@ let g:tagbar_type_markdown = {
     \ 'kinds' : [
         \ 'h:Heading_L1',
         \ 'i:Heading_L2',
-        \ 'k:Heading_L3'
+        \ 'k:Heading_L3',
+        \ 'k:Heading_L4'
     \ ]
 \ }
 
