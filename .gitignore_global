@@ -38,6 +38,7 @@ local.properties
 *.ps
 *.tex~
 *.toc
+*_minted*
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 ######################
