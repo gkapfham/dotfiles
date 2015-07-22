@@ -38,7 +38,6 @@ Plug 'https://github.com/jeetsukumaran/vim-filebeagle.git'
 Plug 'https://github.com/jgdavey/tslime.vim.git'
 Plug 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-" Plug 'https://github.com/justinmk/vim-sneak.git'
 Plug 'https://github.com/kablamo/vim-git-log.git'
 Plug 'https://github.com/kshenoy/vim-signature.git'
 Plug 'https://github.com/lervag/vimtex.git', {'for': 'tex'}
