@@ -1,6 +1,5 @@
+options(menu.graphics=FALSE)
 library(colorout)
-# library(track)
-# track.history.start()
 setOutputColors256(normal=240, number=166, negnum=124, date=166, string=178, const=53, stderror=70, error=70, verbose=FALSE)
 if(interactive()){
        # Get startup messages of three packages and set Vim as R pager:
