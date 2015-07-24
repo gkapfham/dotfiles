@@ -4,7 +4,11 @@ export TERM="screen-256color"
 # exporting the LANG environment variable so that the character coding is correct
 export LANG="en_US.UTF8"
 
+# say that I will always use vim when the operating system calls for an editor
 export EDITOR="vim"
+
+# always run vim with the internal server as it help for running R and Tmux
+alias vim="vim --servername VIM"
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
