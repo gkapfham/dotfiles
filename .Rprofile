@@ -1,3 +1,5 @@
+utils::loadhistory()
+
 options(menu.graphics=FALSE)
 
 library(colorout)
@@ -22,6 +24,7 @@ if(interactive()){
            options(editor = 'gvim -f -c "set ft=r"')
        else
            options(editor = 'vim -c "set ft=r"')
+
        # Load the colorout library:
        library(colorout)
        if(Sys.getenv("TERM") != "linux" && Sys.getenv("TERM") != ""){
@@ -40,6 +43,5 @@ if(interactive()){
            # See R documentation on Vim buffer even if asking for help in R Console:
            if(Sys.getenv("VIM_PANE") != "")
                options(help_type = "text", pager="vimrpager")
-               # options(help_type = "text", pager = vim.pager)
        }
    }
