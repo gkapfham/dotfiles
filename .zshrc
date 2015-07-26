@@ -10,6 +10,9 @@ export EDITOR="vim"
 # always run vim with the internal server as it help for running R and Tmux
 alias vim="vim --servername VIM"
 
+# setting the R history size to be a very large value
+export R_HISTSIZE="25000"
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
