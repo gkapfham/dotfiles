@@ -1,5 +1,3 @@
-utils::loadhistory()
-
 options(menu.graphics=FALSE)
 
 library(colorout)
