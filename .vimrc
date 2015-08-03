@@ -255,8 +255,8 @@ let g:ctrlp_extensions = ['tag', 'quickfix']
 
 " This allows you to jump to the definition of a function using CtrlP
 nnoremap <Tab> :CtrlPBuffer<Cr>
-nnoremap <c-]> :CtrlPtjump<cr>
-vnoremap <c-]> :CtrlPtjumpVisual<cr>
+nnoremap <c-[> :CtrlPtjump<cr>
+vnoremap <c-[> :CtrlPtjumpVisual<cr>
 
 " Very exciting, this allows for Ctrl-P to automatically generate tags for LaTeX using e-ctags
 let g:ctrlp_buftag_types = {
@@ -464,8 +464,8 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_z_nerdtree = 1
 
-" Set a command that allows for the creation of a tags file for exuberant ctags
-nmap <C-t> :!ctags -R<CR>
+" Set a command that allows for the quick searching of tags in vim using Ctrl-P
+nmap <C-t> :CtrlPTag <CR>
 
 " Define a function that allows you to determine what syntax group is being used
 map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
