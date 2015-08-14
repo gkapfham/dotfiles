@@ -7,8 +7,9 @@
 # To print in a file, use the following entry:
 # PRINTER="TO_FILE:/home/berwal/test.ps"
 # PRINTER="TOSHIBA-ColorMFP-X4"
-# PRINTER="TOSHIBA-e-ST4520CSeries"
-PRINTER="HL2270DW"
+
+PRINTER="TOSHIBA-e-ST4520CSeries"
+# PRINTER="HL2270DW"
 
 # Here you can set the print command
 # $PRINTER is substituted by the PRINTER
@@ -104,7 +105,7 @@ FONTSIZE="10pt"
 WRAPMARGIN="90"
 
 # margins
-TOPMARGIN="15"
+TOPMARGIN="22"
 BOTTOMMARGIN="22"
 LEFTMARGIN="20"
 RIGHTMARGIN="20"
