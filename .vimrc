@@ -481,7 +481,14 @@ map <F5> :call SyntaxAttr()<CR>
 " but, I am using it to display information inside of the Airline at the bottom of Vim
 " WAIT -- trying this on the new laptop since everything seems much faster!
 let g:gitgutter_signs = 1
-let g:gitgutter_sign_column_always = 1
+" let g:gitgutter_sign_column_always = 1
+
+" Set all of the symbols for the GitGutter
+let g:gitgutter_sign_added = '➕ '
+let g:gitgutter_sign_modified = '▲ '
+let g:gitgutter_sign_removed = '✘ '
+let g:gitgutter_sign_removed_first_line = '⏫ '
+let g:gitgutter_sign_modified_removed = '✱ '
 
 " Automatically save changes before switching buffer with some
 " commands, like :cnfile. Very useful when running Qdo on a QuickFix list
