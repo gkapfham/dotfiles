@@ -1,7 +1,7 @@
 application/pdf; $HOME/bin/mutt_bgrun mupdf -r 288 %s
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; mutt_bgrun soffice --nologo --writer '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx
 application/msword; mutt_bgrun soffice --nologo --writer '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx
-application/vnd.ms-powerpoint; mutt_bgrun soffice --nologo '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx  
-application/x-mspowerpoint; mutt_bgrun soffice --nologo '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx 
+application/vnd.ms-powerpoint; mutt_bgrun soffice --nologo '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx
+application/x-mspowerpoint; mutt_bgrun soffice --nologo '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx
 application/ppt; mutt_bgrun soffice --nologo '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx
 text/html; chromium-browser %s; test=test -n "$DISPLAY"; needsterminal
