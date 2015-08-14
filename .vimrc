@@ -6,6 +6,7 @@ call plug#begin('~/.vim/bundle')
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
 " Plug 'https://github.com/Valloric/ListToggle.git'
+" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 " Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'
 Plug 'https://github.com/FelikZ/ctrlp-py-matcher.git'
@@ -38,7 +39,6 @@ Plug 'https://github.com/jdelkins/vim-correction.git', {'for': ['csv', 'gitcommi
 Plug 'https://github.com/jeetsukumaran/vim-filebeagle.git'
 Plug 'https://github.com/jgdavey/tslime.vim.git'
 Plug 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 Plug 'https://github.com/kablamo/vim-git-log.git'
 Plug 'https://github.com/kshenoy/vim-signature.git'
 Plug 'https://github.com/lervag/vimtex.git', {'for': 'tex'}
