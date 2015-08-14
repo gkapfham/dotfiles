@@ -10,6 +10,10 @@ export EDITOR="vim"
 # always run vim with the internal server as it help for running R and Tmux
 alias vim="vim --servername VIM"
 
+# always run mupdf at the largest possible size that it supports; this is not
+# really big enough for a HIDPI screen but it is pretty good overall
+alias mupdf="mupdf -r 288"
+
 # setting the R history size to be a very large value
 export R_HISTSIZE="25000"
 
