@@ -5,13 +5,14 @@ call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
+" Plug 'https://github.com/Valloric/ListToggle.git'
+" Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'
 Plug 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
 Plug 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/SirVer/ultisnips.git'
-Plug 'https://github.com/Valloric/ListToggle.git'
 Plug 'https://github.com/Valloric/MatchTagAlways.git', {'for': 'html'}
 Plug 'https://github.com/Valloric/YouCompleteMe.git'
 Plug 'https://github.com/Z1MM32M4N/vim-superman.git'
@@ -61,10 +62,12 @@ Plug 'https://github.com/tpope/vim-unimpaired.git'
 Plug 'https://github.com/vim-scripts/AutoTag.git', {'for': 'html'}
 Plug 'https://github.com/vim-scripts/HTML-AutoCloseTag.git', {'for': 'html'}
 Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
-Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
+
+" always load the special font after all of the other plugins to ensure fonts render correctly
+Plug 'https://github.com/ryanoasis/vim-devicons.git'
 
 call plug#end()
 
@@ -174,13 +177,13 @@ let g:vimtex_toc_resize = 0
 let g:vimtex_toc_hide_help = 1
 let g:vimtex_indent_enabled = 1
 let g:vimtex_latexmk_enabled = 1
-let g:vimtex_latexmk_callback = 0
+let g:vimtex_latexmk_callback = 1
 let g:vimtex_complete_recursive_bib = 0
 
-" let g:vimtex_view_method = 'mupdf'
+let g:vimtex_view_method = 'mupdf'
+let g:vimtex_view_mupdf_options = '-r 288'
 " let g:vimtex_view_general_viewer = 'evince'
 
-" let g:latex_view_mupdf_options = '-r 96'
 " let g:tex_flavor='latex'
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
@@ -203,8 +206,8 @@ autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 
 " " Commands that allow for the invocation of the SyncTex support
 " nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
-nmap <localleader>lv :call tex_nine#ForwardSearch()<CR>
-nmap <C-l> :call tex_nine#ForwardSearch()<CR>
+" nmap <localleader>lv :call tex_nine#ForwardSearch()<CR>
+" nmap <C-l> :call tex_nine#ForwardSearch()<CR>
 " let b:did_tex_nine_indent = 0
 " nmap <C-l> :call vimtex#vimtex-view()
 " nmap <silent><buffer> <C-l> <plug>(vimtex-view)<CR>
@@ -466,6 +469,7 @@ let g:ctrlp_z_nerdtree = 1
 
 " Set a command that allows for the quick searching of tags in vim using Ctrl-P
 nmap <C-t> :CtrlPTag <CR>
+nmap <Leader>q :CtrlPQuickfix <CR>
 
 " Define a function that allows you to determine what syntax group is being used
 map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -475,8 +479,9 @@ map <F5> :call SyntaxAttr()<CR>
 
 " I am not using GitGutter in the signs column because I don't like the slight delay;
 " but, I am using it to display information inside of the Airline at the bottom of Vim
-let g:gitgutter_signs = 0
-" let g:gitgutter_sign_column_always = 1
+" WAIT -- trying this on the new laptop since everything seems much faster!
+let g:gitgutter_signs = 1
+let g:gitgutter_sign_column_always = 1
 
 " Automatically save changes before switching buffer with some
 " commands, like :cnfile. Very useful when running Qdo on a QuickFix list
