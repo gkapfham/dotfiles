@@ -1,4 +1,3 @@
-" -output-directory=sections Set Vim to run in not compatible mode
 set nocompatible
 
 call plug#begin('~/.vim/bundle')
@@ -334,7 +333,12 @@ nmap <silent> <leader>s :set spell!<CR>
 syntax spell toplevel
 
 " Give a special key for turning on and off the Tagbar, a great feature for browsing source code, such as Java programs
-nmap <F12> :TagbarToggle<CR>
+" nmap <F12> :TagbarToggle<CR>
+nmap <C-t> :TagbarToggle <CR>
+
+let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_vertical = 15
 
 " Configure the Tagbar so that it can handle the Markdown language
 let g:tagbar_type_markdown = {
@@ -379,6 +383,9 @@ let g:tagbar_type_css = {
 set nocursorcolumn
 set nocursorline
 set ttyfast
+
+" This is a configuration that should stop NeoVim from highlighting searching results
+set nohlsearch
 
 " Make the source code history browsing feature open windows horizontally, as this supports better browsing
 let g:Gitv_OpenHorizontal=1
@@ -468,7 +475,7 @@ let g:ctrlp_use_caching = 0
 let g:ctrlp_z_nerdtree = 1
 
 " Set a command that allows for the quick searching of tags in vim using Ctrl-P
-nmap <C-t> :CtrlPTag <CR>
+" nmap <C-t> :CtrlPTag <CR>
 nmap <Leader>q :CtrlPQuickfix <CR>
 
 " Define a function that allows you to determine what syntax group is being used
@@ -481,6 +488,8 @@ map <F5> :call SyntaxAttr()<CR>
 " but, I am using it to display information inside of the Airline at the bottom of Vim
 " WAIT -- trying this on the new laptop since everything seems much faster!
 let g:gitgutter_signs = 1
+let g:gitgutter_realtime = 1
+let g:gitgutter_eager = 1
 " let g:gitgutter_sign_column_always = 1
 
 " Set all of the symbols for the GitGutter
