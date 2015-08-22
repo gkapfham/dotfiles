@@ -7,6 +7,7 @@ call plug#begin('~/.vim/bundle')
 " Plug 'https://github.com/Valloric/ListToggle.git'
 " Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 " Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
+
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'
 Plug 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
