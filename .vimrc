@@ -119,9 +119,15 @@ autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 set dictionary-=/usr/share/dict/american-english
 set dictionary+=/usr/share/dict/american-english
 
-" Set the encoding to utf 8, the most common encoding used for text
+" Set the encoding to UTF 8, the most common encoding used for text
 set encoding=utf-8
 
+" Set the symbols that are required to display italics in the terminal window
+" when running vim (works correctly without extra configuration in new
+" terminals for Gnome)
+set t_ZH=[3m
+set t_ZR=[23m
+"
 " set the hybrid color scheme for vim running in the terminal window
 " let g:hybrid_use_Xresources = 1
 colorscheme hybrid
