@@ -243,6 +243,7 @@ let g:ycm_filetype_blacklist = {
 
 " make YCM compatible with UltiSnips
 let g:UltiSnipsExpandTrigger="<C-k>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsListSnippets = "<C-l>"
 let g:UltiSnipsJumpBackwardTrigger=""
 
