@@ -4,16 +4,13 @@ call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
-" Plug 'https://github.com/Valloric/ListToggle.git'
-" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-" Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
-
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'
 Plug 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
 Plug 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/SirVer/ultisnips.git'
+Plug 'https://github.com/Valloric/ListToggle.git'
 Plug 'https://github.com/Valloric/MatchTagAlways.git', {'for': 'html'}
 Plug 'https://github.com/Valloric/YouCompleteMe.git'
 Plug 'https://github.com/Z1MM32M4N/vim-superman.git'
@@ -51,6 +48,7 @@ Plug 'https://github.com/sgur/ctrlp-extensions.vim.git'
 Plug 'https://github.com/shime/vim-livedown.git'
 Plug 'https://github.com/sjl/gundo.vim.git', {'on': 'GundoToggle'}
 Plug 'https://github.com/terryma/vim-multiple-cursors.git'
+Plug 'https://github.com/tmux-plugins/vim-tmux-focus-events.git'
 Plug 'https://github.com/tomtom/tlib_vim'
 Plug 'https://github.com/tpope/vim-abolish.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
@@ -65,6 +63,11 @@ Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
+
+" Plug 'https://github.com/ervandew/supertab.git'
+" Plug 'https://github.com/Valloric/ListToggle.git'
+" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+" Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'https://github.com/ryanoasis/vim-devicons.git'
@@ -243,8 +246,9 @@ let g:ycm_filetype_blacklist = {
 
 " make YCM compatible with UltiSnips
 let g:UltiSnipsExpandTrigger="<C-k>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-k>"
 let g:UltiSnipsListSnippets = "<C-l>"
+let g:UltiSnipsJumpBackwardTrigger='<C-s-k>'
 let g:UltiSnipsJumpBackwardTrigger=""
 
 " make YCM compatible with the tmux-complete
@@ -265,8 +269,8 @@ let g:ctrlp_extensions = ['tag', 'quickfix']
 
 " This allows you to jump to the definition of a function using CtrlP
 nnoremap <Tab> :CtrlPBuffer<Cr>
-nnoremap <c-[> :CtrlPtjump<cr>
-vnoremap <c-[> :CtrlPtjumpVisual<cr>
+nmap <leader>z :CtrlPtjump<cr>
+vnoremap <leader>z :CtrlPtjumpVisual<cr>
 
 " Very exciting, this allows for Ctrl-P to automatically generate tags for LaTeX using e-ctags
 let g:ctrlp_buftag_types = {
@@ -404,12 +408,13 @@ set shortmess=I
 
 " Set up the enter key to ensure that after completing words a return is not pressed; this was all used with the
 " standard SuperTab completion and now I am leaving it even though I primarily use YouCompleteMe
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-            \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-            \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <tab> pumvisible() ? '<tab>' :
-            \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+" inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+"             \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+" inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+"             \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+" inoremap <expr> <tab> pumvisible() ? '<tab>' :
+"             \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 " Configure the airline status bar replacement that provides some delightful context
 set laststatus=2
@@ -484,7 +489,7 @@ let g:ctrlp_z_nerdtree = 1
 
 " Set a command that allows for the quick searching of tags in vim using Ctrl-P
 " nmap <C-t> :CtrlPTag <CR>
-nmap <Leader>q :CtrlPQuickfix <CR>
+" nmap <Leader>q :CtrlPQuickfix <CR>
 
 " Define a function that allows you to determine what syntax group is being used
 map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
