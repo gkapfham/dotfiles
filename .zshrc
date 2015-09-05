@@ -55,36 +55,10 @@ alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 # bindkey "^[[A" history-search-backward
 # bindkey "^[[B" history-search-forward
 
-#
-# autoload -Uz vcs_info
-# zstyle ':vcs_info:*' enable git svn
-# precmd() {
-#     vcs_info
-# }
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Uncomment this to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how often before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
-
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+# And, make sure that you rebind the tab key so that this feature does not conflict with vi-mode
+COMPLETION_WAITING_DOTS="true"
+bindkey "^I" expand-or-complete-with-dots
 
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
@@ -94,11 +68,10 @@ alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 # Uncomment following line if you want to  shown in the command execution time stamp
 # in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
 # yyyy-mm-dd
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git git-extras ant sudo vundle zsh-syntax-highlighting fasd tmux tmuxinator ubuntu vi-mode zsh_reload)
 . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source $ZSH/oh-my-zsh.sh
@@ -114,11 +87,8 @@ fi
 source "$fasd_cache"
 unset fasd_cache
 
-# unset the option of Java tools, avoiding the stange debugging message in Ubutu 15.04
+# unset the option of Java tools, avoiding the strange debugging message in Ubuntu 15.04
 unset JAVA_TOOL_OPTIONS
-
-# fpath=($HOME/.zsh/twitter-t/ $fpath)
-# source ~/.zsh/twitter-t/t-completion.zsh
 
 # Adding these lines of code enables the searching of partially completed commands with the arrow keys
 autoload -Uz up-line-or-beginning-search
@@ -147,7 +117,6 @@ bindkey "^j" history-incremental-search-backward
 # autoload edit-command-line
 # zle -N edit-command-line
 # bindkey -M vicmd v edit-command-line
-#
 
 # User configuration
 export DISABLE_AUTO_TITLE=true
@@ -163,24 +132,3 @@ man() {
     echo "No manual entry for $*"
   fi
 }
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# PROMPT='$(battery_pct_remaining)'
-
-# PROMPT='%B%m%~%b$(git_super_status) %# '
-
-# # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# source ~/.fzf.zsh
