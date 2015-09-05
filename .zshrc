@@ -36,9 +36,6 @@ alias htop="htop -C"
 # create an alias that allows for loading a large fill screen terminal designed for text editing
 alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 
-# create an alias that runs the hubic sync program
-# alias hs="hubic synchronize"
-
 # bindkey '^k' up-line-or-beginning-search
 # bindkey '^j' down-line-or-beginning-search
 # autoload -U history-search-end
