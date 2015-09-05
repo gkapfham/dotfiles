@@ -99,7 +99,7 @@ alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-extras ant sudo vundle zsh-syntax-highlighting fasd tmux tmuxinator vi-mode zsh_reload)
+plugins=(git git-extras ant sudo vundle zsh-syntax-highlighting fasd tmux tmuxinator ubuntu vi-mode zsh_reload)
 . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source $ZSH/oh-my-zsh.sh
 
