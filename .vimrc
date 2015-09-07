@@ -63,6 +63,7 @@ Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
+Plug 'https://github.com/syngan/vim-gitlab.git'
 
 " Plug 'https://github.com/ervandew/supertab.git'
 " Plug 'https://github.com/Valloric/ListToggle.git'
@@ -579,7 +580,7 @@ if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
 
-" Configure the GitHub dashboard plugin
-let g:github_dashboard = {
-\ 'username': 'gkapfham'
-\ }
+" " Configure the GitHub dashboard plugin
+" let g:github_dashboard = {
+" \ 'username': 'gkapfham'
+" \ }
