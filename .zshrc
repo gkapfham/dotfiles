@@ -14,6 +14,9 @@ alias vim="vim --servername VIM"
 # really big enough for a HIDPI screen but it is pretty good overall
 alias mupdf="mupdf -r 288"
 
+# add an alias that will run the agenda command only for the addresses that are most important for me
+alias agenda="gcalcli agenda --calendar 'Office Hours Appointments' --calendar 'gkapfham@allegheny.edu' --calendar 'Office Hours' --calendar 'Department'"
+
 # setting the R history size to be a very large value
 export R_HISTSIZE="25000"
 
@@ -118,7 +121,7 @@ bindkey "^j" history-incremental-search-backward
 # User configuration
 export DISABLE_AUTO_TITLE=true
 
-export PATH="/opt/eclipse:/home/gkapfham/working/software/TweetComplete/run:/usr/local/texlive/2011/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/opt/eclipse:/home/gkapfham/.local/bin:/usr/local/texlive/2011/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
 man() {
   vim -c "SuperMan $*"
