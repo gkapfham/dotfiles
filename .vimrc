@@ -64,6 +64,7 @@ Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
 Plug 'https://github.com/syngan/vim-gitlab.git'
+Plug 'https://github.com/JazzCore/ctrlp-cmatcher.git'
 
 " Plug 'https://github.com/ervandew/supertab.git'
 " Plug 'https://github.com/Valloric/ListToggle.git'
@@ -156,6 +157,7 @@ let g:ctrlp_show_hidden = 1
 
 " Configure ctrlp so that it uses a faster matcher
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+" let g:ctrlp_match_func = { 'match': 'matcher#cmatch' }
 
 " Ignore these directories in all programs like ctrlp
 set wildignore+=*/build/**
@@ -488,10 +490,6 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_z_nerdtree = 1
 
-" Set a command that allows for the quick searching of tags in vim using Ctrl-P
-" nmap <C-t> :CtrlPTag <CR>
-" nmap <Leader>q :CtrlPQuickfix <CR>
-
 " Define a function that allows you to determine what syntax group is being used
 map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
@@ -504,7 +502,7 @@ map <F5> :call SyntaxAttr()<CR>
 let g:gitgutter_signs = 1
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
-" let g:gitgutter_sign_column_always = 1
+let g:gitgutter_sign_column_always = 1
 
 " Set all of the symbols for the GitGutter
 let g:gitgutter_sign_added = '➕ '
