@@ -147,6 +147,8 @@ Session.vim
 ######################
 tags
 .tags
+tags.lock
+tags.temp
 
 # Extra files #
 ######################
