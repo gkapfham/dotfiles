@@ -57,8 +57,8 @@ alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # And, make sure that you rebind the tab key so that this feature does not conflict with vi-mode
-COMPLETION_WAITING_DOTS="true"
-bindkey "^I" expand-or-complete-with-dots
+# COMPLETION_WAITING_DOTS="true"
+# bindkey "^I" expand-or-complete-with-dots
 
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
