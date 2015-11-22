@@ -121,7 +121,7 @@ bindkey "^j" history-incremental-search-backward
 # User configuration
 export DISABLE_AUTO_TITLE=true
 
-export PATH="/opt/eclipse:/home/gkapfham/.local/bin:/usr/local/texlive/2011/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.local/bin:/usr/local/texlive/2011/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
 man() {
   vim -c "SuperMan $*"
