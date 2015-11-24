@@ -66,11 +66,6 @@ Plug 'https://github.com/xolox/vim-misc.git'
 Plug 'https://github.com/syngan/vim-gitlab.git'
 Plug 'https://github.com/JazzCore/ctrlp-cmatcher.git'
 
-" Plug 'https://github.com/ervandew/supertab.git'
-" Plug 'https://github.com/Valloric/ListToggle.git'
-" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-" Plug 'https://github.com/vim-scripts/TeX-9.git', {'for': 'tex'}
-
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'https://github.com/ryanoasis/vim-devicons.git'
 
