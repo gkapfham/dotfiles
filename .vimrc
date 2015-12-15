@@ -103,8 +103,8 @@ autocmd FileType todo set syntax=todo
 autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
 
 " Set the syntax for the markdown files so that the file highlighting is correct
-au BufRead,BufNewFile *.md set filetype=markdown
-autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
+" au BufRead,BufNewFile *.md set filetype=markdown
+" autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
 let g:livedown_autorun = 0
 let g:livedown_open = 1
 let g:livedown_port = 1337
