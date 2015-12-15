@@ -65,6 +65,8 @@ Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
 Plug 'https://github.com/syngan/vim-gitlab.git'
 Plug 'https://github.com/JazzCore/ctrlp-cmatcher.git'
+Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
+
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'https://github.com/ryanoasis/vim-devicons.git'
@@ -572,6 +574,9 @@ nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
+
+" Remove the feature that performs folding inside of Markdown files
+let g:pandoc#modules#disabled = ["folding"]
 
 " " Configure the GitHub dashboard plugin
 " let g:github_dashboard = {
