@@ -6,6 +6,7 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'
 Plug 'https://github.com/FelikZ/ctrlp-py-matcher.git'
+Plug 'https://github.com/JazzCore/ctrlp-cmatcher.git'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
 Plug 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Plug 'https://github.com/Raimondi/delimitMate.git'
@@ -47,6 +48,7 @@ Plug 'https://github.com/scrooloose/syntastic.git'
 Plug 'https://github.com/sgur/ctrlp-extensions.vim.git'
 Plug 'https://github.com/shime/vim-livedown.git'
 Plug 'https://github.com/sjl/gundo.vim.git', {'on': 'GundoToggle'}
+Plug 'https://github.com/syngan/vim-gitlab.git'
 Plug 'https://github.com/terryma/vim-multiple-cursors.git'
 Plug 'https://github.com/tmux-plugins/vim-tmux-focus-events.git'
 Plug 'https://github.com/tomtom/tlib_vim'
@@ -57,16 +59,14 @@ Plug 'https://github.com/tpope/vim-liquid.git'
 Plug 'https://github.com/tpope/vim-ragtag.git', {'for': 'html'}
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/tpope/vim-unimpaired.git'
+Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
+Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/vim-scripts/AutoTag.git', {'for': 'html'}
 Plug 'https://github.com/vim-scripts/HTML-AutoCloseTag.git', {'for': 'html'}
 Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
-Plug 'https://github.com/syngan/vim-gitlab.git'
-Plug 'https://github.com/JazzCore/ctrlp-cmatcher.git'
-Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
-
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'https://github.com/ryanoasis/vim-devicons.git'
