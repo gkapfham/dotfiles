@@ -17,6 +17,8 @@ Plug 'https://github.com/Valloric/YouCompleteMe.git'
 Plug 'https://github.com/Z1MM32M4N/vim-superman.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/airblade/vim-rooter.git'
+Plug 'https://github.com/artur-shaik/vim-javacomplete2.git'
+Plug 'https://github.com/bkad/CamelCaseMotion.git'
 Plug 'https://github.com/bling/vim-airline.git'
 Plug 'https://github.com/chrisbra/csv.vim.git', {'for': 'csv'}
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
@@ -67,7 +69,6 @@ Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
-Plug 'https://github.com/bkad/CamelCaseMotion.git'
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'https://github.com/ryanoasis/vim-devicons.git'
@@ -82,6 +83,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 " Allow syntastic to populate a list of problems for a given file
 let g:syntastic_always_populate_loc_list = 1
@@ -535,9 +537,9 @@ endif
 " Make a separate key binding that allows for the toggling of the indent guides
 nmap <Leader>g :IndentGuidesToggle<CR>
 
-" Call the GUndo plugin Toggle to see the version history with the F5 key
-nnoremap <F6> :GundoToggle<CR>
-let g:gundo_help=0
+" " Call the GUndo plugin Toggle to see the version history with the F5 key
+" nnoremap <F6> :GundoToggle<CR>
+" let g:gundo_help=0
 
 " Bubble single lines
 nmap <C-Up> [e
