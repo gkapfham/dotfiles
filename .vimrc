@@ -579,16 +579,9 @@ endif
 " Remove the feature that performs folding inside of Markdown files
 let g:pandoc#modules#disabled = ["folding"]
 
-" Set up the CamelCaseMotion plugin so that it allows for movements with
-" variables in programs written in Java and R, for instance
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-map <silent> ge <Plug>CamelCaseMotion_ge
-sunmap w
-sunmap b
-sunmap e
-sunmap ge
+" " Set up the CamelCaseMotion plugin so that it allows for movements with
+" " variables in programs written in Java and R, for instance
+call camelcasemotion#CreateMotionMappings('<leader>')
 
 " " Configure the GitHub dashboard plugin
 " let g:github_dashboard = {
