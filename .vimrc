@@ -348,7 +348,6 @@ nmap <silent> <leader>s :set spell!<CR>
 syntax spell toplevel
 
 " Give a special key for turning on and off the Tagbar, a great feature for browsing source code, such as Java programs
-" nmap <F12> :TagbarToggle<CR>
 nmap <C-t> :TagbarToggle <CR>
 
 let g:tagbar_autoclose = 1
