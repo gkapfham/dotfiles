@@ -516,10 +516,6 @@ endif
 " Make a separate key binding that allows for the toggling of the indent guides
 nmap <Leader>g :IndentGuidesToggle<CR>
 
-" " Call the GUndo plugin Toggle to see the version history with the F5 key
-" nnoremap <F6> :GundoToggle<CR>
-" let g:gundo_help=0
-
 " Bubble single lines
 nmap <C-Up> [e
 nmap <C-Down> ]e
