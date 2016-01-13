@@ -585,6 +585,11 @@ let g:pandoc#modules#disabled = ["folding"]
 " " variables in programs written in Java and R, for instance
 call camelcasemotion#CreateMotionMappings('<leader>')
 
+" Configure up and down line movement so that I can handle paragraphs that are
+" "virtually" formatted without specific line breaks
+nmap j gj
+nmap k gk
+
 " " Configure the GitHub dashboard plugin
 " let g:github_dashboard = {
 " \ 'username': 'gkapfham'
