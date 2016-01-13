@@ -428,27 +428,6 @@ let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
 set nosmd " turn of the status line that shows the silly word insert, airline is much better!
 
-" " Configure the way that colors are displayed for the sneak feature of searching in the text, seems to work very nicely
-" " let g:sneak#streak = 1
-" hi link SneakPluginScope Visual
-" hi link SneakPluginTarget Type
-
-" "replace 'f' with 1-char Sneak
-" nmap f <Plug>Sneak_f
-" nmap F <Plug>Sneak_F
-" xmap f <Plug>Sneak_f
-" xmap F <Plug>Sneak_F
-" omap f <Plug>Sneak_f
-" omap F <Plug>Sneak_F
-
-" "replace 't' with 1-char Sneak
-" nmap t <Plug>Sneak_t
-" nmap T <Plug>Sneak_T
-" xmap t <Plug>Sneak_t
-" xmap T <Plug>Sneak_T
-" omap t <Plug>Sneak_t
-" omap T <Plug>Sneak_T
-
 nmap f <Plug>(easymotion-s)
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
