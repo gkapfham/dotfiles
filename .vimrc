@@ -28,7 +28,7 @@ Plug 'https://github.com/freitass/todo.txt-vim.git'
 Plug 'https://github.com/garbas/vim-snipmate'
 Plug 'https://github.com/godlygeek/tabular.git'
 Plug 'https://github.com/gorodinskiy/vim-coloresque.git'
-Plug 'https://github.com/gregsexton/gitv.git'
+" Plug 'https://github.com/gregsexton/gitv.git'
 Plug 'https://github.com/henrik/vim-qargs.git'
 Plug 'https://github.com/honza/vim-snippets'
 Plug 'https://github.com/int3/vim-extradite.git'
@@ -69,6 +69,7 @@ Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
+Plug 'https://github.com/junegunn/gv.vim.git'
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'https://github.com/ryanoasis/vim-devicons.git'
@@ -402,7 +403,7 @@ set ttyfast
 set nohlsearch
 
 " Make the source code history browsing feature open windows horizontally, as this supports better browsing
-let g:Gitv_OpenHorizontal=1
+" let g:Gitv_OpenHorizontal=1
 
 " Do not display the welcome message / splash screen when opening gvim or vim
 " with no specified file
