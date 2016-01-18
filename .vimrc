@@ -4,12 +4,13 @@ call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
+Plug 'https://github.com/Raimondi/delimitMate.git'
+" Plug 'https://github.com/gregsexton/gitv.git'
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'
 Plug 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 Plug 'https://github.com/JazzCore/ctrlp-cmatcher.git'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
 Plug 'https://github.com/MarcWeber/vim-addon-mw-utils'
-Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'https://github.com/Valloric/ListToggle.git'
 Plug 'https://github.com/Valloric/MatchTagAlways.git', {'for': 'html'}
@@ -28,7 +29,6 @@ Plug 'https://github.com/freitass/todo.txt-vim.git'
 Plug 'https://github.com/garbas/vim-snipmate'
 Plug 'https://github.com/godlygeek/tabular.git'
 Plug 'https://github.com/gorodinskiy/vim-coloresque.git'
-" Plug 'https://github.com/gregsexton/gitv.git'
 Plug 'https://github.com/henrik/vim-qargs.git'
 Plug 'https://github.com/honza/vim-snippets'
 Plug 'https://github.com/int3/vim-extradite.git'
@@ -38,7 +38,9 @@ Plug 'https://github.com/jcfaria/Vim-R-plugin.git'
 Plug 'https://github.com/jdelkins/vim-correction.git', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
 Plug 'https://github.com/jeetsukumaran/vim-filebeagle.git'
 Plug 'https://github.com/jgdavey/tslime.vim.git'
+" Plug 'https://github.com/jiangmiao/auto-pairs'
 Plug 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
+Plug 'https://github.com/junegunn/gv.vim.git'
 Plug 'https://github.com/kablamo/vim-git-log.git'
 Plug 'https://github.com/kshenoy/vim-signature.git'
 Plug 'https://github.com/lervag/vimtex.git', {'for': 'tex'}
@@ -69,7 +71,6 @@ Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
-Plug 'https://github.com/junegunn/gv.vim.git'
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'https://github.com/ryanoasis/vim-devicons.git'
@@ -564,6 +565,10 @@ call camelcasemotion#CreateMotionMappings('<leader>')
 " "virtually" formatted without specific line breaks
 nmap j gj
 nmap k gk
+
+" Configure a key combination that allows me to stop using pair matching
+nmap <leader>tp :DelimitMateOff<CR>
+let delimitMateSmartMatchpairs = 1
 
 " " Configure the GitHub dashboard plugin
 " let g:github_dashboard = {
