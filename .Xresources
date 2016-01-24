@@ -1,0 +1,31 @@
+! ------------------------------------------------------------------------------
+! ROFI Color theme and configurations
+! ------------------------------------------------------------------------------
+rofi.font: Ubuntu\ Mono\ derivative\ Powerline\ 32
+rofi.lines: 15
+
+rofi.color-enabled: true
+rofi.color-window: #1c1c1c, #1c1c1c, #df8700
+rofi.color-normal: #1c1c1c, #707880, #1c1c1c, #df8700, #1c1c1c
+rofi.color-active: #1c1c1c, #df8700, #1c1c1c, #df8700, #1c1c1c
+rofi.color-urgent: #1c1c1c, #5f8700, #1c1c1c, #5f8700, #1c1c1c
+
+rofi.location: 6
+rofi.yoffset: 0
+rofi.xoffset: 0
+rofi.width: 100
+rofi.fixed_num_lines: 1
+rofi.hmode: false
+
+rofi.separator-style: none
+rofi.hide-scrollbar: true
+
+
+
+
+
+
+
+
+
+
