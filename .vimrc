@@ -567,7 +567,7 @@ nmap j gj
 nmap k gk
 
 " Configure a key combination that allows me to stop using pair matching
-nmap <leader>tp :DelimitMateOff<CR>
+nmap <leader>tp :DelimitMateSwitch<CR>
 let delimitMateSmartMatchpairs = 1
 
 " " Configure the GitHub dashboard plugin
