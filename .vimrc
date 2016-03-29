@@ -4,11 +4,6 @@ call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
-" Plug 'https://github.com/gregsexton/gitv.git'
-" Plug 'https://github.com/jiangmiao/auto-pairs'
-" Plug 'https://github.com/syngan/vim-gitlab.git'
-" Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
-" Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'
 Plug 'https://github.com/FelikZ/ctrlp-py-matcher.git'
 Plug 'https://github.com/JazzCore/ctrlp-cmatcher.git'
