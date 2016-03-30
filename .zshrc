@@ -121,7 +121,15 @@ bindkey "^j" history-incremental-search-backward
 # User configuration
 export DISABLE_AUTO_TITLE=true
 
-export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.local/bin:/usr/local/texlive/2011/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/usr/local/texlive/2012/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+
+export FZF_DEFAULT_OPTS='
+  --bind ctrl-f:page-down,ctrl-b:page-up
+  --color fg:-1,bg:-1,hl:64,fg+:3,bg+:233,hl+:172
+  --color info:110,prompt:110,spinner:109,pointer:172,marker:172
+'
+
+source /home/gkapfham/.fzf/shell/key-bindings.zsh
 
 man() {
   vim -c "SuperMan $*"
