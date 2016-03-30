@@ -66,6 +66,8 @@ Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
 Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'https://github.com/ryanoasis/vim-devicons.git'
@@ -345,7 +347,7 @@ nmap <silent> <leader>s :set spell!<CR>
 syntax spell toplevel
 
 " Give a special key for turning on and off the Tagbar, a great feature for browsing source code, such as Java programs
-nmap <C-t> :TagbarToggle <CR>
+nmap <C-t> :BTags <CR>
 
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
@@ -564,6 +566,17 @@ nmap k gk
 " Configure a key combination that allows me to stop using pair matching
 nmap <leader>tp :DelimitMateSwitch<CR>
 let delimitMateSmartMatchpairs = 1
+
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " " Configure the GitHub dashboard plugin
 " let g:github_dashboard = {
