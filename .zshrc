@@ -125,7 +125,7 @@ export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.
 
 export FZF_DEFAULT_OPTS='
   --bind ctrl-f:page-down,ctrl-b:page-up
-  --color fg:-1,bg:-1,hl:64,fg+:3,bg+:233,hl+:172
+  --color fg:-1,bg:-1,hl:64,fg+:3,bg+:234,hl+:172
   --color info:110,prompt:110,spinner:109,pointer:172,marker:172
 '
 
