@@ -67,7 +67,13 @@ set sendmail= "msmtp"
 # set up the imap settings for my INBOX and my Drafts folders
 set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
-set postponed="+[Gmail]/Drafts"
+set postponed = "+[Gmail]/Drafts"
+set trash = "+[Google]/Trash"
+
+set my_foo_pass="`gpg --quiet --for-your-eyes-only -d ~/.mutt/password.gpg`"
+set imap_user = "gkapfham@allegheny.edu"
+set imap_pass=$my_foo_pass
+set smtp_url = "smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
 
 # allow mutt to performing caching as a way to improve performance
 set header_cache=~/.mutt/cache/headers
