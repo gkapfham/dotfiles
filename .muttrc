@@ -1,0 +1,120 @@
+# Sven's draconian header weeding
+ignore *
+unignore from date subject to cc
+unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
+unignore posted-to:
+
+# set all of our emails to have flowing text, accommodating for mobile devices
+set text_flowed=yes
+
+# use my standard configuration of vim that is used for all of text editing
+set editor="vim"
+
+# edit the emails in a local tmp/ directory, thus ensuring that I do not lose work when computer crashes
+set tmpdir="/home/gkapfham/.mutt/tmp"
+
+set edit_headers=yes
+
+# color   error        brightwhite            default
+# color   indicator    brightwhite            default
+# color   status       brightwhite            default
+
+#---- Mutt Colors for Black Background -------
+color   hdrdefault   color173               default
+color   quoted       color13                default
+color   signature    color3                 default
+color   attachment   color12                default
+color   message      color246               default
+color   error        color246               default
+color   indicator    color15                default
+color   status       color246               default
+color   tree         color8                 default
+color   normal       color246               default
+color   markers      color237               default
+color   search       white                  default
+color   tilde        white                  default
+color   index        color246               default ~F
+color   index        color246               default "~N|~O"
+
+#set signature='~/.signature'
+#set post_indent_string="--"       # Footer (after quotes, before signature).
+
+set mbox_type=Maildir
+set confirmappend=no     # Confirm when appending messages to an existing mailbox?
+set pager_index_lines=8  # Show 5 message headers from your message index above an email you are reading
+set markers          # mark wrapped lines of text in the pager with a +
+set smart_wrap       # Don't wrap mid-word
+set pager_context=5  # Retain 5 lines of previous page when scrolling.
+set pager_stop = yes
+
+# set record="=outbox"
+set save_name=yes
+my_hdr From: "Gregory M. Kapfhammer" <gkapfham@allegheny.edu>
+my_hdr Bcc: "Gregory M. Kapfhammer" <gkapfham@gmail.com>
+hdr_order From Date: From: To: Cc: Subject:
+set move=no
+auto_view text/html text/enriched application/postscript image/gif
+
+set include         # quote msg when replying
+
+set sort=threads
+set implicit_autoview
+set beep=no
+
+# configure my msmtp program to fetch the email
+set sendmail= "msmtp"
+
+# set up the imap settings for my INBOX and my Drafts folders
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set postponed="+[Gmail]/Drafts"
+
+# allow mutt to performing caching as a way to improve performance
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+
+set imap_keepalive=200
+
+set timeout=10    # mutt 'presses' (like) a key for you (while you're idle)
+                  # each x sec to trigger the thing below
+set mail_check=5  # mutt checks for new mails on every keystroke
+                  # but not more often then once in 5 seconds
+set beep_new      # beep on new messages in the mailboxes
+
+# use an aliases file to automatically save all of email addresses of emails that I read
+set alias_file = '~/.mutt/aliases.txt'
+source $alias_file
+
+# Gmail-style keyboard shortcuts
+bind editor <space> noop
+macro index gn "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to drafts"
+macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
+macro index gt "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
+
+# macro index,pager d "<save-message>=[Gmail]/Trash<enter><enter>" "Trash"
+# macro index,pager y "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive"
+
+# set up a group reply key binding to make it easy to reply-all (I use this a lot)
+bind index G group-reply
+set followup_to=yes
+
+# install a display_filter so that I can capture all of my email headers for aliases
+set display_filter = '$HOME/.mutt/aliases.sh'
+
+# add features for the goobook; note that you can run this type of query with CTRL-t
+set query_command="goobook query '%s'"
+macro index,pager a "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
+
+#### muttprint:
+set print_command="muttprint"
+set print_split
+
+# Dump all headers
+macro index p "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
+macro pager p "<display-toggle-weed> <print-message> <display-toggle-weed>"
+
+# No confirmation before printing
+set print="yes"
