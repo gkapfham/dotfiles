@@ -349,9 +349,6 @@ autocmd FileType gitcommit setlocal spell
 nmap <silent> <leader>s :set spell!<CR>
 syntax spell toplevel
 
-" Give a special key for turning on and off the Tagbar, a great feature for browsing source code, such as Java programs
-nmap <C-t> :BTags <CR>
-
 let g:tagbar_autoclose = 1
 let g:tagbar_autofocus = 1
 let g:tagbar_vertical = 15
@@ -580,6 +577,10 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Setup special key commands for running fzf commands
+nmap <C-t> :BTags <CR>
+nmap <C-l> :FZF <CR>
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
