@@ -146,3 +146,5 @@ else
   eval "$(gpg-agent --daemon --allow-preset-passphrase --write-env-file "$envfile")"
 fi
 export GPG_AGENT_INFO
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
