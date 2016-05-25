@@ -4,9 +4,9 @@ call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
-Plug 'https://github.com/AndrewRadev/splitjoin.vim.git'
-Plug 'https://github.com/FelikZ/ctrlp-py-matcher.git'
-Plug 'https://github.com/JazzCore/ctrlp-cmatcher.git'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'JazzCore/ctrlp-cmatcher'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
 Plug 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Plug 'https://github.com/Raimondi/delimitMate.git'
@@ -72,6 +72,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'rbonvall/vim-textobj-latex'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'gilligan/textobj-gitgutter'
+Plug 'vim-airline/vim-airline-themes'
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'https://github.com/ryanoasis/vim-devicons.git'
@@ -428,7 +429,7 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
-set nosmd " turn of the status line that shows the silly word insert, airline is much better!
+set nosmd " turn off the status line that shows the silly word insert, airline is much better!
 
 nmap f <Plug>(easymotion-s)
 nmap s <Plug>(easymotion-s2)
