@@ -594,8 +594,3 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
-
-" " Configure the GitHub dashboard plugin
-" let g:github_dashboard = {
-" \ 'username': 'gkapfham'
-" \ }
