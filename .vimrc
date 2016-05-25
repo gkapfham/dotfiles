@@ -109,11 +109,9 @@ autocmd FileType todo set syntax=todo
 " Set it so that the todo mode is always run when editing the file called todo.txt or Todo.txt
 autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
 
-" Set the syntax for the markdown files so that the file highlighting is correct
-" au BufRead,BufNewFile *.md set filetype=markdown
-" autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
+" Setup the Livedown plugin that supports the preview of Markdown files
 let g:livedown_autorun = 0
-let g:livedown_open = 1
+let g:livedown_open = 0
 let g:livedown_port = 1337
 nmap gmd :LivedownPreview<CR>
 
