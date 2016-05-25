@@ -68,6 +68,10 @@ Plug 'https://github.com/xolox/vim-easytags.git'
 Plug 'https://github.com/xolox/vim-misc.git'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'rbonvall/vim-textobj-latex'
+Plug 'whatyouhide/vim-textobj-xmlattr'
+Plug 'gilligan/textobj-gitgutter'
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'https://github.com/ryanoasis/vim-devicons.git'
