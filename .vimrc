@@ -542,7 +542,7 @@ map <Leader>mf :call RenameFile()<cr>
 
 " Allow the Vim-R-Plugin to create the R assignment, but only with two
 " underscore presses when writing code in Vim
-let vimrplugin_assign = 2
+let R_assign = 2
 
 " Add in a command that will allow me to remove the trailing white space
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
