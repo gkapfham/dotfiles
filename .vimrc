@@ -583,6 +583,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 nmap <C-t> :BTags <CR>
 nmap <C-l> :FZF <CR>
 
+" Configure the colors for fzf so that they fit my overall theme
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -596,3 +597,9 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+" Make it easier to navigate the open windows
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
