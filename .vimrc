@@ -33,7 +33,7 @@ Plug 'https://github.com/honza/vim-snippets'
 Plug 'https://github.com/int3/vim-extradite.git'
 Plug 'https://github.com/ivalkeen/vim-ctrlp-tjump.git'
 Plug 'https://github.com/jalvesaq/VimCom.git'
-Plug 'https://github.com/jcfaria/Vim-R-plugin.git'
+" Plug 'https://github.com/jcfaria/Vim-R-plugin.git'
 Plug 'https://github.com/jdelkins/vim-correction.git', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
 Plug 'https://github.com/jeetsukumaran/vim-filebeagle.git'
 Plug 'https://github.com/jgdavey/tslime.vim.git'
@@ -73,6 +73,7 @@ Plug 'rbonvall/vim-textobj-latex'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'https://github.com/jalvesaq/Nvim-R.git'
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'https://github.com/ryanoasis/vim-devicons.git'
