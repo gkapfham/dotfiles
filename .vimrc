@@ -4,6 +4,13 @@ call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
+" Plug 'https://github.com/dterei/VimBookmarking.git'
+" Plug 'https://github.com/ervandew/ag.git'
+" Plug 'https://github.com/jalvesaq/VimCom.git'
+" Plug 'https://github.com/junegunn/gv.vim.git'
+" Plug 'https://github.com/kablamo/vim-git-log.git'
+" Plug 'https://github.com/majutsushi/tagbar'
+" Plug 'https://github.com/nathanaelkane/vim-indent-guides'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'gilligan/textobj-gitgutter'
@@ -22,8 +29,6 @@ Plug 'https://github.com/bkad/CamelCaseMotion.git'
 Plug 'https://github.com/bling/vim-airline.git'
 Plug 'https://github.com/chrisbra/csv.vim.git', {'for': 'csv'}
 Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
-Plug 'https://github.com/dterei/VimBookmarking.git'
-Plug 'https://github.com/ervandew/ag.git'
 Plug 'https://github.com/freitass/todo.txt-vim.git'
 Plug 'https://github.com/garbas/vim-snipmate'
 Plug 'https://github.com/godlygeek/tabular.git'
@@ -32,19 +37,14 @@ Plug 'https://github.com/henrik/vim-qargs.git'
 Plug 'https://github.com/honza/vim-snippets'
 Plug 'https://github.com/int3/vim-extradite.git'
 Plug 'https://github.com/jalvesaq/Nvim-R.git'
-Plug 'https://github.com/jalvesaq/VimCom.git'
 Plug 'https://github.com/jdelkins/vim-correction.git', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
 Plug 'https://github.com/jeetsukumaran/vim-filebeagle.git'
 Plug 'https://github.com/jgdavey/tslime.vim.git'
 Plug 'https://github.com/joeytwiddle/sexy_scroller.vim.git'
-Plug 'https://github.com/junegunn/gv.vim.git'
-Plug 'https://github.com/kablamo/vim-git-log.git'
 Plug 'https://github.com/kshenoy/vim-signature.git'
 Plug 'https://github.com/lervag/vimtex.git', {'for': 'tex'}
 Plug 'https://github.com/ludovicchabant/vim-gutentags.git'
-Plug 'https://github.com/majutsushi/tagbar'
 Plug 'https://github.com/mattn/emmet-vim.git', {'for': 'html'}
-Plug 'https://github.com/nathanaelkane/vim-indent-guides'
 Plug 'https://github.com/scrooloose/syntastic.git'
 Plug 'https://github.com/sgur/ctrlp-extensions.vim.git'
 Plug 'https://github.com/shime/vim-livedown.git'
