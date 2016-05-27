@@ -6,7 +6,7 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
-Plug 'JazzCore/ctrlp-cmatcher'
+" Plug 'JazzCore/ctrlp-cmatcher'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
 Plug 'https://github.com/MarcWeber/vim-addon-mw-utils'
@@ -32,7 +32,7 @@ Plug 'https://github.com/gorodinskiy/vim-coloresque.git'
 Plug 'https://github.com/henrik/vim-qargs.git'
 Plug 'https://github.com/honza/vim-snippets'
 Plug 'https://github.com/int3/vim-extradite.git'
-Plug 'https://github.com/ivalkeen/vim-ctrlp-tjump.git'
+" Plug 'https://github.com/ivalkeen/vim-ctrlp-tjump.git'
 Plug 'https://github.com/jalvesaq/Nvim-R.git'
 Plug 'https://github.com/jalvesaq/VimCom.git'
 Plug 'https://github.com/jdelkins/vim-correction.git', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
@@ -159,7 +159,6 @@ let g:ctrlp_show_hidden = 1
 
 " Configure ctrlp so that it uses a faster matcher
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-" let g:ctrlp_match_func = { 'match': 'matcher#cmatch' }
 
 " Ignore these directories in all programs like ctrlp
 set wildignore+=*/build/**
@@ -274,13 +273,13 @@ let g:ctrlp_extensions = ['tag', 'quickfix']
 
 " This allows you to jump to the definition of a function using CtrlP
 nnoremap <Tab> :CtrlPBuffer<Cr>
-nmap <leader>z :CtrlPtjump<cr>
-vnoremap <leader>z :CtrlPtjumpVisual<cr>
+" nmap <leader>z :CtrlPtjump<cr>
+" vnoremap <leader>z :CtrlPtjumpVisual<cr>
 
-" Very exciting, this allows for Ctrl-P to automatically generate tags for LaTeX using e-ctags
-let g:ctrlp_buftag_types = {
-    \ 'tex'          : '--language-force=latex'
-\ }
+" " Very exciting, this allows for Ctrl-P to automatically generate tags for LaTeX using e-ctags
+" let g:ctrlp_buftag_types = {
+"     \ 'tex'          : '--language-force=latex'
+" \ }
 
 " let g:ctrlp_buftag_types = {
 " \ 'go'           : '--language-force=go --golang-types=ftv',
@@ -567,19 +566,25 @@ nmap k gk
 nmap <leader>tp :DelimitMateSwitch<CR>
 let delimitMateSmartMatchpairs = 1
 
-" Mapping selecting mappings
+" Mapping selecting mappings --- lets you see the mappings that are configured
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
-" Insert mode completion
+" Insert mode completion for words, paths, files, and lines in the buffer
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-" Setup special key commands for running fzf commands
+" Setup special key for viewing the tabs in the buffer
 nmap <C-t> :BTags <CR>
+
+" Setup special key for viewing the Tags that match word highlighted
+nmap <C-i> :Tags <C-R><C-W> <CR>
+
+" Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
+" no hidden files are indexed with FZF by default)
 nmap <C-l> :FZF <CR>
 
 " Configure the colors for fzf so that they fit my overall theme
@@ -597,8 +602,8 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-" Make it easier to navigate the open windows
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" " Make it easier to navigate the open windows
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
