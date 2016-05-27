@@ -258,8 +258,6 @@ let g:ycm_semantic_triggers.tex = [
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
 let g:ctrlp_extensions = ['tag', 'quickfix']
 
-" This allows you to jump to the definition of a function using CtrlP
-nnoremap <Tab> :CtrlPBuffer<Cr>
 
 " note that menu provides a substantially better configuration for viewing the autocompletion output that is available in gvim
 set cot=menu
@@ -528,7 +526,10 @@ nmap <C-i> :Tags <C-R><C-W> <CR>
 
 " Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
 " no hidden files are indexed with FZF by default)
-nmap <C-l> :FZF <CR>
+nmap <C-l> :FZF -m<CR>
+
+" This allows you to jump to the definition of a function using FZF
+nnoremap <Tab> :Buffers<Cr>
 
 " Configure the colors for fzf so that they fit my overall theme
 let g:fzf_colors =
