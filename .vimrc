@@ -6,7 +6,6 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
-" Plug 'JazzCore/ctrlp-cmatcher'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
 Plug 'https://github.com/MarcWeber/vim-addon-mw-utils'
@@ -32,7 +31,6 @@ Plug 'https://github.com/gorodinskiy/vim-coloresque.git'
 Plug 'https://github.com/henrik/vim-qargs.git'
 Plug 'https://github.com/honza/vim-snippets'
 Plug 'https://github.com/int3/vim-extradite.git'
-" Plug 'https://github.com/ivalkeen/vim-ctrlp-tjump.git'
 Plug 'https://github.com/jalvesaq/Nvim-R.git'
 Plug 'https://github.com/jalvesaq/VimCom.git'
 Plug 'https://github.com/jdelkins/vim-correction.git', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
