@@ -168,11 +168,11 @@ set wildignore+=*/tmp/*
 let maplocalleader=","
 let mapleader=","
 
-" Setting up SyncTex and compilation support for Tex-9
-let g:tex_nine_config = {
-            \'compiler': "latexmk",
-            \'synctex': 1
-            \}
+" " Setting up SyncTex and compilation support for Tex-9
+" let g:tex_nine_config = {
+"             \'compiler': "latexmk",
+"             \'synctex': 1
+"             \}
 
 " Adding in the conceal option for latex. Trying this out to see if I like the rendering of mathematics
 set cole=2
@@ -193,9 +193,6 @@ let g:vimtex_complete_recursive_bib = 0
 
 let g:vimtex_view_method = 'mupdf'
 let g:vimtex_view_mupdf_options = '-r 288'
-" let g:vimtex_view_general_viewer = 'evince'
-
-" let g:tex_flavor='latex'
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 " Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
@@ -214,14 +211,6 @@ autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 
 " Turn on smart indentation with the Latex plugins, nice and very helpful
 " set smartindent
-
-" " Commands that allow for the invocation of the SyncTex support
-" nmap <C-LeftMouse> :call tex_nine#ForwardSearch()<CR>
-" nmap <localleader>lv :call tex_nine#ForwardSearch()<CR>
-" nmap <C-l> :call tex_nine#ForwardSearch()<CR>
-" let b:did_tex_nine_indent = 0
-" nmap <C-l> :call vimtex#vimtex-view()
-" nmap <silent><buffer> <C-l> <plug>(vimtex-view)<CR>
 
 " Configure completion so that it includes the dictionary
 set complete-=k complete+=k
@@ -271,22 +260,6 @@ let g:ctrlp_extensions = ['tag', 'quickfix']
 
 " This allows you to jump to the definition of a function using CtrlP
 nnoremap <Tab> :CtrlPBuffer<Cr>
-" nmap <leader>z :CtrlPtjump<cr>
-" vnoremap <leader>z :CtrlPtjumpVisual<cr>
-
-" " Very exciting, this allows for Ctrl-P to automatically generate tags for LaTeX using e-ctags
-" let g:ctrlp_buftag_types = {
-"     \ 'tex'          : '--language-force=latex'
-" \ }
-
-" let g:ctrlp_buftag_types = {
-" \ 'go'           : '--language-force=go --golang-types=ftv',
-" \ 'coffee'     : '--language-force=coffee --coffee-types=cmfvf',
-" \ 'markdown'   : '--language-force=markdown --markdown-types=hik',
-" \ 'objc'       : '--language-force=objc --objc-types=mpci',
-" \ 'rc'         : '--language-force=rust --rust-types=fTm',
-" \ 'r'          : '--language-force=r --r-types=fgv'
-" \ }
 
 " note that menu provides a substantially better configuration for viewing the autocompletion output that is available in gvim
 set cot=menu
@@ -404,16 +377,6 @@ set nohlsearch
 " with no specified file
 set shortmess=I
 
-" Set up the enter key to ensure that after completing words a return is not pressed; this was all used with the
-" standard SuperTab completion and now I am leaving it even though I primarily use YouCompleteMe
-
-" inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-"             \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-" inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-"             \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-" inoremap <expr> <tab> pumvisible() ? '<tab>' :
-"             \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
 " Configure the airline status bar replacement that provides some delightful context
 set laststatus=2
 let g:airline_theme='tomorrow'
@@ -423,12 +386,12 @@ let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
 set nosmd " turn off the status line that shows the silly word insert, airline is much better!
 
+" Configure the EasyMotion plugin for the main keys
 nmap f <Plug>(easymotion-s)
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 
 " map <Leader> <Plug>(easymotion-prefix)
-" nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
@@ -470,9 +433,7 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr()<CR>
 
-" I am not using GitGutter in the signs column because I don't like the slight delay;
-" but, I am using it to display information inside of the Airline at the bottom of Vim
-" WAIT -- trying this on the new laptop since everything seems much faster!
+" Configure the GitGutter plugin so that it display signs in the sign column
 let g:gitgutter_signs = 1
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
@@ -494,22 +455,6 @@ set autowrite
 " Basically, make the syntax highlighting for method declarations a lot better
 " let java_highlight_functions="indent"
 let java_highlight_functions="style"
-
-" Configure a different indenting plugin that has smooth lines
-" let g:indent_guides_soft_pattern = ' '
-" let g:indent_guides_space_guides = 1
-let g:indent_guides_enable_on_vim_startup = 0
-let g:indent_guides_guide_size=1
-let g:indent_guides_start_level=1
-
-" An extra configuration to handle the use of the indent guides when running GVim
-if !has("gui_running")
-    let g:indent_guides_auto_colors = 0
-    hi IndentGuidesEven ctermbg=darkgrey
-endif
-
-" Make a separate key binding that allows for the toggling of the indent guides
-nmap <Leader>g :IndentGuidesToggle<CR>
 
 " Bubble single lines
 nmap <C-Up> [e
