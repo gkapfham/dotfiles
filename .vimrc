@@ -12,7 +12,7 @@ call plug#begin('~/.vim/bundle')
 " Plug 'https://github.com/majutsushi/tagbar'
 " Plug 'https://github.com/nathanaelkane/vim-indent-guides'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'FelikZ/ctrlp-py-matcher'
+" Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
 Plug 'https://github.com/MarcWeber/vim-addon-mw-utils'
@@ -28,7 +28,7 @@ Plug 'https://github.com/artur-shaik/vim-javacomplete2.git'
 Plug 'https://github.com/bkad/CamelCaseMotion.git'
 Plug 'https://github.com/bling/vim-airline.git'
 Plug 'https://github.com/chrisbra/csv.vim.git', {'for': 'csv'}
-Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
+" Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 Plug 'https://github.com/freitass/todo.txt-vim.git'
 Plug 'https://github.com/garbas/vim-snipmate'
 Plug 'https://github.com/godlygeek/tabular.git'
@@ -46,7 +46,7 @@ Plug 'https://github.com/lervag/vimtex.git', {'for': 'tex'}
 Plug 'https://github.com/ludovicchabant/vim-gutentags.git'
 Plug 'https://github.com/mattn/emmet-vim.git', {'for': 'html'}
 Plug 'https://github.com/scrooloose/syntastic.git'
-Plug 'https://github.com/sgur/ctrlp-extensions.vim.git'
+" Plug 'https://github.com/sgur/ctrlp-extensions.vim.git'
 Plug 'https://github.com/shime/vim-livedown.git'
 Plug 'https://github.com/sjl/gundo.vim.git', {'on': 'GundoToggle'}
 Plug 'https://github.com/terryma/vim-multiple-cursors.git'
@@ -153,10 +153,10 @@ nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
 
 " Make sure that you can load the dot files when you are searching the file system
-let g:ctrlp_show_hidden = 1
+" let g:ctrlp_show_hidden = 1
 
 " Configure ctrlp so that it uses a faster matcher
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " Ignore these directories in all programs like ctrlp
 set wildignore+=*/build/**
@@ -255,9 +255,8 @@ let g:ycm_semantic_triggers.tex = [
 
 " allow CTRLP to show fifteen total matches, helping in cases where there are
 " many matches that we still want to display and consider
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
-let g:ctrlp_extensions = ['tag', 'quickfix']
-
+" let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
+" let g:ctrlp_extensions = ['tag', 'quickfix']
 
 " note that menu provides a substantially better configuration for viewing the autocompletion output that is available in gvim
 set cot=menu
@@ -421,9 +420,11 @@ let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
 let g:easytags_always_enabled = 1
 let g:easytags_async = 1
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-let g:ctrlp_use_caching = 0
-let g:ctrlp_z_nerdtree = 1
+
+" " Configuring the ctrlp plugin to work faster for searching
+" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+" let g:ctrlp_use_caching = 0
+" let g:ctrlp_z_nerdtree = 1
 
 " Define a function that allows you to determine what syntax group is being used
 map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -524,12 +525,29 @@ nmap <C-t> :BTags <CR>
 " Setup special key for viewing the Tags that match word highlighted
 nmap <C-i> :Tags <C-R><C-W> <CR>
 
-" Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
-" no hidden files are indexed with FZF by default)
-nmap <C-l> :FZF -m<CR>
-
 " This allows you to jump to the definition of a function using FZF
 nnoremap <Tab> :Buffers<Cr>
+
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})
+
+command! FZFHidden call fzf#run({
+\  'source':  'ag --hidden --ignore .git -l -g ""',
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})
+
+" Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
+" no hidden files are indexed with FZF by default)
+nmap <C-m> :FZFMru<CR>
+"
+" Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
+" no hidden files are indexed with FZF by default)
+nmap <C-p> :FZF -m<CR>
+nmap <C-l> :FZFHidden<CR>
 
 " Configure the colors for fzf so that they fit my overall theme
 let g:fzf_colors =
