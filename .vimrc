@@ -519,6 +519,20 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+" Define a custom command for loading MRU files with FZF
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})
+
+" Define a custom command for loading hidden files as well as regular with FZF
+command! FZFHidden call fzf#run({
+\  'source':  'ag --hidden --ignore .git -l -g ""',
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})
+
 " Setup special key for viewing the tabs in the buffer
 nmap <C-t> :BTags <CR>
 
@@ -528,24 +542,13 @@ nmap <C-i> :Tags <C-R><C-W> <CR>
 " This allows you to jump to the definition of a function using FZF
 nnoremap <Tab> :Buffers<Cr>
 
-command! FZFMru call fzf#run({
-\  'source':  v:oldfiles,
-\  'sink':    'e',
-\  'options': '-m -x +s',
-\  'down':    '40%'})
-
-command! FZFHidden call fzf#run({
-\  'source':  'ag --hidden --ignore .git -l -g ""',
-\  'sink':    'e',
-\  'options': '-m -x +s',
-\  'down':    '40%'})
-
 " Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
 " no hidden files are indexed with FZF by default)
 nmap <C-m> :FZFMru<CR>
 "
 " Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
-" no hidden files are indexed with FZF by default)
+" no hidden files are indexed with FZF by default --- so, also use a separate
+" command to display the hidden files along with the standard files)
 nmap <C-p> :FZF -m<CR>
 nmap <C-l> :FZFHidden<CR>
 
