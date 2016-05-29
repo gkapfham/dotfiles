@@ -542,8 +542,8 @@ nmap <C-i> :Tags <C-R><C-W> <CR>
 " This allows you to jump to the definition of a function using FZF
 nnoremap <Tab> :Buffers<Cr>
 
-" Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
-" no hidden files are indexed with FZF by default)
+" Run the FZF command as a file-finder in the same way that I use CTRL-P
+" when it is displaying the most recent files
 nmap <C-u> :FZFMru<CR>
 
 " Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
@@ -566,3 +566,7 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+" Add in a format string for controlling how FZF will color-code when running
+" a commands that shows the Git logs (Note that the blue is black by default)
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
