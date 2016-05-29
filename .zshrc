@@ -103,32 +103,20 @@ autoload -U history-search-end
 bindkey "^k" history-incremental-search-backward
 bindkey "^j" history-incremental-search-backward
 
-# this was the first way that I tried to load fasd and it works, but it might be a little too slow
-# eval "$(fasd --init auto)"
-# bindkey '^k' up-line-or-beginning-search
-# bindkey '^k' up-line-or-beginning-search
-# bindkey '^j' down-line-or-beginning-search
-# autoload -U history-search-end
-# bindkey '^j' down-line-or-beginning-search
-# autoload -U history-search-end
-
-# allow for the editing of the command-line in vim by pressing the "v" key in the terminal window
-# export KEYTIMEOUT=1
-# autoload edit-command-line
-# zle -N edit-command-line
-# bindkey -M vicmd v edit-command-line
-
 # User configuration
 export DISABLE_AUTO_TITLE=true
 
+# Set the PATH environment variable for finding programs
 export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/usr/local/texlive/2012/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 
+# FZF is a fuzzy file finder and I set these default options for use in tmux or a terminal
 export FZF_DEFAULT_OPTS='
   --bind ctrl-f:page-down,ctrl-b:page-up
   --color fg:-1,bg:-1,hl:64,fg+:3,bg+:234,hl+:172
   --color info:110,prompt:110,spinner:109,pointer:172,marker:172
 '
 
+# Set all of the key bindings that are normally used for FZF in the terminal window
 source /home/gkapfham/.fzf/shell/key-bindings.zsh
 
 man() {
@@ -139,6 +127,7 @@ man() {
   fi
 }
 
+# Configure my shell to run and use a GPG agent for passwords in downloading and sending emails
 envfile="$HOME/.gnupg/gpg-agent.env"
 if [[ -e "$envfile" ]] && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
   eval "$(cat "$envfile")"
@@ -147,4 +136,10 @@ else
 fi
 export GPG_AGENT_INFO
 
+# Configure the autosuggestions plugin that allows command history to display interactively
+source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+bindkey '^ ' autosuggest-accept
+
+# Source the file that will setup FZF, this has to be the last line of the file
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
