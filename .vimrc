@@ -544,8 +544,8 @@ nnoremap <Tab> :Buffers<Cr>
 
 " Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
 " no hidden files are indexed with FZF by default)
-nmap <C-m> :FZFMru<CR>
-"
+nmap <C-u> :FZFMru<CR>
+
 " Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
 " no hidden files are indexed with FZF by default --- so, also use a separate
 " command to display the hidden files along with the standard files)
