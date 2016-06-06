@@ -5,6 +5,7 @@ call plug#begin('~/.vim/bundle')
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
 " Plug 'FelikZ/ctrlp-py-matcher'
+" Plug 'https://github.com/Valloric/MatchTagAlways.git', {'for': 'html'}
 " Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
 " Plug 'https://github.com/dterei/VimBookmarking.git'
 " Plug 'https://github.com/ervandew/ag.git'
@@ -14,6 +15,8 @@ call plug#begin('~/.vim/bundle')
 " Plug 'https://github.com/majutsushi/tagbar'
 " Plug 'https://github.com/nathanaelkane/vim-indent-guides'
 " Plug 'https://github.com/sgur/ctrlp-extensions.vim.git'
+" Plug 'https://github.com/tpope/vim-ragtag.git', {'for': 'html'}
+" Plug 'https://github.com/vim-scripts/AutoTag.git', {'for': 'html'}
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
@@ -21,7 +24,6 @@ Plug 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Plug 'https://github.com/Raimondi/delimitMate.git'
 Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'https://github.com/Valloric/ListToggle.git'
-Plug 'https://github.com/Valloric/MatchTagAlways.git', {'for': 'html'}
 Plug 'https://github.com/Valloric/YouCompleteMe.git'
 Plug 'https://github.com/Z1MM32M4N/vim-superman.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
@@ -56,10 +58,8 @@ Plug 'https://github.com/tpope/vim-abolish.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/tpope/vim-liquid.git'
-Plug 'https://github.com/tpope/vim-ragtag.git', {'for': 'html'}
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/tpope/vim-unimpaired.git'
-Plug 'https://github.com/vim-scripts/AutoTag.git', {'for': 'html'}
 Plug 'https://github.com/vim-scripts/HTML-AutoCloseTag.git', {'for': 'html'}
 Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
 Plug 'https://github.com/wellle/tmux-complete.vim.git'
