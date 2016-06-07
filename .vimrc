@@ -97,6 +97,8 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+inoremap jk <ESC>
+inoremap <ESC> <NOP>
 
 " Set the completion function in general if there is not a specific type
 set omnifunc=syntaxcomplete#Complete
@@ -208,6 +210,9 @@ fu! TexQuotes()
     return insert
 endfu
 autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
+
+" Make sure that the full latex mode is always run to get the benefits of plugins
+let g:tex_flavor = 'tex'
 
 " Turn on smart indentation with the Latex plugins, nice and very helpful
 " set smartindent
@@ -466,7 +471,7 @@ vmap <C-Down> ]egv
 " Create a mapping that allows for the insertion of a blank line without
 " having to enter insert mode and then leave it. Works nicely, but only in GVim
 nmap <S-Enter> O<Esc>
-nmap oo O<Esc>
+nmap oo Ojk
 
 " This function will allow you to rename a file inside of vim, works correctly
 function! RenameFile()
