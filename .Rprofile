@@ -1,7 +1,7 @@
 options(menu.graphics=FALSE)
 
-library(prompt)
-set_prompt(prompt_fancy)
+# library(prompt)
+# set_prompt(prompt_fancy)
 
 library(colorout)
 setOutputColors256(normal = 250, negnum = 237, zero = 237,
