@@ -14,7 +14,10 @@ call plug#begin('~/.vim/bundle')
 " Plug 'https://github.com/kablamo/vim-git-log.git'
 " Plug 'https://github.com/majutsushi/tagbar'
 " Plug 'https://github.com/nathanaelkane/vim-indent-guides'
+" Plug 'https://github.com/nelstrom/vim-visual-star-search.git'
+" Plug 'https://github.com/scrooloose/syntastic.git'
 " Plug 'https://github.com/sgur/ctrlp-extensions.vim.git'
+" Plug 'https://github.com/terryma/vim-multiple-cursors.git'
 " Plug 'https://github.com/tpope/vim-ragtag.git', {'for': 'html'}
 " Plug 'https://github.com/vim-scripts/AutoTag.git', {'for': 'html'}
 Plug 'AndrewRadev/splitjoin.vim'
@@ -48,10 +51,9 @@ Plug 'https://github.com/kshenoy/vim-signature.git'
 Plug 'https://github.com/lervag/vimtex.git', {'for': 'tex'}
 Plug 'https://github.com/ludovicchabant/vim-gutentags.git'
 Plug 'https://github.com/mattn/emmet-vim.git', {'for': 'html'}
-Plug 'https://github.com/scrooloose/syntastic.git'
+Plug 'https://github.com/neomake/neomake.git'
 Plug 'https://github.com/shime/vim-livedown.git'
 Plug 'https://github.com/sjl/gundo.vim.git', {'on': 'GundoToggle'}
-Plug 'https://github.com/terryma/vim-multiple-cursors.git'
 Plug 'https://github.com/tmux-plugins/vim-tmux-focus-events.git'
 Plug 'https://github.com/tomtom/tlib_vim'
 Plug 'https://github.com/tpope/vim-abolish.git'
@@ -79,6 +81,20 @@ call plug#end()
 
 " Automatically identify the filetype for the plugins and always use syntax highlighting
 filetype indent plugin on | syn on
+
+autocmd! BufWritePost * Neomake
+
+let g:neomake_error_sign = {
+      \ 'text': '◼ ',
+      \ 'texthl': 'ErrorMsg',
+      \ }
+
+let g:neomake_warning_sign = {
+      \ 'text': '● ',
+      \ 'texthl': 'WarningMsg',
+      \ }
+
+" let g:neomake_open_list = 2
 
 " Set the completion function for a variety of different file types
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
@@ -195,6 +211,10 @@ let g:vimtex_complete_recursive_bib = 0
 
 let g:vimtex_view_method = 'mupdf'
 let g:vimtex_view_mupdf_options = '-r 288'
+
+if has("nvim")
+  let g:vimtex_latexmk_progname = 'nvr'
+endif
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 " Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
@@ -488,6 +508,8 @@ map <Leader>mf :call RenameFile()<cr>
 " Allow the Vim-R-Plugin to create the R assignment, but only with two
 " underscore presses when writing code in Vim
 let R_assign = 2
+let R_tmux_split = 1
+let R_vsplit = 0
 
 " Add in a command that will allow me to remove the trailing white space
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
