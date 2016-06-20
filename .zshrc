@@ -14,9 +14,6 @@ alias vim="vim --servername VIM"
 # really big enough for a HIDPI screen but it is pretty good overall
 alias mupdf="mupdf -r 288"
 
-# add an alias that will run the agenda command only for the addresses that are most important for me
-alias agenda="gcalcli agenda --calendar 'Office Hours Appointments' --calendar 'gkapfham@allegheny.edu' --calendar 'Office Hours' --calendar 'Department'"
-
 # setting the R history size to be a very large value
 export R_HISTSIZE="25000"
 
