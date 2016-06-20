@@ -54,6 +54,7 @@ local.properties
 *.fdb_latexmk
 *.synctex.gz
 *.pdfsync
+*.synctex.gz(busy)
 
 # algorithms
 ######################
@@ -149,6 +150,7 @@ tags
 .tags
 tags.lock
 tags.temp
+tags.tmp
 
 # Extra files #
 ######################
