@@ -564,7 +564,10 @@ command! FZFHidden call fzf#run({
 nmap <C-t> :BTags <CR>
 
 " Setup special key for viewing the Tags that match word highlighted
-nmap <C-i> :Tags <C-R><C-W> <CR>
+nmap <C-i> :Tags <C-R><C-W><CR>
+
+" Allow for running an ag search on the word currently under the cursor
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 
 " This allows you to jump to the definition of a function using FZF
 nnoremap <Tab> :Buffers<Cr>
