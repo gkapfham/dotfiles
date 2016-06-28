@@ -422,6 +422,7 @@ nmap t <Plug>(easymotion-t2)
 " map  n <Plug>(easymotion-next)
 " map  N <Plug>(easymotion-prev)
 
+" define a function that will run EasyMotion after running the incsearch
 function! s:incsearch_config(...) abort
   return incsearch#util#deepextend(deepcopy({
   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
@@ -432,9 +433,17 @@ function! s:incsearch_config(...) abort
   \ }), get(a:, 1, {}))
 endfunction
 
+" configure vim to use incsearch for all of my searching
 noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
 noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
 noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+
+let g:incsearch#highlight = {
+        \   'match' : {
+        \     'group' : 'Type',
+        \     'priority' : '10'
+        \   }
+        \ }
 
 " change the default EasyMotion shading to something more readable
 hi link EasyMotionTarget Type
