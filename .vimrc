@@ -4,22 +4,6 @@ call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
-" Plug 'FelikZ/ctrlp-py-matcher'
-" Plug 'https://github.com/Valloric/MatchTagAlways.git', {'for': 'html'}
-" Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
-" Plug 'https://github.com/dterei/VimBookmarking.git'
-" Plug 'https://github.com/ervandew/ag.git'
-" Plug 'https://github.com/jalvesaq/VimCom.git'
-" Plug 'https://github.com/junegunn/gv.vim.git'
-" Plug 'https://github.com/kablamo/vim-git-log.git'
-" Plug 'https://github.com/majutsushi/tagbar'
-" Plug 'https://github.com/nathanaelkane/vim-indent-guides'
-" Plug 'https://github.com/nelstrom/vim-visual-star-search.git'
-" Plug 'https://github.com/scrooloose/syntastic.git'
-" Plug 'https://github.com/sgur/ctrlp-extensions.vim.git'
-" Plug 'https://github.com/terryma/vim-multiple-cursors.git'
-" Plug 'https://github.com/tpope/vim-ragtag.git', {'for': 'html'}
-" Plug 'https://github.com/vim-scripts/AutoTag.git', {'for': 'html'}
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'haya14busa/incsearch-easymotion.vim'
