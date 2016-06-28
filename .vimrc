@@ -4,6 +4,7 @@ call plug#begin('~/.vim/bundle')
 
 " These are all of the Plugs that we use to enhance the behavior of Vim
 
+" Plug 'jdelkins/vim-correction', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -27,10 +28,9 @@ Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
-Plug 'https://github.com/garbas/vim-snipmate'
+Plug 'garbas/vim-snipmate'
 Plug 'int3/vim-extradite'
 Plug 'jalvesaq/Nvim-R'
-Plug 'jdelkins/vim-correction', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'jgdavey/tslime.vim'
 Plug 'joeytwiddle/sexy_scroller.vim'
@@ -42,8 +42,8 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'neomake/neomake'
-Plug 'rbonvall/vim-textobj-latex'
-Plug 'shime/vim-livedown'
+Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
+Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tomtom/tlib_vim'
