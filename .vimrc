@@ -400,12 +400,12 @@ nmap f <Plug>(easymotion-s)
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 
-" map <Leader> <Plug>(easymotion-prefix)
-nmap t <Plug>(easymotion-t2)
 " map  / <Plug>(easymotion-sn)
-" omap / <Plug>(easymotion-tn)
-" map  n <Plug>(easymotion-next)
 " map  N <Plug>(easymotion-prev)
+" map  n <Plug>(easymotion-next)
+" map <Leader> <Plug>(easymotion-prefix)
+" omap / <Plug>(easymotion-tn)
+nmap t <Plug>(easymotion-t2)
 
 " define a function that will run EasyMotion after running the incsearch
 function! s:incsearch_config(...) abort
@@ -418,7 +418,7 @@ function! s:incsearch_config(...) abort
   \ }), get(a:, 1, {}))
 endfunction
 
-" incsearch.vim x fuzzy x vim-easymotion
+" incsearch.vim combined with the fuzzy search plugin and the EasyMotion plugin
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
   \   'converters': [incsearch#config#fuzzy#converter()],
@@ -429,12 +429,13 @@ function! s:config_easyfuzzymotion(...) abort
   \ }), get(a:, 1, {}))
 endfunction
 
-" configure vim to use incsearch for all of my searching
+" configure to use incsearch for all of my searching
 noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
 noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
 noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
 noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
+" change the color of the highlighting for the incsearch plugin
 let g:incsearch#highlight = {
         \   'match' : {
         \     'group' : 'Type',
