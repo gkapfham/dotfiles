@@ -22,6 +22,9 @@ call plug#begin('~/.vim/bundle')
 " Plug 'https://github.com/vim-scripts/AutoTag.git', {'for': 'html'}
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'gilligan/textobj-gitgutter'
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'haya14busa/incsearch.vim'
 Plug 'https://github.com/Lokaltog/vim-easymotion.git'
 Plug 'https://github.com/MarcWeber/vim-addon-mw-utils'
 Plug 'https://github.com/Raimondi/delimitMate.git'
@@ -73,9 +76,8 @@ Plug 'kana/vim-textobj-user'
 Plug 'rbonvall/vim-textobj-latex'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'whatyouhide/vim-textobj-xmlattr'
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-easymotion.vim'
 
+"
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'https://github.com/ryanoasis/vim-devicons.git'
 
@@ -433,10 +435,22 @@ function! s:incsearch_config(...) abort
   \ }), get(a:, 1, {}))
 endfunction
 
+" incsearch.vim x fuzzy x vim-easymotion
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzy#converter()],
+  \   'modules': [incsearch#config#easymotion#module()],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
 " configure vim to use incsearch for all of my searching
 noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
 noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
 noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
 let g:incsearch#highlight = {
         \   'match' : {
