@@ -468,11 +468,6 @@ let g:easytags_updatetime_warn = 0
 let g:easytags_always_enabled = 1
 let g:easytags_async = 1
 
-" " Configuring the ctrlp plugin to work faster for searching
-" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-" let g:ctrlp_use_caching = 0
-" let g:ctrlp_z_nerdtree = 1
-
 " Define a function that allows you to determine what syntax group is being used
 map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
