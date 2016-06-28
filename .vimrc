@@ -28,23 +28,6 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
 Plug 'https://github.com/garbas/vim-snipmate'
-Plug 'https://github.com/mattn/emmet-vim.git', {'for': 'html'}
-Plug 'https://github.com/neomake/neomake.git'
-Plug 'https://github.com/shime/vim-livedown.git'
-Plug 'https://github.com/sjl/gundo.vim.git', {'on': 'GundoToggle'}
-Plug 'https://github.com/tmux-plugins/vim-tmux-focus-events.git'
-Plug 'https://github.com/tomtom/tlib_vim'
-Plug 'https://github.com/tpope/vim-abolish.git'
-Plug 'https://github.com/tpope/vim-commentary.git'
-Plug 'https://github.com/tpope/vim-fugitive.git'
-Plug 'https://github.com/tpope/vim-liquid.git'
-Plug 'https://github.com/tpope/vim-surround.git'
-Plug 'https://github.com/tpope/vim-unimpaired.git'
-Plug 'https://github.com/vim-scripts/HTML-AutoCloseTag.git', {'for': 'html'}
-Plug 'https://github.com/vim-scripts/SyntaxAttr.vim.git'
-Plug 'https://github.com/wellle/tmux-complete.vim.git'
-Plug 'https://github.com/xolox/vim-easytags.git'
-Plug 'https://github.com/xolox/vim-misc.git'
 Plug 'int3/vim-extradite'
 Plug 'jalvesaq/Nvim-R'
 Plug 'jdelkins/vim-correction', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
@@ -57,13 +40,29 @@ Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'mattn/emmet-vim', {'for': 'html'}
+Plug 'neomake/neomake'
 Plug 'rbonvall/vim-textobj-latex'
+Plug 'shime/vim-livedown'
+Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'tomtom/tlib_vim'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-liquid'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/HTML-AutoCloseTag', {'for': 'html'}
+Plug 'vim-scripts/SyntaxAttr.vim'
+Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
 
-"
 " always load the special font after all of the other plugins to ensure fonts render correctly
-Plug 'https://github.com/ryanoasis/vim-devicons.git'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
