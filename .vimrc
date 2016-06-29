@@ -9,9 +9,9 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Raimondi/delimitMate'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 Plug 'Z1MM32M4N/vim-superman'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -60,6 +60,15 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
+
+" " Load on nothing
+Plug 'SirVer/ultisnips', { 'on': [] }
+" Plug 'Valloric/YouCompleteMe', { 'on': [] }
+
+augroup load_us_ycm
+  autocmd!
+  autocmd InsertEnter * call plug#load('ultisnips') | autocmd! load_us_ycm
+augroup END
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'ryanoasis/vim-devicons'
