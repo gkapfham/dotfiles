@@ -61,9 +61,8 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 
-" " Load on nothing
+" Load on nothing
 Plug 'SirVer/ultisnips', { 'on': [] }
-" Plug 'Valloric/YouCompleteMe', { 'on': [] }
 
 augroup load_us_ycm
   autocmd!
