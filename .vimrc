@@ -82,7 +82,7 @@ autocmd! BufWritePost * Neomake
 
 let g:neomake_error_sign = {
       \ 'text': '◼ ',
-      \ 'texthl': 'ErrorMsg',
+      \ 'texthl': 'WarningMsg',
       \ }
 
 let g:neomake_warning_sign = {
