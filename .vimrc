@@ -540,8 +540,13 @@ call camelcasemotion#CreateMotionMappings('<leader>')
 
 " Configure up and down line movement so that I can handle paragraphs that are
 " "virtually" formatted without specific line breaks
-nmap j gj
-nmap k gk
+" nmap j gj
+" nmap k gk
+
+" Configure up and down line movement for virtual movement when there is no
+" count used. But, when there is a count, move by physical lines instead
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " Configure a key combination that allows me to stop using pair matching
 nmap <leader>tp :DelimitMateSwitch<CR>
