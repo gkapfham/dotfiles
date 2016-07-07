@@ -2,14 +2,12 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" These are all of the Plugs that we use to enhance the behavior of Vim
-
+" Plug 'SirVer/ultisnips'
 " Plug 'jdelkins/vim-correction', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Raimondi/delimitMate'
-" Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/YouCompleteMe'
 Plug 'Z1MM32M4N/vim-superman'
@@ -20,6 +18,7 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'bling/vim-airline'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'freitass/todo.txt-vim'
+Plug 'garbas/vim-snipmate'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'godlygeek/tabular'
 Plug 'gorodinskiy/vim-coloresque'
@@ -28,13 +27,12 @@ Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
-Plug 'garbas/vim-snipmate'
 Plug 'int3/vim-extradite'
 Plug 'jalvesaq/Nvim-R'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'jgdavey/tslime.vim'
 Plug 'joeytwiddle/sexy_scroller.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
@@ -165,12 +163,6 @@ vmap <C-c><C-c> <Plug>SendSelectionToTmux
 nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
 
-" Make sure that you can load the dot files when you are searching the file system
-" let g:ctrlp_show_hidden = 1
-
-" Configure ctrlp so that it uses a faster matcher
-" let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-
 " Ignore these directories in all programs like ctrlp
 set wildignore+=*/build/**
 set wildignore+=*/.git/*
@@ -180,12 +172,6 @@ set wildignore+=*/tmp/*
 " change the mapleader from \ to , -- this makes it easier to perform compilation in LaTeX
 let maplocalleader=","
 let mapleader=","
-
-" " Setting up SyncTex and compilation support for Tex-9
-" let g:tex_nine_config = {
-"             \'compiler': "latexmk",
-"             \'synctex': 1
-"             \}
 
 " Adding in the conceal option for latex. Trying this out to see if I like the rendering of mathematics
 set cole=2
