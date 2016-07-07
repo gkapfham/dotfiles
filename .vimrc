@@ -8,6 +8,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Raimondi/delimitMate'
+Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/YouCompleteMe'
 Plug 'Z1MM32M4N/vim-superman'
@@ -17,6 +18,7 @@ Plug 'artur-shaik/vim-javacomplete2'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bling/vim-airline'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
+Plug 'christoomey/vim-sort-motion'
 Plug 'freitass/todo.txt-vim'
 Plug 'garbas/vim-snipmate'
 Plug 'gilligan/textobj-gitgutter'
@@ -59,13 +61,13 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 
-" Load on nothing
-Plug 'SirVer/ultisnips', { 'on': [] }
+" " Load on nothing
+" Plug 'SirVer/ultisnips', { 'on': [] }
 
-augroup load_us_ycm
-  autocmd!
-  autocmd InsertEnter * call plug#load('ultisnips') | autocmd! load_us_ycm
-augroup END
+" augroup load_us_ycm
+"   autocmd!
+"   autocmd InsertEnter * call plug#load('ultisnips') | autocmd! load_us_ycm
+" augroup END
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'ryanoasis/vim-devicons'
@@ -597,7 +599,7 @@ nmap <C-u> :FZFMru<CR>
 " no hidden files are indexed with FZF by default --- so, also use a separate
 " command to display the hidden files along with the standard files)
 nmap <C-p> :FZF -m<CR>
-nmap <C-l> :FZFHidden<CR>
+nmap <C-h> :FZFHidden<CR>
 
 " Configure the colors for fzf so that they fit my overall theme
 let g:fzf_colors =
