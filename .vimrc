@@ -2,6 +2,7 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'godlygeek/tabular'
 " Plug 'jdelkins/vim-correction', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Lokaltog/vim-easymotion'
@@ -21,7 +22,6 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'freitass/todo.txt-vim'
 Plug 'garbas/vim-snipmate'
 Plug 'gilligan/textobj-gitgutter'
-Plug 'godlygeek/tabular'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
@@ -539,11 +539,6 @@ let g:pandoc#modules#disabled = ["folding"]
 " " Set up the CamelCaseMotion plugin so that it allows for movements with
 " " variables in programs written in Java and R, for instance
 call camelcasemotion#CreateMotionMappings('<leader>')
-
-" Configure up and down line movement so that I can handle paragraphs that are
-" "virtually" formatted without specific line breaks
-" nmap j gj
-" nmap k gk
 
 " Configure up and down line movement for virtual movement when there is no
 " count used. But, when there is a count, move by physical lines instead
