@@ -35,6 +35,7 @@ Plug 'jgdavey/tslime.vim'
 Plug 'joeytwiddle/sexy_scroller.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -59,7 +60,6 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
-Plug 'junegunn/vim-easy-align'
 
 " " Load on nothing
 " Plug 'SirVer/ultisnips', { 'on': [] }
