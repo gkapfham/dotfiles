@@ -59,6 +59,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
+Plug 'junegunn/vim-easy-align'
 
 " " Load on nothing
 " Plug 'SirVer/ultisnips', { 'on': [] }
@@ -618,3 +619,9 @@ let g:fzf_colors =
 " Add in a format string for controlling how FZF will color-code when running
 " a commands that shows the Git logs (Note that the blue is black by default)
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
