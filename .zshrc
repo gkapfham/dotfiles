@@ -124,15 +124,6 @@ man() {
   fi
 }
 
-# # Configure my shell to run and use a GPG agent for passwords in downloading and sending emails
-# envfile="$HOME/.gnupg/gpg-agent.env"
-# if [[ -e "$envfile" ]] && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
-#   eval "$(cat "$envfile")"
-# else
-#   eval "$(gpg-agent --daemon --allow-preset-passphrase)"
-# fi
-# export GPG_AGENT_INFO
-
 # Configure the autosuggestions plugin that allows command history to display interactively
 source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
