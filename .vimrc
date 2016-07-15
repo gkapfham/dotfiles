@@ -2,9 +2,6 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'godlygeek/tabular'
-" Plug 'jdelkins/vim-correction', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
-" Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
