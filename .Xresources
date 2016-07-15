@@ -1,7 +1,7 @@
 ! ------------------------------------------------------------------------------
 ! ROFI Color theme and configurations
 ! ------------------------------------------------------------------------------
-rofi.font: Ubuntu\ Mono\ derivative\ Powerline\ 32
+rofi.font: Ubuntu\ Mono\ derivative\ Powerline\ 30
 rofi.lines: 15
 
 rofi.color-enabled: true
