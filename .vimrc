@@ -4,6 +4,7 @@ call plug#begin('~/.vim/bundle')
 
 " Plug 'godlygeek/tabular'
 " Plug 'jdelkins/vim-correction', {'for': ['csv', 'gitcommit', 'html', 'markdown', 'tex']}
+" Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -45,7 +46,6 @@ Plug 'neomake/neomake'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
-Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
