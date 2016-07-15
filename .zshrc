@@ -69,7 +69,7 @@ HIST_STAMPS="mm/dd/yyyy"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git git-extras ant sudo vundle zsh-syntax-highlighting fasd tmux tmuxinator vi-mode zsh_reload)
+plugins=(git git-extras gpg-agent ant sudo vundle zsh-syntax-highlighting fasd tmux tmuxinator vi-mode zsh_reload)
 . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source $ZSH/oh-my-zsh.sh
 
@@ -124,14 +124,14 @@ man() {
   fi
 }
 
-# Configure my shell to run and use a GPG agent for passwords in downloading and sending emails
-envfile="$HOME/.gnupg/gpg-agent.env"
-if [[ -e "$envfile" ]] && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
-  eval "$(cat "$envfile")"
-else
-  eval "$(gpg-agent --daemon --allow-preset-passphrase --write-env-file "$envfile")"
-fi
-export GPG_AGENT_INFO
+# # Configure my shell to run and use a GPG agent for passwords in downloading and sending emails
+# envfile="$HOME/.gnupg/gpg-agent.env"
+# if [[ -e "$envfile" ]] && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
+#   eval "$(cat "$envfile")"
+# else
+#   eval "$(gpg-agent --daemon --allow-preset-passphrase)"
+# fi
+# export GPG_AGENT_INFO
 
 # Configure the autosuggestions plugin that allows command history to display interactively
 source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
