@@ -15,6 +15,7 @@ Plug 'airblade/vim-rooter'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bling/vim-airline'
+Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'christoomey/vim-sort-motion'
 Plug 'freitass/todo.txt-vim'
