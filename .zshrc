@@ -33,27 +33,6 @@ alias htop="htop -C"
 # create an alias that allows for loading a large fill screen terminal designed for text editing
 alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 
-# bindkey '^k' up-line-or-beginning-search
-# bindkey '^j' down-line-or-beginning-search
-# autoload -U history-search-end
-
-# # zle -N history-beginning-search-backward-end history-search-end
-# # zle -N history-beginning-search-forward-end history-search-end
-# #
-# bindkey "\e[A" history-beginning-search-backward-end
-# bindkey "\e[B" history-beginning-search-forward-end
-#
-# Note that you can use CTRL-R and CTRL-S to do this if not using vi-mode
-
-# bindkey "^R" history-incremental-search-backward
-# bindkey "^[[A" history-search-backward
-# bindkey "^[[B" history-search-forward
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# And, make sure that you rebind the tab key so that this feature does not conflict with vi-mode
-# COMPLETION_WAITING_DOTS="true"
-# bindkey "^I" expand-or-complete-with-dots
-
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
 # much faster.
