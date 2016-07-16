@@ -20,10 +20,7 @@ export R_HISTSIZE="25000"
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+# Define the theme to use my own derivative of the "norm" theme
 ZSH_THEME="norm-gkapfham"
 
 # Make it faster to load the todo.txt file used for my todo list.
