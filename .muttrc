@@ -8,7 +8,7 @@ unignore posted-to:
 set text_flowed=yes
 
 # use my standard configuration of vim that is used for all of text editing
-set editor="vim"
+set editor="nvim"
 
 # edit the emails in a local tmp/ directory, thus ensuring that I do not lose work when computer crashes
 set tmpdir="/home/gkapfham/.mutt/tmp"
