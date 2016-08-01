@@ -14,7 +14,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'bkad/CamelCaseMotion'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'christoomey/vim-sort-motion'
@@ -31,7 +31,6 @@ Plug 'int3/vim-extradite'
 Plug 'jalvesaq/Nvim-R'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'jgdavey/tslime.vim'
-Plug 'joeytwiddle/sexy_scroller.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -58,6 +57,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " " Load on nothing
 " Plug 'SirVer/ultisnips', { 'on': [] }
@@ -76,14 +76,15 @@ call plug#end()
 filetype indent plugin on | syn on
 
 autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * AirlineRefresh
 
 let g:neomake_error_sign = {
-      \ 'text': '◼ ',
+      \ 'text': '>',
       \ 'texthl': 'WarningMsg',
       \ }
 
 let g:neomake_warning_sign = {
-      \ 'text': '● ',
+      \ 'text': '>',
       \ 'texthl': 'WarningMsg',
       \ }
 
@@ -96,10 +97,10 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
-" Allow syntastic to populate a list of problems for a given file
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'passive_filetypes': ['java'] }
+" " Allow syntastic to populate a list of problems for a given file
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_mode_map = { 'mode': 'active',
+"                            \ 'passive_filetypes': ['java'] }
 
 " Disable the arrow keys so that I keep my fingers on home row during programming
 noremap <Up> <NOP>
@@ -179,7 +180,7 @@ let g:tex_conceal= 'adgms'
 hi Conceal ctermbg=234 ctermfg=143
 
 " Starting to use vim-latex and it needs several configurations to work correctly
-let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -synctex=1'"
+let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -interaction=nonstopmode -synctex=1'"
 let g:vimtex_fold_enabled = 0
 let g:vimtex_quickfix_mode = 2
 let g:vimtex_quickfix_open_on_warning = 0
@@ -370,11 +371,12 @@ set nocursorcolumn
 set nocursorline
 set ttyfast
 
+" Configure NeoVim so that it can use different cursor shapes when run in
+" recent terminal windows
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
 " This is a configuration that should stop NeoVim from highlighting searching results
 set nohlsearch
-
-" Make the source code history browsing feature open windows horizontally, as this supports better browsing
-" let g:Gitv_OpenHorizontal=1
 
 " Do not display the welcome message / splash screen when opening gvim or vim
 " with no specified file
@@ -384,9 +386,14 @@ set shortmess=I
 set laststatus=2
 let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
+let g:airline#extensions#hunks#enabled = 0
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
+" let g:airline#extensions#hunks#non_zero_only = 0
+" let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+
 set nosmd " turn off the status line that shows the silly word insert, airline is much better!
 
 " Configure the EasyMotion plugin for the main keys
@@ -451,10 +458,6 @@ let g:EasyMotion_do_shade = 0
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 
-" Configure scrolling in the window; breaks with the mouse flick but fine with the keyboard
-let g:SexyScroller_MaxTime = 500
-let g:SexyScroller_EasingStyle = 3
-
 " Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
 set tags=./tags;/,tags;/
 let g:easytags_ignored_filetypes = ''
@@ -470,17 +473,21 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 map <F5> :call SyntaxAttr()<CR>
 
 " Configure the GitGutter plugin so that it display signs in the sign column
-let g:gitgutter_signs = 1
-let g:gitgutter_realtime = 1
+let g:gitgutter_async = 1
 let g:gitgutter_eager = 1
+let g:gitgutter_realtime = 1
 let g:gitgutter_sign_column_always = 1
+let g:gitgutter_signs = 1
 
-" Set all of the symbols for the GitGutter
-let g:gitgutter_sign_added = '➕ '
-let g:gitgutter_sign_modified = '▲ '
-let g:gitgutter_sign_removed = '✘ '
-let g:gitgutter_sign_removed_first_line = '⏫ '
-let g:gitgutter_sign_modified_removed = '✱ '
+" " Set all of the symbols for the GitGutter
+" let g:gitgutter_sign_added = '➕ '
+" let g:gitgutter_sign_modified = '▲'
+" let g:gitgutter_sign_removed = '✘'
+" let g:gitgutter_sign_removed_first_line = '⏫ '
+" let g:gitgutter_sign_modified_removed = '✱'
+
+" Improve one of the symbols for the GitGutter
+let g:gitgutter_sign_removed_first_line = '^'
 
 " Automatically save changes before switching buffer with some
 " commands, like :cnfile. Very useful when running Qdo on a QuickFix list
