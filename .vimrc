@@ -190,12 +190,19 @@ let g:vimtex_indent_enabled = 1
 let g:vimtex_latexmk_enabled = 1
 let g:vimtex_latexmk_callback = 1
 let g:vimtex_complete_recursive_bib = 0
-
 let g:vimtex_view_method = 'mupdf'
 let g:vimtex_view_mupdf_options = '-r 288'
 
+" Configure nvim so that it uses the nvr program to support a server (helps
+" with the use of vimtex, which needs a server to communicate with programs)
 if has("nvim")
   let g:vimtex_latexmk_progname = 'nvr'
+endif
+
+" Configure nvim so that you can leave the terminal in the same as as you
+" leave insert mode (otherwise, must use the ESC key, which is not consistent)
+if has("nvim")
+  tnoremap jk <C-\><C-n>
 endif
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
