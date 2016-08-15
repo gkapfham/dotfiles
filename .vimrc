@@ -14,7 +14,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'bkad/CamelCaseMotion'
-Plug 'vim-airline/vim-airline'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'christoomey/vim-sort-motion'
@@ -43,6 +42,7 @@ Plug 'neomake/neomake'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -50,6 +50,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tweekmonster/spellrotate.vim'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/HTML-AutoCloseTag', {'for': 'html'}
 Plug 'vim-scripts/SyntaxAttr.vim'
@@ -57,7 +59,6 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
-Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " " Load on nothing
 " Plug 'SirVer/ultisnips', { 'on': [] }
@@ -76,7 +77,6 @@ call plug#end()
 filetype indent plugin on | syn on
 
 autocmd! BufWritePost * Neomake
-" autocmd! BufWritePost * AirlineRefresh
 
 let g:neomake_error_sign = {
       \ 'text': '>',
@@ -536,6 +536,7 @@ map <Leader>mf :call RenameFile()<cr>
 let R_assign = 2
 let R_tmux_split = 1
 let R_vsplit = 0
+let R_openpdf = 0
 
 " Add in a command that will allow me to remove the trailing white space
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
@@ -632,3 +633,10 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Setup mappings that allow for the rotation of misspelled words to
+" correctly-spelled words, using a plugin
+nmap <silent> zn <Plug>(SpellRotateForward)
+nmap <silent> zp <Plug>(SpellRotateBackward)
+vmap <silent> zn <Plug>(SpellRotateForwardV)
+vmap <silent> zp <Plug>(SpellRotateBackwardV)
