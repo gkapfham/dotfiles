@@ -76,6 +76,8 @@ autoload -U history-search-end
 bindkey "^k" history-incremental-search-backward
 bindkey "^j" history-incremental-search-backward
 
+bindkey -M viins 'jk' vi-cmd-mode
+
 # User configuration
 export DISABLE_AUTO_TITLE=true
 
