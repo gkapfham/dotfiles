@@ -59,6 +59,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
+Plug 'Valloric/MatchTagAlways'
 
 " " Load on nothing
 " Plug 'SirVer/ultisnips', { 'on': [] }
@@ -147,7 +148,7 @@ set t_ZR=[23m
 "
 " set the hybrid color scheme for vim running in the terminal window
 " let g:hybrid_use_Xresources = 1
-colorscheme hybrid
+colorscheme orangehybrid
 
 " define some commands for wrapping and not wrapping a line or paragraph
 command! Wrap set textwidth=120
@@ -398,6 +399,7 @@ let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
 let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
+let g:airline#extensions#branch#enabled = 0
 " let g:airline#extensions#hunks#non_zero_only = 0
 " let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
 
@@ -504,7 +506,18 @@ set autowrite
 " supposed to be named (with respect to upper and lowercase), use >
 " Basically, make the syntax highlighting for method declarations a lot better
 " let java_highlight_functions="indent"
-let java_highlight_functions="style"
+" let java_highlight_functions="style"
+" let java_highlight_debug=1
+
+let java_highlight_all=1
+let java_highlight_functions=1
+let java_highlight_functions=1
+let java_highlight_java_lang_ids=1
+let java_space_errors=1
+let java_comment_strings=1
+
+autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
+set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
 
 " Bubble single lines
 nmap <C-Up> [e
