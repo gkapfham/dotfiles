@@ -16,9 +16,6 @@
 --regex-latex=/\\ref[[:space:]]*\{([^}]+)\}/\1/r,ref/
 --regex-latex=/\\pageref[[:space:]]*\{([^}]+)\}/\1/p,pageref/
 --regex-make=/^([^:# \t]+)[ \t]*[:]{1,2}/\1/t,targets/
---langdef=tex2
---langmap=tex2:.tex
---regex-tex2=/\\label[ \t]*\*?\{[ \t]*([^}]*)\}/\1/l,label/
 --langdef=R
 --langmap=r:.R.r
 --regex-R=/^[ \t]*"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*=[ \t]function/\1/f,Functions/
