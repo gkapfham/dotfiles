@@ -77,20 +77,6 @@ call plug#end()
 " Automatically identify the filetype for the plugins and always use syntax highlighting
 filetype indent plugin on | syn on
 
-autocmd! BufWritePost * Neomake
-
-let g:neomake_error_sign = {
-      \ 'text': '>',
-      \ 'texthl': 'WarningMsg',
-      \ }
-
-let g:neomake_warning_sign = {
-      \ 'text': '>',
-      \ 'texthl': 'WarningMsg',
-      \ }
-
-" let g:neomake_open_list = 2
-
 " Set the completion function for a variety of different file types
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
@@ -488,7 +474,7 @@ let g:gitgutter_realtime = 1
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_signs = 1
 
-" " Set all of the symbols for the GitGutter
+" " Set all of the symbols for the GitGutter (break in NeoVim)
 " let g:gitgutter_sign_added = '➕ '
 " let g:gitgutter_sign_modified = '▲'
 " let g:gitgutter_sign_removed = '✘'
@@ -517,7 +503,35 @@ let java_space_errors=1
 let java_comment_strings=1
 
 autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
-set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+
+autocmd! BufWritePost * Neomake
+
+let g:neomake_error_sign = {
+      \ 'text': '>',
+      \ 'texthl': 'WarningMsg',
+      \ }
+
+let g:neomake_warning_sign = {
+      \ 'text': '>',
+      \ 'texthl': 'WarningMsg',
+      \ }
+
+" let g:neomake_open_list = 2
+
+let errorformat =
+        \ '%W%f:%l:%c: style: %m,' .
+        \ '%W%f:%l:%c: warning: %m,' .
+        \ '%E%f:%l:%c: error: %m,'
+
+let g:neomake_r_rlint_maker = {
+        \ 'exe': 'rlint',
+        \ 'errorformat' :
+        \ '%W%f:%l:%c: style: %m,' .
+        \ '%W%f:%l:%c: warning: %m,' .
+        \ '%E%f:%l:%c: error: %m,'
+        \ }
+let g:neomake_r_enabled_makers = ['rlint']
 
 " Bubble single lines
 nmap <C-Up> [e
@@ -653,3 +667,6 @@ nmap <silent> zn <Plug>(SpellRotateForward)
 nmap <silent> zp <Plug>(SpellRotateBackward)
 vmap <silent> zn <Plug>(SpellRotateForwardV)
 vmap <silent> zp <Plug>(SpellRotateBackwardV)
+
+let g:lt_location_list_toggle_map = '<leader>c'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
