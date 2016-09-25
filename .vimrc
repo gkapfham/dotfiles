@@ -488,13 +488,7 @@ let g:gitgutter_sign_removed_first_line = '^'
 " commands, like :cnfile. Very useful when running Qdo on a QuickFix list
 set autowrite
 
-" However, if you follow the Java guidelines about how functions and classes are
-" supposed to be named (with respect to upper and lowercase), use >
-" Basically, make the syntax highlighting for method declarations a lot better
-" let java_highlight_functions="indent"
-" let java_highlight_functions="style"
-" let java_highlight_debug=1
-
+" Configure the syntax highlighting for the Java programming language
 let java_highlight_all=1
 let java_highlight_functions=1
 let java_highlight_functions=1
@@ -502,28 +496,24 @@ let java_highlight_java_lang_ids=1
 let java_space_errors=1
 let java_comment_strings=1
 
+" Configure the makeprg and the errorformat to support using Ant build systems for Java
 autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
 autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
 
+" Configure Neomake to run on the save of every buffer
 autocmd! BufWritePost * Neomake
 
+" Configure the signs that are used in Neomake displays
 let g:neomake_error_sign = {
-      \ 'text': '>',
+      \ 'text': '!',
       \ 'texthl': 'WarningMsg',
       \ }
-
 let g:neomake_warning_sign = {
       \ 'text': '>',
       \ 'texthl': 'WarningMsg',
       \ }
 
-" let g:neomake_open_list = 2
-
-let errorformat =
-        \ '%W%f:%l:%c: style: %m,' .
-        \ '%W%f:%l:%c: warning: %m,' .
-        \ '%E%f:%l:%c: error: %m,'
-
+" Configure a Neomake for running rlint
 let g:neomake_r_rlint_maker = {
         \ 'exe': 'rlint',
         \ 'errorformat' :
