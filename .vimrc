@@ -60,6 +60,7 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'Valloric/MatchTagAlways'
+Plug 'altercation/vim-colors-solarized'
 
 " " Load on nothing
 " Plug 'SirVer/ultisnips', { 'on': [] }
