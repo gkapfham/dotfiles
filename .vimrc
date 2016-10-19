@@ -8,6 +8,7 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
+Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe'
 Plug 'Z1MM32M4N/vim-superman'
 Plug 'airblade/vim-gitgutter'
@@ -59,8 +60,6 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
-Plug 'Valloric/MatchTagAlways'
-Plug 'altercation/vim-colors-solarized'
 
 " " Load on nothing
 " Plug 'SirVer/ultisnips', { 'on': [] }
