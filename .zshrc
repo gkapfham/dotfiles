@@ -86,6 +86,7 @@ export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.
 
 # FZF is a fuzzy file finder and I set these default options for use in tmux or a terminal
 export FZF_DEFAULT_OPTS='
+  --no-bold
   --bind ctrl-f:page-down,ctrl-b:page-up
   --color fg:-1,bg:-1,hl:64,fg+:3,bg+:234,hl+:172
   --color info:110,prompt:110,spinner:109,pointer:172,marker:172
