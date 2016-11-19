@@ -25,6 +25,7 @@ Plug 'gorodinskiy/vim-coloresque'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/vim-operator-flashy'
 Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
 Plug 'int3/vim-extradite'
@@ -34,6 +35,7 @@ Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'kana/vim-operator-user'
 Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -83,6 +85,9 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" let g:JavaComplete_ShowExternalCommandsOutput = 1
+" let g:JavaComplete_JavaviDebug = 0
+" let g:JavaComplete_JavaviLogfileDirectory = '~/.javavi'
 
 " " Allow syntastic to populate a list of problems for a given file
 " let g:syntastic_always_populate_loc_list = 1
@@ -253,6 +258,17 @@ if !exists('g:ycm_semantic_triggers')
 let g:ycm_semantic_triggers.tex = [
         \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
         \ ]
+
+let g:mta_use_matchparen_group = 0
+let g:mta_set_default_matchtag_color = 0
+
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'liquid' : 1,
+    \}
 
 " allow CTRLP to show fifteen total matches, helping in cases where there are
 " many matches that we still want to display and consider
@@ -559,9 +575,9 @@ let R_openpdf = 0
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
 " Load matchit.vim, but only if the user hasn't installed a newer version.
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
-endif
+" if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  " runtime! macros/matchit.vim
+" endif
 
 " Remove the feature that performs folding inside of Markdown files
 let g:pandoc#modules#disabled = ["folding"]
@@ -604,6 +620,13 @@ command! FZFHidden call fzf#run({
 \  'options': '-m -x +s',
 \  'down':    '40%'})
 
+" Define a custom command for loading hidden files as well as regular with FZF
+command! FZFMine call fzf#run({
+\  'source':  'ag --ignore .git -l -g ""',
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})
+
 " Setup special key for viewing the tabs in the buffer
 nmap <C-t> :BTags <CR>
 
@@ -623,27 +646,53 @@ nmap <C-u> :FZFMru<CR>
 " Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
 " no hidden files are indexed with FZF by default --- so, also use a separate
 " command to display the hidden files along with the standard files)
-nmap <C-p> :FZF -m<CR>
+nmap <C-p> :FZFMine<CR>
+" nmap <C-p> :FZF -m<CR>
 nmap <C-h> :FZFHidden<CR>
 
-" Configure the colors for fzf so that they fit my overall theme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'Normal', 'Normal'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+" " Customize fzf colors to match your color scheme
+" let g:fzf_colors =
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
+
+" " Configure the colors for fzf so that they fit my overall theme
+" let g:fzf_colors =
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'Normal', 'Normal'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
 
 " Add in a format string for controlling how FZF will color-code when running
 " a commands that shows the Git logs (Note that the blue is black by default)
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=110 ctermbg=235
+  highlight fzf2 ctermfg=110 ctermbg=235
+  highlight fzf3 ctermfg=110 ctermbg=235
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -660,3 +709,8 @@ vmap <silent> zp <Plug>(SpellRotateBackwardV)
 
 let g:lt_location_list_toggle_map = '<leader>c'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
+
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
+highlight default Flashy term=bold ctermbg=237 guibg=#13354A
+let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
