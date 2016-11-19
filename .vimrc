@@ -89,11 +89,6 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " let g:JavaComplete_JavaviDebug = 0
 " let g:JavaComplete_JavaviLogfileDirectory = '~/.javavi'
 
-" " Allow syntastic to populate a list of problems for a given file
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_mode_map = { 'mode': 'active',
-"                            \ 'passive_filetypes': ['java'] }
-
 " Disable the arrow keys so that I keep my fingers on home row during programming
 noremap <Up> <NOP>
 noremap <Down> <NOP>
