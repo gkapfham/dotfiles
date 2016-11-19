@@ -25,6 +25,7 @@ Plug 'gorodinskiy/vim-coloresque'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/vim-auto-programming'
 Plug 'haya14busa/vim-operator-flashy'
 Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
@@ -85,6 +86,7 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+set completefunc=autoprogramming#complete
 " let g:JavaComplete_ShowExternalCommandsOutput = 1
 " let g:JavaComplete_JavaviDebug = 0
 " let g:JavaComplete_JavaviLogfileDirectory = '~/.javavi'
