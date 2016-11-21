@@ -606,21 +606,21 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 command! FZFMru call fzf#run({
 \  'source':  v:oldfiles,
 \  'sink':    'e',
-\  'options': '-m -x +s',
+\  'options': '-m -x +s --no-bold',
 \  'down':    '40%'})
 
 " Define a custom command for loading hidden files as well as regular with FZF
 command! FZFHidden call fzf#run({
 \  'source':  'ag --hidden --ignore .git -l -g ""',
 \  'sink':    'e',
-\  'options': '-m -x +s',
+\  'options': '-m -x +s --no-bold',
 \  'down':    '40%'})
 
 " Define a custom command for loading hidden files as well as regular with FZF
 command! FZFMine call fzf#run({
 \  'source':  'ag --ignore .git -l -g ""',
 \  'sink':    'e',
-\  'options': '-m -x +s',
+\  'options': '-m -x +s --no-bold',
 \  'down':    '40%'})
 
 " Setup special key for viewing the tabs in the buffer
