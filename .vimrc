@@ -62,6 +62,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
+Plug 'lfv89/vim-interestingwords'
 
 " " Load on nothing
 " Plug 'SirVer/ultisnips', { 'on': [] }
@@ -710,3 +711,9 @@ map y <Plug>(operator-flashy)
 nmap Y <Plug>(operator-flashy)$
 highlight default Flashy term=bold ctermbg=237 guibg=#13354A
 let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
+
+let g:interestingWordsTermColors = ['143', '110', '173']
+nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
+nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
+nnoremap <silent> n :call WordNavigation('forward')<cr>
+nnoremap <silent> N :call WordNavigation('backward')<cr>
