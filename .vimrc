@@ -39,6 +39,7 @@ Plug 'kana/vim-operator-user'
 Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'lfv89/vim-interestingwords'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'neomake/neomake'
@@ -62,7 +63,6 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
-Plug 'lfv89/vim-interestingwords'
 
 " " Load on nothing
 " Plug 'SirVer/ultisnips', { 'on': [] }
@@ -293,7 +293,7 @@ set autoindent                                 " always set autoindenting on
 set copyindent                                 " copy the previous indentation on autoindenting
 set shiftwidth=2                               " number of spaces to use for autoindenting
 set shiftround                                 " use multiple of shiftwidth when indenting with '<' and '>'
-set showmatch                                  " set show matching parenthesis
+" set showmatch                                  " set show matching parenthesis
 set ignorecase                                 " ignore case when searching
 set infercase                                  " predict the case that is needed when doing auto completion
 set smartcase                                  " ignore case if search pattern is all lowercase, case-sensitive otherwise
