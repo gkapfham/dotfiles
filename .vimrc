@@ -59,6 +59,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/HTML-AutoCloseTag', {'for': 'html'}
 Plug 'vim-scripts/SyntaxAttr.vim'
+Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
