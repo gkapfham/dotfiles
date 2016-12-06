@@ -21,7 +21,8 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'freitass/todo.txt-vim'
 Plug 'garbas/vim-snipmate'
 Plug 'gilligan/textobj-gitgutter'
-Plug 'gorodinskiy/vim-coloresque'
+Plug 'spacewander/vim-coloresque'
+" Plug 'gorodinskiy/vim-coloresque'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch.vim'
@@ -64,6 +65,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
+Plug 'davidhalter/jedi-vim'
 
 " " Load on nothing
 " Plug 'SirVer/ultisnips', { 'on': [] }
