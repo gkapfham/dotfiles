@@ -2,6 +2,9 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'haya14busa/incsearch-easymotion.vim'
+" Plug 'haya14busa/incsearch-fuzzy.vim'
+" Plug 'haya14busa/incsearch.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -18,14 +21,11 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'christoomey/vim-sort-motion'
+Plug 'davidhalter/jedi-vim'
 Plug 'freitass/todo.txt-vim'
 Plug 'garbas/vim-snipmate'
 Plug 'gilligan/textobj-gitgutter'
-Plug 'spacewander/vim-coloresque'
-" Plug 'gorodinskiy/vim-coloresque'
-Plug 'haya14busa/incsearch-easymotion.vim'
-Plug 'haya14busa/incsearch-fuzzy.vim'
-Plug 'haya14busa/incsearch.vim'
+Plug 'gorodinskiy/vim-coloresque'
 Plug 'haya14busa/vim-operator-flashy'
 Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
@@ -47,12 +47,14 @@ Plug 'neomake/neomake'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
+Plug 'spacewander/vim-coloresque'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-liquid'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/spellrotate.vim'
@@ -65,7 +67,6 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
-Plug 'davidhalter/jedi-vim'
 
 " " Load on nothing
 " Plug 'SirVer/ultisnips', { 'on': [] }
@@ -180,6 +181,7 @@ let g:vimtex_toc_resize = 0
 let g:vimtex_toc_hide_help = 1
 let g:vimtex_indent_enabled = 1
 let g:vimtex_latexmk_enabled = 1
+let g:vimtex_latexmk_continuous = 1
 let g:vimtex_latexmk_callback = 1
 let g:vimtex_complete_recursive_bib = 0
 let g:vimtex_view_method = 'mupdf'
@@ -196,6 +198,12 @@ endif
 if has("nvim")
   tnoremap jk <C-\><C-n>
 endif
+
+" Configure nvim so that it uses the inccommand
+if has("nvim")
+  set inccommand=split
+endif
+
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 " Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
@@ -240,6 +248,8 @@ let g:ycm_filetype_blacklist = {
         \ 'pandoc' : 1,
         \ 'infolog' : 1,
         \}
+
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
 
 " make YCM compatible with UltiSnips
 let g:UltiSnipsExpandTrigger="<C-k>"
@@ -296,7 +306,7 @@ set autoindent                                 " always set autoindenting on
 set copyindent                                 " copy the previous indentation on autoindenting
 set shiftwidth=2                               " number of spaces to use for autoindenting
 set shiftround                                 " use multiple of shiftwidth when indenting with '<' and '>'
-" set showmatch                                  " set show matching parenthesis
+set showmatch                                  " set show matching parenthesis
 set ignorecase                                 " ignore case when searching
 set infercase                                  " predict the case that is needed when doing auto completion
 set smartcase                                  " ignore case if search pattern is all lowercase, case-sensitive otherwise
@@ -412,48 +422,63 @@ nmap f <Plug>(easymotion-s)
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  ? <Plug>(easymotion-sn)
+omap ? <Plug>(easymotion-tn)
+
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+" Without these mappings, `n` & `N` works fine. (These mappings just provide
+" different highlight method and have some other features )
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+
 " map  / <Plug>(easymotion-sn)
 " map  N <Plug>(easymotion-prev)
 " map  n <Plug>(easymotion-next)
 " map <Leader> <Plug>(easymotion-prefix)
 " omap / <Plug>(easymotion-tn)
-nmap t <Plug>(easymotion-t2)
+" nmap t <Plug>(easymotion-t2)
 
-" define a function that will run EasyMotion after running the incsearch
-function! s:incsearch_config(...) abort
-  return incsearch#util#deepextend(deepcopy({
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {
-  \     "\<CR>": '<Over>(easymotion)'
-  \   },
-  \   'is_expr': 0
-  \ }), get(a:, 1, {}))
-endfunction
+" " define a function that will run EasyMotion after running the incsearch
+" function! s:incsearch_config(...) abort
+"   return incsearch#util#deepextend(deepcopy({
+"   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+"   \   'keymap': {
+"   \     "\<CR>": '<Over>(easymotion)'
+"   \   },
+"   \   'is_expr': 0
+"   \ }), get(a:, 1, {}))
+" endfunction
 
-" incsearch.vim combined with the fuzzy search plugin and the EasyMotion plugin
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-  \   'converters': [incsearch#config#fuzzy#converter()],
-  \   'modules': [incsearch#config#easymotion#module()],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
-endfunction
+" " incsearch.vim combined with the fuzzy search plugin and the EasyMotion plugin
+" function! s:config_easyfuzzymotion(...) abort
+"   return extend(copy({
+"   \   'converters': [incsearch#config#fuzzy#converter()],
+"   \   'modules': [incsearch#config#easymotion#module()],
+"   \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+"   \   'is_expr': 0,
+"   \   'is_stay': 1
+"   \ }), get(a:, 1, {}))
+" endfunction
 
-" configure to use incsearch for all of my searching
-noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
-noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
 
-" change the color of the highlighting for the incsearch plugin
-let g:incsearch#highlight = {
-        \   'match' : {
-        \     'group' : 'Type',
-        \     'priority' : '10'
-        \   }
-        \ }
+" " configure to use incsearch for all of my searching
+" noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+" noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+" noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+
+" " change the color of the highlighting for the incsearch plugin
+" let g:incsearch#highlight = {
+"         \   'match' : {
+"         \     'group' : 'Type',
+"         \     'priority' : '10'
+"         \   }
+"         \ }
 
 " change the default EasyMotion shading to something more readable
 hi link EasyMotionTarget Type
@@ -710,13 +735,14 @@ vmap <silent> zp <Plug>(SpellRotateBackwardV)
 let g:lt_location_list_toggle_map = '<leader>c'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 
+" Highlight the region that you have just yanked
 map y <Plug>(operator-flashy)
 nmap Y <Plug>(operator-flashy)$
 highlight default Flashy term=bold ctermbg=237 guibg=#13354A
 let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
 
-let g:interestingWordsTermColors = ['143', '110', '173']
+let g:interestingWordsTermColors = ['143', '110', '173', '237', '110']
 nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
 nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
-nnoremap <silent> n :call WordNavigation('forward')<cr>
-nnoremap <silent> N :call WordNavigation('backward')<cr>
+nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
+nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
