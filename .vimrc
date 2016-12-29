@@ -3,11 +3,21 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " NOTE: These plugins cannot be used in NeoVim until a bug is fixed
+
 " Plug 'haya14busa/incsearch-easymotion.vim'
 " Plug 'haya14busa/incsearch-fuzzy.vim'
 " Plug 'haya14busa/incsearch.vim'
 
+" NOTE: Plugins that are no longer being used by may be used in the future
+
+" Plug 'Valloric/MatchTagAlways'
+
+" Plug 'Raimondi/delimitMate'
+" nmap <leader>tp :DelimitMateSwitch<CR>
+" let delimitMateSmartMatchpairs = 1
+
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
 
 Plug 'easymotion/vim-easymotion'
 
@@ -21,11 +31,12 @@ omap ? <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
+
+let g:AutoPairsShortcutToggle = '<leader>apt'
+
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
-" Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe'
 Plug 'Z1MM32M4N/vim-superman'
 Plug 'airblade/vim-gitgutter'
@@ -616,9 +627,6 @@ call camelcasemotion#CreateMotionMappings('<leader>')
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
-" Configure a key combination that allows me to stop using pair matching
-nmap <leader>tp :DelimitMateSwitch<CR>
-let delimitMateSmartMatchpairs = 1
 
 " Mapping selecting mappings --- lets you see the mappings that are configured
 nmap <leader><tab> <plug>(fzf-maps-n)
