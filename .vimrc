@@ -2,16 +2,30 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" NOTE: These plugins cannot be used in NeoVim until a bug is fixed
 " Plug 'haya14busa/incsearch-easymotion.vim'
 " Plug 'haya14busa/incsearch-fuzzy.vim'
 " Plug 'haya14busa/incsearch.vim'
+
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'Lokaltog/vim-easymotion'
+
+Plug 'easymotion/vim-easymotion'
+
+nmap f <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  ? <Plug>(easymotion-sn)
+omap ? <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
-Plug 'Valloric/MatchTagAlways'
+" Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe'
 Plug 'Z1MM32M4N/vim-superman'
 Plug 'airblade/vim-gitgutter'
@@ -43,7 +57,7 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lfv89/vim-interestingwords'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim', {'for': 'html'}
-Plug 'neomake/neomake'
+" Plug 'neomake/neomake'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
@@ -67,6 +81,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
+Plug 'w0rp/ale'
 
 " " Load on nothing
 " Plug 'SirVer/ultisnips', { 'on': [] }
@@ -269,16 +284,16 @@ let g:ycm_semantic_triggers.tex = [
         \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
         \ ]
 
-let g:mta_use_matchparen_group = 0
-let g:mta_set_default_matchtag_color = 0
+" let g:mta_use_matchparen_group = 0
+" let g:mta_set_default_matchtag_color = 0
 
-let g:mta_filetypes = {
-    \ 'html' : 1,
-    \ 'xhtml' : 1,
-    \ 'xml' : 1,
-    \ 'jinja' : 1,
-    \ 'liquid' : 1,
-    \}
+" let g:mta_filetypes = {
+"     \ 'html' : 0,
+"     \ 'xhtml' : 1,
+"     \ 'xml' : 1,
+"     \ 'jinja' : 1,
+"     \ 'liquid' : 1,
+"     \}
 
 " allow CTRLP to show fifteen total matches, helping in cases where there are
 " many matches that we still want to display and consider
@@ -306,7 +321,7 @@ set autoindent                                 " always set autoindenting on
 set copyindent                                 " copy the previous indentation on autoindenting
 set shiftwidth=2                               " number of spaces to use for autoindenting
 set shiftround                                 " use multiple of shiftwidth when indenting with '<' and '>'
-set showmatch                                  " set show matching parenthesis
+" set showmatch                                  " set show matching parenthesis
 set ignorecase                                 " ignore case when searching
 set infercase                                  " predict the case that is needed when doing auto completion
 set smartcase                                  " ignore case if search pattern is all lowercase, case-sensitive otherwise
@@ -417,21 +432,6 @@ let g:airline#extensions#branch#enabled = 0
 
 set nosmd " turn off the status line that shows the silly word insert, airline is much better!
 
-" Configure the EasyMotion plugin for the main keys
-nmap f <Plug>(easymotion-s)
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
-
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map  ? <Plug>(easymotion-sn)
-omap ? <Plug>(easymotion-tn)
-
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
 
 " map  / <Plug>(easymotion-sn)
 " map  N <Plug>(easymotion-prev)
@@ -541,8 +541,8 @@ let java_comment_strings=1
 autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
 autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
 
-" Configure Neomake to run on the save of every buffer
-autocmd! BufWritePost * Neomake
+" " Configure Neomake to run on the save of every buffer
+" autocmd! BufWritePost * Neomake
 
 " Configure the signs that are used in Neomake displays
 let g:neomake_error_sign = {
@@ -746,3 +746,6 @@ nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
 nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
 nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
 nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
