@@ -2,15 +2,15 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" NOTE: These plugins cannot be used in NeoVim until a bug is fixed
+" Plugins cannot be used until a bug is fixed in Neovim {{{
 
 " Plug 'haya14busa/incsearch-easymotion.vim'
 " Plug 'haya14busa/incsearch-fuzzy.vim'
 " Plug 'haya14busa/incsearch.vim'
 
-" Plugins that are no longer being used by may be used in the future {{{
+" }}}
 
-" Plug 'Valloric/MatchTagAlways'
+" Plugins that are no longer being used by may be used in the future {{{
 
 " Plug 'Raimondi/delimitMate'
 " nmap <leader>tp :DelimitMateSwitch<CR>
@@ -24,6 +24,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
+Plug 'Valloric/MatchTagAlways'
 
 " }}}
 
