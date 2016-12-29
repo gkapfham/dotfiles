@@ -8,7 +8,7 @@ call plug#begin('~/.vim/bundle')
 " Plug 'haya14busa/incsearch-fuzzy.vim'
 " Plug 'haya14busa/incsearch.vim'
 
-" NOTE: Plugins that are no longer being used by may be used in the future
+" Plugins that are no longer being used by may be used in the future {{{
 
 " Plug 'Valloric/MatchTagAlways'
 
@@ -16,11 +16,22 @@ call plug#begin('~/.vim/bundle')
 " nmap <leader>tp :DelimitMateSwitch<CR>
 " let delimitMateSmartMatchpairs = 1
 
+" }}}
+
+" Plugins that require no configuration {{{
+
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'SirVer/ultisnips'
+Plug 'Valloric/ListToggle'
+
+" }}}
+
+" Plugins that require configuration {{{
+
+" vim-easymotion {{{
 
 Plug 'easymotion/vim-easymotion'
-
 nmap f <Plug>(easymotion-s)
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
@@ -31,12 +42,15 @@ omap ? <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 
-Plug 'jiangmiao/auto-pairs'
+" }}}
 
+" auto-pairs {{{
+
+Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutToggle = '<leader>apt'
 
-Plug 'SirVer/ultisnips'
-Plug 'Valloric/ListToggle'
+" }}}
+
 Plug 'Valloric/YouCompleteMe'
 Plug 'Z1MM32M4N/vim-superman'
 Plug 'airblade/vim-gitgutter'
