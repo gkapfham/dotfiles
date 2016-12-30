@@ -14,23 +14,6 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " }}}
 
-" Line manipulations {{{
-
-" Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-
-" Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-" Insert a blank line
-nmap oo Ojk
-
-" Remove trailing whitespace
-nnoremap <Leader>rtw :%s/\s\+$//e<CR>
-
-" }}}
 
 " Turn off spell checking {{{
 
@@ -418,9 +401,24 @@ vmap <silent> zp <Plug>(SpellRotateBackwardV)
 
 " }}}
 
+" vim-airline {{{
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+set laststatus=2
+let g:airline_theme='tomorrow'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
+let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
+let g:airline#extensions#hunks#enabled = 0
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
+let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#hunks#non_zero_only = 0
+let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+set nosmd
 
+" }}}
 Plug 'vim-scripts/SyntaxAttr.vim'
 
 Plug 'wellle/targets.vim'
@@ -484,6 +482,8 @@ let java_highlight_java_lang_ids=1
 let java_space_errors=1
 let java_comment_strings=1
 
+
+
 " }}}
 
 " Syntax highlighting and completion {{{
@@ -498,6 +498,35 @@ set omnifunc=syntaxcomplete#Complete
 autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 autocmd BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = "html,body,head,tbody,div"
+
+" }}}
+
+" Completions {{{
+
+set complete-=k complete+=k
+set complete+=kspell
+set complete+=]
+
+set cot=menu
+set completeopt=longest,menuone
+set wildmenu
+set wildmode=longest:full,full
+
+" }}}
+
+" Line manipulations {{{
+
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
+" Insert a blank line
+nmap oo Ojk
+
 
 " }}}
 
@@ -581,24 +610,6 @@ let g:vimtex_complete_recursive_bib = 0
 let g:vimtex_view_method = 'mupdf'
 let g:vimtex_view_mupdf_options = '-r 288'
 
-" Configure nvim so that it uses the nvr program to support a server (helps
-" with the use of vimtex, which needs a server to communicate with programs)
-if has("nvim")
-  let g:vimtex_latexmk_progname = 'nvr'
-endif
-
-" Configure nvim so that you can leave the terminal in the same as as you
-" leave insert mode (otherwise, must use the ESC key, which is not consistent)
-if has("nvim")
-  tnoremap jk <C-\><C-n>
-endif
-
-" Configure nvim so that it uses the inccommand
-if has("nvim")
-  set inccommand=split
-endif
-
-
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 " Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
 fu! TexQuotes()
@@ -617,21 +628,26 @@ autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 " Make sure that the full latex mode is always run to get the benefits of plugins
 let g:tex_flavor = 'tex'
 
-" Turn on smart indentation with the Latex plugins, nice and very helpful
-" set smartindent
+" Neovim-specific configurations {{{
 
-" Configure completion so that it includes the dictionary
-set complete-=k complete+=k
-set complete+=kspell
-set complete+=]
+" Configure nvim so that it uses the nvr program to support a server (helps
+" with the use of vimtex, which needs a server to communicate with programs)
+if has("nvim")
+  let g:vimtex_latexmk_progname = 'nvr'
+endif
 
-" note that menu provides a substantially better configuration for viewing the autocompletion output that is available in gvim
-set cot=menu
-set completeopt=longest,menuone
+" Configure nvim so that you can leave the terminal in the same as as you
+" leave insert mode (otherwise, must use the ESC key, which is not consistent)
+if has("nvim")
+  noremap jk <C-\><C-n>
+endif
 
-" start using the wildmenu to complete different commands in command-mode
-set wildmenu
-set wildmode=longest:full,full
+" Configure nvim so that it uses the inccommand
+if has("nvim")
+  set inccommand=split
+endif
+
+" }}}
 
 " Adding in a bunch of additional commands from:
 " http://nvie.com/posts/how-i-boosted-my-vim/
@@ -735,3 +751,8 @@ let g:neomake_r_rlint_maker = {
         \ }
 let g:neomake_r_enabled_makers = ['rlint']
 
+" Trailing whitespace {{{
+
+nnoremap <Leader>rtw :%s/\s\+$//e<CR>
+
+" }}}
