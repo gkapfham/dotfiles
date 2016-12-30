@@ -334,6 +334,12 @@ set encoding=utf-8
 set t_ZH=[3m
 set t_ZR=[23m
 
+" Do not display search highlights
+set nohlsearch
+
+" Do not display the welcome message
+set shortmess=I
+
 " Display colorscheme
 colorscheme orangehybrid
 
@@ -602,12 +608,6 @@ set hidden                                     " this option is required for the
 " recent terminal windows
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
-" This is a configuration that should stop NeoVim from highlighting searching results
-set nohlsearch
-
-" Do not display the welcome message / splash screen when opening gvim or vim
-" with no specified file
-set shortmess=I
 
 
 
