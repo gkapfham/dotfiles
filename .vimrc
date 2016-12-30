@@ -180,13 +180,42 @@ endfunction
 
 noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
-" change the color of the highlighting for the incsearch plugin
+" Change the colorscheme
 let g:incsearch#highlight = {
         \   'match' : {
         \     'group' : 'Type',
         \     'priority' : '10'
         \   }
         \ }
+
+" }}}
+
+" Advanced keyboard movement with easymotion {{{
+
+nmap f <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+
+" Change the color scheme
+hi link EasyMotionTarget Type
+hi link EasyMotionShade Comment
+hi link EasyMotionIncSearch Type
+hi link EasyMotionIncCursor Type
+hi link EasyMotionMoveHL Type
+
+" Do not create the shaded background
+let g:EasyMotion_do_shade = 0
+
+" Use uppercase letters
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
+
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
+" map  ? <Plug>(easymotion-sn)
+" omap ? <Plug>(easymotion-tn)
+" map  n <Plug>(easymotion-next)
+" map  N <Plug>(easymotion-prev)
 
 " }}}
 
@@ -424,32 +453,6 @@ let g:airline#extensions#branch#enabled = 0
 
 set nosmd " turn off the status line that shows the silly word insert, airline is much better!
 
-" Configure the EasyMotion plugin for the main keys
-nmap f <Plug>(easymotion-s)
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
-
-" map  / <Plug>(easymotion-sn)
-" omap / <Plug>(easymotion-tn)
-" map  ? <Plug>(easymotion-sn)
-" omap ? <Plug>(easymotion-tn)
-" map  n <Plug>(easymotion-next)
-" map  N <Plug>(easymotion-prev)
-
-
-" change the default EasyMotion shading to something more readable
-hi link EasyMotionTarget Type
-hi link EasyMotionShade Comment
-hi link EasyMotionIncSearch Type
-hi link EasyMotionIncCursor Type
-hi link EasyMotionMoveHL Type
-
-" Don't create the shaded background ; seems the better choice, but not perfect
-let g:EasyMotion_do_shade = 0
-
-" Tell EasyMotion to use capital letter since these are easier to see
-let g:EasyMotion_use_upper = 1
-let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 
 " Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
 set tags=./tags;/,tags;/
