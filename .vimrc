@@ -78,6 +78,16 @@ omap ? <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 
+let g:EasyMotion_do_shade = 0
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
+
+hi link EasyMotionTarget Type
+hi link EasyMotionShade Comment
+hi link EasyMotionIncSearch Type
+hi link EasyMotionIncCursor Type
+hi link EasyMotionMoveHL Type
+
 " }}}
 
 " auto-pairs {{{
