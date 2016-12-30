@@ -32,6 +32,20 @@ nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
 " }}}
 
+" Turn off spell checking {{{
+
+au BufNewFile,BufRead,BufEnter *.c      set nospell
+au BufNewFile,BufRead,BufEnter *.h      set nospell
+au BufNewFile,BufRead,BufEnter *.cpp    set nospell
+au BufNewFile,BufRead,BufEnter *.hpp    set nospell
+au BufNewFile,BufRead,BufEnter *.java   set nospell
+au BufNewFile,BufRead,BufEnter *.sh     set nospell
+au BufNewFile,BufRead,BufEnter *.xml    set nospell
+au BufNewFile,BufRead,BufEnter *.sql    set nospell
+au BufNewFile,BufRead,BufEnter *.bib    set nospell
+
+" }}}
+
 call plug#begin('~/.vim/bundle')
 
 " Plugins cannot be used until a bug is fixed in Neovim {{{
@@ -108,6 +122,7 @@ Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'xolox/vim-misc'
 
 " }}}
 
@@ -250,11 +265,17 @@ let R_openpdf = 0
 " CamelCaseMotion {{{
 
 Plug 'bkad/CamelCaseMotion'
-call camelcasemotion#CreateMotionMappings('<leader>')
 
 " }}}
 
+" tslime.vim {{{
+
 Plug 'jgdavey/tslime.vim'
+vmap <C-c><C-c> <Plug>SendSelectionToTmux
+nmap <C-c><C-c> <Plug>NormalModeSendToTmux
+nmap <C-c>r <Plug>SetTmuxVars
+
+" }}}
 
 " fzf {{{
 
@@ -394,7 +415,6 @@ vmap <silent> zp <Plug>(SpellRotateBackwardV)
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Plug 'vim-scripts/HTML-AutoCloseTag', {'for': 'html'}
 Plug 'vim-scripts/SyntaxAttr.vim'
 
 Plug 'wellle/targets.vim'
@@ -411,7 +431,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 " vim-easytags {{{
 
 Plug 'xolox/vim-easytags'
-
 let g:easytags_ignored_filetypes = ''
 let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
@@ -421,7 +440,6 @@ set tags=./tags;/,tags;/
 
 " }}}
 
-Plug 'xolox/vim-misc'
 
 " ale {{{
 
@@ -436,13 +454,29 @@ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
-" FileType definitions {{{
+" CreateMotionMappings must be called after plug#end {{{
+
+call camelcasemotion#CreateMotionMappings('<leader>')
+
+" }}}
+
+" FileType definitions and configurations {{{
 
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
+autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+
+" Configure the syntax highlighting for the Java programming language
+let java_highlight_all=1
+let java_highlight_functions=1
+let java_highlight_functions=1
+let java_highlight_java_lang_ids=1
+let java_space_errors=1
+let java_comment_strings=1
 
 " }}}
 
@@ -461,9 +495,27 @@ let g:html_indent_inctags = "html,body,head,tbody,div"
 
 " }}}
 
+" Extra functions {{{
 
+" This function will allow you to rename a file inside of vim, works correctly
+function! RenameFile()
+  let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <Leader>mf :call RenameFile()<cr>
 
-" Set it so that the CSV mode is always run when editing this type of file (does not autodetect?)
+" Functions that allow you to determine what syntax group is being used
+map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+map <F5> :call SyntaxAttr()<CR>
+
+" }}}
 
 " Set up a dictionary so that I can do word completion by looking up words!
 set dictionary-=/usr/share/dict/american-english
@@ -492,10 +544,6 @@ set wrap linebreak nolist
 set relativenumber
 set number
 
-" tmux configuration
-vmap <C-c><C-c> <Plug>SendSelectionToTmux
-nmap <C-c><C-c> <Plug>NormalModeSendToTmux
-nmap <C-c>r <Plug>SetTmuxVars
 
 " Ignore these directories in all programs like ctrlp
 set wildignore+=*/build/**
@@ -611,16 +659,6 @@ set hidden                                     " this option is required for the
 set spell spelllang=en_us,en_gb
 set mousemodel=popup
 
-" turn of spell checking for some types of buffers, mostly Java and other programming languages
-au BufNewFile,BufRead,BufEnter *.c      set nospell
-au BufNewFile,BufRead,BufEnter *.h      set nospell
-au BufNewFile,BufRead,BufEnter *.cpp    set nospell
-au BufNewFile,BufRead,BufEnter *.hpp    set nospell
-au BufNewFile,BufRead,BufEnter *.java   set nospell
-au BufNewFile,BufRead,BufEnter *.sh     set nospell
-au BufNewFile,BufRead,BufEnter *.xml    set nospell
-au BufNewFile,BufRead,BufEnter *.sql    set nospell
-au BufNewFile,BufRead,BufEnter *.bib    set nospell
 
 " Turn on spell checking for Git commits
 autocmd FileType gitcommit setlocal spell
@@ -661,28 +699,13 @@ let g:airline#extensions#branch#enabled = 0
 set nosmd " turn off the status line that shows the silly word insert, airline is much better!
 
 
-" Define a function that allows you to determine what syntax group is being used
-map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-map <F5> :call SyntaxAttr()<CR>
 
 
 " Automatically save changes before switching buffer with some
 " commands, like :cnfile. Very useful when running Qdo on a QuickFix list
 set autowrite
 
-" Configure the syntax highlighting for the Java programming language
-let java_highlight_all=1
-let java_highlight_functions=1
-let java_highlight_functions=1
-let java_highlight_java_lang_ids=1
-let java_space_errors=1
-let java_comment_strings=1
 
-" Configure the makeprg and the errorformat to support using Ant build systems for Java
-autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
-autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
 
 " " Configure Neomake to run on the save of every buffer
 " autocmd! BufWritePost * Neomake
@@ -706,22 +729,5 @@ let g:neomake_r_rlint_maker = {
         \ '%E%f:%l:%c: error: %m,'
         \ }
 let g:neomake_r_enabled_makers = ['rlint']
-
-" This function will allow you to rename a file inside of vim, works correctly
-function! RenameFile()
-  let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
-endfunction
-map <Leader>mf :call RenameFile()<cr>
-
-" Remove the feature that performs folding inside of Markdown files
-let g:pandoc#modules#disabled = ["folding"]
-
-
 
 
