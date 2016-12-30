@@ -4,12 +4,8 @@ call plug#begin('~/.vim/bundle')
 
 " Plug 'Raimondi/delimitMate'
 " Plug 'freitass/todo.txt-vim'
+" Plug 'neomake/neomake'
 
-Plug 'haya14busa/incsearch-easymotion.vim'
-Plug 'haya14busa/incsearch-fuzzy.vim'
-Plug 'haya14busa/incsearch.vim'
-
-Plug 'w0rp/ale'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'SirVer/ultisnips'
@@ -29,6 +25,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'garbas/vim-snipmate'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'gorodinskiy/vim-coloresque'
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/vim-operator-flashy'
 Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
@@ -47,7 +46,6 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lfv89/vim-interestingwords'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim', {'for': 'html'}
-" Plug 'neomake/neomake'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
@@ -65,6 +63,7 @@ Plug 'tweekmonster/spellrotate.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/SyntaxAttr.vim'
+Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
@@ -159,6 +158,11 @@ set omnifunc=syntaxcomplete#Complete
 " Define the dictionaries
 set dictionary-=/usr/share/dict/american-english
 set dictionary+=/usr/share/dict/american-english
+
+" Completion includes dictionaries
+set complete-=k complete+=k
+set complete+=kspell
+set complete+=]
 
 " }}}
 
@@ -311,10 +315,6 @@ endif
 " Turn on smart indentation with the Latex plugins, nice and very helpful
 " set smartindent
 
-" Configure completion so that it includes the dictionary
-set complete-=k complete+=k
-set complete+=kspell
-set complete+=]
 
 " You Complete Me configuration
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
