@@ -112,12 +112,7 @@ autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 
 " LaTeX {{{
 
-" Conceal option
-set cole=2
-let g:tex_conceal= 'adgms'
-hi Conceal ctermbg=234 ctermfg=143
-
-" Starting to use vim-latex and it needs several configurations to work correctly
+" Configure vimtex
 let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -interaction=nonstopmode -synctex=1'"
 let g:vimtex_fold_enabled = 0
 let g:vimtex_quickfix_mode = 2
@@ -131,6 +126,28 @@ let g:vimtex_latexmk_callback = 1
 let g:vimtex_complete_recursive_bib = 0
 let g:vimtex_view_method = 'mupdf'
 let g:vimtex_view_mupdf_options = '-r 288'
+
+" Conceal option
+set cole=2
+let g:tex_conceal= 'adgms'
+hi Conceal ctermbg=234 ctermfg=143
+
+" Use tex over plaintex
+let g:tex_flavor = 'tex'
+
+" Quotation marks
+fu! TexQuotes()
+    let line = getline(".")
+    let curpos = col(".")-1
+    let insert = "''"
+
+    let left = strpart(line, curpos-1, 1)
+    if (left == ' ' || left == '        ' || left == '')
+        let insert = '``'
+    endif
+    return insert
+endfu
+autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 
 " }}}
 
@@ -154,6 +171,10 @@ noremap <Left> <NOP>
 noremap <Right> <NOP>
 inoremap jk <ESC>
 inoremap <ESC> <NOP>
+
+" Define the leaders
+let maplocalleader=","
+let mapleader=","
 
 " }}}
 
@@ -241,7 +262,7 @@ set wrap linebreak nolist
 set relativenumber
 set number
 
-" Faster screen redraws
+" Display screen redraws faster
 set nocursorcolumn
 set nocursorline
 set ttyfast
@@ -266,9 +287,6 @@ set wildignore+=*/.git/*
 set wildignore+=*.class
 set wildignore+=*/tmp/*
 
-" change the mapleader from \ to , -- this makes it easier to perform compilation in LaTeX
-let maplocalleader=","
-let mapleader=","
 
 
 " Configure nvim so that it uses the nvr program to support a server (helps
@@ -289,23 +307,6 @@ if has("nvim")
 endif
 
 
-" Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
-" Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
-fu! TexQuotes()
-    let line = getline(".")
-    let curpos = col(".")-1
-    let insert = "''"
-
-    let left = strpart(line, curpos-1, 1)
-    if (left == ' ' || left == '        ' || left == '')
-        let insert = '``'
-    endif
-    return insert
-endfu
-autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
-
-" Make sure that the full latex mode is always run to get the benefits of plugins
-let g:tex_flavor = 'tex'
 
 " Turn on smart indentation with the Latex plugins, nice and very helpful
 " set smartindent
