@@ -444,7 +444,6 @@ set tags=./tags;/,tags;/
 
 " }}}
 
-
 " ale {{{
 
 Plug 'w0rp/ale'
@@ -478,30 +477,10 @@ autocmd FileType gitcommit setlocal spell
 " }}}
 "
 
-" Java syntax highlighting {{{
-
-let java_highlight_all=1
-let java_highlight_functions=1
-let java_highlight_functions=1
-let java_highlight_java_lang_ids=1
-let java_space_errors=1
-let java_comment_strings=1
-
-" }}}
-
-
 " Syntax highlighting and completion {{{
 
 filetype indent plugin on | syn on
 set omnifunc=syntaxcomplete#Complete
-
-" }}}
-
-" BufReads and BufNewFiles {{{
-
-autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
-autocmd BufRead,BufNewFile *.html set filetype=html
-let g:html_indent_inctags = "html,body,head,tbody,div"
 
 " }}}
 
@@ -515,6 +494,26 @@ set cot=menu
 set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest:full,full
+
+" }}}
+
+" BufReads and BufNewFiles {{{
+
+autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
+autocmd BufRead,BufNewFile *.html set filetype=html
+let g:html_indent_inctags = "html,body,head,tbody,div"
+
+" }}}
+
+
+" Java syntax highlighting {{{
+
+let java_highlight_all=1
+let java_highlight_functions=1
+let java_highlight_functions=1
+let java_highlight_java_lang_ids=1
+let java_space_errors=1
+let java_comment_strings=1
 
 " }}}
 
