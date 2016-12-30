@@ -2,13 +2,16 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'Raimondi/delimitMate'
+" Plug 'freitass/todo.txt-vim'
 " Plug 'haya14busa/incsearch-easymotion.vim'
 " Plug 'haya14busa/incsearch-fuzzy.vim'
 " Plug 'haya14busa/incsearch.vim'
+" Plug 'neomake/neomake'
+
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways'
@@ -22,7 +25,7 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim'
-Plug 'freitass/todo.txt-vim'
+Plug 'easymotion/vim-easymotion'
 Plug 'garbas/vim-snipmate'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'gorodinskiy/vim-coloresque'
@@ -33,6 +36,7 @@ Plug 'int3/vim-extradite'
 Plug 'jalvesaq/Nvim-R'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'jgdavey/tslime.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -43,7 +47,6 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lfv89/vim-interestingwords'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim', {'for': 'html'}
-Plug 'neomake/neomake'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
@@ -62,19 +65,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/HTML-AutoCloseTag', {'for': 'html'}
 Plug 'vim-scripts/SyntaxAttr.vim'
+Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
-
-" " Load on nothing
-" Plug 'SirVer/ultisnips', { 'on': [] }
-
-" augroup load_us_ycm
-"   autocmd!
-"   autocmd InsertEnter * call plug#load('ultisnips') | autocmd! load_us_ycm
-" augroup END
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'ryanoasis/vim-devicons'
@@ -297,8 +293,7 @@ set wildmode=longest:full,full
 " http://nvie.com/posts/how-i-boosted-my-vim/
 
 set linebreak                                  " make sure that you break the lines in a way that preserves words
-" set showbreak=... " set an ellipse character so that you can tell when lines are wrapped
-set showbreak=...                               " set an ellipse character so that you can tell when lines are wrappe
+set showbreak=‚îÅ‚îÅ                               " set an ellipse character so that you can tell when lines are wrapped
 set breakindent                                " indent after linebreaks occur and there are wraps (only Vim 7.4 later patches)
 set tabstop=4                                  " a tab is four spaces
 set expandtab                                  " insert spaces whenever the tab key is pressed, helps with formatting Java code
@@ -318,8 +313,7 @@ set undolevels=1000                            " use many many levels of undo
 set pastetoggle=<F2>                           " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10     " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,]                     " wrap when you get to the end of a line and you are using the arrow keys
-" set listchars=tab:øø,trail:ø,extends:#,precedes:#,nbsp:ø " highlight problematic whitespace
-" set listchars=tab:øø,trail:ø,extends:#,precedes:#,nbsp:ø " highlight problematic whitespace
+set listchars=tab:‚ñ∏‚ñπ,trail:‚Ä¢,extends:#,precedes:#,nbsp:‚åª " highlight problematic whitespace
 set list                                       " also required to ensure that problematic whitespace is highlighted correctly
 set hidden                                     " this option is required for the vimtex plugin to work correctly
 
@@ -392,6 +386,7 @@ let g:tagbar_type_css = {
 set nocursorcolumn
 set nocursorline
 set ttyfast
+set lazyredraw
 
 " Configure NeoVim so that it can use different cursor shapes when run in
 " recent terminal windows
@@ -518,11 +513,11 @@ let g:gitgutter_sign_column_always = 1
 let g:gitgutter_signs = 1
 
 " " Set all of the symbols for the GitGutter (break in NeoVim)
-" let g:gitgutter_sign_added = 'ø '
-" let g:gitgutter_sign_modified = 'ø'
-" let g:gitgutter_sign_removed = 'ø'
-" let g:gitgutter_sign_removed_first_line = 'ø '
-" let g:gitgutter_sign_modified_removed = 'ø'
+" let g:gitgutter_sign_added = '‚ûï '
+" let g:gitgutter_sign_modified = '‚ñ≤'
+" let g:gitgutter_sign_removed = '‚úò'
+" let g:gitgutter_sign_removed_first_line = '‚è´ '
+" let g:gitgutter_sign_modified_removed = '‚ú±'
 
 " Improve one of the symbols for the GitGutter
 let g:gitgutter_sign_removed_first_line = '^'
@@ -747,4 +742,4 @@ let g:interestingWordsTermColors = ['143', '110', '173', '237', '110']
 nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
 nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
 nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
-nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>ik/vim-°
+nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
