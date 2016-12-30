@@ -86,10 +86,9 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
-set completefunc=autoprogramming#complete
-" let g:JavaComplete_ShowExternalCommandsOutput = 1
-" let g:JavaComplete_JavaviDebug = 0
-" let g:JavaComplete_JavaviLogfileDirectory = '~/.javavi'
+
+" Set the completion function in general if there is not a specific type
+set omnifunc=syntaxcomplete#Complete
 
 " Disable the arrow keys so that I keep my fingers on home row during programming
 noremap <Up> <NOP>
@@ -98,12 +97,6 @@ noremap <Left> <NOP>
 noremap <Right> <NOP>
 inoremap jk <ESC>
 inoremap <ESC> <NOP>
-
-" Set the completion function in general if there is not a specific type
-set omnifunc=syntaxcomplete#Complete
-
-" Set the syntax for the todo file so that the file highlighting is correct
-autocmd FileType todo set syntax=todo
 
 " Set it so that the todo mode is always run when editing the file called todo.txt or Todo.txt
 autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
@@ -192,7 +185,7 @@ endif
 " Configure nvim so that you can leave the terminal in the same as as you
 " leave insert mode (otherwise, must use the ESC key, which is not consistent)
 if has("nvim")
-  tnoremap jk <C-\><C-n>
+  noremap jk <C-\><C-n>
 endif
 
 " Configure nvim so that it uses the inccommand
@@ -538,8 +531,8 @@ let java_comment_strings=1
 autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
 autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
 
-" Configure Neomake to run on the save of every buffer
-autocmd! BufWritePost * Neomake
+" " Configure Neomake to run on the save of every buffer
+" autocmd! BufWritePost * Neomake
 
 " Configure the signs that are used in Neomake displays
 let g:neomake_error_sign = {
@@ -743,3 +736,6 @@ nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
 nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
 nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
 nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
