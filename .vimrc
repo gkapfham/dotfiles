@@ -76,7 +76,7 @@ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
-" Minimal file types {{{
+" Programming languages {{{
 
 " Automatically identify the filetype for the plugins and always use syntax highlighting
 filetype indent plugin on | syn on
@@ -110,6 +110,9 @@ let R_openpdf = 0
 " Indenting for HTML
 au BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = 'html,body,head,tbody,div'
+
+" Do not perform folding inside of Markdown
+let g:pandoc#modules#disabled = ["folding"]
 
 " Autodetect CSV
 autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
@@ -193,6 +196,10 @@ call camelcasemotion#CreateMotionMappings('<leader>')
 " Navigate through wrapped text
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" Navigate to the next linting warning/error
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " }}}
 
@@ -280,6 +287,15 @@ vmap <C-Down> ]egv
 " Toggle off the auto-completion of pairs
 let g:AutoPairsShortcutToggle = '<leader>apt'
 
+" Remove trailing whitespace
+nnoremap <Leader>rtw :%s/\s\+$//e<CR>
+
+" Fix a misspelling with next-best word
+nmap <silent> zn <Plug>(SpellRotateForward)
+nmap <silent> zp <Plug>(SpellRotateBackward)
+vmap <silent> zn <Plug>(SpellRotateForwardV)
+vmap <silent> zp <Plug>(SpellRotateBackwardV)
+
 " }}}
 
 " Display improvements {{{
@@ -322,6 +338,11 @@ nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
 nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
 nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
 nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
+
+" Display the location list and quickfix window
+let g:lt_location_list_toggle_map = '<leader>c'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+
 
 " }}}
 
@@ -635,29 +656,3 @@ function! RenameFile()
     endif
 endfunction
 map <Leader>mf :call RenameFile()<cr>
-
-
-" Add in a command that will allow me to remove the trailing white space
-nnoremap <Leader>rtw :%s/\s\+$//e<CR>
-
-" Load matchit.vim, but only if the user hasn't installed a newer version.
-" if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  " runtime! macros/matchit.vim
-" endif
-
-" Remove the feature that performs folding inside of Markdown files
-let g:pandoc#modules#disabled = ["folding"]
-
-
-" Move to the next correctly spelled word
-nmap <silent> zn <Plug>(SpellRotateForward)
-nmap <silent> zp <Plug>(SpellRotateBackward)
-vmap <silent> zn <Plug>(SpellRotateForwardV)
-vmap <silent> zp <Plug>(SpellRotateBackwardV)
-
-let g:lt_location_list_toggle_map = '<leader>c'
-let g:lt_quickfix_list_toggle_map = '<leader>q'
-
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
