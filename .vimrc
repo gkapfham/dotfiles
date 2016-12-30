@@ -8,6 +8,40 @@ call plug#begin('~/.vim/bundle')
 " Plug 'haya14busa/incsearch-fuzzy.vim'
 " Plug 'haya14busa/incsearch.vim'
 
+" " define a function that will run EasyMotion after running the incsearch
+" function! s:incsearch_config(...) abort
+"   return incsearch#util#deepextend(deepcopy({
+"   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+"   \   'keymap': {
+"   \     "\<CR>": '<Over>(easymotion)'
+"   \   },
+"   \   'is_expr': 0
+"   \ }), get(a:, 1, {}))
+" endfunction
+
+" " incsearch.vim combined with the fuzzy search plugin and the EasyMotion plugin
+" function! s:config_easyfuzzymotion(...) abort
+"   return extend(copy({
+"   \   'converters': [incsearch#config#fuzzy#converter()],
+"   \   'modules': [incsearch#config#easymotion#module()],
+"   \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+"   \   'is_expr': 0,
+"   \   'is_stay': 1
+"   \ }), get(a:, 1, {}))
+" endfunction
+
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
+"
+" " change the color of the highlighting for the incsearch plugin
+" let g:incsearch#highlight = {
+"         \   'match' : {
+"         \     'group' : 'Type',
+"         \     'priority' : '10'
+"         \   }
+"         \ }
+
 " }}}
 
 " Plugins that are no longer being used by may be used in the future {{{
@@ -479,53 +513,6 @@ let g:airline#extensions#branch#enabled = 0
 set nosmd " turn off the status line that shows the silly word insert, airline is much better!
 
 
-" map  / <Plug>(easymotion-sn)
-" map  N <Plug>(easymotion-prev)
-" map  n <Plug>(easymotion-next)
-" map <Leader> <Plug>(easymotion-prefix)
-" omap / <Plug>(easymotion-tn)
-" nmap t <Plug>(easymotion-t2)
-
-" " define a function that will run EasyMotion after running the incsearch
-" function! s:incsearch_config(...) abort
-"   return incsearch#util#deepextend(deepcopy({
-"   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-"   \   'keymap': {
-"   \     "\<CR>": '<Over>(easymotion)'
-"   \   },
-"   \   'is_expr': 0
-"   \ }), get(a:, 1, {}))
-" endfunction
-
-" " incsearch.vim combined with the fuzzy search plugin and the EasyMotion plugin
-" function! s:config_easyfuzzymotion(...) abort
-"   return extend(copy({
-"   \   'converters': [incsearch#config#fuzzy#converter()],
-"   \   'modules': [incsearch#config#easymotion#module()],
-"   \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-"   \   'is_expr': 0,
-"   \   'is_stay': 1
-"   \ }), get(a:, 1, {}))
-" endfunction
-
-" map /  <Plug>(incsearch-forward)
-" map ?  <Plug>(incsearch-backward)
-" map g/ <Plug>(incsearch-stay)
-
-" " configure to use incsearch for all of my searching
-" noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-" noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-" noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
-" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
-
-" " change the color of the highlighting for the incsearch plugin
-" let g:incsearch#highlight = {
-"         \   'match' : {
-"         \     'group' : 'Type',
-"         \     'priority' : '10'
-"         \   }
-"         \ }
-
 " change the default EasyMotion shading to something more readable
 hi link EasyMotionTarget Type
 hi link EasyMotionShade Comment
@@ -645,7 +632,6 @@ call camelcasemotion#CreateMotionMappings('<leader>')
 " count used. But, when there is a count, move by physical lines instead
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
-
 
 " Mapping selecting mappings --- lets you see the mappings that are configured
 nmap <leader><tab> <plug>(fzf-maps-n)
