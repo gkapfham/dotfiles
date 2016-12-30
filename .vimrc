@@ -115,6 +115,10 @@ autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 " Define basic completion function
 set omnifunc=syntaxcomplete#Complete
 
+" Define the dictionaries
+set dictionary-=/usr/share/dict/american-english
+set dictionary+=/usr/share/dict/american-english
+
 " }}}
 
 " Keyboard movement {{{
@@ -129,38 +133,35 @@ inoremap <ESC> <NOP>
 
 " }}}
 
-" Setup the Livedown plugin that supports the preview of Markdown files
-let g:livedown_autorun = 0
-let g:livedown_open = 0
-let g:livedown_port = 1337
-nmap gmd :LivedownPreview<CR>
+" Display improvements {{{
 
-" Set up a dictionary so that I can do word completion by looking up words!
-set dictionary-=/usr/share/dict/american-english
-set dictionary+=/usr/share/dict/american-english
-
-" Set the encoding to UTF 8, the most common encoding used for text
+" Display encoding to UTF-8
 set encoding=utf-8
 
-" Set the symbols that are required to display italics in the terminal window
-" when running vim (works correctly without extra configuration in new
-" terminals for Gnome)
+" Display italics in terminal
 set t_ZH=[3m
 set t_ZR=[23m
-"
-" set the hybrid color scheme for vim running in the terminal window
-" let g:hybrid_use_Xresources = 1
+
+" Display colorscheme
 colorscheme orangehybrid
 
-" define some commands for wrapping and not wrapping a line or paragraph
+" Display line wraps
 command! Wrap set textwidth=120
 command! NoWrap set textwidth=0
 command! StandardWrap set textwidth=80
 set wrap linebreak nolist
 
-" set up vim so that it displays line numbers in a hybrid fashion
+" Display of line numbers
 set relativenumber
 set number
+
+" }}}
+
+" Setup the Livedown plugin that supports the preview of Markdown files
+let g:livedown_autorun = 0
+let g:livedown_open = 0
+let g:livedown_port = 1337
+nmap gmd :LivedownPreview<CR>
 
 " tmux configuration
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
