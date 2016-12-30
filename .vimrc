@@ -78,6 +78,9 @@ call plug#end()
 
 " System {{{
 
+"Enable spell checking
+syntax spell toplevel
+
 " Make changes automatically saved during Qdo
 set autowrite
 
@@ -228,14 +231,15 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Advanced keyboard movement with incsearch {{{
 
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-map <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+map z/  <Plug>(incsearch-forward)
+map z?  <Plug>(incsearch-backward)
+map zg/ <Plug>(incsearch-stay)
 
-map z/ <Plug>(incsearch-easymotion-/)
-map z? <Plug>(incsearch-easymotion-?)
-map zg/ <Plug>(incsearch-easymotion-stay)
+map / <Plug>(incsearch-easymotion-/)
+map ? <Plug>(incsearch-easymotion-?)
+map g/ <Plug>(incsearch-easymotion-stay)
+
+map <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
@@ -368,7 +372,6 @@ let g:lt_quickfix_list_toggle_map = '<leader>q'
 
 " Toggle the display of spelling mistakes
 nmap <silent> <leader>s :set spell!<CR>
-syntax spell toplevel
 
 " Display the airline statusline
 set laststatus=2
@@ -385,6 +388,29 @@ let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
 
 " Do not display the standard status line
 set nosmd
+
+" Display version control details in gutter
+let g:gitgutter_async = 1
+let g:gitgutter_eager = 1
+let g:gitgutter_realtime = 1
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_signs = 1
+
+" " Set all of the symbols for the GitGutter (break in NeoVim)
+" let g:gitgutter_sign_added = '➕ '
+" let g:gitgutter_sign_modified = '▲'
+" let g:gitgutter_sign_removed = '✘'
+" let g:gitgutter_sign_removed_first_line = '⏫ '
+" let g:gitgutter_sign_modified_removed = '✱'
+
+" Use a different symbol in the gutter
+let g:gitgutter_sign_removed_first_line = '^'
+
+" Display the syntax group for the symbol under the cursor
+map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+map <F5> :call SyntaxAttr()<CR>
 
 " }}}
 
