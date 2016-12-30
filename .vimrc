@@ -7,7 +7,7 @@ set omnifunc=syntaxcomplete#Complete
 
 " }}}
 
-" Configure movement with the keyboard {{{
+" Movement with the keyboard {{{
 
 noremap <Up> <NOP>
 noremap <Down> <NOP>
@@ -18,6 +18,24 @@ inoremap <ESC> <NOP>
 
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" }}}
+
+" Line manipulations {{{
+
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
+" Insert a blank line
+nmap oo Ojk
+
+" Remove trailing whitespace
+nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
 " }}}
 
@@ -675,18 +693,7 @@ let g:neomake_r_rlint_maker = {
         \ }
 let g:neomake_r_enabled_makers = ['rlint']
 
-" Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
 
-" Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-" Create a mapping that allows for the insertion of a blank line without
-" having to enter insert mode and then leave it. Works nicely, but only in GVim
-nmap <S-Enter> O<Esc>
-nmap oo Ojk
 
 " This function will allow you to rename a file inside of vim, works correctly
 function! RenameFile()
@@ -701,8 +708,6 @@ endfunction
 map <Leader>mf :call RenameFile()<cr>
 
 
-" Add in a command that will allow me to remove the trailing white space
-nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
 " Remove the feature that performs folding inside of Markdown files
 let g:pandoc#modules#disabled = ["folding"]
