@@ -102,6 +102,7 @@ Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
 Plug 'int3/vim-extradite'
 Plug 'jez/vim-superman'
+Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-repeat'
@@ -353,8 +354,17 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'neomake/neomake'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
+
+" vim-livedown {{{
+
 Plug 'shime/vim-livedown', {'for': 'markdown'}
-Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
+let g:livedown_autorun = 0
+let g:livedown_open = 0
+let g:livedown_port = 1337
+nmap gmd :LivedownPreview<CR>
+
+" }}}
+
 Plug 'spacewander/vim-coloresque'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tomtom/tlib_vim'
@@ -433,18 +443,17 @@ set omnifunc=syntaxcomplete#Complete
 
 " }}}
 
-" Setup the Livedown plugin that supports the preview of Markdown files
-let g:livedown_autorun = 0
-let g:livedown_open = 0
-let g:livedown_port = 1337
-nmap gmd :LivedownPreview<CR>
+" BufReads and BufNewFiles {{{
 
-" Set indenting to work correctly for the HTML file type (may not be need now)
-au BufRead,BufNewFile *.html set filetype=html
+autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
+autocmd BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = "html,body,head,tbody,div"
 
+" }}}
+
+
+
 " Set it so that the CSV mode is always run when editing this type of file (does not autodetect?)
-autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 
 " Set up a dictionary so that I can do word completion by looking up words!
 set dictionary-=/usr/share/dict/american-english
@@ -688,8 +697,6 @@ let g:neomake_r_rlint_maker = {
         \ }
 let g:neomake_r_enabled_makers = ['rlint']
 
-
-
 " This function will allow you to rename a file inside of vim, works correctly
 function! RenameFile()
   let old_name = expand('%')
@@ -701,8 +708,6 @@ function! RenameFile()
     endif
 endfunction
 map <Leader>mf :call RenameFile()<cr>
-
-
 
 " Remove the feature that performs folding inside of Markdown files
 let g:pandoc#modules#disabled = ["folding"]
