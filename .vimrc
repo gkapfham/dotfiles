@@ -199,8 +199,16 @@ let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
 
 " }}}
 
+" Nvim-R {{{
 
 Plug 'jalvesaq/Nvim-R'
+let R_assign = 2
+let R_tmux_split = 1
+let R_vsplit = 0
+let R_openpdf = 0
+
+" }}}
+
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
@@ -230,8 +238,10 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/spellrotate.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/HTML-AutoCloseTag', {'for': 'html'}
+
+" Plug 'vim-scripts/HTML-AutoCloseTag', {'for': 'html'}
 Plug 'vim-scripts/SyntaxAttr.vim'
+
 Plug 'wellle/targets.vim'
 
 " tmux-complete.vim {{{
@@ -257,7 +267,14 @@ set tags=./tags;/,tags;/
 " }}}
 
 Plug 'xolox/vim-misc'
+
+" ale {{{
+
 Plug 'w0rp/ale'
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" }}}
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'ryanoasis/vim-devicons'
@@ -432,7 +449,7 @@ set autoindent                                 " always set autoindenting on
 set copyindent                                 " copy the previous indentation on autoindenting
 set shiftwidth=2                               " number of spaces to use for autoindenting
 set shiftround                                 " use multiple of shiftwidth when indenting with '<' and '>'
-" set showmatch                                  " set show matching parenthesis
+set showmatch                                  " set show matching parenthesis
 set ignorecase                                 " ignore case when searching
 set infercase                                  " predict the case that is needed when doing auto completion
 set smartcase                                  " ignore case if search pattern is all lowercase, case-sensitive otherwise
@@ -572,12 +589,6 @@ function! RenameFile()
 endfunction
 map <Leader>mf :call RenameFile()<cr>
 
-" Allow the Vim-R-Plugin to create the R assignment, but only with two
-" underscore presses when writing code in Vim
-let R_assign = 2
-let R_tmux_split = 1
-let R_vsplit = 0
-let R_openpdf = 0
 
 " Add in a command that will allow me to remove the trailing white space
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
@@ -718,5 +729,3 @@ nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
 nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
 nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
 
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
