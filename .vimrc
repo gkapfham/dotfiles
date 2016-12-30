@@ -433,10 +433,15 @@ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
+" FileType definitions {{{
 
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
-" Set it so that the todo mode is always run when editing the file called todo.txt or Todo.txt
-autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
+" }}}
 
 " Setup the Livedown plugin that supports the preview of Markdown files
 let g:livedown_autorun = 0
