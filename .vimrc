@@ -101,6 +101,12 @@ let java_highlight_java_lang_ids=1
 let java_space_errors=1
 let java_comment_strings=1
 
+" Plugin configuration for R
+let R_assign = 2
+let R_tmux_split = 1
+let R_vsplit = 0
+let R_openpdf = 0
+
 " Indenting for HTML
 au BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = 'html,body,head,tbody,div'
@@ -630,12 +636,6 @@ function! RenameFile()
 endfunction
 map <Leader>mf :call RenameFile()<cr>
 
-" Allow the Vim-R-Plugin to create the R assignment, but only with two
-" underscore presses when writing code in Vim
-let R_assign = 2
-let R_tmux_split = 1
-let R_vsplit = 0
-let R_openpdf = 0
 
 " Add in a command that will allow me to remove the trailing white space
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
