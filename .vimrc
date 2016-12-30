@@ -1,12 +1,5 @@
 set nocompatible
 
-" Syntax highlighting and completion {{{
-
-filetype indent plugin on | syn on
-set omnifunc=syntaxcomplete#Complete
-
-" }}}
-
 " Movement with the keyboard {{{
 
 noremap <Up> <NOP>
@@ -430,6 +423,13 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+" }}}
+
+" Syntax highlighting and completion {{{
+
+filetype indent plugin on | syn on
+set omnifunc=syntaxcomplete#Complete
 
 " }}}
 
