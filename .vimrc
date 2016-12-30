@@ -263,7 +263,17 @@ Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+
+" spellrotate.vim {{{
+
 Plug 'tweekmonster/spellrotate.vim'
+nmap <silent> zn <Plug>(SpellRotateForward)
+nmap <silent> zp <Plug>(SpellRotateBackward)
+vmap <silent> zn <Plug>(SpellRotateForwardV)
+vmap <silent> zp <Plug>(SpellRotateBackwardV)
+
+" }}}
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
