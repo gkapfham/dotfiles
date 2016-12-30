@@ -213,7 +213,20 @@ let g:tmuxcomplete#trigger = 'omnifunc'
 " }}}
 
 Plug 'whatyouhide/vim-textobj-xmlattr'
+
+" vim-easytags {{{
+
 Plug 'xolox/vim-easytags'
+
+let g:easytags_ignored_filetypes = ''
+let g:easytags_dynamic_files = 1
+let g:easytags_updatetime_warn = 0
+let g:easytags_always_enabled = 1
+let g:easytags_async = 1
+set tags=./tags;/,tags;/
+
+" }}}
+
 Plug 'xolox/vim-misc'
 Plug 'w0rp/ale'
 
@@ -522,13 +535,6 @@ let g:airline#extensions#branch#enabled = 0
 
 set nosmd " turn off the status line that shows the silly word insert, airline is much better!
 
-" Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
-set tags=./tags;/,tags;/
-let g:easytags_ignored_filetypes = ''
-let g:easytags_dynamic_files = 1
-let g:easytags_updatetime_warn = 0
-let g:easytags_always_enabled = 1
-let g:easytags_async = 1
 
 " Define a function that allows you to determine what syntax group is being used
 map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
