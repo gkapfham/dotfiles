@@ -248,7 +248,81 @@ let R_openpdf = 0
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+
+" fzf.vim {{{
+
 Plug 'junegunn/fzf.vim'
+
+" Mapping selecting mappings --- lets you see the mappings that are configured
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion for words, paths, files, and lines in the buffer
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Define a custom command for loading MRU files with FZF
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '-m -x +s --no-bold',
+\  'down':    '40%'})
+
+" Define a custom command for loading hidden files as well as regular with FZF
+command! FZFHidden call fzf#run({
+\  'source':  'ag --hidden --ignore .git -l -g ""',
+\  'sink':    'e',
+\  'options': '-m -x +s --no-bold',
+\  'down':    '40%'})
+
+" Define a custom command for loading hidden files as well as regular with FZF
+command! FZFMine call fzf#run({
+\  'source':  'ag --ignore .git -l -g ""',
+\  'sink':    'e',
+\  'options': '-m -x +s --no-bold',
+\  'down':    '40%'})
+
+" Setup special key for viewing the tabs in the buffer
+nmap <C-t> :BTags <CR>
+
+" Setup special key for viewing the Tags that match word highlighted
+nmap <C-i> :Tags <C-R><C-W><CR>
+
+" Allow for running an ag search on the word currently under the cursor
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+
+" This allows you to jump to the definition of a function using FZF
+nnoremap <Tab> :Buffers<Cr>
+
+" Run the FZF command as a file-finder in the same way that I use CTRL-P
+" when it is displaying the most recent files
+nmap <C-u> :FZFMru<CR>
+
+" Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
+" no hidden files are indexed with FZF by default --- so, also use a separate
+" command to display the hidden files along with the standard files)
+nmap <C-p> :FZFMine<CR>
+" nmap <C-p> :FZF -m<CR>
+nmap <C-h> :FZFHidden<CR>
+
+" Add in a format string for controlling how FZF will color-code when running
+" a commands that shows the Git logs (Note that the blue is black by default)
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=110 ctermbg=235
+  highlight fzf2 ctermfg=110 ctermbg=235
+  highlight fzf3 ctermfg=110 ctermbg=235
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+" }}}
 
 " vim-easy-align {{{
 
@@ -630,11 +704,6 @@ map <Leader>mf :call RenameFile()<cr>
 " Add in a command that will allow me to remove the trailing white space
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
-" Load matchit.vim, but only if the user hasn't installed a newer version.
-" if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  " runtime! macros/matchit.vim
-" endif
-
 " Remove the feature that performs folding inside of Markdown files
 let g:pandoc#modules#disabled = ["folding"]
 
@@ -643,71 +712,4 @@ let g:pandoc#modules#disabled = ["folding"]
 call camelcasemotion#CreateMotionMappings('<leader>')
 
 
-" Mapping selecting mappings --- lets you see the mappings that are configured
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
 
-" Insert mode completion for words, paths, files, and lines in the buffer
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-" Define a custom command for loading MRU files with FZF
-command! FZFMru call fzf#run({
-\  'source':  v:oldfiles,
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold',
-\  'down':    '40%'})
-
-" Define a custom command for loading hidden files as well as regular with FZF
-command! FZFHidden call fzf#run({
-\  'source':  'ag --hidden --ignore .git -l -g ""',
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold',
-\  'down':    '40%'})
-
-" Define a custom command for loading hidden files as well as regular with FZF
-command! FZFMine call fzf#run({
-\  'source':  'ag --ignore .git -l -g ""',
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold',
-\  'down':    '40%'})
-
-" Setup special key for viewing the tabs in the buffer
-nmap <C-t> :BTags <CR>
-
-" Setup special key for viewing the Tags that match word highlighted
-nmap <C-i> :Tags <C-R><C-W><CR>
-
-" Allow for running an ag search on the word currently under the cursor
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-
-" This allows you to jump to the definition of a function using FZF
-nnoremap <Tab> :Buffers<Cr>
-
-" Run the FZF command as a file-finder in the same way that I use CTRL-P
-" when it is displaying the most recent files
-nmap <C-u> :FZFMru<CR>
-
-" Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
-" no hidden files are indexed with FZF by default --- so, also use a separate
-" command to display the hidden files along with the standard files)
-nmap <C-p> :FZFMine<CR>
-" nmap <C-p> :FZF -m<CR>
-nmap <C-h> :FZFHidden<CR>
-
-" Add in a format string for controlling how FZF will color-code when running
-" a commands that shows the Git logs (Note that the blue is black by default)
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
-
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=110 ctermbg=235
-  highlight fzf2 ctermfg=110 ctermbg=235
-  highlight fzf3 ctermfg=110 ctermbg=235
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
