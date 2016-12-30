@@ -127,8 +127,12 @@ Plug 'xolox/vim-misc'
 
 " Plugins that require configuration {{{
 
+" vim-qargs {{{
+
 Plug 'henrik/vim-qargs'
 set autowrite
+
+" }}}
 
 " vim-easymotion {{{
 
@@ -705,7 +709,6 @@ set nosmd " turn off the status line that shows the silly word insert, airline i
 
 " Automatically save changes before switching buffer with some
 " commands, like :cnfile. Very useful when running Qdo on a QuickFix list
-set autowrite
 
 
 
@@ -731,5 +734,4 @@ let g:neomake_r_rlint_maker = {
         \ '%E%f:%l:%c: error: %m,'
         \ }
 let g:neomake_r_enabled_makers = ['rlint']
-
 
