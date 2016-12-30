@@ -705,29 +705,6 @@ set nohlsearch
 " with no specified file
 set shortmess=I
 
-" Configure the airline status bar replacement that provides some delightful context
-set laststatus=2
-let g:airline_theme='tomorrow'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
-let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
-let g:airline#extensions#hunks#enabled = 0
-let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
-let g:airline#extensions#branch#enabled = 0
-" let g:airline#extensions#hunks#non_zero_only = 0
-" let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
-
-set nosmd " turn off the status line that shows the silly word insert, airline is much better!
-
-
-
-
-" Automatically save changes before switching buffer with some
-" commands, like :cnfile. Very useful when running Qdo on a QuickFix list
-
-
-
 " " Configure Neomake to run on the save of every buffer
 " autocmd! BufWritePost * Neomake
 
