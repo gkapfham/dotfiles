@@ -398,11 +398,6 @@ set complete+=]
 "     \ 'liquid' : 1,
 "     \}
 
-" allow CTRLP to show fifteen total matches, helping in cases where there are
-" many matches that we still want to display and consider
-" let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
-" let g:ctrlp_extensions = ['tag', 'quickfix']
-
 " note that menu provides a substantially better configuration for viewing the autocompletion output that is available in gvim
 set cot=menu
 set completeopt=longest,menuone
