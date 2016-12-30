@@ -57,7 +57,9 @@ call plug#begin('~/.vim/bundle')
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Valloric/ListToggle'
-Plug 'Valloric/MatchTagAlways'
+
+
+
 Plug 'airblade/vim-rooter'
 Plug 'jez/vim-superman'
 
@@ -87,6 +89,20 @@ hi link EasyMotionShade Comment
 hi link EasyMotionIncSearch Type
 hi link EasyMotionIncCursor Type
 hi link EasyMotionMoveHL Type
+
+" }}}
+
+" MatchTagAlways {{{
+
+Plug 'Valloric/MatchTagAlways'
+
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'liquid' : 1,
+    \}
 
 " }}}
 
@@ -390,13 +406,6 @@ set complete+=]
 " let g:mta_use_matchparen_group = 0
 " let g:mta_set_default_matchtag_color = 0
 
-" let g:mta_filetypes = {
-"     \ 'html' : 0,
-"     \ 'xhtml' : 1,
-"     \ 'xml' : 1,
-"     \ 'jinja' : 1,
-"     \ 'liquid' : 1,
-"     \}
 
 " note that menu provides a substantially better configuration for viewing the autocompletion output that is available in gvim
 set cot=menu
