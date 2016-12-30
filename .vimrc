@@ -522,21 +522,6 @@ let g:airline#extensions#branch#enabled = 0
 
 set nosmd " turn off the status line that shows the silly word insert, airline is much better!
 
-
-" change the default EasyMotion shading to something more readable
-hi link EasyMotionTarget Type
-hi link EasyMotionShade Comment
-hi link EasyMotionIncSearch Type
-hi link EasyMotionIncCursor Type
-hi link EasyMotionMoveHL Type
-
-" Don't create the shaded background ; seems the better choice, but not perfect
-let g:EasyMotion_do_shade = 0
-
-" Tell EasyMotion to use capital letter since these are easier to see
-let g:EasyMotion_use_upper = 1
-let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
-
 " Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
 set tags=./tags;/,tags;/
 let g:easytags_ignored_filetypes = ''
