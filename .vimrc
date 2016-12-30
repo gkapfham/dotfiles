@@ -461,49 +461,6 @@ autocmd FileType gitcommit setlocal spell
 nmap <silent> <leader>s :set spell!<CR>
 syntax spell toplevel
 
-" let g:tagbar_autoclose = 1
-" let g:tagbar_autofocus = 1
-" let g:tagbar_vertical = 15
-
-" " Configure the Tagbar so that it can handle the Markdown language
-" let g:tagbar_type_markdown = {
-"     \ 'ctagstype' : 'markdown',
-"     \ 'kinds' : [
-"         \ 'h:Heading_L1',
-"         \ 'i:Heading_L2',
-"         \ 'k:Heading_L3',
-"         \ 'k:Heading_L4'
-"     \ ]
-" \ }
-
-" " Configure the Tagbar so that it can handle the R language
-" let g:tagbar_type_r = {
-"     \ 'ctagstype' : 'r',
-"     \ 'kinds'     : [
-"         \ 'f:Functions',
-"         \ 'g:GlobalVariables',
-"         \ 'v:FunctionVariables',
-"     \ ]
-" \ }
-
-" " Configure the Tagbar so that it can handle the UltiSnips format
-" let g:tagbar_type_snippets = {
-"     \ 'ctagstype' : 'snippets',
-"     \ 'kinds' : [
-"         \ 's:snippets',
-"     \ ]
-" \ }
-
-" " Configure the Tagbar so that it can handle the CSS format
-" let g:tagbar_type_css = {
-" \ 'ctagstype' : 'Css',
-"     \ 'kinds'     : [
-"         \ 'c:classes',
-"         \ 's:selectors',
-"         \ 'i:identities'
-"     \ ]
-" \ }
-
 " These are some configurations that seem to make vim screen redraws faster
 set nocursorcolumn
 set nocursorline
