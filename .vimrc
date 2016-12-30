@@ -413,6 +413,13 @@ map <F5> :call SyntaxAttr()<CR>
 
 " }}}
 
+" Neovim Display {{{
+
+" Use a different cursor shape
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+" }}}
+
 " FZF {{{
 
 " Mapping selecting mappings
