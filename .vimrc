@@ -473,8 +473,13 @@ autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
 autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+autocmd FileType gitcommit setlocal spell
 
-" Configure the syntax highlighting for the Java programming language
+" }}}
+"
+
+" Java syntax highlighting {{{
+
 let java_highlight_all=1
 let java_highlight_functions=1
 let java_highlight_functions=1
@@ -482,9 +487,8 @@ let java_highlight_java_lang_ids=1
 let java_space_errors=1
 let java_comment_strings=1
 
-
-
 " }}}
+
 
 " Syntax highlighting and completion {{{
 
@@ -682,8 +686,6 @@ set spell spelllang=en_us,en_gb
 set mousemodel=popup
 
 
-" Turn on spell checking for Git commits
-autocmd FileType gitcommit setlocal spell
 
 " Allow spelling to be easily toggled on and off
 nmap <silent> <leader>s :set spell!<CR>
