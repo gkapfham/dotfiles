@@ -1,34 +1,5 @@
 set nocompatible
 
-" Movement with the keyboard {{{
-
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-inoremap jk <ESC>
-inoremap <ESC> <NOP>
-
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
-
-" }}}
-
-
-" Turn off spell checking {{{
-
-au BufNewFile,BufRead,BufEnter *.c      set nospell
-au BufNewFile,BufRead,BufEnter *.h      set nospell
-au BufNewFile,BufRead,BufEnter *.cpp    set nospell
-au BufNewFile,BufRead,BufEnter *.hpp    set nospell
-au BufNewFile,BufRead,BufEnter *.java   set nospell
-au BufNewFile,BufRead,BufEnter *.sh     set nospell
-au BufNewFile,BufRead,BufEnter *.xml    set nospell
-au BufNewFile,BufRead,BufEnter *.sql    set nospell
-au BufNewFile,BufRead,BufEnter *.bib    set nospell
-
-" }}}
-
 call plug#begin('~/.vim/bundle')
 
 " Plugins cannot be used until a bug is fixed in Neovim {{{
@@ -357,7 +328,32 @@ nmap ga <Plug>(EasyAlign)
 Plug 'kana/vim-operator-user'
 Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
+
+" vimtex {{{
+
 Plug 'lervag/vimtex', {'for': 'tex'}
+
+" Adding in the conceal option for latex. Trying this out to see if I like the rendering of mathematics
+set conceallevel=2
+let g:tex_conceal= 'adgms'
+hi Conceal ctermbg=234 ctermfg=143
+
+" Starting to use vim-latex and it needs several configurations to work correctly
+let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -interaction=nonstopmode -synctex=1'"
+let g:vimtex_fold_enabled = 0
+let g:vimtex_quickfix_mode = 2
+let g:vimtex_quickfix_open_on_warning = 0
+let g:vimtex_toc_resize = 0
+let g:vimtex_toc_hide_help = 1
+let g:vimtex_indent_enabled = 1
+let g:vimtex_latexmk_enabled = 1
+let g:vimtex_latexmk_continuous = 1
+let g:vimtex_latexmk_callback = 1
+let g:vimtex_complete_recursive_bib = 0
+let g:vimtex_view_method = 'mupdf'
+let g:vimtex_view_mupdf_options = '-r 288'
+
+" }}}
 
 " vim-interestingwords {{{
 
@@ -449,6 +445,8 @@ set tags=./tags;/,tags;/
 Plug 'w0rp/ale'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
 
 " }}}
 
@@ -499,9 +497,11 @@ set wildmode=longest:full,full
 
 " BufReads and BufNewFiles {{{
 
+augroup vimrc_autocmd
 autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 autocmd BufRead,BufNewFile *.html set filetype=html
-let g:html_indent_inctags = "html,body,head,tbody,div"
+
+let g:html_indent_inctags = 'html,body,head,tbody,div'
 
 " }}}
 
@@ -529,7 +529,6 @@ vmap <C-Down> ]egv
 
 " Insert a blank line
 nmap oo Ojk
-
 
 " }}}
 
@@ -592,26 +591,6 @@ set wildignore+=*/tmp/*
 " change the mapleader from \ to , -- this makes it easier to perform compilation in LaTeX
 let maplocalleader=","
 let mapleader=","
-
-" Adding in the conceal option for latex. Trying this out to see if I like the rendering of mathematics
-set cole=2
-let g:tex_conceal= 'adgms'
-hi Conceal ctermbg=234 ctermfg=143
-
-" Starting to use vim-latex and it needs several configurations to work correctly
-let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -interaction=nonstopmode -synctex=1'"
-let g:vimtex_fold_enabled = 0
-let g:vimtex_quickfix_mode = 2
-let g:vimtex_quickfix_open_on_warning = 0
-let g:vimtex_toc_resize = 0
-let g:vimtex_toc_hide_help = 1
-let g:vimtex_indent_enabled = 1
-let g:vimtex_latexmk_enabled = 1
-let g:vimtex_latexmk_continuous = 1
-let g:vimtex_latexmk_callback = 1
-let g:vimtex_complete_recursive_bib = 0
-let g:vimtex_view_method = 'mupdf'
-let g:vimtex_view_mupdf_options = '-r 288'
 
 " Define a function that will insert the correct kind of quotation marks, but only in LaTeX documents
 " Note that this then requires you to run a CTRL-V " to get a traditional quotation mark
@@ -684,8 +663,6 @@ set hidden                                     " this option is required for the
 set spell spelllang=en_us,en_gb
 set mousemodel=popup
 
-
-
 " Allow spelling to be easily toggled on and off
 nmap <silent> <leader>s :set spell!<CR>
 syntax spell toplevel
@@ -729,8 +706,40 @@ let g:neomake_r_rlint_maker = {
         \ }
 let g:neomake_r_enabled_makers = ['rlint']
 
+" Movement with the keyboard {{{
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+inoremap jk <ESC>
+inoremap <ESC> <NOP>
+
+" noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+" noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" }}}
+
 " Trailing whitespace {{{
 
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
 " }}}
+"
+
+" Turn off spell checking {{{
+
+au BufNewFile,BufRead,BufEnter *.c      set nospell
+au BufNewFile,BufRead,BufEnter *.h      set nospell
+au BufNewFile,BufRead,BufEnter *.cpp    set nospell
+au BufNewFile,BufRead,BufEnter *.hpp    set nospell
+au BufNewFile,BufRead,BufEnter *.java   set nospell
+au BufNewFile,BufRead,BufEnter *.sh     set nospell
+au BufNewFile,BufRead,BufEnter *.xml    set nospell
+au BufNewFile,BufRead,BufEnter *.sql    set nospell
+au BufNewFile,BufRead,BufEnter *.bib    set nospell
+
+" }}}
+
+
+" set foldmethod=indent
