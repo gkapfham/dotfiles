@@ -7,8 +7,8 @@ call plug#begin('~/.vim/bundle')
 " Plug 'haya14busa/incsearch-easymotion.vim'
 " Plug 'haya14busa/incsearch-fuzzy.vim'
 " Plug 'haya14busa/incsearch.vim'
-" Plug 'neomake/neomake'
 
+Plug 'w0rp/ale'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -47,6 +47,7 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lfv89/vim-interestingwords'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim', {'for': 'html'}
+" Plug 'neomake/neomake'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
@@ -63,9 +64,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/spellrotate.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/HTML-AutoCloseTag', {'for': 'html'}
 Plug 'vim-scripts/SyntaxAttr.vim'
-Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
@@ -77,20 +76,50 @@ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
+" File types {{{
+
 " Automatically identify the filetype for the plugins and always use syntax highlighting
 filetype indent plugin on | syn on
 
 " Set the completion function for a variety of different file types
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
+augroup configurationgroupforfiletypes
+  autocmd!
+  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
+  autocmd FileType java setlocal omnifunc=javacomplete#Complete
+  autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
+  autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+augroup END
 
-" Set the completion function in general if there is not a specific type
+" Syntax highlighting for Java
+let java_highlight_all=1
+let java_highlight_functions=1
+let java_highlight_functions=1
+let java_highlight_java_lang_ids=1
+let java_space_errors=1
+let java_comment_strings=1
+
+" Indenting for HTML
+au BufRead,BufNewFile *.html set filetype=html
+let g:html_indent_inctags = 'html,body,head,tbody,div'
+
+" Autodetect CSV
+autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
+
+" }}}
+
+" Completion {{{
+
+" Define basic completion function
 set omnifunc=syntaxcomplete#Complete
 
-" Disable the arrow keys so that I keep my fingers on home row during programming
+" }}}
+
+" Keyboard movement {{{
+
+" Disable the arrow keys
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
@@ -98,21 +127,13 @@ noremap <Right> <NOP>
 inoremap jk <ESC>
 inoremap <ESC> <NOP>
 
-" Set it so that the todo mode is always run when editing the file called todo.txt or Todo.txt
-autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
+" }}}
 
 " Setup the Livedown plugin that supports the preview of Markdown files
 let g:livedown_autorun = 0
 let g:livedown_open = 0
 let g:livedown_port = 1337
 nmap gmd :LivedownPreview<CR>
-
-" Set indenting to work correctly for the HTML file type (may not be need now)
-au BufRead,BufNewFile *.html set filetype=html
-let g:html_indent_inctags = "html,body,head,tbody,div"
-
-" Set it so that the CSV mode is always run when editing this type of file (does not autodetect?)
-autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 
 " Set up a dictionary so that I can do word completion by looking up words!
 set dictionary-=/usr/share/dict/american-english
@@ -228,7 +249,6 @@ let g:ycm_use_ultisnips_completer = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_filetype_blacklist = {
-        \ 'tagbar' : 1,
         \ 'qf' : 1,
         \ 'notes' : 1,
         \ 'unite' : 1,
@@ -331,49 +351,6 @@ autocmd FileType gitcommit setlocal spell
 " Allow spelling to be easily toggled on and off
 nmap <silent> <leader>s :set spell!<CR>
 syntax spell toplevel
-
-let g:tagbar_autoclose = 1
-let g:tagbar_autofocus = 1
-let g:tagbar_vertical = 15
-
-" Configure the Tagbar so that it can handle the Markdown language
-let g:tagbar_type_markdown = {
-    \ 'ctagstype' : 'markdown',
-    \ 'kinds' : [
-        \ 'h:Heading_L1',
-        \ 'i:Heading_L2',
-        \ 'k:Heading_L3',
-        \ 'k:Heading_L4'
-    \ ]
-\ }
-
-" Configure the Tagbar so that it can handle the R language
-let g:tagbar_type_r = {
-    \ 'ctagstype' : 'r',
-    \ 'kinds'     : [
-        \ 'f:Functions',
-        \ 'g:GlobalVariables',
-        \ 'v:FunctionVariables',
-    \ ]
-\ }
-
-" Configure the Tagbar so that it can handle the UltiSnips format
-let g:tagbar_type_snippets = {
-    \ 'ctagstype' : 'snippets',
-    \ 'kinds' : [
-        \ 's:snippets',
-    \ ]
-\ }
-
-" Configure the Tagbar so that it can handle the CSS format
-let g:tagbar_type_css = {
-\ 'ctagstype' : 'Css',
-    \ 'kinds'     : [
-        \ 'c:classes',
-        \ 's:selectors',
-        \ 'i:identities'
-    \ ]
-\ }
 
 " These are some configurations that seem to make vim screen redraws faster
 set nocursorcolumn
@@ -519,18 +496,6 @@ let g:gitgutter_sign_removed_first_line = '^'
 " commands, like :cnfile. Very useful when running Qdo on a QuickFix list
 set autowrite
 
-" Configure the syntax highlighting for the Java programming language
-let java_highlight_all=1
-let java_highlight_functions=1
-let java_highlight_functions=1
-let java_highlight_java_lang_ids=1
-let java_space_errors=1
-let java_comment_strings=1
-
-" Configure the makeprg and the errorformat to support using Ant build systems for Java
-autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
-autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
-
 " " Configure Neomake to run on the save of every buffer
 " autocmd! BufWritePost * Neomake
 
@@ -564,7 +529,6 @@ vmap <C-Down> ]egv
 
 " Create a mapping that allows for the insertion of a blank line without
 " having to enter insert mode and then leave it. Works nicely, but only in GVim
-nmap <S-Enter> O<Esc>
 nmap oo Ojk
 
 " This function will allow you to rename a file inside of vim, works correctly
@@ -601,10 +565,10 @@ let g:pandoc#modules#disabled = ["folding"]
 " " variables in programs written in Java and R, for instance
 call camelcasemotion#CreateMotionMappings('<leader>')
 
-" Configure up and down line movement for virtual movement when there is no
-" count used. But, when there is a count, move by physical lines instead
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+" " Configure up and down line movement for virtual movement when there is no
+" " count used. But, when there is a count, move by physical lines instead
+" noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+" noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " Configure a key combination that allows me to stop using pair matching
 nmap <leader>tp :DelimitMateSwitch<CR>
@@ -739,3 +703,5 @@ nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+let g:AutoPairsShortcutToggle = '<leader>apt'
