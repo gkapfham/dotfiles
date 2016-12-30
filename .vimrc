@@ -19,6 +19,7 @@ Plug 'artur-shaik/vim-javacomplete2'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
+Plug 'chrisbra/unicode.vim'
 Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim'
 Plug 'easymotion/vim-easymotion'
@@ -112,7 +113,7 @@ autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 " LaTeX {{{
 
 " Configure vimtex
-let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -interaction=nonstopmode -synctex=1'"
+let g:vimtex_latexmk_options="-pdf -pdflatex='xelatex -file-line-error -shell-escape -interaction=nonstopmode -synctex=1'"
 let g:vimtex_fold_enabled = 0
 let g:vimtex_quickfix_mode = 2
 let g:vimtex_quickfix_open_on_warning = 0
@@ -127,7 +128,7 @@ let g:vimtex_view_method = 'mupdf'
 let g:vimtex_view_mupdf_options = '-r 288'
 
 " Conceal option
-set cole=2
+set conceallevel=2
 let g:tex_conceal= 'adgms'
 hi Conceal ctermbg=234 ctermfg=143
 
@@ -139,13 +140,13 @@ fu! TexQuotes()
     let line = getline(".")
     let curpos = col(".")-1
     let insert = "''"
-
     let left = strpart(line, curpos-1, 1)
     if (left == ' ' || left == '        ' || left == '')
         let insert = '``'
     endif
     return insert
 endfu
+
 autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
 
 " }}}
@@ -179,6 +180,13 @@ inoremap <ESC> <NOP>
 " Define the leaders
 let maplocalleader=","
 let mapleader=","
+
+" Move through CamelCase text
+call camelcasemotion#CreateMotionMappings('<leader>')
+
+" Navigate through wrapped text
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " }}}
 
@@ -244,6 +252,30 @@ let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 
 " }}}
 
+" Text manipulation {{{
+
+" Insert a blank line
+nmap oo Ojk
+
+" Interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
+" Toggle off the auto-completion of pairs
+let g:AutoPairsShortcutToggle = '<leader>apt'
+
+" }}}
+
 " Display improvements {{{
 
 " Display encoding to UTF-8
@@ -284,6 +316,65 @@ nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
 nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
 nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
 nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
+
+" }}}
+
+" FZF {{{
+
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion for words, paths, files, and lines in the buffer
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Define a custom command for loading MRU files with FZF
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '-m -x +s --no-bold',
+\  'down':    '40%'})
+
+" Define a custom command for loading hidden files as well as regular with FZF
+command! FZFHidden call fzf#run({
+\  'source':  'ag --hidden --ignore .git -l -g ""',
+\  'sink':    'e',
+\  'options': '-m -x +s --no-bold',
+\  'down':    '40%'})
+
+" Define a custom command for loading hidden files as well as regular with FZF
+command! FZFMine call fzf#run({
+\  'source':  'ag --ignore .git -l -g ""',
+\  'sink':    'e',
+\  'options': '-m -x +s --no-bold',
+\  'down':    '40%'})
+
+" Define key combinations
+nmap <C-h> :FZFHidden<CR>
+nmap <C-p> :FZFMine<CR>
+nmap <C-i> :Tags <C-R><C-W><CR>
+nmap <C-t> :BTags <CR>
+nmap <C-u> :FZFMru<CR>
+nnoremap <Tab> :Buffers<Cr>
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+
+" Add in a format string for controlling how FZF git logs
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
+
+" Configure the fzf statusline in Neovim
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=110 ctermbg=235
+  highlight fzf2 ctermfg=110 ctermbg=235
+  highlight fzf3 ctermfg=110 ctermbg=235
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 " }}}
 
@@ -526,17 +617,6 @@ let g:neomake_r_rlint_maker = {
         \ }
 let g:neomake_r_enabled_makers = ['rlint']
 
-" Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-
-" Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-" Create a mapping that allows for the insertion of a blank line without
-" having to enter insert mode and then leave it. Works nicely, but only in GVim
-nmap oo Ojk
 
 " This function will allow you to rename a file inside of vim, works correctly
 function! RenameFile()
@@ -568,96 +648,8 @@ nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 " Remove the feature that performs folding inside of Markdown files
 let g:pandoc#modules#disabled = ["folding"]
 
-" " Set up the CamelCaseMotion plugin so that it allows for movements with
-" " variables in programs written in Java and R, for instance
-call camelcasemotion#CreateMotionMappings('<leader>')
 
-" " Configure up and down line movement for virtual movement when there is no
-" " count used. But, when there is a count, move by physical lines instead
-" noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-" noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
-
-" Configure a key combination that allows me to stop using pair matching
-nmap <leader>tp :DelimitMateSwitch<CR>
-let delimitMateSmartMatchpairs = 1
-
-" Mapping selecting mappings --- lets you see the mappings that are configured
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-" Insert mode completion for words, paths, files, and lines in the buffer
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
-" Define a custom command for loading MRU files with FZF
-command! FZFMru call fzf#run({
-\  'source':  v:oldfiles,
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold',
-\  'down':    '40%'})
-
-" Define a custom command for loading hidden files as well as regular with FZF
-command! FZFHidden call fzf#run({
-\  'source':  'ag --hidden --ignore .git -l -g ""',
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold',
-\  'down':    '40%'})
-
-" Define a custom command for loading hidden files as well as regular with FZF
-command! FZFMine call fzf#run({
-\  'source':  'ag --ignore .git -l -g ""',
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold',
-\  'down':    '40%'})
-
-" Setup special key for viewing the tabs in the buffer
-nmap <C-t> :BTags <CR>
-
-" Setup special key for viewing the Tags that match word highlighted
-nmap <C-i> :Tags <C-R><C-W><CR>
-
-" Allow for running an ag search on the word currently under the cursor
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-
-" This allows you to jump to the definition of a function using FZF
-nnoremap <Tab> :Buffers<Cr>
-
-" Run the FZF command as a file-finder in the same way that I use CTRL-P
-" when it is displaying the most recent files
-nmap <C-u> :FZFMru<CR>
-
-" Run the FZF command as a file-finder in the same way that I use CTRL-P (but,
-" no hidden files are indexed with FZF by default --- so, also use a separate
-" command to display the hidden files along with the standard files)
-nmap <C-p> :FZFMine<CR>
-" nmap <C-p> :FZF -m<CR>
-nmap <C-h> :FZFHidden<CR>
-
-" Add in a format string for controlling how FZF will color-code when running
-" a commands that shows the Git logs (Note that the blue is black by default)
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
-
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=110 ctermbg=235
-  highlight fzf2 ctermfg=110 ctermbg=235
-  highlight fzf3 ctermfg=110 ctermbg=235
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-" Setup mappings that allow for the rotation of misspelled words to
-" correctly-spelled words, using a plugin
+" Move to the next correctly spelled word
 nmap <silent> zn <Plug>(SpellRotateForward)
 nmap <silent> zp <Plug>(SpellRotateBackward)
 vmap <silent> zn <Plug>(SpellRotateForwardV)
@@ -669,4 +661,3 @@ let g:lt_quickfix_list_toggle_map = '<leader>q'
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-let g:AutoPairsShortcutToggle = '<leader>apt'
