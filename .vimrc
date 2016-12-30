@@ -24,6 +24,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways'
+Plug 'airblade/vim-rooter'
 Plug 'jez/vim-superman'
 
 " }}}
@@ -96,8 +97,23 @@ let g:ycm_semantic_triggers.tex = [
 " }}}
 
 
+" vim-gitgutter {{{
+
 Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
+let g:gitgutter_async = 1
+let g:gitgutter_eager = 1
+let g:gitgutter_realtime = 1
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_signs = 1
+let g:gitgutter_sign_added = '➕'
+let g:gitgutter_sign_modified = '▲'
+let g:gitgutter_sign_removed = '✘'
+let g:gitgutter_sign_removed_first_line = '⏫'
+let g:gitgutter_sign_modified_removed = '✱'
+" let g:gitgutter_sign_removed_first_line = '^'
+
+" }}}
+
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
@@ -539,22 +555,6 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr()<CR>
 
-" Configure the GitGutter plugin so that it display signs in the sign column
-let g:gitgutter_async = 1
-let g:gitgutter_eager = 1
-let g:gitgutter_realtime = 1
-let g:gitgutter_sign_column_always = 1
-let g:gitgutter_signs = 1
-
-" " Set all of the symbols for the GitGutter (break in NeoVim)
-" let g:gitgutter_sign_added = '➕ '
-" let g:gitgutter_sign_modified = '▲'
-" let g:gitgutter_sign_removed = '✘'
-" let g:gitgutter_sign_removed_first_line = '⏫ '
-" let g:gitgutter_sign_modified_removed = '✱'
-
-" Improve one of the symbols for the GitGutter
-let g:gitgutter_sign_removed_first_line = '^'
 
 " Automatically save changes before switching buffer with some
 " commands, like :cnfile. Very useful when running Qdo on a QuickFix list
