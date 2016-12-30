@@ -90,7 +90,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'airblade/vim-rooter'
 Plug 'artur-shaik/vim-javacomplete2'
-Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'christoomey/vim-sort-motion'
@@ -101,6 +100,7 @@ Plug 'gorodinskiy/vim-coloresque'
 Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
 Plug 'int3/vim-extradite'
+Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'jez/vim-superman'
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
 Plug 'tpope/vim-fugitive'
@@ -247,10 +247,20 @@ let R_openpdf = 0
 
 " }}}
 
-Plug 'jeetsukumaran/vim-filebeagle'
+" CamelCaseMotion {{{
+
+Plug 'bkad/CamelCaseMotion'
+call camelcasemotion#CreateMotionMappings('<leader>')
+
+" }}}
+
 Plug 'jgdavey/tslime.vim'
+
+" fzf {{{
+
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 
+" }}}
 " fzf.vim {{{
 
 Plug 'junegunn/fzf.vim'
@@ -712,9 +722,6 @@ map <Leader>mf :call RenameFile()<cr>
 " Remove the feature that performs folding inside of Markdown files
 let g:pandoc#modules#disabled = ["folding"]
 
-" " Set up the CamelCaseMotion plugin so that it allows for movements with
-" " variables in programs written in Java and R, for instance
-call camelcasemotion#CreateMotionMappings('<leader>')
 
 
 
