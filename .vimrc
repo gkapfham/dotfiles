@@ -76,6 +76,28 @@ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
+" System {{{
+
+" Make changes automatically saved during Qdo
+set autowrite
+
+" Enable spell checking
+set spell spelllang=en_us,en_gb
+set mousemodel=popup
+
+" Disable spell checking in source code
+au BufNewFile,BufRead,BufEnter *.c      set nospell
+au BufNewFile,BufRead,BufEnter *.h      set nospell
+au BufNewFile,BufRead,BufEnter *.cpp    set nospell
+au BufNewFile,BufRead,BufEnter *.hpp    set nospell
+au BufNewFile,BufRead,BufEnter *.java   set nospell
+au BufNewFile,BufRead,BufEnter *.sh     set nospell
+au BufNewFile,BufRead,BufEnter *.xml    set nospell
+au BufNewFile,BufRead,BufEnter *.sql    set nospell
+au BufNewFile,BufRead,BufEnter *.bib    set nospell
+
+" }}}
+
 " Programming languages {{{
 
 " Automatically identify the filetype for the plugins and always use syntax highlighting
@@ -89,6 +111,7 @@ augroup configurationgroupforfiletypes
   autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
   autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
   autocmd FileType java setlocal omnifunc=javacomplete#Complete
+  autocmd FileType gitcommit setlocal spell
   autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
   autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
 augroup END
@@ -343,6 +366,25 @@ nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
 let g:lt_location_list_toggle_map = '<leader>c'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 
+" Toggle the display of spelling mistakes
+nmap <silent> <leader>s :set spell!<CR>
+syntax spell toplevel
+
+" Display the airline statusline
+set laststatus=2
+let g:airline_theme='tomorrow'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
+let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#hunks#non_zero_only = 0
+let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+
+" Do not display the standard status line
+set nosmd
 
 " }}}
 
@@ -536,28 +578,6 @@ set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻ " highlight pro
 set list                                       " also required to ensure that problematic whitespace is highlighted correctly
 set hidden                                     " this option is required for the vimtex plugin to work correctly
 
-" turn on spell checking so that I can do this for Latex documents
-set spell spelllang=en_us,en_gb
-set mousemodel=popup
-
-" turn of spell checking for some types of buffers, mostly Java and other programming languages
-au BufNewFile,BufRead,BufEnter *.c      set nospell
-au BufNewFile,BufRead,BufEnter *.h      set nospell
-au BufNewFile,BufRead,BufEnter *.cpp    set nospell
-au BufNewFile,BufRead,BufEnter *.hpp    set nospell
-au BufNewFile,BufRead,BufEnter *.java   set nospell
-au BufNewFile,BufRead,BufEnter *.sh     set nospell
-au BufNewFile,BufRead,BufEnter *.xml    set nospell
-au BufNewFile,BufRead,BufEnter *.sql    set nospell
-au BufNewFile,BufRead,BufEnter *.bib    set nospell
-
-" Turn on spell checking for Git commits
-autocmd FileType gitcommit setlocal spell
-
-" Allow spelling to be easily toggled on and off
-nmap <silent> <leader>s :set spell!<CR>
-syntax spell toplevel
-
 
 " Configure NeoVim so that it can use different cursor shapes when run in
 " recent terminal windows
@@ -570,20 +590,6 @@ set nohlsearch
 " with no specified file
 set shortmess=I
 
-" Configure the airline status bar replacement that provides some delightful context
-set laststatus=2
-let g:airline_theme='tomorrow'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
-let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
-let g:airline#extensions#hunks#enabled = 0
-let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
-let g:airline#extensions#branch#enabled = 0
-" let g:airline#extensions#hunks#non_zero_only = 0
-" let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
-
-set nosmd " turn off the status line that shows the silly word insert, airline is much better!
 
 
 " Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
@@ -617,9 +623,6 @@ let g:gitgutter_signs = 1
 " Improve one of the symbols for the GitGutter
 let g:gitgutter_sign_removed_first_line = '^'
 
-" Automatically save changes before switching buffer with some
-" commands, like :cnfile. Very useful when running Qdo on a QuickFix list
-set autowrite
 
 " " Configure Neomake to run on the save of every buffer
 " autocmd! BufWritePost * Neomake
@@ -643,7 +646,6 @@ let g:neomake_r_rlint_maker = {
         \ '%E%f:%l:%c: error: %m,'
         \ }
 let g:neomake_r_enabled_makers = ['rlint']
-
 
 " This function will allow you to rename a file inside of vim, works correctly
 function! RenameFile()
