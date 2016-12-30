@@ -274,10 +274,6 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 set completefunc=autoprogramming#complete
-"
-" let g:JavaComplete_ShowExternalCommandsOutput = 1
-" let g:JavaComplete_JavaviDebug = 0
-" let g:JavaComplete_JavaviLogfileDirectory = '~/.javavi'
 
 " Disable the arrow keys so that I keep my fingers on home row during programming
 noremap <Up> <NOP>
@@ -414,11 +410,6 @@ let g:tex_flavor = 'tex'
 set complete-=k complete+=k
 set complete+=kspell
 set complete+=]
-
-
-" let g:mta_use_matchparen_group = 0
-" let g:mta_set_default_matchtag_color = 0
-
 
 " note that menu provides a substantially better configuration for viewing the autocompletion output that is available in gvim
 set cot=menu
