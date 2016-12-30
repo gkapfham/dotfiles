@@ -272,6 +272,19 @@ set nocursorline
 set ttyfast
 " set lazyredraw
 
+" Highlight yanked region
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
+highlight default Flashy term=bold ctermbg=237 guibg=#13354A
+let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
+
+" Highlight chosen words
+let g:interestingWordsTermColors = ['143', '110', '173', '237', '110']
+nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
+nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
+nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
+nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
+
 " }}}
 
 " Setup the Livedown plugin that supports the preview of Markdown files
@@ -623,36 +636,6 @@ nmap <C-p> :FZFMine<CR>
 " nmap <C-p> :FZF -m<CR>
 nmap <C-h> :FZFHidden<CR>
 
-" " Customize fzf colors to match your color scheme
-" let g:fzf_colors =
-" \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'PreProc'],
-"   \ 'prompt':  ['fg', 'Conditional'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment'] }
-
-" " Configure the colors for fzf so that they fit my overall theme
-" let g:fzf_colors =
-" \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'Normal', 'Normal'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'PreProc'],
-"   \ 'prompt':  ['fg', 'Conditional'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment'] }
-
 " Add in a format string for controlling how FZF will color-code when running
 " a commands that shows the Git logs (Note that the blue is black by default)
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
@@ -682,18 +665,6 @@ vmap <silent> zp <Plug>(SpellRotateBackwardV)
 
 let g:lt_location_list_toggle_map = '<leader>c'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
-
-" Highlight the region that you have just yanked
-map y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
-highlight default Flashy term=bold ctermbg=237 guibg=#13354A
-let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
-
-let g:interestingWordsTermColors = ['143', '110', '173', '237', '110']
-nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
-nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
-nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
-nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
