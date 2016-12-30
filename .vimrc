@@ -56,7 +56,6 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'Valloric/ListToggle'
 Plug 'airblade/vim-rooter'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'bkad/CamelCaseMotion'
@@ -67,6 +66,9 @@ Plug 'davidhalter/jedi-vim'
 Plug 'garbas/vim-snipmate'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'gorodinskiy/vim-coloresque'
+Plug 'henrik/vim-qargs'
+Plug 'honza/vim-snippets'
+Plug 'int3/vim-extradite'
 Plug 'jez/vim-superman'
 
 " }}}
@@ -95,6 +97,14 @@ hi link EasyMotionShade Comment
 hi link EasyMotionIncSearch Type
 hi link EasyMotionIncCursor Type
 hi link EasyMotionMoveHL Type
+
+" }}}
+
+" ListToggle {{{
+
+Plug 'Valloric/ListToggle'
+let g:lt_location_list_toggle_map = '<leader>c'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
 
 " }}}
 
@@ -179,10 +189,17 @@ let g:gitgutter_signs = 1
 
 " }}}
 
+" vim-operator-flashy {{{
+
 Plug 'haya14busa/vim-operator-flashy'
-Plug 'henrik/vim-qargs'
-Plug 'honza/vim-snippets'
-Plug 'int3/vim-extradite'
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
+highlight default Flashy term=bold ctermbg=237 guibg=#13354A
+let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
+
+" }}}
+
+
 Plug 'jalvesaq/Nvim-R'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'jgdavey/tslime.vim'
@@ -703,14 +720,6 @@ nmap <silent> zp <Plug>(SpellRotateBackward)
 vmap <silent> zn <Plug>(SpellRotateForwardV)
 vmap <silent> zp <Plug>(SpellRotateBackwardV)
 
-let g:lt_location_list_toggle_map = '<leader>c'
-let g:lt_quickfix_list_toggle_map = '<leader>q'
-
-" Highlight the region that you have just yanked
-map y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
-highlight default Flashy term=bold ctermbg=237 guibg=#13354A
-let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
 
 let g:interestingWordsTermColors = ['143', '110', '173', '237', '110']
 nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
