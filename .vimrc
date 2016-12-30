@@ -57,10 +57,16 @@ call plug#begin('~/.vim/bundle')
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Valloric/ListToggle'
-
-
-
 Plug 'airblade/vim-rooter'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'bkad/CamelCaseMotion'
+Plug 'bronson/vim-visual-star-search'
+Plug 'chrisbra/csv.vim', {'for': 'csv'}
+Plug 'christoomey/vim-sort-motion'
+Plug 'davidhalter/jedi-vim'
+Plug 'garbas/vim-snipmate'
+Plug 'gilligan/textobj-gitgutter'
+Plug 'gorodinskiy/vim-coloresque'
 Plug 'jez/vim-superman'
 
 " }}}
@@ -173,16 +179,6 @@ let g:gitgutter_signs = 1
 
 " }}}
 
-Plug 'artur-shaik/vim-javacomplete2'
-Plug 'bkad/CamelCaseMotion'
-Plug 'bronson/vim-visual-star-search'
-Plug 'chrisbra/csv.vim', {'for': 'csv'}
-Plug 'christoomey/vim-sort-motion'
-Plug 'davidhalter/jedi-vim'
-Plug 'freitass/todo.txt-vim'
-Plug 'garbas/vim-snipmate'
-Plug 'gilligan/textobj-gitgutter'
-Plug 'gorodinskiy/vim-coloresque'
 Plug 'haya14busa/vim-operator-flashy'
 Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
