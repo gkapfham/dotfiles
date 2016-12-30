@@ -111,7 +111,6 @@ Plug 'davidhalter/jedi-vim'
 Plug 'garbas/vim-snipmate'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'gorodinskiy/vim-coloresque'
-Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
 Plug 'int3/vim-extradite'
 Plug 'jeetsukumaran/vim-filebeagle'
@@ -127,6 +126,9 @@ Plug 'xolox/vim-misc'
 " }}}
 
 " Plugins that require configuration {{{
+
+Plug 'henrik/vim-qargs'
+set autowrite
 
 " vim-easymotion {{{
 
