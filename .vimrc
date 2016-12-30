@@ -98,6 +98,11 @@ Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
 Plug 'int3/vim-extradite'
 Plug 'jez/vim-superman'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-liquid'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 
 " }}}
 
@@ -260,7 +265,7 @@ nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
 
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim', {'for': 'html'}
-" Plug 'neomake/neomake'
+Plug 'neomake/neomake'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
@@ -269,11 +274,6 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-liquid'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 
 " spellrotate.vim {{{
 
