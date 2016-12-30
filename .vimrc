@@ -22,7 +22,6 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways'
 
@@ -52,7 +51,49 @@ let g:AutoPairsShortcutToggle = '<leader>apt'
 
 " }}}
 
+" ultisnips {{{
+
+Plug 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<C-k>"
+let g:UltiSnipsJumpForwardTrigger="<C-k>"
+let g:UltiSnipsListSnippets = "<C-l>"
+let g:UltiSnipsJumpBackwardTrigger='<C-s-k>'
+let g:UltiSnipsJumpBackwardTrigger=""
+
+" }}}
+
+" YouCompleteMe {{{
+
 Plug 'Valloric/YouCompleteMe'
+
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_use_ultisnips_completer = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_filetype_blacklist = {
+        \ 'tagbar' : 1,
+        \ 'qf' : 1,
+        \ 'notes' : 1,
+        \ 'unite' : 1,
+        \ 'text' : 1,
+        \ 'vimwiki' : 1,
+        \ 'pandoc' : 1,
+        \ 'infolog' : 1,
+        \}
+
+" make YCM compatible with the vimtex package
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+  endif
+let g:ycm_semantic_triggers.tex = [
+        \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
+        \ ]
+
+" }}}
+
 Plug 'Z1MM32M4N/vim-superman'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -103,19 +144,18 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/HTML-AutoCloseTag', {'for': 'html'}
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'wellle/targets.vim'
+
+" tmux-complete.vim {{{
+
 Plug 'wellle/tmux-complete.vim'
+let g:tmuxcomplete#trigger = 'omnifunc'
+
+" }}}
+
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'w0rp/ale'
-
-" " Load on nothing
-" Plug 'SirVer/ultisnips', { 'on': [] }
-
-" augroup load_us_ycm
-"   autocmd!
-"   autocmd InsertEnter * call plug#load('ultisnips') | autocmd! load_us_ycm
-" augroup END
 
 " always load the special font after all of the other plugins to ensure fonts render correctly
 Plug 'ryanoasis/vim-devicons'
@@ -132,6 +172,7 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 set completefunc=autoprogramming#complete
+"
 " let g:JavaComplete_ShowExternalCommandsOutput = 1
 " let g:JavaComplete_JavaviDebug = 0
 " let g:JavaComplete_JavaviLogfileDirectory = '~/.javavi'
@@ -272,43 +313,6 @@ set complete-=k complete+=k
 set complete+=kspell
 set complete+=]
 
-" You Complete Me configuration
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_use_ultisnips_completer = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_filetype_blacklist = {
-        \ 'tagbar' : 1,
-        \ 'qf' : 1,
-        \ 'notes' : 1,
-        \ 'unite' : 1,
-        \ 'text' : 1,
-        \ 'vimwiki' : 1,
-        \ 'pandoc' : 1,
-        \ 'infolog' : 1,
-        \}
-
-let g:ycm_server_python_interpreter = '/usr/bin/python3'
-
-" make YCM compatible with UltiSnips
-let g:UltiSnipsExpandTrigger="<C-k>"
-let g:UltiSnipsJumpForwardTrigger="<C-k>"
-let g:UltiSnipsListSnippets = "<C-l>"
-let g:UltiSnipsJumpBackwardTrigger='<C-s-k>'
-let g:UltiSnipsJumpBackwardTrigger=""
-
-" make YCM compatible with the tmux-complete
-let g:tmuxcomplete#trigger = 'omnifunc'
-
-" make YCM compatible with the vimtex package
-if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-  endif
-let g:ycm_semantic_triggers.tex = [
-        \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
-        \ ]
 
 " let g:mta_use_matchparen_group = 0
 " let g:mta_set_default_matchtag_color = 0
