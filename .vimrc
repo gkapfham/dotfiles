@@ -246,7 +246,18 @@ Plug 'kana/vim-operator-user'
 Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
+
+" vim-interestingwords {{{
+
 Plug 'lfv89/vim-interestingwords'
+let g:interestingWordsTermColors = ['143', '110', '173', '237', '110']
+nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
+nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
+nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
+nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
+
+" }}}
+
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 " Plug 'neomake/neomake'
@@ -730,17 +741,4 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" Setup mappings that allow for the rotation of misspelled words to
-" correctly-spelled words, using a plugin
-nmap <silent> zn <Plug>(SpellRotateForward)
-nmap <silent> zp <Plug>(SpellRotateBackward)
-vmap <silent> zn <Plug>(SpellRotateForwardV)
-vmap <silent> zp <Plug>(SpellRotateBackwardV)
-
-
-let g:interestingWordsTermColors = ['143', '110', '173', '237', '110']
-nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
-nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
-nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
-nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
 
