@@ -396,13 +396,6 @@ let g:gitgutter_realtime = 1
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_signs = 1
 
-" " Set all of the symbols for the GitGutter (break in NeoVim)
-" let g:gitgutter_sign_added = '➕ '
-" let g:gitgutter_sign_modified = '▲'
-" let g:gitgutter_sign_removed = '✘'
-" let g:gitgutter_sign_removed_first_line = '⏫ '
-" let g:gitgutter_sign_modified_removed = '✱'
-
 " Use a different symbol in the gutter
 let g:gitgutter_sign_removed_first_line = '^'
 
@@ -626,28 +619,6 @@ let g:easytags_updatetime_warn = 0
 let g:easytags_always_enabled = 1
 let g:easytags_async = 1
 
-" Define a function that allows you to determine what syntax group is being used
-map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-map <F5> :call SyntaxAttr()<CR>
-
-" Configure the GitGutter plugin so that it display signs in the sign column
-let g:gitgutter_async = 1
-let g:gitgutter_eager = 1
-let g:gitgutter_realtime = 1
-let g:gitgutter_sign_column_always = 1
-let g:gitgutter_signs = 1
-
-" " Set all of the symbols for the GitGutter (break in NeoVim)
-" let g:gitgutter_sign_added = '➕ '
-" let g:gitgutter_sign_modified = '▲'
-" let g:gitgutter_sign_removed = '✘'
-" let g:gitgutter_sign_removed_first_line = '⏫ '
-" let g:gitgutter_sign_modified_removed = '✱'
-
-" Improve one of the symbols for the GitGutter
-let g:gitgutter_sign_removed_first_line = '^'
 
 
 " " Configure Neomake to run on the save of every buffer
