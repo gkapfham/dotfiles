@@ -24,6 +24,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways'
+Plug 'jez/vim-superman'
 
 " }}}
 
@@ -94,7 +95,7 @@ let g:ycm_semantic_triggers.tex = [
 
 " }}}
 
-Plug 'Z1MM32M4N/vim-superman'
+
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'artur-shaik/vim-javacomplete2'
