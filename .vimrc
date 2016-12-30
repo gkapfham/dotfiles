@@ -1,5 +1,33 @@
 set nocompatible
 
+" Syntax highlighting and completion {{{
+
+filetype indent plugin on | syn on
+set omnifunc=syntaxcomplete#Complete
+
+" }}}
+
+" Configure movement with the keyboard {{{
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+inoremap jk <ESC>
+inoremap <ESC> <NOP>
+
+" }}}
+
+" FileType definitions {{{
+
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+" }}}
+
 call plug#begin('~/.vim/bundle')
 
 " Plugins cannot be used until a bug is fixed in Neovim {{{
@@ -281,30 +309,7 @@ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
-" Automatically identify the filetype for the plugins and always use syntax highlighting
-filetype indent plugin on | syn on
 
-" Set the completion function for a variety of different file types
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-set completefunc=autoprogramming#complete
-
-" Disable the arrow keys so that I keep my fingers on home row during programming
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-inoremap jk <ESC>
-inoremap <ESC> <NOP>
-
-" Set the completion function in general if there is not a specific type
-set omnifunc=syntaxcomplete#Complete
-
-" Set the syntax for the todo file so that the file highlighting is correct
-autocmd FileType todo set syntax=todo
 
 " Set it so that the todo mode is always run when editing the file called todo.txt or Todo.txt
 autocmd BufNewFile,BufRead [Tt]odo.txt set filetype=todo
