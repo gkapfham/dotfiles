@@ -4,13 +4,13 @@ call plug#begin('~/.vim/bundle')
 
 " Plug 'Raimondi/delimitMate'
 " Plug 'freitass/todo.txt-vim'
-" Plug 'haya14busa/incsearch-easymotion.vim'
-" Plug 'haya14busa/incsearch-fuzzy.vim'
-" Plug 'haya14busa/incsearch.vim'
+
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'haya14busa/incsearch.vim'
 
 Plug 'w0rp/ale'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
@@ -76,7 +76,7 @@ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
-" File types {{{
+" Minimal file types {{{
 
 " Automatically identify the filetype for the plugins and always use syntax highlighting
 filetype indent plugin on | syn on
@@ -110,6 +110,30 @@ autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 
 " }}}
 
+" LaTeX {{{
+
+" Conceal option
+set cole=2
+let g:tex_conceal= 'adgms'
+hi Conceal ctermbg=234 ctermfg=143
+
+" Starting to use vim-latex and it needs several configurations to work correctly
+let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -interaction=nonstopmode -synctex=1'"
+let g:vimtex_fold_enabled = 0
+let g:vimtex_quickfix_mode = 2
+let g:vimtex_quickfix_open_on_warning = 0
+let g:vimtex_toc_resize = 0
+let g:vimtex_toc_hide_help = 1
+let g:vimtex_indent_enabled = 1
+let g:vimtex_latexmk_enabled = 1
+let g:vimtex_latexmk_continuous = 1
+let g:vimtex_latexmk_callback = 1
+let g:vimtex_complete_recursive_bib = 0
+let g:vimtex_view_method = 'mupdf'
+let g:vimtex_view_mupdf_options = '-r 288'
+
+" }}}
+
 " Completion {{{
 
 " Define basic completion function
@@ -121,7 +145,7 @@ set dictionary+=/usr/share/dict/american-english
 
 " }}}
 
-" Keyboard movement {{{
+" Basic keyboard movement {{{
 
 " Disable the arrow keys
 noremap <Up> <NOP>
@@ -130,6 +154,39 @@ noremap <Left> <NOP>
 noremap <Right> <NOP>
 inoremap jk <ESC>
 inoremap <ESC> <NOP>
+
+" }}}
+
+" Advanced keyboard movement with incsearch {{{
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+map <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+
+map z/ <Plug>(incsearch-easymotion-/)
+map z? <Plug>(incsearch-easymotion-?)
+map zg/ <Plug>(incsearch-easymotion-stay)
+
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzy#converter()],
+  \   'modules': [incsearch#config#easymotion#module()],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+
+" change the color of the highlighting for the incsearch plugin
+let g:incsearch#highlight = {
+        \   'match' : {
+        \     'group' : 'Type',
+        \     'priority' : '10'
+        \   }
+        \ }
 
 " }}}
 
@@ -155,6 +212,12 @@ set wrap linebreak nolist
 set relativenumber
 set number
 
+" Faster screen redraws
+set nocursorcolumn
+set nocursorline
+set ttyfast
+" set lazyredraw
+
 " }}}
 
 " Setup the Livedown plugin that supports the preview of Markdown files
@@ -178,25 +241,6 @@ set wildignore+=*/tmp/*
 let maplocalleader=","
 let mapleader=","
 
-" Adding in the conceal option for latex. Trying this out to see if I like the rendering of mathematics
-set cole=2
-let g:tex_conceal= 'adgms'
-hi Conceal ctermbg=234 ctermfg=143
-
-" Starting to use vim-latex and it needs several configurations to work correctly
-let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -interaction=nonstopmode -synctex=1'"
-let g:vimtex_fold_enabled = 0
-let g:vimtex_quickfix_mode = 2
-let g:vimtex_quickfix_open_on_warning = 0
-let g:vimtex_toc_resize = 0
-let g:vimtex_toc_hide_help = 1
-let g:vimtex_indent_enabled = 1
-let g:vimtex_latexmk_enabled = 1
-let g:vimtex_latexmk_continuous = 1
-let g:vimtex_latexmk_callback = 1
-let g:vimtex_complete_recursive_bib = 0
-let g:vimtex_view_method = 'mupdf'
-let g:vimtex_view_mupdf_options = '-r 288'
 
 " Configure nvim so that it uses the nvr program to support a server (helps
 " with the use of vimtex, which needs a server to communicate with programs)
@@ -353,11 +397,6 @@ autocmd FileType gitcommit setlocal spell
 nmap <silent> <leader>s :set spell!<CR>
 syntax spell toplevel
 
-" These are some configurations that seem to make vim screen redraws faster
-set nocursorcolumn
-set nocursorline
-set ttyfast
-set lazyredraw
 
 " Configure NeoVim so that it can use different cursor shapes when run in
 " recent terminal windows
@@ -390,63 +429,13 @@ nmap f <Plug>(easymotion-s)
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map  ? <Plug>(easymotion-sn)
-omap ? <Plug>(easymotion-tn)
-
-" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-" Without these mappings, `n` & `N` works fine. (These mappings just provide
-" different highlight method and have some other features )
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
-
 " map  / <Plug>(easymotion-sn)
-" map  N <Plug>(easymotion-prev)
-" map  n <Plug>(easymotion-next)
-" map <Leader> <Plug>(easymotion-prefix)
 " omap / <Plug>(easymotion-tn)
-" nmap t <Plug>(easymotion-t2)
+" map  ? <Plug>(easymotion-sn)
+" omap ? <Plug>(easymotion-tn)
+" map  n <Plug>(easymotion-next)
+" map  N <Plug>(easymotion-prev)
 
-" " define a function that will run EasyMotion after running the incsearch
-" function! s:incsearch_config(...) abort
-"   return incsearch#util#deepextend(deepcopy({
-"   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-"   \   'keymap': {
-"   \     "\<CR>": '<Over>(easymotion)'
-"   \   },
-"   \   'is_expr': 0
-"   \ }), get(a:, 1, {}))
-" endfunction
-
-" " incsearch.vim combined with the fuzzy search plugin and the EasyMotion plugin
-" function! s:config_easyfuzzymotion(...) abort
-"   return extend(copy({
-"   \   'converters': [incsearch#config#fuzzy#converter()],
-"   \   'modules': [incsearch#config#easymotion#module()],
-"   \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-"   \   'is_expr': 0,
-"   \   'is_stay': 1
-"   \ }), get(a:, 1, {}))
-" endfunction
-
-" map /  <Plug>(incsearch-forward)
-" map ?  <Plug>(incsearch-backward)
-" map g/ <Plug>(incsearch-stay)
-
-" " configure to use incsearch for all of my searching
-" noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-" noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-" noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
-" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
-
-" " change the color of the highlighting for the incsearch plugin
-" let g:incsearch#highlight = {
-"         \   'match' : {
-"         \     'group' : 'Type',
-"         \     'priority' : '10'
-"         \   }
-"         \ }
 
 " change the default EasyMotion shading to something more readable
 hi link EasyMotionTarget Type
