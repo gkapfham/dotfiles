@@ -39,16 +39,6 @@ nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
 " }}}
 
-" FileType definitions {{{
-
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-" }}}
-
 call plug#begin('~/.vim/bundle')
 
 " Plugins cannot be used until a bug is fixed in Neovim {{{
