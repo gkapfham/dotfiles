@@ -16,6 +16,9 @@ noremap <Right> <NOP>
 inoremap jk <ESC>
 inoremap <ESC> <NOP>
 
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
 " }}}
 
 " FileType definitions {{{
@@ -639,10 +642,6 @@ let g:pandoc#modules#disabled = ["folding"]
 " " variables in programs written in Java and R, for instance
 call camelcasemotion#CreateMotionMappings('<leader>')
 
-" Configure up and down line movement for virtual movement when there is no
-" count used. But, when there is a count, move by physical lines instead
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " Mapping selecting mappings --- lets you see the mappings that are configured
 nmap <leader><tab> <plug>(fzf-maps-n)
