@@ -371,6 +371,9 @@ let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 " Insert a blank line
 nmap oo Ojk
 
+" Support the backspace key in insert mode
+set backspace=indent,eol,start
+
 " Interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
