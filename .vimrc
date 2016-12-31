@@ -200,6 +200,11 @@ set complete-=k complete+=k
 set complete+=kspell
 set complete+=]
 
+" Completion menus
+set completeopt=longest,menuone
+set wildmenu
+set wildmode=longest:full,full
+
 " }}}
 
 " Basic keyboard movement {{{
@@ -569,11 +574,6 @@ let g:mta_filetypes = {
     \ 'liquid' : 1,
     \}
 
-" allow CTRLP to show fifteen total matches, helping in cases where there are
-" many matches that we still want to display and consider
-" let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:15,results:15'
-" let g:ctrlp_extensions = ['tag', 'quickfix']
-
 " note that menu provides a substantially better configuration for viewing the autocompletion output that is available in gvim
 set cot=menu
 set completeopt=longest,menuone
@@ -650,15 +650,3 @@ let g:neomake_r_rlint_maker = {
         \ '%E%f:%l:%c: error: %m,'
         \ }
 let g:neomake_r_enabled_makers = ['rlint']
-
-" This function will allow you to rename a file inside of vim, works correctly
-function! RenameFile()
-  let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
-endfunction
-map <Leader>mf :call RenameFile()<cr>
