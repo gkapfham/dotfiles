@@ -105,6 +105,10 @@ set wildignore+=*/.git/*
 set wildignore+=*.class
 set wildignore+=*/tmp/*
 
+" Set levels for history an undo
+set history=1000
+set undolevels=1000
+
 " }}}
 
 " Tags {{{
