@@ -101,6 +101,17 @@ au BufNewFile,BufRead,BufEnter *.bib    set nospell
 
 " }}}
 
+" Tags {{{
+
+set tags=./tags;/,tags;/
+let g:easytags_ignored_filetypes = ''
+let g:easytags_dynamic_files = 1
+let g:easytags_updatetime_warn = 0
+let g:easytags_always_enabled = 1
+let g:easytags_async = 1
+
+" }}}
+
 " Programming languages {{{
 
 " Automatically identify the filetype for the plugins and always use syntax highlighting
