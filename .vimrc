@@ -193,6 +193,9 @@ hi Conceal ctermbg=234 ctermfg=143
 " Use tex over plaintex
 let g:tex_flavor = 'tex'
 
+" Vimtex requires
+set hidden
+
 " Quotation marks
 fu! TexQuotes()
     let line = getline(".")
@@ -423,12 +426,17 @@ set number
 set nocursorcolumn
 set nocursorline
 set ttyfast
+set lazyredraw
 
 " Display linebreaks and tabs
 set linebreak
 set showbreak=━━
 set breakindent
 set tabstop=4
+
+" Display problematic whitespace
+set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
+set list
 
 " Highlight yanked region
 map y <Plug>(operator-flashy)
@@ -475,6 +483,16 @@ let g:gitgutter_signs = 1
 
 " Use a different symbol in the gutter
 let g:gitgutter_sign_removed_first_line = '^'
+
+let g:mta_use_matchparen_group = 0
+let g:mta_set_default_matchtag_color = 0
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'liquid' : 1,
+    \}
 
 " Display the syntax group for the symbol under the cursor
 map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -561,7 +579,9 @@ function! s:fzf_statusline()
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
 
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
+augroup configurationgroupforfzf
+  autocmd! User FzfStatusLine call <SID>fzf_statusline()
+augroup END
 
 " }}}
 
@@ -576,16 +596,6 @@ nmap <C-c>r <Plug>SetTmuxVars
 " Turn on smart indentation with the Latex plugins, nice and very helpful
 " set smartindent
 
-let g:mta_use_matchparen_group = 0
-let g:mta_set_default_matchtag_color = 0
-
-let g:mta_filetypes = {
-    \ 'html' : 1,
-    \ 'xhtml' : 1,
-    \ 'xml' : 1,
-    \ 'jinja' : 1,
-    \ 'liquid' : 1,
-    \}
 
 set expandtab                                  " insert spaces whenever the tab key is pressed, helps with formatting Java code
 set backspace=indent,eol,start                 " allow backspacing over everything in insert mode
@@ -604,9 +614,6 @@ set undolevels=1000                            " use many many levels of undo
 set pastetoggle=<F2>                           " allow vim to paste a large amount of source code or tex
 set timeout timeoutlen=1000 ttimeoutlen=10     " make the escape key function faster in the terminal window
 set whichwrap+=<,>,h,l,[,]                     " wrap when you get to the end of a line and you are using the arrow keys
-set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻ " highlight problematic whitespace
-set list                                       " also required to ensure that problematic whitespace is highlighted correctly
-set hidden                                     " this option is required for the vimtex plugin to work correctly
 
 " " Configure Neomake to run on the save of every buffer
 " autocmd! BufWritePost * Neomake
