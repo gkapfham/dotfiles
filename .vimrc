@@ -139,6 +139,8 @@ augroup configurationgroupforfiletypes
   autocmd FileType gitcommit setlocal spell
   autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
   autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+  autocmd Filetype python setlocal softtabstop=4
+  autocmd Filetype python setlocal shiftwidth=4
 augroup END
 
 " Syntax highlighting for Java
@@ -444,6 +446,8 @@ set tabstop=4
 
 " Insert spaces for tab
 set expandtab
+set smarttab
+set shiftround
 
 " Display problematic whitespace
 set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
@@ -459,6 +463,7 @@ set showmatch
 set autoindent
 set copyindent
 set shiftwidth=2
+set smartindent
 
 " Display goes to the next line
 set whichwrap+=<,>,h,l,[,]
