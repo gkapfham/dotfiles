@@ -99,6 +99,12 @@ au BufNewFile,BufRead,BufEnter *.xml    set nospell
 au BufNewFile,BufRead,BufEnter *.sql    set nospell
 au BufNewFile,BufRead,BufEnter *.bib    set nospell
 
+" Ignore these directories
+set wildignore+=*/build/**
+set wildignore+=*/.git/*
+set wildignore+=*.class
+set wildignore+=*/tmp/*
+
 " }}}
 
 " Tags {{{
@@ -112,7 +118,7 @@ let g:easytags_async = 1
 
 " }}}
 
-" Programming languages {{{
+" Programming Languages {{{
 
 " Automatically identify the filetype for the plugins and always use syntax highlighting
 filetype indent plugin on | syn on
@@ -150,6 +156,12 @@ let g:html_indent_inctags = 'html,body,head,tbody,div'
 
 " Do not perform folding inside of Markdown
 let g:pandoc#modules#disabled = ["folding"]
+
+" Preview the Markdown
+let g:livedown_autorun = 0
+let g:livedown_open = 0
+let g:livedown_port = 1337
+nmap gmd :LivedownPreview<CR>
 
 " Autodetect CSV
 autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
@@ -256,7 +268,7 @@ let g:ycm_semantic_triggers.tex = [
 
 " }}}
 
-" Basic keyboard movement {{{
+" Basic Keyboard Movement {{{
 
 " Disable the arrow keys
 noremap <Up> <NOP>
@@ -283,7 +295,7 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " }}}
 
-" Advanced keyboard movement with incsearch {{{
+" Advanced Keyboard Movement with incsearch {{{
 
 map z/  <Plug>(incsearch-forward)
 map z?  <Plug>(incsearch-backward)
@@ -317,7 +329,7 @@ let g:incsearch#highlight = {
 
 " }}}
 
-" Advanced keyboard movement with easymotion {{{
+" Advanced Keyboard Movement with easymotion {{{
 
 nmap f <Plug>(easymotion-s)
 nmap s <Plug>(easymotion-s2)
@@ -346,7 +358,7 @@ let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 
 " }}}
 
-" Text manipulation {{{
+" Text Manipulation {{{
 
 " Insert a blank line
 nmap oo Ojk
@@ -379,7 +391,7 @@ vmap <silent> zp <Plug>(SpellRotateBackwardV)
 
 " }}}
 
-" Display improvements {{{
+" Display Improvements {{{
 
 " Display encoding to UTF-8
 set encoding=utf-8
@@ -411,7 +423,12 @@ set number
 set nocursorcolumn
 set nocursorline
 set ttyfast
-" set lazyredraw
+
+" Display linebreaks and tabs
+set linebreak
+set showbreak=━━
+set breakindent
+set tabstop=4
 
 " Highlight yanked region
 map y <Plug>(operator-flashy)
@@ -467,10 +484,25 @@ map <F5> :call SyntaxAttr()<CR>
 
 " }}}
 
-" Neovim Display {{{
+" Neovim Display and Configuration {{{
 
 " Use a different cursor shape
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+" Use nvr for remove communication
+if has("nvim")
+  let g:vimtex_latexmk_progname = 'nvr'
+endif
+
+" Leave using a different command than ESC
+if has("nvim")
+  noremap jk <C-\><C-n>
+endif
+
+" Use the new inccommand
+if has("nvim")
+  set inccommand=split
+endif
 
 " }}}
 
@@ -533,84 +565,16 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 " }}}
 
-" Setup the Livedown plugin that supports the preview of Markdown files
-let g:livedown_autorun = 0
-let g:livedown_open = 0
-let g:livedown_port = 1337
-nmap gmd :LivedownPreview<CR>
+" Tmux {{{
 
-" tmux configuration
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
 nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
 
-" Ignore these directories in all programs like ctrlp
-set wildignore+=*/build/**
-set wildignore+=*/.git/*
-set wildignore+=*.class
-set wildignore+=*/tmp/*
-
-
-
-" Configure nvim so that it uses the nvr program to support a server (helps
-" with the use of vimtex, which needs a server to communicate with programs)
-if has("nvim")
-  let g:vimtex_latexmk_progname = 'nvr'
-endif
-
-" Configure nvim so that you can leave the terminal in the same as as you
-" leave insert mode (otherwise, must use the ESC key, which is not consistent)
-if has("nvim")
-  noremap jk <C-\><C-n>
-endif
-
-" Configure nvim so that it uses the inccommand
-if has("nvim")
-  set inccommand=split
-endif
-
-
+" }}}
 
 " Turn on smart indentation with the Latex plugins, nice and very helpful
 " set smartindent
-
-
-" You Complete Me configuration
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_use_ultisnips_completer = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_filetype_blacklist = {
-        \ 'qf' : 1,
-        \ 'notes' : 1,
-        \ 'unite' : 1,
-        \ 'text' : 1,
-        \ 'vimwiki' : 1,
-        \ 'pandoc' : 1,
-        \ 'infolog' : 1,
-        \}
-
-let g:ycm_server_python_interpreter = '/usr/bin/python3'
-
-" make YCM compatible with UltiSnips
-let g:UltiSnipsExpandTrigger="<C-k>"
-let g:UltiSnipsJumpForwardTrigger="<C-k>"
-let g:UltiSnipsListSnippets = "<C-l>"
-let g:UltiSnipsJumpBackwardTrigger='<C-s-k>'
-let g:UltiSnipsJumpBackwardTrigger=""
-
-" make YCM compatible with the tmux-complete
-let g:tmuxcomplete#trigger = 'omnifunc'
-
-" make YCM compatible with the vimtex package
-if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-  endif
-let g:ycm_semantic_triggers.tex = [
-        \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
-        \ ]
 
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
@@ -623,21 +587,6 @@ let g:mta_filetypes = {
     \ 'liquid' : 1,
     \}
 
-" note that menu provides a substantially better configuration for viewing the autocompletion output that is available in gvim
-set cot=menu
-set completeopt=longest,menuone
-
-" start using the wildmenu to complete different commands in command-mode
-set wildmenu
-set wildmode=longest:full,full
-
-" Adding in a bunch of additional commands from:
-" http://nvie.com/posts/how-i-boosted-my-vim/
-
-set linebreak                                  " make sure that you break the lines in a way that preserves words
-set showbreak=━━                               " set an ellipse character so that you can tell when lines are wrapped
-set breakindent                                " indent after linebreaks occur and there are wraps (only Vim 7.4 later patches)
-set tabstop=4                                  " a tab is four spaces
 set expandtab                                  " insert spaces whenever the tab key is pressed, helps with formatting Java code
 set backspace=indent,eol,start                 " allow backspacing over everything in insert mode
 set autoindent                                 " always set autoindenting on
@@ -659,43 +608,25 @@ set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻ " highlight pro
 set list                                       " also required to ensure that problematic whitespace is highlighted correctly
 set hidden                                     " this option is required for the vimtex plugin to work correctly
 
-
-" Configure NeoVim so that it can use different cursor shapes when run in
-" recent terminal windows
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-
-
-
-
-" Configuring the EasyTags and Ctrl-P plugins to better support tag creation and browsing and good syntax highlighting
-set tags=./tags;/,tags;/
-let g:easytags_ignored_filetypes = ''
-let g:easytags_dynamic_files = 1
-let g:easytags_updatetime_warn = 0
-let g:easytags_always_enabled = 1
-let g:easytags_async = 1
-
-
-
 " " Configure Neomake to run on the save of every buffer
 " autocmd! BufWritePost * Neomake
 
-" Configure the signs that are used in Neomake displays
-let g:neomake_error_sign = {
-      \ 'text': '!',
-      \ 'texthl': 'WarningMsg',
-      \ }
-let g:neomake_warning_sign = {
-      \ 'text': '>',
-      \ 'texthl': 'WarningMsg',
-      \ }
+" " Configure the signs that are used in Neomake displays
+" let g:neomake_error_sign = {
+"       \ 'text': '!',
+"       \ 'texthl': 'WarningMsg',
+"       \ }
+" let g:neomake_warning_sign = {
+"       \ 'text': '>',
+"       \ 'texthl': 'WarningMsg',
+"       \ }
 
-" Configure a Neomake for running rlint
-let g:neomake_r_rlint_maker = {
-        \ 'exe': 'rlint',
-        \ 'errorformat' :
-        \ '%W%f:%l:%c: style: %m,' .
-        \ '%W%f:%l:%c: warning: %m,' .
-        \ '%E%f:%l:%c: error: %m,'
-        \ }
-let g:neomake_r_enabled_makers = ['rlint']
+" " Configure a Neomake for running rlint
+" let g:neomake_r_rlint_maker = {
+"         \ 'exe': 'rlint',
+"         \ 'errorformat' :
+"         \ '%W%f:%l:%c: style: %m,' .
+"         \ '%W%f:%l:%c: warning: %m,' .
+"         \ '%E%f:%l:%c: error: %m,'
+"         \ }
+" let g:neomake_r_enabled_makers = ['rlint']
