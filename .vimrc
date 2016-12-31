@@ -347,7 +347,7 @@ let g:incsearch#highlight = {
 
 nmap f <Plug>(easymotion-s)
 nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
+" nmap t <Plug>(easymotion-t2)
 
 " Change the color scheme
 hi link EasyMotionTarget Type
@@ -536,28 +536,6 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr()<CR>
-
-" }}}
-
-" Neovim Display and Configuration {{{
-
-" Use a different cursor shape
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-
-" Use nvr for remove communication
-if has("nvim")
-  let g:vimtex_latexmk_progname = 'nvr'
-endif
-
-" Leave using a different command than ESC
-if has("nvim")
-  noremap jk <C-\><C-n>
-endif
-
-" Use the new inccommand
-if has("nvim")
-  set inccommand=split
-endif
 
 " }}}
 
