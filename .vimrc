@@ -110,6 +110,9 @@ set wildignore+=*/tmp/*
 set history=1000
 set undolevels=1000
 
+" Source the vimrc file
+nmap <silent> <leader>v :source $MYVIMRC<CR>
+
 " }}}
 
 " Tags {{{
