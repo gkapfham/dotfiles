@@ -205,6 +205,44 @@ set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest:full,full
 
+" YCM
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_use_ultisnips_completer = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_filetype_blacklist = {
+        \ 'qf' : 1,
+        \ 'notes' : 1,
+        \ 'unite' : 1,
+        \ 'text' : 1,
+        \ 'vimwiki' : 1,
+        \ 'pandoc' : 1,
+        \ 'infolog' : 1,
+        \}
+
+" YCM uses python3
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
+
+" YCM is compatible with UltiSnips
+let g:UltiSnipsExpandTrigger="<C-k>"
+let g:UltiSnipsJumpForwardTrigger="<C-k>"
+let g:UltiSnipsListSnippets = "<C-l>"
+let g:UltiSnipsJumpBackwardTrigger='<C-s-k>'
+let g:UltiSnipsJumpBackwardTrigger=""
+
+" YCM is compatible with the tmux-complete
+let g:tmuxcomplete#trigger = 'omnifunc'
+
+" YCM is compatible with the vimtex
+if !exists('g:ycm_semantic_triggers')
+    let g:ycm_semantic_triggers = {}
+  endif
+let g:ycm_semantic_triggers.tex = [
+        \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
+        \ ]
+
 " }}}
 
 " Basic keyboard movement {{{
