@@ -73,7 +73,7 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 
-" always load the special font after all of the other plugins to ensure fonts render correctly
+" Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
@@ -629,6 +629,38 @@ nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
 
 " }}}
+
+" Testing {{{
+
+nmap <silent> <leader>t :Pytest function<CR>
+nmap <silent> <leader>T :Pytest file<CR>
+nmap <silent> <leader>f :Pytest next<CR>
+nmap <silent> <leader>F :Pytest previous<CR>
+
+" }}}
+
+" Neovim Display and Configuration {{{
+
+" Use a different cursor shape
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+" Use nvr for remove communication
+if has("nvim")
+  let g:vimtex_latexmk_progname = 'nvr'
+endif
+
+" Leave using a different command than ESC
+if has("nvim")
+  noremap jk <C-\><C-n>
+endif
+
+" Use the new inccommand
+if has("nvim")
+  set inccommand=split
+endif
+
+" }}}
+
 
 " Turn on smart indentation with the Latex plugins, nice and very helpful
 " set smartindent
