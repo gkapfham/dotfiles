@@ -438,9 +438,29 @@ set showbreak=━━
 set breakindent
 set tabstop=4
 
+" Insert spaces for tab
+set expandtab
+
 " Display problematic whitespace
 set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
 set list
+
+" Display with faster timeouts in the TUI
+set timeout timeoutlen=1000 ttimeoutlen=10
+
+" Display matching parentheses
+set showmatch
+
+" Display indentation
+set autoindent
+set copyindent
+set shiftwidth=2
+
+" Display goes to the next line
+set whichwrap+=<,>,h,l,[,]
+
+" Do not display spaces at end of line
+set nojoinspaces
 
 " Highlight yanked region
 map y <Plug>(operator-flashy)
@@ -599,25 +619,16 @@ nmap <C-c>r <Plug>SetTmuxVars
 
 " Turn on smart indentation with the Latex plugins, nice and very helpful
 " set smartindent
+" set backspace=indent,eol,start                 " allow backspacing over everything in insert mode
+" set shiftround                                 " use multiple of shiftwidth when indenting with '<' and '>'
+" set ignorecase                                 " ignore case when searching
+" set infercase                                  " predict the case that is needed when doing auto completion
+" set smartcase                                  " ignore case if search pattern is all lowercase, case-sensitive otherwise
+" set smarttab                                   " insert tabs on the start of a line according to shiftwidth, not tabstop
+" set incsearch                                  " show search matches as you type
+" set pastetoggle=<F2>                           " allow vim to paste a large amount of source code or tex
 
-
-set expandtab                                  " insert spaces whenever the tab key is pressed, helps with formatting Java code
-set backspace=indent,eol,start                 " allow backspacing over everything in insert mode
-set autoindent                                 " always set autoindenting on
-set copyindent                                 " copy the previous indentation on autoindenting
-set shiftwidth=2                               " number of spaces to use for autoindenting
-set shiftround                                 " use multiple of shiftwidth when indenting with '<' and '>'
-set showmatch                                  " set show matching parenthesis
-set ignorecase                                 " ignore case when searching
-set infercase                                  " predict the case that is needed when doing auto completion
-set smartcase                                  " ignore case if search pattern is all lowercase, case-sensitive otherwise
-set smarttab                                   " insert tabs on the start of a line according to shiftwidth, not tabstop
-set incsearch                                  " show search matches as you type
-set history=1000                               " remember more commands and search history
-set undolevels=1000                            " use many many levels of undo
-set pastetoggle=<F2>                           " allow vim to paste a large amount of source code or tex
-set timeout timeoutlen=1000 ttimeoutlen=10     " make the escape key function faster in the terminal window
-set whichwrap+=<,>,h,l,[,]                     " wrap when you get to the end of a line and you are using the arrow keys
+" Neomake configuration not needed right now {{{
 
 " " Configure Neomake to run on the save of every buffer
 " autocmd! BufWritePost * Neomake
@@ -641,3 +652,5 @@ set whichwrap+=<,>,h,l,[,]                     " wrap when you get to the end of
 "         \ '%E%f:%l:%c: error: %m,'
 "         \ }
 " let g:neomake_r_enabled_makers = ['rlint']
+
+" }}}
