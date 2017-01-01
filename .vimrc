@@ -72,6 +72,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
+Plug 'janko-m/vim-test'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -112,7 +113,7 @@ set history=1000
 set undolevels=1000
 
 " Source the vimrc file
-nmap <silent> <leader>v :source $MYVIMRC<CR>
+command! Reload :source $MYVIMRC
 
 " }}}
 
@@ -610,10 +611,20 @@ nmap <C-c>r <Plug>SetTmuxVars
 
 " Testing {{{
 
-nmap <silent> <leader>t :Pytest function<CR>
-nmap <silent> <leader>T :Pytest file<CR>
-nmap <silent> <leader>f :Pytest next<CR>
-nmap <silent> <leader>F :Pytest previous<CR>
+" " nmap <silent> <leader>f :Pytest next<CR>
+" nmap <silent> <leader>F :Pytest previous<CR>
+" nmap <silent> <leader>T :Pytest file<CR>
+" nmap <silent> <leader>t :Pytest function<CR>
+
+" augroup configurationgroupforpytest
+"   autocmd VimEnter * noremap <leader>f :Pytest next<CR>
+" augroup END
+
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 
 " }}}
 
