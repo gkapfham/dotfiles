@@ -311,9 +311,9 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Advanced Keyboard Movement with incsearch {{{
 
-map z/  <Plug>(incsearch-forward)
-map z?  <Plug>(incsearch-backward)
-map zg/ <Plug>(incsearch-stay)
+" map z/  <Plug>(incsearch-forward)
+" map z?  <Plug>(incsearch-backward)
+" map zg/ <Plug>(incsearch-stay)
 
 map / <Plug>(incsearch-easymotion-/)
 map ? <Plug>(incsearch-easymotion-?)
