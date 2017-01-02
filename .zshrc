@@ -82,7 +82,7 @@ bindkey -M viins 'jk' vi-cmd-mode
 export DISABLE_AUTO_TITLE=true
 
 # Set the PATH environment variable for finding programs
-export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/usr/local/texlive/2012/bin/i386-linux:/opt/processing-1.2.1:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # FZF is a fuzzy file finder and I set these default options for use in tmux or a terminal
 export FZF_DEFAULT_OPTS='
