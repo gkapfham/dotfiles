@@ -17,6 +17,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'alfredodeza/pytest.vim'
 Plug 'artur-shaik/vim-javacomplete2'
+Plug 'benmills/vimux'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
@@ -36,6 +37,7 @@ Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'int3/vim-extradite'
 Plug 'jalvesaq/Nvim-R'
+Plug 'janko-m/vim-test'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'jgdavey/tslime.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -72,7 +74,6 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
-Plug 'janko-m/vim-test'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -625,6 +626,8 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+
+let test#strategy = "vimux"
 
 " }}}
 
