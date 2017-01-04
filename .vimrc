@@ -313,13 +313,13 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Advanced Keyboard Movement with incsearch {{{
 
-" map z/  <Plug>(incsearch-forward)
-" map z?  <Plug>(incsearch-backward)
-" map zg/ <Plug>(incsearch-stay)
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-easymotion-/)
 
-map / <Plug>(incsearch-easymotion-/)
-map ? <Plug>(incsearch-easymotion-?)
-map g/ <Plug>(incsearch-easymotion-stay)
+" map / <Plug>(incsearch-easymotion-/)
+" map ? <Plug>(incsearch-easymotion-?)
+" map g/ <Plug>(incsearch-easymotion-stay)
 
 map <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
@@ -335,13 +335,13 @@ endfunction
 
 noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
-" Change the colorscheme
-let g:incsearch#highlight = {
-        \   'match' : {
-        \     'group' : 'Type',
-        \     'priority' : '10'
-        \   }
-        \ }
+" " Change the colorscheme
+" let g:incsearch#highlight = {
+"         \   'match' : {
+"         \     'group' : 'Type',
+"         \     'priority' : '10'
+"         \   }
+"         \ }
 
 " }}}
 
