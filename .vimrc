@@ -653,6 +653,7 @@ endif
 
 " }}}
 
+" Not Needed Configurations {{{
 
 " Turn on smart indentation with the Latex plugins, nice and very helpful
 " set smartindent
@@ -690,4 +691,6 @@ endif
 "         \ }
 " let g:neomake_r_enabled_makers = ['rlint']
 
+" }}}
+"
 " }}}
