@@ -612,15 +612,6 @@ nmap <C-c>r <Plug>SetTmuxVars
 
 " Testing {{{
 
-" " nmap <silent> <leader>f :Pytest next<CR>
-" nmap <silent> <leader>F :Pytest previous<CR>
-" nmap <silent> <leader>T :Pytest file<CR>
-" nmap <silent> <leader>t :Pytest function<CR>
-
-" augroup configurationgroupforpytest
-"   autocmd VimEnter * noremap <leader>f :Pytest next<CR>
-" augroup END
-
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
