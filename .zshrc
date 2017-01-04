@@ -106,6 +106,7 @@ man() {
 # Configure the autosuggestions plugin that allows command history to display interactively
 source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 bindkey '^ ' autosuggest-accept
 
 # Source the file that will setup FZF, this has to be the last line of the file
