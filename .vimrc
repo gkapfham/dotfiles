@@ -173,8 +173,8 @@ let g:pandoc#modules#disabled = ["folding"]
 " Preview the Markdown
 let g:livedown_autorun = 0
 let g:livedown_open = 0
-let g:livedown_port = 1337
-nmap gmd :LivedownPreview<CR>
+let g:livedown_port = 4200
+nmap <leader>gmd :LivedownPreview<CR>
 
 " Autodetect CSV
 autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
@@ -616,7 +616,7 @@ nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+" nmap <silent> <leader>g :TestVisit<CR>
 
 let test#strategy = "vimux"
 
