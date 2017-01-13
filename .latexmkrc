@@ -16,7 +16,7 @@ push @generated_exts, "synctex.gz";
 push @generated_exts, "tex.latexmain";
 push @generated_exts, "run.xml";
 $latex = 'latex --src-specials %O %S';
-$pdflatex = 'xelatex -file-line-error -synctex=1 -interaction=nonstopmode -shell-escape %O %S';
+$pdflatex = 'pdflatex -file-line-error -synctex=1 -interaction=nonstopmode -shell-escape %O %S';
 
 # If zero, check for a previously running previewer on the same file and update it.  If nonzero, always start a new previewer.
 $new_viewer_always = 0;
