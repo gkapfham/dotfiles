@@ -184,7 +184,7 @@ autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 " LaTeX {{{
 
 " Configure vimtex
-let g:vimtex_latexmk_options="-pdf -pdflatex='xelatex -file-line-error -shell-escape -interaction=nonstopmode -synctex=1'"
+let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -interaction=nonstopmode -synctex=1'"
 let g:vimtex_fold_enabled = 0
 let g:vimtex_quickfix_mode = 2
 let g:vimtex_quickfix_open_on_warning = 0
