@@ -486,7 +486,7 @@ let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
 " Highlight chosen words
 let g:interestingWordsTermColors = ['143', '110', '173', '237', '110']
 nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
-nnoremap <silent> <leader>u :call UncolorAllWords()<cr>
+nnoremap <silent> <leader>uc :call UncolorAllWords()<cr>
 nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
 nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
 
