@@ -316,11 +316,7 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-easymotion-/)
-
-" map / <Plug>(incsearch-easymotion-/)
-" map ? <Plug>(incsearch-easymotion-?)
-" map g/ <Plug>(incsearch-easymotion-stay)
-
+map g? <Plug>(incsearch-easymotion-?)
 map <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
 function! s:config_easyfuzzymotion(...) abort
