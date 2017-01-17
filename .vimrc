@@ -442,7 +442,7 @@ set number
 set nocursorcolumn
 set nocursorline
 set ttyfast
-set lazyredraw
+" set lazyredraw
 
 " Display linebreaks and tabs
 set linebreak
@@ -559,21 +559,21 @@ command! FZFMru call fzf#run({
 \  'source':  v:oldfiles,
 \  'sink':    'e',
 \  'options': '-m -x +s --no-bold',
-\  'down':    '40%'})
+\  'down':    '25%'})
 
 " Define a custom command for loading hidden files as well as regular with FZF
 command! FZFHidden call fzf#run({
 \  'source':  'ag --hidden --ignore .git -l -g ""',
 \  'sink':    'e',
 \  'options': '-m -x +s --no-bold',
-\  'down':    '40%'})
+\  'down':    '25%'})
 
 " Define a custom command for loading hidden files as well as regular with FZF
 command! FZFMine call fzf#run({
 \  'source':  'ag --ignore .git -l -g ""',
 \  'sink':    'e',
 \  'options': '-m -x +s --no-bold',
-\  'down':    '40%'})
+\  'down':    '25%'})
 
 " Define key combinations
 nmap <C-h> :FZFHidden<CR>
