@@ -118,6 +118,138 @@ command! Reload :source $MYVIMRC
 
 " }}}
 
+" Display Improvements {{{
+
+" Display encoding to UTF-8
+set encoding=utf-8
+
+" Display italics in terminal
+set t_ZH=[3m
+set t_ZR=[23m
+
+" Do not display search highlights
+set nohlsearch
+
+" Do not display the welcome message
+set shortmess=I
+
+" Display colorscheme
+colorscheme orangehybrid
+
+" Display line wraps
+command! Wrap set textwidth=120
+command! NoWrap set textwidth=0
+command! StandardWrap set textwidth=80
+set wrap linebreak nolist
+
+" Display of line numbers
+set relativenumber
+set number
+
+" Display screen redraws faster
+set nocursorcolumn
+set nocursorline
+set ttyfast
+" set lazyredraw
+
+" Display linebreaks and tabs
+set linebreak
+set showbreak=━━
+set breakindent
+set tabstop=4
+
+" Insert spaces for tab
+set expandtab
+set smarttab
+set shiftround
+
+" Display problematic whitespace
+set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
+set list
+
+" Display with faster timeouts in the TUI
+set timeout timeoutlen=1000 ttimeoutlen=10
+
+" Display matching parentheses
+set showmatch
+
+" Display indentation
+set autoindent
+set copyindent
+set shiftwidth=2
+set smartindent
+
+" Display goes to the next line
+set whichwrap+=<,>,h,l,[,]
+
+" Do not display spaces at end of line
+set nojoinspaces
+
+" Highlight yanked region
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
+highlight default Flashy term=bold ctermbg=237 guibg=#13354A
+let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
+
+" Highlight chosen words
+let g:interestingWordsTermColors = ['143', '110', '173', '237', '110']
+nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
+nnoremap <silent> <leader>uc :call UncolorAllWords()<cr>
+nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
+nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
+
+" Display the location list and quickfix window
+let g:lt_location_list_toggle_map = '<leader>c'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+
+" Toggle the display of spelling mistakes
+nmap <silent> <leader>s :set spell!<CR>
+
+" Display the airline statusline
+set laststatus=2
+let g:airline_theme='tomorrow'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
+let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#hunks#non_zero_only = 0
+let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+
+" Do not display the standard status line
+set nosmd
+
+" Display version control details in gutter
+let g:gitgutter_async = 1
+let g:gitgutter_eager = 1
+let g:gitgutter_realtime = 1
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_signs = 1
+
+" Use a different symbol in the gutter
+let g:gitgutter_sign_removed_first_line = '^'
+
+let g:mta_use_matchparen_group = 0
+let g:mta_set_default_matchtag_color = 0
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'liquid' : 1,
+    \}
+
+" Display the syntax group for the symbol under the cursor
+map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+map <F5> :call SyntaxAttr()<CR>
+
+" }}}
+
+
 " Tags {{{
 
 set tags=./tags;/,tags;/
@@ -201,7 +333,7 @@ let g:vimtex_view_mupdf_options = '-r 288'
 " Conceal option
 set conceallevel=2
 let g:tex_conceal= 'adgms'
-hi Conceal ctermbg=234 ctermfg=143
+hi Conceal ctermbg=NONE ctermfg=172
 
 " Use tex over plaintex
 let g:tex_flavor = 'tex'
@@ -395,136 +527,6 @@ vmap <silent> zp <Plug>(SpellRotateBackwardV)
 
 " }}}
 
-" Display Improvements {{{
-
-" Display encoding to UTF-8
-set encoding=utf-8
-
-" Display italics in terminal
-set t_ZH=[3m
-set t_ZR=[23m
-
-" Do not display search highlights
-set nohlsearch
-
-" Do not display the welcome message
-set shortmess=I
-
-" Display colorscheme
-colorscheme orangehybrid
-
-" Display line wraps
-command! Wrap set textwidth=120
-command! NoWrap set textwidth=0
-command! StandardWrap set textwidth=80
-set wrap linebreak nolist
-
-" Display of line numbers
-set relativenumber
-set number
-
-" Display screen redraws faster
-set nocursorcolumn
-set nocursorline
-set ttyfast
-" set lazyredraw
-
-" Display linebreaks and tabs
-set linebreak
-set showbreak=━━
-set breakindent
-set tabstop=4
-
-" Insert spaces for tab
-set expandtab
-set smarttab
-set shiftround
-
-" Display problematic whitespace
-set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
-set list
-
-" Display with faster timeouts in the TUI
-set timeout timeoutlen=1000 ttimeoutlen=10
-
-" Display matching parentheses
-set showmatch
-
-" Display indentation
-set autoindent
-set copyindent
-set shiftwidth=2
-set smartindent
-
-" Display goes to the next line
-set whichwrap+=<,>,h,l,[,]
-
-" Do not display spaces at end of line
-set nojoinspaces
-
-" Highlight yanked region
-map y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
-highlight default Flashy term=bold ctermbg=237 guibg=#13354A
-let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
-
-" Highlight chosen words
-let g:interestingWordsTermColors = ['143', '110', '173', '237', '110']
-nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
-nnoremap <silent> <leader>uc :call UncolorAllWords()<cr>
-nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
-nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
-
-" Display the location list and quickfix window
-let g:lt_location_list_toggle_map = '<leader>c'
-let g:lt_quickfix_list_toggle_map = '<leader>q'
-
-" Toggle the display of spelling mistakes
-nmap <silent> <leader>s :set spell!<CR>
-
-" Display the airline statusline
-set laststatus=2
-let g:airline_theme='tomorrow'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#hunks#enabled = 1
-let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
-let g:airline#extensions#branch#enabled = 0
-let g:airline#extensions#hunks#non_zero_only = 0
-let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
-
-" Do not display the standard status line
-set nosmd
-
-" Display version control details in gutter
-let g:gitgutter_async = 1
-let g:gitgutter_eager = 1
-let g:gitgutter_realtime = 1
-let g:gitgutter_sign_column_always = 1
-let g:gitgutter_signs = 1
-
-" Use a different symbol in the gutter
-let g:gitgutter_sign_removed_first_line = '^'
-
-let g:mta_use_matchparen_group = 0
-let g:mta_set_default_matchtag_color = 0
-let g:mta_filetypes = {
-    \ 'html' : 1,
-    \ 'xhtml' : 1,
-    \ 'xml' : 1,
-    \ 'jinja' : 1,
-    \ 'liquid' : 1,
-    \}
-
-" Display the syntax group for the symbol under the cursor
-map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-map <F5> :call SyntaxAttr()<CR>
-
-" }}}
 
 " FZF {{{
 
