@@ -282,6 +282,9 @@ let g:ycm_semantic_triggers.tex = [
         \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
         \ ]
 
+" YCM will not echo messages (nor will searches)
+set noshowmode
+
 " }}}
 
 " Basic Keyboard Movement {{{
