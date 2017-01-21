@@ -209,18 +209,6 @@ let g:tex_flavor = 'tex'
 " Vimtex requires
 set hidden
 
-" Quotation marks
-fu! TexQuotes()
-    let line = getline(".")
-    let curpos = col(".")-1
-    let insert = "''"
-    let left = strpart(line, curpos-1, 1)
-    if (left == ' ' || left == '        ' || left == '')
-        let insert = '``'
-    endif
-    return insert
-endfu
-
 " }}}
 
 " Completion {{{
