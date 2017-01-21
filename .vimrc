@@ -221,8 +221,6 @@ fu! TexQuotes()
     return insert
 endfu
 
-autocmd FileType tex imap " <c-r>=TexQuotes()<cr>
-
 " }}}
 
 " Completion {{{
