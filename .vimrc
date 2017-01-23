@@ -131,7 +131,7 @@ set t_ZR=[23m
 set nohlsearch
 
 " Do not display the welcome message
-set shortmess=I
+set shortmess=Ic
 
 " Display colorscheme
 colorscheme orangehybrid
