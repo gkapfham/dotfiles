@@ -452,7 +452,7 @@ endfunction
 
 noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
-" " Change the colorscheme
+" " Change the colorscheme if using only easymotion
 " let g:incsearch#highlight = {
 "         \   'match' : {
 "         \     'group' : 'Type',
