@@ -249,7 +249,6 @@ map <F5> :call SyntaxAttr()<CR>
 
 " }}}
 
-
 " Tags {{{
 
 set tags=./tags;/,tags;/
@@ -526,7 +525,6 @@ vmap <silent> zn <Plug>(SpellRotateForwardV)
 vmap <silent> zp <Plug>(SpellRotateBackwardV)
 
 " }}}
-
 
 " FZF {{{
 
