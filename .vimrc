@@ -48,7 +48,6 @@ Plug 'kana/vim-operator-user'
 Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
-Plug 'lfv89/vim-interestingwords'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
@@ -173,6 +172,9 @@ set timeout timeoutlen=1000 ttimeoutlen=10
 " Display matching parentheses
 set showmatch
 
+" Run the matchit macro for tag matching
+runtime macros/matchit.vim
+
 " Display indentation
 set autoindent
 set copyindent
@@ -191,19 +193,9 @@ nmap Y <Plug>(operator-flashy)$
 highlight default Flashy term=bold ctermbg=237 guibg=#13354A
 let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
 
-" Highlight chosen words
-let g:interestingWordsTermColors = ['143', '110', '173', '237', '110']
-nnoremap <silent> <leader>z :call InterestingWords('n')<cr>
-nnoremap <silent> <leader>uc :call UncolorAllWords()<cr>
-nnoremap <silent> <leader>n :call WordNavigation('forward')<cr>
-nnoremap <silent> <leader>b :call WordNavigation('backward')<cr>
-
 " Display the location list and quickfix window
 let g:lt_location_list_toggle_map = '<leader>c'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
-
-" Toggle the display of spelling mistakes
-nmap <silent> <leader>s :set spell!<CR>
 
 " Display the airline statusline
 set laststatus=2
@@ -379,7 +371,7 @@ let g:ycm_filetype_blacklist = {
         \}
 
 " YCM uses python3
-let g:ycm_server_python_interpreter = '/usr/bin/python3'
+let g:ycm_server_python_interpreter = '/usr/bin/python'
 
 " YCM is compatible with UltiSnips
 let g:UltiSnipsExpandTrigger="<C-k>"
@@ -523,6 +515,9 @@ nmap <silent> zn <Plug>(SpellRotateForward)
 nmap <silent> zp <Plug>(SpellRotateBackward)
 vmap <silent> zn <Plug>(SpellRotateForwardV)
 vmap <silent> zp <Plug>(SpellRotateBackwardV)
+
+" Toggle the display of spelling mistakes
+nmap <silent> <leader>s :set spell!<CR>
 
 " }}}
 
