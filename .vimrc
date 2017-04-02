@@ -211,7 +211,7 @@ let g:airline#extensions#hunks#non_zero_only = 0
 let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
 
 " Do not display the standard status line
-set nosmd
+set noshowmode
 
 " Display version control details in gutter
 let g:gitgutter_async = 1
