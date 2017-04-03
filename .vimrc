@@ -291,7 +291,7 @@ au BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = 'html,body,head,tbody,div'
 
 " Do not perform folding inside of Markdown
-let g:pandoc#modules#disabled = ["folding"]
+let g:pandoc#modules#disabled = ['folding']
 
 " Preview the Markdown
 let g:livedown_autorun = 0
