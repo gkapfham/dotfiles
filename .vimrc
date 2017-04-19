@@ -149,7 +149,7 @@ set number
 set nocursorcolumn
 set nocursorline
 set ttyfast
-" set lazyredraw
+set lazyredraw
 
 " Display linebreaks and tabs
 set linebreak
@@ -283,7 +283,6 @@ let java_comment_strings=1
 " Plugin configuration for R
 let R_assign = 2
 let R_tmux_split = 1
-let R_vsplit = 0
 let R_openpdf = 0
 
 " Indenting for HTML
@@ -307,17 +306,10 @@ autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 " LaTeX {{{
 
 " Configure vimtex
-let g:vimtex_latexmk_options="-pdf -pdflatex='pdflatex -file-line-error -shell-escape -interaction=nonstopmode -synctex=1'"
+
 let g:vimtex_fold_enabled = 0
-let g:vimtex_quickfix_mode = 2
 let g:vimtex_quickfix_open_on_warning = 0
-let g:vimtex_toc_resize = 0
-let g:vimtex_toc_hide_help = 1
-let g:vimtex_indent_enabled = 1
-let g:vimtex_latexmk_enabled = 1
-let g:vimtex_latexmk_continuous = 1
-let g:vimtex_latexmk_callback = 1
-let g:vimtex_complete_recursive_bib = 0
+let g:vimtex_index_show_help = 0
 let g:vimtex_view_method = 'mupdf'
 let g:vimtex_view_mupdf_options = '-r 288'
 
@@ -370,7 +362,7 @@ let g:ycm_filetype_blacklist = {
         \ 'infolog' : 1,
         \}
 
-" YCM uses python3
+" YCM uses python (python3 is also an option)
 let g:ycm_server_python_interpreter = '/usr/bin/python'
 
 " YCM is compatible with UltiSnips
@@ -384,12 +376,22 @@ let g:UltiSnipsJumpBackwardTrigger=""
 let g:tmuxcomplete#trigger = 'omnifunc'
 
 " YCM is compatible with the vimtex
+
 if !exists('g:ycm_semantic_triggers')
-    let g:ycm_semantic_triggers = {}
-  endif
+  let g:ycm_semantic_triggers = {}
+endif
 let g:ycm_semantic_triggers.tex = [
-        \ 're!\\[A-Za-z]*(ref|cite)[A-Za-z]*([^]]*])?{([^}]*, ?)*'
-        \ ]
+      \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+      \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+      \ 're!\\hyperref\[[^]]*',
+      \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+      \ 're!\\(include(only)?|input){[^}]*',
+      \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
+      \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
+      \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
+      \ 're!\\usepackage(\s*\[[^]]*\])?\s*\{[^}]*',
+      \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
+      \ ]
 
 " YCM will not echo messages (nor will searches)
 set noshowmode
@@ -425,12 +427,14 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Advanced Keyboard Movement with incsearch {{{
 
+" Basic motions using incsearch
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-easymotion-/)
 map g? <Plug>(incsearch-easymotion-?)
 map <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
+" Define a function for fuzzy searching
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
   \   'converters': [incsearch#config#fuzzy#converter()],
@@ -441,15 +445,12 @@ function! s:config_easyfuzzymotion(...) abort
   \ }), get(a:, 1, {}))
 endfunction
 
+" Perform fuzzy searching
 noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
-" " Change the colorscheme if using only easymotion
-" let g:incsearch#highlight = {
-"         \   'match' : {
-"         \     'group' : 'Type',
-"         \     'priority' : '10'
-"         \   }
-"         \ }
+" Support the highlighting of words
+nnoremap <leader>* :set hlsearch<cr>*<c-o>
+nnoremap <silent><expr> <Leader>i (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
 " }}}
 
