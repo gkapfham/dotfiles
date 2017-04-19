@@ -108,6 +108,10 @@ set wildignore+=*/tmp/*
 set history=1000
 set undolevels=1000
 
+" Set persistent undo
+set undofile
+set undodir=~/.vim/undo
+
 " Source the vimrc file
 command! Reload :source $MYVIMRC
 
