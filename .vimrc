@@ -2,10 +2,6 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'Raimondi/delimitMate'
-" Plug 'freitass/todo.txt-vim'
-" Plug 'neomake/neomake'
-
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'SirVer/ultisnips'
