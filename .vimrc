@@ -301,6 +301,9 @@ nmap <leader>gmd :LivedownPreview<CR>
 " Autodetect CSV
 autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 
+" Define linting for email
+let g:ale_linter_aliases = {'mail': 'tex'}
+
 " }}}
 
 " LaTeX {{{
