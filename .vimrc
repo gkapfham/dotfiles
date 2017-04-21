@@ -453,7 +453,7 @@ noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
 " Support the highlighting of words
 nnoremap <leader>* :set hlsearch<cr>*<c-o>
-nnoremap <silent><expr> <Leader>i (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
+nnoremap <silent><expr> <Leader>i (&hls && v:hlsearch ? ':set nohlsearch' : ':set hlsearch')."\n"
 
 " }}}
 
