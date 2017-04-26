@@ -3,6 +3,7 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Plug 'int3/vim-extradite'
+" Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'SirVer/ultisnips'
@@ -44,7 +45,6 @@ Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
