@@ -2,8 +2,6 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'int3/vim-extradite'
-" Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'SirVer/ultisnips'
