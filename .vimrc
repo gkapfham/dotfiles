@@ -146,7 +146,6 @@ set number
 set nocursorcolumn
 set nocursorline
 set ttyfast
-set lazyredraw
 
 " Display linebreaks and tabs
 set linebreak
