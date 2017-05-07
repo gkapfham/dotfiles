@@ -23,15 +23,8 @@ ZSH=$HOME/.oh-my-zsh
 # Define the theme to use my own derivative of the "norm" theme
 ZSH_THEME="norm-gkapfham"
 
-# Make it faster to load the todo.txt file used for my todo list.
-alias vt="vim ~/working/todo/todo.txt"
-alias gvt="gvim ~/working/todo/todo.txt"
-
 # make it easier to run htop in monochrome mode
 alias htop="htop -C"
-
-# create an alias that allows for loading a large fill screen terminal designed for text editing
-alias mt="gnome-terminal --profile=Vim  --working-directory=$PWD --maximize"
 
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
@@ -84,17 +77,6 @@ export DISABLE_AUTO_TITLE=true
 # Set the PATH environment variable for finding programs
 export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-# FZF is a fuzzy file finder and I set these default options for use in tmux or a terminal
-export FZF_DEFAULT_OPTS='
-  --no-bold
-  --bind ctrl-f:page-down,ctrl-b:page-up
-  --color fg:-1,bg:-1,hl:64,fg+:3,bg+:234,hl+:172
-  --color info:110,prompt:110,spinner:109,pointer:172,marker:172
-'
-
-# Set all of the key bindings that are normally used for FZF in the terminal window
-source /home/gkapfham/.fzf/shell/key-bindings.zsh
-
 man() {
   vim -c "SuperMan $*"
 
@@ -109,21 +91,44 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 bindkey '^ ' autosuggest-accept
 
-# Source the file that will setup FZF, this has to be the last line of the file
+# FZF {{{
+
+# Default options
+export FZF_DEFAULT_OPTS='
+  --no-bold
+  --bind ctrl-f:page-down,ctrl-b:page-up
+  --color fg:-1,bg:-1,hl:64,fg+:3,bg+:234,hl+:172
+  --color info:110,prompt:110,spinner:109,pointer:172,marker:172
+'
+
+# Key bindings
+source /home/gkapfham/.fzf/shell/key-bindings.zsh
+
+# Source the files
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# You can customize where you put it but it's generally recommended that you put in $HOME/.zplug
+# }}}
+
+# zplug {{{
+
+# Check if installed
 if [[ ! -d ~/.zplug ]];then
     git clone https://github.com/zplug/zplug ~/.zplug
 fi
 
+# Initialize zplug
 source ~/.zplug/init.zsh
+
+# Declare plugins
 
 zplug "changyuheng/fz", from:github, defer:0
 zplug "changyuheng/zsh-interactive-cd", from:github, defer:0
 zplug "mafredri/zsh-async", from:github, defer:0
 
-# Install plugins if there are plugins that have not been installed
+# zplug "hchbaw/zce.zsh", from:github, defer:0
+# zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+
+# Install plugins
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
@@ -131,5 +136,9 @@ if ! zplug check --verbose; then
     fi
 fi
 
-# Then, source plugins and add commands to $PATH
-zplug load --verbose
+# Source plugins
+zplug load
+
+# }}}
+
+# bindkey "^Xz" zce
