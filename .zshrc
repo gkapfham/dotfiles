@@ -111,3 +111,25 @@ bindkey '^ ' autosuggest-accept
 
 # Source the file that will setup FZF, this has to be the last line of the file
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# You can customize where you put it but it's generally recommended that you put in $HOME/.zplug
+if [[ ! -d ~/.zplug ]];then
+    git clone https://github.com/zplug/zplug ~/.zplug
+fi
+
+source ~/.zplug/init.zsh
+
+zplug "changyuheng/fz", from:github, defer:0
+zplug "changyuheng/zsh-interactive-cd", from:github, defer:0
+zplug "mafredri/zsh-async", from:github, defer:0
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
