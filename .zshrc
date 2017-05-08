@@ -111,10 +111,10 @@ source /home/gkapfham/.fzf/shell/key-bindings.zsh
 
 # zplug {{{
 
-# Check if installed
-if [[ ! -d ~/.zplug ]];then
-    git clone https://github.com/zplug/zplug ~/.zplug
-fi
+# # Check if installed
+# if [[ ! -d ~/.zplug ]];then
+#     git clone https://github.com/zplug/zplug ~/.zplug
+# fi
 
 # Initialize zplug
 source ~/.zplug/init.zsh
@@ -124,21 +124,19 @@ source ~/.zplug/init.zsh
 zplug "changyuheng/fz", from:github, defer:0
 zplug "changyuheng/zsh-interactive-cd", from:github, defer:0
 zplug "mafredri/zsh-async", from:github, defer:0
+zplug "plugins/colored-man-pages", from:oh-my-zsh
+zplug "zdharma/fast-syntax-highlighting", from:github, defer:0
+zplug "zsh-users/zsh-autosuggestions", from:github, defer:0
 
-# zplug "hchbaw/zce.zsh", from:github, defer:0
-# zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-
-# Install plugins
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
+# # Install plugins
+# if ! zplug check --verbose; then
+#     printf "Install? [y/N]: "
+#     if read -q; then
+#         echo; zplug install
+#     fi
+# fi
 
 # Source plugins
 zplug load
 
 # }}}
-
-# bindkey "^Xz" zce
