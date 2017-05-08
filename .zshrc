@@ -40,7 +40,8 @@ HIST_STAMPS="mm/dd/yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # plugins=(git git-extras gpg-agent ant sudo fasd tmux tmuxinator vi-mode zsh_reload)
 # plugins=(gpg-agent ant sudo fasd vi-mode)
-. /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
+plugins=(vi-mode)
+# . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source $ZSH/oh-my-zsh.sh
 
 # load the special plugin that is needed to create the git-stacular prompt showing status
@@ -59,18 +60,18 @@ GIT_PROMPT_EXECUTABLE="haskell"
 # unset the option of Java tools, avoiding the strange debugging message in Ubuntu 15.04
 unset JAVA_TOOL_OPTIONS
 
-# Adding these lines of code enables the searching of partially completed commands with the arrow keys
-autoload -Uz up-line-or-beginning-search
-autoload -Uz down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey '\eOA' up-line-or-beginning-search
-bindkey '\e[A' up-line-or-beginning-search
-bindkey '\eOB' down-line-or-beginning-search
-bindkey '\e[B' down-line-or-beginning-search
-autoload -U history-search-end
-bindkey "^k" history-incremental-search-backward
-bindkey "^j" history-incremental-search-backward
+# # Adding these lines of code enables the searching of partially completed commands with the arrow keys
+# autoload -Uz up-line-or-beginning-search
+# autoload -Uz down-line-or-beginning-search
+# zle -N up-line-or-beginning-search
+# zle -N down-line-or-beginning-search
+# bindkey '\eOA' up-line-or-beginning-search
+# bindkey '\e[A' up-line-or-beginning-search
+# bindkey '\eOB' down-line-or-beginning-search
+# bindkey '\e[B' down-line-or-beginning-search
+# autoload -U history-search-end
+# bindkey "^k" history-incremental-search-backward
+# bindkey "^j" history-incremental-search-backward
 
 bindkey -M viins 'jk' vi-cmd-mode
 
@@ -80,13 +81,13 @@ export DISABLE_AUTO_TITLE=true
 # Set the PATH environment variable for finding programs
 export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-man() {
-  vim -c "SuperMan $*"
+# man() {
+#   vim -c "SuperMan $*"
 
-  if [ "$?" != "0" ]; then
-    echo "No manual entry for $*"
-  fi
-}
+#   if [ "$?" != "0" ]; then
+#     echo "No manual entry for $*"
+#   fi
+# }
 
 # Configure the autosuggestions plugin that allows command history to display interactively
 source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -124,17 +125,17 @@ source ~/.zplug/init.zsh
 
 # Declare plugins
 
+# zplug "plugins/vi-mode", from:oh-my-zsh
 zplug "changyuheng/fz", from:github, defer:0
 zplug "changyuheng/zsh-interactive-cd", from:github, defer:0
-# zplug "mafredri/zsh-async", from:github, defer:0
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/tmuxinator", from:oh-my-zsh
-# zplug "plugins/fasd", from:oh-my-zsh
-zplug "zdharma/fast-syntax-highlighting", from:github, defer:0
-zplug "zsh-users/zsh-autosuggestions", from:github, defer:0
+zplug "plugins/z", from:oh-my-zsh
+zplug "zdharma/fast-syntax-highlighting", from:github, defer:2
+# zplug "zsh-users/zsh-autosuggestions", from:github, defer:0
 zplug "paulmelnikow/zsh-startup-timer", from:github, defer:0
 
 # # Install plugins
@@ -150,6 +151,6 @@ zplug load
 
 # }}}
 
-setopt PROMPT_SUBST
+# setopt PROMPT_SUBST
 # export PROMPT='%F{red}%n%f@%F{blue}%m%f %F{yellow}%1~%f % $(gitHUD zsh) $ '
-export PROMPT='%F{yellow}%n%f%F{yellow}@%m in %f%F{green}%1~ %f% $(git_super_status)'
+# export PROMPT='%F{yellow}%n%f%F{yellow}@%m in %f%F{green}%1~ %f% $(git_super_status)$reset_color%'
