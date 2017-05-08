@@ -98,40 +98,6 @@ source /home/gkapfham/.fzf/shell/key-bindings.zsh
 
 # }}}
 
-# zplug {{{
-
-# # Check if installed
-# if [[ ! -d ~/.zplug ]];then
-#     git clone https://github.com/zplug/zplug ~/.zplug
-# fi
-
-# Initialize zplug
-# source ~/.zplug/init.zsh
-
-# Declare plugins
-
-# zplug "b4b4r07/enhancd", from:github, use:init.sh
-# zplug "changyuheng/fz", from:github, defer:0
-# zplug "changyuheng/zsh-interactive-cd", from:github, defer:0
-# zplug "lib/completion", from:oh-my-zsh
-# zplug "paulmelnikow/zsh-startup-timer", from:github, defer:0
-# zplug "plugins/colored-man-pages", from:oh-my-zsh
-# zplug "plugins/git-extras", from:oh-my-zsh
-# zplug "plugins/vi-mode", from:oh-my-zsh, defer:2
-# zplug "plugins/z", from:oh-my-zsh
-
-# zplug "plugins/fasd", from:oh-my-zsh
-# zplug "plugins/git", from:oh-my-zsh
-# zplug "plugins/tmux", from:oh-my-zsh
-# zplug "plugins/tmuxinator", from:oh-my-zsh
-# zplug "zdharma/fast-syntax-highlighting", from:github, defer:2
-# zplug "zsh-users/zsh-autosuggestions", from:github, defer:0
-
-# Source plugins
-# zplug load
-
-# }}}
-
 # setopt PROMPT_SUBST
 # export PROMPT='%F{red}%n%f@%F{blue}%m%f %F{yellow}%1~%f % $(gitHUD zsh) $ '
 # export PROMPT='%F{yellow}%n%f%F{yellow}@%m in %f%F{green}%1~ %f% $(git_super_status)$reset_color%'
