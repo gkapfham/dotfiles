@@ -38,7 +38,8 @@ HIST_STAMPS="mm/dd/yyyy"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git git-extras gpg-agent ant sudo vundle zsh-syntax-highlighting fasd tmux tmuxinator vi-mode zsh_reload)
+# plugins=(git git-extras gpg-agent ant sudo fasd tmux tmuxinator vi-mode zsh_reload)
+plugins=(gpg-agent ant sudo fasd tmux tmuxinator vi-mode zsh_reload)
 . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source $ZSH/oh-my-zsh.sh
 
@@ -125,6 +126,8 @@ zplug "changyuheng/fz", from:github, defer:0
 zplug "changyuheng/zsh-interactive-cd", from:github, defer:0
 zplug "mafredri/zsh-async", from:github, defer:0
 zplug "plugins/colored-man-pages", from:oh-my-zsh
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/git-extras", from:oh-my-zsh
 zplug "zdharma/fast-syntax-highlighting", from:github, defer:0
 zplug "zsh-users/zsh-autosuggestions", from:github, defer:0
 
