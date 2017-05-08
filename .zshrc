@@ -39,22 +39,22 @@ HIST_STAMPS="mm/dd/yyyy"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # plugins=(git git-extras gpg-agent ant sudo fasd tmux tmuxinator vi-mode zsh_reload)
-plugins=(gpg-agent ant sudo fasd vi-mode)
+# plugins=(gpg-agent ant sudo fasd vi-mode)
 . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 # load the special plugin that is needed to create the git-stacular prompt showing status
 # source ~/.zsh/git-prompt/zshrc.sh
 source /home/gkapfham/.zsh/zsh-git-prompt/zshrc.sh
 GIT_PROMPT_EXECUTABLE="haskell"
 
-# create the FASD cache so that the terminal loads quickly but I still get all of the FASD features
-fasd_cache="$HOME/.fasd-init-zsh"
-if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
-fi
-source "$fasd_cache"
-unset fasd_cache
+# # create the FASD cache so that the terminal loads quickly but I still get all of the FASD features
+# fasd_cache="$HOME/.fasd-init-zsh"
+# if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+#   fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
+# fi
+# source "$fasd_cache"
+# unset fasd_cache
 
 # unset the option of Java tools, avoiding the strange debugging message in Ubuntu 15.04
 unset JAVA_TOOL_OPTIONS
@@ -132,6 +132,7 @@ zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/tmuxinator", from:oh-my-zsh
+# zplug "plugins/fasd", from:oh-my-zsh
 zplug "zdharma/fast-syntax-highlighting", from:github, defer:0
 zplug "zsh-users/zsh-autosuggestions", from:github, defer:0
 zplug "paulmelnikow/zsh-startup-timer", from:github, defer:0
