@@ -49,13 +49,13 @@ source $ZSH/oh-my-zsh.sh
 source /home/gkapfham/.zsh/zsh-git-prompt/zshrc.sh
 GIT_PROMPT_EXECUTABLE="haskell"
 
-# # create the FASD cache so that the terminal loads quickly but I still get all of the FASD features
-# fasd_cache="$HOME/.fasd-init-zsh"
-# if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-#   fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
-# fi
-# source "$fasd_cache"
-# unset fasd_cache
+# create the FASD cache so that the terminal loads quickly but I still get all of the FASD features
+fasd_cache="$HOME/.fasd-init-zsh"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
 
 # unset the option of Java tools, avoiding the strange debugging message in Ubuntu 15.04
 unset JAVA_TOOL_OPTIONS
@@ -90,7 +90,7 @@ export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.
 # }
 
 # Configure the autosuggestions plugin that allows command history to display interactively
-source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 bindkey '^ ' autosuggest-accept
@@ -125,18 +125,19 @@ source ~/.zplug/init.zsh
 
 # Declare plugins
 
-# zplug "plugins/vi-mode", from:oh-my-zsh
-zplug "changyuheng/fz", from:github, defer:0
-zplug "changyuheng/zsh-interactive-cd", from:github, defer:0
+# zplug "changyuheng/fz", from:github, defer:0
+# zplug "changyuheng/zsh-interactive-cd", from:github, defer:0
+# zplug "plugins/vi-mode", from:oh-my-zsh, defer:2
+# zplug "plugins/z", from:oh-my-zsh
+zplug "paulmelnikow/zsh-startup-timer", from:github, defer:0
 zplug "plugins/colored-man-pages", from:oh-my-zsh
+zplug "plugins/fasd", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/git-extras", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/tmuxinator", from:oh-my-zsh
-zplug "plugins/z", from:oh-my-zsh
 zplug "zdharma/fast-syntax-highlighting", from:github, defer:2
-# zplug "zsh-users/zsh-autosuggestions", from:github, defer:0
-zplug "paulmelnikow/zsh-startup-timer", from:github, defer:0
+zplug "zsh-users/zsh-autosuggestions", from:github, defer:0
 
 # # Install plugins
 # if ! zplug check --verbose; then
