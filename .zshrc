@@ -39,15 +39,20 @@ HIST_STAMPS="mm/dd/yyyy"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # plugins=(git git-extras gpg-agent ant sudo fasd tmux tmuxinator vi-mode zsh_reload)
+plugins=(git git-extras fasd tmux tmuxinator vi-mode)
 # plugins=(gpg-agent ant sudo fasd vi-mode)
-plugins=(vi-mode)
-# . /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
+# plugins=(vi-mode)
+. /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
+source /home/gkapfham/.oh-my-zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $ZSH/oh-my-zsh.sh
 
 # load the special plugin that is needed to create the git-stacular prompt showing status
 # source ~/.zsh/git-prompt/zshrc.sh
 source /home/gkapfham/.zsh/zsh-git-prompt/zshrc.sh
 GIT_PROMPT_EXECUTABLE="haskell"
+
+source /home/gkapfham/.zsh/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+source /home/gkapfham/.zsh/fz/fz.plugin.zsh
 
 # create the FASD cache so that the terminal loads quickly but I still get all of the FASD features
 fasd_cache="$HOME/.fasd-init-zsh"
@@ -60,19 +65,6 @@ unset fasd_cache
 # unset the option of Java tools, avoiding the strange debugging message in Ubuntu 15.04
 unset JAVA_TOOL_OPTIONS
 
-# # Adding these lines of code enables the searching of partially completed commands with the arrow keys
-# autoload -Uz up-line-or-beginning-search
-# autoload -Uz down-line-or-beginning-search
-# zle -N up-line-or-beginning-search
-# zle -N down-line-or-beginning-search
-# bindkey '\eOA' up-line-or-beginning-search
-# bindkey '\e[A' up-line-or-beginning-search
-# bindkey '\eOB' down-line-or-beginning-search
-# bindkey '\e[B' down-line-or-beginning-search
-# autoload -U history-search-end
-# bindkey "^k" history-incremental-search-backward
-# bindkey "^j" history-incremental-search-backward
-
 bindkey -M viins 'jk' vi-cmd-mode
 
 # User configuration
@@ -81,16 +73,8 @@ export DISABLE_AUTO_TITLE=true
 # Set the PATH environment variable for finding programs
 export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-# man() {
-#   vim -c "SuperMan $*"
-
-#   if [ "$?" != "0" ]; then
-#     echo "No manual entry for $*"
-#   fi
-# }
-
 # Configure the autosuggestions plugin that allows command history to display interactively
-# source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 bindkey '^ ' autosuggest-accept
@@ -121,34 +105,29 @@ source /home/gkapfham/.fzf/shell/key-bindings.zsh
 # fi
 
 # Initialize zplug
-source ~/.zplug/init.zsh
+# source ~/.zplug/init.zsh
 
 # Declare plugins
 
+# zplug "b4b4r07/enhancd", from:github, use:init.sh
 # zplug "changyuheng/fz", from:github, defer:0
 # zplug "changyuheng/zsh-interactive-cd", from:github, defer:0
+# zplug "lib/completion", from:oh-my-zsh
+# zplug "paulmelnikow/zsh-startup-timer", from:github, defer:0
+# zplug "plugins/colored-man-pages", from:oh-my-zsh
+# zplug "plugins/git-extras", from:oh-my-zsh
 # zplug "plugins/vi-mode", from:oh-my-zsh, defer:2
 # zplug "plugins/z", from:oh-my-zsh
-zplug "paulmelnikow/zsh-startup-timer", from:github, defer:0
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "plugins/fasd", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/tmuxinator", from:oh-my-zsh
-zplug "zdharma/fast-syntax-highlighting", from:github, defer:2
-zplug "zsh-users/zsh-autosuggestions", from:github, defer:0
 
-# # Install plugins
-# if ! zplug check --verbose; then
-#     printf "Install? [y/N]: "
-#     if read -q; then
-#         echo; zplug install
-#     fi
-# fi
+# zplug "plugins/fasd", from:oh-my-zsh
+# zplug "plugins/git", from:oh-my-zsh
+# zplug "plugins/tmux", from:oh-my-zsh
+# zplug "plugins/tmuxinator", from:oh-my-zsh
+# zplug "zdharma/fast-syntax-highlighting", from:github, defer:2
+# zplug "zsh-users/zsh-autosuggestions", from:github, defer:0
 
 # Source plugins
-zplug load
+# zplug load
 
 # }}}
 
