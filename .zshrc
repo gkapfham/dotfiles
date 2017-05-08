@@ -1,59 +1,83 @@
-# run the bash shell in 256 color mode, better for vim!
+# Exports {{{
+
+# 256 color mode
 export TERM="screen-256color"
 
-# exporting the LANG environment variable so that the character coding is correct
+# Character encoding
 export LANG="en_US.UTF8"
 
-# say that I will always use vim when the operating system calls for an editor
+# Vim as editor
 export EDITOR="vim"
 
-# always run vim with the internal server as it help for running R and Tmux
-alias vim="vim --servername VIM"
-
-# always run mupdf at the largest possible size that it supports; this is not
-# really big enough for a HIDPI screen but it is pretty good overall
-alias mupdf="mupdf -r 288"
-
-# setting the R history size to be a very large value
+# Large R history
 export R_HISTSIZE="25000"
 
-# Path to your oh-my-zsh configuration.
+# Shell title
+export DISABLE_AUTO_TITLE=true
+
+# Path
+export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# No Java tools
+unset JAVA_TOOL_OPTIONS
+
+# }}}
+
+# Aliases {{{
+
+# Vim with a server
+alias vim="vim --servername VIM"
+
+# MuPDF resolution
+alias mupdf="mupdf -r 288"
+
+# Htop
+alias htop="htop -C"
+
+# }}}
+
+# Oh-My-Zsh and Plugins {{{
+
+# Configuration path
 ZSH=$HOME/.oh-my-zsh
 
-# Define the theme to use my own derivative of the "norm" theme
+# Default theme
 ZSH_THEME="norm-gkapfham"
-
-# make it easier to run htop in monochrome mode
-alias htop="htop -C"
 
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
 # much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment following line if you want to  shown in the command execution time stamp
-# in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
-# yyyy-mm-dd
+# Timestamps
 HIST_STAMPS="mm/dd/yyyy"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Plugins
 # plugins=(git git-extras gpg-agent ant sudo fasd tmux tmuxinator vi-mode zsh_reload)
 plugins=(git git-extras fasd tmux tmuxinator vi-mode)
 source /home/gkapfham/.oh-my-zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $ZSH/oh-my-zsh.sh
 
-# load the special plugin that is needed to create the git-stacular prompt showing status
-# source ~/.zsh/git-prompt/zshrc.sh
+# Git-stacular prompt
 source /home/gkapfham/.zsh/zsh-git-prompt/zshrc.sh
 GIT_PROMPT_EXECUTABLE="haskell"
 
-# Load the plug for an enhanced z
+# Z command for jumping
 source /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 
-# Load plugins for using FZF in the shell
+# FZF in the shell
 source /home/gkapfham/.zsh/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 source /home/gkapfham/.zsh/fz/fz.plugin.zsh
+
+# Autosuggestions
+source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+bindkey '^ ' autosuggest-accept
+
+# }}}
+
+# FASD {{{
 
 # create the FASD cache so that the terminal loads quickly but I still get all of the FASD features
 fasd_cache="$HOME/.fasd-init-zsh"
@@ -63,22 +87,7 @@ fi
 source "$fasd_cache"
 unset fasd_cache
 
-# unset the option of Java tools, avoiding the strange debugging message in Ubuntu 15.04
-unset JAVA_TOOL_OPTIONS
-
-bindkey -M viins 'jk' vi-cmd-mode
-
-# User configuration
-export DISABLE_AUTO_TITLE=true
-
-# Set the PATH environment variable for finding programs
-export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-
-# Configure the autosuggestions plugin that allows command history to display interactively
-source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-bindkey '^ ' autosuggest-accept
+# }}}
 
 # FZF {{{
 
@@ -95,6 +104,12 @@ source /home/gkapfham/.fzf/shell/key-bindings.zsh
 
 # Source the files
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# }}}
+
+# Bindkey {{{
+
+bindkey -M viins 'jk' vi-cmd-mode
 
 # }}}
 
