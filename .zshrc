@@ -40,9 +40,6 @@ HIST_STAMPS="mm/dd/yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # plugins=(git git-extras gpg-agent ant sudo fasd tmux tmuxinator vi-mode zsh_reload)
 plugins=(git git-extras fasd tmux tmuxinator vi-mode)
-# plugins=(gpg-agent ant sudo fasd vi-mode)
-# plugins=(vi-mode)
-. /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 source /home/gkapfham/.oh-my-zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $ZSH/oh-my-zsh.sh
 
@@ -51,6 +48,10 @@ source $ZSH/oh-my-zsh.sh
 source /home/gkapfham/.zsh/zsh-git-prompt/zshrc.sh
 GIT_PROMPT_EXECUTABLE="haskell"
 
+# Load the plug for an enhanced z
+source /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
+
+# Load plugins for using FZF in the shell
 source /home/gkapfham/.zsh/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 source /home/gkapfham/.zsh/fz/fz.plugin.zsh
 
