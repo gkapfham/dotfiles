@@ -16,7 +16,7 @@ export R_HISTSIZE="25000"
 export DISABLE_AUTO_TITLE=true
 
 # Path
-export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/gkapfham/.git-radar/"
 
 # No Java tools
 unset JAVA_TOOL_OPTIONS
@@ -44,11 +44,6 @@ ZSH=$HOME/.oh-my-zsh
 # Default theme
 ZSH_THEME="norm-gkapfham"
 
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
 # Timestamps
 HIST_STAMPS="mm/dd/yyyy"
 
@@ -61,6 +56,28 @@ source $ZSH/oh-my-zsh.sh
 # Git-stacular prompt
 source /home/gkapfham/.zsh/zsh-git-prompt/zshrc.sh
 GIT_PROMPT_EXECUTABLE="haskell"
+
+# Toggle git cache
+function toggle_git() {
+    if [ -n "${ZSH_THEME_GIT_PROMPT_CACHE}" ]; then
+        unset ZSH_THEME_GIT_PROMPT_CACHE
+        echo "Cache  ? = ✘"
+    else
+        ZSH_THEME_GIT_PROMPT_CACHE="true"
+        echo "Cache  ? = ✔"
+    fi
+}
+alias tg=toggle_git
+
+# Echo git cache
+function echo_git() {
+    if [ -n "${ZSH_THEME_GIT_PROMPT_CACHE}" ]; then
+        echo "Cache  = ✔"
+    else
+        echo "Cache  = ✘"
+    fi
+}
+alias eg=echo_git
 
 # Z command for jumping
 source /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
@@ -112,6 +129,7 @@ source /home/gkapfham/.fzf/shell/key-bindings.zsh
 bindkey -M viins 'jk' vi-cmd-mode
 
 # }}}
+
 
 # setopt PROMPT_SUBST
 # export PROMPT='%F{red}%n%f@%F{blue}%m%f %F{yellow}%1~%f % $(gitHUD zsh) $ '
