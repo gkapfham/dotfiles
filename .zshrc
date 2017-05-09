@@ -129,7 +129,3 @@ source /home/gkapfham/.fzf/shell/key-bindings.zsh
 bindkey -M viins 'jk' vi-cmd-mode
 
 # }}}
-
-# setopt PROMPT_SUBST
-# export PROMPT='%F{red}%n%f@%F{blue}%m%f %F{yellow}%1~%f % $(gitHUD zsh) $ '
-# export PROMPT='%F{yellow}%n%f%F{yellow}@%m in %f%F{green}%1~ %f% $(git_super_status)$reset_color%'
