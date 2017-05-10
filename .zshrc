@@ -61,10 +61,10 @@ GIT_PROMPT_EXECUTABLE="haskell"
 function toggle_git() {
     if [ -n "${ZSH_THEME_GIT_PROMPT_CACHE}" ]; then
         unset ZSH_THEME_GIT_PROMPT_CACHE
-        echo "Cache  ? = ✘"
+        echo "Cache  = ✘"
     else
         ZSH_THEME_GIT_PROMPT_CACHE="true"
-        echo "Cache  ? = ✔"
+        echo "Cache  = ✔"
     fi
 }
 alias tg=toggle_git
