@@ -613,7 +613,8 @@ endif
 
 " Leave using a different command than ESC
 if has("nvim")
-  noremap jk <C-\><C-n>
+  inoremap <ESC> <C-\><C-n>
+  nmap oo O<ESC>
 endif
 
 " Use the new inccommand
