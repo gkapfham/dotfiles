@@ -622,4 +622,10 @@ if has("nvim")
   set inccommand=split
 endif
 
+" Highlight trailing spaces
+if has("nvim")
+  highlight ExtraWhitespace ctermfg=172
+  match ExtraWhitespace /\s\+$\|\t/
+endif
+
 " }}}
