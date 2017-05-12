@@ -162,7 +162,7 @@ set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
 set list
 
 " Display with faster timeouts in the TUI
-set timeout timeoutlen=1000 ttimeoutlen=10
+set timeoutlen=1000 ttimeoutlen=10
 
 " Display matching parentheses
 set showmatch
@@ -420,6 +420,9 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 " Navigate to the next linting warning/error
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" Format a paragraph quickly
+nmap fp gqip
 
 " }}}
 
