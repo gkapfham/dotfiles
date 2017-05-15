@@ -633,24 +633,21 @@ endif
 
 " Control FZF windows
 if has("nvim")
-" Load hidden, smaller window is faster
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '-m -x +s --no-bold',
+\  'down':    '10%')}
 command! FZFHidden call fzf#run({
 \  'source':  'ag --hidden --ignore .git -l -g ""',
 \  'sink':    'e',
 \  'options': '-m -x +s --no-bold',
-\  'down':    '25%',
-\  'window':  'rightbelow enew'})
-
-" Load non-hidden, smaller window is faster
+\  'down':    '10%'})
 command! FZFMine call fzf#run({
 \  'source':  'ag --ignore .git -l -g ""',
 \  'sink':    'e',
 \  'options': '-m -x +s --no-bold',
-\  'down':    '25%',
-\  'window':  'rightbelow enew'})
-
-" All other, smaller window is faster
-let g:fzf_layout = { 'window': 'rightbelow enew' }
+\  'down':    '10%'})
 endif
 
 " }}}
