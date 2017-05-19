@@ -138,8 +138,8 @@ command! StandardWrap set textwidth=80
 set wrap linebreak nolist
 
 " Display of line numbers
-set relativenumber
 set number
+set relativenumber
 
 " Display screen redraws faster
 set nocursorcolumn
