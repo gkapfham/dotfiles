@@ -637,17 +637,20 @@ command! FZFMru call fzf#run({
 \  'source':  v:oldfiles,
 \  'sink':    'e',
 \  'options': '-m -x +s --no-bold',
-\  'down':    '10%')}
+\  'down':    '10%',
+\  'window':  'enew'})
 command! FZFHidden call fzf#run({
 \  'source':  'ag --hidden --ignore .git -l -g ""',
 \  'sink':    'e',
 \  'options': '-m -x +s --no-bold',
 \  'down':    '10%'})
-command! FZFMine call fzf#run({
+command! -bang FZFMine call fzf#run({
 \  'source':  'ag --ignore .git -l -g ""',
 \  'sink':    'e',
 \  'options': '-m -x +s --no-bold',
-\  'down':    '10%'})
+\  'down':    '100%',
+\  'window':  'enew'})
+let g:fzf_layout = { 'window': 'enew' }
 endif
 
 " }}}
