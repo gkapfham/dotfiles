@@ -126,6 +126,7 @@ source /home/gkapfham/.fzf/shell/key-bindings.zsh
 
 # Bindkey {{{
 
+# Configure the shell so that it uses jk for escape
 bindkey -M viins 'jk' vi-cmd-mode
 
 # }}}
