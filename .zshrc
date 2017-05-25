@@ -83,7 +83,7 @@ alias eg=echo_git
 source /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 
 # FZF in the shell
-source /home/gkapfham/.zsh/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+# source /home/gkapfham/.zsh/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 source /home/gkapfham/.zsh/fz/fz.plugin.zsh
 
 # Autosuggestions
@@ -127,5 +127,26 @@ source /home/gkapfham/.fzf/shell/key-bindings.zsh
 # Bindkey {{{
 
 bindkey -M viins 'jk' vi-cmd-mode
+
+# }}}
+#
+
+# Tmux {{{
+
+# Display all of the open tmux sessions with fzf
+tms() {
+  local session
+  newsession=${1:-Work}
+  session=$(tmux list-sessions -F "#{session_name}" | \
+    fzf --query="$1" --select-1 --exit-0) &&
+    tmux attach-session -t "$session" || tmux new-session -s $newsession
+}
+
+# Display all of the possible tmuxinators with fzf
+tmm() {
+  session=$( ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
+    fzf --query="$1" --select-1 --exit-0) &&
+    mux "$session"
+}
 
 # }}}
