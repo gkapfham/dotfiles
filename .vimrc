@@ -617,6 +617,7 @@ endif
 " Leave using a different command than ESC
 if has("nvim")
   inoremap <ESC> <C-\><C-n>
+  tnoremap jk <C-\><C-n>
   nmap oo O<ESC>
 endif
 
