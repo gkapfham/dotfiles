@@ -80,11 +80,11 @@ function echo_git() {
 alias eg=echo_git
 
 # Z command for jumping
-source /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
+# source /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 
 # FZF in the shell
 # source /home/gkapfham/.zsh/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
-source /home/gkapfham/.zsh/fz/fz.plugin.zsh
+# source /home/gkapfham/.zsh/fz/fz.plugin.zsh
 
 # Autosuggestions
 source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -162,10 +162,17 @@ tmm() {
     mux "$session"
 }
 
-# Display all of the recent directories matching a search term
+# Display all of the recent directories -- matches search term
 rt() {
   fasdlist=$( fasd -d -l -r $1 | \
-    fzf --query="$1" --select-1 --exit-0 --height=12 --tac --no-sort --cycle) &&
+    fzf --query="$1" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle) &&
+    cd "$fasdlist"
+}
+
+# Display all of the recent directories -- searches with term
+rrt() {
+  fasdlist=$( fasd -d -l -r | \
+    fzf --query="$1" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle) &&
     cd "$fasdlist"
 }
 
