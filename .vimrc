@@ -540,21 +540,21 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 command! FZFMru call fzf#run({
 \  'source':  v:oldfiles,
 \  'sink':    'e',
-\  'options': '-m -x +s --no-bold',
+\  'options': '-m -x +s --no-bold --cycle',
 \  'down':    '25%')}
 
 " Load hidden files
 command! FZFHidden call fzf#run({
 \  'source':  'ag --hidden --ignore .git -l -g ""',
 \  'sink':    'e',
-\  'options': '-m -x +s --no-bold',
+\  'options': '-m -x +s --no-bold --cycle',
 \  'down':    '25%'})
 
 " Load non-hidden files
 command! FZFMine call fzf#run({
 \  'source':  'ag --ignore .git -l -g ""',
 \  'sink':    'e',
-\  'options': '-m -x +s --no-bold',
+\  'options': '-m -x +s --no-bold --cycle',
 \  'down':    '25%'})
 
 " Define key combinations
@@ -637,18 +637,18 @@ if has("nvim")
 command! FZFMru call fzf#run({
 \  'source':  v:oldfiles,
 \  'sink':    'e',
-\  'options': '-m -x +s --no-bold',
+\  'options': '-m -x +s --no-bold --cycle',
 \  'down':    '10%',
 \  'window':  'enew'})
 command! FZFHidden call fzf#run({
 \  'source':  'ag --hidden --ignore .git -l -g ""',
 \  'sink':    'e',
-\  'options': '-m -x +s --no-bold',
+\  'options': '-m -x +s --no-bold --cycle',
 \  'window':  'enew'})
 command! -bang FZFMine call fzf#run({
 \  'source':  'ag --ignore .git -l -g ""',
 \  'sink':    'e',
-\  'options': '-m -x +s --no-bold',
+\  'options': '-m -x +s --no-bold --cycle',
 \  'down':    '100%',
 \  'window':  'enew'})
 let g:fzf_layout = { 'window': 'enew' }
