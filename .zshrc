@@ -90,6 +90,7 @@ source /home/gkapfham/.zsh/fz/fz.plugin.zsh
 source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_USE_ASYNC=1
 bindkey '^ ' autosuggest-accept
 
 # }}}
@@ -150,15 +151,22 @@ tms() {
   local session
   newsession=${1:-Work}
   session=$(tmux list-sessions -F "#{session_name}" | \
-    fzf --query="$1" --select-1 --exit-0) &&
+    fzf --query="$1" --select-1 --exit-0 --cycle) &&
     tmux attach-session -t "$session" || tmux new-session -s $newsession
 }
 
 # Display all of the possible tmuxinators with fzf
 tmm() {
   session=$( ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
-    fzf --query="$1" --select-1 --exit-0) &&
+    fzf --query="$1" --select-1 --exit-0 --cycle) &&
     mux "$session"
+}
+
+# Display all of the recent directories matching a search term
+rt() {
+  fasdlist=$( fasd -d -l -r $1 | \
+    fzf --query="$1" --select-1 --exit-0 --height=12 --tac --no-sort --cycle) &&
+    cd "$fasdlist"
 }
 
 # }}}
