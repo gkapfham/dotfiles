@@ -134,6 +134,9 @@ fkill() {
   fi
 }
 
+# Trigger fzf completion using the semi-colon instead of **
+export FZF_COMPLETION_TRIGGER=';'
+
 # }}}
 
 # Bindkey {{{
@@ -163,17 +166,17 @@ tmm() {
 }
 
 # Display all of the recent directories -- matches search term
-rt() {
+t() {
   fasdlist=$( fasd -d -l -r $1 | \
-    fzf --query="$1" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle) &&
+    fzf --query="$1 " --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle) &&
     cd "$fasdlist"
 }
 
-# Display all of the recent directories -- searches with term
-rrt() {
-  fasdlist=$( fasd -d -l -r | \
-    fzf --query="$1" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle) &&
-    cd "$fasdlist"
-}
+# # Display all of the recent directories -- searches with term
+# tt() {
+#   fasdlist=$( fasd -d -l -r | \
+#     fzf --query="$1" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle) &&
+#     cd "$fasdlist"
+# }
 
 # }}}
