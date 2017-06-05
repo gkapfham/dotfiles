@@ -173,3 +173,15 @@ t() {
 }
 
 # }}}
+
+# Commands {{{
+
+usage() {
+    du -h --max-depth="${2:-1}"\
+      "${1:-.}" |\
+        sort -h |\
+        sed "s:\./::" |\
+        sed "s:$HOME:~:"
+}
+
+# }}}
