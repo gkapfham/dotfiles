@@ -486,8 +486,11 @@ let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 
 " Text Manipulation {{{
 
-" Insert a blank line
+" Insert a blank line at end of line
 nmap oo Ojk
+
+" Insert a blank line at cursor
+nnoremap <NL> i<CR><ESC>
 
 " Support the backspace key in insert mode
 set backspace=indent,eol,start
