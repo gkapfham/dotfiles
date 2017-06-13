@@ -77,8 +77,8 @@ set smtp_pass=$my_foo_pass
 set smtp_url = "smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
 
 # allow mutt to performing caching as a way to improve performance
-set header_cache=~/.mutt/cache/headers
-set message_cachedir=~/.mutt/cache/bodies
+# set header_cache=~/.mutt/cache/headers
+# set message_cachedir=~/.mutt/cache/bodies
 set certificate_file=~/.mutt/certificates
 
 set imap_keepalive=200
