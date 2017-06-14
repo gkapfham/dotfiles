@@ -21,7 +21,6 @@ Plug 'davidhalter/jedi-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'garbas/vim-snipmate'
 Plug 'gilligan/textobj-gitgutter'
-Plug 'gorodinskiy/vim-coloresque'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch.vim'
@@ -319,7 +318,7 @@ hi Conceal ctermbg=NONE ctermfg=172
 " Use tex over plaintex
 let g:tex_flavor = 'tex'
 
-" Vimtex requires
+" Vimtex (and fzf with YCM) requires
 set hidden
 
 " }}}
