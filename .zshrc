@@ -137,7 +137,7 @@ fkill() {
 }
 
 # Trigger fzf completion using the semi-colon instead of **
-export FZF_COMPLETION_TRIGGER=';'
+export FZF_COMPLETION_TRIGGER='**'
 
 # }}}
 
