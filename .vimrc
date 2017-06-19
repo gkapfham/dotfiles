@@ -195,6 +195,7 @@ let g:lt_quickfix_list_toggle_map = '<leader>q'
 set laststatus=2
 let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
