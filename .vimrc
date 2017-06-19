@@ -2,6 +2,7 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'henrik/vim-qargs'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'SirVer/ultisnips'
@@ -25,7 +26,6 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/vim-operator-flashy'
-" Plug 'henrik/vim-qargs'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'jalvesaq/Nvim-R'
