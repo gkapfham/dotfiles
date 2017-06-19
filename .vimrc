@@ -407,8 +407,8 @@ inoremap jk <ESC>
 inoremap <ESC> <NOP>
 
 " Define the leaders
-let maplocalleader=","
-let mapleader=","
+let maplocalleader=','
+let mapleader=','
 
 " Move through CamelCase text
 call camelcasemotion#CreateMotionMappings('<leader>')
