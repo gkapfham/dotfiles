@@ -394,6 +394,9 @@ let g:ycm_semantic_triggers.tex = [
 " YCM will not echo messages (nor will searches)
 set noshowmode
 
+" Infer the case when doing completion
+set infercase
+
 " }}}
 
 " Basic Keyboard Movement {{{
