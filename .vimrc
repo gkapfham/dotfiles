@@ -144,8 +144,8 @@ set nocursorcolumn
 set nocursorline
 set ttyfast
 
-" Only syntax highlight 200 characters
-set synmaxcol=200
+" Syntax highlight the first 200 characters
+command! FastSyntax set synmaxcol=200
 
 " Display linebreaks and tabs
 set linebreak
