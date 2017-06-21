@@ -126,17 +126,6 @@ source /home/gkapfham/.fzf/shell/key-bindings.zsh
 # Source the files
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Kill a process using fzf
-fkill() {
-  local pid
-  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
-
-  if [ "x$pid" != "x" ]
-  then
-    echo $pid | xargs kill -${1:-9}
-  fi
-}
-
 # Trigger fzf completion using the semi-colon instead of **
 export FZF_COMPLETION_TRIGGER='**'
 
