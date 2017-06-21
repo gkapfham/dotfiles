@@ -2,7 +2,6 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'henrik/vim-qargs'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'SirVer/ultisnips'
