@@ -145,7 +145,7 @@ set nocursorcolumn
 set nocursorline
 set ttyfast
 
-" Only syntax highlight 200 lines
+" Only syntax highlight 200 characters
 set synmaxcol=200
 
 " Display linebreaks and tabs
