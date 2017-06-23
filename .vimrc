@@ -509,7 +509,7 @@ let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 nmap oo Ojk
 
 " Insert a blank line at cursor
-nnoremap <C-o> i<CR><ESC>
+nnoremap oO i<CR><ESC>
 
 " Support the backspace key in insert mode
 set backspace=indent,eol,start
