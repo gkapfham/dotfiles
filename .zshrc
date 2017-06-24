@@ -86,7 +86,7 @@ alias eg=echo_git
 # source /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
 
 # FZF in the shell
-# source /home/gkapfham/.zsh/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+source /home/gkapfham/.zsh/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 # source /home/gkapfham/.zsh/fz/fz.plugin.zsh
 
 # Autosuggestions
@@ -115,6 +115,7 @@ unset fasd_cache
 # Default options
 export FZF_DEFAULT_OPTS='
   --no-bold
+  --cycle
   --bind ctrl-f:page-down,ctrl-b:page-up
   --color fg:-1,bg:-1,hl:64,fg+:3,bg+:234,hl+:172
   --color info:110,prompt:110,spinner:109,pointer:172,marker:172
