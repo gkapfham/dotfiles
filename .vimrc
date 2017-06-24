@@ -432,14 +432,6 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 nnoremap <C-j> :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
 nnoremap <C-k> :try<bar>lprev<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>llast<bar>endtry<cr>
 
-" Different key bindings for unimpaired movements
-nmap < [
-nmap > ]
-omap < [
-omap > ]
-xmap < [
-xmap > ]
-
 " Format a paragraph quickly
 nmap fp gqip
 
