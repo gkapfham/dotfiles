@@ -585,13 +585,14 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 
 " Configure the fzf statusline in Neovim
 function! s:fzf_statusline()
-  " Override statusline as you like
+  " Define colors for the statusline
   highlight fzf1 ctermfg=110 ctermbg=235
   highlight fzf2 ctermfg=110 ctermbg=235
   highlight fzf3 ctermfg=110 ctermbg=235
   setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
 endfunction
 
+" Set the colors for the statusline
 augroup configurationgroupforfzf
   autocmd! User FzfStatusLine call <SID>fzf_statusline()
 augroup END
