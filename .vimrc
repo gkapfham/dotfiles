@@ -644,6 +644,13 @@ endif
 if has("nvim")
   highlight ExtraWhitespace ctermfg=172
   match ExtraWhitespace /\s\+$\|\t/
+  augroup extra_whitespace
+    autocmd!
+    autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+    autocmd BufWinLeave * call clearmatches()
+  augroup END
 endif
 
 " Control FZF windows
