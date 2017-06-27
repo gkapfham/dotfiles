@@ -399,6 +399,7 @@ set noshowmode
 " Infer the case when doing completion
 set infercase
 
+
 " }}}
 
 " Basic Keyboard Movement {{{
@@ -463,6 +464,10 @@ noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 " Support the highlighting of words
 nnoremap <leader>* :set hlsearch<cr>*<c-o>
 nnoremap <silent><expr> <Leader>i (&hls && v:hlsearch ? ':set nohlsearch' : ':set hlsearch')."\n"
+
+" Carefully ignore the case of words when searching
+set ignorecase
+set smartcase
 
 " }}}
 
