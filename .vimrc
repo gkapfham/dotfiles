@@ -399,7 +399,6 @@ set noshowmode
 " Infer the case when doing completion
 set infercase
 
-
 " }}}
 
 " Basic Keyboard Movement {{{
