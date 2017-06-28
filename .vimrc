@@ -10,7 +10,6 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'alfredodeza/pytest.vim'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'benmills/vimux'
 Plug 'bkad/CamelCaseMotion'
@@ -37,12 +36,14 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-operator-user'
 Plug 'kana/vim-textobj-user'
+Plug 'kassio/neoterm'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'latex'}
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
+Plug 'skywind3000/asyncrun.vim'
 Plug 'spacewander/vim-coloresque'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tomtom/tlib_vim'
@@ -206,6 +207,9 @@ let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mi
 let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#hunks#non_zero_only = 0
 let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+
+" Display errors from running a test suite with vim-test
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 
 " Do not display the standard status line
 set noshowmode
@@ -424,13 +428,17 @@ call camelcasemotion#CreateMotionMappings('<leader>')
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
-" Navigate to the next linting warning/error
+" " Navigate to the next linting warning/error
 " nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 " nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" Allow for wrapping from the entries in the location list
-nnoremap <C-j> :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
-nnoremap <C-k> :try<bar>lprev<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>llast<bar>endtry<cr>
+" Navigate to the next linting warning/error
+nmap <silent> <C-k> <Plug>(ale_previous)
+nmap <silent> <C-j> <Plug>(ale_next)
+
+" " Allow for wrapping from the entries in the location list
+" nnoremap <C-j> :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
+" nnoremap <C-k> :try<bar>lprev<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>llast<bar>endtry<cr>
 
 " Format a paragraph quickly
 nmap fp gqip
@@ -541,7 +549,7 @@ nmap <silent> <leader>s :set spell!<CR>
 
 " }}}
 
-" FZF {{{
+" FZF a{{
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -619,7 +627,8 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 " nmap <silent> <leader>g :TestVisit<CR>
 
-let test#strategy = "vimux"
+" let test#strategy = "neoterm"
+let test#strategy = "asyncrun"
 
 " }}}
 
