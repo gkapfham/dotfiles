@@ -198,18 +198,18 @@ let g:lt_quickfix_list_toggle_map = '<leader>q'
 set laststatus=2
 let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#whitespace#enabled = 1
+" let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#hunks#enabled = 1
-let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
+" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
 let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#hunks#non_zero_only = 0
 let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
 
 " Display errors from running a test suite with vim-test
-let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+" let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 
 " Do not display the standard status line
 set noshowmode
@@ -413,7 +413,7 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 inoremap jk <ESC>
-inoremap <ESC> <NOP>
+" inoremap <ESC> <NOP>
 
 " Define the leaders
 let maplocalleader=','
