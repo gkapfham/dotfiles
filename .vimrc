@@ -64,6 +64,8 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ervandew/supertab'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -687,6 +689,40 @@ command! -bang FZFMine call fzf#run({
 \  'down':    '100%',
 \  'window':  'enew'})
 let g:fzf_layout = { 'window': 'enew' }
+endif
+
+" Highlight trailing spaces
+if has("nvim")
+
+  " Disable YCM and enable Deoplete
+  let g:loaded_youcompleteme = 1
+  let g:deoplete#enable_at_startup = 1
+
+  let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+  let g:deoplete#omni#functions = {}
+  let g:deoplete#omni#functions.java = [
+        \ 'javacomplete#Complete'
+        \]
+
+  if !exists('g:deoplete#omni#input_patterns')
+      let g:deoplete#omni#input_patterns = {}
+  endif
+  let g:deoplete#omni#input_patterns.tex = '\\(?:'
+        \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+        \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+        \ . '|hyperref\s*\[[^]]*'
+        \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+        \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
+        \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+        \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+        \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+        \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
+        \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
+        \ . '|\w*'
+        \ .')'
+
 endif
 
 " }}}
