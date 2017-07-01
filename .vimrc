@@ -554,7 +554,7 @@ nmap <silent> <leader>s :set spell!<CR>
 
 " }}}
 
-" FZF a{{
+" FZF {{
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
