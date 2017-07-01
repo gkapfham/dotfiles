@@ -373,7 +373,7 @@ let g:ycm_filetype_blacklist = {
 " YCM uses python (python3 is also an option)
 let g:ycm_server_python_interpreter = '/usr/bin/python'
 
-" YCM is compatible with UltiSnips
+" YCM and Deoplete are compatible with UltiSnips
 let g:UltiSnipsExpandTrigger="<C-k>"
 let g:UltiSnipsJumpForwardTrigger="<C-k>"
 let g:UltiSnipsListSnippets = "<C-l>"
@@ -439,7 +439,7 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
 " Navigate to the next linting warning/error
 nmap <silent> <C-k> <Plug>(ale_previous)
-nmap <silent> <C-j> <Plug>(ale_next)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " " Allow for wrapping from the entries in the location list
 " nnoremap <C-j> :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
