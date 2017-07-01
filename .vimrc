@@ -4,6 +4,8 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/neco-syntax'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways'
@@ -18,6 +20,7 @@ Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'ervandew/supertab'
 Plug 'garbas/vim-snipmate'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'haya14busa/incsearch-easymotion.vim'
@@ -64,8 +67,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ervandew/supertab'
+Plug 'zchee/deoplete-jedi'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -285,8 +287,9 @@ let java_comment_strings=1
 
 " Plugin configuration for R
 let R_assign = 2
-let R_tmux_split = 1
+" let R_tmux_split = 1
 let R_openpdf = 0
+let R_show_args = 1
 
 " Indenting for HTML
 au BufRead,BufNewFile *.html set filetype=html
@@ -382,7 +385,6 @@ let g:UltiSnipsJumpBackwardTrigger=""
 let g:tmuxcomplete#trigger = 'omnifunc'
 
 " YCM is compatible with the vimtex
-
 if !exists('g:ycm_semantic_triggers')
   let g:ycm_semantic_triggers = {}
 endif
@@ -404,6 +406,8 @@ set noshowmode
 
 " Infer the case when doing completion
 set infercase
+
+inoremap <C-Space> <C-x><C-o>
 
 " }}}
 
@@ -699,7 +703,7 @@ if has("nvim")
   let g:deoplete#enable_at_startup = 1
 
   let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
   let g:deoplete#omni#functions = {}
   let g:deoplete#omni#functions.java = [
