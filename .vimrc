@@ -5,7 +5,6 @@ call plug#begin('~/.vim/bundle')
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neco-syntax'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways'
@@ -695,21 +694,24 @@ command! -bang FZFMine call fzf#run({
 let g:fzf_layout = { 'window': 'enew' }
 endif
 
-" Highlight trailing spaces
+" Configure completion with deoplete
 if has("nvim")
 
   " Disable YCM and enable Deoplete
   let g:loaded_youcompleteme = 1
   let g:deoplete#enable_at_startup = 1
 
+  " Configure deoplete so that it uses tabs
   let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
   inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
+  " Register Java's completion function with deoplete
   let g:deoplete#omni#functions = {}
   let g:deoplete#omni#functions.java = [
         \ 'javacomplete#Complete'
         \]
 
+  " Configure deoplete to work with LaTeX
   if !exists('g:deoplete#omni#input_patterns')
       let g:deoplete#omni#input_patterns = {}
   endif
