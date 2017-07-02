@@ -10,7 +10,7 @@ export LC_CTYPE="en_US.UTF-8"
 export LANGUAGE="en_US.UTF-8"
 
 # Vim as editor
-export EDITOR="vim"
+export EDITOR="nvim"
 
 # Large R history
 export R_HISTSIZE="25000"
