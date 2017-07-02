@@ -696,7 +696,6 @@ endif
 
 " Configure completion with deoplete
 if has("nvim")
-
   " Disable YCM and enable Deoplete
   let g:loaded_youcompleteme = 1
   let g:deoplete#enable_at_startup = 1
@@ -728,7 +727,12 @@ if has("nvim")
         \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
         \ . '|\w*'
         \ .')'
+endif
 
+if has("nvim")
+  " disable jedi-vim's completion engine, use it otherwise
+  let g:jedi#auto_vim_configuration = 0
+  let g:jedi#completions_enabled = 0
 endif
 
 " }}}
