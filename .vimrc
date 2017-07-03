@@ -211,7 +211,7 @@ let g:airline#extensions#hunks#non_zero_only = 0
 let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
 
 " Display errors from running a test suite with vim-test
-" let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 
 " Do not display the standard status line
 set noshowmode
@@ -285,7 +285,6 @@ let java_comment_strings=1
 
 " Plugin configuration for R
 let R_assign = 2
-" let R_tmux_split = 1
 let R_openpdf = 0
 let R_show_args = 1
 
@@ -352,7 +351,7 @@ set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest:full,full
 
-" YCM
+" YCM is used with Vim
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
@@ -405,7 +404,7 @@ set noshowmode
 " Infer the case when doing completion
 set infercase
 
-inoremap <C-Space> <C-x><C-o>
+" inoremap <C-Space> <C-x><C-o>
 
 " }}}
 
@@ -417,7 +416,7 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 inoremap jk <ESC>
-" inoremap <ESC> <NOP>
+inoremap <ESC> <NOP>
 
 " Define the leaders
 let maplocalleader=','
@@ -427,22 +426,12 @@ let mapleader=','
 call camelcasemotion#CreateMotionMappings('<leader>')
 
 " Navigate through wrapped text
-" noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-" noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-
-" " Navigate to the next linting warning/error
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Navigate to the next linting warning/error
 nmap <silent> <C-k> <Plug>(ale_previous)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-" " Allow for wrapping from the entries in the location list
-" nnoremap <C-j> :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
-" nnoremap <C-k> :try<bar>lprev<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>llast<bar>endtry<cr>
 
 " Format a paragraph quickly
 nmap fp gqip
