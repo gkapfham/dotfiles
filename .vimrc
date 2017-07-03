@@ -7,7 +7,7 @@ call plug#begin('~/.vim/bundle')
 " Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins', 'on': []}
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways', {'for': ['html', 'md', 'liquid']}
@@ -67,6 +67,13 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi'
+Plug 'ervandew/supertab'
+
+augroup load_us_ycm
+  autocmd!
+  autocmd InsertEnter * call plug#load('deoplete.nvim')
+                     \| autocmd! load_us_ycm
+augroup END
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -685,9 +692,7 @@ if has("nvim")
   let g:deoplete#auto_complete_delay = 5
 
   " Configure deoplete so that it uses tabs
-  inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>"
-        \ : (<SID>is_whitespace() ? "\<Tab>" : deoplete#mappings#manual_complete())
-  inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<C-h>"
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
   " Register Java's completion function with deoplete
   let g:deoplete#omni#functions = {}
@@ -712,6 +717,8 @@ if has("nvim")
         \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
         \ . '|\w*'
         \ .')'
+
+  " autocmd InsertEnter * call deoplete#enable()
 endif
 
 if has("nvim")
