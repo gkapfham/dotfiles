@@ -473,9 +473,9 @@ set smartcase
 
 " Advanced Keyboard Movement with easymotion {{{
 
+" Make f and s movements use easymotion
 nmap f <Plug>(easymotion-s)
 nmap s <Plug>(easymotion-s2)
-" nmap t <Plug>(easymotion-t2)
 
 " Change the color scheme
 hi link EasyMotionTarget Type
@@ -490,13 +490,6 @@ let g:EasyMotion_do_shade = 0
 " Use uppercase letters
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
-
-" map  / <Plug>(easymotion-sn)
-" omap / <Plug>(easymotion-tn)
-" map  ? <Plug>(easymotion-sn)
-" omap ? <Plug>(easymotion-tn)
-" map  n <Plug>(easymotion-next)
-" map  N <Plug>(easymotion-prev)
 
 " }}}
 
