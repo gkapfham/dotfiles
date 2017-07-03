@@ -599,6 +599,7 @@ augroup END
 
 " Tmux {{{
 
+" Send commands to tmux pages
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
 nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
@@ -607,13 +608,13 @@ nmap <C-c>r <Plug>SetTmuxVars
 
 " Testing {{{
 
+" Run all/part of a test suite
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
-" nmap <silent> <leader>g :TestVisit<CR>
 
-" let test#strategy = "neoterm"
+" Run the test suite async and display in quickfix
 let test#strategy = "asyncrun"
 
 " }}}
