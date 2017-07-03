@@ -2,6 +2,7 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'gilligan/textobj-gitgutter'
 " Plug 'kassio/neoterm'
 " Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -22,7 +23,6 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'garbas/vim-snipmate'
-Plug 'gilligan/textobj-gitgutter'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch.vim'
@@ -56,6 +56,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/spellrotate.vim'
+Plug 'ujihisa/neco-look'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/SyntaxAttr.vim'
