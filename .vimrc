@@ -21,7 +21,6 @@ Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim'
 Plug 'easymotion/vim-easymotion'
-Plug 'ervandew/supertab'
 Plug 'garbas/vim-snipmate'
 Plug 'gilligan/textobj-gitgutter'
 Plug 'haya14busa/incsearch-easymotion.vim'
@@ -30,8 +29,8 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/vim-operator-flashy'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent'
-Plug 'jalvesaq/Nvim-R'
-Plug 'janko-m/vim-test'
+Plug 'jalvesaq/Nvim-R', {'for': 'r'}
+Plug 'janko-m/vim-test', {'for': 'python'}
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'jgdavey/tslime.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -702,8 +701,9 @@ if has("nvim")
   let g:deoplete#auto_complete_delay = 5
 
   " Configure deoplete so that it uses tabs
-  let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-  inoremap <expr><TAB> pumvisible() ? '\<C-n>' : '\<TAB>'
+  inoremap <silent><expr><Tab> pumvisible() ? "\<C-n>"
+        \ : (<SID>is_whitespace() ? "\<Tab>" : deoplete#mappings#manual_complete())
+  inoremap <expr><S-Tab>  pumvisible() ? "\<C-p>" : "\<C-h>"
 
   " Register Java's completion function with deoplete
   let g:deoplete#omni#functions = {}
