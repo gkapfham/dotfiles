@@ -6,10 +6,10 @@ call plug#begin('~/.vim/bundle')
 " Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
-Plug 'Valloric/MatchTagAlways'
+Plug 'Valloric/MatchTagAlways', {'for': ['html', 'md', 'liquid']}
 Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
@@ -699,6 +699,7 @@ if has("nvim")
   " Disable YCM and enable Deoplete
   let g:loaded_youcompleteme = 1
   let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_complete_delay = 5
 
   " Configure deoplete so that it uses tabs
   let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
@@ -730,7 +731,7 @@ if has("nvim")
 endif
 
 if has("nvim")
-  " disable jedi-vim's completion engine, use it otherwise
+  " disable jedi-vim's completion engine, use all features otherwise
   let g:jedi#auto_vim_configuration = 0
   let g:jedi#completions_enabled = 0
 endif
