@@ -2,12 +2,14 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins', 'on': []}
 " Plug 'gilligan/textobj-gitgutter'
 " Plug 'kassio/neoterm'
 " Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins', 'on': []}
+Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/echodoc.vim'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways', {'for': ['html', 'md', 'liquid']}
@@ -22,6 +24,7 @@ Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'ervandew/supertab'
 Plug 'garbas/vim-snipmate'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
@@ -67,13 +70,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr'
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi'
-Plug 'ervandew/supertab'
-
-augroup load_us_ycm
-  autocmd!
-  autocmd InsertEnter * call plug#load('deoplete.nvim')
-                     \| autocmd! load_us_ycm
-augroup END
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -580,8 +576,11 @@ command! FZFMine call fzf#run({
 " Define key combinations
 nmap <C-h> :FZFHidden<CR>
 nmap <C-p> :FZFMine<CR>
-nmap <C-i> :Tags <C-R><C-W><CR>
-nmap <C-t> :BTags <CR>
+" nmap <C-i> :Tags <C-R><C-W><CR>
+" nmap <C-g> :Tags <CR>
+nmap <Space>g :Tags <CR>
+" nmap <C-g> :BTags <CR>
+nmap <Space>t :BTags <CR>
 nmap <C-u> :FZFMru<CR>
 nnoremap <Tab> :Buffers<Cr>
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
@@ -662,38 +661,46 @@ if has("nvim")
   augroup END
 endif
 
-" Control FZF windows
-if has("nvim")
-command! FZFMru call fzf#run({
-\  'source':  v:oldfiles,
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold --cycle',
-\  'down':    '10%',
-\  'window':  'enew'})
-command! FZFHidden call fzf#run({
-\  'source':  'ag --hidden --ignore .git -l -g ""',
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold --cycle',
-\  'window':  'enew'})
-command! -bang FZFMine call fzf#run({
-\  'source':  'ag --ignore .git -l -g ""',
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold --cycle',
-\  'down':    '100%',
-\  'window':  'enew'})
+" " Control FZF windows
+" if has("nvim")
+" command! FZFMru call fzf#run({
+" \  'source':  v:oldfiles,
+" \  'sink':    'e',
+" \  'options': '-m -x +s --no-bold --cycle',
+" \  'down':    '10%',
+" \  'window':  'enew'})
+" command! FZFHidden call fzf#run({
+" \  'source':  'ag --hidden --ignore .git -l -g ""',
+" \  'sink':    'e',
+" \  'options': '-m -x +s --no-bold --cycle',
+" \  'window':  'enew'})
+" command! -bang FZFMine call fzf#run({
+" \  'source':  'ag --ignore .git -l -g ""',
+" \  'sink':    'e',
+" \  'options': '-m -x +s --no-bold --cycle',
+" \  'down':    '100%',
+" \  'window':  'enew'})
 let g:fzf_layout = { 'window': 'enew' }
-endif
+" endif
 
 " Configure completion with deoplete
 if has("nvim")
   " Disable YCM and enable Deoplete
   let g:loaded_youcompleteme = 1
-  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_at_startup = 0
   let g:deoplete#auto_complete_delay = 5
+  autocmd InsertEnter * call deoplete#enable()
 
   " Configure deoplete so that it uses tabs
   let g:SuperTabDefaultCompletionType = "<C-n>"
   inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
+  " Change the source rankings
+  call deoplete#custom#set('buffer', 'rank', 500)
+  call deoplete#custom#set('tag', 'rank', 400)
+  call deoplete#custom#set('ultisnips', 'rank', 300)
+  call deoplete#custom#set('tmux', 'rank', 200)
+  call deoplete#custom#set('look', 'rank', 100)
 
   " Register Java's completion function with deoplete
   let g:deoplete#omni#functions = {}
@@ -718,8 +725,6 @@ if has("nvim")
         \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
         \ . '|\w*'
         \ .')'
-
-  " autocmd InsertEnter * call deoplete#enable()
 endif
 
 if has("nvim")
