@@ -692,7 +692,8 @@ if has("nvim")
   let g:deoplete#auto_complete_delay = 5
 
   " Configure deoplete so that it uses tabs
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  let g:SuperTabDefaultCompletionType = "<C-n>"
+  inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
   " Register Java's completion function with deoplete
   let g:deoplete#omni#functions = {}
