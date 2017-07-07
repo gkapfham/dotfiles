@@ -292,6 +292,9 @@ let R_assign = 2
 let R_openpdf = 0
 let R_show_args = 1
 
+" Force jedi to use version 3
+let g:jedi#force_py_version = 3
+
 " Indenting for HTML
 au BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = 'html,body,head,tbody,div'
@@ -680,7 +683,7 @@ endif
 " \  'options': '-m -x +s --no-bold --cycle',
 " \  'down':    '100%',
 " \  'window':  'enew'})
-let g:fzf_layout = { 'window': 'enew' }
+" let g:fzf_layout = { 'window': 'enew' }
 " endif
 
 " Configure completion with deoplete
