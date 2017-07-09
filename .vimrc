@@ -691,7 +691,7 @@ if has("nvim")
   " Disable YCM and enable Deoplete
   let g:loaded_youcompleteme = 1
   let g:deoplete#enable_at_startup = 0
-  let g:deoplete#auto_complete_delay = 5
+  let g:deoplete#auto_complete_delay = 1
   autocmd InsertEnter * call deoplete#enable()
 
   " Configure deoplete so that it uses tabs
