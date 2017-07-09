@@ -1,0 +1,23 @@
+# load additional resource files
+resource braces
+
+# pretty printing options in alphabetical order
+
+key.format = short
+preserve.key.case=on
+preserve.keys=on
+print.align.key=1
+print.align.string=50
+print.align=20
+print.indent=2
+print.line.length=999999
+print.use.tab=off
+print.wide.equal=on
+sort=on
+suppress.initial.newline=on
+verbose=on
+
+
+# print.equal.right = off
+
+rename.field {pages = optpages}
