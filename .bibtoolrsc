@@ -21,8 +21,8 @@ suppress.initial.newline=on
 
 # display of the output
 verbose=on
-count.all=on
-count.used=on
+count.all=off
+count.used=off
 
 # check for double entries, but do not delete
 check.double=on
@@ -33,11 +33,18 @@ rewrite.rule { "^{ *}$" }
 
 # delete the page numbers
 delete.field = {pages}
+delete.field = {organization}
+delete.field = {optorganization}
+delete.field = {OPTorganization}
 
+# delete all society details in conference papers
+rewrite.rule { booktitle # "IEEE " = "" }
+rewrite.rule { booktitle # "ACM " = "" }
 rewrite.rule { booktitle # "IEEE" = "" }
 rewrite.rule { booktitle # "ACM" = "" }
 rewrite.rule { booktitle # "/" = "" }
 
+# delete society details in the journal papers
 rewrite.rule { journal  # "IEEE " = "" }
 rewrite.rule { journal  # "ACM " = "" }
 rewrite.rule { journal  # "/" = "" }
