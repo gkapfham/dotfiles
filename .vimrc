@@ -631,8 +631,8 @@ let test#strategy = "asyncrun"
 
 " Neovim Display and Configuration {{{
 
-" Use a different cursor shape
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+" Do not use a different cursor shape
+set guicursor=
 
 " Use nvr for remove communication
 if has("nvim")
