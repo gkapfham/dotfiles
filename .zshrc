@@ -15,6 +15,9 @@ export EDITOR="nvim"
 # Large R history
 export R_HISTSIZE="25000"
 
+# BibTeX inputs
+export BIBINPUTS=.
+
 # Shell title
 export DISABLE_AUTO_TITLE=true
 
