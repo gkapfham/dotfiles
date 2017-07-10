@@ -30,11 +30,29 @@ check.double=on
 rewrite.rule {"^\" *\"$"}
 rewrite.rule {"^{ *}$" }
 
-# delete the page numbers
-delete.field = {pages}
+# delete the not-needed attributes
+
+delete.field = {address}
+delete.field = {doi}
+delete.field = {isbn}
+delete.field = {location}
+delete.field = {month}
 delete.field = {organization}
-delete.field = {optorganization}
+delete.field = {pages}
+delete.field = {publisher}
+delete.field = {series}
+delete.field = {url}
+
+delete.field = {OPTaddress}
+delete.field = {OPTdoi}
+delete.field = {OPTisbn}
+delete.field = {OPTlocation}
+delete.field = {OPTmonth}
 delete.field = {OPTorganization}
+delete.field = {OPTpages}
+delete.field = {OPTpublisher}
+delete.field = {OPTseries}
+delete.field = {OPTurl}
 
 # delete all society details in conference papers
 rewrite.rule {booktitle # "IEEE " = ""}
