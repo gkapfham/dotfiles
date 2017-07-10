@@ -53,4 +53,3 @@ rewrite.rule { journal  # "/" = "" }
 
 # sort the attributes in the following fashion (e.g., author first)
 sort.order { * = author # title # booktitle # journal # volume # number # year }
-
