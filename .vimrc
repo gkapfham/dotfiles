@@ -632,7 +632,9 @@ let test#strategy = "asyncrun"
 " Neovim Display and Configuration {{{
 
 " Do not use a different cursor shape
-set guicursor=
+if has("nvim")
+  set guicursor=
+endif
 
 " Use nvr for remove communication
 if has("nvim")
