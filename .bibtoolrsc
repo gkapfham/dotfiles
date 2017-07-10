@@ -51,5 +51,8 @@ rewrite.rule { journal  # "IEEE" = "" }
 rewrite.rule { journal  # "ACM"  = "" }
 rewrite.rule { journal  # "/" = "" }
 
+# remove some of the abbreviated words
+rewrite.rule { journal  # "Trans[\.]" = "Transactions" }
+
 # sort the attributes in the following fashion (e.g., author first)
 sort.order { * = author # title # booktitle # journal # volume # number # year }
