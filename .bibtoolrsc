@@ -38,20 +38,20 @@ delete.field = {optorganization}
 delete.field = {OPTorganization}
 
 # delete all society details in conference papers
-rewrite.rule { booktitle # "IEEE " = "" }
-rewrite.rule { booktitle # "ACM " = "" }
-rewrite.rule { booktitle # "IEEE" = "" }
-rewrite.rule { booktitle # "ACM" = "" }
-rewrite.rule { booktitle # "SIGSOFT " = "" }
-rewrite.rule { booktitle # "SIGSOFT" = "" }
-rewrite.rule { booktitle # "/" = "" }
+rewrite.rule {booktitle # "IEEE " = ""}
+rewrite.rule {booktitle # "ACM " = ""}
+rewrite.rule {booktitle # "IEEE" = ""}
+rewrite.rule {booktitle # "ACM" = ""}
+rewrite.rule {booktitle # "SIGSOFT " = ""}
+rewrite.rule {booktitle # "SIGSOFT" = ""}
+rewrite.rule {booktitle # "/" = ""}
 
 # delete society details in the journal papers
-rewrite.rule { journal  # "IEEE " = "" }
-rewrite.rule { journal  # "ACM " = "" }
-rewrite.rule { journal  # "IEEE" = "" }
-rewrite.rule { journal  # "ACM"  = "" }
-rewrite.rule { journal  # "/" = "" }
+rewrite.rule {journal  # "IEEE " = ""}
+rewrite.rule {journal  # "ACM " = ""}
+rewrite.rule {journal  # "IEEE" = ""}
+rewrite.rule {journal  # "ACM"  = ""}
+rewrite.rule {journal  # "/" = ""}
 
 # remove some of the abbreviated words
 rewrite.rule { journal  # "Trans[\.] on" = "Transactions on" }
