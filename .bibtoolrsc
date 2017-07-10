@@ -47,6 +47,8 @@ rewrite.rule { booktitle # "/" = "" }
 # delete society details in the journal papers
 rewrite.rule { journal  # "IEEE " = "" }
 rewrite.rule { journal  # "ACM " = "" }
+rewrite.rule { journal  # "IEEE" = "" }
+rewrite.rule { journal  # "ACM"  = "" }
 rewrite.rule { journal  # "/" = "" }
 
 # sort the attributes in the following fashion (e.g., author first)
