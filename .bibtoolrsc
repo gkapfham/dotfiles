@@ -17,7 +17,22 @@ sort=on
 suppress.initial.newline=on
 verbose=on
 
+count.all=on
+count.used=on
 
-# print.equal.right = off
+check.double=on
+
+rewrite.rule { "^\" *\"$"}
+rewrite.rule { "^{ *}$" }
+
+rewrite.rule { booktitle # "IEEE" = "" }
+rewrite.rule { booktitle # "ACM" = "" }
+rewrite.rule { booktitle # "/" = "" }
+
+rewrite.rule { journal  # "IEEE " = "" }
+rewrite.rule { journal  # "ACM " = "" }
+rewrite.rule { journal  # "/" = "" }
+
+sort.order { * = author # title # booktitle # journal # volume # number # year }
 
 rename.field {pages = optpages}
