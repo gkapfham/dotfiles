@@ -32,7 +32,6 @@ rewrite.rule { "^\" *\"$"}
 rewrite.rule { "^{ *}$" }
 
 # delete the page numbers
-# rename.field {pages = optpages}
 delete.field = {pages}
 
 rewrite.rule { booktitle # "IEEE" = "" }
