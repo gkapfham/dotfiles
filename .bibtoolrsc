@@ -28,8 +28,8 @@ count.used=off
 check.double=on
 
 # delete attributes will null values
-rewrite.rule { "^\" *\"$"}
-rewrite.rule { "^{ *}$" }
+rewrite.rule {"^\" *\"$"}
+rewrite.rule {"^{ *}$" }
 
 # delete the page numbers
 delete.field = {pages}
