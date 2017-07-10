@@ -1,11 +1,15 @@
 # load additional resource files
 resource braces
 
-# pretty printing options in alphabetical order
+# sort all of the entries by key
+sort=on
 
+# preserve the key formatting
 key.format = short
 preserve.key.case=on
 preserve.keys=on
+
+# pretty printing of the output
 print.align.key=1
 print.align.string=50
 print.align=20
@@ -13,17 +17,23 @@ print.indent=2
 print.line.length=999999
 print.use.tab=off
 print.wide.equal=on
-sort=on
 suppress.initial.newline=on
-verbose=on
 
+# display of the output
+verbose=on
 count.all=on
 count.used=on
 
+# check for double entries, but do not delete
 check.double=on
 
+# delete attributes will null values
 rewrite.rule { "^\" *\"$"}
 rewrite.rule { "^{ *}$" }
+
+# delete the page numbers
+# rename.field {pages = optpages}
+delete.field = {pages}
 
 rewrite.rule { booktitle # "IEEE" = "" }
 rewrite.rule { booktitle # "ACM" = "" }
@@ -33,6 +43,6 @@ rewrite.rule { journal  # "IEEE " = "" }
 rewrite.rule { journal  # "ACM " = "" }
 rewrite.rule { journal  # "/" = "" }
 
+# sort the attributes in the following fashion (e.g., author first)
 sort.order { * = author # title # booktitle # journal # volume # number # year }
 
-rename.field {pages = optpages}
