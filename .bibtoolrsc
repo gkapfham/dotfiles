@@ -30,24 +30,28 @@ check.double=on
 rewrite.rule {"^\" *\"$"}
 rewrite.rule {"^{ *}$" }
 
-# delete the not-needed attributes
-
+# delete the not-needed attributes (full name)
+delete.field = {acmid}
 delete.field = {address}
 delete.field = {doi}
 delete.field = {isbn}
 delete.field = {location}
 delete.field = {month}
+delete.field = {numpages}
 delete.field = {organization}
 delete.field = {pages}
 delete.field = {publisher}
 delete.field = {series}
 delete.field = {url}
 
+# delete the not-needed attributes (full name with OPT)
+delete.field = {OPTacmid}
 delete.field = {OPTaddress}
 delete.field = {OPTdoi}
 delete.field = {OPTisbn}
 delete.field = {OPTlocation}
 delete.field = {OPTmonth}
+delete.field = {OPTnumpages}
 delete.field = {OPTorganization}
 delete.field = {OPTpages}
 delete.field = {OPTpublisher}
