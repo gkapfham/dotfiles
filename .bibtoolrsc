@@ -11,8 +11,7 @@ preserve.keys=on
 
 # pretty printing of the output
 print.align.key=1
-print.align.string=50
-print.align=20
+print.align=17
 print.indent=2
 print.line.length=999999
 print.use.tab=off
