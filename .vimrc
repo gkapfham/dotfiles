@@ -667,26 +667,26 @@ if has("nvim")
 endif
 
 " " Control FZF windows
-" if has("nvim")
-" command! FZFMru call fzf#run({
-" \  'source':  v:oldfiles,
-" \  'sink':    'e',
-" \  'options': '-m -x +s --no-bold --cycle',
-" \  'down':    '10%',
-" \  'window':  'enew'})
-" command! FZFHidden call fzf#run({
-" \  'source':  'ag --hidden --ignore .git -l -g ""',
-" \  'sink':    'e',
-" \  'options': '-m -x +s --no-bold --cycle',
-" \  'window':  'enew'})
-" command! -bang FZFMine call fzf#run({
-" \  'source':  'ag --ignore .git -l -g ""',
-" \  'sink':    'e',
-" \  'options': '-m -x +s --no-bold --cycle',
-" \  'down':    '100%',
-" \  'window':  'enew'})
-" let g:fzf_layout = { 'window': 'enew' }
-" endif
+if has("nvim")
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '-m -x +s --no-bold --cycle',
+\  'down':    '10%',
+\  'window':  'enew'})
+command! FZFHidden call fzf#run({
+\  'source':  'ag --hidden --ignore .git -l -g ""',
+\  'sink':    'e',
+\  'options': '-m -x +s --no-bold --cycle',
+\  'window':  'enew'})
+command! -bang FZFMine call fzf#run({
+\  'source':  'ag --ignore .git -l -g ""',
+\  'sink':    'e',
+\  'options': '-m -x +s --no-bold --cycle',
+\  'down':    '100%',
+\  'window':  'enew'})
+let g:fzf_layout = { 'window': 'enew' }
+endif
 
 " Configure completion with deoplete
 if has("nvim")
