@@ -58,6 +58,9 @@ delete.field = {OPTpublisher}
 delete.field = {OPTseries}
 delete.field = {OPTurl}
 
+# delete the OPTnote but not the note field
+delete.field = {OPTnote}
+
 # delete all society details in conference papers
 rewrite.rule {booktitle # "IEEE " = ""}
 rewrite.rule {booktitle # "ACM " = ""}
