@@ -13,6 +13,10 @@ set editor="nvim"
 # edit the emails in a local tmp/ directory, thus ensuring that I do not lose work when computer crashes
 set tmpdir="/home/gkapfham/.mutt/tmp"
 
+# explicitly specify the mailboxes, helps with stability
+mailboxes +INBOX +archive +sent +drafts +spam +trash
+
+# make it possible to edit the headers in the (n)vim
 set edit_headers=yes
 
 # color   error        brightwhite            default
