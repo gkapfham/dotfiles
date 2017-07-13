@@ -40,6 +40,9 @@ alias mupdf="mupdf -r 288"
 # Htop
 alias htop="htop -C"
 
+# IPython
+alias ipython="ipython --TerminalInteractiveShell.editing_mode=vi"
+
 # }}}
 
 # Oh-My-Zsh and Plugins {{{
