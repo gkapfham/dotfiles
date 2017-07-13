@@ -583,14 +583,15 @@ command! FZFMine call fzf#run({
 \  'down':    '25%'})
 
 " Define key combinations
+
+" nmap <C-g> :BTags <CR>
+" nmap <C-g> :Tags <CR>
+" nmap <C-i> :Tags <C-R><C-W><CR>
+" nmap <C-u> :FZFMru<CR>
 nmap <C-h> :FZFHidden<CR>
 nmap <C-p> :FZFMine<CR>
-" nmap <C-i> :Tags <C-R><C-W><CR>
-" nmap <C-g> :Tags <CR>
 nmap <Space>g :Tags <CR>
-" nmap <C-g> :BTags <CR>
 nmap <Space>t :BTags <CR>
-" nmap <C-u> :FZFMru<CR>
 nnoremap <Tab> :Buffers<Cr>
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 
