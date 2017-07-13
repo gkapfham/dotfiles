@@ -443,6 +443,12 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " Format a paragraph quickly
 nmap fp gqip
 
+" Quickly switch between two recent buffers
+function SwitchBuffer()
+  b#
+endfunction
+nmap <C-u> :call SwitchBuffer()<CR>
+
 " }}}
 
 " Advanced Keyboard Movement with incsearch {{{
@@ -584,7 +590,7 @@ nmap <C-p> :FZFMine<CR>
 nmap <Space>g :Tags <CR>
 " nmap <C-g> :BTags <CR>
 nmap <Space>t :BTags <CR>
-nmap <C-u> :FZFMru<CR>
+" nmap <C-u> :FZFMru<CR>
 nnoremap <Tab> :Buffers<Cr>
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 
