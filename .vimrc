@@ -444,7 +444,7 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nmap fp gqip
 
 " Quickly switch between two recent buffers
-function SwitchBuffer()
+function! SwitchBuffer()
   b#
 endfunction
 nmap <C-u> :call SwitchBuffer()<CR>
