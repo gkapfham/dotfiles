@@ -16,13 +16,13 @@ Plug 'Valloric/MatchTagAlways', {'for': ['html', 'md', 'liquid']}
 Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
-Plug 'artur-shaik/vim-javacomplete2'
+Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
 Plug 'benmills/vimux'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'christoomey/vim-sort-motion'
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 Plug 'garbas/vim-snipmate'
@@ -66,10 +66,10 @@ Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
-Plug 'whatyouhide/vim-textobj-xmlattr'
+Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
-Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
