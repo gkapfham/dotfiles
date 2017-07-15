@@ -2,13 +2,11 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins', 'on': []}
 " Plug 'gilligan/textobj-gitgutter'
 " Plug 'kassio/neoterm'
-" Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/echodoc.vim'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
@@ -152,7 +150,7 @@ set nocursorline
 set ttyfast
 
 " Syntax highlight the first 200 characters
-command! FastSyntax set synmaxcol=200
+" command! FastSyntax set synmaxcol=200
 
 " Display linebreaks and tabs
 set linebreak
