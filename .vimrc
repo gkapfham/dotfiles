@@ -2,6 +2,7 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'benmills/vimux'
 " Plug 'gilligan/textobj-gitgutter'
 " Plug 'kassio/neoterm'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -15,7 +16,6 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
-Plug 'benmills/vimux'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
@@ -618,6 +618,7 @@ augroup END
 vmap <C-c><C-c> <Plug>SendSelectionToTmux
 nmap <C-c><C-c> <Plug>NormalModeSendToTmux
 nmap <C-c>r <Plug>SetTmuxVars
+let g:tslime_always_current_session = 1
 
 " }}}
 
