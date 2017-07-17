@@ -1,4 +1,4 @@
-# Sven's draconian header weeding
+# ignore many header entries and then only display some
 ignore *
 unignore from date subject to cc
 unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
@@ -8,6 +8,7 @@ unignore posted-to:
 set text_flowed=yes
 
 # use my standard configuration of vim that is used for all of text editing
+# jump to the first blank link when editing the emails; skip the header
 set editor="nvim +/^$ ++1"
 # set editor="nvim"
 
@@ -17,20 +18,23 @@ set tmpdir="/home/gkapfham/.mutt/tmp"
 # explicitly specify the mailboxes to display in the sidebar
 mailboxes imaps://imap.gmail.com:993/INBOX imaps://imap.gmail.com:993/advise2017 imaps://imap.gmail.com:993/avmf imaps://imap.gmail.com:993/chair2017 imaps://imap.gmail.com:993/dbtest imaps://imap.gmail.com:993/kanonizo imaps://imap.gmail.com:993/redecheck imaps://imap.gmail.com:993/research imaps://imap.gmail.com:993/reviews2017
 
+# display the sidebar and show stats about each of the mailboxes
 set sidebar_visible
 set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
 set mail_check_stats
 
+# configure navigation for the sidebar
 bind index,pager \cp sidebar-prev
 bind index,pager \cn sidebar-next
 bind index,pager \co sidebar-open
 
+# check to see if there is a missing attachment
 set abort_noattach="ask-yes"
 
 # make it possible to edit the headers in the (n)vim
 set edit_headers=yes
 
-# Mutt Colors for Black Background
+# mutt colors for dark background
 color   hdrdefault   color172               default
 color   quoted       color13                default
 color   signature    color3                 default
