@@ -103,7 +103,6 @@ set timeout=5    # mutt 'presses' (like) a key for you (while you're idle)
                   # each x sec to trigger the thing below
 set mail_check=5  # mutt checks for new mails on every keystroke
                   # but not more often then once in 5 seconds
-set beep_new      # beep on new messages in the mailboxes
 
 # use an aliases file to automatically save all of email addresses of emails that I read
 set alias_file = '~/.mutt/aliases.txt'
