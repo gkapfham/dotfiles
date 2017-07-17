@@ -21,6 +21,9 @@ export BIBINPUTS=.
 # Shell title
 export DISABLE_AUTO_TITLE=true
 
+# Set the browser to Firefox
+export BROWSER=/usr/bin/firefox
+
 # Path
 export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/gkapfham/.git-radar/"
 
