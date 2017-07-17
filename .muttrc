@@ -121,41 +121,65 @@ macro index gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
 macro index gt "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
 macro index go "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to outbox"
 
-# macro index ^n "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to drafts"
-# macro index ^d "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
-# macro index ^i "<change-folder>=INBOX<enter>" "Go to inbox"
-# macro index ^s "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
-# macro index ^t "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
+bind generic z  noop
+bind generic zt current-top
+bind generic zz current-middle
+bind generic zb current-bottom
+bind index   za collapse-thread
+bind index   zA collapse-all
 
-# macro index,pager d "<save-message>=[Gmail]/Trash<enter><enter>" "Trash"
-# macro index,pager y "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive"
+# bind index,pager        s noop
+# bind index,pager        c noop
+# bind generic,pager      t noop
 
-# set up a group reply key binding to make it easy to reply-all (I use this a lot)
-bind index G group-reply
+bind generic,index,pager \Cf next-page
+bind generic,index,pager \Cb previous-page
+
+bind pager         g  noop
+bind generic       gg first-entry
+bind generic,index G  last-entry
+bind pager         gg top
+bind pager         G  bottom
+
+bind generic,index,pager \Cd half-down
+bind generic,index,pager \Cu half-up
+
+bind index n search-next
+bind index p search-opposite
+
+bind index { previous-thread
+bind pager { half-up
+
+bind index } next-thread
+bind pager } half-down
+
+bind  index,pager d   noop
+macro index,pager dd  "<delete-message>" "move message to trash"
+macro index,pager dat "<delete-thread>" "move thread to trash"
+
+bind index,pager u noop
+macro index,pager uu  "<undelete-message>" "undelete a message"
+macro index,pager uat "<undelete-thread>" "undelete a thread"
+
+# allow group reply with R from index and pager
+bind index R group-reply
+bind pager R group-reply
 set followup_to=yes
 
 # install a display_filter so that I can capture all of my email headers for aliases
 set display_filter = '$HOME/.mutt/aliases.sh'
 
-# add features for the goobook; note that you can run this type of query with CTRL-t
-set query_command="goobook query '%s'"
-macro index,pager a "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
-
-#### muttprint:
+# configure muttprint
 set print_command="muttprint"
 set print_split
 
-# Dump all headers
-macro index p "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
-macro pager p "<display-toggle-weed> <print-message> <display-toggle-weed>"
+# dump all headers and then send the mail to the printer
+macro index \Cp "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
+macro pager \Cp "<display-toggle-weed> <print-message> <display-toggle-weed>"
 
-# macro pager \cb <pipe-entry>'w3m'<enter> 'Follow links in w3m'
+# display links in a web site in a compact list, allowing for firefox viewing
 macro index,pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 macro attach,compose \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 
-# macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
-# macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
-# macro index,pager \cB ": unset wait_key; set pipe_decode\n|urlview\n: set wait_key; unset pipe_decode\n" "call w3m to extract URLs out of a message"
-
-# No confirmation before printing
+# no confirmation before printing
 set print="yes"
