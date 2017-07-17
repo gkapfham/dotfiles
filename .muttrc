@@ -169,6 +169,11 @@ bind index,pager u noop
 macro index,pager uu  "<undelete-message>" "undelete a message"
 macro index,pager uat "<undelete-thread>" "undelete a thread"
 
+# define how to tag messages and threads
+bind index,pager t noop
+macro index,pager tt  "<tag-message>" "tag a message"
+macro index,pager tat "<tag-thread>" "tag a thread"
+
 # allow group reply with R from index and pager
 bind index R group-reply
 bind pager R group-reply
@@ -182,8 +187,8 @@ set print_command="muttprint"
 set print_split
 
 # dump all headers and then send the mail to the printer
-macro index \Cp "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
-macro pager \Cp "<display-toggle-weed> <print-message> <display-toggle-weed>"
+macro index \Cr "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
+macro pager \Cr "<display-toggle-weed> <print-message> <display-toggle-weed>"
 
 # display links in a web site in a compact list, allowing for Firefox viewing
 macro index,pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
