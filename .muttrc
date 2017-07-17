@@ -50,11 +50,12 @@ color   search       white                  default
 color   tilde        white                  default
 color   index        color246               default ~F
 color   index        color246               default "~N|~O"
-color progress white color237
+color   progress     white                  color237
 
 #set signature='~/.signature'
 #set post_indent_string="--"       # Footer (after quotes, before signature).
 
+# control the display of parts of the interface
 set mbox_type=Maildir
 set confirmappend=no     # Confirm when appending messages to an existing mailbox?
 set pager_index_lines=12  # Show 5 message headers from your message index above an email you are reading
@@ -63,6 +64,7 @@ set smart_wrap       # Don't wrap mid-word
 set pager_context=5  # Retain 5 lines of previous page when scrolling.
 set pager_stop = yes
 
+# configure the display of entries in the email headers
 set save_name=yes
 my_hdr From: "Gregory M. Kapfhammer" <gkapfham@allegheny.edu>
 my_hdr Bcc: "Gregory M. Kapfhammer" <gkapfham@gmail.com>
@@ -78,7 +80,7 @@ set sort=threads
 set implicit_autoview
 set beep=no
 
-# SSL hardening
+# configure SSL
 set ssl_force_tls=yes
 set ssl_starttls=yes
 set ssl_verify_dates=yes
@@ -90,6 +92,7 @@ set spoolfile = "+INBOX"
 set postponed = "+[Gmail]/Drafts"
 set trash = "+[Google]/Trash"
 
+# configure the logins with GPG decryption for the password
 set my_foo_pass="`gpg --quiet --for-your-eyes-only -d ~/.mutt/password.gpg`"
 set imap_user = "gkapfham@allegheny.edu"
 set imap_pass=$my_foo_pass
@@ -101,21 +104,22 @@ set smtp_url = "smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
 set message_cachedir=~/.mutt/cache/bodies
 set certificate_file=~/.mutt/certificates
 
-set imap_keepalive=100
+# define how frequently mutt tells IMAP server to persist connection
+set imap_keepalive=50
 
-set timeout=5    # mutt 'presses' (like) a key for you (while you're idle)
-                  # each x sec to trigger the thing below
-set mail_check=5  # mutt checks for new mails on every keystroke
-                  # but not more often then once in 5 seconds
+# mutt 'presses' (like) a key for you (while you're idle)
+# each x sec to trigger the thing below
+set timeout=3
+
+# mutt checks for new mails on every keystroke
+# but not more often then once in 5 seconds
+set mail_check=5
 
 # use an aliases file to automatically save all of email addresses of emails that I read
 set alias_file = '~/.mutt/aliases.txt'
 source $alias_file
 
-# Gmail-style keyboard shortcuts
-bind editor <space> noop
-
-# Gmail-style keyboard shortcuts
+# make it easy to switch to common Gmail folders
 bind index g noop
 macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
 macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
@@ -124,42 +128,43 @@ macro index gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
 macro index gt "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
 macro index go "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to outbox"
 
+# support navigation with respect to the current message like done in vim
 bind generic z  noop
 bind generic zt current-top
 bind generic zz current-middle
 bind generic zb current-bottom
-bind index   za collapse-thread
-bind index   zA collapse-all
 
-# bind index,pager        s noop
-# bind index,pager        c noop
-# bind generic,pager      t noop
+# collapse current thread and collapse all of the threads
+bind index za collapse-thread
+bind index zA collapse-all
 
-bind generic,index,pager \Cf next-page
-bind generic,index,pager \Cb previous-page
-
+# define keybindings for navigating to first and lass message
 bind pager         g  noop
 bind generic       gg first-entry
 bind generic,index G  last-entry
 bind pager         gg top
 bind pager         G  bottom
 
+# define keybindings for navigating half up and down the page
 bind generic,index,pager \Cd half-down
 bind generic,index,pager \Cu half-up
 
+# make searching go in both directions
 bind index n search-next
 bind index p search-opposite
 
+# make it easy to navigate around threads
 bind index { previous-thread
 bind pager { half-up
-
 bind index } next-thread
 bind pager } half-down
 
+# define how to delete messages and threads
 bind  index,pager d   noop
 macro index,pager dd  "<delete-message>" "move message to trash"
 macro index,pager dat "<delete-thread>" "move thread to trash"
 
+# define how to undelete messages and threads
 bind index,pager u noop
 macro index,pager uu  "<undelete-message>" "undelete a message"
 macro index,pager uat "<undelete-thread>" "undelete a thread"
@@ -180,7 +185,7 @@ set print_split
 macro index \Cp "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
 macro pager \Cp "<display-toggle-weed> <print-message> <display-toggle-weed>"
 
-# display links in a web site in a compact list, allowing for firefox viewing
+# display links in a web site in a compact list, allowing for Firefox viewing
 macro index,pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 macro attach,compose \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 
