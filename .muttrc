@@ -22,7 +22,7 @@ set record = "imaps://imap.gmail.com:993/[Gmail]/Sent Mail"
 set tmpdir="/home/gkapfham/.mutt/tmp"
 
 # explicitly specify the mailboxes to display in the sidebar
-mailboxes imaps://imap.gmail.com:993/INBOX imaps://imap.gmail.com:993/advise2017 imaps://imap.gmail.com:993/avmf imaps://imap.gmail.com:993/chair2017 imaps://imap.gmail.com:993/dbtest imaps://imap.gmail.com:993/kanonizo imaps://imap.gmail.com:993/redecheck imaps://imap.gmail.com:993/research imaps://imap.gmail.com:993/research2017 imaps://imap.gmail.com:993/reviews2017 "imaps://imap.gmail.com:993/[Gmail]/Drafts" "imaps://imap.gmail.com:993/[Gmail]/Starred" "imaps://imap.gmail.com:993/[Gmail]/Trash" "imaps://imap.gmail.com:993/[Google]/Trash" "imaps://imap.gmail.com:993/[Gmail]/All Mail" "imaps://imap.gmail.com:993/[Gmail]/Sent Mail"
+mailboxes imaps://imap.gmail.com:993/INBOX imaps://imap.gmail.com:993/advise2017 imaps://imap.gmail.com:993/avmf imaps://imap.gmail.com:993/chair2017 imaps://imap.gmail.com:993/dbtest imaps://imap.gmail.com:993/kanonizo imaps://imap.gmail.com:993/redecheck imaps://imap.gmail.com:993/research imaps://imap.gmail.com:993/research2017 imaps://imap.gmail.com:993/reviews2017 "imaps://imap.gmail.com:993/[Gmail]/Drafts" "imaps://imap.gmail.com:993/[Gmail]/Starred" "imaps://imap.gmail.com:993/[Gmail]/Trash" "imaps://imap.gmail.com:993/[Gmail]/All Mail" "imaps://imap.gmail.com:993/[Gmail]/Sent Mail"
 
 # display the sidebar and show stats about each of the mailboxes
 set sidebar_visible
@@ -107,7 +107,7 @@ set ssl_verify_host=yes
 set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
 set postponed = "+[Gmail]/Drafts"
-set trash = "+[Google]/Trash"
+set trash = "+[Gmail]/Trash"
 
 # configure the logins with GPG decryption for the password
 set my_foo_pass="`gpg --quiet --for-your-eyes-only -d ~/.mutt/password.gpg`"
@@ -118,7 +118,7 @@ set smtp_url = "smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
 
 # allow mutt to performing caching as a way to improve performance
 # set header_cache=~/.mutt/cache/headers
-set message_cachedir=~/.mutt/cache/bodies
+# set message_cachedir=~/.mutt/cache/bodies
 set certificate_file=~/.mutt/certificates
 
 # define how frequently mutt tells IMAP server to persist connection
@@ -141,7 +141,7 @@ bind index g noop
 macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
 macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
 macro index gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
-macro index gt "<change-folder>=[Google]/Trash<enter>" "Go to trash"
+macro index gt "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
 macro index go "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to 'Sent Mail'"
 macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
 
