@@ -12,8 +12,11 @@ set text_flowed=yes
 set editor="nvim +/^$ ++1"
 # set editor="nvim"
 
+# ignore spaces in the names of folders
+bind editor <space> noop
+
 # record all of the send messages to Sent Mail on Gmail
-set record = "+[Gmail]/Sent Mail"
+set record = "imaps://imap.gmail.com:993/[Gmail]/Sent Mail"
 
 # edit the emails in a local tmp/ directory, thus ensuring that I do not lose work when computer crashes
 set tmpdir="/home/gkapfham/.mutt/tmp"
@@ -133,8 +136,6 @@ set mail_check=15
 set alias_file = '~/.mutt/aliases.txt'
 source $alias_file
 
-# ignore spaces in the names of folders
-bind editor <space> noop
 
 # make it easy to switch to common Gmail folders
 bind index g noop
