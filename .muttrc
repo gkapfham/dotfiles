@@ -12,16 +12,21 @@ set text_flowed=yes
 set editor="nvim +/^$ ++1"
 # set editor="nvim"
 
+# record all of the send messages to Sent Mail on Gmail
+set record = "+[Gmail]/Sent Mail"
+
 # edit the emails in a local tmp/ directory, thus ensuring that I do not lose work when computer crashes
 set tmpdir="/home/gkapfham/.mutt/tmp"
 
 # explicitly specify the mailboxes to display in the sidebar
-mailboxes imaps://imap.gmail.com:993/INBOX imaps://imap.gmail.com:993/advise2017 imaps://imap.gmail.com:993/avmf imaps://imap.gmail.com:993/chair2017 imaps://imap.gmail.com:993/dbtest imaps://imap.gmail.com:993/kanonizo imaps://imap.gmail.com:993/redecheck imaps://imap.gmail.com:993/research imaps://imap.gmail.com:993/reviews2017
+mailboxes imaps://imap.gmail.com:993/INBOX imaps://imap.gmail.com:993/advise2017 imaps://imap.gmail.com:993/avmf imaps://imap.gmail.com:993/chair2017 imaps://imap.gmail.com:993/dbtest imaps://imap.gmail.com:993/kanonizo imaps://imap.gmail.com:993/redecheck imaps://imap.gmail.com:993/research imaps://imap.gmail.com:993/research2017 imaps://imap.gmail.com:993/reviews2017 "imaps://imap.gmail.com:993/[Gmail]/Drafts" "imaps://imap.gmail.com:993/[Gmail]/Starred" "imaps://imap.gmail.com:993/[Gmail]/Trash" "imaps://imap.gmail.com:993/[Gmail]/All Mail" "imaps://imap.gmail.com:993/[Gmail]/Sent Mail"
 
 # display the sidebar and show stats about each of the mailboxes
 set sidebar_visible
+set sidebar_next_new_wrap
 set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
 set mail_check_stats
+
 
 # configure navigation for the sidebar
 bind index,pager \cp sidebar-prev
@@ -56,7 +61,7 @@ color   progress     white                  color237
 #set post_indent_string="--"       # Footer (after quotes, before signature).
 
 # control the display of parts of the interface
-set mbox_type=Maildir
+# set mbox_type=Maildir
 set confirmappend=no     # Confirm when appending messages to an existing mailbox?
 set pager_index_lines=12  # Show 5 message headers from your message index above an email you are reading
 set markers          # mark wrapped lines of text in the pager with a +
@@ -105,28 +110,34 @@ set message_cachedir=~/.mutt/cache/bodies
 set certificate_file=~/.mutt/certificates
 
 # define how frequently mutt tells IMAP server to persist connection
-set imap_keepalive=50
+set imap_keepalive=500
 
 # mutt 'presses' (like) a key for you (while you're idle)
 # each x sec to trigger the thing below
-set timeout=3
+set timeout=15
 
 # mutt checks for new mails on every keystroke
-# but not more often then once in 5 seconds
-set mail_check=5
+# but not more often than once in 5 seconds
+set mail_check=15
 
 # use an aliases file to automatically save all of email addresses of emails that I read
 set alias_file = '~/.mutt/aliases.txt'
 source $alias_file
 
+# ignore spaces in the names of folders
+bind editor <space> noop
+
 # make it easy to switch to common Gmail folders
 bind index g noop
-macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
 macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
 macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
 macro index gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
 macro index gt "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
-macro index go "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to outbox"
+macro index go "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to 'Sent Mail'"
+macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
+
+# mark a message as starred
+folder-hook +[Gmail]/Starred bind index,pager i flag-message
 
 # support navigation with respect to the current message like done in vim
 bind generic z  noop
@@ -162,7 +173,7 @@ bind pager } half-down
 # define how to delete messages and threads
 bind  index,pager d   noop
 macro index,pager dd  "<delete-message>" "move message to trash"
-macro index,pager dat "<delete-thread>" "move thread to trash"
+macro index,pager dat "<delete-thread>"  "move thread  to trash"
 
 # define how to undelete messages and threads
 bind index,pager u noop
@@ -173,6 +184,8 @@ macro index,pager uat "<undelete-thread>" "undelete a thread"
 bind index,pager t noop
 macro index,pager tt  "<tag-message>" "tag a message"
 macro index,pager tat "<tag-thread>" "tag a thread"
+
+bind index,pager i flag-message #Star a message
 
 # allow group reply with R from index and pager
 bind index R group-reply
