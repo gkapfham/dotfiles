@@ -27,7 +27,6 @@ set sidebar_next_new_wrap
 set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
 set mail_check_stats
 
-
 # configure navigation for the sidebar
 bind index,pager \cp sidebar-prev
 bind index,pager \cn sidebar-next
@@ -62,12 +61,22 @@ color   progress     white                  color237
 
 # control the display of parts of the interface
 # set mbox_type=Maildir
-set confirmappend=no     # Confirm when appending messages to an existing mailbox?
-set pager_index_lines=12  # Show 5 message headers from your message index above an email you are reading
-set markers          # mark wrapped lines of text in the pager with a +
-set smart_wrap       # Don't wrap mid-word
-set pager_context=5  # Retain 5 lines of previous page when scrolling.
+
+# confirm when appending messages to an existing mailbox?
+set confirmappend=no
+
+# show 12 lines above the current message in the pager
+set pager_index_lines=12
+
+# retain 5 lines of previous page when scrolling.
+set pager_context=5
 set pager_stop = yes
+
+# mark wrapped lines of text in the pager with a +
+set markers
+
+# don't wrap mid-word
+set smart_wrap
 
 # configure the display of entries in the email headers
 set save_name=yes
