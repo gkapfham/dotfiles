@@ -136,7 +136,6 @@ set mail_check=15
 set alias_file = '~/.mutt/aliases.txt'
 source $alias_file
 
-
 # make it easy to switch to common Gmail folders
 bind index g noop
 macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
@@ -146,8 +145,8 @@ macro index gt "<change-folder>=[Google]/Trash<enter>" "Go to trash"
 macro index go "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to 'Sent Mail'"
 macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
 
-# mark a message as starred
-folder-hook +[Gmail]/Starred bind index,pager i flag-message
+# make it possible to move a message (helps for deleting not-needed drafts)
+bind index,pager v save-message
 
 # support navigation with respect to the current message like done in vim
 bind generic z  noop
