@@ -30,6 +30,9 @@ export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.fzf/bin:/home/gkapfham/.
 # No Java tools
 unset JAVA_TOOL_OPTIONS
 
+# Get correct spacing in python virtualenv_prompt_info
+export ZSH_THEME_VIRTUALENV_SUFFIX="] "
+
 # }}}
 
 # Aliases {{{
@@ -64,7 +67,7 @@ HIST_STAMPS="mm/dd/yyyy"
 
 # Plugins
 # plugins=(git git-extras gpg-agent ant sudo fasd tmux tmuxinator vi-mode zsh_reload)
-plugins=(colored-man-pages fasd git git-extras tmux tmuxinator vi-mode )
+plugins=(colored-man-pages fasd git git-extras tmux tmuxinator vi-mode virtualenv)
 source /home/gkapfham/.oh-my-zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $ZSH/oh-my-zsh.sh
 
