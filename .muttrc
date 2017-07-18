@@ -221,4 +221,4 @@ macro index,pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 macro attach,compose \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 
 # no confirmation before printing
-set print="yes"
+set print=yes
