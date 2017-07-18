@@ -186,6 +186,11 @@ celerybeat-schedule
 .venv/
 venv/
 ENV/
+bin/
+share/
+lib64
+pip-selfcheck.json
+pyvenv.cfg
 
 # R #
 ######################
