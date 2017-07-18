@@ -46,6 +46,9 @@ alias htop="htop -C"
 # IPython
 alias ipython="ipython --TerminalInteractiveShell.editing_mode=vi"
 
+# Twitter
+alias twitter="/usr/local/bin/t"
+
 # }}}
 
 # Oh-My-Zsh and Plugins {{{
