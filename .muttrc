@@ -106,7 +106,11 @@ set ssl_verify_host=yes
 # set up the imap settings for my INBOX and my Gmail folders
 set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
+
+# track postponed messages in the Gmail Drafts
 set postponed = "+[Gmail]/Drafts"
+
+# set up the trash, which is deleted on Gmail after 30 days
 set trash = "+[Gmail]/Trash"
 
 # configure the logins with GPG decryption for the password
@@ -117,19 +121,20 @@ set smtp_pass=$my_foo_pass
 set smtp_url = "smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
 
 # allow mutt to performing caching as a way to improve performance
+# NOTE: commented out as it seems to limit stability
 # set header_cache=~/.mutt/cache/headers
 # set message_cachedir=~/.mutt/cache/bodies
+
+# set the certificates used for communication
 set certificate_file=~/.mutt/certificates
 
 # define how frequently mutt tells IMAP server to persist connection
 set imap_keepalive=500
 
-# mutt 'presses' (like) a key for you (while you're idle)
-# each x sec to trigger the thing below
+# poll the current mailbox every 15 seconds
 set timeout=15
 
-# mutt checks for new mails on every keystroke
-# but not more often than once in 5 seconds
+# check for new mail every 15 seconds
 set mail_check=15
 
 # use an aliases file to automatically save all of email addresses of emails that I read
