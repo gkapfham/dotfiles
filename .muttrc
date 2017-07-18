@@ -150,9 +150,6 @@ macro index gt "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
 macro index go "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to 'Sent Mail'"
 macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
 
-# # make it possible to move a message (helps for deleting not-needed drafts)
-# bind index,pager v save-message
-
 # support navigation with respect to the current message like done in vim
 bind generic z  noop
 bind generic zt current-top
