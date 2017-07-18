@@ -195,7 +195,11 @@ bind index,pager t noop
 macro index,pager tt  "<tag-message>" "tag a message"
 macro index,pager tat "<tag-thread>" "tag a thread"
 
-bind index,pager i flag-message #Star a message
+# mark a message as starred
+folder-hook +[Gmail]/Starred bind index,pager i flag-message
+
+# star a message
+bind index,pager i flag-message
 
 # allow group reply with R from index and pager
 bind index R group-reply
