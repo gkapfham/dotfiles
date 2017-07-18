@@ -182,7 +182,7 @@ bind pager } half-down
 # define how to delete messages and threads
 bind  index,pager d   noop
 macro index,pager dd  "<delete-message>" "move message to trash"
-macro index,pager dat "<delete-thread>"  "move thread  to trash"
+macro index,pager dat "<delete-thread>"  "move thread to trash"
 
 # define how to undelete messages and threads
 bind index,pager u noop
