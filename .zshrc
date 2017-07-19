@@ -1,7 +1,7 @@
 # Exports {{{
 
 # 256 color mode with bold and italics
-export TERM="tmux-256color"
+export TERM="xterm-256color"
 
 # Character encoding
 export LANG="en_US.UTF-8"
