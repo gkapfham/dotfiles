@@ -16,6 +16,14 @@
 --regex-latex=/\\ref[[:space:]]*\{([^}]+)\}/\1/r,ref/
 --regex-latex=/\\pageref[[:space:]]*\{([^}]+)\}/\1/p,pageref/
 --regex-make=/^([^:# \t]+)[ \t]*[:]{1,2}/\1/t,targets/
+--langdef=bib
+--langmap=bib:.bib
+--regex-bib=/^@[A-Za-z]+\{([^,]*)/\1/b,bib/
+--langdef=bibtex
+--langmap=bibtex:.bib
+--regex-bibtex=/@string\{([^ "#%')(,=}{]+)/\1/s,BibTeX-Strings/i
+--regex-bibtex=/@(article|book|booklet|inbook|incollection|inproceedings|manual|masterthesis|misc|phdthesis|proceedings|techreport|unpublished)\{([^,]+),/\2/e,BibTeX-Entries/i
+--regex-bibtex=/[[:space:]]*author[[:space:]]*=[[:space:]]*("([^"]+)"|\{([^\}]+)\})[[:space:]]*,?[[:space:]]*$/\2\3/a,BibTeX-Authors/i
 --langdef=R
 --langmap=r:.R.r
 --regex-R=/^[ \t]*"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*=[ \t]function/\1/f,Functions/
