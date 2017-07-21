@@ -2,9 +2,6 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'benmills/vimux'
-" Plug 'gilligan/textobj-gitgutter'
-" Plug 'kassio/neoterm'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
