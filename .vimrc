@@ -65,6 +65,7 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'kassio/neoterm'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -628,7 +629,7 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 
 " Run the test suite async and display in quickfix
-let test#strategy = "asyncrun"
+let test#strategy = "tslime"
 
 " }}}
 
