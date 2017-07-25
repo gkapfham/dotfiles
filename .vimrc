@@ -669,7 +669,7 @@ if has("nvim")
   augroup END
 endif
 
-" " Control FZF windows
+" Control FZF windows
 if has("nvim")
 command! FZFMru call fzf#run({
 \  'source':  v:oldfiles,
