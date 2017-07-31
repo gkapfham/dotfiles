@@ -2,7 +2,9 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'kassio/neoterm'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'Chiel92/vim-autoformat'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/echodoc.vim'
@@ -65,7 +67,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'kassio/neoterm'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -290,6 +291,8 @@ let R_show_args = 1
 
 " Force jedi to use version 3
 let g:jedi#force_py_version = 3
+
+let g:formatter_yapf_style = 'google'
 
 " Indenting for HTML
 au BufRead,BufNewFile *.html set filetype=html
