@@ -292,6 +292,7 @@ let R_show_args = 1
 " Force jedi to use version 3
 let g:jedi#force_py_version = 3
 
+" Format Python code according to Google's standard
 let g:formatter_yapf_style = 'google'
 
 " Indenting for HTML
