@@ -226,6 +226,7 @@ set signcolumn=yes
 " Use a different symbol in the gutter
 let g:gitgutter_sign_removed_first_line = '^'
 
+" Configure the display of parentheses matching
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
 let g:mta_filetypes = {
