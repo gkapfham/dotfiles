@@ -261,22 +261,32 @@ let g:easytags_async = 1
 
 " Programming Languages {{{
 
-" Automatically identify the filetype for the plugins and always use syntax highlighting
+" Automatically identify the filetype for the plugins
+" and always use syntax highlighting
 filetype indent plugin on | syn on
 
-" Set the completion function for a variety of different file types
+" Configure settings for different file types
 augroup configurationgroupforfiletypes
   autocmd!
+
+  " Set the completion function for different file types
   autocmd FileType css set omnifunc=csscomplete#CompleteCSS
   autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
   autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
   autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
   autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+  " Enable spellcheck for the git commit messages
   autocmd FileType gitcommit setlocal spell
+
+  " Configuration for Java programming filetype
   autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
   autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+
+  " Configuration for Python programming language
   autocmd Filetype python setlocal softtabstop=4
   autocmd Filetype python setlocal shiftwidth=4
+
 augroup END
 
 " Syntax highlighting for Java
