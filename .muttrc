@@ -1,63 +1,63 @@
-# Ignore many header entries and then only display some
+# ignore many header entries and then only display some
 ignore *
 unignore from date subject to cc
 unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
 unignore posted-to:
 
-# Set all of our emails to have flowing text, accommodating for mobile devices
+# set all of our emails to have flowing text, accommodating for mobile devices
 set text_flowed=yes
 
-# Use my standard configuration of Neovim that is used for all of text editing
+# use my standard configuration of vim that is used for all of text editing
 # jump to the first blank link when editing the emails; skip the header
 set editor="nvim +/^$ ++1"
 # set editor="nvim"
 
-# Ignore spaces in the names of folders
+# ignore spaces in the names of folders
 bind editor <space> noop
 
-# Record all of the send messages to Sent Mail on Gmail
+# record all of the send messages to Sent Mail on Gmail
 set record = "imaps://imap.gmail.com:993/[Gmail]/Sent Mail"
 
-# Edit the emails in a local tmp/ directory, thus ensuring that I do not lose work when computer crashes
+# edit the emails in a local tmp/ directory, thus ensuring that I do not lose work when computer crashes
 set tmpdir="/home/gkapfham/.mutt/tmp"
 
-# Explicitly specify the mailboxes to display in the sidebar
+# explicitly specify the mailboxes to display in the sidebar
 mailboxes imaps://imap.gmail.com:993/INBOX imaps://imap.gmail.com:993/advise2017 imaps://imap.gmail.com:993/avmf imaps://imap.gmail.com:993/chair2017 imaps://imap.gmail.com:993/dbtest imaps://imap.gmail.com:993/kanonizo imaps://imap.gmail.com:993/papers imaps://imap.gmail.com:993/redecheck imaps://imap.gmail.com:993/research imaps://imap.gmail.com:993/research2017 imaps://imap.gmail.com:993/reviews2017 "imaps://imap.gmail.com:993/[Gmail]/Drafts" "imaps://imap.gmail.com:993/[Gmail]/Starred" "imaps://imap.gmail.com:993/[Gmail]/Trash" "imaps://imap.gmail.com:993/[Gmail]/All Mail" "imaps://imap.gmail.com:993/[Gmail]/Sent Mail"
 
-# Display the sidebar and show stats about each of the mailboxes
+# display the sidebar and show stats about each of the mailboxes
 set sidebar_visible
 set sidebar_next_new_wrap
-set sidebar_format = "%b%?f? [%f]?%* %?n?%n/?%s"
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
 set mail_check_stats
 
-# Configure navigation for the sidebar
+# configure navigation for the sidebar
 bind index,pager \cp sidebar-prev
 bind index,pager \cn sidebar-next
 bind index,pager \co sidebar-open
 
-# Check to see if there is a missing attachment
+# check to see if there is a missing attachment
 set abort_noattach="ask-yes"
 
-# Make it possible to edit the headers in the (n)vim
+# make it possible to edit the headers in the (n)vim
 set edit_headers=yes
 
-# Mutt colors for dark background
-color hdrdefault color172 default
-color quoted     color13  default
-color signature  color3   default
-color attachment color12  default
-color message    color246 default
-color error      color246 default
-color indicator  color15  default
-color status     color246 default
-color tree       color8   default
-color normal     color246 default
-color markers    color237 default
-color search     white    default
-color tilde      white    default
-color index      color246 default ~F
-color index      color246 default "~N|~O"
-color progress   white    color237
+# mutt colors for dark background
+color   hdrdefault   color172               default
+color   quoted       color13                default
+color   signature    color3                 default
+color   attachment   color12                default
+color   message      color246               default
+color   error        color246               default
+color   indicator    color15                default
+color   status       color246               default
+color   tree         color8                 default
+color   normal       color246               default
+color   markers      color237               default
+color   search       white                  default
+color   tilde        white                  default
+color   index        color246               default ~F
+color   index        color246               default "~N|~O"
+color   progress     white                  color237
 
 #set signature='~/.signature'
 #set post_indent_string="--"       # Footer (after quotes, before signature).
@@ -65,23 +65,23 @@ color progress   white    color237
 # control the display of parts of the interface
 # set mbox_type=Maildir
 
-# Confirm when appending messages to an existing mailbox?
+# confirm when appending messages to an existing mailbox?
 set confirmappend=no
 
-# Show 12 lines above the current message in the pager
+# show 12 lines above the current message in the pager
 set pager_index_lines=12
 
-# Retain 5 lines of previous page when scrolling.
+# retain 5 lines of previous page when scrolling.
 set pager_context=5
-set pager_stop=yes
+set pager_stop = yes
 
-# Mark wrapped lines of text in the pager with a +
+# mark wrapped lines of text in the pager with a +
 set markers
 
-# Don't wrap mid-word
+# don't wrap mid-word
 set smart_wrap
 
-# Configure the display of entries in the email headers
+# configure the display of entries in the email headers
 set save_name=yes
 my_hdr From: "Gregory M. Kapfhammer" <gkapfham@allegheny.edu>
 my_hdr Bcc: "Gregory M. Kapfhammer" <gkapfham@gmail.com>
@@ -89,63 +89,66 @@ hdr_order From Date: From: To: Cc: Subject:
 set move=no
 auto_view text/html text/enriched application/postscript image/gif
 
-# Quote msg when replying
+# quote msg when replying
 set include
 
-# Display the sort order
+# display the sort order
 set sort=threads
 set implicit_autoview
 set beep=no
 
-# Configure SSL
+# configure SSL
 set ssl_force_tls=yes
 set ssl_starttls=yes
 set ssl_verify_dates=yes
 set ssl_verify_host=yes
 
-# Set up the imap settings for my INBOX and my Gmail folders
-set folder="imaps://imap.gmail.com:993"
-set spoolfile="+INBOX"
+# set up the imap settings for my INBOX and my Gmail folders
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
 
-# Track postponed messages in the Gmail Drafts
-set postponed="+[Gmail]/Drafts"
+# track postponed messages in the Gmail Drafts
+set postponed = "+[Gmail]/Drafts"
 
-# Set up the trash, which is deleted on Gmail after 30 days
-set trash="+[Gmail]/Trash"
+# set up the trash, which is deleted on Gmail after 30 days
+set trash = "+[Gmail]/Trash"
 
-# Configure the logins with GPG decryption for the password
+# configure the logins with GPG decryption for the password
 set my_foo_pass="`gpg --quiet --for-your-eyes-only -d ~/.mutt/password.gpg`"
-set imap_user="gkapfham@allegheny.edu"
+set imap_user = "gkapfham@allegheny.edu"
 set imap_pass=$my_foo_pass
 set smtp_pass=$my_foo_pass
-set smtp_url="smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
+set smtp_url = "smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
 
 # allow mutt to performing caching as a way to improve performance
 # NOTE: commented out as it seems to limit stability
 # set header_cache=~/.mutt/cache/headers
 # set message_cachedir=~/.mutt/cache/bodies
 
-# Set the certificates used for communication
+# set the certificates used for communication
 set certificate_file=~/.mutt/certificates
 
-# Set the depth of the imap operation pipeline (normally 15)
+# unset imap_passive
+# unset imap_peek
+
+# set the depth of the imap operation pipeline (normally 15)
 # setting the value to 0 makes mutt slower, but more reliable, maybe
 set imap_pipeline_depth=10
 
-# Define how frequently mutt tells IMAP server to persist connection
+# define how frequently mutt tells IMAP server to persist connection
 set imap_keepalive=300
 
-# Poll the current mailbox every 15 seconds
+# poll the current mailbox every 15 seconds
 set timeout=15
 
-# Check for new mail every 15 seconds
+# check for new mail every 15 seconds
 set mail_check=15
 
-# Use an aliases file to automatically save all of email addresses of emails that I read
+# use an aliases file to automatically save all of email addresses of emails that I read
 set alias_file = '~/.mutt/aliases.txt'
 source $alias_file
 
-# Make it easy to switch to common Gmail folders
+# make it easy to switch to common Gmail folders
 bind index g noop
 macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
 macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
@@ -154,77 +157,77 @@ macro index gt "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
 macro index go "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to 'Sent Mail'"
 macro index ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
 
-# Support navigation with respect to the current message like done in vim
+# support navigation with respect to the current message like done in vim
 bind generic z  noop
 bind generic zt current-top
 bind generic zz current-middle
 bind generic zb current-bottom
 
-# Collapse current thread and collapse all of the threads
+# collapse current thread and collapse all of the threads
 bind index za collapse-thread
 bind index zA collapse-all
 
-# Define keybindings for navigating to first and lass message
+# define keybindings for navigating to first and lass message
 bind pager         g  noop
 bind generic       gg first-entry
 bind generic,index G  last-entry
 bind pager         gg top
 bind pager         G  bottom
 
-# Define keybindings for navigating half up and down the page
+# define keybindings for navigating half up and down the page
 bind generic,index,pager \Cd half-down
 bind generic,index,pager \Cu half-up
 
-# Make searching go in both directions
+# make searching go in both directions
 bind index n search-next
 bind index p search-opposite
 
-# Make it easy to navigate around threads
+# make it easy to navigate around threads
 bind index { previous-thread
 bind pager { half-up
 bind index } next-thread
 bind pager } half-down
 
-# Define how to delete messages and threads
+# define how to delete messages and threads
 bind  index,pager d   noop
 macro index,pager dd  "<delete-message>" "move message to trash"
 macro index,pager dat "<delete-thread>"  "move thread to trash"
 
-# Define how to undelete messages and threads
+# define how to undelete messages and threads
 bind index,pager u noop
 macro index,pager uu  "<undelete-message>" "undelete a message"
 macro index,pager uat "<undelete-thread>" "undelete a thread"
 
-# Define how to tag messages and threads
+# define how to tag messages and threads
 bind index,pager t noop
 macro index,pager tt  "<tag-message>" "tag a message"
 macro index,pager tat "<tag-thread>" "tag a thread"
 
-# Mark a message as starred
+# mark a message as starred
 folder-hook +[Gmail]/Starred bind index,pager i flag-message
 
-# Star a message
+# star a message
 bind index,pager i flag-message
 
-# Allow group reply with R from index and pager
+# allow group reply with R from index and pager
 bind index R group-reply
 bind pager R group-reply
 set followup_to=yes
 
-# Install a display_filter so that I can capture all of my email headers for aliases
+# install a display_filter so that I can capture all of my email headers for aliases
 set display_filter = '$HOME/.mutt/aliases.sh'
 
-# Configure muttprint
+# configure muttprint
 set print_command="muttprint"
 set print_split
 
-# Dump all headers and then send the mail to the printer
+# dump all headers and then send the mail to the printer
 macro index \Cr "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
 macro pager \Cr "<display-toggle-weed> <print-message> <display-toggle-weed>"
 
-# Display links in a web site in a compact list, allowing for Firefox viewing
+# display links in a web site in a compact list, allowing for Firefox viewing
 macro index,pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 macro attach,compose \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 
-# No confirmation before printing
+# no confirmation before printing
 set print=yes
