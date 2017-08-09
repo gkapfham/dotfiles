@@ -1,63 +1,63 @@
-# ignore many header entries and then only display some
+# Ignore many header entries and then only display some
 ignore *
 unignore from date subject to cc
 unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
 unignore posted-to:
 
-# set all of our emails to have flowing text, accommodating for mobile devices
+# Set all of our emails to have flowing text, accommodating for mobile devices
 set text_flowed=yes
 
-# use my standard configuration of vim that is used for all of text editing
+# Use my standard configuration of Neovim that is used for all of text editing
 # jump to the first blank link when editing the emails; skip the header
 set editor="nvim +/^$ ++1"
 # set editor="nvim"
 
-# ignore spaces in the names of folders
+# Ignore spaces in the names of folders
 bind editor <space> noop
 
-# record all of the send messages to Sent Mail on Gmail
+# Record all of the send messages to Sent Mail on Gmail
 set record = "imaps://imap.gmail.com:993/[Gmail]/Sent Mail"
 
-# edit the emails in a local tmp/ directory, thus ensuring that I do not lose work when computer crashes
+# Edit the emails in a local tmp/ directory, thus ensuring that I do not lose work when computer crashes
 set tmpdir="/home/gkapfham/.mutt/tmp"
 
-# explicitly specify the mailboxes to display in the sidebar
+# Explicitly specify the mailboxes to display in the sidebar
 mailboxes imaps://imap.gmail.com:993/INBOX imaps://imap.gmail.com:993/advise2017 imaps://imap.gmail.com:993/avmf imaps://imap.gmail.com:993/chair2017 imaps://imap.gmail.com:993/dbtest imaps://imap.gmail.com:993/kanonizo imaps://imap.gmail.com:993/papers imaps://imap.gmail.com:993/redecheck imaps://imap.gmail.com:993/research imaps://imap.gmail.com:993/research2017 imaps://imap.gmail.com:993/reviews2017 "imaps://imap.gmail.com:993/[Gmail]/Drafts" "imaps://imap.gmail.com:993/[Gmail]/Starred" "imaps://imap.gmail.com:993/[Gmail]/Trash" "imaps://imap.gmail.com:993/[Gmail]/All Mail" "imaps://imap.gmail.com:993/[Gmail]/Sent Mail"
 
-# display the sidebar and show stats about each of the mailboxes
+# Display the sidebar and show stats about each of the mailboxes
 set sidebar_visible
 set sidebar_next_new_wrap
-set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_format = "%b%?f? [%f]?%* %?n?%n/?%s"
 set mail_check_stats
 
-# configure navigation for the sidebar
+# Configure navigation for the sidebar
 bind index,pager \cp sidebar-prev
 bind index,pager \cn sidebar-next
 bind index,pager \co sidebar-open
 
-# check to see if there is a missing attachment
+# Check to see if there is a missing attachment
 set abort_noattach="ask-yes"
 
-# make it possible to edit the headers in the (n)vim
+# Make it possible to edit the headers in the (n)vim
 set edit_headers=yes
 
-# mutt colors for dark background
-color   hdrdefault   color172               default
-color   quoted       color13                default
-color   signature    color3                 default
-color   attachment   color12                default
-color   message      color246               default
-color   error        color246               default
-color   indicator    color15                default
-color   status       color246               default
-color   tree         color8                 default
-color   normal       color246               default
-color   markers      color237               default
-color   search       white                  default
-color   tilde        white                  default
-color   index        color246               default ~F
-color   index        color246               default "~N|~O"
-color   progress     white                  color237
+# Mutt colors for dark background
+color hdrdefault color172 default
+color quoted     color13  default
+color signature  color3   default
+color attachment color12  default
+color message    color246 default
+color error      color246 default
+color indicator  color15  default
+color status     color246 default
+color tree       color8   default
+color normal     color246 default
+color markers    color237 default
+color search     white    default
+color tilde      white    default
+color index      color246 default ~F
+color index      color246 default "~N|~O"
+color progress   white    color237
 
 #set signature='~/.signature'
 #set post_indent_string="--"       # Footer (after quotes, before signature).
