@@ -96,9 +96,6 @@ function echo_git() {
 }
 alias eg=echo_git
 
-# Z command for jumping
-# source /home/gkapfham/.oh-my-zsh/plugins/z/z.sh
-
 # FZF in the shell
 source /home/gkapfham/.zsh/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 # source /home/gkapfham/.zsh/fz/fz.plugin.zsh
