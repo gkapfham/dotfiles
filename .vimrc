@@ -332,7 +332,6 @@ let g:ale_linter_aliases = {'mail': 'tex'}
 " LaTeX {{{
 
 " Configure vimtex
-
 let g:vimtex_fold_enabled = 0
 let g:vimtex_quickfix_open_on_warning = 0
 let g:vimtex_index_show_help = 0
