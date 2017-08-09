@@ -595,17 +595,17 @@ command! FZFMine call fzf#run({
 \  'down':    '25%'})
 
 " Define key combinations
-
-" nmap <C-g> :BTags <CR>
-" nmap <C-g> :Tags <CR>
-" nmap <C-i> :Tags <C-R><C-W><CR>
-" nmap <C-u> :FZFMru<CR>
 nmap <C-h> :FZFHidden<CR>
 nmap <C-p> :FZFMine<CR>
 nmap <Space>g :Tags <CR>
 nmap <Space>t :BTags <CR>
 nnoremap <Tab> :Buffers<Cr>
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+
+" nmap <C-g> :BTags <CR>
+" nmap <C-g> :Tags <CR>
+" nmap <C-i> :Tags <C-R><C-W><CR>
+" nmap <C-u> :FZFMru<CR>
 
 " Add in a format string for controlling how FZF git logs
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
@@ -710,7 +710,7 @@ endif
 
 " Configure completion with deoplete
 if has("nvim")
-  " Disable YCM and enable Deoplete
+  " Disable YCM and enable deoplete
   let g:loaded_youcompleteme = 1
   let g:deoplete#enable_at_startup = 0
   let g:deoplete#auto_complete_delay = 1
