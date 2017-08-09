@@ -128,7 +128,7 @@ set nohlsearch
 " Do not display the welcome message
 set shortmess=Ic
 
-" Display colorscheme
+" Display customized colorscheme
 colorscheme orangehybrid
 
 " Display line wraps
