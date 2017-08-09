@@ -66,7 +66,6 @@ ZSH_THEME="norm-gkapfham"
 HIST_STAMPS="mm/dd/yyyy"
 
 # Plugins
-# plugins=(git git-extras gpg-agent ant sudo fasd tmux tmuxinator vi-mode zsh_reload)
 plugins=(colored-man-pages fasd git git-extras tmux tmuxinator vi-mode virtualenv)
 source /home/gkapfham/.oh-my-zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $ZSH/oh-my-zsh.sh
