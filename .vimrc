@@ -84,15 +84,15 @@ set spell spelllang=en_us,en_gb
 set mousemodel=popup
 
 " Disable spell checking in source code
-au BufNewFile,BufRead,BufEnter *.c      set nospell
-au BufNewFile,BufRead,BufEnter *.h      set nospell
-au BufNewFile,BufRead,BufEnter *.cpp    set nospell
-au BufNewFile,BufRead,BufEnter *.hpp    set nospell
-au BufNewFile,BufRead,BufEnter *.java   set nospell
-au BufNewFile,BufRead,BufEnter *.sh     set nospell
-au BufNewFile,BufRead,BufEnter *.xml    set nospell
-au BufNewFile,BufRead,BufEnter *.sql    set nospell
-au BufNewFile,BufRead,BufEnter *.bib    set nospell
+au BufNewFile,BufRead,BufEnter *.c    set nospell
+au BufNewFile,BufRead,BufEnter *.h    set nospell
+au BufNewFile,BufRead,BufEnter *.cpp  set nospell
+au BufNewFile,BufRead,BufEnter *.hpp  set nospell
+au BufNewFile,BufRead,BufEnter *.java set nospell
+au BufNewFile,BufRead,BufEnter *.sh   set nospell
+au BufNewFile,BufRead,BufEnter *.xml  set nospell
+au BufNewFile,BufRead,BufEnter *.sql  set nospell
+au BufNewFile,BufRead,BufEnter *.bib  set nospell
 
 " Ignore these directories
 set wildignore+=*/build/**
