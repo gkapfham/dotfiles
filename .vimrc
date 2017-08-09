@@ -220,8 +220,9 @@ set noshowmode
 let g:gitgutter_async = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
-let g:gitgutter_sign_column_always = 1
+" let g:gitgutter_sign_column_always = 1
 let g:gitgutter_signs = 1
+set signcolumn=yes
 
 " Use a different symbol in the gutter
 let g:gitgutter_sign_removed_first_line = '^'
