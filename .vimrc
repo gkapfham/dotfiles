@@ -247,7 +247,10 @@ map <F5> :call SyntaxAttr()<CR>
 
 " Tags {{{
 
+" Say where the tags are stored
 set tags=./tags;/,tags;/
+
+" Configure easytags
 let g:easytags_ignored_filetypes = ''
 let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
