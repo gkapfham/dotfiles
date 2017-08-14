@@ -128,9 +128,6 @@ set smtp_url = "smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
 # set the certificates used for communication
 set certificate_file=~/.mutt/certificates
 
-# unset imap_passive
-# unset imap_peek
-
 # set the depth of the imap operation pipeline (normally 15)
 # setting the value to 0 makes mutt slower, but more reliable, maybe
 set imap_pipeline_depth=10
