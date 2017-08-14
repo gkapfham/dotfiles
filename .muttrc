@@ -62,9 +62,6 @@ color   progress     white                  color237
 #set signature='~/.signature'
 #set post_indent_string="--"       # Footer (after quotes, before signature).
 
-# control the display of parts of the interface
-# set mbox_type=Maildir
-
 # Confirm when appending messages to an existing mailbox?
 set confirmappend=no
 
