@@ -59,9 +59,6 @@ color   index        color246               default ~F
 color   index        color246               default "~N|~O"
 color   progress     white                  color237
 
-#set signature='~/.signature'
-#set post_indent_string="--"       # Footer (after quotes, before signature).
-
 # Confirm when appending messages to an existing mailbox?
 set confirmappend=no
 
