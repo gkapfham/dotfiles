@@ -189,3 +189,6 @@ usage() {
 }
 
 # }}}
+
+# added by travis gem
+[ -f /home/gkapfham/.travis/travis.sh ] && source /home/gkapfham/.travis/travis.sh
