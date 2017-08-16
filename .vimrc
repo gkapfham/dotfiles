@@ -53,12 +53,12 @@ Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
 Plug 'ujihisa/neco-look'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/SyntaxAttr.vim'
-Plug 'bps/vim-textobj-python.git', {'for': 'python'}
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
@@ -246,6 +246,23 @@ map <F5> :call SyntaxAttr()<CR>
 
 " }}}
 
+" Folding {{{
+
+function! FancyFoldText()
+    let line = getline(v:foldstart)
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . ' … ' . repeat(" ",fillcharcount-8) . foldedlinecount . ' lines…' . ' '
+endfunction
+set foldtext=FancyFoldText()
+
+" }}}
+
 " Tags {{{
 
 " Say where the tags are stored
@@ -287,6 +304,7 @@ augroup configurationgroupforfiletypes
   " Configuration for Python programming language
   autocmd Filetype python setlocal softtabstop=4
   autocmd Filetype python setlocal shiftwidth=4
+  autocmd FileType python BracelessEnable +indent +fold +highlight-cc
 
 augroup END
 
