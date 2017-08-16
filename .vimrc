@@ -304,7 +304,7 @@ augroup configurationgroupforfiletypes
   " Configuration for Python programming language
   autocmd Filetype python setlocal softtabstop=4
   autocmd Filetype python setlocal shiftwidth=4
-  autocmd FileType python BracelessEnable +indent +fold +highlight-cc
+  autocmd FileType python BracelessEnable +fold +highlight-cc
 
 augroup END
 
