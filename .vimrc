@@ -325,7 +325,7 @@ let R_show_args = 1
 let g:jedi#force_py_version = 3
 
 " Format Python code according to Google's standard
-let g:formatter_yapf_style = 'google'
+let g:formatter_yapf_style = 'pep8'
 
 " Indenting for HTML
 au BufRead,BufNewFile *.html set filetype=html
