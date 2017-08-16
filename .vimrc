@@ -58,6 +58,7 @@ Plug 'ujihisa/neco-look'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/SyntaxAttr.vim'
+Plug 'bps/vim-textobj-python.git', {'for': 'python'}
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
