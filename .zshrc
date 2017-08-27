@@ -97,7 +97,7 @@ function echo_git() {
 alias eg=echo_git
 
 # FZF in the shell
-source /home/gkapfham/.zsh/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+# source /home/gkapfham/.zsh/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
 # source /home/gkapfham/.zsh/fz/fz.plugin.zsh
 
 # Autosuggestions
