@@ -20,6 +20,7 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
+Plug 'fszymanski/deoplete-emoji'
 Plug 'garbas/vim-snipmate'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
@@ -41,6 +42,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
+Plug 'rhysd/github-complete.vim'
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'skywind3000/asyncrun.vim'
@@ -293,6 +295,7 @@ augroup configurationgroupforfiletypes
   autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
   autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
   autocmd FileType java setlocal omnifunc=javacomplete#Complete
+  autocmd FileType gitcommit setlocal omnifunc=github_complete#complete
 
   " Enable spellcheck for the git commit messages
   autocmd FileType gitcommit setlocal spell
@@ -752,6 +755,12 @@ if has("nvim")
         \ 'javacomplete#Complete'
         \]
 
+  " Register a GitHub completion function with deoplete
+  let g:deoplete#omni#functions = {}
+  let g:deoplete#omni#functions.gitcommit = [
+        \ 'github_complete#complete'
+        \]
+
   " Configure deoplete to work with LaTeX and vimtex plugin
   if !exists('g:deoplete#omni#input_patterns')
       let g:deoplete#omni#input_patterns = {}
@@ -769,6 +778,9 @@ if has("nvim")
         \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
         \ . '|\w*'
         \ .')'
+
+  " Configure deoplete to work with GitHub issue completion
+  let g:deoplete#omni#input_patterns.gitcommit = '#[0-9]*'
 endif
 
 if has("nvim")
