@@ -212,9 +212,6 @@ let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#hunks#non_zero_only = 0
 let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
 
-" Display errors from running a test suite with vim-test
-" let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
-
 " Do not display the standard status line
 set noshowmode
 
