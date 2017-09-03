@@ -97,6 +97,12 @@ au BufNewFile,BufRead,BufEnter *.xml  set nospell
 au BufNewFile,BufRead,BufEnter *.sql  set nospell
 au BufNewFile,BufRead,BufEnter *.bib  set nospell
 
+" Disable spell checking in quickfix
+augroup quickfix
+    autocmd!
+    autocmd FileType qf setlocal nospell
+augroup END
+
 " Ignore these directories
 set wildignore+=*/build/**
 set wildignore+=*/.git/*
