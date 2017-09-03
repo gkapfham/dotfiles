@@ -338,7 +338,6 @@ let g:pandoc#modules#disabled = ['folding']
 let g:livedown_autorun = 0
 let g:livedown_open = 0
 let g:livedown_port = 4200
-nmap <leader>gmd :LivedownPreview<CR>
 
 " Autodetect CSV
 autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
