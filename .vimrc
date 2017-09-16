@@ -623,6 +623,7 @@ nmap <C-h> :FZFHidden<CR>
 nmap <C-p> :FZFMine<CR>
 nmap <Space>g :Tags <CR>
 nmap <Space>t :BTags <CR>
+nmap <Space>b :BLines <CR>
 nnoremap <Tab> :Buffers<Cr>
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 
