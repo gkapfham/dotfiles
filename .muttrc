@@ -116,8 +116,8 @@ set smtp_url = "smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
 
 # Allow mutt to performing caching as a way to improve performance
 # NOTE: commented out as it seems to limit stability
-# set header_cache=~/.mutt/cache/headers
-# set message_cachedir=~/.mutt/cache/bodies
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
 
 # Set the certificates used for communication
 set certificate_file=~/.mutt/certificates
