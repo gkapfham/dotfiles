@@ -68,6 +68,7 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'tfnico/vim-gradle'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -304,8 +305,8 @@ augroup configurationgroupforfiletypes
   autocmd FileType gitcommit setlocal spell
 
   " Configuration for Java programming filetype
-  autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
-  autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
+  " autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
+  " autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
 
   " Configuration for Python programming language
   autocmd Filetype python setlocal softtabstop=4
