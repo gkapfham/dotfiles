@@ -96,10 +96,6 @@ function echo_git() {
 }
 alias eg=echo_git
 
-# FZF in the shell
-# source /home/gkapfham/.zsh/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
-# source /home/gkapfham/.zsh/fz/fz.plugin.zsh
-
 # Autosuggestions
 source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
