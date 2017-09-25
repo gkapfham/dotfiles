@@ -138,8 +138,8 @@ source /home/gkapfham/.fzf/shell/key-bindings.zsh
 # Source the files
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Trigger fzf completion using the semi-colon instead of **
-export FZF_COMPLETION_TRIGGER='**'
+# Trigger fzf completion using the TAB key instead of **
+export FZF_COMPLETION_TRIGGER=''
 
 # }}}
 
