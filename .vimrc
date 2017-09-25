@@ -305,6 +305,7 @@ augroup configurationgroupforfiletypes
   autocmd FileType gitcommit setlocal spell
 
   " Configuration for Java programming filetype
+  autocmd Filetype java compiler gradle
   " autocmd Filetype java set makeprg=cd\ %:h\ &&\ ant\ -emacs\ -q\ -find\ build.xml
   " autocmd Filetype java set errorformat=%A%f:%l:\ %m,%-Z%p^,%-C%.%#
 
