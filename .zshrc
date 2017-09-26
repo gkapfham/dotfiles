@@ -145,7 +145,6 @@ export FZF_COMPLETION_TRIGGER=''
 bindkey -M viins 'jk' vi-cmd-mode
 
 # }}}
-#
 
 # Tmux {{{
 
