@@ -314,6 +314,10 @@ augroup configurationgroupforfiletypes
   autocmd Filetype python setlocal shiftwidth=4
   autocmd FileType python BracelessEnable +fold +highlight-cc
 
+  " When linting is costly, only perform it when the file is saved
+  autocmd Filetype tex let g:ale_lint_on_text_changed = 'never'
+  autocmd Filetype java let g:ale_lint_on_text_changed = 'never'
+
 augroup END
 
 " Syntax highlighting for Java
