@@ -312,9 +312,19 @@ augroup configurationgroupforfiletypes
   autocmd Filetype python setlocal shiftwidth=4
   autocmd FileType python BracelessEnable +fold +highlight-cc
 
-  " When linting is costly, only perform it when the file is saved
-  autocmd Filetype tex let g:ale_lint_on_text_changed = 'never'
-  autocmd Filetype java let g:ale_lint_on_text_changed = 'never'
+  " When linting is costly in Java, only perform it when the file is saved
+  autocmd Filetype java call SetJavaLintingOptions()
+  function SetJavaLintingOptions()
+    let g:ale_lint_on_text_changed = 'never'
+    let g:ale_lint_on_enter = 0
+  endfunction
+
+  " When linting is costly in LaTeX, only perform it when the file is saved
+  autocmd Filetype tex call SetLatexLintingOptions()
+  function SetLatexLintingOptions()
+    let g:ale_lint_on_text_changed = 'never'
+    let g:ale_lint_on_enter = 0
+  endfunction
 
 augroup END
 
