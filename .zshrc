@@ -184,8 +184,21 @@ fzf-fasd-widget() {
   done
   FIRSTWORD="$words[$start]"
   CURRENTWORD="$words[$i]"
-  unset 'words[${#words[@]}]'
-  PASTWORDS=${words[@]}
+
+  # if [ ${#words[@]} -gt 1 ]; then
+  #   unset 'words[${#words[@]}]'
+  #   PASTWORDS=${words[@]}
+  # else
+  #   PASTWORDS=${words[@]}
+  # fi
+
+  if [ "$CURSOR" -eq " " ]; then
+    PASTWORDS=${words[@]}
+  else
+    unset 'words[${#words[@]}]'
+    PASTWORDS=${words[@]}
+  fi
+
   LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
     fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
   local ret=$?
