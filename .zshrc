@@ -172,7 +172,9 @@ t() {
 }
 
 # Use FZF to filter the output of FASD anywhere is a command
+autoload -U modify-current-argument
 fzf-fasd-widget() {
+
   local words i beginword start
   i=0
   start=1
@@ -184,19 +186,18 @@ fzf-fasd-widget() {
   done
   FIRSTWORD="$words[$start]"
   CURRENTWORD="$words[$i]"
+  TRIGGERLETTER=${CURRENTWORD:0:1}
+  # RESTCURRENTWORD=${CURRENTWORD:1:${#CURRENTWORD}}
 
-  # if [ ${#words[@]} -gt 1 ]; then
-  #   unset 'words[${#words[@]}]'
-  #   PASTWORDS=${words[@]}
-  # else
-  #   PASTWORDS=${words[@]}
-  # fi
+  # ${string:1:${#string}-2}"
 
-  if [ "$CURSOR" -eq " " ]; then
-    PASTWORDS=${words[@]}
-  else
+  if [ "$TRIGGERLETTER" = "," ]; then
     unset 'words[${#words[@]}]'
     PASTWORDS=${words[@]}
+    CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
+  else
+    PASTWORDS=${words[@]}
+    CURRENTWORD=""
   fi
 
   LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
