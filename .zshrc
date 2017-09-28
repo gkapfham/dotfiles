@@ -187,8 +187,6 @@ fzf-fasd-widget() {
   FIRSTWORD="$words[$start]"
   CURRENTWORD="$words[$i]"
   TRIGGERLETTER=${CURRENTWORD:0:1}
-  # RESTCURRENTWORD=${CURRENTWORD:1:${#CURRENTWORD}}
-  # ${string:1:${#string}-2}"
   if [ "$TRIGGERLETTER" = "," ]; then
     unset 'words[${#words[@]}]'
     PASTWORDS=${words[@]}
