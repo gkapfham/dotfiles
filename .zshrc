@@ -66,7 +66,7 @@ ZSH_THEME="norm-gkapfham"
 HIST_STAMPS="mm/dd/yyyy"
 
 # Plugins
-plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
+plugins=(colored-man-pages fasd git git-extras tmux tmuxinator vi-mode virtualenv)
 source /home/gkapfham/.oh-my-zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $ZSH/oh-my-zsh.sh
 
@@ -170,6 +170,33 @@ t() {
     fzf --query="$1 " --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle) &&
     cd "$fasdlist"
 }
+
+fzf-fasd-widget() {
+  # echo $CURSOR
+  # CURRENTWORD="${LBUFFER/* /}${RBUFFER/ */}"
+  local words i beginword start
+  i=0
+  start=1
+  beginword=0
+  words=("${(z)BUFFER}")
+
+  while (( beginword <= CURSOR )); do
+          (( i++ ))
+          (( beginword += ${#words[$i]}+1 ))
+  done
+  FIRSTWORD="$words[$start]"
+  CURRENTWORD="$words[$i]"
+  unset 'words[${#words[@]}]'
+  PASTWORDS=${words[@]}
+  LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
+    fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
+  local ret=$?
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
+zle     -N   fzf-fasd-widget
+bindkey '^B' fzf-fasd-widget
 
 # }}}
 
