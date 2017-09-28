@@ -188,20 +188,19 @@ fzf-fasd-widget() {
   CURRENTWORD="$words[$i]"
   TRIGGERLETTER=${CURRENTWORD:0:1}
   # RESTCURRENTWORD=${CURRENTWORD:1:${#CURRENTWORD}}
-
   # ${string:1:${#string}-2}"
-
   if [ "$TRIGGERLETTER" = "," ]; then
     unset 'words[${#words[@]}]'
     PASTWORDS=${words[@]}
     CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
+    LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
+      fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
   else
     PASTWORDS=${words[@]}
     CURRENTWORD=""
+    LBUFFER="${PASTWORDS} $(fasd -d -l -r $CURRENTWORD | \
+      fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
   fi
-
-  LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
-    fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
   local ret=$?
   zle redisplay
   typeset -f zle-line-init >/dev/null && zle zle-line-init
