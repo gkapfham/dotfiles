@@ -171,15 +171,13 @@ t() {
     cd "$fasdlist"
 }
 
+# Use FZF to filter the output of FASD anywhere is a command
 fzf-fasd-widget() {
-  # echo $CURSOR
-  # CURRENTWORD="${LBUFFER/* /}${RBUFFER/ */}"
   local words i beginword start
   i=0
   start=1
   beginword=0
   words=("${(z)BUFFER}")
-
   while (( beginword <= CURSOR )); do
           (( i++ ))
           (( beginword += ${#words[$i]}+1 ))
