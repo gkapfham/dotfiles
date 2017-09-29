@@ -314,15 +314,16 @@ augroup configurationgroupforfiletypes
 
   " When linting is costly in Java, only perform it when the file is saved
   autocmd Filetype java call SetJavaLintingOptions()
-  function SetJavaLintingOptions()
+  function! SetJavaLintingOptions()
     let g:ale_lint_on_text_changed = 'never'
     let g:ale_lint_on_enter = 0
   endfunction
 
   " When linting is costly in LaTeX, only perform it when the file is saved
   autocmd Filetype tex call SetLatexLintingOptions()
-  function SetLatexLintingOptions()
-    let g:ale_lint_on_text_changed = 'never'
+  function! SetLatexLintingOptions()
+    let g:ale_lint_on_text_changed = 'normal'
+    let g:ale_lint_delay = 500
     let g:ale_lint_on_enter = 0
   endfunction
 
