@@ -174,6 +174,7 @@ t() {
 # Use FZF to filter the output of FASD anywhere is a command
 autoload -U modify-current-argument
 fzf-fasd-widget() {
+  # divide the commands buffer into words
   local words i beginword start
   i=0
   start=1
@@ -183,26 +184,35 @@ fzf-fasd-widget() {
           (( i++ ))
           (( beginword += ${#words[$i]}+1 ))
   done
+  # extract the first and current words
+  # extract the first letter as a potential trigger
   FIRSTWORD="$words[$start]"
   CURRENTWORD="$words[$i]"
   TRIGGERLETTER=${CURRENTWORD:0:1}
+  # the trigger of "," was used, so start
+  # the use of FASD and FZF with this word
   if [ "$TRIGGERLETTER" = "," ]; then
     unset 'words[${#words[@]}]'
     PASTWORDS=${words[@]}
     CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
     LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
       fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
+  # the trigger of "," was not used, so
+  # search interactively based on user input
   else
     PASTWORDS=${words[@]}
     CURRENTWORD=""
     LBUFFER="${PASTWORDS} $(fasd -d -l -r $CURRENTWORD | \
       fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
   fi
+  # update the prompt with the result of using FASD and FZF
   local ret=$?
   zle redisplay
   typeset -f zle-line-init >/dev/null && zle zle-line-init
   return $ret
 }
+# create a binding so that you can type "cd ,pract^B"
+# (as an example) to trigger this integrated widget
 zle     -N   fzf-fasd-widget
 bindkey '^B' fzf-fasd-widget
 
