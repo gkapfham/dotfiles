@@ -461,8 +461,6 @@ set noshowmode
 " Infer the case when doing completion
 set infercase
 
-" inoremap <C-Space> <C-x><C-o>
-
 " }}}
 
 " Basic Keyboard Movement {{{
