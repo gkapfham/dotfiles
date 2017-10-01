@@ -31,12 +31,14 @@ rewrite.rule {"^\" *\"$"}
 rewrite.rule {"^{ *}$" }
 
 # delete the not-needed attributes (full name)
+delete.field = {abstract}
 delete.field = {acmid}
 delete.field = {address}
 delete.field = {articleno}
 delete.field = {bibsource}
 delete.field = {biburl}
 delete.field = {doi}
+delete.field = {editor}
 delete.field = {isbn}
 delete.field = {issn}
 delete.field = {issue_date}
