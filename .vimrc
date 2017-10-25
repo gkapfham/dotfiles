@@ -232,7 +232,7 @@ let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.spell = '⎘'
+let g:airline_symbols.spell = 'A-Z✔'
 let g:airline_symbols.notexists = '  '
 let g:airline_symbols.whitespace = 'Ξ'
 
