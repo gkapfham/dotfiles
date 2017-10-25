@@ -218,6 +218,7 @@ let g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-inden
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 0
 let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+let g:airline#extensions#wordcount#enabled = 0
 
 " Create an empty airline_symbols variable
 if !exists('g:airline_symbols')
@@ -228,7 +229,7 @@ endif
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.linenr = '☰ '
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.paste = 'Þ'
