@@ -228,6 +228,8 @@ endif
 " Define symbols for the airline
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_alt_sep = ''
 let g:airline_symbols.crypt = '🔒'
 let g:airline_symbols.linenr = '☰ '
 let g:airline_symbols.maxlinenr = ''
