@@ -618,6 +618,28 @@ nmap <silent> <leader>s :set spell!<CR>
 
 " }}}
 
+" File System {{{
+
+augroup dirvishconfiguration
+  autocmd!
+
+  " Disable spell checking for the Dirvish buffers
+  autocmd FileType dirvish setlocal nospell
+
+  " Enable :Gstatus and friends
+  autocmd FileType dirvish call fugitive#detect(@%)
+
+  " Map `gr` to reload the Dirvish buffer
+  autocmd FileType dirvish nnoremap <silent><buffer> gr :<C-U>Dirvish %<CR>
+
+  " Map `gh` to hide dot-prefixed files
+  " To toggle this, press `R` to reload
+  autocmd FileType dirvish nnoremap <silent><buffer>
+        \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
+augroup END
+
+" }}}
+
 " FZF {{
 
 " Mapping selecting mappings
