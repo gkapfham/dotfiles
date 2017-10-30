@@ -2,6 +2,7 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -30,12 +31,12 @@ Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
-Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'jgdavey/tslime.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-operator-user'
 Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
@@ -100,8 +101,8 @@ au BufNewFile,BufRead,BufEnter *.bib  set nospell
 
 " Disable spell checking in quickfix
 augroup quickfix
-    autocmd!
-    autocmd FileType qf setlocal nospell
+  autocmd!
+  autocmd FileType qf setlocal nospell
 augroup END
 
 " Ignore these directories
@@ -257,17 +258,17 @@ let g:gitgutter_sign_removed_first_line = '^'
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
 let g:mta_filetypes = {
-    \ 'html' : 1,
-    \ 'xhtml' : 1,
-    \ 'xml' : 1,
-    \ 'jinja' : 1,
-    \ 'liquid' : 1,
-    \}
+      \ 'html' : 1,
+      \ 'xhtml' : 1,
+      \ 'xml' : 1,
+      \ 'jinja' : 1,
+      \ 'liquid' : 1,
+      \}
 
 " Display the syntax group for the symbol under the cursor
 map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr()<CR>
 
 " }}}
@@ -275,15 +276,15 @@ map <F5> :call SyntaxAttr()<CR>
 " Folding {{{
 
 function! FancyFoldText()
-    let line = getline(v:foldstart)
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . ' ' . repeat(" ",fillcharcount-8) . foldedlinecount . ' lines ' . ' '
+  let line = getline(v:foldstart)
+  let nucolwidth = &fdc + &number * &numberwidth
+  let windowwidth = winwidth(0) - nucolwidth - 3
+  let foldedlinecount = v:foldend - v:foldstart
+  let onetab = strpart('          ', 0, &tabstop)
+  let line = substitute(line, '\t', onetab, 'g')
+  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+  let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+  return line . ' ' . repeat(" ",fillcharcount-8) . foldedlinecount . ' lines ' . ' '
 endfunction
 set foldtext=FancyFoldText()
 
@@ -438,14 +439,14 @@ let g:ycm_use_ultisnips_completer = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_filetype_blacklist = {
-        \ 'qf' : 1,
-        \ 'notes' : 1,
-        \ 'unite' : 1,
-        \ 'text' : 1,
-        \ 'vimwiki' : 1,
-        \ 'pandoc' : 1,
-        \ 'infolog' : 1,
-        \}
+      \ 'qf' : 1,
+      \ 'notes' : 1,
+      \ 'unite' : 1,
+      \ 'text' : 1,
+      \ 'vimwiki' : 1,
+      \ 'pandoc' : 1,
+      \ 'infolog' : 1,
+      \}
 
 " YCM uses python (python3 is also an option)
 let g:ycm_server_python_interpreter = '/usr/bin/python'
@@ -533,12 +534,12 @@ map <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 " Define a function for fuzzy searching
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
-  \   'converters': [incsearch#config#fuzzy#converter()],
-  \   'modules': [incsearch#config#easymotion#module()],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
+        \   'converters': [incsearch#config#fuzzy#converter()],
+        \   'modules': [incsearch#config#easymotion#module()],
+        \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+        \   'is_expr': 0,
+        \   'is_stay': 1
+        \ }), get(a:, 1, {}))
 endfunction
 
 " Perform fuzzy searching
@@ -655,24 +656,24 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Define a custom command for loading MRU files with FZF
 command! FZFMru call fzf#run({
-\  'source':  v:oldfiles,
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold --cycle',
-\  'down':    '25%')}
+      \  'source':  v:oldfiles,
+      \  'sink':    'e',
+      \  'options': '-m -x +s --no-bold --cycle',
+      \  'down':    '25%')}
 
 " Load hidden files
 command! FZFHidden call fzf#run({
-\  'source':  'ag --hidden --ignore .git -l -g ""',
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold --cycle',
-\  'down':    '25%'})
+      \  'source':  'ag --hidden --ignore .git -l -g ""',
+      \  'sink':    'e',
+      \  'options': '-m -x +s --no-bold --cycle',
+      \  'down':    '25%'})
 
 " Load non-hidden files
 command! FZFMine call fzf#run({
-\  'source':  'ag --ignore .git -l -g ""',
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold --cycle',
-\  'down':    '25%'})
+      \  'source':  'ag --ignore .git -l -g ""',
+      \  'sink':    'e',
+      \  'options': '-m -x +s --no-bold --cycle',
+      \  'down':    '25%'})
 
 " Define key combinations
 nmap <C-h> :FZFHidden<CR>
@@ -764,24 +765,24 @@ endif
 
 " Control FZF windows
 if has("nvim")
-command! FZFMru call fzf#run({
-\  'source':  v:oldfiles,
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold --cycle',
-\  'down':    '10%',
-\  'window':  'enew'})
-command! FZFHidden call fzf#run({
-\  'source':  'ag --hidden --ignore .git -l -g ""',
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold --cycle',
-\  'window':  'enew'})
-command! -bang FZFMine call fzf#run({
-\  'source':  'ag --ignore .git -l -g ""',
-\  'sink':    'e',
-\  'options': '-m -x +s --no-bold --cycle',
-\  'down':    '100%',
-\  'window':  'enew'})
-let g:fzf_layout = { 'window': 'enew' }
+  command! FZFMru call fzf#run({
+        \  'source':  v:oldfiles,
+        \  'sink':    'e',
+        \  'options': '-m -x +s --no-bold --cycle',
+        \  'down':    '10%',
+        \  'window':  'enew'})
+  command! FZFHidden call fzf#run({
+        \  'source':  'ag --hidden --ignore .git -l -g ""',
+        \  'sink':    'e',
+        \  'options': '-m -x +s --no-bold --cycle',
+        \  'window':  'enew'})
+  command! -bang FZFMine call fzf#run({
+        \  'source':  'ag --ignore .git -l -g ""',
+        \  'sink':    'e',
+        \  'options': '-m -x +s --no-bold --cycle',
+        \  'down':    '100%',
+        \  'window':  'enew'})
+  let g:fzf_layout = { 'window': 'enew' }
 endif
 
 " Configure completion with deoplete
@@ -817,7 +818,7 @@ if has("nvim")
 
   " Configure deoplete to work with LaTeX and vimtex plugin
   if !exists('g:deoplete#omni#input_patterns')
-      let g:deoplete#omni#input_patterns = {}
+    let g:deoplete#omni#input_patterns = {}
   endif
   let g:deoplete#omni#input_patterns.tex = '\\(?:'
         \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
