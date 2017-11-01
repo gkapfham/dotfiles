@@ -135,7 +135,7 @@ source /home/gkapfham/.fzf/shell/key-bindings.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Trigger fzf completion using the TAB key instead of **
-export FZF_COMPLETION_TRIGGER=';'
+export FZF_COMPLETION_TRIGGER='**'
 
 # }}}
 
