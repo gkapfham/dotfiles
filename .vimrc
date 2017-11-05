@@ -559,6 +559,8 @@ set smartcase
 " Make f and s movements use easymotion
 nmap f <Plug>(easymotion-s)
 nmap s <Plug>(easymotion-s2)
+nmap <leader>e <Plug>(easymotion-next)
+nmap <leader>E <Plug>(easymotion-prev)
 
 " Change the color scheme
 hi link EasyMotionTarget Type
