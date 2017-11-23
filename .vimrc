@@ -1,5 +1,7 @@
 set nocompatible
 
+" Plug {{{
+
 call plug#begin('~/.vim/bundle')
 
 Plug 'AndrewRadev/splitjoin.vim'
@@ -74,6 +76,8 @@ Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
+
+" }}}
 
 " System {{{
 
