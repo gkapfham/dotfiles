@@ -27,7 +27,6 @@ Plug 'garbas/vim-snipmate'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/vim-operator-flashy'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
@@ -43,6 +42,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'machakann/vim-highlightedyank'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
 Plug 'rhysd/github-complete.vim'
 Plug 'shime/vim-livedown', {'for': 'markdown'}
@@ -71,7 +71,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'machakann/vim-highlightedyank'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
