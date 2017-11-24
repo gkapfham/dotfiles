@@ -755,6 +755,22 @@ if has("nvim")
   set inccommand=split
 endif
 
+" Set the clipboard to use xclip (not xsel)
+if has("nvim")
+  let g:clipboard = {
+        \   'name': 'NeovimClipboard',
+        \   'copy': {
+        \      '+': 'xclip -i -selection clipboard',
+        \      '*': 'xclip -i -selection clipboard',
+        \    },
+        \   'paste': {
+        \      '+': 'xclip -o -selection clipboard',
+        \      '*': 'xclip -o -selection clipboard',
+        \   },
+        \   'cache_enabled': 1,
+        \ }
+endif
+
 " Highlight trailing spaces
 if has("nvim")
   highlight ExtraWhitespace ctermfg=172 ctermbg=234
