@@ -71,6 +71,7 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'machakann/vim-highlightedyank'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -199,11 +200,13 @@ set whichwrap+=<,>,h,l,[,]
 " Do not display spaces at end of line
 set nojoinspaces
 
-" Highlight yanked region
-map y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
-highlight default Flashy term=bold ctermbg=237 guibg=#13354A
-let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
+" " Highlight yanked region
+" map y <Plug>(operator-flashy)
+" nmap Y <Plug>(operator-flashy)$
+" highlight default Flashy term=bold ctermbg=1 guibg=#FFFFFF
+" let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
+
+let g:highlightedyank_highlight_duration = 500
 
 " Display the location list and quickfix window
 let g:lt_location_list_toggle_map = '<leader>c'
