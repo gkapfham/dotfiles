@@ -200,12 +200,7 @@ set whichwrap+=<,>,h,l,[,]
 " Do not display spaces at end of line
 set nojoinspaces
 
-" " Highlight yanked region
-" map y <Plug>(operator-flashy)
-" nmap Y <Plug>(operator-flashy)$
-" highlight default Flashy term=bold ctermbg=1 guibg=#FFFFFF
-" let g:operator#flashy#flash_time = get(g:, 'operator#flashy#flash_time', 200)
-
+" Highlight yanked region
 let g:highlightedyank_highlight_duration = 500
 
 " Display the location list and quickfix window
