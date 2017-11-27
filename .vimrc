@@ -407,7 +407,7 @@ hi Conceal ctermbg=NONE ctermfg=172
 " Use tex over plaintex
 let g:tex_flavor = 'tex'
 
-" Vimtex (and fzf with YCM) requires
+" Vimtex (and Fzf with YCM) requires
 set hidden
 
 " }}}
