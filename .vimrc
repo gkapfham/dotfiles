@@ -292,10 +292,10 @@ set foldtext=FancyFoldText()
 
 " Tags {{{
 
-" Say where the tags are stored
+" Specify where the tags are stored
 set tags=./tags;/,tags;/
 
-" Configure easytags
+" Configure tag generation with easytags
 let g:easytags_ignored_filetypes = ''
 let g:easytags_dynamic_files = 1
 let g:easytags_updatetime_warn = 0
@@ -333,7 +333,7 @@ augroup configurationgroupforfiletypes
   autocmd Filetype python setlocal shiftwidth=4
   autocmd FileType python BracelessEnable
 
-  " When linting is costly in Java, only perform it when the file is saved
+  " When linting is costly in Java, only perform it in normal mode
   autocmd Filetype java call SetJavaLintingOptions()
   function! SetJavaLintingOptions()
     let g:ale_lint_on_text_changed = 'normal'
@@ -341,7 +341,7 @@ augroup configurationgroupforfiletypes
     let g:ale_lint_on_enter = 0
   endfunction
 
-  " When linting is costly in LaTeX, only perform it when the file is saved
+  " When linting is costly in LaTeX, only perform it in normal mode
   autocmd Filetype tex call SetLatexLintingOptions()
   function! SetLatexLintingOptions()
     let g:ale_lint_on_text_changed = 'normal'
@@ -364,7 +364,7 @@ let R_assign = 2
 let R_openpdf = 0
 let R_show_args = 1
 
-" Force jedi to use version 3
+" Force Jedi to use version 3
 let g:jedi#force_py_version = 3
 
 " Format Python code according to Google's standard
