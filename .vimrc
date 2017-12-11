@@ -524,7 +524,7 @@ nmap <C-u> :call SwitchBuffer()<CR>
 
 " }}}
 
-" Advanced Keyboard Movement with incsearch {{{
+" Advanced Search Highlighting {{{
 
 " Basic motions using incsearch
 map /  <Plug>(incsearch-forward)
