@@ -4,10 +4,6 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'haya14busa/incsearch-easymotion.vim'
-" Plug 'haya14busa/incsearch-fuzzy.vim'
-" Plug 'haya14busa/incsearch.vim'
-" Plug 'romainl/vim-cool'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'MarcWeber/vim-addon-mw-utils'
