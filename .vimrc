@@ -4,6 +4,7 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'junegunn/vim-slash'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -33,7 +34,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/vim-slash'
 Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-operator-user'
 Plug 'kana/vim-textobj-user'
@@ -41,6 +41,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-highlightedyank'
+Plug 'pgdouyon/vim-evanesco'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
 Plug 'rhysd/github-complete.vim'
 Plug 'shime/vim-livedown', {'for': 'markdown'}
