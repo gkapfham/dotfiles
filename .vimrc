@@ -202,7 +202,7 @@ set whichwrap+=<,>,h,l,[,]
 set nojoinspaces
 
 " Highlight yanked region
-let g:highlightedyank_highlight_duration = 500
+let g:highlightedyank_highlight_duration = 150
 
 " Display the location list and quickfix window
 let g:lt_location_list_toggle_map = '<leader>c'
