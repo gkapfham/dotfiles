@@ -139,7 +139,7 @@ set t_ZH=[3m
 set t_ZR=[23m
 
 " Do not display search highlights
-set nohlsearch
+" set nohlsearch
 
 " Do not display the welcome message
 set shortmess=Ic
