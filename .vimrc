@@ -530,7 +530,7 @@ nmap <C-u> :call SwitchBuffer()<CR>
 set incsearch
 
 " Support the highlighting of words
-nnoremap <leader>* :set hlsearch<cr>*<c-o>
+" nnoremap <leader>* :set hlsearch<cr>*<c-o>
 nnoremap <silent><expr> <Leader>i (&hls && v:hlsearch ? ':set nohlsearch' : ':set hlsearch')."\n"
 
 " Carefully ignore the case of words when searching
