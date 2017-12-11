@@ -134,9 +134,6 @@ set encoding=utf-8
 set t_ZH=[3m
 set t_ZR=[23m
 
-" Do not display search highlights
-" set nohlsearch
-
 " Do not display the welcome message
 set shortmess=Ic
 
