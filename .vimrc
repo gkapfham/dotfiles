@@ -526,26 +526,29 @@ nmap <C-u> :call SwitchBuffer()<CR>
 
 " Advanced Search Highlighting {{{
 
+" Incrementally highlight the search matches
+set incsearch
+
 " Basic motions using incsearch
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-easymotion-/)
-map g? <Plug>(incsearch-easymotion-?)
-map <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-easymotion-/)
+" map g? <Plug>(incsearch-easymotion-?)
+" map <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
-" Define a function for fuzzy searching
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-        \   'converters': [incsearch#config#fuzzy#converter()],
-        \   'modules': [incsearch#config#easymotion#module()],
-        \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-        \   'is_expr': 0,
-        \   'is_stay': 1
-        \ }), get(a:, 1, {}))
-endfunction
+" " Define a function for fuzzy searching
+" function! s:config_easyfuzzymotion(...) abort
+"   return extend(copy({
+"         \   'converters': [incsearch#config#fuzzy#converter()],
+"         \   'modules': [incsearch#config#easymotion#module()],
+"         \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+"         \   'is_expr': 0,
+"         \   'is_stay': 1
+"         \ }), get(a:, 1, {}))
+" endfunction
 
-" Perform fuzzy searching
-noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+" " Perform fuzzy searching
+" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
 " Support the highlighting of words
 nnoremap <leader>* :set hlsearch<cr>*<c-o>
