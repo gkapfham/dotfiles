@@ -173,6 +173,8 @@ set timeout=15
 # Check for new mail every 15 seconds
 set mail_check=15
 
+# Keyboard Bindings {{{
+
 # Use an aliases file to automatically save all of email addresses of emails that I read
 set alias_file = '~/.mutt/aliases.txt'
 source $alias_file
@@ -242,6 +244,8 @@ bind index,pager i flag-message
 bind index R group-reply
 bind pager R group-reply
 set followup_to=yes
+
+# }}}
 
 # Install a display_filter so that I can capture all of my email headers for aliases
 set display_filter = '$HOME/.mutt/aliases.sh'
