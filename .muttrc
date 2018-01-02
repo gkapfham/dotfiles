@@ -30,6 +30,9 @@ set tmpdir="/home/gkapfham/.mutt/tmp"
 # Set all emails to have flowing text, accommodating for mobile devices
 set text_flowed=yes
 
+# Quote msg when replying
+set include
+
 # }}}
 
 # Standard Configuration {{{
@@ -127,8 +130,6 @@ color tree       color8   default
 
 # }}}
 
-# Quote msg when replying
-set include
 
 # Display the sort order
 set sort=threads
