@@ -127,9 +127,6 @@ color tree       color8   default
 
 # }}}
 
-
-
-
 # Quote msg when replying
 set include
 
