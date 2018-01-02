@@ -47,9 +47,15 @@ if you were in your home directory, you would type the following command to
 create the `.bibtoolrsc` as a symbolic link to the file in the
 `~/configure/dotfiles/` directory containing this repository.
 
-```
+```shell
 ln -s ~/configure/dotfiles/.bibtoolrsc .bibtoolrsc
 ```
+
+It is worth noting that I use the `.vimrc` file to configure both `vim` and
+`nvim`. To do this, I have created the `.nvim` directory to be a symbolic link
+to the `.vim` directory. Next, this `.nvim` directory contains a file called
+`init.vim` that is a symbolic link to the `~/.vimrc` file that is itself a
+symbolic link to the `.vimrc` provided by this repository.
 
 ## Problems or Praise?
 
