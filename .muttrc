@@ -67,6 +67,11 @@ set pager_stop=yes
 # Mark wrapped lines of text in the pager with a +
 set markers
 
+# Set the sort order
+set sort=threads
+set implicit_autoview
+set beep=no
+
 # }}}
 
 # Gmail Integration {{{
@@ -131,10 +136,6 @@ color tree       color8   default
 # }}}
 
 
-# Display the sort order
-set sort=threads
-set implicit_autoview
-set beep=no
 
 # Configure SSL
 set ssl_force_tls=yes
