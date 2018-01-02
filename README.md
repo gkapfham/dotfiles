@@ -31,6 +31,12 @@ This is a summary of the dotfiles that I currently provide and maintain:
 - `.vimrc`: configuration for the `nvim` and `vim` text editors
 - `.zshrc`: configuration for the `zsh` shell to use oh-my-zsh
 
+Are you looking for some neat configurations to sharpen your own dotfiles? If
+so, then I encourage you to review the `.vimrc`, `.zshrc`, and `.tmux.conf`
+files that I regularly improve. Please note that all of these files have
+groupings with beginning and ending marks that respectively look like `{{{` and
+`}}}`.
+
 ## Installation Instructions
 
 You can type the following command if you want to clone this repository:
