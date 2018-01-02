@@ -1,5 +1,7 @@
+# Do not use the graphical menu for package installation
 options(menu.graphics = FALSE)
 
+# Load the colorout library
 library(colorout)
 setOutputColors256(normal = 250, negnum = 237, zero = 237,
                    number = 214, date = 110, string = 143,
@@ -16,6 +18,7 @@ if (interactive()) {
     options(browser = function(u) .C("nvimcom_msg_to_nvim",
                                      paste0('StartTxtBrowser("w3m",
                                             "', u, '")')))
+
   # Load the colorout library
   library(colorout)
   if (Sys.getenv("TERM") != "linux" && Sys.getenv("TERM") != "") {
