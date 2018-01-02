@@ -14,7 +14,7 @@ hdr_order From Date: From: To: Cc: Subject:
 set move=no
 auto_view text/html text/enriched application/postscript image/gif
 
-# Enable header editing in vim or neovim
+# Enable header editing in Vim or Neovim
 set edit_headers=yes
 
 # }}}
