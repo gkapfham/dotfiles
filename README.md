@@ -7,7 +7,7 @@ of the dotfiles in this repository are "hard-coded" to work for my development
 environment and projects. For instance, these configuration files are written
 under the assumption that the developer will use Ubuntu 16.04. But, even though
 they are heavily customized, my hope is that they will give examples of how to
-configure various programs such as `vim`, `zsh`, `mutt`, and `tmux`.
+configure various programs such as `neovim`, `vim`, `zsh`, `mutt`, and `tmux`.
 
 ## Installation Instructions
 
