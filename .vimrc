@@ -569,7 +569,7 @@ set backspace=indent,eol,start
 " Interactive EasyAlign in visual mode (e.g., 'vipga')
 xmap ga <Plug>(EasyAlign)
 
-" Start interactive EasyAlign for a motion/text object (e.g., 'gaip')
+" Start interactive EasyAlign for a motion/text object (e.g., gaip)
 nmap ga <Plug>(EasyAlign)
 
 " Bubble single lines
@@ -659,7 +659,7 @@ nmap <C-p> :FZFMine<CR>
 nmap <Space>g :Tags <CR>
 nmap <Space>t :BTags <CR>
 nmap <Space>b :BLines <CR>
-nnoremap <Tab> :Buffers<Cr>
+nnoremap <Tab> :Buffers<CR>
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 
 " Add in a format string for controlling how FZF git logs
