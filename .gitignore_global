@@ -5,7 +5,7 @@
 *.so
 
 # Android #
-############
+###########
 *.apk
 *.ap_
 *.dex
@@ -38,8 +38,8 @@ local.properties
 *.toc
 *_minted*
 
-# Bibliography auxiliary files (bibtex/biblatex/biber) #
-########################################################
+# Bibliography aux files (bibtex/biblatex/biber) #
+##################################################
 *.bbl
 *.bcf
 *.blg
@@ -77,41 +77,41 @@ local.properties
 *.glo
 *.gls
 
-# hyperref
-######################
+# Hyperref #
+############
 *.brf
 
-# listings
-######################
+# Listings #
+############
 *.lol
 
-# makeidx
-######################
+# Makeidx #
+###########
 *.idx
 *.ilg
 *.ind
 *.ist
 
-# minitoc
-######################
+# Minitoc #
+###########
 *.maf
 *.mtc
 *.mtc0
 
-# minted
-######################
+# Minted #
+##########
 *.pyg
 
-# nomencl
-######################
+# Nomencl #
+###########
 *.nlo
 
-# todonotes
-######################
+# Todonotes #
+#############
 *.tdo
 
-# xindy
-######################
+# Xindy #
+#########
 *.xdy
 
 # Vim #
