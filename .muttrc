@@ -168,7 +168,7 @@ set my_foo_pass="`gpg --quiet --for-your-eyes-only -d ~/.mutt/password.gpg`"
 set imap_user="gkapfham@allegheny.edu"
 set imap_pass=$my_foo_pass
 set smtp_pass=$my_foo_pass
-set smtp_url = "smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
+set smtp_url="smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
 
 # Set the certificates used for communication
 set certificate_file=~/.mutt/certificates
