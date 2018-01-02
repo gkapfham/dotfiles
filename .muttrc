@@ -150,15 +150,18 @@ set imap_pass=$my_foo_pass
 set smtp_pass=$my_foo_pass
 set smtp_url = "smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
 
-# }}}
-
-# Allow mutt to performing caching as a way to improve performance
-# NOTE: commented out as it seems to limit stability
-# set header_cache=~/.mutt/cache/headers
-# set message_cachedir=~/.mutt/cache/bodies
-
 # Set the certificates used for communication
 set certificate_file=~/.mutt/certificates
+
+# }}}
+
+# Cache {{{
+
+# Allow mutt to performing caching as a way to improve performance
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+
+# }}}
 
 # Set the depth of the imap operation pipeline (normally 15)
 # Setting the value to 0 makes mutt slower, but more reliable, maybe
