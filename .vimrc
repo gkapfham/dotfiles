@@ -566,10 +566,10 @@ nnoremap oO i<CR><ESC>
 " Support the backspace key in insert mode
 set backspace=indent,eol,start
 
-" Interactive EasyAlign in visual mode (e.g. vipga)
+" Interactive EasyAlign in visual mode (e.g., 'vipga')
 xmap ga <Plug>(EasyAlign)
 
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+" Start interactive EasyAlign for a motion/text object (e.g., 'gaip')
 nmap ga <Plug>(EasyAlign)
 
 " Bubble single lines
