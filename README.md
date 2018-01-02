@@ -12,17 +12,17 @@ programs such as `nvim`, `vim`, `zsh`, `mutt`, and `tmux`.
 
 This is a summary of the dotfiles that I currently provide:
 
-- `.Rprofile`: initializations for the R programming language
+- `.Rprofile`: initialization for the R programming language
 - `.Xresources`: configuration for the Rofi for displaying menus
 - `.bibtoolrsc`: configuration for the `bibtool` program's BibTeX management
 - `.ctags`: extensions for `exuberant-ctags` to handle new languages
-- .gitignore_global
-- .gtkrc-2.0
-- .gvimrc
-- .inputrc
-- .latexmkrc
-- .mailcap
-- .minivimrc
+- `.gitignore_global`: configuration of the files to exclude from Git repositories
+- `.gtkrc-2.0`: legacy configuration of GTK 2.0 to support `gvim` on Ubuntu
+- `.gvimrc`: legacy configuration of `gvim` text editor
+- `.inputrc`: configuration of all input-enabled tools with vi-like mappings
+- `.latexmkrc`: configuration for the `latexmk` wrapper for LaTeX compilers
+- `.mailcap`: configuration for how MIME-enabled programs load files
+- `.minivimrc`: minimal configuration of `vim` and `nvim` for testing purposes
 - .msmtprc
 - .muttprintrc
 - .muttrc
