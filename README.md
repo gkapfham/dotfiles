@@ -63,7 +63,7 @@ to the `.vim` directory. Next, this `.nvim` directory contains a file called
 `init.vim` that is a symbolic link to the `~/.vimrc` file that is itself a
 symbolic link to the `.vimrc` provided by this repository.
 
-## Problems or Praise?
+## Problems or Praise
 
 If you have any problems with downloading or understanding these configuration
 files, then please create an issue associated with this Git repository using
