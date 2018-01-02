@@ -72,6 +72,9 @@ set sort=threads
 set implicit_autoview
 set beep=no
 
+# Create a display_filter that captures all email headers for aliases
+set display_filter = '$HOME/.mutt/aliases.sh'
+
 # }}}
 
 # Gmail Integration {{{
@@ -255,20 +258,26 @@ set followup_to=yes
 
 # }}}
 
-# Install a display_filter so that I can capture all of my email headers for aliases
-set display_filter = '$HOME/.mutt/aliases.sh'
+
+# Printing {{{
 
 # Configure muttprint
 set print_command="muttprint"
 set print_split
 
+# No confirmation before printing
+set print=yes
+
 # Dump all headers and then send the mail to the printer
 macro index \Cr "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
 macro pager \Cr "<display-toggle-weed> <print-message> <display-toggle-weed>"
 
-# Display links in a web site in a compact list, allowing for Firefox viewing
+# }}}
+
+# Web {{{
+
+# Display links in a web site in a compact list, allowing for web browser viewing
 macro index,pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 macro attach,compose \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 
-# No confirmation before printing
-set print=yes
+# }}}
