@@ -59,7 +59,7 @@ set pager_index_lines=12
 
 # Retain 5 lines of previous page when scrolling.
 set pager_context=5
-set pager_stop = yes
+set pager_stop=yes
 
 # Mark wrapped lines of text in the pager with a +
 set markers
