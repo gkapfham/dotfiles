@@ -115,7 +115,7 @@ local.properties
 *.xdy
 
 # Vim #
-######################
+#######
 *.project.vim
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
@@ -125,14 +125,14 @@ Session.vim
 *~
 
 # Java #
-######################
+########
 *.ear
 *.jar
 *.war
 *.ant_targets
 
 # Gradle #
-######################
+##########
 .gradle
 gradle
 /build
@@ -142,8 +142,7 @@ gradle
 /subprojects/internal-android-performance-testing/build-android-libs
 
 # Python #
-######################
-
+##########
 __pycache__/
 *.py[cod]
 *$py.class
@@ -201,7 +200,7 @@ pip-selfcheck.json
 pyvenv.cfg
 
 # R #
-######################
+#####
 *-Ex.R
 *.RData
 *.Rdata
@@ -209,7 +208,7 @@ pyvenv.cfg
 *.Rincr_history
 
 # CTags #
-######################
+#########
 tags
 .tags
 tags.lock
@@ -217,7 +216,7 @@ tags.temp
 tags.tmp
 
 # Extra files #
-######################
+###############
 *.xmi
 *.sync
 *.jekyll-metadata
