@@ -2,16 +2,17 @@
 
 This repository contains the configuration files (i.e., "dotfiles") used to
 configure the programs regularly used by [Gregory M.
-Kapfhammer](http://www.cs.allegheny.edu/sites/gkapfham). Please note that all
-of the dotfiles in this repository are "hard-coded" to work for my development
-environment and projects. For instance, these configuration files are written
-under the assumption that the developer will use Ubuntu 16.04. But, even though
-they are heavily customized, my hope is that they will give examples of how to
-configure various programs such as `neovim`, `vim`, `zsh`, `mutt`, and `tmux`.
+Kapfhammer](http://www.cs.allegheny.edu/sites/gkapfham). Please note that all of
+the dotfiles in this repository are, at least to some extent, "hard-coded" to
+work for my development environment and projects. For instance, I created these
+configuration files under the assumption that the developer will use Ubuntu
+16.04. Even though they are heavily customized, my hope is that they are largely
+reusable and will give examples of how to configure various programs such as
+`neovim`, `vim`, `zsh`, `mutt`, and `tmux`.
 
 This is a summary of the dotfiles that I currently provide:
 
-- .Rprofile
+- `.Rprofile`:
 - .Xresources
 - .bibtoolrsc
 - .ctags
