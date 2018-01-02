@@ -183,7 +183,6 @@ set message_cachedir=~/.mutt/cache/bodies
 
 # }}}
 
-
 # Keyboard Bindings {{{
 
 # Use an aliases file to automatically save all of email addresses of emails that I read
