@@ -9,6 +9,27 @@ under the assumption that the developer will use Ubuntu 16.04. But, even though
 they are heavily customized, my hope is that they will give examples of how to
 configure various programs such as `neovim`, `vim`, `zsh`, `mutt`, and `tmux`.
 
+This is a summary of the dotfiles that I currently provide:
+
+- .Rprofile
+- .Xresources
+- .bibtoolrsc
+- .ctags
+- .gitignore_global
+- .gtkrc-2.0
+- .gvimrc
+- .inputrc
+- .latexmkrc
+- .mailcap
+- .minivimrc
+- .msmtprc
+- .muttprintrc
+- .muttrc
+- .signature
+- .tmux.conf
+- .vimrc
+- .zshrc
+
 ## Installation Instructions
 
 You can type the following command if you want to clone this repository:
