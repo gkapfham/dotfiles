@@ -37,8 +37,18 @@ set text_flowed=yes
 # Ignore spaces in the names of folders
 bind editor <space> noop
 
+# Set up the imap settings for my INBOX and my Gmail folders
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+
 # Record all of the send messages to Sent Mail on Gmail
 set record = "imaps://imap.gmail.com:993/[Gmail]/Sent Mail"
+
+# Track postponed messages in the Gmail Drafts
+set postponed = "+[Gmail]/Drafts"
+
+# Set up the trash, which is deleted on Gmail after 30 days
+set trash = "+[Gmail]/Trash"
 
 # }}}
 
@@ -116,15 +126,6 @@ set ssl_starttls=yes
 set ssl_verify_dates=yes
 set ssl_verify_host=yes
 
-# Set up the imap settings for my INBOX and my Gmail folders
-set folder = "imaps://imap.gmail.com:993"
-set spoolfile = "+INBOX"
-
-# Track postponed messages in the Gmail Drafts
-set postponed = "+[Gmail]/Drafts"
-
-# Set up the trash, which is deleted on Gmail after 30 days
-set trash = "+[Gmail]/Trash"
 
 # Configure the logins with GPG decryption for the password
 set my_foo_pass="`gpg --quiet --for-your-eyes-only -d ~/.mutt/password.gpg`"
