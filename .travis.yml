@@ -1,0 +1,19 @@
+# use Python 3.5
+sudo: required
+dist: trusty
+language: python
+
+# install tools for checking markdown
+install:
+  - pip install proselint
+  - gem install mdl
+
+# cache to speed installation
+cache:
+  directories:
+    - $HOME/.pip-cache/
+
+# run checks on Markdown writing through mdl and proselint
+script:
+  - mdl README.md
+  - proselint README.md
