@@ -6,18 +6,31 @@ unignore from date subject to cc
 unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
 unignore posted-to:
 
+# Configure the display of entries in the email headers
+set save_name=yes
+my_hdr From: "Gregory M. Kapfhammer" <gkapfham@allegheny.edu>
+my_hdr Bcc: "Gregory M. Kapfhammer" <gkapfham@gmail.com>
+hdr_order From Date: From: To: Cc: Subject:
+set move=no
+auto_view text/html text/enriched application/postscript image/gif
+
 # Enable header editing in vim or neovim
 set edit_headers=yes
 
 # }}}
 
-# Set all of our emails to have flowing text, accommodating for mobile devices
+# Set all emails to have flowing text, accommodating for mobile devices
 set text_flowed=yes
 
-# Use my standard configuration of (n)vim that is used for all of text editing
+# Editing {{{
+
 # Jump to the first blank link when editing the emails; skip the header
 set editor="nvim +/^$ ++1"
-# set editor="nvim"
+
+# Edit the emails in a local tmp/ directory, saving work from crashes
+set tmpdir="/home/gkapfham/.mutt/tmp"
+
+# }}}
 
 # Ignore spaces in the names of folders
 bind editor <space> noop
@@ -25,8 +38,6 @@ bind editor <space> noop
 # Record all of the send messages to Sent Mail on Gmail
 set record = "imaps://imap.gmail.com:993/[Gmail]/Sent Mail"
 
-# Edit the emails in a local tmp/ directory, thus ensuring that I do not lose work when computer crashes
-set tmpdir="/home/gkapfham/.mutt/tmp"
 
 # Explicitly specify the mailboxes to display in the sidebar
 mailboxes imaps://imap.gmail.com:993/INBOX imaps://imap.gmail.com:993/advise2017 imaps://imap.gmail.com:993/advise2018 imaps://imap.gmail.com:993/chair2017 imaps://imap.gmail.com:993/chair2018 imaps://imap.gmail.com:993/avmf imaps://imap.gmail.com:993/dbtest imaps://imap.gmail.com:993/kanonizo imaps://imap.gmail.com:993/papers imaps://imap.gmail.com:993/redecheck imaps://imap.gmail.com:993/research imaps://imap.gmail.com:993/research2017 imaps://imap.gmail.com:993/reviews2017 imaps://imap.gmail.com:993/reviews2018 "imaps://imap.gmail.com:993/[Gmail]/Drafts" "imaps://imap.gmail.com:993/[Gmail]/Starred" "imaps://imap.gmail.com:993/[Gmail]/Trash" "imaps://imap.gmail.com:993/[Gmail]/All Mail" "imaps://imap.gmail.com:993/[Gmail]/Sent Mail"
@@ -80,13 +91,6 @@ set markers
 # Don't wrap mid-word
 set smart_wrap
 
-# Configure the display of entries in the email headers
-set save_name=yes
-my_hdr From: "Gregory M. Kapfhammer" <gkapfham@allegheny.edu>
-my_hdr Bcc: "Gregory M. Kapfhammer" <gkapfham@gmail.com>
-hdr_order From Date: From: To: Cc: Subject:
-set move=no
-auto_view text/html text/enriched application/postscript image/gif
 
 # Quote msg when replying
 set include
