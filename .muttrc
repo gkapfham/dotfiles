@@ -7,11 +7,12 @@ unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
 unignore posted-to:
 
 # Display entries in the email headers
+
 set save_name=yes
+set move=no
 my_hdr From: "Gregory M. Kapfhammer" <gkapfham@allegheny.edu>
 my_hdr Bcc: "Gregory M. Kapfhammer" <gkapfham@gmail.com>
 hdr_order From Date: From: To: Cc: Subject:
-set move=no
 auto_view text/html text/enriched application/postscript image/gif
 
 # Enable header editing in Vim or Neovim
@@ -101,13 +102,6 @@ set mail_check_stats
 bind index,pager \cp sidebar-prev
 bind index,pager \cn sidebar-next
 bind index,pager \co sidebar-open
-
-# }}}
-
-# NeoMutt {{{
-
-# Check to see if there is a missing attachment
-set abort_noattach="ask-yes"
 
 # }}}
 
