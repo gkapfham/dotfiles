@@ -41,8 +41,7 @@ git clone https://github.com/gkapfham/dotfiles.git
 
 Now, you can type `cd dotfiles` and start to browse the configuration files that
 are available. I suggest that you make symbolic links from your home directory
-to this repository if you want to create and use these configuration files in a
-disciplined fashion.
+to this repository if you want to maintain and use these configuration files.
 
 ## Problems or Praise?
 
