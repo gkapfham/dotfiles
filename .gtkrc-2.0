@@ -1,6 +1,6 @@
 # GTK theme preferences
 
 style "vimfix" {
-  bg[NORMAL] = "#1c1c1c" # this matches my gvim theme 'Normal' bg color.
+  bg[NORMAL] = "#1c1c1c" # This matches my gvim theme 'Normal' bg color.
 }
 widget "vim-main-window.*GtkForm" style "vimfix"
