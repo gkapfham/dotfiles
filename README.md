@@ -12,10 +12,10 @@ programs such as `nvim`, `vim`, `zsh`, `mutt`, and `tmux`.
 
 This is a summary of the dotfiles that I currently provide:
 
-- `.Rprofile`:
-- .Xresources
-- .bibtoolrsc
-- .ctags
+- `.Rprofile`: initializations for the R programming language
+- `.Xresources`: configuration for the Rofi for displaying menus
+- `.bibtoolrsc`: configuration for the `bibtool` program's BibTeX management
+- `.ctags`: extensions for `exuberant-ctags` to handle new languages
 - .gitignore_global
 - .gtkrc-2.0
 - .gvimrc
