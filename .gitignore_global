@@ -207,7 +207,7 @@ pyvenv.cfg
 *.Rhistory
 *.Rincr_history
 
-# CTags #
+# Ctags #
 #########
 tags
 .tags
