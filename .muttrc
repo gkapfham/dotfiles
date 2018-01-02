@@ -32,6 +32,13 @@ set text_flowed=yes
 
 # }}}
 
+# Display {{{
+
+# Don't wrap mid-word
+set smart_wrap
+
+# }}}
+
 # Gmail Integration {{{
 
 # Ignore spaces in the names of folders
@@ -77,6 +84,8 @@ set abort_noattach="ask-yes"
 
 # }}}
 
+# Colors {{{
+
 # Mutt colors for dark background
 color   hdrdefault   color172               default
 color   quoted       color13                default
@@ -95,6 +104,8 @@ color   index        color246               default ~F
 color   index        color246               default "~N|~O"
 color   progress     white                  color237
 
+# }}}
+
 # Confirm when appending messages to an existing mailbox?
 set confirmappend=no
 
@@ -108,8 +119,6 @@ set pager_stop = yes
 # Mark wrapped lines of text in the pager with a +
 set markers
 
-# Don't wrap mid-word
-set smart_wrap
 
 
 # Quote msg when replying
