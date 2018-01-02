@@ -32,6 +32,20 @@ set text_flowed=yes
 
 # }}}
 
+# Standard Configuration {{{
+
+# Confirm when appending messages to an existing mailbox?
+set confirmappend=no
+
+# }}}
+
+# NeoMutt Configuration {{{
+
+# Check to see if there is a missing attachment
+set abort_noattach="ask-yes"
+
+# }}}
+
 # Display {{{
 
 # Don't wrap mid-word
