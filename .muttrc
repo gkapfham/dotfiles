@@ -19,9 +19,6 @@ set edit_headers=yes
 
 # }}}
 
-# Set all emails to have flowing text, accommodating for mobile devices
-set text_flowed=yes
-
 # Editing {{{
 
 # Jump to the first blank link when editing the emails; skip the header
@@ -29,6 +26,9 @@ set editor="nvim +/^$ ++1"
 
 # Edit the emails in a local tmp/ directory, saving work from crashes
 set tmpdir="/home/gkapfham/.mutt/tmp"
+
+# Set all emails to have flowing text, accommodating for mobile devices
+set text_flowed=yes
 
 # }}}
 
