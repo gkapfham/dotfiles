@@ -47,31 +47,30 @@ local.properties
 *-blx.bib
 *.run.xml
 
-## Build tool auxiliary files:
-######################
+## Build tool auxiliary files #
+###############################
 *.fdb_latexmk
 *.synctex.gz
 *.pdfsync
 *.synctex.gz(busy)
 
-# algorithms
-######################
+# Algorithms #
+##############
 *.alg
 *.loa
 
-# theorems
-######################
-# amsthm
+# Theorems #
+############
 *.thm
 
-# beamer
-######################
+# Beamer #
+##########
 *.nav
 *.snm
 *.vrb
 
-# glossaries
-######################
+# Glossaries #
+##############
 *.acn
 *.acr
 *.glg
