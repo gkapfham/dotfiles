@@ -1,8 +1,15 @@
-# Ignore many header entries and then only display some
+# Headers {{{
+
+# Ignore all header entries and then only display some
 ignore *
 unignore from date subject to cc
 unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
 unignore posted-to:
+
+# Enable header editing in vim or neovim
+set edit_headers=yes
+
+# }}}
 
 # Set all of our emails to have flowing text, accommodating for mobile devices
 set text_flowed=yes
@@ -38,8 +45,6 @@ bind index,pager \co sidebar-open
 # Check to see if there is a missing attachment
 set abort_noattach="ask-yes"
 
-# Make it possible to edit the headers in the (n)vim
-set edit_headers=yes
 
 # Mutt colors for dark background
 color   hdrdefault   color172               default
