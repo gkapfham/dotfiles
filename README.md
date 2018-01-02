@@ -2,7 +2,7 @@
 
 This repository contains the configuration files (i.e., "dotfiles") used to
 configure the programs regularly used by [Gregory M.
-Kapfhammer](http://www.cs.allegheny.edu/sites/gkapfham).  Please note that all
+Kapfhammer](http://www.cs.allegheny.edu/sites/gkapfham). Please note that all
 of the dotfiles in this repository are "hard-coded" to work for my development
 environment and projects. For instance, these configuration files are written
 under the assumption that the developer will use Ubuntu 16.04. But, even though
