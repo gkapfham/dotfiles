@@ -10,7 +10,7 @@ configuration files under the assumption that the developer will use Ubuntu
 reusable and, additionally, will give examples of how to configure various
 programs such as `nvim`, `vim`, `zsh`, `mutt`, and `tmux`.
 
-This is a summary of the dotfiles that I currently provide:
+This is a summary of the dotfiles that I currently provide and maintain:
 
 - `.Rprofile`: initialization for the R programming language
 - `.Xresources`: configuration for the Rofi for displaying menus
@@ -23,13 +23,13 @@ This is a summary of the dotfiles that I currently provide:
 - `.latexmkrc`: configuration for the `latexmk` wrapper for LaTeX compilers
 - `.mailcap`: configuration for how MIME-enabled programs load files
 - `.minivimrc`: minimal configuration of `vim` and `nvim` for testing purposes
-- .msmtprc
-- .muttprintrc
-- .muttrc
-- .signature
-- .tmux.conf
-- .vimrc
-- .zshrc
+- `.msmtprc`: legacy configuration for the `msmtp` SMTP client
+- `.muttprintrc`: configuration of the `muttprint` program for printing emails
+- `.muttrc`: configuration of the `mutt` mail user agent
+- `.signature`: footer displayed by `mutt` in all email messages
+- `.tmux.conf`: configuration of the `tmux` terminal multiplexing tool
+- `.vimrc`: configuration for the `nvim` and `vim` text editors
+- `.zshrc`: configuration for the `zsh` shell to use oh-my-zsh
 
 ## Installation Instructions
 
