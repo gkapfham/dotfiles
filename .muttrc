@@ -7,7 +7,6 @@ unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
 unignore posted-to:
 
 # Display entries in the email headers
-
 set save_name=yes
 set move=no
 my_hdr From: "Gregory M. Kapfhammer" <gkapfham@allegheny.edu>
