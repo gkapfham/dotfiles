@@ -88,22 +88,22 @@ set abort_noattach="ask-yes"
 
 # Mutt colors for dark background
 
-color   attachment   color12                default
-color   error        color246               default
-color   hdrdefault   color172               default
-color   index        color246               default "~N|~O"
-color   index        color246               default ~F
-color   indicator    color15                default
-color   markers      color237               default
-color   message      color246               default
-color   normal       color246               default
-color   progress     white                  color237
-color   quoted       color13                default
-color   search       white                  default
-color   signature    color3                 default
-color   status       color246               default
-color   tilde        white                  default
-color   tree         color8                 default
+color attachment color12  default
+color error      color246 default
+color hdrdefault color172 default
+color index      color246 default "~N|~O"
+color index      color246 default ~F
+color indicator  color15  default
+color markers    color237 default
+color message    color246 default
+color normal     color246 default
+color progress   white    color237
+color quoted     color13  default
+color search     white    default
+color signature  color3   default
+color status     color246 default
+color tilde      white    default
+color tree       color8   default
 
 # }}}
 
