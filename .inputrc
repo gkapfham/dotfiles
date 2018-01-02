@@ -6,7 +6,6 @@ $if mode=vi
     "\C-l": clear-screen
     "\C-p": history-search-backward
     "\C-n": history-search-forward
-    # alt dot cycles through last argument
     "\e.":yank-last-arg
 
     set keymap vi-command
