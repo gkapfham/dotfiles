@@ -135,7 +135,7 @@ color tree       color8   default
 
 # }}}
 
-
+# Security {{{
 
 # Configure SSL
 set ssl_force_tls=yes
@@ -145,10 +145,12 @@ set ssl_verify_host=yes
 
 # Configure the logins with GPG decryption for the password
 set my_foo_pass="`gpg --quiet --for-your-eyes-only -d ~/.mutt/password.gpg`"
-set imap_user = "gkapfham@allegheny.edu"
+set imap_user="gkapfham@allegheny.edu"
 set imap_pass=$my_foo_pass
 set smtp_pass=$my_foo_pass
 set smtp_url = "smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
+
+# }}}
 
 # Allow mutt to performing caching as a way to improve performance
 # NOTE: commented out as it seems to limit stability
