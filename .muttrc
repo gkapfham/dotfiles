@@ -6,7 +6,7 @@ unignore from date subject to cc
 unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
 unignore posted-to:
 
-# Configure the display of entries in the email headers
+# Display entries in the email headers
 set save_name=yes
 my_hdr From: "Gregory M. Kapfhammer" <gkapfham@allegheny.edu>
 my_hdr Bcc: "Gregory M. Kapfhammer" <gkapfham@gmail.com>
