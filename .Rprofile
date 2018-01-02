@@ -1,4 +1,4 @@
-options(menu.graphics=FALSE)
+options(menu.graphics = FALSE)
 
 library(colorout)
 setOutputColors256(normal = 250, negnum = 237, zero = 237,
