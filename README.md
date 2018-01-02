@@ -7,8 +7,8 @@ the dotfiles in this repository are, at least to some extent, "hard-coded" to
 work for my development environment and projects. For instance, I created these
 configuration files under the assumption that the developer will use Ubuntu
 16.04. Even though they are heavily customized, my hope is that they are largely
-reusable and will give examples of how to configure various programs such as
-`neovim`, `vim`, `zsh`, `mutt`, and `tmux`.
+reusable and, additionally, will give examples of how to configure various
+programs such as `nvim`, `vim`, `zsh`, `mutt`, and `tmux`.
 
 This is a summary of the dotfiles that I currently provide:
 
