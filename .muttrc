@@ -101,7 +101,7 @@ set trash="+[Gmail]/Trash"
 
 # Set the depth of the imap operation pipeline (normally 15)
 # Setting the value to 0 makes mutt slower, but more reliable, maybe
-set imap_pipeline_depth=10
+set imap_pipeline_depth=15
 
 # Define how frequently mutt tells IMAP server to persist connection
 set imap_keepalive=300
