@@ -380,7 +380,7 @@ let g:livedown_port = 4200
 autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 
 " Define linting for email
-let g:ale_linter_aliases = {'mail': 'tex'}
+let g:ale_linter_aliases = {'mail': 'tex', 'liquid': 'markdown'}
 
 " }}}
 
