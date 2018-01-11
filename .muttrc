@@ -178,8 +178,8 @@ set certificate_file=~/.mutt/certificates
 # Cache {{{
 
 # Allow mutt to performing caching as a way to improve performance
-set header_cache=~/.mutt/cache/headers
-set message_cachedir=~/.mutt/cache/bodies
+# set header_cache=~/.mutt/cache/headers
+# set message_cachedir=~/.mutt/cache/bodies
 
 # }}}
 
