@@ -235,3 +235,5 @@ usage() {
 [ -f /home/gkapfham/.travis/travis.sh ] && source /home/gkapfham/.travis/travis.sh
 
 # }}}
+
+# source /usr/local/etc/profile.d/vte.sh
