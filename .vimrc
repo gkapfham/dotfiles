@@ -329,6 +329,9 @@ augroup configurationgroupforfiletypes
   autocmd Filetype python setlocal shiftwidth=4
   autocmd FileType python BracelessEnable
 
+  " Force hard wrapping for configuration files
+  autocmd FileType conf set formatoptions+=t
+
   " When linting is costly in Java, only perform it in normal mode
   autocmd Filetype java call SetJavaLintingOptions()
   function! SetJavaLintingOptions()
@@ -363,7 +366,7 @@ let R_show_args = 1
 " Force Jedi to use version 3
 let g:jedi#force_py_version = 3
 
-" Format Python code according to Google's standard
+" Format Python code according to the PEP8 standard
 let g:formatter_yapf_style = 'pep8'
 
 " Indenting for HTML
