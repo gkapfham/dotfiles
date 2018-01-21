@@ -78,7 +78,7 @@ call plug#end()
 
 " System {{{
 
-"Enable spell checking
+" Enable spell checking
 syntax spell toplevel
 
 " Make changes automatically saved during Qdo
