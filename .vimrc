@@ -207,8 +207,8 @@ let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
 let g:airline#extensions#hunks#non_zero_only = 0
 let g:airline#extensions#tabline#buffer_idx_mode = 0
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#show_tab_nr = 0
+let g:airline#extensions#tabline#fnamemod = ':t:.'
+let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-indent-file']
 let g:airline#extensions#whitespace#enabled = 1
@@ -216,6 +216,11 @@ let g:airline#extensions#wordcount#enabled = 0
 let g:airline_powerline_fonts = 1
 let g:airline_theme='tomorrow'
 set laststatus=2
+
+" TODO: These might be needed to solve the spacing issue.
+
+" let g:airline#extensions#tabline#buffer_nr_show = 1
+" let g:airline#extensions#tabline#buffer_nr_format = ' %s: '
 
 " Create an empty airline_symbols variable
 if !exists('g:airline_symbols')
@@ -235,6 +240,10 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.spell = 'A-Z✔'
 let g:airline_symbols.notexists = '  '
 let g:airline_symbols.whitespace = 'Ξ'
+
+" Add the extra spacing in the tabline for buffers
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = ' '
 
 " Do not display the standard status line
 set noshowmode
@@ -621,6 +630,13 @@ augroup dirvishconfiguration
   autocmd FileType dirvish nnoremap <silent><buffer>
         \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
 augroup END
+
+" }}}
+
+" Fugitive {{
+
+" Run Fugitive commands asynchronously using AsyncRun
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
 " }}}
 
