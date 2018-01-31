@@ -519,9 +519,6 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 nmap <silent> <C-k> <Plug>(ale_previous)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" Format a paragraph quickly
-" nmap fp gqip
-
 " Quickly switch between two recent buffers
 function! SwitchBuffer()
   b#
