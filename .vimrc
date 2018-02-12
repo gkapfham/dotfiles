@@ -217,11 +217,6 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='tomorrow'
 set laststatus=2
 
-" TODO: These might be needed to solve the spacing issue.
-
-" let g:airline#extensions#tabline#buffer_nr_show = 1
-" let g:airline#extensions#tabline#buffer_nr_format = ' %s: '
-
 " Create an empty airline_symbols variable
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -240,10 +235,6 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.spell = 'A-Z✔'
 let g:airline_symbols.notexists = '  '
 let g:airline_symbols.whitespace = 'Ξ'
-
-" Add the extra spacing in the tabline for buffers
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = ' '
 
 " Do not display the standard status line
 set noshowmode
