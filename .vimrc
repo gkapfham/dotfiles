@@ -245,7 +245,7 @@ let g:gitgutter_async = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:gitgutter_signs = 1
-let g:gitgutter_grep_command = 'ag --nocolor'
+" let g:gitgutter_grep_command = 'ag --nocolor'
 set signcolumn=yes
 set updatetime=100
 
