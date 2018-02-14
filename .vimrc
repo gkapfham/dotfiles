@@ -245,6 +245,7 @@ let g:gitgutter_async = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:gitgutter_signs = 1
+let g:gitgutter_grep_command = 'ag --nocolor'
 set signcolumn=yes
 
 " Use a different symbol in the gutter
