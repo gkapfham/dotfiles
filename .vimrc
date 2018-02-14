@@ -796,6 +796,7 @@ if has("nvim")
   let g:loaded_youcompleteme = 1
   let g:deoplete#enable_at_startup = 0
   let g:deoplete#auto_complete_delay = 1
+  let g:deoplete#max_abbr_width = 40
   autocmd InsertEnter * call deoplete#enable()
 
   " Configure deoplete so that it uses tabs
