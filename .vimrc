@@ -243,10 +243,10 @@ set noshowmode
 " Display version control details in gutter
 let g:gitgutter_async = 1
 let g:gitgutter_eager = 1
-let g:gitgutter_realtime = 0
+let g:gitgutter_realtime = 1
 let g:gitgutter_signs = 1
 set signcolumn=yes
-set updatetime=100
+set updatetime=1000
 
 " Use a different symbol in the gutter
 let g:gitgutter_sign_removed_first_line = '^'
