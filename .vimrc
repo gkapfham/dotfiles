@@ -241,7 +241,6 @@ let g:airline_symbols.whitespace = 'Ξ'
 set noshowmode
 
 " Display version control details in gutter
-" let g:gitgutter_sign_column_always = 1
 let g:gitgutter_async = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
