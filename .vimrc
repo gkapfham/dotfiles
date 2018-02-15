@@ -248,10 +248,10 @@ let g:gitgutter_realtime = 1
 let g:gitgutter_signs = 1
 
 " Display the sign column for Gitgutter
-set signcolumn=yes
+set signcolumn = yes
 
 " Configure how quickly interface updates
-set updatetime=500
+set updatetime = 500
 
 " Use a different symbol in the gutter
 let g:gitgutter_sign_removed_first_line = '^'
