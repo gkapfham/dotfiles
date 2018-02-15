@@ -283,6 +283,11 @@ augroup magitconfiguration
 
 augroup END
 
+" Configure magit to display in a minimal fashion
+let g:magit_default_sections = ['commit', 'staged', 'unstaged']
+
+nmap <Space>s :MagitOnly <CR>
+
 " Configure the display of parentheses matching
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
