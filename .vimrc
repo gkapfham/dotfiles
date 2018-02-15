@@ -241,14 +241,16 @@ let g:airline_symbols.whitespace = 'Ξ'
 " Do not display the standard status line
 set noshowmode
 
-" Display version control details in gutter
+" Display Git version control details in gutter
 let g:gitgutter_async = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
 let g:gitgutter_signs = 1
 
-" configure
+" Display the sign column for Gitgutter
 set signcolumn=yes
+
+" Configure how quickly interface updates
 set updatetime=750
 
 " Use a different symbol in the gutter
