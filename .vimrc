@@ -251,7 +251,7 @@ let g:gitgutter_signs = 1
 set signcolumn=yes
 
 " Configure how quickly interface updates
-set updatetime=750
+set updatetime=100
 
 " Use a different symbol in the gutter
 let g:gitgutter_sign_removed_first_line = '^'
