@@ -249,7 +249,7 @@ let g:gitgutter_signs = 1
 
 " configure
 set signcolumn=yes
-set updatetime=1000
+set updatetime=750
 
 " Use a different symbol in the gutter
 let g:gitgutter_sign_removed_first_line = '^'
