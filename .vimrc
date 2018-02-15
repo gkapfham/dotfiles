@@ -240,23 +240,44 @@ let g:airline_symbols.spell = 'A-Z✔'
 let g:airline_symbols.notexists = '  '
 let g:airline_symbols.whitespace = 'Ξ'
 
-" Do not display the standard status line
-set noshowmode
+let g:signify_vcs_list = ['git']
 
-" Display Git version control details in the gutter
-let g:gitgutter_async = 1
-let g:gitgutter_eager = 1
-let g:gitgutter_realtime = 0
-let g:gitgutter_signs = 1
+let g:signify_realtime = 1
+let g:signify_update_on_focusgained = 1
+
+let g:signify_sign_add               = '+'
+let g:signify_sign_delete            = '-'
+let g:signify_sign_delete_first_line = '^'
+let g:signify_sign_change            = '~'
+let g:signify_sign_changedelete      = g:signify_sign_change
 
 " Display the sign column for Gitgutter
 set signcolumn=yes
 
+" Do not display the standard status line
+set noshowmode
+
 " Configure how quickly interface updates
-set updatetime=1000
+set updatetime=100
+
+" " Display Git version control details in the gutter
+" let g:gitgutter_async = 1
+" let g:gitgutter_eager = 1
+" let g:gitgutter_realtime = 0
+" let g:gitgutter_signs = 1
 
 " Use a different symbol in the gutter
-let g:gitgutter_sign_removed_first_line = '^'
+" let g:gitgutter_sign_removed_first_line = '^'
+
+augroup magitconfiguration
+  autocmd!
+
+  " Disable spell checking for the Dirvish buffers
+  autocmd FileType magit setlocal nospell
+
+  set listchars=tab:▸▹,extends:#,precedes:#,nbsp:⌻
+
+augroup END
 
 " Configure the display of parentheses matching
 let g:mta_use_matchparen_group = 0
