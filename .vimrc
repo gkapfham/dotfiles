@@ -826,7 +826,7 @@ if has("nvim")
         \ 'github_complete#complete'
         \]
 
-  " Configure deoplete to work with LaTeX and vimtex plugin
+  " Configure deoplete to work with LaTeX and the vimtex plugin
   if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
   endif
