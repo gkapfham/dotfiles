@@ -174,7 +174,8 @@ set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
 set list
 
 " Display with faster timeouts in the TUI
-set timeoutlen=1000 ttimeoutlen=10
+set timeoutlen=1000
+set ttimeoutlen=10
 
 " Display matching parentheses
 set showmatch
