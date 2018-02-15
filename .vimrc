@@ -202,7 +202,7 @@ let g:lt_location_list_toggle_map = '<leader>c'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 
 " Display and configure the airline
-let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
 let g:airline#extensions#hunks#non_zero_only = 0
