@@ -243,23 +243,25 @@ let g:airline_symbols.whitespace = 'Ξ'
 " Only allow signify to manage Git repos
 let g:signify_vcs_list = ['git']
 
+" Configure signify to update in rapidly
 let g:signify_realtime = 1
 let g:signify_update_on_focusgained = 1
 
+" Define new display symbols for signify
 let g:signify_sign_add               = '+'
 let g:signify_sign_delete            = '-'
 let g:signify_sign_delete_first_line = '^'
 let g:signify_sign_change            = '~'
 let g:signify_sign_changedelete      = g:signify_sign_change
 
-" Display the sign column for Gitgutter
+" Display the sign column for version control
 set signcolumn=yes
-
-" Do not display the standard status line
-set noshowmode
 
 " Configure how quickly interface updates
 set updatetime=100
+"
+" Do not display the standard status line
+set noshowmode
 
 " " Display Git version control details in the gutter
 " let g:gitgutter_async = 1
