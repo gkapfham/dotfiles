@@ -69,6 +69,8 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'mhinz/vim-signify'
+Plug 'jreybert/vimagit'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
