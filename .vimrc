@@ -244,6 +244,7 @@ set noshowmode
 " Display Git version control details in gutter
 let g:gitgutter_async = 1
 let g:gitgutter_eager = 1
+let g:gitgutter_grep_command = 'ag --nocolor'
 let g:gitgutter_realtime = 1
 let g:gitgutter_signs = 1
 
@@ -800,6 +801,7 @@ if has("nvim")
   let g:deoplete#enable_at_startup = 0
   let g:deoplete#auto_complete_delay = 1
   let g:deoplete#max_abbr_width = 40
+  let g:deoplete#enable_refresh_always = 1
   autocmd InsertEnter * call deoplete#enable()
 
   " Configure deoplete so that it uses tabs
