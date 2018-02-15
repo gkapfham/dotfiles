@@ -240,6 +240,7 @@ let g:airline_symbols.spell = 'A-Z✔'
 let g:airline_symbols.notexists = '  '
 let g:airline_symbols.whitespace = 'Ξ'
 
+" Only allow signify to manage Git repos
 let g:signify_vcs_list = ['git']
 
 let g:signify_realtime = 1
