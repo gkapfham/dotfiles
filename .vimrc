@@ -241,7 +241,7 @@ let g:airline_symbols.whitespace = 'Ξ'
 " Do not display the standard status line
 set noshowmode
 
-" Display Git version control details in gutter
+" Display Git version control details in the gutter
 let g:gitgutter_async = 1
 let g:gitgutter_eager = 1
 let g:gitgutter_realtime = 1
