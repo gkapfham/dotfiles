@@ -85,7 +85,7 @@ syntax spell toplevel
 " Make changes automatically saved during Qdo
 set autowrite
 
-" Enable spell checking
+" Enable spell checking with two dictionaries
 set spell spelllang=en_us,en_gb
 set mousemodel=popup
 
