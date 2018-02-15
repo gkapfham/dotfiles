@@ -272,12 +272,14 @@ set noshowmode
 " Use a different symbol in the gutter
 " let g:gitgutter_sign_removed_first_line = '^'
 
+" Special configuration for magit buffers
 augroup magitconfiguration
   autocmd!
 
   " Disable spell checking for the Dirvish buffers
   autocmd FileType magit setlocal nospell
 
+  " Do not display trailing spaces in magit
   set listchars=tab:▸▹,extends:#,precedes:#,nbsp:⌻
 
 augroup END
