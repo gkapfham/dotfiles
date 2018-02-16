@@ -879,7 +879,7 @@ if has("nvim")
 endif
 
 if has("nvim")
-  " disable jedi-vim's completion engine, use all features otherwise
+  " Disable jedi-vim's completion engine, use all features otherwise
   let g:jedi#auto_vim_configuration = 0
   let g:jedi#completions_enabled = 0
 endif
