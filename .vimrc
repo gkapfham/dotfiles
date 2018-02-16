@@ -4,6 +4,7 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'airblade/vim-gitgutter'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -13,7 +14,6 @@ Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/MatchTagAlways', {'for': ['html', 'md', 'liquid']}
 Plug 'Valloric/YouCompleteMe'
-" Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
 Plug 'bkad/CamelCaseMotion'
@@ -31,6 +31,7 @@ Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
 Plug 'jgdavey/tslime.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -40,6 +41,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-highlightedyank'
+Plug 'mhinz/vim-signify'
 Plug 'pgdouyon/vim-evanesco'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
 Plug 'rhysd/github-complete.vim'
