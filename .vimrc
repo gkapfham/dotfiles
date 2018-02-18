@@ -248,37 +248,6 @@ set signcolumn=yes
 " Configure how quickly interface updates
 set updatetime=500
 
-" Only allow signify to manage Git repos
-let g:signify_vcs_list = ['git']
-
-" Configure signify to update rapidly
-let g:signify_realtime = 1
-let g:signify_update_on_focusgained = 1
-
-" Define new display symbols for signify
-let g:signify_sign_add               = '+'
-let g:signify_sign_delete            = '-'
-let g:signify_sign_delete_first_line = '^'
-let g:signify_sign_change            = '~'
-let g:signify_sign_changedelete      = g:signify_sign_change
-
-" Special configuration for magit buffers
-augroup magitconfiguration
-  autocmd!
-  " Disable spell checking for the Dirvish buffers
-  autocmd FileType magit setlocal nospell
-
-  " Do not display trailing spaces in magit
-  autocmd FileType magit setlocal listchars=tab:▸▹,extends:#,precedes:#,nbsp:⌻
-augroup END
-
-" Configure magit to display in a minimal fashion
-let g:magit_default_sections = ['commit', 'staged', 'unstaged']
-let g:magit_default_fold_level = 2
-
-" Define a command to load magit in full-screen mode
-nmap <Space>s :MagitOnly <CR>
-
 " Configure the display of parentheses matching
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
@@ -295,6 +264,41 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr()<CR>
+
+" }}}
+
+" Version Control {{{
+
+" Only allow signify to manage Git repos
+let g:signify_vcs_list = ['git']
+
+" Configure signify to update rapidly
+let g:signify_realtime = 1
+let g:signify_update_on_focusgained = 1
+
+" Define new display symbols for signify
+let g:signify_sign_add               = '+'
+let g:signify_sign_delete            = '-'
+let g:signify_sign_delete_first_line = '^'
+let g:signify_sign_change            = '~'
+let g:signify_sign_changedelete      = g:signify_sign_change
+
+" Configure magit to display in a minimal fashion
+let g:magit_default_sections = ['commit', 'staged', 'unstaged']
+let g:magit_default_fold_level = 2
+
+" Define a command to load magit in full-screen mode
+nmap <Space>s :MagitOnly <CR>
+
+" Special configuration for magit buffers
+augroup magitconfiguration
+  autocmd!
+  " Disable spell checking for the Dirvish buffers
+  autocmd FileType magit setlocal nospell
+
+  " Do not display trailing spaces in magit
+  autocmd FileType magit setlocal listchars=tab:▸▹,extends:#,precedes:#,nbsp:⌻
+augroup END
 
 " }}}
 
