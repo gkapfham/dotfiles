@@ -203,6 +203,9 @@ let g:highlightedyank_highlight_duration = 250
 let g:lt_location_list_toggle_map = '<leader>c'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 
+" Do not display the standard status line
+set noshowmode
+
 " Display and configure the airline
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#hunks#enabled = 1
@@ -259,8 +262,6 @@ set signcolumn=yes
 " Configure how quickly interface updates
 set updatetime=500
 
-" Do not display the standard status line
-set noshowmode
 
 " Special configuration for magit buffers
 augroup magitconfiguration
@@ -631,7 +632,6 @@ nmap <silent> <leader>s :set spell!<CR>
 
 augroup dirvishconfiguration
   autocmd!
-
   " Disable spell checking for the Dirvish buffers
   autocmd FileType dirvish setlocal nospell
 
