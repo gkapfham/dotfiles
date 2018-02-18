@@ -262,13 +262,6 @@ let g:signify_sign_delete_first_line = '^'
 let g:signify_sign_change            = '~'
 let g:signify_sign_changedelete      = g:signify_sign_change
 
-" Display the sign column for version control
-set signcolumn=yes
-
-" Configure how quickly interface updates
-set updatetime=500
-
-
 " Special configuration for magit buffers
 augroup magitconfiguration
   autocmd!
