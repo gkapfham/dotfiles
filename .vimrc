@@ -4,7 +4,6 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'airblade/vim-gitgutter'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'MarcWeber/vim-addon-mw-utils'
