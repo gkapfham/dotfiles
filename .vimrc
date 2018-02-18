@@ -274,7 +274,7 @@ augroup END
 
 " Configure magit to display in a minimal fashion
 let g:magit_default_sections = ['commit', 'staged', 'unstaged']
-let g:magit_default_fold_level=2
+let g:magit_default_fold_level = 2
 
 " Define a command to load magit in full-screen mode
 nmap <Space>s :MagitOnly <CR>
