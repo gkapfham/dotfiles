@@ -242,6 +242,12 @@ let g:airline_symbols.spell = 'A-Z✔'
 let g:airline_symbols.notexists = '  '
 let g:airline_symbols.whitespace = 'Ξ'
 
+" Display the sign column for version control
+set signcolumn=yes
+
+" Configure how quickly interface updates
+set updatetime=500
+
 " Only allow signify to manage Git repos
 let g:signify_vcs_list = ['git']
 
