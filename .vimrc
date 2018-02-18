@@ -262,14 +262,6 @@ set updatetime=500
 " Do not display the standard status line
 set noshowmode
 
-" " Display Git version control details in the gutter
-" let g:gitgutter_async = 1
-" let g:gitgutter_eager = 1
-" let g:gitgutter_realtime = 0
-" let g:gitgutter_signs = 1
-" Use a different symbol in the gutter
-" let g:gitgutter_sign_removed_first_line = '^'
-
 " Special configuration for magit buffers
 augroup magitconfiguration
   autocmd!
