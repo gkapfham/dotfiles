@@ -257,8 +257,8 @@ let g:signify_sign_changedelete      = g:signify_sign_change
 set signcolumn=yes
 
 " Configure how quickly interface updates
-set updatetime=100
-"
+set updatetime=500
+
 " Do not display the standard status line
 set noshowmode
 
