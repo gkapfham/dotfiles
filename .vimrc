@@ -342,7 +342,6 @@ filetype indent plugin on | syn on
 " Configure settings for different file types
 augroup configurationgroupforfiletypes
   autocmd!
-
   " Set the completion function for different file types
   autocmd FileType css set omnifunc=csscomplete#CompleteCSS
   autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
@@ -380,7 +379,6 @@ augroup configurationgroupforfiletypes
     let g:ale_lint_delay = 500
     let g:ale_lint_on_enter = 0
   endfunction
-
 augroup END
 
 " Syntax highlighting for Java
