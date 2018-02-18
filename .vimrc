@@ -242,7 +242,7 @@ let g:airline_symbols.whitespace = 'Ξ'
 " Only allow signify to manage Git repos
 let g:signify_vcs_list = ['git']
 
-" Configure signify to update in rapidly
+" Configure signify to update rapidly
 let g:signify_realtime = 1
 let g:signify_update_on_focusgained = 1
 
