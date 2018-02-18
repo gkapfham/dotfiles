@@ -273,13 +273,11 @@ set noshowmode
 " Special configuration for magit buffers
 augroup magitconfiguration
   autocmd!
-
   " Disable spell checking for the Dirvish buffers
   autocmd FileType magit setlocal nospell
 
   " Do not display trailing spaces in magit
-  set listchars=tab:▸▹,extends:#,precedes:#,nbsp:⌻
-
+  autocmd FileType magit setlocal listchars=tab:▸▹,extends:#,precedes:#,nbsp:⌻
 augroup END
 
 " Configure magit to display in a minimal fashion
