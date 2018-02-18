@@ -335,8 +335,8 @@ let g:easytags_async = 1
 
 " Programming Languages {{{
 
-" Automatically identify the filetype for the plugins
-" and always use syntax highlighting
+" Automatically identify the filetype
+" Always use syntax highlighting
 filetype indent plugin on | syn on
 
 " Configure settings for different file types
