@@ -4,6 +4,7 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'ervandew/supertab'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -21,7 +22,6 @@ Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
-Plug 'ervandew/supertab'
 Plug 'fszymanski/deoplete-emoji'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
@@ -41,6 +41,7 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mhinz/vim-signify'
+Plug 'nixprime/cpsm', {'dir': '~/.vim/bundle/cpsm', 'do': 'PY3=ON ./install.sh'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
 Plug 'rhysd/github-complete.vim'
@@ -794,6 +795,14 @@ if has("nvim")
     autocmd BufWinLeave * call clearmatches()
   augroup END
 endif
+
+" Ensure that Neovim exits quickly when using fzf
+if has('nvim')
+  aug fzf_setup
+    au!
+    au TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
+  aug END
+end
 
 " Control FZF windows
 if has("nvim")
