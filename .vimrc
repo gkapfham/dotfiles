@@ -832,15 +832,15 @@ if has("nvim")
   let g:deoplete#enable_at_startup = 0
   let g:deoplete#auto_complete_delay = 1
   let g:deoplete#max_abbr_width = 40
-  let g:deoplete#enable_refresh_always = 1
+  let g:deoplete#enable_refresh_always = 0
   autocmd InsertEnter * call deoplete#enable()
 
   " Configure deoplete so that it uses tabs
   inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
   " Use a fast fuzzy matcher called cpsm
-  call deoplete#custom#source('_', 'matchers', ['matcher_cpsm'])
-  call deoplete#custom#source('_', 'sorters', [])
+  " call deoplete#custom#source('_', 'matchers', ['matcher_cpsm'])
+  " call deoplete#custom#source('_', 'sorters', [])
 
   " Define the cache limit for the tag files
   let g:deoplete#tag#cache_limit_size = 500000
