@@ -836,8 +836,6 @@ if has("nvim")
   autocmd InsertEnter * call deoplete#enable()
 
   " Configure deoplete so that it uses tabs
-  " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-  " let g:SuperTabDefaultCompletionType = "<C-n>"
   inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
   " Use a fast fuzzy matcher called cpsm
