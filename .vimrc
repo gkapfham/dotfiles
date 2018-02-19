@@ -832,7 +832,7 @@ if has("nvim")
   let g:deoplete#enable_at_startup = 0
   let g:deoplete#auto_complete_delay = 1
   let g:deoplete#max_abbr_width = 40
-  let g:deoplete#enable_refresh_always = 0
+  let g:deoplete#enable_refresh_always = 1
   autocmd InsertEnter * call deoplete#enable()
 
   " Configure deoplete so that it uses tabs
@@ -842,7 +842,7 @@ if has("nvim")
   call deoplete#custom#source('_', 'matchers', ['matcher_cpsm'])
   call deoplete#custom#source('_', 'sorters', [])
 
-  " Define a (large) cache limit for big tag files
+  " Define the cache limit for the tag files
   let g:deoplete#tag#cache_limit_size = 500000
 
   " Change the source rankings
