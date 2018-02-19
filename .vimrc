@@ -4,8 +4,6 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'AndrewRadev/splitjoin.vim'
-" Plug 'nixprime/cpsm', {'dir': '~/.vim/bundle/cpsm', 'do': 'PY3=ON ./install.sh'}
 Plug 'Chiel92/vim-autoformat'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
