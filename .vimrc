@@ -5,6 +5,7 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Plug 'AndrewRadev/splitjoin.vim'
+" Plug 'nixprime/cpsm', {'dir': '~/.vim/bundle/cpsm', 'do': 'PY3=ON ./install.sh'}
 Plug 'Chiel92/vim-autoformat'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
@@ -40,7 +41,6 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mhinz/vim-signify'
-Plug 'nixprime/cpsm', {'dir': '~/.vim/bundle/cpsm', 'do': 'PY3=ON ./install.sh'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
 Plug 'rhysd/github-complete.vim'
