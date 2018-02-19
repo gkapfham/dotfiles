@@ -838,10 +838,6 @@ if has("nvim")
   " Configure deoplete so that it uses tabs
   inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
-  " Use a fast fuzzy matcher called cpsm
-  " call deoplete#custom#source('_', 'matchers', ['matcher_cpsm'])
-  " call deoplete#custom#source('_', 'sorters', [])
-
   " Define the cache limit for the tag files
   let g:deoplete#tag#cache_limit_size = 500000
 
