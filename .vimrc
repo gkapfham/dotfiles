@@ -4,7 +4,7 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-Plug 'AndrewRadev/splitjoin.vim'
+" Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
@@ -24,7 +24,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'fszymanski/deoplete-emoji'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
-Plug 'hynek/vim-python-pep8-indent'
+Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
 Plug 'jgdavey/tslime.vim'
