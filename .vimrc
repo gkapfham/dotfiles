@@ -15,6 +15,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-rooter'
 Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
 Plug 'bkad/CamelCaseMotion'
+Plug 'bps/vim-textobj-python', {'for': 'python'}
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'christoomey/vim-sort-motion'
