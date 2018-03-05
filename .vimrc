@@ -178,8 +178,8 @@ set list
 set timeoutlen=1000
 set ttimeoutlen=10
 
-" Display matching parentheses
-set showmatch
+" " Display matching parentheses
+" set showmatch
 
 " " Run the matchit macro for tag matching
 " runtime macros/matchit.vim
