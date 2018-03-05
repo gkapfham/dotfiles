@@ -4,15 +4,16 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'Valloric/MatchTagAlways', {'for': ['html', 'md', 'liquid']}
 Plug 'Chiel92/vim-autoformat'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neco-syntax'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
-Plug 'Valloric/MatchTagAlways', {'for': ['html', 'md', 'liquid']}
 Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-rooter'
+Plug 'andymass/vim-matchup'
 Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
 Plug 'bkad/CamelCaseMotion'
 Plug 'bps/vim-textobj-python', {'for': 'python'}
@@ -180,8 +181,8 @@ set ttimeoutlen=10
 " Display matching parentheses
 set showmatch
 
-" Run the matchit macro for tag matching
-runtime macros/matchit.vim
+" " Run the matchit macro for tag matching
+" runtime macros/matchit.vim
 
 " Display indentation
 set autoindent
