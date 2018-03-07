@@ -697,6 +697,7 @@ nmap <C-p> :FZFMine<CR>
 nmap <Space>g :Tags <CR>
 nmap <Space>t :BTags <CR>
 nmap <Space>b :BLines <CR>
+nmap <Space>r :Lines <CR>
 nnoremap <Tab> :Buffers<CR>
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 
