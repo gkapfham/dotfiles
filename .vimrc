@@ -4,7 +4,6 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'Valloric/MatchTagAlways', {'for': ['html', 'md', 'liquid']}
 Plug 'Chiel92/vim-autoformat'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
