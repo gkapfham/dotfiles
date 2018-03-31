@@ -863,10 +863,12 @@ if has("nvim")
         \ 'github_complete#complete'
         \]
 
-  " Configure deoplete to work with LaTeX and the vimtex plugin
+  " Define the input_patterns mapping so that it can be configured
   if !exists('g:deoplete#omni#input_patterns')
     let g:deoplete#omni#input_patterns = {}
   endif
+
+  " Configure deoplete to work with LaTeX and the vimtex plugin
   let g:deoplete#omni#input_patterns.tex = '\\(?:'
         \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
         \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
