@@ -841,12 +841,12 @@ if has("nvim")
   let g:deoplete#tag#cache_limit_size = 500000
 
   " Change the source rankings
-  call deoplete#custom#set('around', 'rank', 600)
-  call deoplete#custom#set('buffer', 'rank', 500)
-  call deoplete#custom#set('ultisnips', 'rank', 400)
-  call deoplete#custom#set('look', 'rank', 300)
-  call deoplete#custom#set('tmux', 'rank', 200)
-  call deoplete#custom#set('tag', 'rank', 100)
+  call deoplete#custom#source('around', 'rank', 600)
+  call deoplete#custom#source('buffer', 'rank', 500)
+  call deoplete#custom#source('ultisnips', 'rank', 400)
+  call deoplete#custom#source('look', 'rank', 300)
+  call deoplete#custom#source('tmux', 'rank', 200)
+  call deoplete#custom#source('tag', 'rank', 100)
 
   " Register Java's completion function with deoplete
   let g:deoplete#omni#functions = {}
