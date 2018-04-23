@@ -33,6 +33,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
@@ -356,6 +357,25 @@ augroup configurationgroupforfiletypes
   " Force hard wrapping for configuration files
   autocmd FileType conf set formatoptions+=t
 
+  " Configuration for Mail that does soft wrapping
+  autocmd Filetype mail call SetMailWrappingOptions()
+  function! SetMailWrappingOptions()
+    set formatoptions=jtcqln
+    set wrap linebreak textwidth=0
+    set splitright
+  endfunction
+
+  " Create an invisible right-side buffer for wrapping
+  autocmd Filetype mail call CreateInvisibleEmailBuffer()
+  function! CreateInvisibleEmailBuffer()
+    highlight EndOfBuffer ctermfg=bg
+    set fillchars+=vert:\ 
+    75vnew
+    set nonumber norelativenumber
+    wincmd w
+  endfunction
+  command! Email call CreateInvisibleEmailBuffer()
+
   " When linting is costly in Java, only perform it in normal mode
   autocmd Filetype java call SetJavaLintingOptions()
   function! SetJavaLintingOptions()
@@ -371,6 +391,7 @@ augroup configurationgroupforfiletypes
     let g:ale_lint_delay = 500
     let g:ale_lint_on_enter = 0
   endfunction
+
 augroup END
 
 " Syntax highlighting for Java
