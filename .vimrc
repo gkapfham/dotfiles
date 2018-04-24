@@ -360,19 +360,20 @@ augroup configurationgroupforfiletypes
   " Configuration for Mail that does soft wrapping
   autocmd Filetype mail call SetMailWrappingOptions()
   function! SetMailWrappingOptions()
-    set formatoptions=jtcqln
-    set wrap linebreak textwidth=0
-    set splitright
+    setlocal formatoptions=jtcqln
+    setlocal wrap linebreak textwidth=0
+    setlocal splitright
   endfunction
 
   " Create an invisible right-side buffer for wrapping
   autocmd Filetype mail call CreateInvisibleEmailBuffer()
   function! CreateInvisibleEmailBuffer()
     highlight EndOfBuffer ctermfg=bg
-    set fillchars+=vert:\ 
+    setlocal fillchars+=vert:\ 
     75vnew
-    set nonumber norelativenumber
+    setlocal nonumber norelativenumber
     wincmd w
+    command! Quit :wqa
   endfunction
   command! Email call CreateInvisibleEmailBuffer()
 
