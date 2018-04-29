@@ -71,9 +71,9 @@ Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
-Plug 'xolox/vim-easytags'
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'skywind3000/vim-preview'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
