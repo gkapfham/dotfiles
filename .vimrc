@@ -286,12 +286,12 @@ let g:magit_default_sections = ['commit', 'staged', 'unstaged']
 let g:magit_default_fold_level = 1
 
 " Define a command to load magit in full-screen mode
-nmap <Space>s :MagitOnly <CR>
+nmap <Space>m :MagitOnly <CR>
 
 " Special configuration for magit buffers
 augroup magitconfiguration
   autocmd!
-  " Disable spell checking for the Dirvish buffers
+  " Disable spell checking for the magit buffers
   autocmd FileType magit setlocal nospell
 
   " Do not display trailing spaces in magit
