@@ -50,6 +50,7 @@ Plug 'rhysd/github-complete.vim'
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/vim-preview'
 Plug 'spacewander/vim-coloresque'
 Plug 'tfnico/vim-gradle'
 Plug 'tomtom/tlib_vim'
@@ -73,7 +74,6 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'skywind3000/vim-preview'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
