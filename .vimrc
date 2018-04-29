@@ -258,10 +258,13 @@ let g:mta_filetypes = {
 map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-map <F5> :call SyntaxAttr()<CR>
+map <F5> :call SyntaxAttr() <CR>
 
 " Display the current block of text/code in a highlighting limelight
 nmap <Space>f :Limelight!! <CR>
+
+" Display the signature of a function in the footer of the screen
+noremap <Space>s :PreviewSignature! <CR>
 
 " }}}
 
