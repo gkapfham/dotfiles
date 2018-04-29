@@ -38,3 +38,14 @@
 --regex-markdown=/^##[ \t]+(.*)/\1/i,Heading_L2/
 --regex-markdown=/^###[ \t]+(.*)/\1/k,Heading_L3/
 --regex-markdown=/^####[ \t]+(.*)/\1/k,Heading_L4/
+--langdef=Groovy
+--langmap=Groovy:.groovy
+--regex-Groovy=/^\s*package\s+([a-zA-Z0-9.-_]+)/\1/p,package/
+--regex-Groovy=/^\s*(abstract)?\s*(private|public)?\s*class\s+([A-Za-z0-9_]+)\s+/\3/c,class/
+--regex-Groovy=/^\s*(def|String|void)\s+([a-zA-Z0-9_]+\([A-Za-z0-9 _]*\))\s+/\2/m,method/
+--regex-Groovy=/^\s*(def|String|File)\s+([a-zA-Z0-9_]+)$/\2/f,field/
+--regex-Groovy=/^\s*(def|String|File)\s+([a-zA-Z0-9_]+)\s+=/\2/f,field/
+--langdef=Gradle
+--langmap=Gradle:.gradle
+--regex-Gradle=/^[ \t]*task[ \t]+([a-zA-Z0-9]+)/\1/t,task/
+--regex-Gradle=/^[ \t]*def[ \t]+([a-zA-Z0-9_]+\([A-Za-z0-9 _,]*\))[ \t]+/\1/m,method/
