@@ -325,12 +325,15 @@ set foldtext=FancyFoldText()
 " Specify where the tags are stored
 set tags=./tags;/,tags;/
 
-" Configure tag generation with easytags
-let g:easytags_ignored_filetypes = ''
-let g:easytags_dynamic_files = 1
-let g:easytags_updatetime_warn = 0
-let g:easytags_always_enabled = 1
-let g:easytags_async = 1
+" " Configure tag generation with easytags
+" let g:easytags_ignored_filetypes = ''
+" let g:easytags_dynamic_files = 1
+" let g:easytags_updatetime_warn = 0
+" let g:easytags_always_enabled = 1
+" let g:easytags_async = 1
+
+" Perform highlighting asynchronously when file is loaded or saved
+let g:highlighter#auto_update = 2
 
 " }}}
 
