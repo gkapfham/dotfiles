@@ -4,7 +4,9 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'xolox/vim-easytags'
 Plug 'Chiel92/vim-autoformat'
+Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neco-syntax'
