@@ -260,6 +260,9 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr()<CR>
 
+" Display the current block of text/code in a highlighting limelight
+nmap <Space>f :Limelight!! <CR>
+
 " }}}
 
 " Version Control {{{
