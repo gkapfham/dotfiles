@@ -372,7 +372,7 @@ augroup configurationgroupforfiletypes
   autocmd Filetype mail call CreateInvisibleEmailBuffer()
   function! CreateInvisibleEmailBuffer()
     highlight EndOfBuffer ctermfg=bg
-    setlocal fillchars+=vert:\
+    setlocal fillchars+=vert:\ 
     75vnew
     setlocal nonumber norelativenumber
     wincmd w
