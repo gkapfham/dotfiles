@@ -4,6 +4,7 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
+" Plug 'machakann/vim-highlightedyank'
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -41,7 +42,6 @@ Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'machakann/vim-highlightedyank'
 Plug 'mhinz/vim-signify'
 Plug 'pgdouyon/vim-evanesco'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
@@ -190,8 +190,8 @@ set whichwrap+=<,>,h,l,[,]
 " Do not display spaces at end of line
 set nojoinspaces
 
-" Highlight yanked region
-let g:highlightedyank_highlight_duration = 250
+" " Highlight yanked region
+" let g:highlightedyank_highlight_duration = 250
 
 " Display the location list and quickfix window
 let g:lt_location_list_toggle_map = '<leader>c'
