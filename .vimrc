@@ -809,11 +809,12 @@ if has("nvim")
   augroup END
 endif
 
-" Ensure that Neovim exits quickly when using fzf
+" Ensure that Neovim exits quickly and gives no line numbers when using fzf
 if has('nvim')
   aug fzf_setup
     au!
     au TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
+    au TermOpen term://*FZF setlocal nonumber nornu
   aug END
 end
 
