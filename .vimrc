@@ -13,6 +13,7 @@ Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'Valloric/YouCompleteMe'
 Plug 'airblade/vim-rooter'
+Plug 'ambv/black', {'for': 'python'}
 Plug 'andymass/vim-matchup'
 Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
 Plug 'bkad/CamelCaseMotion'
