@@ -52,9 +52,12 @@ alias ipython="ipython --TerminalInteractiveShell.editing_mode=vi"
 # Twitter
 alias twitter="/usr/local/bin/t"
 
+# npm without non-Ubuntu packages
+alias npm="npm --no-optional"
+
 # }}}
 
-# Oh-My-Zsh and Plugins {{{
+# Oh-My-Zsh and Plugin {{{
 
 # Configuration path
 ZSH=$HOME/.oh-my-zsh
@@ -66,7 +69,7 @@ ZSH_THEME="norm-gkapfham"
 HIST_STAMPS="mm/dd/yyyy"
 
 # Plugins
-plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
+plugins=(colored-man-pages git git-extras gulp tmux tmuxinator vi-mode virtualenv)
 source /home/gkapfham/.oh-my-zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $ZSH/oh-my-zsh.sh
 
