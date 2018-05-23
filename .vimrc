@@ -73,6 +73,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'junegunn/vim-emoji'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -865,6 +866,8 @@ if has("nvim")
   call deoplete#custom#source('tmux', 'rank', 200)
   call deoplete#custom#source('tag', 'rank', 100)
 
+  call deoplete#custom#source('emoji', 'filetypes', ['markdown'])
+
   " Register Java's completion function with deoplete
   let g:deoplete#omni#functions = {}
   let g:deoplete#omni#functions.java = [
@@ -899,6 +902,8 @@ if has("nvim")
 
   " Configure deoplete to work with GitHub issue completion
   let g:deoplete#omni#input_patterns.gitcommit = '#[0-9]*'
+  " let g:deoplete#omni#input_patterns.markdown = ':[A-Za-z]*'
+
 endif
 
 if has("nvim")
