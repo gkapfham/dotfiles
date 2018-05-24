@@ -73,7 +73,14 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'junegunn/vim-emoji'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
