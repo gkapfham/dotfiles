@@ -206,6 +206,7 @@ set noshowmode
 
 " Display and configure the airline
 let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#gutentags#enabled = 0
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
 let g:airline#extensions#hunks#non_zero_only = 0
