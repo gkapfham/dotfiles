@@ -146,8 +146,9 @@ set encoding=utf-8
 set t_ZH=[3m
 set t_ZR=[23m
 
-" Do not display the welcome message
-set shortmess=Ic
+" Do not display messages
+set shortmess=FIWacto
+set confirm
 
 " Display customized colorscheme
 colorscheme orangehybrid
