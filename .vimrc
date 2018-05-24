@@ -422,6 +422,9 @@ let g:jedi#force_py_version = 3
 " Format Python code according to the PEP8 standard
 let g:formatter_yapf_style = 'pep8'
 
+let g:python_host_prog  = '/usr/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
+
 " Indenting for HTML
 au BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = 'html,body,head,tbody,div'
