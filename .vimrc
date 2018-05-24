@@ -4,8 +4,6 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-" Plug 'Valloric/YouCompleteMe'
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
