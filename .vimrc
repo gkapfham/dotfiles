@@ -290,10 +290,10 @@ let g:signify_sign_changedelete      = g:signify_sign_change
 
 " Configure magit to display in a minimal fashion
 let g:magit_default_sections = ['commit', 'staged', 'unstaged']
-let g:magit_default_fold_level = 1
+let g:magit_default_fold_level = 2
 
 " Define a command to load magit in full-screen mode
-nmap <Space>m :MagitOnly <CR>
+nmap <Space>g :MagitOnly <CR>
 
 " Special configuration for magit buffers
 augroup magitconfiguration
@@ -459,7 +459,7 @@ hi Conceal ctermbg=NONE ctermfg=172
 " Use tex over plaintex
 let g:tex_flavor = 'tex'
 
-" Vimtex (and Fzf with YCM) requires
+" Vimtex requires
 set hidden
 
 " }}}
@@ -483,54 +483,54 @@ set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest:full,full
 
-" YCM is used with Vim
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_use_ultisnips_completer = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_filetype_blacklist = {
-      \ 'qf' : 1,
-      \ 'notes' : 1,
-      \ 'unite' : 1,
-      \ 'text' : 1,
-      \ 'vimwiki' : 1,
-      \ 'pandoc' : 1,
-      \ 'infolog' : 1,
-      \}
+" " YCM is used with Vim
+" let g:ycm_collect_identifiers_from_comments_and_strings = 1
+" let g:ycm_collect_identifiers_from_tags_files = 1
+" let g:ycm_seed_identifiers_with_syntax = 1
+" let g:ycm_use_ultisnips_completer = 1
+" let g:ycm_complete_in_comments = 1
+" let g:ycm_complete_in_strings = 1
+" let g:ycm_filetype_blacklist = {
+"       \ 'qf' : 1,
+"       \ 'notes' : 1,
+"       \ 'unite' : 1,
+"       \ 'text' : 1,
+"       \ 'vimwiki' : 1,
+"       \ 'pandoc' : 1,
+"       \ 'infolog' : 1,
+"       \}
 
-" YCM uses python (python3 is also an option)
-let g:ycm_server_python_interpreter = '/usr/bin/python'
+" " YCM uses python (python3 is also an option)
+" let g:ycm_server_python_interpreter = '/usr/bin/python'
 
-" YCM and Deoplete are compatible with UltiSnips
+" Deoplete is compatible with UltiSnips
 let g:UltiSnipsExpandTrigger="<C-k>"
 let g:UltiSnipsJumpForwardTrigger="<C-k>"
 let g:UltiSnipsListSnippets = "<C-l>"
 let g:UltiSnipsJumpBackwardTrigger='<C-s-k>'
 let g:UltiSnipsJumpBackwardTrigger=""
 
-" YCM is compatible with the tmux-complete
+" Completion compatible with the tmux-complete
 let g:tmuxcomplete#trigger = 'omnifunc'
 
-" YCM is compatible with the vimtex
-if !exists('g:ycm_semantic_triggers')
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers.tex = [
-      \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
-      \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
-      \ 're!\\hyperref\[[^]]*',
-      \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
-      \ 're!\\(include(only)?|input){[^}]*',
-      \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
-      \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
-      \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
-      \ 're!\\usepackage(\s*\[[^]]*\])?\s*\{[^}]*',
-      \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
-      \ ]
+" " YCM is compatible with the vimtex
+" if !exists('g:ycm_semantic_triggers')
+"   let g:ycm_semantic_triggers = {}
+" endif
+" let g:ycm_semantic_triggers.tex = [
+"       \ 're!\\[A-Za-z]*cite[A-Za-z]*(\[[^]]*\]){0,2}{[^}]*',
+"       \ 're!\\[A-Za-z]*ref({[^}]*|range{([^,{}]*(}{)?))',
+"       \ 're!\\hyperref\[[^]]*',
+"       \ 're!\\includegraphics\*?(\[[^]]*\]){0,2}{[^}]*',
+"       \ 're!\\(include(only)?|input){[^}]*',
+"       \ 're!\\\a*(gls|Gls|GLS)(pl)?\a*(\s*\[[^]]*\]){0,2}\s*\{[^}]*',
+"       \ 're!\\includepdf(\s*\[[^]]*\])?\s*\{[^}]*',
+"       \ 're!\\includestandalone(\s*\[[^]]*\])?\s*\{[^}]*',
+"       \ 're!\\usepackage(\s*\[[^]]*\])?\s*\{[^}]*',
+"       \ 're!\\documentclass(\s*\[[^]]*\])?\s*\{[^}]*',
+"       \ ]
 
-" YCM will not echo messages (nor will searches)
+" Do not echo messages (nor will searches)
 set noshowmode
 
 " Infer the case when doing completion
@@ -716,7 +716,7 @@ command! FZFMine call fzf#run({
 " Define key combinations
 nmap <C-h> :FZFHidden<CR>
 nmap <C-p> :FZFMine<CR>
-nmap <Space>g :Tags <CR>
+" nmap <Space>g :Tags <CR>
 nmap <Space>t :BTags <CR>
 nmap <Space>b :BLines <CR>
 nmap <Space>r :Lines <CR>
@@ -828,95 +828,104 @@ if has('nvim')
 end
 
 " Control FZF windows
-if has("nvim")
-  command! FZFMru call fzf#run({
-        \  'source':  v:oldfiles,
-        \  'sink':    'e',
-        \  'options': '-m -x +s --no-bold --cycle',
-        \  'down':    '10%',
-        \  'window':  'enew'})
-  command! FZFHidden call fzf#run({
-        \  'source':  'ag --hidden --ignore .git -l -g ""',
-        \  'sink':    'e',
-        \  'options': '-m -x +s --no-bold --cycle',
-        \  'window':  'enew'})
-  command! -bang FZFMine call fzf#run({
-        \  'source':  'ag --ignore .git -l -g ""',
-        \  'sink':    'e',
-        \  'options': '-m -x +s --no-bold --cycle',
-        \  'down':    '100%',
-        \  'window':  'enew'})
-  let g:fzf_layout = { 'window': 'enew' }
+" if has("nvim")
+command! FZFMru call fzf#run({
+      \  'source':  v:oldfiles,
+      \  'sink':    'e',
+      \  'options': '-m -x +s --no-bold --cycle',
+      \  'down':    '10%',
+      \  'window':  'enew'})
+command! FZFHidden call fzf#run({
+      \  'source':  'ag --hidden --ignore .git -l -g ""',
+      \  'sink':    'e',
+      \  'options': '-m -x +s --no-bold --cycle',
+      \  'window':  'enew'})
+command! -bang FZFMine call fzf#run({
+      \  'source':  'ag --ignore .git -l -g ""',
+      \  'sink':    'e',
+      \  'options': '-m -x +s --no-bold --cycle',
+      \  'down':    '100%',
+      \  'window':  'enew'})
+let g:fzf_layout = { 'window': 'enew' }
+" endif
+
+"if !has("nvim")
+"if has('python3')
+"   set pyx=3
+"else
+"   set pyx=2
+"endif
+"endif
+""
+"" Configure completion with deoplete
+"" if has("nvim")
+"  " Disable YCM and enable deoplete
+"  " let g:loaded_youcompleteme = 1
+
+let g:deoplete#enable_at_startup = 0
+let g:deoplete#auto_complete_delay = 1
+let g:deoplete#max_abbr_width = 40
+let g:deoplete#enable_refresh_always = 0
+autocmd InsertEnter * call deoplete#enable()
+
+" Configure deoplete so that it uses tabs
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Define the cache limit for the tag files
+let g:deoplete#tag#cache_limit_size = 500000
+
+" Change the source rankings
+call deoplete#custom#source('around', 'rank', 600)
+call deoplete#custom#source('buffer', 'rank', 500)
+call deoplete#custom#source('ultisnips', 'rank', 400)
+call deoplete#custom#source('look', 'rank', 300)
+call deoplete#custom#source('tmux', 'rank', 200)
+call deoplete#custom#source('tag', 'rank', 100)
+
+call deoplete#custom#source('emoji', 'filetypes', ['markdown'])
+
+" Register Java's completion function with deoplete
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.java = [
+      \ 'javacomplete#Complete'
+      \]
+
+" Register a GitHub completion function with deoplete
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.gitcommit = [
+      \ 'github_complete#complete'
+      \]
+
+" Define the input_patterns mapping so that it can be configured
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
 endif
 
-" Configure completion with deoplete
-if has("nvim")
-  " Disable YCM and enable deoplete
-  let g:loaded_youcompleteme = 1
-  let g:deoplete#enable_at_startup = 0
-  let g:deoplete#auto_complete_delay = 1
-  let g:deoplete#max_abbr_width = 40
-  let g:deoplete#enable_refresh_always = 0
-  autocmd InsertEnter * call deoplete#enable()
+" Configure deoplete to work with LaTeX and the vimtex plugin
+let g:deoplete#omni#input_patterns.tex = '\\(?:'
+      \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+      \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+      \ . '|hyperref\s*\[[^]]*'
+      \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
+      \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+      \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
+      \ . '|\w*'
+      \ .')'
 
-  " Configure deoplete so that it uses tabs
-  inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" Configure deoplete to work with GitHub issue completion
+let g:deoplete#omni#input_patterns.gitcommit = '#[0-9]*'
+" let g:deoplete#omni#input_patterns.markdown = ':[A-Za-z]*'
 
-  " Define the cache limit for the tag files
-  let g:deoplete#tag#cache_limit_size = 500000
+" endif
 
-  " Change the source rankings
-  call deoplete#custom#source('around', 'rank', 600)
-  call deoplete#custom#source('buffer', 'rank', 500)
-  call deoplete#custom#source('ultisnips', 'rank', 400)
-  call deoplete#custom#source('look', 'rank', 300)
-  call deoplete#custom#source('tmux', 'rank', 200)
-  call deoplete#custom#source('tag', 'rank', 100)
-
-  call deoplete#custom#source('emoji', 'filetypes', ['markdown'])
-
-  " Register Java's completion function with deoplete
-  let g:deoplete#omni#functions = {}
-  let g:deoplete#omni#functions.java = [
-        \ 'javacomplete#Complete'
-        \]
-
-  " Register a GitHub completion function with deoplete
-  let g:deoplete#omni#functions = {}
-  let g:deoplete#omni#functions.gitcommit = [
-        \ 'github_complete#complete'
-        \]
-
-  " Define the input_patterns mapping so that it can be configured
-  if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-  endif
-
-  " Configure deoplete to work with LaTeX and the vimtex plugin
-  let g:deoplete#omni#input_patterns.tex = '\\(?:'
-        \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-        \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-        \ . '|hyperref\s*\[[^]]*'
-        \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-        \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
-        \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-        \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
-        \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
-        \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
-        \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
-        \ . '|\w*'
-        \ .')'
-
-  " Configure deoplete to work with GitHub issue completion
-  let g:deoplete#omni#input_patterns.gitcommit = '#[0-9]*'
-  " let g:deoplete#omni#input_patterns.markdown = ':[A-Za-z]*'
-
-endif
-
-if has("nvim")
-  " Disable jedi-vim's completion engine, use all features otherwise
-  let g:jedi#auto_vim_configuration = 0
-  let g:jedi#completions_enabled = 0
-endif
+" if has("nvim")
+" Disable jedi-vim's completion engine, use all features otherwise
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#completions_enabled = 0
+" endif
 
 " }}}
