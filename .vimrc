@@ -857,32 +857,25 @@ command! -bang FZFMine call fzf#run({
       \  'down':    '100%',
       \  'window':  'enew'})
 let g:fzf_layout = { 'window': 'enew' }
-" endif
 
-"if !has("nvim")
-"if has('python3')
-"   set pyx=3
-"else
-"   set pyx=2
-"endif
-"endif
-""
-"" Configure completion with deoplete
-"" if has("nvim")
-"  " Disable YCM and enable deoplete
-"  " let g:loaded_youcompleteme = 1
-
+" Configure Deoplete
 let g:deoplete#enable_at_startup = 0
 let g:deoplete#auto_complete_delay = 1
 let g:deoplete#max_abbr_width = 40
-let g:deoplete#enable_refresh_always = 0
+let g:deoplete#enable_refresh_always = 1
 autocmd InsertEnter * call deoplete#enable()
 
-" Configure deoplete so that it uses tabs
+" Configure Deoplete so that it uses tabs
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 
 " Define the cache limit for the tag files
 let g:deoplete#tag#cache_limit_size = 500000
+
+" Use the full fuzzy matching algorithm
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+
+call deoplete#custom#option('auto_refresh_delay', '25')
 
 " Change the source rankings
 call deoplete#custom#source('around', 'rank', 600)
