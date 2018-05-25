@@ -491,9 +491,6 @@ set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest:full,full
 
-" " YCM uses python (python3 is also an option)
-" let g:ycm_server_python_interpreter = '/usr/bin/python'
-
 " Deoplete is compatible with UltiSnips
 let g:UltiSnipsExpandTrigger='<C-k>'
 let g:UltiSnipsJumpForwardTrigger='<C-k>'
