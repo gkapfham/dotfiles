@@ -841,7 +841,7 @@ call deoplete#custom#option('auto_refresh_delay', '25')
 
 " Change the source rankings
 call deoplete#custom#source('around', 'rank', 600)
-call deoplete#custom#source('buffer', 'rank', 500)
+call deoplete#custom#source('buffer', 'rank', 600)
 call deoplete#custom#source('ultisnips', 'rank', 400)
 call deoplete#custom#source('look', 'rank', 300)
 call deoplete#custom#source('tmux', 'rank', 200)
