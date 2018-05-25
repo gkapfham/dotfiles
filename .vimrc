@@ -496,12 +496,6 @@ let g:UltiSnipsExpandTrigger='<C-k>'
 let g:UltiSnipsJumpForwardTrigger='<C-k>'
 let g:UltiSnipsJumpBackwardTrigger='<C-j>'
 
-" let g:UltiSnipsExpandTrigger="<Tab>"
-" let g:UltiSnipsJumpForwardTrigger="<Tab>"
-" let g:UltiSnipsJumpBackwardTrigger='<s-Tab>'
-" let g:UltiSnipsJumpBackwardTrigger=""
-" let g:UltiSnipsListSnippets = "<C-l>"
-
 " Completion compatible with the tmux-complete
 let g:tmuxcomplete#trigger = 'omnifunc'
 
