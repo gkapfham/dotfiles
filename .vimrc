@@ -379,6 +379,7 @@ augroup configurationgroupforfiletypes
   autocmd Filetype mail call CreateInvisibleEmailBuffer()
   function! CreateInvisibleEmailBuffer()
     highlight EndOfBuffer ctermfg=bg
+    " Note that trailing slash is by design
     setlocal fillchars+=vert:\ 
     75vnew
     setlocal nonumber norelativenumber
