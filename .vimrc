@@ -834,8 +834,11 @@ if has('nvim')
   aug END
 end
 
+" }}}
+
+" Advanced FZF and Deoplete Settings {{{
+
 " Control FZF windows
-" if has("nvim")
 command! FZFMru call fzf#run({
       \  'source':  v:oldfiles,
       \  'sink':    'e',
