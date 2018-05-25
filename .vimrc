@@ -922,14 +922,9 @@ let g:deoplete#omni#input_patterns.tex = '\\(?:'
 
 " Configure deoplete to work with GitHub issue completion
 let g:deoplete#omni#input_patterns.gitcommit = '#[0-9]*'
-" let g:deoplete#omni#input_patterns.markdown = ':[A-Za-z]*'
 
-" endif
-
-" if has("nvim")
 " Disable jedi-vim's completion engine, use all features otherwise
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#completions_enabled = 0
-" endif
 
 " }}}
