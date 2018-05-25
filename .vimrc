@@ -772,7 +772,7 @@ let test#strategy = "tslime"
 
 " }}}
 
-" Neovim Display and Configuration {{{
+" Neovim Configuration {{{
 
 " Do not use a different cursor shape
 if has("nvim")
