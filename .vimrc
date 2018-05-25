@@ -685,7 +685,7 @@ command! FZFMine call fzf#run({
 " Define key combinations
 nmap <C-h> :FZFHidden<CR>
 nmap <C-p> :FZFMine<CR>
-" nmap <Space>g :Tags <CR>
+nmap <Space>y :Tags <CR>
 nmap <Space>t :BTags <CR>
 nmap <Space>b :BLines <CR>
 nmap <Space>r :Lines <CR>
