@@ -425,6 +425,8 @@ let g:jedi#force_py_version = 3
 " Format Python code according to the PEP8 standard
 let g:formatter_yapf_style = 'pep8'
 
+" Set the hosts programs for Python and Python3
+" That this improves performance when loading deoplete
 let g:python_host_prog  = '/usr/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
