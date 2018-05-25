@@ -290,7 +290,7 @@ let g:signify_sign_changedelete      = g:signify_sign_change
 
 " Configure magit to display in a minimal fashion
 let g:magit_default_sections = ['commit', 'staged', 'unstaged']
-let g:magit_default_fold_level = 2
+let g:magit_default_fold_level = 1
 
 " Define a command to load magit in full-screen mode
 nmap <Space>g :MagitOnly <CR>
