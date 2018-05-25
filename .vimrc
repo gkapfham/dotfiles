@@ -827,7 +827,7 @@ let g:deoplete#max_abbr_width = 40
 let g:deoplete#enable_refresh_always = 1
 autocmd InsertEnter * call deoplete#enable()
 
-" Configure Deoplete so that it uses tabs
+" Configure Deoplete to use Tab for forward and backward movement
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 
