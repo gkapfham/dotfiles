@@ -885,7 +885,8 @@ call deoplete#custom#source('look', 'rank', 300)
 call deoplete#custom#source('tmux', 'rank', 200)
 call deoplete#custom#source('tag', 'rank', 100)
 
-call deoplete#custom#source('emoji', 'filetypes', ['markdown'])
+" Define the emoji plugin as a source
+call deoplete#custom#source('emoji', 'filetypes', ['markdown', 'gitcommit'])
 
 " Register Java's completion function with deoplete
 let g:deoplete#omni#functions = {}
