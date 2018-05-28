@@ -824,7 +824,7 @@ let g:fzf_layout = { 'window': 'enew' }
 let g:deoplete#enable_at_startup = 0
 let g:deoplete#auto_complete_delay = 1
 let g:deoplete#max_abbr_width = 40
-let g:deoplete#enable_refresh_always = 1
+let g:deoplete#enable_refresh_always = 0
 autocmd InsertEnter * call deoplete#enable()
 
 " Configure Deoplete to use Tab for forward and backward movement
