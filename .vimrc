@@ -168,6 +168,10 @@ set nocursorcolumn
 set nocursorline
 set ttyfast
 
+" Disable these commands to improve
+" screen performance in Neovim
+set noshowcmd noruler
+
 " Display linebreaks and tabs
 set linebreak
 set showbreak=━━
