@@ -251,7 +251,7 @@ let g:airline_symbols.whitespace = 'Ξ'
 set signcolumn=yes
 
 " Configure how quickly interface updates
-set updatetime=500
+set updatetime=1000
 
 " Configure the display of parentheses matching
 let g:mta_use_matchparen_group = 0
@@ -284,8 +284,9 @@ noremap <Space>s :PreviewSignature! <CR>
 let g:signify_vcs_list = ['git']
 
 " Configure signify to update rapidly
-let g:signify_realtime = 1
+let g:signify_realtime              = 1
 let g:signify_update_on_focusgained = 1
+let g:signify_cursorhold_insert     = 0
 
 " Define new display symbols for signify
 let g:signify_sign_add               = '+'
