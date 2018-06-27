@@ -408,7 +408,6 @@ augroup configurationgroupforfiletypes
     let g:ale_lint_delay = 500
     let g:ale_lint_on_enter = 0
   endfunction
-
 augroup END
 
 " Syntax highlighting for Java
