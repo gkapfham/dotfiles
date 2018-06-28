@@ -8,6 +8,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
