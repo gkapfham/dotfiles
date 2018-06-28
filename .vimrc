@@ -5,6 +5,7 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'ambv/black', {'for': 'python'}
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -13,7 +14,6 @@ Plug 'Shougo/neco-syntax'
 Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'airblade/vim-rooter'
-Plug 'ambv/black', {'for': 'python'}
 Plug 'andymass/vim-matchup'
 Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
 Plug 'bkad/CamelCaseMotion'
