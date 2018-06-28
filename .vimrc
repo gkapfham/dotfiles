@@ -435,6 +435,9 @@ let g:formatter_yapf_style = 'pep8'
 let g:python_host_prog  = '/usr/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
+" Turn on the EchoDoc plugin for languages like Python
+let g:echodoc#enable_at_startup = 1
+
 " Indenting for HTML
 au BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = 'html,body,head,tbody,div'
