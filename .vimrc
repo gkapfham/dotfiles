@@ -427,7 +427,8 @@ let R_show_args = 1
 let g:jedi#force_py_version = 3
 
 " Run the black formatter on current Python file
-command! Black :!black -q %
+command! Black silent :!black %
+command! Blacken silent :!black **/*.py<bar>:bufdo e!
 
 " black works only when using the dynamic virtualenv set by pipenv
 " let g:black_virtualenv="/home/gkapfham/.local/share/virtualenvs/speed-surprises-Gu19juBf"
