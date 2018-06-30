@@ -430,8 +430,9 @@ let g:jedi#force_py_version = 3
 " command! Black cex !black %<bar>:checktime
 command! Black cexpr system('black ' . shellescape(expand('%')))<bar>:checktime
 
-" Run the black formatter on all Python files
-command! Blacken silent :!black **/*.py<bar>:checktime
+" Run the black formatter on all of the Python files
+" command! Blacken silent :!black **/*.py<bar>:checktime
+command! Blacken cexpr system('black **/*.py')<bar>:checktime
 
 " If using yapf, format Python code according to PEP8
 let g:formatter_yapf_style = 'pep8'
