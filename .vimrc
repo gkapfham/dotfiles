@@ -427,7 +427,8 @@ let R_show_args = 1
 let g:jedi#force_py_version = 3
 
 " Run the black formatter on current Python file
-command! Black silent :!black %<bar>:checktime
+" command! Black cex !black %<bar>:checktime
+command! Black cexpr system('black ' . shellescape(expand('%')))<bar>:checktime
 
 " Run the black formatter on all Python files
 command! Blacken silent :!black **/*.py<bar>:checktime
