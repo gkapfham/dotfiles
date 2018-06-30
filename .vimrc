@@ -426,14 +426,11 @@ let R_show_args = 1
 " Force Jedi to use version 3
 let g:jedi#force_py_version = 3
 
-" Reload all open buffers after AsyncRun
-let g:asyncrun_exit = "checktime"
-
 " Run the black formatter on current Python file
-command! Black AsyncRun black %
+command! Black silent :!black %<bar>:checktime
 
 " Run the black formatter on all Python files
-command! Blacken AsyncRun black **/*.py
+command! Blacken silent :!black **/*.py<bar>:checktime
 
 " If using yapf, format Python code according to PEP8
 let g:formatter_yapf_style = 'pep8'
