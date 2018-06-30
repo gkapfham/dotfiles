@@ -426,14 +426,16 @@ let R_show_args = 1
 " Force Jedi to use version 3
 let g:jedi#force_py_version = 3
 
+" Reload all open buffers after AsyncRun
+let g:asyncrun_exit = "checktime"
+
 " Run the black formatter on current Python file
-command! Black silent :!black %
-command! Blacken silent :!black **/*.py<bar>:bufdo e!
+command! Black AsyncRun black %
 
-" black works only when using the dynamic virtualenv set by pipenv
-" let g:black_virtualenv="/home/gkapfham/.local/share/virtualenvs/speed-surprises-Gu19juBf"
+" Run the black formatter on all Python files
+command! Blacken AsyncRun black **/*.py
 
-" If using yapf, Format Python code according to PEP8
+" If using yapf, format Python code according to PEP8
 let g:formatter_yapf_style = 'pep8'
 
 " Set the hosts programs for Python and Python3
