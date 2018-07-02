@@ -361,6 +361,9 @@ augroup configurationgroupforfiletypes
   " Enable spellcheck for the git commit messages
   autocmd FileType gitcommit setlocal spell
 
+  " Disable gutentags when editing a commit message
+  au FileType gitcommit,gitrebase let g:gutentags_enabled=0
+
   " Configuration for Java programming filetype
   autocmd Filetype java compiler gradle
 
