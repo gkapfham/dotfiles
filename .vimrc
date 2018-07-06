@@ -94,6 +94,10 @@ call plug#end()
 " Enable spell checking
 syntax spell toplevel
 
+" Configure the spelling files
+set spellfile+=~/.config/nvim/spell/en.utf-8.add
+set spellfile+=.extra.utf-8.add
+
 " Make changes automatically saved during Qdo
 set autowrite
 
