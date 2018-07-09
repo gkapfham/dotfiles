@@ -280,6 +280,9 @@ nmap <Space>f :Limelight!! <CR>
 " Display the signature of a function in the footer of the screen
 noremap <Space>s :PreviewSignature! <CR>
 
+" Display special characters as sign column marks
+let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
+
 " }}}
 
 " Version Control {{{
