@@ -6,22 +6,22 @@ $if mode=vi
     "\C-l": clear-screen
     "\C-p": history-search-backward
     "\C-n": history-search-forward
-    "\e.":yank-last-arg
+    "\e.":  yank-last-arg
 
     set keymap vi-command
-    "D":kill-line
-    "dw": kill-word
-    "dd": kill-whole-line
-    "db": backward-kill-word
-    "cc": "ddi"
-    "cw": "dwi"
-    "cb": "dbi"
+    "D":   kill-line
+    "dw":  kill-word
+    "dd":  kill-whole-line
+    "db":  backward-kill-word
+    "cc":  "ddi"
+    "cw":  "dwi"
+    "cb":  "dbi"
     "diw": "lbdw"
     "yiw": "lbyw"
     "ciw": "lbcw"
     "diW": "lBdW"
     "yiW": "lByW"
     "ciW": "lBcW"
-    "gg": beginning-of-history
-    "G": end-of-history
+    "gg":  beginning-of-history
+    "G":   end-of-history
 $endif
