@@ -72,6 +72,9 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
+Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
+Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 
 " Conditionally load deoplete for Vim8 and Neovim
 if has('nvim')
@@ -419,6 +422,9 @@ augroup configurationgroupforfiletypes
     let g:ale_lint_on_enter = 0
   endfunction
 augroup END
+
+" Syntax highlighting for JavaScript and JSX
+let g:jsx_ext_required = 0
 
 " Syntax highlighting for Java
 let java_highlight_all=1
