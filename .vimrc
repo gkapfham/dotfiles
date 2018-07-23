@@ -8,6 +8,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'SirVer/ultisnips'
@@ -42,6 +43,8 @@ Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/vim-signify'
+Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
+Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
 Plug 'rhysd/github-complete.vim'
@@ -72,9 +75,6 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
-Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
-Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 
 " Conditionally load deoplete for Vim8 and Neovim
 if has('nvim')
