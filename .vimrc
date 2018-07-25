@@ -286,6 +286,9 @@ noremap <Space>s :PreviewSignature! <CR>
 " Display special characters as sign column marks
 let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
 
+" Do not display the match of an offscreen delimiter
+let g:matchup_matchparen_status_offscreen = 0
+
 " }}}
 
 " Version Control {{{
