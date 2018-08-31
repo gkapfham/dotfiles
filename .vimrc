@@ -480,9 +480,11 @@ autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 " Define linting for email
 let g:ale_linter_aliases = {'mail': 'tex', 'liquid': 'markdown'}
 
-" Only use eslint for JavaScript
+" Use eslint for JavaScript
+" Use htmlhint for HTML
 let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'html': ['htmlhint'],
 \}
 
 " }}}
