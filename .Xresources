@@ -1,7 +1,8 @@
 ! ------------------------------------------------------------------------------
 ! ROFI Color theme and configurations
 ! ------------------------------------------------------------------------------
-rofi.font: Ubuntu\ Mono\ derivative\ Powerline\ 32
+!rofi.font: Ubuntu\ Mono\ derivative\ Powerline\ 32
+rofi.font: Hack\ Nerd\ Font\ Regular\ 48
 rofi.lines: 5
 
 rofi.color-enabled: true
@@ -11,9 +12,9 @@ rofi.color-active: #1c1c1c, #df8700, #1c1c1c, #df8700, #1c1c1c
 rofi.color-urgent: #1c1c1c, #5f8700, #1c1c1c, #5f8700, #1c1c1c
 
 rofi.location: 6
-rofi.yoffset: 0
+rofi.yoffset: -200
 rofi.xoffset: 0
-rofi.width: 100
+rofi.width: 75
 rofi.fixed_num_lines: 1
 rofi.hmode: false
 
