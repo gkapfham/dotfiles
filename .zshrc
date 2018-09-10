@@ -25,7 +25,7 @@ export DISABLE_AUTO_TITLE=true
 export BROWSER=/usr/bin/google-chrome
 
 # Path
-export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.npm-global/bin:home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.npm-global/bin:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/gkapfham/.local/kitty.app/bin:/home/gkapfham/.cargo/bin"
 
 # Local Gem home
 export GEM_HOME=/home/gkapfham/.gem
