@@ -859,14 +859,14 @@ command! -bang FZFMine call fzf#run({
       \  'window':  'enew'})
 let g:fzf_layout = { 'window': 'enew' }
 
-" Configure Deoplete
+" Configure deoplete
 let g:deoplete#enable_at_startup = 0
 let g:deoplete#auto_complete_delay = 0
 let g:deoplete#auto_refresh_delay = 25
 let g:deoplete#max_abbr_width = 40
 autocmd InsertEnter * call deoplete#enable()
 
-" Configure Deoplete to use Tab for forward and backward movement
+" Configure deoplete to use Tab for forward and backward movement
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 
