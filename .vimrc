@@ -861,9 +861,9 @@ let g:fzf_layout = { 'window': 'enew' }
 
 " Configure Deoplete
 let g:deoplete#enable_at_startup = 0
-let g:deoplete#auto_complete_delay = 1
+let g:deoplete#auto_complete_delay = 0
+let g:deoplete#auto_refresh_delay = 25
 let g:deoplete#max_abbr_width = 40
-let g:deoplete#enable_refresh_always = 0
 autocmd InsertEnter * call deoplete#enable()
 
 " Configure Deoplete to use Tab for forward and backward movement
@@ -874,7 +874,7 @@ inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 let g:deoplete#tag#cache_limit_size = 500000
 
 " Use the full fuzzy matching algorithm
-call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+call deoplete#custom#source('_', 'matchers', ['matcher_head'])
 
 call deoplete#custom#option('auto_refresh_delay', '25')
 
