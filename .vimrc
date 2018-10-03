@@ -75,6 +75,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
+Plug 'Shougo/context_filetype.vim'
 
 " Conditionally load deoplete for Vim8 and Neovim
 if has('nvim')
@@ -401,7 +402,7 @@ augroup configurationgroupforfiletypes
   function! CreateInvisibleEmailBuffer()
     highlight EndOfBuffer ctermfg=bg
     " Note that trailing slash is by design
-    setlocal fillchars+=vert:\ 
+    setlocal fillchars+=vert:\
     75vnew
     setlocal nonumber norelativenumber
     wincmd w
@@ -483,9 +484,9 @@ let g:ale_linter_aliases = {'mail': 'tex', 'liquid': 'markdown'}
 " Use eslint for JavaScript
 " Use htmlhint for HTML
 let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'html': ['htmlhint'],
-\}
+      \   'javascript': ['eslint'],
+      \   'html': ['htmlhint'],
+      \}
 
 " }}}
 
@@ -861,10 +862,13 @@ let g:fzf_layout = { 'window': 'enew' }
 
 " Configure deoplete
 let g:deoplete#enable_at_startup = 0
-let g:deoplete#auto_complete_delay = 0
-let g:deoplete#auto_refresh_delay = 25
-let g:deoplete#max_abbr_width = 40
 autocmd InsertEnter * call deoplete#enable()
+
+" Immediately trigger the deoplete completion
+call deoplete#custom#option('auto_complete_delay', 0)
+
+" Set the maximum width of the abbreviations
+call deoplete#custom#source('_', 'max_abbr_width', 40)
 
 " Configure deoplete to use Tab for forward and backward movement
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -873,14 +877,23 @@ inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 " Define the cache limit for the tag files
 let g:deoplete#tag#cache_limit_size = 500000
 
-" Use the full fuzzy matching algorithm
+" Use the head matching algorithm for speed improvements
 call deoplete#custom#source('_', 'matchers', ['matcher_head'])
 
+" Set the refresh delay to be 25 ms
 call deoplete#custom#option('auto_refresh_delay', '25')
 
-" Change the source rankings
+" Since a dictionary is already sorted, no need to sort it again
+call deoplete#custom#source(
+      \ 'dictionary', 'sorters', [])
+" Do not complete words that are too short
+call deoplete#custom#source(
+      \ 'dictionary', 'min_pattern_length', 4)
+
+" Change the source rankings: higher value means higher priority
 call deoplete#custom#source('around', 'rank', 600)
 call deoplete#custom#source('buffer', 'rank', 600)
+call deoplete#custom#source('member', 'rank', 600)
 call deoplete#custom#source('ultisnips', 'rank', 400)
 call deoplete#custom#source('look', 'rank', 300)
 call deoplete#custom#source('tmux', 'rank', 200)
@@ -923,6 +936,16 @@ let g:deoplete#omni#input_patterns.tex = '\\(?:'
 
 " Configure deoplete to work with GitHub issue completion
 let g:deoplete#omni#input_patterns.gitcommit = '#[0-9]*'
+
+" Allow completion from different sources with a plugin
+if !exists('g:context_filetype#same_filetypes')
+  let g:context_filetype#same_filetypes = {}
+endif
+
+" In gitcommit buffers, completes from all buffers
+let g:context_filetype#same_filetypes.gitcommit = '_'
+" In default, completes from all buffers
+let g:context_filetype#same_filetypes._ = '_'
 
 " Disable jedi-vim's completion engine, use all features otherwise
 let g:jedi#auto_vim_configuration = 0
