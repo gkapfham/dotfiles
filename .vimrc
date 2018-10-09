@@ -220,14 +220,26 @@ let g:lt_quickfix_list_toggle_map = '<leader>q'
 " Do not display the standard status line
 set noshowmode
 
-
+" Always display the tabline so that lightline buffers can override
 set showtabline=2
 
-let g:lightline#bufferline#show_number = 0
-let g:lightline#bufferline#shorten_path = 0
-let g:lightline#bufferline#unnamed = '*'
+" Display icons in lightline buffer at screen top
 let g:lightline#bufferline#enable_devicons = 1
 
+" Do not shorten the path of a buffer
+let g:lightline#bufferline#shorten_path = 0
+
+" Show the buffer, allowing for :b num navigation
+let g:lightline#bufferline#show_number = 1
+
+" Define a name of 'No Name' buffer
+let g:lightline#bufferline#unnamed = '*'
+
+" Remap arrow keys for navigating the lightline buffers
+nnoremap <A-j> :bnext<CR>
+nnoremap <A-k> :bprev<CR>
+
+" Configure the lightline according to documentation and examples from statico/dotfiles
 let g:lightline = {
       \ 'colorscheme': 'Orange_Hybrid',
       \ 'active': {
@@ -255,64 +267,77 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
+" Display a lock symbol if the file is read-only (e.g., help files)
 function! LightlineReadonly()
   return &readonly ? '' : ''
 endfunction
 
+" Display symbols, not dictionaries, to indicate that spell-checking runs
 function! LightlineSpell()
   return &spell ? 'A-Z✔ ' : ''
 endfunction
 
+" Display file name with symbol or '*' for 'No Name'
 function! LightlineFilename()
-  return '' != expand('%:t') ? ' '.expand('%:t') : ''
+  return '' !=# expand('%:t') ? ' '.expand('%:t') : ' *'
 endfunction
 
+" Display the name of the branch with a specialize symbol
 function! LightlineFugitive()
   if exists('*fugitive#head')
-    let branch = fugitive#head()
-    return branch !=# '' ? ' שׂ '.branch : ''
+    let l:branch = fugitive#head()
+    return l:branch !=# '' ? ' שׂ '.l:branch : ''
   endif
   return ''
 endfunction
 
+" Detect and display the file type, using a dev-icon
 function! LightlineFiletype()
   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() . ' ' : 'no ft ') : ''
 endfunction
 
+" Detect and display the file format, using a dev-icon
 function! LightLineFileformat()
   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) . ' ' : ''
 endfunction
 
+" Collect, count, and display the linter warnings from ale
 function! LightlineLinterWarnings() abort
   let l:counts = ale#statusline#Count(bufnr(''))
   let l:all_errors = l:counts.error + l:counts.style_error
   let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+  return l:counts.total == 0 ? '' : printf('%d ', l:all_non_errors)
 endfunction
 
+" Collect, count, and display the linter errors from ale
 function! LightlineLinterErrors() abort
   let l:counts = ale#statusline#Count(bufnr(''))
   let l:all_errors = l:counts.error + l:counts.style_error
   let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+  return l:counts.total == 0 ? '' : printf('%d ', l:all_errors)
 endfunction
 
+" Since there are no warnings or errors, display a zero count
 function! LightlineLinterOK() abort
   let l:counts = ale#statusline#Count(bufnr(''))
   let l:all_errors = l:counts.error + l:counts.style_error
   let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '✔ ' : ''
+  return l:counts.total == 0 ? '0   0 ' : ''
 endfunction
 
-autocmd User ALELint call s:MaybeUpdateLightline()
-
-" Update and show lightline but only if it's visible (e.g., not in Goyo)
+" Update and show lightline but only if it's visible
 function! s:MaybeUpdateLightline()
   if exists('#lightline')
     call lightline#update()
   end
 endfunction
 
+" Update the lightline linting errors if it is enabled
+augroup alecallconfiguration
+  autocmd User ALELint call s:MaybeUpdateLightline()
+augroup END
+
+" Configure the lightline buffer listing at top of the screen
 let g:lightline.tabline          = {'left': [['buffers']], 'right': [['bufnum']]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
