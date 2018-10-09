@@ -342,43 +342,6 @@ let g:lightline.tabline          = {'left': [['buffers']], 'right': [['bufnum']]
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 
-" " Display and configure the airline
-" let g:airline#extensions#branch#enabled = 1
-" let g:airline#extensions#gutentags#enabled = 0
-" let g:airline#extensions#hunks#enabled = 1
-" let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
-" let g:airline#extensions#hunks#non_zero_only = 0
-" let g:airline#extensions#tabline#buffer_idx_mode = 0
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#fnamemod = ':t:.'
-" let g:airline#extensions#tabline#show_tab_nr = 1
-" let g:airline#extensions#tagbar#enabled = 1
-" let g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-indent-file']
-" let g:airline#extensions#whitespace#enabled = 1
-" let g:airline#extensions#wordcount#enabled = 0
-" let g:airline_powerline_fonts = 1
-" let g:airline_theme='tomorrow'
-" set laststatus=2
-
-" " Create an empty airline_symbols variable
-" if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-" endif
-
-" " Define symbols for the airline
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_symbols.crypt = '🔒'
-" let g:airline_symbols.linenr = '☰ '
-" let g:airline_symbols.maxlinenr = ''
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.paste = 'Þ'
-" let g:airline_symbols.spell = 'A-Z✔'
-" let g:airline_symbols.notexists = ' ∉'
-" let g:airline_symbols.whitespace = 'Ξ'
-
 " Display the sign column for version control
 set signcolumn=yes
 
