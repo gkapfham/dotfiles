@@ -831,13 +831,12 @@ function! s:fzf_statusline()
   highlight fzf1 ctermfg=110 ctermbg=235
   highlight fzf2 ctermfg=110 ctermbg=235
   highlight fzf3 ctermfg=110 ctermbg=235
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+  setlocal statusline=%#fzf1#\ \ %#fzf2#fz%#fzf3#f
 endfunction
 
 " Set the colors for the statusline
-augroup configurationgroupforfzf
-  autocmd! User FzfStatusLine call <SID>fzf_statusline()
-augroup END
+" Note that this will not always trigger if in an augroup
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 " }}}
 
@@ -949,6 +948,10 @@ command! -bang FZFMine call fzf#run({
       \  'down':    '100%',
       \  'window':  'enew'})
 let g:fzf_layout = { 'window': 'enew' }
+
+" autocmd! FileType fzf
+" autocmd  FileType fzf set laststatus=0 noshowmode noruler
+"   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " Configure deoplete
 let g:deoplete#enable_at_startup = 0
