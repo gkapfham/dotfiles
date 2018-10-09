@@ -65,8 +65,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
 Plug 'ujihisa/neco-look'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'vim-scripts/python_match.vim'
 Plug 'w0rp/ale'
@@ -76,6 +76,8 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'Shougo/context_filetype.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'mgee/lightline-bufferline'
 
 " Conditionally load deoplete for Vim8 and Neovim
 if has('nvim')
@@ -218,42 +220,139 @@ let g:lt_quickfix_list_toggle_map = '<leader>q'
 " Do not display the standard status line
 set noshowmode
 
-" Display and configure the airline
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#gutentags#enabled = 0
-let g:airline#extensions#hunks#enabled = 1
-let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
-let g:airline#extensions#hunks#non_zero_only = 0
-let g:airline#extensions#tabline#buffer_idx_mode = 0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t:.'
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-indent-file']
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#wordcount#enabled = 0
-let g:airline_powerline_fonts = 1
-let g:airline_theme='tomorrow'
-set laststatus=2
 
-" Create an empty airline_symbols variable
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
+set showtabline=2
 
-" Define symbols for the airline
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.linenr = '☰ '
-let g:airline_symbols.maxlinenr = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.spell = 'A-Z✔'
-let g:airline_symbols.notexists = ' ∉'
-let g:airline_symbols.whitespace = 'Ξ'
+let g:lightline#bufferline#show_number = 0
+let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#unnamed = '*'
+let g:lightline#bufferline#enable_devicons = 1
+
+let g:lightline = {
+      \ 'colorscheme': 'Orange_Hybrid',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'spell', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [['lineinfo'], ['percent'], ['linter_warnings', 'linter_errors', 'linter_ok', 'fileformat', 'fileencoding', 'filetype']]
+      \ },
+      \ 'component_function': {
+      \   'readonly': 'LightlineReadonly',
+      \   'fugitive': 'LightlineFugitive',
+      \   'spell': 'LightlineSpell',
+      \   'filetype': 'LightlineFiletype',
+      \   'fileformat': 'LightlineFileformat',
+      \   'filename': 'LightlineFilename',
+      \   'linter_warnings': 'LightlineLinterWarnings',
+      \   'linter_errors': 'LightlineLinterErrors',
+      \   'linter_ok': 'LightlineLinterOK'
+      \ },
+      \ 'component_type': {
+      \   'readonly': 'error',
+      \   'linter_warnings': 'warning',
+      \   'linter_errors': 'error'
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+\ }
+
+function! LightlineReadonly()
+  return &readonly ? '' : ''
+endfunction
+
+function! LightlineSpell()
+  return &spell ? 'A-Z✔ ' : ''
+endfunction
+
+function! LightlineFilename()
+  return '' != expand('%:t') ? ' '.expand('%:t') : ''
+endfunction
+
+function! LightlineFugitive()
+  if exists('*fugitive#head')
+    let branch = fugitive#head()
+    return branch !=# '' ? ' שׂ '.branch : ''
+  endif
+  return ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() . ' ' : 'no ft ') : ''
+endfunction
+
+function! LightLineFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) . ' ' : ''
+endfunction
+
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+endfunction
+
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
+
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✔ ' : ''
+endfunction
+
+autocmd User ALELint call s:MaybeUpdateLightline()
+
+" Update and show lightline but only if it's visible (e.g., not in Goyo)
+function! s:MaybeUpdateLightline()
+  if exists('#lightline')
+    call lightline#update()
+  end
+endfunction
+
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['bufnum']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+
+" " Display and configure the airline
+" let g:airline#extensions#branch#enabled = 1
+" let g:airline#extensions#gutentags#enabled = 0
+" let g:airline#extensions#hunks#enabled = 1
+" let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+" let g:airline#extensions#hunks#non_zero_only = 0
+" let g:airline#extensions#tabline#buffer_idx_mode = 0
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#fnamemod = ':t:.'
+" let g:airline#extensions#tabline#show_tab_nr = 1
+" let g:airline#extensions#tagbar#enabled = 1
+" let g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-indent-file']
+" let g:airline#extensions#whitespace#enabled = 1
+" let g:airline#extensions#wordcount#enabled = 0
+" let g:airline_powerline_fonts = 1
+" let g:airline_theme='tomorrow'
+" set laststatus=2
+
+" " Create an empty airline_symbols variable
+" if !exists('g:airline_symbols')
+"   let g:airline_symbols = {}
+" endif
+
+" " Define symbols for the airline
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_symbols.crypt = '🔒'
+" let g:airline_symbols.linenr = '☰ '
+" let g:airline_symbols.maxlinenr = ''
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.spell = 'A-Z✔'
+" let g:airline_symbols.notexists = ' ∉'
+" let g:airline_symbols.whitespace = 'Ξ'
 
 " Display the sign column for version control
 set signcolumn=yes
@@ -487,6 +586,11 @@ let g:ale_linters = {
       \   'javascript': ['eslint'],
       \   'html': ['htmlhint'],
       \}
+
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
+highlight link ALEWarningSign String
+highlight link ALEErrorSign WarningMsg
 
 " }}}
 
