@@ -227,9 +227,9 @@ set showtabline=2
 let g:lightline#bufferline#enable_devicons = 1
 
 " Do not shorten the path of a buffer
-let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#shorten_path = 1
 
-" Show the buffer, allowing for :b num navigation
+" Do not show the buffer, as :b num nav not needed
 let g:lightline#bufferline#show_number = 0
 
 " Define a name of 'No Name' buffer
