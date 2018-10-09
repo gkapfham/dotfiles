@@ -230,7 +230,7 @@ let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#shorten_path = 0
 
 " Show the buffer, allowing for :b num navigation
-let g:lightline#bufferline#show_number = 1
+let g:lightline#bufferline#show_number = 0
 
 " Define a name of 'No Name' buffer
 let g:lightline#bufferline#unnamed = '*'
