@@ -236,8 +236,8 @@ let g:lightline#bufferline#show_number = 1
 let g:lightline#bufferline#unnamed = '*'
 
 " Remap arrow keys for navigating the lightline buffers
-nnoremap <A-j> :bnext<CR>
-nnoremap <A-k> :bprev<CR>
+nnoremap <Space>j :bnext<CR>
+nnoremap <Space>k :bprev<CR>
 
 " Configure the lightline according to documentation and examples from statico/dotfiles
 let g:lightline = {
