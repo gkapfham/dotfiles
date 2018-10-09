@@ -233,10 +233,6 @@ let g:lightline#bufferline#show_number = 0
 " Define a name of 'No Name' buffer
 let g:lightline#bufferline#unnamed = '*'
 
-" Remap arrow keys for navigating the lightline buffers
-nnoremap <Space>j :bnext<CR>
-nnoremap <Space>k :bprev<CR>
-
 " Configure the lightline according to documentation and examples from statico/dotfiles
 let g:lightline = {
       \ 'colorscheme': 'Orange_Hybrid',
