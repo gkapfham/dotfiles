@@ -827,7 +827,7 @@ function! s:fzf_statusline()
   highlight fzf1 ctermfg=235 ctermbg=110 cterm=bold
   highlight fzf2 ctermfg=235 ctermbg=110 cterm=bold
   highlight fzf3 ctermfg=110 ctermbg=235
-  setlocal statusline=%#fzf1#\ \ %#fzf2#FZF\ \ \ \%#fzf3#
+  setlocal statusline=%#fzf1#\ \%#fzf2#\ \FIND\ \ %#fzf3#
 endfunction
 
 " Display a customized statusline when invoking fzf
