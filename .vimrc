@@ -945,10 +945,6 @@ command! -bang FZFMine call fzf#run({
       \  'window':  'enew'})
 let g:fzf_layout = { 'window': 'enew' }
 
-" autocmd! FileType fzf
-" autocmd  FileType fzf set laststatus=0 noshowmode noruler
-"   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
 " Configure deoplete
 let g:deoplete#enable_at_startup = 0
 autocmd InsertEnter * call deoplete#enable()
