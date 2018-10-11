@@ -965,8 +965,8 @@ let g:deoplete#tag#cache_limit_size = 500000
 " Use the head matching algorithm for speed improvements
 call deoplete#custom#source('_', 'matchers', ['matcher_head'])
 
-" Set the refresh delay to be 25 ms
-call deoplete#custom#option('auto_refresh_delay', '25')
+" Set the refresh delay to be 150 ms
+call deoplete#custom#option('auto_refresh_delay', '150')
 
 " Since a dictionary is already sorted, no need to sort it again
 call deoplete#custom#source(
