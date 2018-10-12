@@ -6,7 +6,9 @@ call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
 " Plug 'Shougo/context_filetype.vim'
+" Plug 'fszymanski/deoplete-emoji'
 " Plug 'rhysd/github-complete.vim'
+" Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -26,7 +28,6 @@ Plug 'chrisbra/unicode.vim'
 Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
-Plug 'fszymanski/deoplete-emoji'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
@@ -67,7 +68,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
-Plug 'ujihisa/neco-look'
+" Plug 'ujihisa/neco-look'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'vim-scripts/python_match.vim'
 Plug 'w0rp/ale'
@@ -75,13 +76,24 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
-Plug 'zchee/deoplete-jedi', {'for': 'python'}
+
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-tagprefix'
+Plug 'filipekiss/ncm2-look.vim'
+Plug 'ncm2/ncm2-syntax'
+Plug 'ncm2/ncm2-jedi'
+Plug 'ncm2/ncm2-ultisnips'
+" Plug 'yuki-ycino/ncm2-dictionary'
 
 " Conditionally load deoplete for Vim8 and Neovim
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'ncm2/ncm2'
+  Plug 'roxma/nvim-yarp'
 else
-  Plug 'Shougo/deoplete.nvim'
+  " Plug 'Shougo/deoplete.nvim'
+  Plug 'ncm2/ncm2'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
@@ -613,7 +625,7 @@ set complete+=kspell
 set complete+=]
 
 " Completion menus
-set completeopt=longest,menuone
+" set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest:full,full
 
@@ -945,12 +957,91 @@ command! -bang FZFMine call fzf#run({
       \  'window':  'enew'})
 let g:fzf_layout = { 'window': 'enew' }
 
-" Configure deoplete
-let g:deoplete#enable_at_startup = 0
-autocmd InsertEnter * call deoplete#enable()
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
 
-" Immediately trigger the deoplete completion
-call deoplete#custom#option('auto_complete_delay', 0)
+" make it FAST
+let ncm2#popup_delay = 1
+" let ncm2#complete_length = [[1,1]]
+" let g:ncm2#matcher = 'substrfuzzy'
+let g:ncm2#matcher = 'abbrfuzzy'
+let g:ncm2#sorter = 'abbrfuzzy'
+
+augroup my_cm_setup
+  autocmd!
+  autocmd BufEnter * call ncm2#enable_for_buffer()
+  autocmd Filetype tex call ncm2#register_source({
+        \ 'name' : 'vimtex-cmds',
+        \ 'priority': 8,
+        \ 'complete_length': -1,
+        \ 'scope': ['tex'],
+        \ 'matcher': {'name': 'prefix', 'key': 'word'},
+        \ 'word_pattern': '\w+',
+        \ 'complete_pattern': g:vimtex#re#ncm2#cmds,
+        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+        \ })
+  autocmd Filetype tex call ncm2#register_source({
+        \ 'name' : 'vimtex-labels',
+        \ 'priority': 8,
+        \ 'complete_length': -1,
+        \ 'scope': ['tex'],
+        \ 'matcher': {'name': 'combine',
+        \             'matchers': [
+        \               {'name': 'substr', 'key': 'word'},
+        \               {'name': 'substr', 'key': 'menu'},
+        \             ]},
+        \ 'word_pattern': '\w+',
+        \ 'complete_pattern': g:vimtex#re#ncm2#labels,
+        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+        \ })
+  autocmd Filetype tex call ncm2#register_source({
+        \ 'name' : 'vimtex-files',
+        \ 'priority': 8,
+        \ 'complete_length': -1,
+        \ 'scope': ['tex'],
+        \ 'matcher': {'name': 'combine',
+        \             'matchers': [
+        \               {'name': 'abbrfuzzy', 'key': 'word'},
+        \               {'name': 'abbrfuzzy', 'key': 'abbr'},
+        \             ]},
+        \ 'word_pattern': '\w+',
+        \ 'complete_pattern': g:vimtex#re#ncm2#files,
+        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+        \ })
+  autocmd Filetype tex call ncm2#register_source({
+        \ 'name' : 'bibtex',
+        \ 'priority': 8,
+        \ 'complete_length': -1,
+        \ 'scope': ['tex'],
+        \ 'matcher': {'name': 'combine',
+        \             'matchers': [
+        \               {'name': 'prefix', 'key': 'word'},
+        \               {'name': 'abbrfuzzy', 'key': 'abbr'},
+        \               {'name': 'abbrfuzzy', 'key': 'menu'},
+        \             ]},
+        \ 'word_pattern': '\w+',
+        \ 'complete_pattern': g:vimtex#re#ncm2#bibtex,
+        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+        \ })
+augroup END
+
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
+
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new
+" line.
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+let g:ncm2_look_enabled = 1
+
+" " Configure deoplete
+" let g:deoplete#enable_at_startup = 0
+" autocmd InsertEnter * call deoplete#enable()
+
+" " Immediately trigger the deoplete completion
+" call deoplete#custom#option('auto_complete_delay', 0)
 
 " Set the maximum width of the abbreviations
 " call deoplete#custom#source('_', 'max_abbr_width', 40)
@@ -959,41 +1050,41 @@ call deoplete#custom#option('auto_complete_delay', 0)
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 
-" Define the cache limit for the tag files
-let g:deoplete#tag#cache_limit_size = 50000
+" " Define the cache limit for the tag files
+" let g:deoplete#tag#cache_limit_size = 50000
 
-" Use the head matching algorithm for speed improvements
-call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy'])
+" " Use the head matching algorithm for speed improvements
+" call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy'])
 
-" Set the refresh delay to be 250 ms
-call deoplete#custom#option('auto_refresh_delay', '250')
+" " Set the refresh delay to be 250 ms
+" call deoplete#custom#option('auto_refresh_delay', '250')
 
-" Since a dictionary is already sorted, no need to sort it again
-call deoplete#custom#source(
-      \ 'dictionary', 'sorters', [])
-" Do not complete words that are too short
+" " Since a dictionary is already sorted, no need to sort it again
 " call deoplete#custom#source(
-      " \ 'dictionary', 'min_pattern_length', 4)
+"       \ 'dictionary', 'sorters', [])
+" " Do not complete words that are too short
+" " call deoplete#custom#source(
+"       " \ 'dictionary', 'min_pattern_length', 4)
 
-call deoplete#custom#option('ignore_sources', {'_': ['tag']})
+" call deoplete#custom#option('ignore_sources', {'_': ['tag']})
 
-" Change the source rankings: higher value means higher priority
-call deoplete#custom#source('around', 'rank', 600)
-call deoplete#custom#source('buffer', 'rank', 600)
-call deoplete#custom#source('member', 'rank', 600)
-call deoplete#custom#source('ultisnips', 'rank', 400)
-call deoplete#custom#source('look', 'rank', 300)
-call deoplete#custom#source('tmux', 'rank', 200)
-" call deoplete#custom#source('tag', 'rank', 100)
+" " Change the source rankings: higher value means higher priority
+" call deoplete#custom#source('around', 'rank', 600)
+" call deoplete#custom#source('buffer', 'rank', 600)
+" call deoplete#custom#source('member', 'rank', 600)
+" call deoplete#custom#source('ultisnips', 'rank', 400)
+" call deoplete#custom#source('look', 'rank', 300)
+" call deoplete#custom#source('tmux', 'rank', 200)
+" " call deoplete#custom#source('tag', 'rank', 100)
 
-" Define the emoji plugin as a source
-call deoplete#custom#source('emoji', 'filetypes', ['markdown', 'gitcommit'])
+" " Define the emoji plugin as a source
+" call deoplete#custom#source('emoji', 'filetypes', ['markdown', 'gitcommit'])
 
-" Register Java's completion function with deoplete
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.java = [
-      \ 'javacomplete#Complete'
-      \]
+" " Register Java's completion function with deoplete
+" let g:deoplete#omni#functions = {}
+" let g:deoplete#omni#functions.java = [
+"       \ 'javacomplete#Complete'
+"       \]
 
 " " Register a GitHub completion function with deoplete
 " let g:deoplete#omni#functions = {}
@@ -1001,16 +1092,16 @@ let g:deoplete#omni#functions.java = [
 "       \ 'github_complete#complete'
 "       \]
 
-" Define the input_patterns mapping so that it can be configured
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
+" " Define the input_patterns mapping so that it can be configured
+" if !exists('g:deoplete#omni#input_patterns')
+"   let g:deoplete#omni#input_patterns = {}
+" endif
 
-" Configure deoplete to work with LaTeX and the vimtex plugin
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
-let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+" " Configure deoplete to work with LaTeX and the vimtex plugin
+" if !exists('g:deoplete#omni#input_patterns')
+"   let g:deoplete#omni#input_patterns = {}
+" endif
+" let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
 " let g:deoplete#omni#input_patterns.tex = '\\(?:'
 "       \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
@@ -1040,7 +1131,16 @@ let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 " let g:context_filetype#same_filetypes._ = '_'
 
 " Disable jedi-vim's completion engine, use all features otherwise
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#completions_enabled = 0
+" let g:jedi#auto_vim_configuration = 0
+" let g:jedi#completions_enabled = 0
+
+" Disable Jedi-vim autocompletion and enable call-signatures options
+let g:jedi#auto_initialization = 1
+let g:jedi#completions_enabled = 1
+let g:jedi#auto_vim_configuration = 1
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = ""
+let g:jedi#show_call_signatures = "1"
 
 " }}}
