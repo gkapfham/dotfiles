@@ -5,11 +5,12 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'Shougo/context_filetype.vim'
+" Plug 'rhysd/github-complete.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
-Plug 'Shougo/context_filetype.vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'SirVer/ultisnips'
@@ -50,7 +51,6 @@ Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
-Plug 'rhysd/github-complete.vim'
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'skywind3000/asyncrun.vim'
@@ -953,27 +953,29 @@ autocmd InsertEnter * call deoplete#enable()
 call deoplete#custom#option('auto_complete_delay', 0)
 
 " Set the maximum width of the abbreviations
-call deoplete#custom#source('_', 'max_abbr_width', 40)
+" call deoplete#custom#source('_', 'max_abbr_width', 40)
 
 " Configure deoplete to use Tab for forward and backward movement
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 
 " Define the cache limit for the tag files
-let g:deoplete#tag#cache_limit_size = 500000
+let g:deoplete#tag#cache_limit_size = 50000
 
 " Use the head matching algorithm for speed improvements
-call deoplete#custom#source('_', 'matchers', ['matcher_head'])
+call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy'])
 
-" Set the refresh delay to be 150 ms
-call deoplete#custom#option('auto_refresh_delay', '150')
+" Set the refresh delay to be 250 ms
+call deoplete#custom#option('auto_refresh_delay', '250')
 
 " Since a dictionary is already sorted, no need to sort it again
 call deoplete#custom#source(
       \ 'dictionary', 'sorters', [])
 " Do not complete words that are too short
-call deoplete#custom#source(
-      \ 'dictionary', 'min_pattern_length', 4)
+" call deoplete#custom#source(
+      " \ 'dictionary', 'min_pattern_length', 4)
+
+call deoplete#custom#option('ignore_sources', {'_': ['tag']})
 
 " Change the source rankings: higher value means higher priority
 call deoplete#custom#source('around', 'rank', 600)
@@ -982,7 +984,7 @@ call deoplete#custom#source('member', 'rank', 600)
 call deoplete#custom#source('ultisnips', 'rank', 400)
 call deoplete#custom#source('look', 'rank', 300)
 call deoplete#custom#source('tmux', 'rank', 200)
-call deoplete#custom#source('tag', 'rank', 100)
+" call deoplete#custom#source('tag', 'rank', 100)
 
 " Define the emoji plugin as a source
 call deoplete#custom#source('emoji', 'filetypes', ['markdown', 'gitcommit'])
@@ -993,11 +995,11 @@ let g:deoplete#omni#functions.java = [
       \ 'javacomplete#Complete'
       \]
 
-" Register a GitHub completion function with deoplete
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.gitcommit = [
-      \ 'github_complete#complete'
-      \]
+" " Register a GitHub completion function with deoplete
+" let g:deoplete#omni#functions = {}
+" let g:deoplete#omni#functions.gitcommit = [
+"       \ 'github_complete#complete'
+"       \]
 
 " Define the input_patterns mapping so that it can be configured
 if !exists('g:deoplete#omni#input_patterns')
@@ -1005,32 +1007,37 @@ if !exists('g:deoplete#omni#input_patterns')
 endif
 
 " Configure deoplete to work with LaTeX and the vimtex plugin
-let g:deoplete#omni#input_patterns.tex = '\\(?:'
-      \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-      \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-      \ . '|hyperref\s*\[[^]]*'
-      \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-      \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
-      \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-      \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
-      \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
-      \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
-      \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
-      \ . '|\w*'
-      \ .')'
-
-" Configure deoplete to work with GitHub issue completion
-let g:deoplete#omni#input_patterns.gitcommit = '#[0-9]*'
-
-" Allow completion from different sources with a plugin
-if !exists('g:context_filetype#same_filetypes')
-  let g:context_filetype#same_filetypes = {}
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
 endif
+let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+
+" let g:deoplete#omni#input_patterns.tex = '\\(?:'
+"       \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
+"       \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
+"       \ . '|hyperref\s*\[[^]]*'
+"       \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+"       \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
+"       \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
+"       \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
+"       \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
+"       \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
+"       \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
+"       \ . '|\w*'
+"       \ .')'
+
+" " Configure deoplete to work with GitHub issue completion
+" let g:deoplete#omni#input_patterns.gitcommit = '#[0-9]*'
+
+" " Allow completion from different sources with a plugin
+" if !exists('g:context_filetype#same_filetypes')
+"   let g:context_filetype#same_filetypes = {}
+" endif
 
 " In gitcommit buffers, completes from all buffers
-let g:context_filetype#same_filetypes.gitcommit = '_'
+" let g:context_filetype#same_filetypes.gitcommit = '_'
 " In default, completes from all buffers
-let g:context_filetype#same_filetypes._ = '_'
+" let g:context_filetype#same_filetypes._ = '_'
 
 " Disable jedi-vim's completion engine, use all features otherwise
 let g:jedi#auto_vim_configuration = 0
