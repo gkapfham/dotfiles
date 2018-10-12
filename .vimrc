@@ -84,7 +84,6 @@ Plug 'filipekiss/ncm2-look.vim'
 Plug 'ncm2/ncm2-syntax'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-ultisnips'
-" Plug 'yuki-ycino/ncm2-dictionary'
 
 " Conditionally load deoplete for Vim8 and Neovim
 if has('nvim')
