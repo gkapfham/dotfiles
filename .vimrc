@@ -8,6 +8,7 @@ call plug#begin('~/.vim/bundle')
 " Plug 'Shougo/context_filetype.vim'
 " Plug 'fszymanski/deoplete-emoji'
 " Plug 'rhysd/github-complete.vim'
+" Plug 'ujihisa/neco-look'
 " Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
@@ -28,6 +29,7 @@ Plug 'chrisbra/unicode.vim'
 Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
+Plug 'filipekiss/ncm2-look.vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
@@ -49,6 +51,12 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'mgee/lightline-bufferline'
 Plug 'mhinz/vim-signify'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-jedi'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-syntax'
+Plug 'ncm2/ncm2-tagprefix'
+Plug 'ncm2/ncm2-ultisnips'
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
@@ -68,7 +76,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
-" Plug 'ujihisa/neco-look'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'vim-scripts/python_match.vim'
 Plug 'w0rp/ale'
@@ -76,14 +83,6 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
-
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-tagprefix'
-Plug 'filipekiss/ncm2-look.vim'
-Plug 'ncm2/ncm2-syntax'
-Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-ultisnips'
 
 " Conditionally load deoplete for Vim8 and Neovim
 if has('nvim')
