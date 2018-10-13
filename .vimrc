@@ -1132,7 +1132,7 @@ inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 " let g:jedi#auto_vim_configuration = 0
 " let g:jedi#completions_enabled = 0
 
-" Disable Jedi-vim auto-completion and enable call-signatures options
+" Disable jedi-vim auto-completion and enable call-signatures options
 let g:jedi#auto_initialization = 0
 let g:jedi#auto_vim_configuration = 0
 let g:jedi#completions_command = ''
