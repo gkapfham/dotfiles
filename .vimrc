@@ -955,17 +955,19 @@ command! -bang FZFMine call fzf#run({
       \  'window':  'enew'})
 let g:fzf_layout = { 'window': 'enew' }
 
-" enable ncm2 for all buffers
+" Enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
-" make it FAST
+" Configure ncm2 so that it appears quickly
 let ncm2#popup_delay = 1
-" let ncm2#complete_length = [[1,1]]
-" let g:ncm2#matcher = 'substrfuzzy'
+
+" Use a matcher and a sorter that work together
 let g:ncm2#matcher = 'abbrfuzzy'
 let g:ncm2#sorter = 'abbrfuzzy'
 
+" Follow vimtex documentation to configuration ncm2
+" This ensures that labels and references complete correctly
 augroup my_cm_setup
   autocmd!
   autocmd BufEnter * call ncm2#enable_for_buffer()
