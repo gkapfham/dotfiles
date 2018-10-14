@@ -493,7 +493,7 @@ augroup configurationgroupforfiletypes
   function! CreateInvisibleEmailBuffer()
     highlight EndOfBuffer ctermfg=bg
     " Note that trailing slash is by design
-    setlocal fillchars+=vert:\
+    setlocal fillchars+=vert:\ 
     75vnew
     setlocal nonumber norelativenumber
     wincmd w
