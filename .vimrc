@@ -492,9 +492,10 @@ augroup configurationgroupforfiletypes
   autocmd Filetype mail call CreateInvisibleEmailBuffer()
   function! CreateInvisibleEmailBuffer()
     highlight EndOfBuffer ctermfg=bg
-    " Note that trailing slash is by design
+    " Note that trailing slash with a trailing space is by design;
+    " If you do not include this space then a line will appear
     setlocal fillchars+=vert:\ 
-    75vnew
+    80vnew
     setlocal nonumber norelativenumber
     wincmd w
     command! Quit :wqa
