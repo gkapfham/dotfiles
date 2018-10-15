@@ -494,7 +494,6 @@ augroup configurationgroupforfiletypes
     highlight EndOfBuffer ctermfg=bg
     " Note that trailing slash with a trailing space is by design;
     " If you do not include this space then a line will appear
-    " setlocal fillchars+=vert:\ 
     set fillchars=vert:\│
     80vnew
     setlocal nonumber norelativenumber
