@@ -575,6 +575,7 @@ let g:ale_linters = {
       \   'html': ['htmlhint'],
       \}
 
+" Configure the symbols for linting warnings and errors
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
