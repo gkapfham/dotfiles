@@ -5,11 +5,6 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
-" Plug 'Shougo/context_filetype.vim'
-" Plug 'fszymanski/deoplete-emoji'
-" Plug 'rhysd/github-complete.vim'
-" Plug 'ujihisa/neco-look'
-" Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
