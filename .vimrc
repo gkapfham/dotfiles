@@ -1093,26 +1093,6 @@ inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 "   let g:deoplete#omni#input_patterns = {}
 " endif
 
-" " Configure deoplete to work with LaTeX and the vimtex plugin
-" if !exists('g:deoplete#omni#input_patterns')
-"   let g:deoplete#omni#input_patterns = {}
-" endif
-" let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
-
-" let g:deoplete#omni#input_patterns.tex = '\\(?:'
-"       \ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-"       \ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-"       \ . '|hyperref\s*\[[^]]*'
-"       \ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-"       \ . '|(?:include(?:only)?|input)\s*\{[^}]*'
-"       \ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-"       \ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
-"       \ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
-"       \ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
-"       \ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
-"       \ . '|\w*'
-"       \ .')'
-
 " Disable jedi-vim auto-completion and enable call-signatures options
 let g:jedi#auto_initialization = 0
 let g:jedi#auto_vim_configuration = 0
