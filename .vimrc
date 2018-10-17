@@ -1046,15 +1046,6 @@ let g:ncm2_look_enabled = 1
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 
-" " Change the source rankings: higher value means higher priority
-" call deoplete#custom#source('around', 'rank', 600)
-" call deoplete#custom#source('buffer', 'rank', 600)
-" call deoplete#custom#source('member', 'rank', 600)
-" call deoplete#custom#source('ultisnips', 'rank', 400)
-" call deoplete#custom#source('look', 'rank', 300)
-" call deoplete#custom#source('tmux', 'rank', 200)
-" " call deoplete#custom#source('tag', 'rank', 100)
-
 " " Define the emoji plugin as a source
 " call deoplete#custom#source('emoji', 'filetypes', ['markdown', 'gitcommit'])
 
