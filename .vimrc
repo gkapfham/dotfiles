@@ -487,8 +487,8 @@ augroup configurationgroupforfiletypes
   autocmd Filetype mail call CreateInvisibleEmailBuffer()
   function! CreateInvisibleEmailBuffer()
     highlight EndOfBuffer ctermfg=bg
-    " Note that trailing slash with a trailing space is by design;
-    " If you do not include this space then a line will appear
+    " Set the fillchars to be a large vertical line
+    " Note that using a space would make this invisible
     set fillchars=vert:\│
     80vnew
     setlocal nonumber norelativenumber
