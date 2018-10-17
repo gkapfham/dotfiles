@@ -828,6 +828,8 @@ nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
 
 " Configure the fzf statusline in Neovim
+" Note that this color configuration does
+" correctly integrate with the lightline
 function! s:fzf_statusline()
   " Define colors for the statusline
   highlight fzf1 ctermfg=235 ctermbg=110 cterm=bold
