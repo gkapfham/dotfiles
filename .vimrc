@@ -619,11 +619,13 @@ set complete+=kspell
 set complete+=]
 
 " Completion menus
-" set completeopt=longest,menuone
 set wildmenu
 set wildmode=longest:full,full
 
-" Deoplete is compatible with UltiSnips
+" Set the completion approach for the engine
+set completeopt=noinsert,menuone,noselect
+
+" Completion engine is compatible with UltiSnips
 let g:UltiSnipsExpandTrigger='<C-k>'
 let g:UltiSnipsJumpForwardTrigger='<C-k>'
 let g:UltiSnipsJumpBackwardTrigger='<C-j>'
@@ -955,7 +957,6 @@ let g:fzf_layout = { 'window': 'enew' }
 
 " Enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
 
 " Configure ncm2 so that it appears quickly
 let ncm2#popup_delay = 1
