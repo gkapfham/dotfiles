@@ -1046,24 +1046,6 @@ let g:ncm2_look_enabled = 1
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 
-" " Define the cache limit for the tag files
-" let g:deoplete#tag#cache_limit_size = 50000
-
-" " Use the head matching algorithm for speed improvements
-" call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy'])
-
-" " Set the refresh delay to be 250 ms
-" call deoplete#custom#option('auto_refresh_delay', '250')
-
-" " Since a dictionary is already sorted, no need to sort it again
-" call deoplete#custom#source(
-"       \ 'dictionary', 'sorters', [])
-" " Do not complete words that are too short
-" " call deoplete#custom#source(
-"       " \ 'dictionary', 'min_pattern_length', 4)
-
-" call deoplete#custom#option('ignore_sources', {'_': ['tag']})
-
 " " Change the source rankings: higher value means higher priority
 " call deoplete#custom#source('around', 'rank', 600)
 " call deoplete#custom#source('buffer', 'rank', 600)
