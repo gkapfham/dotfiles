@@ -1022,14 +1022,16 @@ augroup my_cm_setup
         \ })
 augroup END
 
-" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+" CTRL-c doesn't trigger the InsertLeave autocmd, so map to <ESC> instead
 inoremap <c-c> <ESC>
 
-" When the <Enter> key is pressed while the popup menu is visible, it only
-" hides the menu. Use this mapping to close the menu and also start a new
-" line.
+" When the <Enter> key is pressed while the pop-up menu is visible,
+" it only hides the menu.
+" Use this mapping to close the menu and also start a new line.
+" This configures the completion engine to make is more useful.
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
+" Enable the very fast and useful ncm2 completion engine
 let g:ncm2_look_enabled = 1
 
 " Configure deoplete to use Tab for forward and backward movement
