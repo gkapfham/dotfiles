@@ -1031,7 +1031,7 @@ inoremap <c-c> <ESC>
 " This configures the completion engine to make is more useful.
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
-" Enable the very fast and useful ncm2 completion engine
+" Enable the ncm2 completion engine to use the "look" dictionary
 let g:ncm2_look_enabled = 1
 
 " Configure deoplete to use Tab for forward and backward movement
