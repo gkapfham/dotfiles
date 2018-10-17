@@ -1032,16 +1032,6 @@ inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
 let g:ncm2_look_enabled = 1
 
-" " Configure deoplete
-" let g:deoplete#enable_at_startup = 0
-" autocmd InsertEnter * call deoplete#enable()
-
-" " Immediately trigger the deoplete completion
-" call deoplete#custom#option('auto_complete_delay', 0)
-
-" Set the maximum width of the abbreviations
-" call deoplete#custom#source('_', 'max_abbr_width', 40)
-
 " Configure deoplete to use Tab for forward and backward movement
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
