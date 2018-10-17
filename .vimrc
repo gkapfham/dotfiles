@@ -1126,10 +1126,6 @@ inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 " In default, completes from all buffers
 " let g:context_filetype#same_filetypes._ = '_'
 
-" Disable jedi-vim's completion engine, use all features otherwise
-" let g:jedi#auto_vim_configuration = 0
-" let g:jedi#completions_enabled = 0
-
 " Disable jedi-vim auto-completion and enable call-signatures options
 let g:jedi#auto_initialization = 0
 let g:jedi#auto_vim_configuration = 0
