@@ -1036,9 +1036,6 @@ let g:ncm2_look_enabled = 1
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 
-" " Define the emoji plugin as a source
-" call deoplete#custom#source('emoji', 'filetypes', ['markdown', 'gitcommit'])
-
 " Disable jedi-vim auto-completion and enable call-signatures options
 let g:jedi#auto_initialization = 0
 let g:jedi#auto_vim_configuration = 0
