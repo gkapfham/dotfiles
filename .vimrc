@@ -1076,23 +1076,6 @@ inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 " " Define the emoji plugin as a source
 " call deoplete#custom#source('emoji', 'filetypes', ['markdown', 'gitcommit'])
 
-" " Register Java's completion function with deoplete
-" let g:deoplete#omni#functions = {}
-" let g:deoplete#omni#functions.java = [
-"       \ 'javacomplete#Complete'
-"       \]
-
-" " Register a GitHub completion function with deoplete
-" let g:deoplete#omni#functions = {}
-" let g:deoplete#omni#functions.gitcommit = [
-"       \ 'github_complete#complete'
-"       \]
-
-" " Define the input_patterns mapping so that it can be configured
-" if !exists('g:deoplete#omni#input_patterns')
-"   let g:deoplete#omni#input_patterns = {}
-" endif
-
 " Disable jedi-vim auto-completion and enable call-signatures options
 let g:jedi#auto_initialization = 0
 let g:jedi#auto_vim_configuration = 0
