@@ -1113,19 +1113,6 @@ inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 "       \ . '|\w*'
 "       \ .')'
 
-" " Configure deoplete to work with GitHub issue completion
-" let g:deoplete#omni#input_patterns.gitcommit = '#[0-9]*'
-
-" " Allow completion from different sources with a plugin
-" if !exists('g:context_filetype#same_filetypes')
-"   let g:context_filetype#same_filetypes = {}
-" endif
-
-" In gitcommit buffers, completes from all buffers
-" let g:context_filetype#same_filetypes.gitcommit = '_'
-" In default, completes from all buffers
-" let g:context_filetype#same_filetypes._ = '_'
-
 " Disable jedi-vim auto-completion and enable call-signatures options
 let g:jedi#auto_initialization = 0
 let g:jedi#auto_vim_configuration = 0
