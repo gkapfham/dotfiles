@@ -489,7 +489,7 @@ augroup configurationgroupforfiletypes
     highlight EndOfBuffer ctermfg=bg
     " Set the fillchars to be a large vertical line
     " Note that using a space would make this invisible
-    set fillchars=vert:\│
+    set fillchars=vert:\ 
     80vnew
     setlocal nonumber norelativenumber
     wincmd w
