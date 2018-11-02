@@ -543,7 +543,7 @@ command! Blacken cexpr system('black **/*.py')<bar>:checktime
 let g:formatter_yapf_style = 'pep8'
 
 " Set the hosts programs for Python and Python3
-" That this improves performance when loading plugins using Python
+" This improves performance when loading plugins using Python
 let g:python_host_prog  = '/usr/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
