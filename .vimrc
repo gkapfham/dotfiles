@@ -534,12 +534,16 @@ let R_show_args = 1
 let g:jedi#force_py_version = 3
 
 " Run the black formatter on current Python file
+" Note that this is not the standard method, but
+" I adopted it because Black did not work well
+" with virtual environments created by Pipenv
 command! Black cexpr system('black ' . shellescape(expand('%')))<bar>:checktime
 
 " Run the black formatter on all of the Python files
 command! Blacken cexpr system('black **/*.py')<bar>:checktime
 
 " If using yapf, format Python code according to PEP8
+" Note that I should standardly use Black now
 let g:formatter_yapf_style = 'pep8'
 
 " Set the hosts programs for Python and Python3
