@@ -1033,10 +1033,9 @@ augroup END
 " CTRL-c doesn't trigger the InsertLeave autocmd, so map to <ESC> instead
 inoremap <c-c> <ESC>
 
-" When the <Enter> key is pressed while the pop-up menu is visible,
-" it only hides the menu.
+" Pressing <Enter> while the pop-up menu is visible, hides the menu.
 " Use this mapping to close the menu and also start a new line.
-" This configures the completion engine to make is more useful.
+" This configures the completion engine to make it more useful.
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
 " Enable the ncm2 completion engine to use the "look" dictionary
