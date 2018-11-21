@@ -2,7 +2,7 @@
 
 This repository contains the configuration files (i.e., "dotfiles") used to
 configure the programs regularly used by [Gregory M.
-Kapfhammer](http://www.cs.allegheny.edu/sites/gkapfham). Please note that all of
+Kapfhammer](https://www.gregorykapfhammer.com/). Please note that all of
 the dotfiles in this repository are, at least to some extent, "hard-coded" to
 work for my development environment and projects. For instance, I created these
 configuration files under the assumption that the developer will use Ubuntu
@@ -34,8 +34,7 @@ This is a summary of the dotfiles that I currently provide and maintain:
 Are you looking for some neat configurations to sharpen your own dotfiles? If
 so, then I encourage you to review the `.vimrc`, `.zshrc`, and `.tmux.conf`
 files that I regularly improve. Please note that all of these files have
-groupings with beginning and ending marks that respectively look like `{{{` and
-`}}}`.
+groupings with beginning and ending marks that respectively look like `{}`.
 
 ## Installation Instructions
 
