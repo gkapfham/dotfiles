@@ -481,24 +481,7 @@ augroup configurationgroupforfiletypes
   function! SetMailWrappingOptions()
     setlocal formatoptions=jtcqn
     setlocal wrap linebreak textwidth=80
-    " setlocal splitright
   endfunction
-
-  "" Create an invisible right-side buffer for wrapping
-  "function! CreateInvisibleEmailBuffer()
-  "  highlight EndOfBuffer ctermfg=bg
-  "  "
-  "  " Set the fillchars to be a large vertical line
-  "  " Note that using a space would make this invisible
-  "  setlocal comments+=nb:>
-  "  " setlocal fo+=q
-  "  " set fillchars=vert:\ 
-  "  " 80vnew
-  "  " setlocal nonumber norelativenumber
-  "  " wincmd w
-  "  " command! Quit :wqa
-  "endfunction
-  "autocmd Filetype mail call CreateInvisibleEmailBuffer()
 
   " When linting is costly in Java, only perform it in normal mode
   autocmd Filetype java call SetJavaLintingOptions()
