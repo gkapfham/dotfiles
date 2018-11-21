@@ -79,13 +79,11 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
 
-" Conditionally load deoplete for Vim8 and Neovim
+" Conditionally load ncm2 for Vim8 and Neovim
 if has('nvim')
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   Plug 'ncm2/ncm2'
   Plug 'roxma/nvim-yarp'
 else
-  " Plug 'Shougo/deoplete.nvim'
   Plug 'ncm2/ncm2'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
