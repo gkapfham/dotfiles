@@ -473,27 +473,32 @@ augroup configurationgroupforfiletypes
   " Force hard wrapping for configuration files
   autocmd FileType conf set formatoptions+=t
 
-  " Configuration for Mail that does soft wrapping
+  " Configuration for Mail that does hard wrapping
+  " Assume user will perform soft wrapping with vipJ
+  " Multiple approaches with soft wrapping slowed
+  " completion the completion engine; try new method
   autocmd Filetype mail call SetMailWrappingOptions()
   function! SetMailWrappingOptions()
-    setlocal formatoptions=jtcqln
-    setlocal wrap linebreak textwidth=0
-    setlocal splitright
+    setlocal formatoptions=jtcqn
+    setlocal wrap linebreak textwidth=80
+    " setlocal splitright
   endfunction
 
-  " Create an invisible right-side buffer for wrapping
-  autocmd Filetype mail call CreateInvisibleEmailBuffer()
-  function! CreateInvisibleEmailBuffer()
-    highlight EndOfBuffer ctermfg=bg
-    " Set the fillchars to be a large vertical line
-    " Note that using a space would make this invisible
-    set fillchars=vert:\ 
-    80vnew
-    setlocal nonumber norelativenumber
-    wincmd w
-    command! Quit :wqa
-  endfunction
-  command! Email call CreateInvisibleEmailBuffer()
+  "" Create an invisible right-side buffer for wrapping
+  "function! CreateInvisibleEmailBuffer()
+  "  highlight EndOfBuffer ctermfg=bg
+  "  "
+  "  " Set the fillchars to be a large vertical line
+  "  " Note that using a space would make this invisible
+  "  setlocal comments+=nb:>
+  "  " setlocal fo+=q
+  "  " set fillchars=vert:\ 
+  "  " 80vnew
+  "  " setlocal nonumber norelativenumber
+  "  " wincmd w
+  "  " command! Quit :wqa
+  "endfunction
+  "autocmd Filetype mail call CreateInvisibleEmailBuffer()
 
   " When linting is costly in Java, only perform it in normal mode
   autocmd Filetype java call SetJavaLintingOptions()
