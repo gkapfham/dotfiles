@@ -1033,6 +1033,11 @@ augroup END
 " CTRL-c doesn't trigger the InsertLeave autocmd, so map to <ESC> instead
 inoremap <c-c> <ESC>
 
+" Enable auto complete for `<backspace>`, `<c-w>` keys
+augroup ImproveNcmTwoCompletion
+  au TextChangedI * call ncm2#auto_trigger()
+augroup END
+
 " Pressing <Enter> while the pop-up menu is visible, hides the menu.
 " Use this mapping to close the menu and also start a new line.
 " This configures the completion engine to make it more useful.
