@@ -15,7 +15,6 @@ Plug 'SirVer/ultisnips'
 Plug 'Valloric/ListToggle'
 Plug 'airblade/vim-rooter'
 Plug 'andymass/vim-matchup'
-Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
 Plug 'bkad/CamelCaseMotion'
 Plug 'bps/vim-textobj-python', {'for': 'python'}
 Plug 'bronson/vim-visual-star-search'
@@ -453,7 +452,6 @@ augroup configurationgroupforfiletypes
   autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
   autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
   autocmd FileType tex set omnifunc=vimtex#complete#omnifunc
-  autocmd FileType java setlocal omnifunc=javacomplete#Complete
   autocmd FileType gitcommit setlocal omnifunc=github_complete#complete
 
   " Enable spellcheck for the git commit messages
