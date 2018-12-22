@@ -5,6 +5,7 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'kshenoy/vim-signature'
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -39,7 +40,6 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
-Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mgee/lightline-bufferline'
@@ -807,16 +807,17 @@ command! FZFMine call fzf#run({
       \  'down':    '25%'})
 
 " Define key combinations
-nmap <C-h> :FZFHidden<CR>
-nmap <C-p> :FZFMine<CR>
-nmap <Space>y :Tags <CR>
-nmap <Space>t :BTags <CR>
+nmap <C-h> :FZFHidden <CR>
+nmap <C-p> :FZFMine <CR>
 nmap <Space>b :BLines <CR>
 nmap <Space>r :Lines <CR>
-nnoremap <Tab> :Buffers<CR>
+nmap <Space>m :Marks <CR>
+nmap <Space>t :BTags <CR>
+nmap <Space>y :Tags <CR>
+nnoremap <Tab> :Buffers <CR>
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 
-" Add in a format string for controlling how FZF git logs
+" Add in a format string for controlling how FZF displays the git log
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
 
 " Configure the fzf statusline in Neovim
@@ -923,7 +924,7 @@ end
 
 " }}}
 
-" Advanced FZF and Deoplete Settings {{{
+" Advanced FZF and Completion Settings {{{
 
 " Control FZF windows
 command! FZFMru call fzf#run({
