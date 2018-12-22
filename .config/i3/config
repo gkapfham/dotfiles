@@ -1,5 +1,9 @@
+# Mod {{{
+
 # Set the mod key to Alt
 set $mod Mod1
+
+# }}}
 
 # Looks {{{
 
@@ -21,9 +25,6 @@ exec_always --no-startup-id feh --bg-fill ~/configure/wallpaper/mountains.png
 
 # }}}
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
 # Rofi {{{
 
 # Rofi for processes
@@ -43,11 +44,17 @@ bindsym Control+$mod+b exec "~/bin/switch-i3-workspace.sh"
 
 # }}}
 
+# Float {{{
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# }}}
+
 # Programs {{{
 
 # Terminal
 bindsym $mod+Return exec i3-sensible-terminal
-
 
 # }}}
 
