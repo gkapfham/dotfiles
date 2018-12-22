@@ -1,0 +1,210 @@
+[colors]
+background = #333333
+background-alt = #dfdfdf
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #E95420
+secondary = #e60053
+alert = #bd2c40
+green = #009300
+yellow = #E95420
+red = #f90000
+blue = #0a6cf5
+
+[bar/mybar]
+width = 100%
+height = 35
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 0
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = "Hack Nerd Font:size=20;5"
+font-1 = "Hack Nerd Font:size=18;5"
+font-2 = "Hack Nerd Font:size=18:weight=bold;5"
+
+modules-left = i3
+modules-right = cpu memory battery0 backlight pulseaudio date
+
+tray-position = right
+tray-padding = 8
+tray-maxsize = 32
+tray-scale = 1.0
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+ws-icon-0 = 1;1
+ws-icon-1 = 2;2
+ws-icon-2 = 3;3
+ws-icon-3 = 4;4
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
+ws-icon-8 = 9;9
+ws-icon-9 = 10;10
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-font = 3
+label-focused-background = ${colors.primary}
+label-focused-underline= ${colors.primary}
+label-focused-foreground = ${colors.background-alt}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %icon%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+[module/mpd]
+type = internal/mpd
+host = 127.0.0.1
+port = 6600
+
+format-online = <toggle> <label-song>
+format-offline =
+format-playing-underline = ${colors.green}
+format-paused-underline = ${colors.yellow}
+label-song = %artist% - %title:0:30:...%
+icon-play = ""
+icon-pause = "契"
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-postfix = " "
+;format-prefix-foreground = ${colors.foreground-alt}
+format-underline = ${colors.background}
+label = %percentage:2%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+;format-prefix-foreground = ${colors.foreground-alt}
+format-underline = ${colors.background}
+label = %percentage_used%%
+
+[module/date]
+type = internal/date
+interval = 1
+
+date = %a %b %d
+time = "%I:%M %p "
+label = %date% %time%
+
+format = <label>
+format-underline = ${colors.background}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
+label-volume-foreground = ${root.foreground}
+format-volume-underline = ${colors.background}
+
+format-muted-prefix = "婢"
+label-muted = %percentage%%
+label-muted-foreground = #666
+format-muted-underline = ${colors.background}
+
+ramp-volume-0 = "奄"
+ramp-volume-1 = "奔"
+ramp-volume-2 = "墳"
+
+[module/battery0]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 99
+
+label-charging = %percentage%%
+format-charging-prefix = " "
+format-charging = <label-charging>
+format-charging-underline = ${colors.background}
+
+label-discharging = %percentage%%
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${colors.background}
+
+label-full = %percentage%%
+format-full-prefix = " "
+format-full-underline = ${colors.background}
+
+ramp-capacity-0 = ""
+ramp-capacity-1 = ""
+ramp-capacity-2 = ""
+ramp-capacity-3 = ""
+
+[module/battery1]
+type = internal/battery
+battery = BAT1
+adapter = AC
+full-at = 99
+
+label-charging = %percentage%%
+format-charging-prefix = " "
+format-charging = <label-charging>
+format-charging-underline = ${colors.yellow}
+
+label-discharging = %percentage%%
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${colors.red}
+
+label-full = %percentage%%
+format-full-prefix = " "
+format-full-underline = ${colors.background}
+
+ramp-capacity-0 = ""
+ramp-capacity-1 = ""
+ramp-capacity-2 = ""
+ramp-capacity-3 = ""
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format = <label>
+format-prefix = " "
+label = %percentage%%
