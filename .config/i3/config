@@ -8,7 +8,7 @@ set $mod Mod1
 # Startup {{{
 
 # Run polybar
-exec_always --no-startup-id ~/.config/polybar/bin/launch.sh
+exec_always --no-startup-id ~/.config/polybar/bin/polybar-launch.sh
 
 # Run compton for fast screen redraws and compositing
 exec --no-startup-id compton
