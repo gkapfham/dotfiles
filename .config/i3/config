@@ -5,6 +5,19 @@ set $mod Mod1
 
 # }}}
 
+# Startup {{{
+
+# Run polybar
+exec_always --no-startup-id ~/.config/polybar/bin/launch.sh
+
+# Run compton for fast screen redraws and compositing
+exec --no-startup-id compton
+
+# Run the network-monitor applet
+exec --no-startup-id nm-applet
+
+# }}}
+
 # Looks {{{
 
 # Colors
@@ -58,7 +71,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # }}}
 
-# Workspace {{{
+# Workspaces {{{
 
 # Define names for default workspaces
 set $ws1 "1"
@@ -96,6 +109,7 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+bindsym Shift+$mod+1 workspace $ws11
 
 # Create a new workspace
 bindsym $mod+n exec --no-startup-id ~/bin/create-i3-workspace.sh
@@ -256,12 +270,6 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # }}}
-
-# startup applications
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec --no-startup-id compton
-exec --no-startup-id nm-applet
-exec --no-startup-id xsetroot -cursor_name Adwaita
 
 # media keys
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
