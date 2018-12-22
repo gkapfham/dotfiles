@@ -1,7 +1,6 @@
 ! ------------------------------------------------------------------------------
 ! ROFI Color theme and configurations
 ! ------------------------------------------------------------------------------
-!rofi.font: Ubuntu\ Mono\ derivative\ Powerline\ 32
 rofi.font: Hack\ Nerd\ Font\ Regular\ 48
 rofi.lines: 5
 
@@ -20,3 +19,6 @@ rofi.hmode: false
 
 rofi.separator-style: none
 rofi.hide-scrollbar: true
+
+Xcursor.theme: moblin
+Xcursor.size: 32
