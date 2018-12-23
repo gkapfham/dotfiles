@@ -31,8 +31,8 @@ module-margin-left = 1
 module-margin-right = 1
 
 font-0 = "Hack Nerd Font:size=20;5"
-font-1 = "Hack Nerd Font:size=18;5"
-font-2 = "Hack Nerd Font:size=18:weight=bold;5"
+font-1 = "Hack Nerd Font:size=20;5"
+font-2 = "Hack Nerd Font:size=20:weight=bold;5"
 
 modules-left = i3
 modules-right = cpu memory battery0 backlight pulseaudio date
