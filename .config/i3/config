@@ -83,6 +83,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 # Workspaces {{{
 
 # Define names for default workspaces
+# Note that these are not numbers
 # 1 through 10
 set $ws1 "1"
 set $ws2 "2"
@@ -224,12 +225,10 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+f fullscreen toggle
 
 # Split in horizontal orientation
-# Do not understand this feature
 bindsym $mod+backslash split h
 bindsym $mod+Shift+backslash split h
 
 # Split in vertical orientation
-# Do not understand this feature
 bindsym $mod+minus split v
 bindsym $mod+Shift+minus split v
 
