@@ -18,14 +18,14 @@ fi
 
 # Show exit wm option if exit command is provided as an argument
 if [ ${#1} -gt 0 ]; then
-  OPTIONS="Exit Manager\n$OPTIONS"
+  OPTIONS="Log Out\n$OPTIONS"
 fi
 
 option=`echo -e $OPTIONS | $LAUNCHER | awk '{print $1}' | tr -d '\r\n'`
 if [ ${#option} -gt 0 ]
 then
     case $option in
-      Exit)
+      Log)
         eval $1
         ;;
       Lock)
