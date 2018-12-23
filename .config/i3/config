@@ -40,20 +40,26 @@ exec_always --no-startup-id feh --bg-fill ~/configure/wallpaper/mountains.png
 
 # Rofi {{{
 
-# Rofi for processes
-bindsym Control+$mod+p exec "rofi -width 30 -modi 'run' -show run"
+# Rofi for programs
+set $rofi-program "rofi -width 30 -modi 'run' -show run"
+bindsym Control+$mod+p exec $rofi-program
 
 # Rofi for .desktop files
-bindsym Control+$mod+n exec "j4-dmenu-desktop --dmenu='rofi -width 30 -p 'dmenu:' -dmenu -i'"
+set $rofi-desktop "j4-dmenu-desktop --dmenu='rofi -width 30 -p 'dmenu:' -dmenu -i'"
+bindsym Control+$mod+n exec $rofi-desktop
 
 # Rofi for windows
-bindsym Control+$mod+m exec "rofi -width 50 -modi 'window' -show window"
+set $rofi-windows "rofi -width 50 -modi 'window' -show window"
+bindsym Control+$mod+m exec $rofi-windows
 
 # Rofi for system control
 bindsym Control+$mod+plus exec "~/bin/rofi-power.sh 'i3-msg exit'"
 
 # Rofi for workspaces
 bindsym Control+$mod+b exec "~/bin/switch-i3-workspace.sh"
+
+# Rofi for keymap reminders
+bindsym Control+$mod+r exec ".config/i3/bin/i3-keymaps.sh"
 
 # }}}
 
