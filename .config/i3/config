@@ -335,9 +335,6 @@ bindsym $mod+Shift+r restart
 # Exit i3
 bindsym $mod+Shift+e exec i3-msg exit
 
-# Lock i3 screen
-bindsym $mod+Shift+o exec --no-startup-id "~/bin/lock-screen.sh"
-
 # }}}
 
 # Resize {{{
