@@ -30,6 +30,8 @@ This is a summary of the dotfiles that I currently provide and maintain:
 - `.tmux.conf`: configuration of the `tmux` terminal multiplexing tool
 - `.vimrc`: configuration for the `nvim` and `vim` text editors
 - `.zshrc`: configuration for the `zsh` shell to use oh-my-zsh
+- `.config/i3`: configuration and scripts for the `i3` window manager
+- `.config/polybar`: configuration and scripts for the `polybar` used with `i3`
 
 Are you looking for some neat configurations to sharpen your own dotfiles? If
 so, then I encourage you to review the `.vimrc`, `.zshrc`, and `.tmux.conf`
