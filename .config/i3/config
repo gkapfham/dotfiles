@@ -251,7 +251,8 @@ mode $mode_move_workspace {
 bindsym $mod+e mode $mode_move_workspace
 
 # Create a new workspace
-bindsym $mod+n exec --no-startup-id ~/bin/create-i3-workspace.sh
+set $create-workspace "~/.config/i3/scripts/i3-create-workspace.sh"
+bindsym $mod+n exec --no-startup-id $create-workspace
 
 # }}}
 
