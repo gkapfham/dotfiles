@@ -70,6 +70,7 @@ format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
 
+; Define simple numbers for workspace indices
 ws-icon-0 = 1;1
 ws-icon-1 = 2;2
 ws-icon-2 = 3;3
@@ -91,6 +92,7 @@ ws-icon-17 = 18;18
 ws-icon-18 = 19;19
 ws-icon-19 = 20;20
 
+; Configure the display of the mode indicator
 label-mode-padding = 1
 label-mode-margin-left = 5
 label-mode-margin-right = 1
@@ -116,10 +118,11 @@ label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-focused = %name%
+label-urgent = %name%
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
+; Display the use of the processor
 [module/cpu]
 type = internal/cpu
 interval = 2
@@ -128,6 +131,7 @@ format-prefix = " "
 format-underline = ${colors.background}
 label = %percentage:2%%
 
+; Display the use of the memory
 [module/memory]
 type = internal/memory
 interval = 2
@@ -136,6 +140,7 @@ format-prefix = " "
 format-underline = ${colors.background}
 label = %percentage_used%%
 
+; Display the date
 [module/date]
 type = internal/date
 interval = 1
@@ -147,6 +152,7 @@ label = %date% %time%
 format = <label>
 format-underline = ${colors.background}
 
+; Display the level of the audio
 [module/pulseaudio]
 type = internal/pulseaudio
 
@@ -164,6 +170,7 @@ ramp-volume-0 = "奄"
 ramp-volume-1 = "奔"
 ramp-volume-2 = "墳"
 
+; Display the level of the battery
 [module/battery0]
 type = internal/battery
 battery = BAT0
@@ -178,30 +185,6 @@ format-charging-underline = ${colors.background}
 label-discharging = %percentage%%
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${colors.background}
-
-label-full = %percentage%%
-format-full-prefix = " "
-format-full-underline = ${colors.background}
-
-ramp-capacity-0 = ""
-ramp-capacity-1 = ""
-ramp-capacity-2 = ""
-ramp-capacity-3 = ""
-
-[module/battery1]
-type = internal/battery
-battery = BAT1
-adapter = AC
-full-at = 99
-
-label-charging = %percentage%%
-format-charging-prefix = " "
-format-charging = <label-charging>
-format-charging-underline = ${colors.yellow}
-
-label-discharging = %percentage%%
-format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${colors.red}
 
 label-full = %percentage%%
 format-full-prefix = " "
