@@ -59,7 +59,7 @@ bindsym Control+$mod+plus exec "~/bin/rofi-power.sh 'i3-msg exit'"
 bindsym Control+$mod+b exec "~/bin/switch-i3-workspace.sh"
 
 # Rofi for keymap reminders
-bindsym Control+$mod+r exec ".config/i3/bin/i3-keymaps.sh"
+bindsym Control+$mod+r exec ".config/i3/scripts/i3-keymaps.sh"
 
 # }}}
 
