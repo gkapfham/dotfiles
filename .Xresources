@@ -21,4 +21,4 @@ rofi.separator-style: none
 rofi.hide-scrollbar: true
 
 Xcursor.theme: moblin
-Xcursor.size: 32
+Xcursor.size: 16
