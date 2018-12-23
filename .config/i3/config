@@ -74,6 +74,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 # Workspaces {{{
 
 # Define names for default workspaces
+# 1 through 10
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -83,6 +84,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
+# 10 through 20
 set $ws10 "10"
 set $ws11 "11"
 set $ws12 "12"
@@ -139,9 +141,40 @@ mode $mode_switch_workspace {
 # Enter the extended workspace switching mode
 bindsym $mod+w mode $mode_switch_workspace
 
+# Move focused container to workspace
+# 1 through 10
+bindsym Control+$mod+1 move container to workspace $ws1
+bindsym Control+$mod+2 move container to workspace $ws2
+bindsym Control+$mod+3 move container to workspace $ws3
+bindsym Control+$mod+4 move container to workspace $ws4
+bindsym Control+$mod+5 move container to workspace $ws5
+bindsym Control+$mod+6 move container to workspace $ws6
+bindsym Control+$mod+7 move container to workspace $ws7
+bindsym Control+$mod+8 move container to workspace $ws8
+bindsym Control+$mod+9 move container to workspace $ws9
+bindsym Control+$mod+0 move container to workspace $ws10
+
+# Move to a specified (extended) workspace
+# 11 through 20
+set $mode_move_workspace "Move to Workspace"
+mode $mode_move_workspace {
+    bindsym Control+$mod+1 move container to workspace $ws11; mode "default"
+    bindsym Control+$mod+2 move container to workspace $workspace $ws12; mode "default"
+    bindsym Control+$mod+3 move container to workspace $workspace $ws13; mode "default"
+    bindsym Control+$mod+4 move container to workspace $workspace $ws14; mode "default"
+    bindsym Control+$mod+5 move container to workspace $workspace $ws15; mode "default"
+    bindsym Control+$mod+6 move container to workspace $workspace $ws16; mode "default"
+    bindsym Control+$mod+7 move container to workspace $workspace $ws17; mode "default"
+    bindsym Control+$mod+8 move container to workspace $workspace $ws18; mode "default"
+    bindsym Control+$mod+9 move container to workspace $workspace $ws19; mode "default"
+    bindsym Control+$mod+0 move container to workspace $ws20; mode "default"
+    bindsym Escape mode "default"
+}
+# Enter the extended workspace move mode
+bindsym $mod+e mode $mode_move_workspace
+
 # Create a new workspace
 bindsym $mod+n exec --no-startup-id ~/bin/create-i3-workspace.sh
-
 
 # }}}
 
@@ -184,7 +217,7 @@ bindsym $mod+f fullscreen toggle
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+i layout toggle split
 
 # Toggle between tiling and floating windows
 bindsym $mod+Shift+space floating toggle
@@ -195,21 +228,6 @@ bindsym $mod+space focus mode_toggle
 # }}}
 
 # Move {{{
-
-# Move focused container to workspace
-# 1 through 10
-bindsym Control+$mod+1 move container to workspace $ws1
-bindsym Control+$mod+2 move container to workspace $ws2
-bindsym Control+$mod+3 move container to workspace $ws3
-bindsym Control+$mod+4 move container to workspace $ws4
-bindsym Control+$mod+5 move container to workspace $ws5
-bindsym Control+$mod+6 move container to workspace $ws6
-bindsym Control+$mod+7 move container to workspace $ws7
-bindsym Control+$mod+8 move container to workspace $ws8
-bindsym Control+$mod+9 move container to workspace $ws9
-bindsym Control+$mod+0 move container to workspace $ws10
-# 11 through 20
-bindsym Control+Mod4+0 move container to workspace $ws11
 
 # Move focused window with vim keybindings
 bindsym $mod+Shift+h move left
