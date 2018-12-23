@@ -206,21 +206,6 @@ bindsym $mod+a focus parent
 
 # }}}
 
-# Split {{{
-
-# Split in horizontal orientation
-bindsym $mod+backslash split h
-bindsym $mod+Shift+backslash split h
-
-# Split in vertical orientation
-bindsym $mod+minus split v
-bindsym $mod+Shift+minus split v
-
-# Use fullscreen mode for focused container
-bindsym $mod+f fullscreen toggle
-
-# }}}
-
 # Layout {{{
 
 # Change container layout (stacked, tabbed, toggle split)
@@ -233,6 +218,20 @@ bindsym $mod+Shift+space floating toggle
 
 # Change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
+# Toggle fullscreen mode for focused container
+# This removes the polybar at the screen's top
+bindsym $mod+f fullscreen toggle
+
+# Split in horizontal orientation
+# Do not understand this feature
+bindsym $mod+backslash split h
+bindsym $mod+Shift+backslash split h
+
+# Split in vertical orientation
+# Do not understand this feature
+bindsym $mod+minus split v
+bindsym $mod+Shift+minus split v
 
 # }}}
 
