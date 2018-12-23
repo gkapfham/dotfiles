@@ -72,8 +72,8 @@ ws-icon-17 = 18;18
 ws-icon-18 = 19;19
 ws-icon-19 = 20;20
 
-label-mode-padding = 2
-label-mode-margin-left = 52
+label-mode-padding = 1
+label-mode-margin-left = 5
 label-mode-margin-right = 1
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
@@ -84,11 +84,11 @@ label-focused-font = 3
 label-focused-background = ${colors.primary}
 label-focused-underline= ${colors.primary}
 label-focused-foreground = ${colors.background-alt}
-label-focused-padding = 2
+label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %icon%
-label-unfocused-padding = 2
+label-unfocused-padding = 1
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %icon%
