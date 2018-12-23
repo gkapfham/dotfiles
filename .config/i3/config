@@ -57,7 +57,8 @@ set $rofi-system "~/.config/i3/scripts/i3-system.sh 'i3-msg exit'"
 bindsym Control+$mod+plus exec $rofi-system
 
 # Rofi for workspaces
-bindsym Control+$mod+b exec "~/bin/switch-i3-workspace.sh"
+set $rofi-switch-workspace "~/.config/i3/scripts/i3-switch-workspace.sh"
+bindsym Control+$mod+b exec $rofi-switch-workspace
 
 # Rofi for keymap reminders
 set $rofi-reminder "~/.config/i3/scripts/i3-keymaps.sh"
