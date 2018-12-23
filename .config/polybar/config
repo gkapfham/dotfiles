@@ -46,14 +46,21 @@ font-1 = "Hack Nerd Font:size=20;5"
 ; Specify the emphasis font for the i3 workspaces
 font-2 = "Hack Nerd Font:size=20:weight=bold;5"
 
+; Display the i3 workspaces on the left
 modules-left = i3
+
+; Display multiple modules on the right
 modules-right = cpu memory battery0 backlight pulseaudio date
 
+; Do not display any modules in the middle
+
+; Configure the tray to display the network-manager applet
 tray-position = right
 tray-padding = 8
 tray-maxsize = 32
 tray-scale = 1.0
 
+; Allow the mouse to click and scroll
 cursor-click = pointer
 cursor-scroll = ns-resize
 
