@@ -275,10 +275,8 @@ bindsym $mod+Shift+o exec --no-startup-id "~/bin/lock-screen.sh"
 
 # Resize {{{
 
-# resize window (you can also use the mouse for that)
+# Resize window mode
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
         # Pressing left will shrink the window’s width.
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
@@ -287,19 +285,17 @@ mode "resize" {
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
-
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
-
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
+# Enter the resize mode
 bindsym $mod+r mode "resize"
 
 # }}}
@@ -310,5 +306,5 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5%
 bindsym XF86AudioMute exec --no-startup-id pavolume mute
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 2 toggle
 
-bindsym XF86MonBrightnessUp exec sudo /usr/bin/light -s sysfs/backlight/auto -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec sudo /usr/bin/light -s sysfs/backlight/auto -U 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec sudo /usr/bin/light -s sysfs/backlight/auto -A 5
+bindsym XF86MonBrightnessDown exec sudo /usr/bin/light -s sysfs/backlight/auto -U 5
