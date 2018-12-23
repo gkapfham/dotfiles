@@ -61,6 +61,7 @@ ws-icon-6 = 7;7
 ws-icon-7 = 8;8
 ws-icon-8 = 9;9
 ws-icon-9 = 10;10
+ws-icon-10 = 11;11
 
 label-mode-padding = 2
 label-mode-foreground = #000
@@ -88,19 +89,6 @@ label-visible-padding = ${self.label-focused-padding}
 label-urgent = %icon%
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
-
-[module/mpd]
-type = internal/mpd
-host = 127.0.0.1
-port = 6600
-
-format-online = <toggle> <label-song>
-format-offline =
-format-playing-underline = ${colors.green}
-format-paused-underline = ${colors.yellow}
-label-song = %artist% - %title:0:30:...%
-icon-play = ""
-icon-pause = "契"
 
 [module/cpu]
 type = internal/cpu
