@@ -300,11 +300,25 @@ bindsym $mod+r mode "resize"
 
 # }}}
 
-# media keys
+# Media {{{
+
+# Increase the volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
+
+# Decrease the volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5%
+
+# Mute the audio
 bindsym XF86AudioMute exec --no-startup-id pavolume mute
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 2 toggle
 
+# Use the light backlight modification tool
+# This works as long as the light program is in the sudoers file
+
+# Increase the brightness of the screen
 bindsym XF86MonBrightnessUp exec sudo /usr/bin/light -s sysfs/backlight/auto -A 5
+
+# Decrease the brightness of the screen
 bindsym XF86MonBrightnessDown exec sudo /usr/bin/light -s sysfs/backlight/auto -U 5
+
+# }}}
