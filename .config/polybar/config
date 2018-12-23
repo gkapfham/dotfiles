@@ -1,4 +1,6 @@
 [colors]
+; Define colors to be dark grey and Ubuntu-like
+; Some of these colors are not-used defaults
 background = #333333
 background-alt = #dfdfdf
 foreground = #dfdfdf
@@ -12,26 +14,35 @@ red = #f90000
 blue = #0a6cf5
 
 [bar/mybar]
+; Define format
 width = 100%
 height = 40
 fixed-center = true
 
+; Set the two basic colors
 background = ${colors.background}
 foreground = ${colors.foreground}
 
+; Make the lines the same as background
 line-size = 3
-line-color = #f00
-
+line-color = ${colors.background}
 border-size = 0
 
+; Don't use padding by default
 padding-left = 0
 padding-right = 0
 
+; Set 1 unit of margin by default
 module-margin-left = 1
 module-margin-right = 1
 
+; Specify the main font
 font-0 = "Hack Nerd Font:size=20;5"
+
+; Specify the icon font
 font-1 = "Hack Nerd Font:size=20;5"
+
+; Specify the emphasis font for the i3 workspaces
 font-2 = "Hack Nerd Font:size=20:weight=bold;5"
 
 modules-left = i3
