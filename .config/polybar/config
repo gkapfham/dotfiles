@@ -13,14 +13,6 @@ yellow = #E95420
 red = #f90000
 blue = #0a6cf5
 
-; Specify some global settings
-[settings]
-screenchange-reload = true
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
-
 [bar/mybar]
 ; Define format
 width = 100%
@@ -57,19 +49,32 @@ font-2 = "Hack Nerd Font:size=20:weight=bold;5"
 modules-left = i3
 
 ; Display multiple modules on the right
-modules-right = cpu memory battery0 backlight pulseaudio date
+modules-right = cpu memory battery0 backlight pulseaudio network date
 
 ; Do not display any modules in the middle
 
 ; Configure the tray to display the network-manager applet
-tray-position = right
-tray-padding = 8
-tray-maxsize = 32
-tray-scale = 1.0
+;tray-position = right
+;tray-padding = 8
+;tray-maxsize = 20
+;tray-scale = 1.0
+;tray-transparent = true
+;tray-detached = true
 
 ; Allow the mouse to click and scroll
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[module/network]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+udspeed-minwidth = 0
+format-connected-prefix = " "
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+label-connected = %essid%
+label-disconnected = Disconnected
 
 [module/i3]
 type = internal/i3
@@ -210,3 +215,11 @@ card = intel_backlight
 format = <label>
 format-prefix = " "
 label = %percentage%%
+
+; Specify some global settings
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
