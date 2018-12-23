@@ -1,7 +1,6 @@
 [colors]
 ; Define colors to be centered by dark grey
 ; Some of these colors are not used now
-;primary = #E95420
 background = #333333
 background-alt = #dfdfdf
 foreground = #dfdfdf
@@ -13,6 +12,14 @@ green = #009300
 yellow = #E95420
 red = #f90000
 blue = #0a6cf5
+
+; Specify some global settings
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
 
 [bar/mybar]
 ; Define format
@@ -194,13 +201,6 @@ ramp-capacity-0 = ""
 ramp-capacity-1 = ""
 ramp-capacity-2 = ""
 ramp-capacity-3 = ""
-
-[settings]
-screenchange-reload = true
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
 
 [module/backlight]
 type = internal/backlight
