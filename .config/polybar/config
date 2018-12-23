@@ -202,6 +202,8 @@ ramp-capacity-1 = ""
 ramp-capacity-2 = ""
 ramp-capacity-3 = ""
 
+; Display backlight details
+; Note that this works even though i3 uses light
 [module/backlight]
 type = internal/backlight
 card = intel_backlight
