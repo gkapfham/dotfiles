@@ -1,11 +1,12 @@
 [colors]
-; Define colors to be dark grey and Ubuntu-like
-; Some of these colors are not-used defaults
+; Define colors to be centered by dark grey
+; Some of these colors are not used now
+;primary = #E95420
 background = #333333
 background-alt = #dfdfdf
 foreground = #dfdfdf
 foreground-alt = #555
-primary = #E95420
+primary = #616161
 secondary = #e60053
 alert = #bd2c40
 green = #009300
