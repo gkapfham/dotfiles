@@ -73,6 +73,8 @@ ws-icon-18 = 19;19
 ws-icon-19 = 20;20
 
 label-mode-padding = 2
+label-mode-margin-left = 52
+label-mode-margin-right = 1
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
@@ -103,7 +105,6 @@ label-urgent-padding = 2
 type = internal/cpu
 interval = 2
 format-prefix = " "
-format-postfix = " "
 ;format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.background}
 label = %percentage:2%%
