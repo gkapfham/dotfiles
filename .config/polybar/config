@@ -13,7 +13,7 @@ blue = #0a6cf5
 
 [bar/mybar]
 width = 100%
-height = 35
+height = 40
 fixed-center = true
 
 background = ${colors.background}
