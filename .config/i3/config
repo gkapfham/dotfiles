@@ -216,7 +216,7 @@ bindsym $mod+a focus parent
 
 # Layout {{{
 
-# Change container layout (stacked, tabbed, toggle split)
+# Change container layout to stacked, tabbed, or toggle split
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+i layout toggle split
@@ -224,7 +224,7 @@ bindsym $mod+i layout toggle split
 # Toggle between tiling and floating windows
 bindsym $mod+Shift+space floating toggle
 
-# Change focus between tiling / floating windows
+# Change focus between tiling or floating windows
 bindsym $mod+space focus mode_toggle
 
 # Toggle fullscreen mode for focused container
@@ -272,7 +272,7 @@ bindsym $mod+Shift+c reload
 # Restart i3 inplace
 bindsym $mod+Shift+r restart
 
-# Exit i3
+# Exit i3 without any prompt
 bindsym $mod+Shift+e exec i3-msg exit
 
 # }}}
@@ -280,7 +280,7 @@ bindsym $mod+Shift+e exec i3-msg exit
 # Resize {{{
 
 # Resize window mode
-mode "resize" {
+mode "Resize Window" {
         # Pressing left will shrink the window’s width.
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
@@ -300,7 +300,7 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 # Enter the resize mode
-bindsym $mod+r mode "resize"
+bindsym $mod+r mode "Resize Window"
 
 # }}}
 
