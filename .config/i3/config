@@ -27,7 +27,7 @@ exec_always --no-startup-id feh --bg-fill ~/configure/wallpaper/mountains.png
 
 # Startup {{{
 
-# Run polybar to display fully configured status bar
+# Run polybar to display the fully configured status bar
 exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
 
 # Run compton for fast screen redraws and compositing
@@ -124,19 +124,6 @@ bindsym Control+Shift+h move to workspace prev
 
 # Move window to the workspace on the left
 bindsym Control+Shift+l move to workspace next
-
-# # Switch to a specified workspace
-# # 1 through 10
-# bindsym $mod+1 workspace $ws1
-# bindsym $mod+2 workspace $ws2
-# bindsym $mod+3 workspace $ws3
-# bindsym $mod+4 workspace $ws4
-# bindsym $mod+5 workspace $ws5
-# bindsym $mod+6 workspace $ws6
-# bindsym $mod+7 workspace $ws7
-# bindsym $mod+8 workspace $ws8
-# bindsym $mod+9 workspace $ws9
-# bindsym $mod+0 workspace $ws10
 
 # Switch to a specified workspace
 # 1 through 10
