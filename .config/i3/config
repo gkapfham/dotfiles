@@ -326,7 +326,6 @@ bindsym XF86MonBrightnessUp exec sudo /usr/bin/light -s sysfs/backlight/auto -A 
 bindsym XF86MonBrightnessDown exec sudo /usr/bin/light -s sysfs/backlight/auto -U 5
 
 # }}}
-#
 
 # Final Startup {{{
 
