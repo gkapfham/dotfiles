@@ -51,10 +51,11 @@ git clone https://github.com/gkapfham/dotfiles.git
 Now, you can type `cd dotfiles` and start to browse the configuration files that
 are available. I suggest that you make symbolic links from your home directory
 to this repository if you want to maintain and use these configuration files.
-For instance, if you use the `bibtool` program to manage your BibTeX files, then
-if you were in your home directory, you would type the following command to
-create the `.bibtoolrsc` as a symbolic link to the file in the
-`~/configure/dotfiles/` directory containing this repository.
+For instance, if you use the `bibtool` program to manage your BibTeX files and
+if you were in your home directory and the `dotfiles/` directory was in
+`configure/`, then you would type the following command to create the
+`.bibtoolrsc` as a symbolic link to the file in the `~/configure/dotfiles/`
+directory containing this repository.
 
 ```shell
 ln -s ~/configure/dotfiles/.bibtoolrsc .bibtoolrsc
