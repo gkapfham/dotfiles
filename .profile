@@ -42,5 +42,26 @@ if [ -n "$DESKTOP_SESSION" ];then
     # run the daemon
     eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh) &
     export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
-    eval $(ssh-agent)
+    /usr/bin/ssh-agent
+    /usr/bin/ssh-add -t 432000
+    # eval $(ssh-agent)
 fi
+
+# SSH_ENV="$HOME/.ssh/environment"
+# function start_agent {
+#   echo "Initialising new SSH agent..."
+#   /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+#   echo succeeded
+#   chmod 600 "${SSH_ENV}"
+#   . "${SSH_ENV}" > /dev/null
+#   /usr/bin/ssh-add -t 432000 ;
+# }
+
+# if [ -f "${SSH_ENV}" ]; then
+#   . "${SSH_ENV}" > /dev/null
+#   ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+#     start_agent;
+#   }
+# else
+#   start_agent;
+# fi
