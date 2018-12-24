@@ -8,12 +8,12 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
+# set PATH so that it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# GTK configuration
+# enable the GTK configuration
 export APPMENU_DISPLAY_BOTH=1
 if [ -n "$GTK_MODULES" ]
 then
@@ -21,7 +21,7 @@ then
 else
   GTK_MODULES="unity-gtk-module"
 fi
-
+#
 if [ -z "$UBUNTU_MENUPROXY" ]
 then
   UBUNTU_MENUPROXY=1
