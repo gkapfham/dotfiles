@@ -226,12 +226,18 @@ bindkey '^B' fzf-fasd-widget
 
 # Commands {{{
 
+# display disk usage in a friendly manner
 usage() {
     du -h --max-depth="${2:-1}"\
       "${1:-.}" |\
         sort -h |\
         sed "s:\./::" |\
         sed "s:$HOME:~:"
+}
+
+# store the ssh passphrase for easy git use
+secure() {
+    /usr/bin/ssh-add -t 432000
 }
 
 # }}}
