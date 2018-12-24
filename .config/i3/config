@@ -36,9 +36,6 @@ exec --no-startup-id gnome-settings-daemon
 # Run the network-monitor applet
 exec --no-startup-id nm-applet
 
-# Start the ssh-agent
-exec --no-startup-id /usr/bin/ssh-agent
-
 # Run polybar to display the fully configured status bar
 exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
 
