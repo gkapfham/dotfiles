@@ -36,32 +36,13 @@ export PATH="$HOME/.cargo/bin:$PATH"
 feh --bg-fill ~/configure/wallpaper/mountains.png
 
 # run the gnome keyring manager
-if [ -n "$DESKTOP_SESSION" ];then
+# if [ -n "$DESKTOP_SESSION" ];then
     # eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh) &
     # export SSH_AUTH_SOCK
     # run the daemon
-    eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh) &
-    export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
-    /usr/bin/ssh-agent
-    /usr/bin/ssh-add -t 432000
+    # eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh) &
+    # export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
+    # /usr/bin/ssh-agent &
+    # /usr/bin/ssh-add -t 432000
     # eval $(ssh-agent)
-fi
-
-# SSH_ENV="$HOME/.ssh/environment"
-# function start_agent {
-#   echo "Initialising new SSH agent..."
-#   /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-#   echo succeeded
-#   chmod 600 "${SSH_ENV}"
-#   . "${SSH_ENV}" > /dev/null
-#   /usr/bin/ssh-add -t 432000 ;
-# }
-
-# if [ -f "${SSH_ENV}" ]; then
-#   . "${SSH_ENV}" > /dev/null
-#   ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-#     start_agent;
-#   }
-# else
-#   start_agent;
 # fi
