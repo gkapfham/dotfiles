@@ -48,7 +48,6 @@ exec_always --no-startup-id exec ~/.cargo/bin/i3wsr
 # This prevents numlock from displaying in i3lock-color
 exec_always --no-startup-id numlockx off
 
-
 # }}}
 
 # Rofi {{{
