@@ -17,6 +17,7 @@ This is a summary of the dotfiles that I currently provide and maintain:
 - `.Xresources`: configuration for the Rofi for displaying menus
 - `.bibtoolrsc`: configuration for the `bibtool` program's BibTeX management
 - `.ctags`: extensions for `exuberant-ctags` to handle new languages
+- `.compton.conf`: configuration for the `compton` compositor used with `i3`
 - `.gitignore_global`: configuration of the files to exclude from Git repositories
 - `.gtkrc-2.0`: legacy configuration of GTK 2.0 to support `gvim` on Ubuntu
 - `.gvimrc`: legacy configuration of `gvim` text editor
@@ -37,7 +38,9 @@ This is a summary of the dotfiles that I currently provide and maintain:
 
 Are you looking for some neat configurations to sharpen your own dotfiles? If
 so, then I encourage you to review the `.vimrc`, `.zshrc`, and `.tmux.conf`
-files that I regularly improve. Please note that some of these files have
+files that I regularly improve. Interesting in learning how to configuration the
+i3 window manager? Then, you are invited to review the `.config/i3`
+`.config/polybar` directories. Please note that many of these files have
 groupings with beginning and ending marks that respectively look like `{{{` and
 `}}}`, thereby helping to group the regions.
 
