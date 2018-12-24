@@ -37,13 +37,13 @@ module-margin-left = 1
 module-margin-right = 1
 
 ; Specify the main font
-font-0 = "Hack Nerd Font:size=20;5"
+font-0 = "Hack Nerd Font:size=22;5"
 
 ; Specify the icon font
-font-1 = "Hack Nerd Font:size=20;5"
+font-1 = "Hack Nerd Font:size=22;5"
 
 ; Specify the emphasis font for the i3 workspaces
-font-2 = "Hack Nerd Font:size=20:weight=bold;5"
+font-2 = "Hack Nerd Font:size=22:weight=bold;5"
 
 ; Display the i3 workspaces on the left
 modules-left = i3
@@ -54,6 +54,8 @@ modules-right = cpu memory battery0 backlight pulseaudio network date
 ; Do not display any modules in the middle
 
 ; Configure the tray to display the network-manager applet
+; Disable the tray and do not display the network-manager applet
+; Enable this tray once the polybar bug is fixed and display works
 ;tray-position = right
 ;tray-padding = 8
 ;tray-maxsize = 20
@@ -73,7 +75,7 @@ udspeed-minwidth = 0
 format-connected-prefix = " "
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
-label-connected = %essid%
+label-connected = %essid% 說 %signal%
 label-disconnected = Disconnected
 
 [module/i3]
