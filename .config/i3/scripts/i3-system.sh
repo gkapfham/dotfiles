@@ -13,6 +13,8 @@ if [ -f $HOME/.config/rofi-power/config ]; then
 else
   LAUNCHER="rofi -width 30 -dmenu -i -p system:"
   USE_LOCKER="true"
+  # use a customized i3lock command suitable only for the forked version
+  # that can be configured with command-line arguments
   LOCKER="i3lock --indicator -e --greetertext='login' --greeterpos='100:225' --greetercolor=875f87ff --indpos='100:100' --wrongtext='Incorrect' --veriftext='Verifying' --locktext='Locking' --radius=75 --insidecolor=875f87ff --ringvercolor=5f8700ff --keyhlcolor=b5bd68ff --linecolor=875f87ff --ringwrongcolor=5f8700ff --insidevercolor=81a2beff --insidewrongcolor=de935fff --line-uses-inside --separatorcolor=5f8700ff -i ~/configure/wallpaper/mountains.png"
 fi
 
