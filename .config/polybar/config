@@ -67,6 +67,15 @@ modules-right = cpu memory battery0 backlight pulseaudio network date
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+; Specify some global redraw settings
+[settings]
+screenchange-reload = true
+
+; Specify some global margin settings
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
 ; Display details about the wireless network
 [module/network]
 type = internal/network
@@ -222,10 +231,4 @@ format = <label>
 format-prefix = " "
 label = %percentage%%
 
-; Specify some global settings
-[settings]
-screenchange-reload = true
 
-[global/wm]
-margin-top = 5
-margin-bottom = 5
