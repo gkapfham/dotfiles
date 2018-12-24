@@ -27,9 +27,6 @@ exec_always --no-startup-id feh --bg-fill ~/configure/wallpaper/mountains.png
 
 # Startup {{{
 
-# Run polybar to display the fully configured status bar
-exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
-
 # Run compton for fast screen redraws and compositing
 exec --no-startup-id compton
 
@@ -39,12 +36,18 @@ exec --no-startup-id gnome-settings-daemon
 # Run the network-monitor applet
 exec --no-startup-id nm-applet
 
+exec --no-startup-id /usr/bin/ssh-agent
+
+# Run polybar to display the fully configured status bar
+exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
+
 # Run the dynamic workspace renaming program
 exec_always --no-startup-id exec ~/.cargo/bin/i3wsr
 
 # Run numlockx to turn off numlock by default
 # This prevents numlock from displaying in i3lock-color
 exec_always --no-startup-id numlockx off
+
 
 # }}}
 
