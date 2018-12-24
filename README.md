@@ -36,9 +36,9 @@ This is a summary of the dotfiles that I currently provide and maintain:
 
 Are you looking for some neat configurations to sharpen your own dotfiles? If
 so, then I encourage you to review the `.vimrc`, `.zshrc`, and `.tmux.conf`
-files that I regularly improve. Please note that all of these files have
+files that I regularly improve. Please note that some of these files have
 groupings with beginning and ending marks that respectively look like `{{{` and
-`}}}`.
+`}}}`, thereby helping to group the regions.
 
 ## Installation Instructions
 
