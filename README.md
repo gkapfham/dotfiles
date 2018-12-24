@@ -39,7 +39,7 @@ This is a summary of the dotfiles that I currently provide and maintain:
 Are you looking for some neat configurations to sharpen your own dotfiles? If
 so, then I encourage you to review the `.vimrc`, `.zshrc`, and `.tmux.conf`
 files that I regularly improve. Interesting in learning how to configuration the
-i3 window manager? Then, you are invited to review the `.config/i3`
+i3 window manager? Then, you are invited to review the `.config/i3` and
 `.config/polybar` directories. Please note that many of these files have
 groupings with beginning and ending marks that respectively look like `{{{` and
 `}}}`, thereby helping to group the regions.
