@@ -311,7 +311,7 @@ mode "Resize a Window" {
         bindsym $mod+r mode "default"
 }
 # Enter the resize mode
-bindsym $mod+r mode "Resize akWindow"
+bindsym $mod+r mode "Resize a Window"
 
 # }}}
 
