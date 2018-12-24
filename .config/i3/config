@@ -42,6 +42,10 @@ exec --no-startup-id nm-applet
 # Run the dynamic workspace renaming program
 exec_always --no-startup-id exec ~/.cargo/bin/i3wsr
 
+# Run numlockx to turn off numlock by default
+# This prevents numlock from displaying in i3lock-color
+exec_always --no-startup-id numlockx off
+
 # }}}
 
 # Rofi {{{
