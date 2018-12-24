@@ -67,6 +67,7 @@ modules-right = cpu memory battery0 backlight pulseaudio network date
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+; Display details about the wireless network
 [module/network]
 type = internal/network
 interface = wlp2s0
@@ -78,6 +79,7 @@ format-disconnected = <label-disconnected>
 label-connected = %essid% 說 %signal%
 label-disconnected = Disconnected
 
+; Display the i3 workspaces
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
@@ -113,7 +115,10 @@ label-mode-margin-right = 1
 label-mode-foreground = ${colors.foreground}
 label-mode-background = ${colors.primary}
 
-; focused = Active workspace on focused monitor
+; Focused = Active workspace on focused monitor
+; This expands to give the full name of the workspace
+; Using a separate process will dynamically adjust
+; these names depending on the program currently in use
 label-focused = %name%
 label-focused-font = 3
 label-focused-background = ${colors.primary}
@@ -121,17 +126,17 @@ label-focused-underline= ${colors.primary}
 label-focused-foreground = ${colors.background-alt}
 label-focused-padding = 1
 
-; unfocused = Inactive workspace on any monitor
+; Unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
 label-unfocused-padding = 1
 
-; visible = Active workspace on unfocused monitor
+; Visible = Active workspace on unfocused monitor
 label-visible = %index%
 label-visible-background = ${self.label-focused-background}
 label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
-; urgent = Workspace with urgency hint set
+; Urgent = Workspace with urgency hint set
 label-urgent = %name%
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
