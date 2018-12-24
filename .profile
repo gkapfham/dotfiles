@@ -37,6 +37,8 @@ feh --bg-fill ~/configure/wallpaper/mountains.png
 
 # run the Gnome keyring manager
 if [ -n "$DESKTOP_SESSION" ];then
-    eval $(gnome-keyring-daemon --start) &
-    export SSH_AUTH_SOCK
+    # eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh) &
+    # export SSH_AUTH_SOCK
+    eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh) &
+    export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 fi
