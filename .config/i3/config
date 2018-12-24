@@ -209,7 +209,7 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# focus the parent container
+# Focus the parent container
 bindsym $mod+a focus parent
 
 # }}}
