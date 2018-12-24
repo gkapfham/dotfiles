@@ -125,6 +125,13 @@ bindsym Control+Shift+h move to workspace prev
 # Move window to the workspace on the left
 bindsym Control+Shift+l move to workspace next
 
+# Move window to the scratchpad
+bindsym Control+Shift+s move scratchpad
+
+# Take window from the scratchpad as a float
+# This is a toggle-able command; returns to scratchpad
+bindsym Control+$mod+s scratchpad show
+
 # Switch to a specified workspace
 # 1 through 10
 bindsym $mod+1 workspace number 1
@@ -140,7 +147,7 @@ bindsym $mod+0 workspace number 10
 
 # Switch to a specified (extended) workspace
 # 11 through 20
-set $mode_switch_workspace "Switch Workspace"
+set $mode_switch_workspace "Switch to Workspace"
 mode $mode_switch_workspace {
     bindsym $mod+1 workspace number 11; mode "default"
     bindsym $mod+2 workspace number 12; mode "default"
@@ -280,7 +287,7 @@ bindsym $mod+Shift+e exec i3-msg exit
 # Resize {{{
 
 # Resize window mode
-mode "Resize Window" {
+mode "Resize a Window" {
         # Pressing left will shrink the window’s width.
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
@@ -300,7 +307,7 @@ mode "Resize Window" {
         bindsym $mod+r mode "default"
 }
 # Enter the resize mode
-bindsym $mod+r mode "Resize Window"
+bindsym $mod+r mode "Resize akWindow"
 
 # }}}
 
