@@ -35,7 +35,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # set the wallpaper for i3
 feh --bg-fill ~/configure/wallpaper/mountains.png
 
-# run the Gnome keyring manager
+# run the gnome keyring manager
 if [ -n "$DESKTOP_SESSION" ];then
     # eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh) &
     # export SSH_AUTH_SOCK
