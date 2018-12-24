@@ -5,22 +5,6 @@ set $mod Mod1
 
 # }}}
 
-# Startup {{{
-
-# Run polybar to display fully configured status bar
-exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
-
-# Run compton for fast screen redraws and compositing
-exec --no-startup-id compton
-
-# Run the network-monitor applet
-exec --no-startup-id nm-applet
-
-# Run the dynamic workspace renaming program
-exec_always --no-startup-id exec ~/.cargo/bin/i3wsr
-
-# }}}
-
 # Looks {{{
 
 # Colors
@@ -38,6 +22,25 @@ font pango:Hack Nerd Font Regular 20
 
 # Wallpaper
 exec_always --no-startup-id feh --bg-fill ~/configure/wallpaper/mountains.png
+
+# }}}
+
+# Startup {{{
+
+# Run polybar to display fully configured status bar
+exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
+
+# Run compton for fast screen redraws and compositing
+exec --no-startup-id compton
+
+# Run the settings daemon to control scaling
+exec --no-startup-id gnome-settings-daemon
+
+# Run the network-monitor applet
+exec --no-startup-id nm-applet
+
+# Run the dynamic workspace renaming program
+exec_always --no-startup-id exec ~/.cargo/bin/i3wsr
 
 # }}}
 
@@ -387,3 +390,14 @@ bindsym XF86MonBrightnessUp exec sudo /usr/bin/light -s sysfs/backlight/auto -A 
 bindsym XF86MonBrightnessDown exec sudo /usr/bin/light -s sysfs/backlight/auto -U 5
 
 # }}}
+#
+
+# Final Startup {{{
+
+# Run polybar to display fully configured status bar
+# exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
+
+# }}}
+
+# exec_always --no-startup-id xrdb -load ~/.Xresources
+# exec_always --no-startup-id xsetroot -cursor_name left_ptr
