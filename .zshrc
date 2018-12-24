@@ -217,7 +217,7 @@ fzf-fasd-widget() {
   typeset -f zle-line-init >/dev/null && zle zle-line-init
   return $ret
 }
-# create a binding so that you can type "cd ,pract^B"
+# Create a binding so that you can type "cd ,pract^B"
 # (as an example) to trigger this integrated widget
 zle     -N   fzf-fasd-widget
 bindkey '^B' fzf-fasd-widget
@@ -226,7 +226,7 @@ bindkey '^B' fzf-fasd-widget
 
 # Commands {{{
 
-# display disk usage in a friendly manner
+# Display disk usage in a friendly manner
 usage() {
     du -h --max-depth="${2:-1}"\
       "${1:-.}" |\
@@ -235,7 +235,7 @@ usage() {
         sed "s:$HOME:~:"
 }
 
-# store the ssh passphrase for easy git use
+# Store the ssh passphrase for easy git use
 secure() {
     /usr/bin/ssh-add -t 432000
 }
