@@ -143,6 +143,7 @@
 
     # Close notification
     # Seems to require two space key presses
+    # In practice: ctrl+space+space
     close = ctrl+space
 
     # Close all notifications
