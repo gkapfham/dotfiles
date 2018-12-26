@@ -48,3 +48,6 @@ feh --bg-fill ~/configure/wallpaper/mountains.png
     # /usr/bin/ssh-add -t 432000
     # eval $(ssh-agent)
 # fi
+
+# export a variable that supports the use of dunst for notiifcations
+export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
