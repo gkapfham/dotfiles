@@ -344,12 +344,9 @@ bindsym XF86MonBrightnessDown exec sudo /usr/bin/light -s sysfs/backlight/auto -
 
 # }}}
 
-# Final Startup {{{
-
-# Run polybar to display fully configured status bar
-# exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
-
-# }}}
+# Deprecated {{{
 
 # exec_always --no-startup-id xrdb -load ~/.Xresources
 # exec_always --no-startup-id xsetroot -cursor_name left_ptr
+
+# }}}
