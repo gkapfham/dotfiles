@@ -33,6 +33,7 @@ This is a summary of the dotfiles that I currently provide and maintain:
 - `.tmux.conf`: configuration of the `tmux` terminal multiplexing tool
 - `.vimrc`: configuration for the `nvim` and `vim` text editors
 - `.zshrc`: configuration for the `zsh` shell to use oh-my-zsh
+- `.config/dunst`: configuration and scripts for the `dunst` notification manager
 - `.config/i3`: configuration and scripts for the `i3` window manager
 - `.config/polybar`: configuration and scripts for the `polybar` used with `i3`
 
