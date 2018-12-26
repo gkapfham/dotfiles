@@ -1,0 +1,170 @@
+[global]
+    # Define a matching font
+    font = Hack Nerd Font Regular 22
+
+    # Allow a small subset of HTML markup:
+    #   <b>bold</b>
+    #   <i>italic</i>
+    #   <s>strikethrough</s>
+    #   <u>underline</u>
+    #
+    # For a complete reference see
+    # <http://developer.gnome.org/pango/stable/PangoMarkupFormat.html>.
+    # If markup is not allowed, those tags will be stripped
+    # out of the message
+    allow_markup = yes
+
+    # The format of the message.  Possible variables are:
+    #   %a  appname
+    #   %s  summary
+    #   %b  body
+    #   %i  iconname (including its path)
+    #   %I  iconname (without its path)
+    #   %p  progress value if set ([  0%] to [100%]) or nothing
+    # Markup is allowed
+    format = "<b>%s</b>\n%b"
+
+    # Sort messages by urgency
+    sort = yes
+
+    # Show how many messages are currently hidden (because of geometry)
+    indicate_hidden = yes
+
+    # Alignment of message text
+    # Possible values are "left", "center", and "right"
+    alignment = left
+
+    # The frequency with which text that is longer than the notification
+    # window allows bounces back and forth
+    # This option conflicts with "word_wrap"
+    # Set to 0 to disable
+    bounce_freq = 0
+
+    # Show age of message if message is older than show_age_threshold seconds
+    # Set to -1 to disable.
+    show_age_threshold = 60
+
+    # Split notifications into multiple lines if
+    # they don't fit into geometry
+    word_wrap = yes
+
+    # Ignore newlines '\n' in notifications
+    ignore_newline = no
+
+    # The geometry of the window:
+    #   [{width}]x{height}[+/-{x}+/-{y}]
+    geometry = "750x5-30+75"
+
+    # Shrink window if it's smaller than the width
+    # Will be ignored if width is 0.
+    shrink = no
+
+    # The transparency of the window.  Range: [0; 100].
+    # Requires i3 to run with compton
+    transparency = 10
+
+    # Don't remove messages, if the user is
+    # idle (no mouse or keyboard input)
+    # for longer than idle_threshold seconds
+    # Set to 0 to disable
+    idle_threshold = 120
+
+    # The monitor on which the notifications be displayed
+    monitor = 0
+
+    # Display notification on focused monitor.  Possible modes are:
+    #   mouse: follow mouse pointer
+    #   keyboard: follow window with keyboard focus
+    #   none: don't follow anything
+    # If this option is set to mouse or keyboard, the monitor option
+    # will be ignored.
+    follow = mouse
+
+    # Should a notification popped up from history be sticky or timeout
+    # as if it would normally do.
+    sticky_history = no
+
+    # Maximum amount of notifications kept in history
+    history_length = 20
+
+    # Display indicators for URLs (U) and actions (A).
+    show_indicators = yes
+
+    # The height of a single line
+    # If the height is smaller than the
+    # font height, it will get raised to the font height
+    # This adds empty space above and under the text
+    line_height = 0
+
+    # Draw a line of "separator_height" pixel height
+    # between two notifications
+    # Set to 0 to disable.
+    separator_height = 5
+
+    # Padding between text and separator
+    padding = 8
+
+    # Horizontal padding
+    horizontal_padding = 18
+
+    # Define a color for the separator.
+    # possible values are:
+    #  * auto: dunst tries to find a color fitting to the background;
+    #  * foreground: use the same color as the foreground;
+    #  * frame: use the same color as the frame;
+    #  * anything else will be interpreted as a X color.
+    separator_color = frame
+
+    # Print a notification on startup.
+    # This is mainly for error detection, since dbus (re-)starts dunst
+    # automatically after a crash.
+    startup_notification = false
+
+    # context menu (for the web sites)
+    dmenu = /usr/bin/rofi -dmenu -p dunst:
+
+    # Browser for opening URLs in context menu
+    browser = /usr/bin/firefox -new-tab
+
+    # Align icons left/right/off
+    icon_position = off
+
+    # Paths to default icons
+    icon_path = /usr/share/icons/Adwaita/256x256/status/:/usr/share/icons/Adwaita/256x256/devices/
+
+[frame]
+    width = 3
+    color = "#616161"
+
+[shortcuts]
+    # Shortcuts are specified as [modifier+][modifier+]...key
+    # Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
+    # "mod3" and "mod4" (windows-key)
+
+    # Close notification
+    # Seems to require two space key presses
+    close = ctrl+space
+
+    # Close all notifications
+    close_all = ctrl+shift+space
+
+    # Redisplay last message(s)
+    history = ctrl+mod1+space
+
+    # Context menu.
+    context = ctrl+shift+period
+
+[urgency_low]
+    background = "#333333"
+    foreground = "#888888"
+    timeout = 5
+
+[urgency_normal]
+    background = "#333333"
+    foreground = "#ffffff"
+    timeout = 5
+
+[urgency_critical]
+    background = "#333333"
+    foreground = "#ffffff"
+    timeout = 0
