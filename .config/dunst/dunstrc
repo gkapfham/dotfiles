@@ -59,7 +59,7 @@
     # Will be ignored if width is 0.
     shrink = no
 
-    # The transparency of the window.  Range: [0; 100].
+    # The transparency of the window. Range: [0, 100]
     # Requires i3 to run with compton
     transparency = 10
 
