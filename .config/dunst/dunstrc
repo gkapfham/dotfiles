@@ -161,12 +161,12 @@
 [urgency_low]
     background = "#333333"
     foreground = "#dfdfdf"
-    timeout = 5
+    timeout = 10
 
 [urgency_normal]
     background = "#333333"
     foreground = "#dfdfdf"
-    timeout = 5
+    timeout = 10
 
 [urgency_critical]
     background = "#333333"
