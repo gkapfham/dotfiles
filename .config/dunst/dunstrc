@@ -80,8 +80,8 @@
     # will be ignored.
     follow = mouse
 
-    # Should a notification popped up from history be sticky or timeout
-    # as if it would normally do.
+    # Should a notification be displayed from history be sticky
+    # or timeout as if it would normally do
     sticky_history = yes
 
     # Maximum amount of notifications kept in history
@@ -126,11 +126,13 @@
     # Browser for opening URLs in context menu
     browser = /usr/bin/firefox -new-tab
 
+    # Paths to default icons
+    # Note that currently a single FontAwesome/NerdFont
+    # symbol is displayed instead of these icons
+    icon_path = /usr/share/icons/Adwaita/256x256/status/:/usr/share/icons/Adwaita/256x256/devices/
+
     # Align icons left/right/off
     icon_position = off
-
-    # Paths to default icons
-    icon_path = /usr/share/icons/Adwaita/256x256/status/:/usr/share/icons/Adwaita/256x256/devices/
 
 [frame]
     width = 3
