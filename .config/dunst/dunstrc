@@ -142,9 +142,10 @@
     # "mod3" and "mod4" (windows-key)
 
     # Close notification
-    # Seems to require two space key presses
-    # In practice: ctrl+space+space
-    close = ctrl+space
+    # Note that ctrl+space is intercepted
+    # even if ibus is disable (it seems)
+    # So, use mod4 (super/win key) instead
+    close = mod4+space
 
     # Close all notifications
     close_all = ctrl+shift+space
