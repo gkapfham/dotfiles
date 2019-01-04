@@ -90,6 +90,8 @@ rewrite.rule {booktitle # "IEEE" = ""}
 rewrite.rule {booktitle # "ACM" = ""}
 rewrite.rule {booktitle # "SIGSOFT " = ""}
 rewrite.rule {booktitle # "SIGSOFT" = ""}
+rewrite.rule {booktitle # "SIGPLAN " = ""}
+rewrite.rule {booktitle # "SIGPLAN" = ""}
 rewrite.rule {booktitle # "/" = ""}
 
 # delete society details in the journal papers
