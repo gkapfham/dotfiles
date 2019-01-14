@@ -203,7 +203,8 @@ set ttimeoutlen=10
 
 " Display indentation
 set autoindent
-set copyindent
+" WARNING: seems to crash Neovim 0.4.0.4.0-dev
+" set copyindent
 set shiftwidth=2
 set smartindent
 
