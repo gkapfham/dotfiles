@@ -25,10 +25,10 @@ export DISABLE_AUTO_TITLE=true
 export BROWSER=/usr/bin/google-chrome
 
 # Path
-export PATH="/opt/urserver:/opt/eclipse:/home/gkapfham/.npm-global/bin:/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:/home/gkapfham/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/gkapfham/.local/kitty.app/bin:/home/gkapfham/.cargo/bin"
+export PATH="/opt/urserver:/opt/eclipse:$HOME/.npm-global/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$HOME/.local/kitty.app/bin:$HOME/.cargo/bin"
 
 # Local Gem home
-export GEM_HOME=/home/gkapfham/.gem
+export GEM_HOME=$HOME/.gem
 
 # No Java tools
 unset JAVA_TOOL_OPTIONS
@@ -73,11 +73,11 @@ HIST_STAMPS="mm/dd/yyyy"
 
 # Plugins
 plugins=(colored-man-pages git git-extras gulp tmux tmuxinator vi-mode virtualenv)
-source /home/gkapfham/.oh-my-zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOME/.oh-my-zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $ZSH/oh-my-zsh.sh
 
 # Git-stacular prompt
-source /home/gkapfham/.zsh/zsh-git-prompt/zshrc.sh
+source $HOME/.zsh/zsh-git-prompt/zshrc.sh
 GIT_PROMPT_EXECUTABLE="haskell"
 
 # Toggle git cache
@@ -103,7 +103,7 @@ function echo_git() {
 alias eg=echo_git
 
 # Autosuggestions
-source /home/gkapfham/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_USE_ASYNC=1
@@ -135,7 +135,7 @@ export FZF_DEFAULT_OPTS='
 '
 
 # Key bindings
-source /home/gkapfham/.fzf/shell/key-bindings.zsh
+source $HOME/.fzf/shell/key-bindings.zsh
 
 # Source the files
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -244,7 +244,7 @@ secure() {
 
 # Travis {{{
 
-[ -f /home/gkapfham/.travis/travis.sh ] && source /home/gkapfham/.travis/travis.sh
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
 # }}}
 
