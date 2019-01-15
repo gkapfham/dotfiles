@@ -247,5 +247,3 @@ secure() {
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
 # }}}
-
-# source /usr/local/etc/profile.d/vte.sh
