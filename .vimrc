@@ -534,7 +534,14 @@ let g:formatter_yapf_style = 'pep8'
 " Set the hosts programs for Python and Python3
 " This improves performance when loading plugins using Python
 let g:python_host_prog  = '/usr/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+if filereadable('/usr/local/bin/python3')
+  let g:python3_host_prog = '/usr/local/bin/python3'
+else
+  let g:python3_host_prog = '/usr/bin/python3'
+endif
+
+" Deprecated: set it for a single computer
+" let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Turn on the EchoDoc plugin for languages like Python
 let g:echodoc#enable_at_startup = 1
