@@ -35,19 +35,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # set the wallpaper for i3
 feh --bg-fill ~/configure/wallpaper/mountains.png
 
-# does not seem to be needed (just do "secure" in shell once)
-
-# run the gnome keyring manager
-# if [ -n "$DESKTOP_SESSION" ];then
-    # eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh) &
-    # export SSH_AUTH_SOCK
-    # run the daemon
-    # eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh) &
-    # export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
-    # /usr/bin/ssh-agent &
-    # /usr/bin/ssh-add -t 432000
-    # eval $(ssh-agent)
-# fi
-
 # export a variable that supports the use of dunst for notiifcations
 export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
