@@ -47,7 +47,7 @@ exec_always --no-startup-id exec ~/.cargo/bin/i3wsr
 exec_always --no-startup-id numlockx off
 
 # Do not use Ubuntu's standard notification
-exec killall -q notify-osd
+exec --no-startup-id killall -q notify-osd
 
 # Run dunst to display the notifications
 exec_always --no-startup-id ~/.config/dunst/scripts/dunst-launch.sh
@@ -337,10 +337,10 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 2 toggle
 # This works as long as the light program is in the sudoers file
 
 # Increase the brightness of the screen
-bindsym XF86MonBrightnessUp exec sudo /usr/bin/light -s sysfs/backlight/auto -A 5
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo /usr/bin/light -s sysfs/backlight/auto -A 5
 
 # Decrease the brightness of the screen
-bindsym XF86MonBrightnessDown exec sudo /usr/bin/light -s sysfs/backlight/auto -U 5
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo /usr/bin/light -s sysfs/backlight/auto -U 5
 
 # }}}
 
