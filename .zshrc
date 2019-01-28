@@ -224,7 +224,7 @@ bindkey '^B' fzf-fasd-widget
 
 # }}}
 
-# Commands {{{
+# User Commands {{{
 
 # Display disk usage in a friendly manner
 usage() {
@@ -245,5 +245,13 @@ secure() {
 # Travis {{{
 
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+
+# }}}
+
+# Pyenv {{{
+
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 # }}}
