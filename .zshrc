@@ -224,6 +224,20 @@ bindkey '^B' fzf-fasd-widget
 
 # }}}
 
+# Travis {{{
+
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+
+# }}}
+
+# Pyenv {{{
+
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# }}}
+
 # User Commands {{{
 
 # Display disk usage in a friendly manner
@@ -239,19 +253,5 @@ usage() {
 secure() {
     /usr/bin/ssh-add -t 432000
 }
-
-# }}}
-
-# Travis {{{
-
-[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
-
-# }}}
-
-# Pyenv {{{
-
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 
 # }}}
