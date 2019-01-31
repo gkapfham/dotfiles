@@ -246,9 +246,6 @@ pyenv() {
   pyenv "$@"
 }
 
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
-
 # }}}
 
 # User Commands {{{
