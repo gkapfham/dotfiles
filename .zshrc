@@ -69,6 +69,10 @@ alias npm="npm --no-optional"
 
 # Oh-My-Zsh and Plugin {{{
 
+# Save startup time by disabling
+DISABLE_UPDATE_PROMPT=true
+DISABLE_AUTO_UPDATE=true
+
 # Configuration path
 ZSH=$HOME/.oh-my-zsh
 
