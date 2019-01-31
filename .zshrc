@@ -1,3 +1,10 @@
+# Benchmarking {{{
+
+# Uncomment to enable
+# zmodload zsh/zprof
+
+# }}}
+
 # Exports {{{
 
 # 256 color mode with bold and italics
@@ -233,8 +240,14 @@ bindkey '^B' fzf-fasd-widget
 # Pyenv {{{
 
 export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+pyenv() {
+  eval "$(command pyenv init -)"
+  eval "$(command pyenv virtualenv-init -)"
+  pyenv "$@"
+}
+
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 # }}}
 
@@ -249,9 +262,21 @@ usage() {
         sed "s:$HOME:~:"
 }
 
+# Run a benchmark for zsh startup time
+benchmark() {
+    for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done
+}
+
 # Store the ssh passphrase for easy git use
 secure() {
     /usr/bin/ssh-add -t 432000
 }
+
+# }}}
+
+# Benchmarking {{{
+
+# Uncomment to enable
+# zprof
 
 # }}}
