@@ -237,10 +237,6 @@ bindkey '^B' fzf-fasd-widget
 
 # Travis {{{
 
-# ( {time
-# [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
-# } )
-
 travis() {
   unfunction "$0"
   [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
