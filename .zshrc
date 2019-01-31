@@ -237,6 +237,7 @@ bindkey '^B' fzf-fasd-widget
 
 # Travis {{{
 
+# Lazy load completion of travis command after first call
 travis() {
   unfunction "$0"
   [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
@@ -247,6 +248,7 @@ travis() {
 
 # Pyenv {{{
 
+# Lazy load completion of pyenv command after first call
 export PATH="$HOME/.pyenv/bin:$PATH"
 pyenv() {
   unfunction "$0"
