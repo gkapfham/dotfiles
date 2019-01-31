@@ -237,7 +237,15 @@ bindkey '^B' fzf-fasd-widget
 
 # Travis {{{
 
-[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+# ( {time
+# [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+# } )
+
+travis() {
+  unfunction "$0"
+  [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+  travis "$@"
+}
 
 # }}}
 
@@ -245,6 +253,7 @@ bindkey '^B' fzf-fasd-widget
 
 export PATH="$HOME/.pyenv/bin:$PATH"
 pyenv() {
+  unfunction "$0"
   eval "$(command pyenv init -)"
   eval "$(command pyenv virtualenv-init -)"
   pyenv "$@"
