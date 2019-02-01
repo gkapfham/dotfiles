@@ -72,8 +72,15 @@ alias ipython="ipython --TerminalInteractiveShell.editing_mode=vi"
 # Twitter
 alias twitter="/usr/local/bin/t"
 
-# npm without non-Ubuntu packages
+# Npm without non-Ubuntu packages
 alias npm="npm --no-optional"
+
+# Bat with a special color scheme
+alias bat="bat --theme=\"Tomorrow Night\""
+
+# More and cat are aliased to bat
+alias more="bat"
+alias cat="bat"
 
 # }}}
 
