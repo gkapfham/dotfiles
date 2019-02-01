@@ -5,6 +5,16 @@
 
 # }}}
 
+# {{{
+#
+# Navigation Summary:
+#
+# cd <ctrl>-t ::- search from home directory using fd and fzf
+# cd **; <tab> ::- search from current directory using fzf
+# cd ,paper <ctrl>-b ::- search through recent directories with fzf and fasd
+#
+# }}}
+
 # Exports {{{
 
 # 256 color mode with bold and italics
