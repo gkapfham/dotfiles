@@ -99,12 +99,16 @@ ZSH_THEME="norm-gkapfham"
 # Timestamps
 HIST_STAMPS="mm/dd/yyyy"
 
-# Plugins
+# Plugin: fast-syntax-highlighting
+source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# Request all plugins from oh-my-zsh
 plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
-source $HOME/.oh-my-zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# Load customized oh-my-zsh script
 source $ZSH/oh-my-zsh.sh
 
-# Git-stacular prompt
+# Plugin: Git-stacular prompt with zsh-git-prompt
 source $HOME/.zsh/zsh-git-prompt/zshrc.sh
 GIT_PROMPT_EXECUTABLE="haskell"
 
