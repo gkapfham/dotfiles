@@ -130,8 +130,8 @@ function echo_git() {
 }
 alias eg=echo_git
 
-# Autosuggestions
-source $HOME/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Plugin: zsh-autosuggestions
+source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_USE_ASYNC=1
@@ -172,9 +172,9 @@ source $HOME/.fzf/shell/key-bindings.zsh
 export FZF_COMPLETION_TRIGGER=';'
 
 # Configure fzf to work with fast-finder called fd
-export FZF_DEFAULT_COMMAND="fd . $HOME"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+# export FZF_DEFAULT_COMMAND="fd . $HOME"
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 
 # }}}
 
