@@ -26,7 +26,7 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LANGUAGE="en_US.UTF-8"
 
-# Vim as editor
+# NeoVim as editor
 export EDITOR="nvim"
 
 # Large R history
