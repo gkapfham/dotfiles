@@ -9,9 +9,17 @@
 #
 # Navigation Summary:
 #
-# cd <ctrl>-t means "search from home directory using fd and fzf"
-# cd **; <tab> mean "search from current directory using fzf"
-# cd ,paper <ctrl>-b means "search through recent directories with fzf and fasd"
+# cd <ctrl>-t        means "change to directory matching ...
+#                           search from HOME directory using fd and fzf"
+#
+# cd **; <tab>       means "change to directory matching ...
+#                           search from CURRENT directory using only fzf"
+#
+# <alt>-c            means "change to directory matching ...
+#                           search from CURRENT directory with fzf"
+#
+# cd ,paper <ctrl>-b means "change to directory matching ...
+#                           search through recent directories with fzf and fasd"
 #
 # }}}
 
@@ -224,7 +232,7 @@ export FZF_COMPLETION_TRIGGER=';'
 # Configure fzf to work with fast-finder called fd
 export FZF_DEFAULT_COMMAND="fd . $HOME"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+# export FZF_ALT_C_COMMAND="fd -t d . $HOME"
 
 # }}}
 
