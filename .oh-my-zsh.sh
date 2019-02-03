@@ -81,7 +81,7 @@ fi
 # Load all of the plugins that were defined in ~/.zshrc
 # CUSTOMIZED:
 # Execute code in the background to not affect the current session
-{
+# {
 for plugin ($plugins); do
   if [ -f $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh ]; then
     source $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh
@@ -89,13 +89,7 @@ for plugin ($plugins); do
     source $ZSH/plugins/$plugin/$plugin.plugin.zsh
   fi
 done
-} &!
-
-# # Load all of your custom configurations from custom/
-# for config_file ($ZSH_CUSTOM/*.zsh(N)); do
-#   source $config_file
-# done
-# unset config_file
+# } &!
 
 # Load the theme
 if [[ "$ZSH_THEME" == "random" ]]; then
