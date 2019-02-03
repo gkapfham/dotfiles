@@ -109,6 +109,7 @@ plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
 source $ZSH/oh-my-zsh.sh
 
 # Plugin: Git-stacular prompt with zsh-git-prompt
+# Note: local modifications to this plugin
 source $HOME/.zsh/zsh-git-prompt/zshrc.sh
 GIT_PROMPT_EXECUTABLE="haskell"
 
