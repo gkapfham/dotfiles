@@ -9,9 +9,9 @@
 #
 # Navigation Summary:
 #
-# cd <ctrl>-t ::- search from home directory using fd and fzf
-# cd **; <tab> ::- search from current directory using fzf
-# cd ,paper <ctrl>-b ::- search through recent directories with fzf and fasd
+# cd <ctrl>-t means "search from home directory using fd and fzf"
+# cd **; <tab> mean "search from current directory using fzf"
+# cd ,paper <ctrl>-b means "search through recent directories with fzf and fasd"
 #
 # }}}
 
