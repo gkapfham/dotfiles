@@ -28,6 +28,7 @@ This is a summary of the dotfiles that I currently provide and maintain:
 - `.msmtprc`: legacy configuration for the `msmtp` SMTP client
 - `.muttprintrc`: configuration of the `muttprint` program for printing emails
 - `.muttrc`: configuration of the `mutt` mail user agent
+- `.oh-my-zsh.sh`: customized script to load the oh-my-zsh framework
 - `.profile`: script to run when logging into the `i3` window manager
 - `.signature`: footer displayed by `mutt` in all email messages
 - `.tmux.conf`: configuration of the `tmux` terminal multiplexing tool
