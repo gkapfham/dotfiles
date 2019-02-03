@@ -110,7 +110,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Plugin: fast-syntax-highlighting
 source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
-# Request all plugins from oh-my-zsh
+# Plugin: Request all plugins from oh-my-zsh
 plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
 
 # Load customized oh-my-zsh script
