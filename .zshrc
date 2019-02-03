@@ -114,7 +114,7 @@ source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
 
 # Load customized oh-my-zsh script
-source $ZSH/oh-my-zsh.sh
+source $HOME/.oh-my-zsh.sh
 
 # Plugin: Git-stacular prompt with zsh-git-prompt
 # Note: local modifications to this plugin
