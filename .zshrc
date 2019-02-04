@@ -23,6 +23,16 @@
 #
 # }}}
 
+# External Plugins {{{
+
+# gkapfham in ~/.zsh exa --long --header --git --classify --all
+# Permissions Size User     Date Modified Name
+# drwxrwxr-x     - gkapfham  3 Feb 17:40  fast-syntax-highlighting/
+# drwxrwxr-x     - gkapfham  3 Feb 17:22  zsh-autosuggestions/
+# drwxrwxr-x     - gkapfham  4 Feb 16:50  zsh-git-prompt/
+
+# }}}
+
 # Exports {{{
 
 # 256 color mode with bold and italics
