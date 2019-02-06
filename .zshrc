@@ -31,6 +31,8 @@
 # drwxrwxr-x     - gkapfham  3 Feb 17:22  zsh-autosuggestions/
 # drwxrwxr-x     - gkapfham  4 Feb 16:50  zsh-git-prompt/
 
+# Note that the zsh-git-prompt is heavily modified.
+
 # }}}
 
 # Exports {{{
