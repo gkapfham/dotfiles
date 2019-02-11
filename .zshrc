@@ -233,9 +233,9 @@ export FZF_DEFAULT_OPTS='
 '
 
 # Key bindings
-source $HOME/.fzf/shell/key-bindings.zsh
+# source $HOME/.fzf/shell/key-bindings.zsh
 
-# Source the files
+# Setup fzf, its auto-completions, and key bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Trigger fzf completion using the semi-colon key instead of **
