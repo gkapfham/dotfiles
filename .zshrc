@@ -232,9 +232,6 @@ export FZF_DEFAULT_OPTS='
   --color info:110,prompt:110,spinner:109,pointer:172,marker:172
 '
 
-# Key bindings
-# source $HOME/.fzf/shell/key-bindings.zsh
-
 # Setup fzf, its auto-completions, and key bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
