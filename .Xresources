@@ -1,24 +1,33 @@
-! ------------------------------------------------------------------------------
 ! ROFI Color theme and configurations
-! ------------------------------------------------------------------------------
 rofi.font: Hack\ Nerd\ Font\ Regular\ 48
 rofi.lines: 5
+rofi.matching: fuzzy
+
+!rofi.color-enabled: true
+!rofi.color-window: #1c1c1c, #1c1c1c, #df8700
+!rofi.color-normal: #1c1c1c, #707880, #1c1c1c, #df8700, #1c1c1c
+!rofi.color-active: #1c1c1c, #df8700, #1c1c1c, #df8700, #1c1c1c
+!rofi.color-urgent: #1c1c1c, #5f8700, #1c1c1c, #5f8700, #1c1c1c
 
 rofi.color-enabled: true
-rofi.color-window: #1c1c1c, #1c1c1c, #df8700
-rofi.color-normal: #1c1c1c, #707880, #1c1c1c, #df8700, #1c1c1c
-rofi.color-active: #1c1c1c, #df8700, #1c1c1c, #df8700, #1c1c1c
+!                  bg       border   separator
+rofi.color-window: #1c1c1c, #1c1c1c, #767676
+!                  bg       fg       bg-alt   hl-bg    hl-fg
+rofi.color-normal: #1c1c1c, #767676, #1c1c1c, #767676, #1c1c1c
+rofi.color-active: #1c1c1c, #767676, #1c1c1c, #767676, #1c1c1c
 rofi.color-urgent: #1c1c1c, #5f8700, #1c1c1c, #5f8700, #1c1c1c
 
+rofi.line-margin: 10
 rofi.location: 6
 rofi.yoffset: -200
 rofi.xoffset: 0
-rofi.width: 75
+rofi.bw: 5
+rofi.width: 50
 rofi.fixed_num_lines: 1
 rofi.hmode: false
 
 rofi.separator-style: none
-rofi.hide-scrollbar: true
+rofi.hide-scrollbar: false
 
 Xcursor.theme: moblin
 Xcursor.size: 16
