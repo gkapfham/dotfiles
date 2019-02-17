@@ -58,15 +58,18 @@ exec_always --no-startup-id ~/.config/dunst/scripts/dunst-launch.sh
 # Rofi {{{
 
 # Rofi for programs
-set $rofi-program "rofi -width 30 -modi 'run' -show run"
+# set $rofi-program "rofi -width 30 -modi 'run' -show run"
+set $rofi-program "rofi -modi 'run' -show run"
 bindsym Control+$mod+p exec $rofi-program
 
 # Rofi for .desktop files
-set $rofi-desktop "j4-dmenu-desktop --dmenu='rofi -width 30 -p 'dmenu:' -dmenu -i'"
+# set $rofi-desktop "j4-dmenu-desktop --dmenu='rofi width 30 -p 'dmenu:' -dmenu -i'"
+set $rofi-desktop "j4-dmenu-desktop --dmenu='rofi -p 'dmenu' -dmenu -i'"
 bindsym Control+$mod+n exec $rofi-desktop
 
 # Rofi for windows
-set $rofi-windows "rofi -width 50 -modi 'window' -show window"
+# set $rofi-windows "rofi -width 50 -modi 'window' -show window"
+set $rofi-windows "rofi -modi 'window' -show window"
 bindsym Control+$mod+m exec $rofi-windows
 
 # Rofi for system control
@@ -283,6 +286,12 @@ bindsym $mod+Shift+q kill
 # }}}
 
 # System {{{
+
+# Dim the screen after ten minutes
+exec --no-startup-id xset dpms 600
+
+# Lock the screen after ten minutes
+exec --no-startup-id xautolock -time 10 -locker ~/.config/i3/scripts/i3-lock-screen.sh
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
