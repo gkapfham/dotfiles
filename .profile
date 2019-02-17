@@ -33,7 +33,6 @@ export UBUNTU_MENUPROXY
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # set the wallpaper for i3
-# feh --bg-fill ~/configure/wallpaper/mountains.png
 hsetroot -solid "#1C1C1C"
 
 # export a variable that supports the use of dunst for notifications
