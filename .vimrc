@@ -824,6 +824,7 @@ nmap <Space>t :BTags <CR>
 nmap <Space>y :Tags <CR>
 nnoremap <Tab> :Buffers <CR>
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
 " Add in a format string for controlling how FZF displays the git log
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
