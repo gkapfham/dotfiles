@@ -21,7 +21,6 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 font pango:Hack Nerd Font Regular 20
 
 # Wallpaper
-# exec_always --no-startup-id feh --bg-fill ~/configure/wallpaper/mountains.png
 exec_always --no-startup-id hsetroot -solid "#1C1C1C"
 
 # }}}
