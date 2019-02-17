@@ -802,14 +802,14 @@ command! FZFMru call fzf#run({
 
 " Load hidden files
 command! FZFHidden call fzf#run({
-      \  'source':  'ag --hidden --ignore .git -l -g ""',
+      \  'source':  'rg --hidden --ignore .git -l -g ""',
       \  'sink':    'e',
       \  'options': '-m -x +s --no-bold --cycle',
       \  'down':    '25%'})
 
 " Load non-hidden files
 command! FZFMine call fzf#run({
-      \  'source':  'ag --ignore .git -l -g ""',
+      \  'source':  'rg --ignore .git -l -g ""',
       \  'sink':    'e',
       \  'options': '-m -x +s --no-bold --cycle',
       \  'down':    '25%'})
