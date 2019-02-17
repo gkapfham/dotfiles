@@ -1,14 +1,11 @@
-! ROFI Color theme and configurations
+!
+! Rofi theme
+!
+
+! Set the font to match i3 and program configuration
 rofi.font: Hack\ Nerd\ Font\ Regular\ 48
-rofi.lines: 5
-rofi.matching: fuzzy
 
-!rofi.color-enabled: true
-!rofi.color-window: #1c1c1c, #1c1c1c, #df8700
-!rofi.color-normal: #1c1c1c, #707880, #1c1c1c, #df8700, #1c1c1c
-!rofi.color-active: #1c1c1c, #df8700, #1c1c1c, #df8700, #1c1c1c
-!rofi.color-urgent: #1c1c1c, #5f8700, #1c1c1c, #5f8700, #1c1c1c
-
+! Set the color theme for rofi
 rofi.color-enabled: true
 !                  bg       border   separator
 rofi.color-window: #1c1c1c, #1c1c1c, #767676
@@ -17,17 +14,26 @@ rofi.color-normal: #1c1c1c, #767676, #1c1c1c, #767676, #1c1c1c
 rofi.color-active: #1c1c1c, #767676, #1c1c1c, #767676, #1c1c1c
 rofi.color-urgent: #1c1c1c, #5f8700, #1c1c1c, #5f8700, #1c1c1c
 
-rofi.line-margin: 10
-rofi.location: 6
-rofi.yoffset: -200
-rofi.xoffset: 0
+! Set all other configurations for rofi
 rofi.bw: 5
-rofi.width: 50
 rofi.fixed_num_lines: 1
-rofi.hmode: false
-
-rofi.separator-style: none
 rofi.hide-scrollbar: false
+rofi.hmode: false
+rofi.line-margin: 10
+rofi.lines: 5
+rofi.location: 6
+rofi.matching: fuzzy
+rofi.separator-style: none
+rofi.width: 50
+rofi.xoffset: 0
+rofi.yoffset: -200
 
+!
+! Cursor theme
+!
+
+! Define the cursor size and theme
+! Note that this is not reliable
+! and hard to set on Ubuntu 16.04
 Xcursor.theme: moblin
 Xcursor.size: 16
