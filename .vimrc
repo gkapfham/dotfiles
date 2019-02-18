@@ -163,6 +163,9 @@ set confirm
 " Display customized colorscheme
 colorscheme orangehybrid
 
+" Set color for concealment with limelight
+let g:limelight_conceal_ctermfg = 240
+
 " Display line wraps
 command! Wrap set textwidth=120
 command! NoWrap set textwidth=0
