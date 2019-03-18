@@ -418,15 +418,15 @@ augroup END
 " Folding {{{
 
 function! FancyFoldText()
-  let line = getline(v:foldstart)
-  let nucolwidth = &fdc + &number * &numberwidth
-  let windowwidth = winwidth(0) - nucolwidth - 3
-  let foldedlinecount = v:foldend - v:foldstart
-  let onetab = strpart('          ', 0, &tabstop)
-  let line = substitute(line, '\t', onetab, 'g')
-  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-  let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-  return line . ' ' . repeat(" ",fillcharcount-8) . foldedlinecount . ' lines ' . ' '
+  let l:line = getline(v:foldstart)
+  let l:nucolwidth = &foldcolumn + &number * &numberwidth
+  let l:windowwidth = winwidth(0) - l:nucolwidth - 3
+  let l:foldedlinecount = v:foldend - v:foldstart
+  let l:onetab = strpart('          ', 0, &tabstop)
+  let l:line = substitute(l:line, '\t', l:onetab, 'g')
+  let l:line = strpart(l:line, 0, l:windowwidth - 2 -len(l:foldedlinecount))
+  let l:fillcharcount = l:windowwidth - len(l:line) - len(l:foldedlinecount)
+  return l:line . ' ' . repeat(' ',l:fillcharcount-8) . l:foldedlinecount . ' lines ' . ' '
 endfunction
 set foldtext=FancyFoldText()
 
