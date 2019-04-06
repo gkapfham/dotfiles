@@ -456,7 +456,7 @@ augroup semshiconfiguration
 let g:semshi#error_sign = v:false
 function! CustomizedPythonSemshiHighlights()
   hi semshiLocal           ctermfg=167
-  hi semshiGlobal          ctermfg=64 cterm=underline
+  hi semshiGlobal          ctermfg=64 cterm=italic
   hi semshiImported        ctermfg=110 cterm=NONE
   hi semshiParameter       ctermfg=110
   hi semshiParameterUnused ctermfg=110 cterm=underline
