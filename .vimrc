@@ -5,6 +5,7 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'spacewander/vim-coloresque'
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -58,7 +59,6 @@ Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/vim-preview'
-Plug 'spacewander/vim-coloresque'
 Plug 'tfnico/vim-gradle'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
