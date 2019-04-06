@@ -79,9 +79,12 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
 
 " Conditionally load ncm2 for Vim8 and Neovim
+"
+" Running Neovim, so a connector is not needed
 if has('nvim')
   Plug 'ncm2/ncm2'
   Plug 'roxma/nvim-yarp'
+" Running Vim8, so a connector is needed
 else
   Plug 'ncm2/ncm2'
   Plug 'roxma/nvim-yarp'
