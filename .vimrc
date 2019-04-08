@@ -764,6 +764,14 @@ vmap <C-Down> ]egv
 " Toggle off the auto-completion of pairs
 let g:AutoPairsShortcutToggle = '<leader>apt'
 
+" Configure AutoPairs for HTML and LaTeX
+augroup autopairsconfiguration
+  " Add correct comments for HTML
+  au FileType html let b:AutoPairs = AutoPairsDefine({'<!--' : '-->'}, ['{'])
+  " Disable backtick pairing
+  au FileType tex let b:AutoPairs = AutoPairsDefine({}, ["'"])
+augroup END
+
 " Remove trailing whitespace
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
