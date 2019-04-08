@@ -764,11 +764,15 @@ vmap <C-Down> ]egv
 " Toggle off the auto-completion of pairs
 let g:AutoPairsShortcutToggle = '<leader>apt'
 
-" Configure AutoPairs for HTML and LaTeX
+" Configure AutoPairs for several programming languages
 augroup autopairsconfiguration
   " Add correct comments for HTML
-  au FileType html let b:AutoPairs = AutoPairsDefine({'<!--' : '-->'}, ['{'])
-  " Disable backtick pairing
+  au FileType html let b:AutoPairs = AutoPairsDefine({'<!--' : '-->'}, [])
+  " Add correct comments for Markdown
+  au FileType markdown let b:AutoPairs = AutoPairsDefine({'<!--' : '-->'}, [])
+  " Add correct comments for Liquid
+  au FileType liquid let b:AutoPairs = AutoPairsDefine({'<!--' : '-->'}, [])
+  " Disable backtick pairing for LaTeX
   au FileType tex let b:AutoPairs = AutoPairsDefine({}, ["'"])
 augroup END
 
