@@ -461,8 +461,8 @@ function! CustomizedPythonSemshiHighlights()
   hi semshiParameter       ctermfg=110
   hi semshiParameterUnused ctermfg=110 cterm=underline
   hi semshiFree            ctermfg=167
-  hi semshiBuiltin         ctermfg=143
-  hi semshiAttribute       ctermfg=49
+  hi semshiBuiltin         ctermfg=64 cterm=underline
+  hi semshiAttribute       ctermfg=109
   hi semshiSelf            ctermfg=249
   hi semshiUnresolved      ctermfg=NONE cterm=underline
   hi semshiSelected        ctermfg=NONE ctermbg=NONE cterm=underline
