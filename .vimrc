@@ -465,7 +465,7 @@ function! CustomizedPythonSemshiHighlights()
   hi semshiAttribute       ctermfg=109
   hi semshiSelf            ctermfg=249
   hi semshiUnresolved      ctermfg=NONE cterm=underline
-  hi semshiSelected        ctermfg=NONE ctermbg=NONE cterm=underline
+  hi semshiSelected        ctermfg=NONE ctermbg=NONE cterm=underline,bold
 endfunction
 autocmd FileType python call CustomizedPythonSemshiHighlights()
 autocmd ColorScheme * call CustomizedPythonSemshiHighlights()
