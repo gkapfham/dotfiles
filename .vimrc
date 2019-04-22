@@ -773,7 +773,7 @@ augroup autopairsconfiguration
   " Add correct comments for Liquid
   au FileType liquid let b:AutoPairs = AutoPairsDefine({'{% comment %}' : '{% comment %}'}, [])
   " Disable backtick pairing for LaTeX
-  au FileType tex let b:AutoPairs = AutoPairsDefine({}, ["'"])
+  au FileType tex let b:AutoPairs = AutoPairsDefine({'(':')', '[':']', '{':'}','"':'"', '`':'`'}, ["'"])
 augroup END
 
 " Remove trailing whitespace
