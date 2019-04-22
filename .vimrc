@@ -772,7 +772,7 @@ augroup autopairsconfiguration
   au FileType markdown let b:AutoPairs = AutoPairsDefine({'<!--' : '-->'}, [])
   " Add correct comments for Liquid
   au FileType liquid let b:AutoPairs = AutoPairsDefine({'{% comment %}' : '{% comment %}'}, [])
-  " Disable backtick pairing for LaTeX
+  " Disable single-quote pairing for LaTeX
   au FileType tex let b:AutoPairs = AutoPairsDefine({'(':')', '[':']', '{':'}','"':'"', '`':'`'}, ["'"])
 augroup END
 
