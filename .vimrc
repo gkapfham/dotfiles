@@ -773,6 +773,10 @@ augroup autopairsconfiguration
   " Add correct comments for Liquid
   au FileType liquid let b:AutoPairs = AutoPairsDefine({'{% comment %}' : '{% comment %}'}, [])
   " Disable single-quote pairing for LaTeX
+  " Perform two steps to ensure that a reload or a new load does not error
+  " 1. Add all of the potential tags for LaTeX
+  au FileType tex let b:AutoPairs = AutoPairsDefine({'(':')', '[':']', '{':'}','"':'"', '`':'`', "'":"'"}, [])
+  " 2. Remove the single quote matching with causes problems
   au FileType tex let b:AutoPairs = AutoPairsDefine({'(':')', '[':']', '{':'}','"':'"', '`':'`'}, ["'"])
 augroup END
 
