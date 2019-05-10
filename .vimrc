@@ -417,6 +417,37 @@ augroup magitconfiguration
   autocmd FileType magit setlocal listchars=tab:▸▹,extends:#,precedes:#,nbsp:⌻
 augroup END
 
+" Define the color scheme for the git-messenger plugin
+"
+" Header such as 'Commit:', 'Author:'
+hi link gitmessengerHeader Identifier
+
+" Commit hash at 'Commit:' header
+hi link gitmessengerHash Comment
+
+" History number at 'History:' header
+hi link gitmessengerHistory Constant
+
+" Normal color. This color is the most important
+hi link gitmessengerPopupNormal CursorLine
+
+" Color of 'end of buffer'. To hide '~' in pop-up window, set 'None'
+hi gitmessengerEndOfBuffer term=None guifg=None guibg=None ctermfg=None ctermbg=None
+
+" Configure the git-messenger
+augroup gitmessenger
+" Define a mapping to navigate the git-messenger pop-up
+function! SetupGitMessengerPopup() abort
+    " Go into the git-messenger pop-up to navigate
+    nmap <Leader>gg <Plug>(git-messenger-into-popup)
+    " Go to an older commit
+    nmap <buffer><C-o> o
+    " Go to a newer commit
+    nmap <buffer><C-i> O
+endfunction
+autocmd FileType gitmessengerpopup call SetupGitMessengerPopup()
+augroup END
+
 " }}}
 
 " Folding {{{
