@@ -51,9 +51,11 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-syntax'
 Plug 'ncm2/ncm2-tagprefix'
 Plug 'ncm2/ncm2-ultisnips'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
+Plug 'rhysd/git-messenger.vim'
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'skywind3000/asyncrun.vim'
@@ -76,7 +78,6 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
