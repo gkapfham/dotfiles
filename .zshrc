@@ -343,6 +343,13 @@ function chpwd() {
 
 # }}}
 
+# Redefine Aliases {{{
+
+# Already defined in oh-my-zsh, redefine to use exa
+alias ls="exa --color=always"
+
+# }}}
+
 # Benchmarking {{{
 
 # Uncomment to enable
