@@ -43,9 +43,10 @@ export LS_COLORS="rs=0:di=0;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;3
 
 # Define the EXA_COLORS so that:
 # --> user name is not displayed as bold
+# --> group name is not displayed as bold
 # --> read bit for user is not displayed as bold
 # --> write bit for user is not displayed as bold
-export EXA_COLORS="uu=0;33:ur=0;33:uw=0;31"
+export EXA_COLORS="uu=0;33:gu=0;33:ur=0;33:uw=0;31"
 
 # 256 color mode with bold and italics
 export TERM="xterm-256color"
