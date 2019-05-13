@@ -338,7 +338,7 @@ secure() {
 # Always display directory contents after a change of directory
 function chpwd() {
   emulate -L zsh
-  exa --header --group-directories-first --grid --long --git --sort=name --classify
+  exa --group-directories-first --grid --long --git --sort=name --classify
 }
 
 # }}}
