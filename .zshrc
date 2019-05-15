@@ -276,7 +276,8 @@ tms() {
 
 # Display all of the possible tmuxinators with fzf
 tmm() {
-  session=$( ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
+  # NOTE: Use the /bin/ls command since "ls" is now aliased to use "exa" command
+  session=$( /bin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
     fzf --query="$1" --select-1 --exit-0 --cycle) &&
     mux "$session"
 }
