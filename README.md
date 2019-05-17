@@ -1,17 +1,27 @@
 # dotfiles
 
+```
+       __      __  _____ __
+  ____/ /___  / /_/ __(_) /__  _____
+ / __  / __ \/ __/ /_/ / / _ \/ ___/
+/ /_/ / /_/ / /_/ __/ / /  __(__  )
+\__,_/\____/\__/_/ /_/_/\___/____/
+```
+
+[![Build Status](https://travis-ci.org/gkapfham/dotfiles.svg?branch=master)](https://travis-ci.org/gkapfham/dotfiles)
+
 This repository contains the configuration files (i.e., "dotfiles") used to
 configure the programs regularly used by [Gregory M.
-Kapfhammer](https://www.gregorykapfhammer.com/). Please note that all of the
-dotfiles in this repository are, at least to some extent, "hard-coded" to work
-for my development environment and projects. For instance, I created these
+Kapfhammer](https://www.gregorykapfhammer.com/). Please note that the dotfiles
+in this repository are, at least to some extent, "hard-coded" to work for my
+development environment and projects. For instance, I created these
 configuration files under the assumption that the developer will use Ubuntu
 16.04. Even though they are heavily customized, my hope is that they are
 largely reusable and, additionally, will give examples of how to configure
 various programs such as `i3`, `mutt`, `nvim`, `polybar`, `tmux`, `vim`, and
 `zsh`.
 
-This is a summary of the dotfiles that I currently provide and maintain:
+This is a summary of the dotfiles that I create and maintain:
 
 - `.Rprofile`: initialization for the R programming language
 - `.Xresources`: configuration for the Rofi for displaying menus
