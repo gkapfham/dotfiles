@@ -113,6 +113,9 @@ alias bat="bat --theme=\"Tomorrow Night\""
 alias more="bat"
 alias cat="bat"
 
+# Directory listing with a simple command
+alias ka="exa --group-directories-first --grid --long --sort=name"
+
 # }}}
 
 # Oh-My-Zsh and Plugin {{{
