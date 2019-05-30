@@ -854,7 +854,7 @@ command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
 " }}}
 
-" FZF {{
+" FZF {{{
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
