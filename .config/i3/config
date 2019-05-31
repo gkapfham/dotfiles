@@ -227,7 +227,8 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # Focus the parent container
-bindsym $mod+a focus parent
+# NOTE: Commented out since it conflicts with FZF in neovim
+# bindsym $mod+a focus parent
 
 # }}}
 
