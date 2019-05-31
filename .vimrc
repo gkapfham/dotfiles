@@ -5,6 +5,7 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'skywind3000/vim-preview'
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -23,6 +24,7 @@ Plug 'chrisbra/unicode.vim'
 Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
+Plug 'fgrsnau/ncm2-otherbuf'
 Plug 'filipekiss/ncm2-look.vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
@@ -45,6 +47,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'mgee/lightline-bufferline'
 Plug 'mhinz/vim-signify'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
+Plug 'ncm2/float-preview.nvim'
 Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-path'
@@ -59,7 +62,6 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'skywind3000/asyncrun.vim'
-Plug 'skywind3000/vim-preview'
 Plug 'tfnico/vim-gradle'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
@@ -742,6 +744,10 @@ nnoremap <silent><expr> <Leader>i (&hls && v:hlsearch ? ':set nohlsearch' : ':se
 set ignorecase
 set smartcase
 
+" Make :grep use ripgrep and use -uu to not ignore files
+" This is an alternative to :Rg or :Ag which ignore some files
+set grepprg=rg\ --vimgrep\ -uu\ --no-heading\ --smart-case
+
 " }}}
 
 " Advanced Keyboard Movement with easymotion {{{
@@ -1035,11 +1041,27 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 " Configure ncm2 so that it appears quickly
 let ncm2#popup_delay = 1
 
+" Show a preview of completion details
+" For instance, useful to see Python function signature
+" Do not display in a bottom-screen doc, instead near menu
+let g:float_preview#docked = 0
+
+" Configure the floating preview window for completions
+augroup my_floating_window_configuration
+function! DisableExtras()
+  call nvim_win_set_option(g:float_preview#win, 'number', v:false)
+  call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:false)
+  call nvim_win_set_option(g:float_preview#win, 'cursorline', v:false)
+  call nvim_win_set_option(g:float_preview#win, 'spell', v:false)
+endfunction
+autocmd User FloatPreviewWinOpen call DisableExtras()
+augroup END
+
 " Use a matcher and a sorter that work together
 let g:ncm2#matcher = 'abbrfuzzy'
 let g:ncm2#sorter = 'abbrfuzzy'
 
-" Follow vimtex documentation to configuration ncm2
+" Follow vimtex's documentation to configuration ncm2
 " This ensures that labels and references complete correctly
 augroup my_cm_setup
   autocmd!
