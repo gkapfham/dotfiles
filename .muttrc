@@ -269,9 +269,6 @@ bind index R group-reply
 bind pager R group-reply
 set followup_to=yes
 
-# bind compose a noop
-# bind compose ga attach-file
-
 # }}}
 
 # Printing {{{
