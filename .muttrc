@@ -178,8 +178,8 @@ set certificate_file=~/.mutt/certificates
 # Cache {{{
 
 # Allow mutt to performing caching as a way to improve performance
-# set header_cache=~/.mutt/cache/headers
-# set message_cachedir=~/.mutt/cache/bodies
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
 
 # }}}
 
@@ -254,6 +254,9 @@ bind index,pager i flag-message
 bind index R group-reply
 bind pager R group-reply
 set followup_to=yes
+
+# bind compose a noop
+# bind compose ga attach-file
 
 # }}}
 
