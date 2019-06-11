@@ -7,12 +7,15 @@ unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
 unignore posted-to:
 
 # Display entries in the email headers
-set save_name=yes
-set move=no
 my_hdr From: "Gregory M. Kapfhammer" <gkapfham@allegheny.edu>
 my_hdr Bcc: "Gregory M. Kapfhammer" <gkapfham@gmail.com>
 hdr_order From Date: From: To: Cc: Subject:
-auto_view text/html text/enriched application/postscript image/gif
+
+# Prefer plaintext over HTML email displays
+alternative_order text/plain text/enriched text/html
+
+# Automatically view HTML using a previewer in .mailcap
+auto_view text/html text/enriched
 
 # Enable header editing in Vim or Neovim
 set edit_headers=yes
@@ -32,6 +35,9 @@ set text_flowed=yes
 
 # Quote msg when replying
 set include
+
+# Save copies of outgoing messages
+set save_name=yes
 
 # }}}
 
@@ -78,6 +84,9 @@ set display_filter = '$HOME/.mutt/aliases.sh'
 # }}}
 
 # Gmail Integration {{{
+
+# Do not automatically move mail to a new mailbox
+set move=no
 
 # Ignore spaces in the names of folders
 bind editor <space> noop
@@ -149,6 +158,10 @@ color signature  color3   default
 color status     color246 default
 color tilde      white    default
 color tree       color8   default
+
+color hdrdefault    red default
+color header        yellow    default "^(From)"
+color header        blue      default "^(Subject)"
 
 # }}}
 
