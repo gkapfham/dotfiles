@@ -46,6 +46,30 @@ set save_name=yes
 # Confirm when appending messages to an existing mailbox?
 set confirmappend=no
 
+# Configure the status line at the screen's bottom
+set status_chars = " *%A"
+set status_format = "[ Folder: %f ] [%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]%>─%?p?( %p postponed )?"
+
+# Set the date format for display and in emails
+set date_format = "%m-%d-%Y %H:%M"
+
+# Configure display for each email in index
+set index_format = "%3C %Z%?X?A&? %D  %-20.20F  %s"
+
+# Sort the email so that new messages are on the top
+set sort = threads
+set sort_aux = reverse-last-date-received
+
+# Further configure sorting of emails
+set uncollapse_jump
+set sort_re
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+
+# Always use Unicode
+set send_charset = "utf-8:iso-8859-1:us-ascii"
+set charset = "utf-8"
+
 # }}}
 
 # NeoMutt Configuration {{{
@@ -110,7 +134,8 @@ set trash="+[Gmail]/Trash"
 
 # Set the depth of the imap operation pipeline (normally 15)
 # Setting the value to 0 makes mutt slower, but more reliable, maybe
-set imap_pipeline_depth=15
+# set imap_pipeline_depth=15
+set imap_pipeline_depth=30
 
 # Define how frequently mutt tells IMAP server to persist connection
 set imap_keepalive=300
@@ -206,6 +231,7 @@ source $alias_file
 
 # Make it easy to switch to common Gmail folders
 bind index g noop
+bind index gj jump
 macro index gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
 macro index gi "<change-folder>=INBOX<enter>" "Go to inbox"
 macro index gs "<change-folder>=[Gmail]/Starred<enter>" "Go to starred messages"
