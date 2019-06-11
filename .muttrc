@@ -159,9 +159,9 @@ color status     color246 default
 color tilde      white    default
 color tree       color8   default
 
-color hdrdefault    red default
-color header        yellow    default "^(From)"
-color header        blue      default "^(Subject)"
+color hdrdefault red      default
+color header     yellow   default "^(From)"
+color header     blue     default "^(Subject)"
 
 # }}}
 
