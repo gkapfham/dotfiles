@@ -36,8 +36,10 @@ set text_flowed=yes
 # Quote msg when replying
 set include
 
-# Save copies of outgoing messages
-set save_name=yes
+# Do not save copies of outgoing messages
+# Note that this is not needed since emails
+# will be saved in the Gmail Sent-Mail.
+set save_name=no
 
 # }}}
 
