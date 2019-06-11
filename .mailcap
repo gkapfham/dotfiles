@@ -4,4 +4,5 @@ application/msword; mutt_bgrun soffice --nologo --writer '%s'; edit=soffice -no-
 application/vnd.ms-powerpoint; mutt_bgrun soffice --nologo '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx
 application/x-mspowerpoint; mutt_bgrun soffice --nologo '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx
 application/ppt; mutt_bgrun soffice --nologo '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx
-text/html; google-chrome %s; test=test -n "$DISPLAY"; needsterminal
+text/html;  /usr/bin/firefox %s >/dev/null 2>&1; needsterminal
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
