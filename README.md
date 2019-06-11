@@ -34,6 +34,7 @@ This is a summary of the dotfiles that I create and maintain:
 - `.profile`: script to run when logging into the `i3` window manager
 - `.signature`: footer displayed by `mutt` in all email messages
 - `.tmux.conf`: configuration of the `tmux` terminal multiplexing tool
+- `.urlview`: configuration for the `urlview` program used with `mutt`
 - `.vimrc`: configuration for the `nvim` and `vim` text editors
 - `.zshrc`: configuration for the `zsh` shell to use oh-my-zsh
 - `.config/dunst`: configuration and scripts for the `dunst` notification manager
