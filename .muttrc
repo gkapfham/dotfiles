@@ -230,6 +230,7 @@ mailboxes imaps://imap.gmail.com:993/INBOX imaps://imap.gmail.com:993/advise2017
 # Cache {{{
 
 # Allow mutt to performing caching as a way to improve performance
+# Although this previously lead to instability, now it works very well
 set header_cache=~/.mutt/cache/headers
 set message_cachedir=~/.mutt/cache/bodies
 
