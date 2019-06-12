@@ -173,7 +173,8 @@ bind index,pager \cv sidebar-toggle-visible
 
 # Colors {{{
 
-# Mutt colors for dark background
+# Mutt colors for a dark background
+# The scheme is monochrome an non-bold
 
 color attachment color12  default
 color error      color246 default
@@ -191,6 +192,8 @@ color signature  color3   default
 color status     color246 default
 color tilde      white    default
 color tree       color8   default
+
+# Define colors for the display of email headers
 
 color hdrdefault red      default
 color header     yellow   default "^(From)"
