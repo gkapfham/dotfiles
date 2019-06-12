@@ -308,6 +308,8 @@ travis() {
 # Pyenv {{{
 
 # Lazy load completion of pyenv command after first call
+# Note that this reduces startup time for a shell at the
+# cost of making pyenv not available until run first time
 export PATH="$HOME/.pyenv/bin:$PATH"
 pyenv() {
   unfunction "$0"
@@ -315,6 +317,14 @@ pyenv() {
   eval "$(command pyenv virtualenv-init -)"
   pyenv "$@"
 }
+
+# }}}
+
+# Pipenv {{{
+
+# Ensure that Pipenv can find the version of Python
+# that is managed by the Pyenv tool
+export PIPENV_PYTHON="$HOME/.pyenv/shims/python"
 
 # }}}
 
