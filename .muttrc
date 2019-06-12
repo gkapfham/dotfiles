@@ -49,12 +49,15 @@ set save_name=no
 set confirmappend=no
 
 # Use "-" for a saved mailbox state and "*" for a changed mailbox state
+# Use symbols that will only display correctly if using Nerd Fonts
 set status_chars = "%A"
 
 # Set the status line configuration for the bottom of the index and pager
+# This configures and "Email Details" block on bottom left and "Mailbox Status" block on bottom right
 set status_format = "[%f %m messages%?n? (%n new)?%?o? (%o old)?%?d? (%d to delete)?%?t? (%t tagged)?%?p? (%p postponed)?]%>─[ %r %S ]"
 
 # Set the date format for display and in emails
+# This data format is also adopted when a message is quoted
 set date_format = "%m-%d-%Y %H:%M"
 
 # Configure display for each email in index
