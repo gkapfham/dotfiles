@@ -302,6 +302,8 @@ t() {
 # Travis {{{
 
 # Lazy load completion of travis command after first call
+# Note that this reduces startup time for a shell at the
+# cost of making travis not available until run first time
 travis() {
   unfunction "$0"
   [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
