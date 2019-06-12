@@ -329,6 +329,8 @@ macro pager \Cr "<display-toggle-weed> <print-message> <display-toggle-weed>"
 # Web {{{
 
 # Display links in a web site in a compact list, allowing for web browser viewing
+# The urlview program will run ~/bin/url_handler.sh which will then run a
+# browser that is specified at the start of the script; currently using Firefox
 macro index,pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 macro attach,compose \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 
