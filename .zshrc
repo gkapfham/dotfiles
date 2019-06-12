@@ -84,6 +84,11 @@ unset JAVA_TOOL_OPTIONS
 # Get correct spacing in python virtualenv_prompt_info
 export ZSH_THEME_VIRTUALENV_SUFFIX="] "
 
+# Define a marker to display of a "partial line"
+# Normally shown as a "%"
+# May appear when using Tmuxinator to start tmux
+export PROMPT_EOL_MARK='    '
+
 # }}}
 
 # Aliases {{{
