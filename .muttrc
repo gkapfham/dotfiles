@@ -49,10 +49,10 @@ set save_name=no
 set confirmappend=no
 
 # Use "-" for a saved mailbox state and "*" for a changed mailbox state
-set status_chars = "-*%A"
+set status_chars = "%A"
 
 # Set the status line configuration for the bottom of the index and pager
-set status_format = "[ %f %m messages%?n? (%n new)?%?o? (%o old)?%?d? (%d to delete)?%?t? (%t tagged)? %?p?(%p postponed)? ]%>─[ %r %S ]"
+set status_format = "[%f %m messages%?n? (%n new)?%?o? (%o old)?%?d? (%d to delete)?%?t? (%t tagged)?%?p? (%p postponed)?]%>─[ %r %S ]"
 
 # Set the date format for display and in emails
 set date_format = "%m-%d-%Y %H:%M"
