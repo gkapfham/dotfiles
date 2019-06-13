@@ -297,6 +297,12 @@ t() {
     cd "$fasdlist"
 }
 
+# Define the name of a tmux pane, display in the status-right
+function workspace {
+  readonly name=${1:?"Specify the name of the workspace."}
+  tmux select-pane -T $name
+}
+
 # }}}
 
 # Travis {{{
