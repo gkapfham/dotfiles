@@ -5,7 +5,6 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
-" Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -612,11 +611,6 @@ let g:html_indent_inctags = 'html,body,head,tbody,div'
 
 " Do not perform folding inside of Markdown
 let g:pandoc#modules#disabled = ['folding']
-
-" " Preview the Markdown
-" let g:livedown_autorun = 0
-" let g:livedown_open = 0
-" let g:livedown_port = 4200
 
 " Preview for Markdown
 let g:mkdp_browser = '/usr/bin/firefox'
