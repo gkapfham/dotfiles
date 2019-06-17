@@ -282,7 +282,7 @@ augroup END
 
 " Display a diagnostic message when gutentags updates
 function! LightlineGutentags()
-  return gutentags#statusline('', ' ', 'Tagging') . ''
+  return gutentags#statusline() !=# '' ? '  Tags ' : 'Tags '
 endfunction
 
 " Display a lock symbol if the file is read-only (e.g., help files)
