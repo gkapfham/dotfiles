@@ -5,6 +5,7 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -28,6 +29,7 @@ Plug 'filipekiss/ncm2-look.vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
+Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
 Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
@@ -58,7 +60,6 @@ Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
 Plug 'rhysd/git-messenger.vim'
-Plug 'shime/vim-livedown', {'for': 'markdown'}
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tfnico/vim-gradle'
@@ -612,10 +613,17 @@ let g:html_indent_inctags = 'html,body,head,tbody,div'
 " Do not perform folding inside of Markdown
 let g:pandoc#modules#disabled = ['folding']
 
-" Preview the Markdown
-let g:livedown_autorun = 0
-let g:livedown_open = 0
-let g:livedown_port = 4200
+" " Preview the Markdown
+" let g:livedown_autorun = 0
+" let g:livedown_open = 0
+" let g:livedown_port = 4200
+
+" Preview for Markdown
+let g:mkdp_browser = '/usr/bin/firefox'
+let g:mkdp_page_title = '${name}'
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 0
+let g:mkdp_echo_preview_url = 1
 
 " Autodetect CSV
 autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
