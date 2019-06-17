@@ -250,7 +250,7 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'spell', 'paste' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
-      \   'right': [['lineinfo'], ['percent'], ['linter_warnings', 'linter_errors', 'linter_ok', 'fileformat', 'fileencoding', 'filetype']]
+      \   'right': [['lineinfo'], ['percent'], ['linter_warnings', 'linter_errors', 'linter_ok', 'fileformat', 'fileencoding', 'filetype'], ['gutentags']]
       \ },
       \ 'component_function': {
       \   'readonly': 'LightlineReadonly',
@@ -259,6 +259,7 @@ let g:lightline = {
       \   'filetype': 'LightlineFiletype',
       \   'fileformat': 'LightlineFileformat',
       \   'filename': 'LightlineFilename',
+      \   'gutentags': 'LightlineGutentags',
       \   'linter_warnings': 'LightlineLinterWarnings',
       \   'linter_errors': 'LightlineLinterErrors',
       \   'linter_ok': 'LightlineLinterOK'
@@ -271,6 +272,18 @@ let g:lightline = {
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' }
 \ }
+
+" Ensure that the lightline status bar updates
+augroup GutentagsStatusLineRefresher
+  autocmd!
+  autocmd User GutentagsUpdating call lightline#update()
+  autocmd User GutentagsUpdated call lightline#update()
+augroup END
+
+" Display a diagnostic message when gutentags updates
+function! LightlineGutentags()
+  return gutentags#statusline('', ' ', 'Tagging') . ''
+endfunction
 
 " Display a lock symbol if the file is read-only (e.g., help files)
 function! LightlineReadonly()
