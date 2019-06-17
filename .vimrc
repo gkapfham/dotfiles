@@ -500,6 +500,10 @@ let g:gutentags_project_root = ['.maketags']
 " Always use syntax highlighting
 filetype indent plugin on | syn on
 
+" Always continue a comment in code to
+" the next line when pressing "return"
+set formatoptions+=r
+
 " Define a color scheme for Python source code highlighting
 augroup semshiconfiguration
 let g:semshi#error_sign = v:false
