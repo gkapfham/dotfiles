@@ -489,6 +489,9 @@ set tags=./tags;/,tags;/
 " Perform highlighting asynchronously when file is loaded or saved
 let g:highlighter#auto_update = 2
 
+" Perform tag generation in existence of a '.maketags' marker file
+let g:gutentags_project_root = ['.maketags']
+
 " }}}
 
 " Programming Languages {{{
