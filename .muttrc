@@ -86,6 +86,14 @@ set abort_noattach="ask-yes"
 
 # }}}
 
+# Macros {{{
+
+# Define a macro for going to the INBOX
+macro index I "c!\n"
+macro pager I "c!\n"
+
+# }}}
+
 # Display {{{
 
 # Don't wrap mid-word
