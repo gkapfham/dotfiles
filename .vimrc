@@ -49,6 +49,7 @@ Plug 'mhinz/vim-signify'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 Plug 'ncm2/float-preview.nvim'
 Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-github'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-syntax'
