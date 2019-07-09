@@ -5,6 +5,7 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'ncm2/ncm2-github'
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -49,7 +50,6 @@ Plug 'mhinz/vim-signify'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 Plug 'ncm2/float-preview.nvim'
 Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-github'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-syntax'
