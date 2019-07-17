@@ -643,11 +643,14 @@ autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 " Define linting for email
 let g:ale_linter_aliases = {'mail': 'tex', 'liquid': 'markdown'}
 
-" Use eslint for JavaScript
-" Use htmlhint for HTML
+" Configure the linters run by ALE
+" JavaScript: eslint
+" HTML: htmlhint
+" Python: flake8, pylint, pydocstyle
 let g:ale_linters = {
       \   'javascript': ['eslint'],
       \   'html': ['htmlhint'],
+      \   'python': ['flake8', 'pylint', 'pydocstyle'],
       \}
 
 " Configure the symbols for linting warnings and errors
