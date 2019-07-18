@@ -671,6 +671,9 @@ let g:vimtex_view_method = 'mupdf'
 let g:vimtex_view_mupdf_options = '-r 288'
 let g:vimtex_compiler_progname = 'nvr'
 
+" Set keymap for viewing the table of contents
+nnoremap <leader>lt :VimtexTocToggle<cr>
+
 " Conceal option
 set conceallevel=2
 let g:tex_conceal= 'adgms'
@@ -1056,6 +1059,9 @@ command! -bang FZFMine call fzf#run({
       \  'down':    '100%',
       \  'window':  'enew'})
 let g:fzf_layout = { 'window': 'enew' }
+
+" Use FZF to search through the TOC of a LaTeX document
+nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
 
 " Enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
