@@ -43,6 +43,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
+Plug 'lifepillar/vim-colortemplate'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mgee/lightline-bufferline'
 Plug 'mhinz/vim-signify'
