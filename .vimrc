@@ -9,6 +9,7 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
+Plug 'RRethy/vim-hexokinase'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'SirVer/ultisnips'
@@ -26,6 +27,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'fgrsnau/ncm2-otherbuf', {'branch': 'ncm2'}
 Plug 'filipekiss/ncm2-look.vim'
 Plug 'garbas/vim-snipmate'
+Plug 'gkapfham/vim-vitamin-onec'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
@@ -166,8 +168,11 @@ set t_ZR=[23m
 set shortmess=FIWacto
 set confirm
 
+" Use full color in the terminal
+set termguicolors
+
 " Display customized colorscheme
-colorscheme orangehybrid
+colorscheme vitaminonec
 
 " Set color for concealment with limelight
 let g:limelight_conceal_ctermfg = 240
@@ -396,6 +401,9 @@ let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
 " Do not display the match of an offscreen delimiter
 let g:matchup_matchparen_status_offscreen = 0
 
+" Enable for all filetypes
+let g:Hexokinase_ftAutoload = ['css', 'html', 'markdown', 'colortemplate']
+
 " }}}
 
 " Version Control {{{
@@ -521,8 +529,8 @@ function! CustomizedPythonSemshiHighlights()
   hi semshiUnresolved      ctermfg=NONE cterm=underline
   hi semshiSelected        ctermfg=NONE ctermbg=NONE cterm=underline,bold
 endfunction
-autocmd FileType python call CustomizedPythonSemshiHighlights()
-autocmd ColorScheme * call CustomizedPythonSemshiHighlights()
+" autocmd FileType python call CustomizedPythonSemshiHighlights()
+" autocmd ColorScheme * call CustomizedPythonSemshiHighlights()
 augroup END
 
 " Configure settings for different file types
@@ -656,8 +664,8 @@ let g:ale_linters = {
 " Configure the symbols for linting warnings and errors
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
-highlight link ALEWarningSign String
-highlight link ALEErrorSign WarningMsg
+" highlight link ALEWarningSign String
+" highlight link ALEErrorSign WarningMsg
 
 " }}}
 
@@ -1016,7 +1024,7 @@ endif
 
 " Highlight trailing spaces
 if has("nvim")
-  highlight ExtraWhitespace ctermfg=172 ctermbg=234
+  " highlight ExtraWhitespace ctermfg=172 ctermbg=234
   match ExtraWhitespace /\s\+$\|\t/
   augroup extra_whitespace
     autocmd!
