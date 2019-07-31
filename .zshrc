@@ -248,9 +248,19 @@ export FZF_DEFAULT_OPTS='
   --no-bold
   --cycle
   --bind ctrl-f:page-down,ctrl-b:page-up
-  --color fg:-1,bg:-1,hl:64,fg+:3,bg+:234,hl+:172
-  --color info:110,prompt:110,spinner:109,pointer:172,marker:172
-'
+  --color=fg:#767676,bg:#1c1c1c,hl:#5f8700
+  --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
+  --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
+  --color=marker:#d78700,spinner:#875f87,header:#875f87'
+
+# # Default options
+# export FZF_DEFAULT_OPTS='
+#   --no-bold
+#   --cycle
+#   --bind ctrl-f:page-down,ctrl-b:page-up
+#   --color fg:-1,bg:-1,hl:64,fg+:3,bg+:234,hl+:172
+#   --color info:110,prompt:110,spinner:109,pointer:172,marker:172
+# '
 
 # Setup fzf, its auto-completions, and key bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
