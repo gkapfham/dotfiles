@@ -78,6 +78,9 @@ export PATH="/opt/urserver:/opt/eclipse:$HOME/.npm-global/bin:$HOME/.fzf/bin:$HO
 # Local Gem home
 export GEM_HOME=$HOME/.gem
 
+# Local Go program home
+export GOPATH=$HOME/.gocode
+
 # No Java tools
 unset JAVA_TOOL_OPTIONS
 
@@ -243,24 +246,26 @@ bindkey '^B' fzf-fasd-widget
 
 # FZF {{{
 
-# Default options
+# Match the vim-vitamin-onec colorscheme
+# https://github.com/gkapfham/vim-vitamin-onec
 export FZF_DEFAULT_OPTS='
   --no-bold
   --cycle
   --bind ctrl-f:page-down,ctrl-b:page-up
-  --color=fg:#767676,bg:#1c1c1c,hl:#5f8700
+  --color=fg:#a8a8a8,bg:#1c1c1c,hl:#5f8700
   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
   --color=marker:#d78700,spinner:#875f87,header:#875f87'
 
-# # Default options
-# export FZF_DEFAULT_OPTS='
+# Same colorscheme but in 256 colors:
+#   export FZF_DEFAULT_OPTS='
 #   --no-bold
 #   --cycle
 #   --bind ctrl-f:page-down,ctrl-b:page-up
-#   --color fg:-1,bg:-1,hl:64,fg+:3,bg+:234,hl+:172
-#   --color info:110,prompt:110,spinner:109,pointer:172,marker:172
-# '
+#   --color=fg:243,bg:234,hl:64
+#   --color=fg+:143,bg+:234,hl+:172
+#   --color=info:110,prompt:110,pointer:172
+#   --color=marker:172,spinner:96,header:96'
 
 # Setup fzf, its auto-completions, and key bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
