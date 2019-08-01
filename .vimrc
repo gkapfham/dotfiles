@@ -767,13 +767,6 @@ nmap s <Plug>(easymotion-s2)
 nmap <leader>e <Plug>(easymotion-next)
 nmap <leader>E <Plug>(easymotion-prev)
 
-" Change the color scheme
-hi link EasyMotionTarget Type
-hi link EasyMotionShade Comment
-hi link EasyMotionIncSearch Type
-hi link EasyMotionIncCursor Type
-hi link EasyMotionMoveHL Type
-
 " Do not create the shaded background
 let g:EasyMotion_do_shade = 0
 
