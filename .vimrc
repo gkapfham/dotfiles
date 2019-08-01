@@ -640,8 +640,6 @@ let g:ale_linters = {
 " Configure the symbols for linting warnings and errors
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
-" highlight link ALEWarningSign String
-" highlight link ALEErrorSign WarningMsg
 
 " }}}
 
