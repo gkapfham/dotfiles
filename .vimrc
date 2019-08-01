@@ -155,6 +155,16 @@ command! Reload :source $MYVIMRC
 
 " }}}
 
+" Color Scheme {{{
+
+" Use full color in the terminal
+set termguicolors
+
+" Display customized colorscheme
+colorscheme vitaminonec
+
+" }}}
+
 " Display Improvements {{{
 
 " Display encoding to UTF-8
@@ -167,12 +177,6 @@ set t_ZR=[23m
 " Do not display messages
 set shortmess=FIWacto
 set confirm
-
-" Use full color in the terminal
-set termguicolors
-
-" Display customized colorscheme
-colorscheme vitaminonec
 
 " Set color for concealment with limelight
 let g:limelight_conceal_ctermfg = 240
@@ -455,7 +459,7 @@ hi link gitmessengerHistory Constant
 hi link gitmessengerPopupNormal CursorLine
 
 " Color of 'end of buffer'. To hide '~' in pop-up window, set 'None'
-hi gitmessengerEndOfBuffer term=None guifg=None guibg=None ctermfg=None ctermbg=None
+" hi gitmessengerEndOfBuffer term=None guifg=None guibg=None ctermfg=None ctermbg=None
 
 " Configure the git-messenger
 augroup gitmessenger
