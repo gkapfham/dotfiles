@@ -662,7 +662,7 @@ nnoremap <leader>lt :VimtexTocToggle<cr>
 " Conceal option
 set conceallevel=2
 let g:tex_conceal= 'adgms'
-hi Conceal ctermbg=NONE ctermfg=172
+" hi Conceal ctermbg=NONE ctermfg=172
 
 " Use tex over plaintex
 let g:tex_flavor = 'tex'
@@ -919,20 +919,17 @@ nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 " Add in a format string for controlling how FZF displays the git log
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
 
-" Configure the fzf statusline in Neovim
-" Note that this color configuration does
-" correctly integrate with the lightline
+" Configure the FZF statusline in Neovim
 function! s:fzf_statusline()
   " Define colors for the statusline
-  highlight fzf1 ctermfg=235 ctermbg=110 cterm=bold
-  highlight fzf2 ctermfg=235 ctermbg=110 cterm=bold
-  highlight fzf3 ctermfg=110 ctermbg=235
   setlocal statusline=%#fzf1#\ \%#fzf2#\ \FIND\ \ %#fzf3#
 endfunction
 
 " Display a customized statusline when invoking fzf
 " Note that this will not always trigger if in an augroup
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
+augroup FzfStatusLineGroup
+  autocmd! User FzfStatusLine call <SID>fzf_statusline()
+augroup END
 
 " }}}
 
