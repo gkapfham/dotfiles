@@ -507,19 +507,19 @@ set formatoptions+=r
 " Define a color scheme for Python source code highlighting
 augroup semshiconfiguration
 let g:semshi#error_sign = v:false
-function! CustomizedPythonSemshiHighlights()
-  hi semshiLocal           ctermfg=167
-  hi semshiGlobal          ctermfg=64 cterm=italic
-  hi semshiImported        ctermfg=110 cterm=NONE
-  hi semshiParameter       ctermfg=110
-  hi semshiParameterUnused ctermfg=110 cterm=underline
-  hi semshiFree            ctermfg=167
-  hi semshiBuiltin         ctermfg=64 cterm=underline
-  hi semshiAttribute       ctermfg=109
-  hi semshiSelf            ctermfg=249
-  hi semshiUnresolved      ctermfg=NONE cterm=underline
-  hi semshiSelected        ctermfg=NONE ctermbg=NONE cterm=underline,bold
-endfunction
+" function! CustomizedPythonSemshiHighlights()
+  " hi semshiLocal           ctermfg=167
+  " hi semshiGlobal          ctermfg=64 cterm=italic
+  " hi semshiImported        ctermfg=110 cterm=NONE
+  " hi semshiParameter       ctermfg=110
+  " hi semshiParameterUnused ctermfg=110 cterm=underline
+  " hi semshiFree            ctermfg=167
+  " hi semshiBuiltin         ctermfg=64 cterm=underline
+  " hi semshiAttribute       ctermfg=109
+  " hi semshiSelf            ctermfg=249
+  " hi semshiUnresolved      ctermfg=NONE cterm=underline
+  " hi semshiSelected        ctermfg=NONE ctermbg=NONE cterm=underline,bold
+" endfunction
 " autocmd FileType python call CustomizedPythonSemshiHighlights()
 " autocmd ColorScheme * call CustomizedPythonSemshiHighlights()
 augroup END
