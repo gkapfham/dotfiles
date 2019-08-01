@@ -583,7 +583,7 @@ let R_show_args = 1
 let g:jedi#force_py_version = 3
 
 " Run the black formatter on current Python file
-" Note that this is not the standard method, but
+" NOTE: this is not the standard method, but
 " I adopted it because Black did not work well
 " with virtual environments created by Pipenv
 command! Black cexpr system('black ' . shellescape(expand('%')))<bar>:checktime
