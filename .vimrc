@@ -163,6 +163,12 @@ set termguicolors
 " Use customized colorscheme
 colorscheme vitaminonec
 
+" Set color for concealment with limelight
+" NOTE: In this file because there are no
+" highlight groups to move to color scheme
+let g:limelight_conceal_ctermfg = 240
+let g:limelight_conceal_guifg = '#585858'
+
 " }}}
 
 " Display Improvements {{{
@@ -177,9 +183,6 @@ set t_ZR=[23m
 " Do not display messages
 set shortmess=FIWacto
 set confirm
-
-" Set color for concealment with limelight
-let g:limelight_conceal_ctermfg = 240
 
 " Display line wraps
 command! Wrap set textwidth=120
