@@ -926,10 +926,8 @@ function! s:fzf_statusline()
 endfunction
 
 " Display a customized statusline when invoking fzf
-" Note that this will not always trigger if in an augroup
-augroup FzfStatusLineGroup
-  autocmd! User FzfStatusLine call <SID>fzf_statusline()
-augroup END
+" NOTE: this will not always trigger if in an augroup
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 " }}}
 
