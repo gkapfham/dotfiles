@@ -451,16 +451,16 @@ augroup END
 " Define the color scheme for the git-messenger plugin
 "
 " Header such as 'Commit:', 'Author:'
-hi link gitmessengerHeader Identifier
+" hi link gitmessengerHeader Identifier
 
 " Commit hash at 'Commit:' header
-hi link gitmessengerHash Comment
+" hi link gitmessengerHash Comment
 
 " History number at 'History:' header
-hi link gitmessengerHistory Constant
+" hi link gitmessengerHistory Constant
 
 " Normal color. This color is the most important
-hi link gitmessengerPopupNormal CursorLine
+" hi link gitmessengerPopupNormal CursorLine
 
 " Color of 'end of buffer'. To hide '~' in pop-up window, set 'None'
 " hi gitmessengerEndOfBuffer term=None guifg=None guibg=None ctermfg=None ctermbg=None
