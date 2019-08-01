@@ -301,7 +301,7 @@ let g:lightline#bufferline#unnamed = '*'
 
 " Configure the lightline according to documentation and examples from statico/dotfiles
 let g:lightline = {
-      \ 'colorscheme': 'Orange_Hybrid',
+      \ 'colorscheme': 'vitaminonec',
       \ 'active': {
       \   'left': [ [ 'mode', 'spell', 'paste' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
