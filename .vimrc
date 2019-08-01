@@ -995,7 +995,6 @@ endif
 
 " Highlight trailing spaces
 if has("nvim")
-  " highlight ExtraWhitespace ctermfg=172 ctermbg=234
   match ExtraWhitespace /\s\+$\|\t/
   augroup extra_whitespace
     autocmd!
