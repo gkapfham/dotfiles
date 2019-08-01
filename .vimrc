@@ -157,10 +157,10 @@ command! Reload :source $MYVIMRC
 
 " Color Scheme {{{
 
-" Use full color in the terminal
+" Use true-color in the terminal
 set termguicolors
 
-" Display customized colorscheme
+" Use customized colorscheme
 colorscheme vitaminonec
 
 " }}}
@@ -238,6 +238,48 @@ let g:lt_quickfix_list_toggle_map = '<leader>q'
 
 " Do not display the standard status line
 set noshowmode
+
+" Display the sign column for version control
+set signcolumn=yes
+
+" Configure how quickly interface updates
+set updatetime=1000
+
+" Configure the display of parentheses matching
+let g:mta_use_matchparen_group = 0
+let g:mta_set_default_matchtag_color = 0
+let g:mta_filetypes = {
+      \ 'html' : 1,
+      \ 'xhtml' : 1,
+      \ 'xml' : 1,
+      \ 'jinja' : 1,
+      \ 'liquid' : 1,
+      \}
+
+" Display the syntax group for the symbol under the cursor
+map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+map <F5> :call SyntaxAttr() <CR>
+
+" Display the current block of text/code in a highlighting limelight
+nmap <Space>f :Limelight!! <CR>
+
+" Display the signature of a function in the footer of the screen
+noremap <Space>s :PreviewSignature! <CR>
+
+" Display special characters as sign column marks
+let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
+
+" Do not display the match of an offscreen delimiter
+let g:matchup_matchparen_status_offscreen = 0
+
+" Enable for all filetypes
+let g:Hexokinase_ftAutoload = ['css', 'html', 'markdown', 'colortemplate']
+
+" }}}
+
+" Lightline for Status Line and Buffer Line {{{
 
 " Always display the tabline so that lightline buffers can override
 set showtabline=2
@@ -369,44 +411,6 @@ augroup END
 let g:lightline.tabline          = {'left': [['buffers']], 'right': [['bufnum']]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
-
-" Display the sign column for version control
-set signcolumn=yes
-
-" Configure how quickly interface updates
-set updatetime=1000
-
-" Configure the display of parentheses matching
-let g:mta_use_matchparen_group = 0
-let g:mta_set_default_matchtag_color = 0
-let g:mta_filetypes = {
-      \ 'html' : 1,
-      \ 'xhtml' : 1,
-      \ 'xml' : 1,
-      \ 'jinja' : 1,
-      \ 'liquid' : 1,
-      \}
-
-" Display the syntax group for the symbol under the cursor
-map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-map <F5> :call SyntaxAttr() <CR>
-
-" Display the current block of text/code in a highlighting limelight
-nmap <Space>f :Limelight!! <CR>
-
-" Display the signature of a function in the footer of the screen
-noremap <Space>s :PreviewSignature! <CR>
-
-" Display special characters as sign column marks
-let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
-
-" Do not display the match of an offscreen delimiter
-let g:matchup_matchparen_status_offscreen = 0
-
-" Enable for all filetypes
-let g:Hexokinase_ftAutoload = ['css', 'html', 'markdown', 'colortemplate']
 
 " }}}
 
