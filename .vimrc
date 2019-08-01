@@ -278,7 +278,7 @@ let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
 let g:matchup_matchparen_status_offscreen = 0
 
 " Enable for all filetypes
-let g:Hexokinase_ftAutoload = ['css', 'html', 'markdown', 'colortemplate']
+let g:Hexokinase_ftAutoload = ['colortemplate', 'conf', 'css', 'html', 'markdown']
 
 " }}}
 
