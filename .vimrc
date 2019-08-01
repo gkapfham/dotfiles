@@ -662,7 +662,6 @@ nnoremap <leader>lt :VimtexTocToggle<cr>
 " Conceal option
 set conceallevel=2
 let g:tex_conceal= 'adgms'
-" hi Conceal ctermbg=NONE ctermfg=172
 
 " Use tex over plaintex
 let g:tex_flavor = 'tex'
