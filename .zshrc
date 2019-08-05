@@ -49,7 +49,9 @@ export LS_COLORS="rs=0:di=0;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;3
 export EXA_COLORS="uu=0;33:gu=0;33:ur=0;33:uw=0;31"
 
 # 256 color mode with bold and italics
-export TERM="tmux-256color"
+# NOTE: Use of tmux-256color does not
+# correctly set the title of terminal
+export TERM="xterm-256color"
 
 # Character encoding
 export LANG="en_US.UTF-8"
