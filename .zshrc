@@ -254,7 +254,7 @@ export FZF_DEFAULT_OPTS='
   --no-bold
   --cycle
   --bind ctrl-f:page-down,ctrl-b:page-up
-  --color=fg:#a8a8a8,bg:#1c1c1c,hl:#5f8700
+  --color=fg:#a9a9a9,bg:#1c1c1c,hl:#5f8700
   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
   --color=marker:#d78700,spinner:#875f87,header:#875f87'
