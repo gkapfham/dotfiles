@@ -944,6 +944,11 @@ nmap <silent> <leader>l :TestLast<CR>
 " Run the test suite async and display in quickfix
 let test#strategy = "tslime"
 
+" Always run pytest test suites so that:
+" -x: stop testing as soon as test fails
+" -s: display all standard output and standard error
+let test#python#pytest#options = '-x -s'
+
 " }}}
 
 " Neovim Configuration {{{
