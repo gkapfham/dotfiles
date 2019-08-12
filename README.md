@@ -20,6 +20,7 @@ This is a summary of the dotfiles that I create and maintain:
 - `.bibtoolrsc`: configuration for the `bibtool` program's BibTeX management
 - `.ctags`: extensions for `exuberant-ctags` to handle new languages
 - `.compton.conf`: configuration for the `compton` compositor used with `i3`
+- `.gitconfig`: configuration file for Git, including customized aliases
 - `.gitignore_global`: configuration of the files to exclude from Git repositories
 - `.gtkrc-2.0`: legacy configuration of GTK 2.0 to support `gvim` on Ubuntu
 - `.gvimrc`: legacy configuration of `gvim` text editor
