@@ -1,0 +1,31 @@
+[user]
+    email = gkapfham@allegheny.edu
+    name = Gregory M. Kapfhammer
+[push]
+    default = simple
+[core]
+    excludesfile = /home/gkapfham/.gitignore_global
+[github]
+    user = gkapfham
+[ghi]
+    token = 0f5aad3cfcdf2c8f3605b8bc91e8d553b55c4a68
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    required = true
+[credential]
+    helper = cache --timeout=36000
+[alias]
+    # display a color-coded version of the git log
+    smartlog = log --graph --pretty=format:'commit: %C(bold red)%h%Creset %C(red)<%H>%Creset %C(bold magenta)%d %Creset%ndate: %C(bold yellow)%cd %Creset%C(yellow)%cr%Creset%nauthor: %C(bold blue)%an%Creset %C(blue)<%ae>%Creset%n%C(cyan)%s%n%Creset'
+    sl = !git smartlog
+    slog = !git smartlog
+[alias]
+    # Delete all local branches but master and the current one, only if they are fully merged with master
+    br-delete-useless = "!f(){\
+        git branch | grep -v "master" | grep -v ^* | xargs git branch -d;\
+    }; f"
+    # Delete all local branches but master and the current one
+    br-delete-useless-force = "!f(){\
+        git branch | grep -v "master" | grep -v ^* | xargs git branch -D;\
+    }; f"
