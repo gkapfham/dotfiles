@@ -7,8 +7,6 @@
     excludesfile = /home/gkapfham/.gitignore_global
 [github]
     user = gkapfham
-[ghi]
-    token = 0f5aad3cfcdf2c8f3605b8bc91e8d553b55c4a68
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
