@@ -17,7 +17,6 @@ Plug 'Valloric/ListToggle'
 Plug 'airblade/vim-rooter'
 Plug 'andymass/vim-matchup'
 Plug 'bkad/CamelCaseMotion'
-Plug 'bps/vim-textobj-python', {'for': 'python'}
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'chrisbra/unicode.vim'
