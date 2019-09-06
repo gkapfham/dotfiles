@@ -655,6 +655,13 @@ nnoremap <silent> <Space>d :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<spac
 vnoremap <silent> <Space>w :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[<space>]<space>/<CR>0f]h
 vnoremap <silent> <Space>d :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[X]<space>/<CR>0f]h
 
+" Convert the checkmark symbol, which is not on the keyboard, to a dash.
+" This command enables suitable display of GatorGrader results in markdown files.
+command -range=% ConvertCheckmark <line1>,<line2> :s/✔ /-/g
+
+" Convert the single quote symbol, to a backtick, aiding conversion to markdown
+command -range=% Backtick <line1>,<line2> :s/'/`/g
+
 " }}}
 
 " LaTeX {{{
