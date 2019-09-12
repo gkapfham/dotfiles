@@ -66,8 +66,8 @@ set index_format = "%3C %Z%?X?A&? %D  %-20.20F  %s"
 # Sort the email so that new messages are on the top
 # Not using as this sorting leads to instability after email send
 set sort = threads
-# set sort_aux = reverse-last-date-received
-# set sort = reverse-date-received
+set sort_aux = reverse-last-date-received
+set sort = reverse-date-received
 
 # Further configure sorting of emails
 set uncollapse_jump
