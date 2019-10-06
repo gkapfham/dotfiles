@@ -419,6 +419,7 @@ let g:lightline.component_type   = {'buffers': 'tabsel'}
 " Version Control {{{
 
 " Only allow signify to manage Git repos
+" This allows signify to perform faster
 let g:signify_vcs_list = ['git']
 
 " Configure signify to update rapidly
