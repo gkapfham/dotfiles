@@ -595,7 +595,7 @@ command! Black cexpr system('black ' . shellescape(expand('%')))<bar>:checktime
 command! Blacken cexpr system('black **/*.py')<bar>:checktime
 
 " If using yapf, format Python code according to PEP8
-" Note that I should standardly use Black now
+" Note that I should standardly use :Black and :Blacken
 let g:formatter_yapf_style = 'pep8'
 
 " Set the hosts programs for Python and Python3
