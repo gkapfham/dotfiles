@@ -661,6 +661,7 @@ vnoremap <silent> <Space>d :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<spac
 command! -range=% Checkmark <line1>,<line2> :s/✔ /-/g
 
 " Convert the single quote symbol, to a backtick, aiding conversion to markdown
+" This command also enables suitable display of GatorGrader results in markdown files.
 command! -range=% Backtick <line1>,<line2> :s/'/`/g
 
 " }}}
