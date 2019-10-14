@@ -23,7 +23,7 @@ Plug 'chrisbra/unicode.vim'
 Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
-Plug 'fgrsnau/ncm2-otherbuf', {'branch': 'ncm2'}
+Plug 'fgrsnau/ncm2-otherbuf', {'branch': 'master'}
 Plug 'filipekiss/ncm2-look.vim'
 Plug 'garbas/vim-snipmate'
 Plug 'gkapfham/vim-vitamin-onec'
