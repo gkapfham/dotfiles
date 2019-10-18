@@ -45,6 +45,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lifepillar/vim-colortemplate'
+Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mgee/lightline-bufferline'
 Plug 'mhinz/vim-signify'
@@ -303,7 +304,7 @@ let g:lightline = {
       \ 'colorscheme': 'vitaminonec',
       \ 'active': {
       \   'left': [ [ 'mode', 'spell', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified', 'context'] ],
       \   'right': [['lineinfo'], ['percent'], ['linter_warnings', 'linter_errors', 'linter_ok', 'fileformat', 'fileencoding', 'filetype'], ['gutentags']]
       \ },
       \ 'component_function': {
@@ -316,7 +317,8 @@ let g:lightline = {
       \   'gutentags': 'LightlineGutentags',
       \   'linter_warnings': 'LightlineLinterWarnings',
       \   'linter_errors': 'LightlineLinterErrors',
-      \   'linter_ok': 'LightlineLinterOK'
+      \   'linter_ok': 'LightlineLinterOK',
+      \   'context': 'NearestMethodOrFunction'
       \ },
       \ 'component_type': {
       \   'readonly': 'error',
@@ -494,6 +496,24 @@ let g:highlighter#auto_update = 2
 
 " Perform tag generation in existence of a '.maketags' marker file
 let g:gutentags_project_root = ['.maketags']
+
+" Use Vista to determine the context (e.g., function definition)
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
+" Always run the function to capture the context
+" Note that using an augroup does not seem to work correctly
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+
+" Define a command to support the toggle of Vista's display of tags
+nnoremap <Space>v :Vista!!<cr>
+
+" Configure how Vista shows a location when navigating its interface
+let g:vista_echo_cursor_strategy = 'echo'
+
+" Allow Vista to create data for display in the lightline
+let g:vista_disable_statusline = 0
 
 " }}}
 
