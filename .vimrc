@@ -304,7 +304,7 @@ let g:lightline = {
       \ 'colorscheme': 'vitaminonec',
       \ 'active': {
       \   'left': [ [ 'mode', 'spell', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified', 'context'] ],
+      \             [ 'fugitive', 'readonly', 'filename', 'context', 'modified' ] ],
       \   'right': [['lineinfo'], ['percent'], ['linter_warnings', 'linter_errors', 'linter_ok', 'fileformat', 'fileencoding', 'filetype'], ['gutentags']]
       \ },
       \ 'component_function': {
