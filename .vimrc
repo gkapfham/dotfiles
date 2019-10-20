@@ -509,11 +509,21 @@ autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 " Define a command to support the toggle of Vista's display of tags
 nnoremap <Space>v :Vista!!<cr>
 
+" Enable the display of icons in the Vista interface
+let g:vista#renderer#enable_icon = 1
+
 " Configure how Vista shows a location when navigating its interface
 let g:vista_echo_cursor_strategy = 'echo'
 
 " Allow Vista to create data for display in the lightline
 let g:vista_disable_statusline = 0
+
+" Define icon mappings for the cases when the defaults do not match
+" Note that lightline defines "class" and "method" but not the plural
+let g:vista#renderer#icons = {
+\   'classes': "\uf0e8",
+\   'methods': "\uf6a6",
+\  }
 
 " }}}
 
