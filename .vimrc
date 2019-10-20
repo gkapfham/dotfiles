@@ -519,10 +519,17 @@ let g:vista_echo_cursor_strategy = 'echo'
 let g:vista_disable_statusline = 0
 
 " Define icon mappings for the cases when the defaults do not match
-" Note that lightline defines "class" and "method" but not the plural
+" Note that Vista defines "class" and "method" but not the plural
+" Summary of the icon definitions:
+" --> Java: classes, methods
+" --> LaTeX: labels, sections, subsections, subsubsections
 let g:vista#renderer#icons = {
 \   'classes': "\uf0e8",
+\   'labels': "\uf71b",
 \   'methods': "\uf6a6",
+\   'sections': "\uf7fd",
+\   'subsections': "\uf7fd",
+\   'subsubsections': "\uf7fd",
 \  }
 
 " }}}
