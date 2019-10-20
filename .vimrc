@@ -7,6 +7,7 @@ call plug#begin('~/.vim/bundle')
 " Load plugins for Vim8 and Neovim
 Plug 'Chiel92/vim-autoformat'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'RRethy/vim-hexokinase'
@@ -82,7 +83,6 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
