@@ -82,6 +82,7 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
@@ -717,8 +718,8 @@ let g:vimtex_compiler_progname = 'nvr'
 nnoremap <leader>lt :VimtexTocToggle<cr>
 
 " Conceal option
-set conceallevel=2
-let g:tex_conceal= 'adgms'
+set conceallevel=1
+let g:tex_conceal='abdmgs'
 
 " Use tex over plaintex
 let g:tex_flavor = 'tex'
