@@ -115,6 +115,9 @@ syntax spell toplevel
 set spellfile+=~/.config/nvim/spell/en.utf-8.add
 set spellfile+=.extra.utf-8.add
 
+" Correct spelling mistakes from insert mode
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
 " Make changes automatically saved during Qdo
 set autowrite
 
