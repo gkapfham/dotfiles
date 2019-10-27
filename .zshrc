@@ -126,6 +126,25 @@ alias cat="bat"
 # Directory listing with a simple command
 alias ka="exa --group-directories-first --grid --long --sort=name"
 
+# Use git through the hub interface
+# Note that this does not change git's behavior
+alias git="hub"
+
+# Markdown pull request with hub
+alias hubmdpr="hub -c core.commentChar='%' pull-request"
+
+# Markdown issue with hub
+alias hubmdis="hub -c core.commentChar='%' issue create"
+
+# Reusable format strings for git aliases
+GIT_PRETTY_FORMAT_AUTHOR="--pretty=\"%C(bold green)%h%Creset %C(yellow)%an%Creset%C(auto)%d%Creset %s\""
+
+# Display a colorized git log with authors
+alias gla="git log --graph $GIT_PRETTY_FORMAT_AUTHOR"
+
+# Display a colorized git log with all references and authors
+alias glaa='gla --all'
+
 # }}}
 
 # Oh-My-Zsh and Plugin {{{
