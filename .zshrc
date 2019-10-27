@@ -139,7 +139,10 @@ alias hubmdis="hub -c core.commentChar='%' issue create"
 # Reusable format strings for git aliases
 GIT_PRETTY_FORMAT_AUTHOR="--pretty=\"%C(bold green)%h%Creset %C(yellow)%an%Creset%C(auto)%d%Creset %s\""
 
-# Display a colorized git log with authors
+# Display colorize git output in blocks
+alias gls="git slog"
+
+# Display a colorized git log with authors in a graph
 alias gla="git log --graph $GIT_PRETTY_FORMAT_AUTHOR"
 
 # Display a colorized git log with all references and authors
