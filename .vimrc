@@ -524,13 +524,17 @@ let g:vista_disable_statusline = 0
 " Summary of the icon definitions:
 " --> Java: classes, methods
 " --> LaTeX: labels, sections, subsections, subsubsections
+" --> VimScript: autocommand groups, commands, maps
 let g:vista#renderer#icons = {
-\   'classes': "\uf0e8",
-\   'labels': "\uf71b",
-\   'methods': "\uf6a6",
 \   'c': "\uf7fd",
 \   'S': "\uf7fd",
 \   's': "\uf7fd",
+\   'autocommand groups': "\uf136",
+\   'classes': "\uf0e8",
+\   'commands': "\uf8a3",
+\   'labels': "\uf71b",
+\   'maps': "\uf8a3",
+\   'methods': "\uf6a6",
 \   'sections': "\uf7fd",
 \   'subsections': "\uf7fd",
 \   'subsubsections': "\uf7fd",
