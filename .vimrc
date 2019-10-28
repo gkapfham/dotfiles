@@ -530,9 +530,10 @@ let g:vista_disable_statusline = 0
 " --> Java: classes, methods
 " --> LaTeX: labels, sections, subsections, subsubsections
 " --> VimScript: autocommand groups, commands, maps
+" --> Default: use a box with a circle instead of question mark
 let g:vista#renderer#icons = {
-\   'c': "\uf7fd",
 \   'S': "\uf7fd",
+\   'c': "\uf7fd",
 \   's': "\uf7fd",
 \   'autocommand groups': "\uf136",
 \   'classes': "\uf0e8",
@@ -543,6 +544,7 @@ let g:vista#renderer#icons = {
 \   'sections': "\uf7fd",
 \   'subsections': "\uf7fd",
 \   'subsubsections': "\uf7fd",
+\   'default': "\uf7fd",
 \  }
 
 " }}}
