@@ -11,6 +11,7 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'RRethy/vim-hexokinase'
+Plug 'RRethy/vim-illuminate'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'SirVer/ultisnips'
@@ -828,6 +829,15 @@ set smartcase
 " Make :grep use ripgrep and use -uu to not ignore files
 " This is an alternative to :Rg or :Ag which ignore some files
 set grepprg=rg\ --vimgrep\ -uu\ --no-heading\ --smart-case
+
+" Make illuminate quickly highlight matching words under the cursor
+let g:Illuminate_delay = 100
+
+" Do not highlight words for the following filetypes:
+" --> Dirvish
+" --> Python
+" --> Vista
+let g:Illuminate_ftblacklist = ['dirvish', 'python', 'vista']
 
 " }}}
 
