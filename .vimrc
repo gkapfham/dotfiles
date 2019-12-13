@@ -42,6 +42,7 @@ Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
 Plug 'kshenoy/vim-signature'
@@ -285,6 +286,16 @@ let g:matchup_matchparen_status_offscreen = 0
 
 " Enable for all filetypes
 let g:Hexokinase_ftAutoload = ['colortemplate', 'conf', 'css', 'html', 'markdown']
+
+" Increase size of display of all registers through the peekaboo plugin
+let g:peekaboo_window = 'vert bo 40new'
+
+" Special configuration for peekaboo buffers
+augroup peekabooconfiguration
+  autocmd!
+  " Disable spell checking for the peekaboo buffers
+  autocmd FileType peekaboo setlocal nospell
+augroup END
 
 " }}}
 
