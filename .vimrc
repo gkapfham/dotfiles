@@ -6,6 +6,7 @@ call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
 Plug 'Chiel92/vim-autoformat'
+Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'MarcWeber/vim-addon-mw-utils'
