@@ -35,6 +35,7 @@ Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': '
 Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
+Plug 'jeetsukumaran/vim-pythonsense'
 Plug 'jez/vim-github-hub'
 Plug 'jgdavey/tslime.vim'
 Plug 'jiangmiao/auto-pairs'
