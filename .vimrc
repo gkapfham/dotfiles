@@ -5,6 +5,7 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'christoomey/vim-sort-motion'
 Plug 'Chiel92/vim-autoformat'
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
@@ -22,7 +23,6 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'chrisbra/unicode.vim'
-Plug 'christoomey/vim-sort-motion'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
 Plug 'fgrsnau/ncm2-otherbuf', {'branch': 'master'}
@@ -52,6 +52,8 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lifepillar/vim-colortemplate'
 Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'machakann/vim-sandwich'
+Plug 'machakann/vim-swap'
 Plug 'mgee/lightline-bufferline'
 Plug 'mhinz/vim-signify'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
@@ -76,7 +78,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
@@ -88,6 +89,7 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
+Plug 'tommcdo/vim-ninja-feet'
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
@@ -848,7 +850,7 @@ set grepprg=rg\ --vimgrep\ -uu\ --no-heading\ --smart-case
 
 " Make f and s movements use easymotion
 nmap f <Plug>(easymotion-s)
-nmap s <Plug>(easymotion-s2)
+nmap <leader>f <Plug>(easymotion-s2)
 nmap <leader>e <Plug>(easymotion-next)
 nmap <leader>E <Plug>(easymotion-prev)
 
