@@ -88,7 +88,6 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
-Plug 'tommcdo/vim-ninja-feet'
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
@@ -948,6 +947,38 @@ augroup END
 
 " Run Fugitive commands asynchronously using AsyncRun
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+
+" }}}
+
+" Sandwich {{
+
+" Do not use the default mappings to preserve
+" the use of the sentence object in technical writing
+let g:textobj_sandwich_no_default_key_mappings = 1
+
+" Remap the auto-mode sandwich operators
+" to the same mappings used by default
+" Usage example: file_name after saiw" --> "file_name"
+xmap ib <Plug>(textobj-sandwich-auto-i)
+omap ib <Plug>(textobj-sandwich-auto-i)
+xmap ab <Plug>(textobj-sandwich-auto-a)
+omap ab <Plug>(textobj-sandwich-auto-a)
+
+" Remap the query-mode sandwich operators
+" that work for dynamically detected regions.
+" Note that this uses, for instance, 'iq'
+" instead of 'is' to avoid conflict with sentence.
+" The intuition is that these 'query' for a
+" delimiter and then dynamically match a region.
+xmap iq <Plug>(textobj-sandwich-query-i)
+omap iq <Plug>(textobj-sandwich-query-i)
+xmap aq <Plug>(textobj-sandwich-query-a)
+omap aq <Plug>(textobj-sandwich-query-a)
+
+" Disable the s command for deleting characters
+" Reference: https://github.com/machakann/vim-sandwich/issues/62
+map <silent> s <nop>
+map <silent> S <nop>
 
 " }}}
 
