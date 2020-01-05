@@ -5,7 +5,6 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
-" Plug 'christoomey/vim-sort-motion'
 Plug 'Chiel92/vim-autoformat'
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
@@ -848,7 +847,10 @@ set grepprg=rg\ --vimgrep\ -uu\ --no-heading\ --smart-case
 
 " Advanced Keyboard Movement with easymotion {{{
 
-" Make f and s movements use easymotion
+" Make f (single-character search)
+" and <leader>f (two-character search) with easymotion.
+" Using <leader>f instead of s avoids a conflict
+" with the vim-sandwich plugin that uses "s" for sandwich-ing
 nmap f <Plug>(easymotion-s)
 nmap <leader>f <Plug>(easymotion-s2)
 nmap <leader>e <Plug>(easymotion-next)
