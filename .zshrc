@@ -281,7 +281,10 @@ export FZF_DEFAULT_OPTS='
   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
   --color=marker:#d78700,spinner:#875f87,header:#875f87'
 
-# Same colorscheme but in 256 colors:
+# Same colorscheme but in 256 colors,
+# note that this does not use the HTML color
+# codes and instead uses those available at:
+# https://jonasjacek.github.io/colors/
 #   export FZF_DEFAULT_OPTS='
 #   --no-bold
 #   --cycle
