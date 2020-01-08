@@ -857,7 +857,7 @@ set grepprg=rg\ --vimgrep\ -uu\ --no-heading\ --smart-case
 
 " Make f (single-character search) and
 " <leader>f (two-character search) with easymotion.
-" Using <leader>f instead of s avoids a conflict
+" Using <leader>f instead of "s" avoids a conflict
 " with the vim-sandwich plugin that uses "s" for sandwich-ing
 nmap f <Plug>(easymotion-s)
 nmap <leader>f <Plug>(easymotion-s2)
