@@ -6,7 +6,7 @@
 # }}}
 
 # Reminders {{{
-#
+
 # Navigation Summary:
 #
 # cd <ctrl>-t        means "change to directory resulting from ...
