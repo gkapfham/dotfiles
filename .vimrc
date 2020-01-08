@@ -455,6 +455,15 @@ let g:signify_sign_delete_first_line = '^'
 let g:signify_sign_change            = '~'
 let g:signify_sign_changedelete      = g:signify_sign_change
 
+" Define text objects for the changed hunks
+" This adds support for:
+" --> "vic" : visual selection of entire-changed hunk
+" --> "vac" : visual selection of no-blank-line changed hunk
+omap ic <plug>(signify-motion-inner-pending)
+xmap ic <plug>(signify-motion-inner-visual)
+omap ac <plug>(signify-motion-outer-pending)
+xmap ac <plug>(signify-motion-outer-visual)
+
 " Configure magit to display in a minimal fashion
 let g:magit_default_sections = ['commit', 'staged', 'unstaged']
 let g:magit_default_fold_level = 1
