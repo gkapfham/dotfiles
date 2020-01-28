@@ -1,5 +1,13 @@
 # dotfiles
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/gkapfham/dotfiles/master/.github/dotfiles-logo.jpeg" alt="Dotfiles Logo"</img>
+<br>
+<b>
+Lovingly Curated Dotfiles for Popular Linux Programs
+</b>
+</p>
+
 [![Build Status](https://travis-ci.org/gkapfham/dotfiles.svg?branch=master)](https://travis-ci.org/gkapfham/dotfiles)
 
 This repository contains the configuration files (i.e., "dotfiles") used to
