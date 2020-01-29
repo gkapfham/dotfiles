@@ -4,7 +4,7 @@
 <img src="https://raw.githubusercontent.com/gkapfham/dotfiles/master/.github/dotfiles-logo.jpeg" alt="Dotfiles Logo"</img>
 <br>
 <b>
-Lovingly Curated Dotfiles for Popular Linux Programs
+Carefully Curated Dotfiles for Popular Linux Programs
 </b>
 </p>
 
