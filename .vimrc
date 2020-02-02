@@ -443,11 +443,6 @@ let g:lightline.component_type   = {'buffers': 'tabsel'}
 " This enables signify to perform faster
 let g:signify_vcs_list = ['git']
 
-" Configure signify to update rapidly
-" let g:signify_realtime              = 1
-" let g:signify_update_on_focusgained = 1
-" let g:signify_cursorhold_insert     = 0
-
 " Define new display symbols for signify
 let g:signify_sign_add               = '+'
 let g:signify_sign_delete            = '-'
