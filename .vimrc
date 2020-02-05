@@ -5,23 +5,14 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
-Plug 'Chiel92/vim-autoformat'
-Plug 'ColinKennedy/vim-textobj-block-party'
-Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
-Plug 'RRethy/vim-hexokinase'
-Plug 'Shougo/echodoc.vim'
-Plug 'Shougo/neco-syntax'
-Plug 'SirVer/ultisnips'
-Plug 'Valloric/ListToggle'
 Plug 'airblade/vim-rooter'
 Plug 'andymass/vim-matchup'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
+Plug 'Chiel92/vim-autoformat'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'chrisbra/unicode.vim'
+Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
 Plug 'fgrsnau/ncm2-otherbuf', {'branch': 'master'}
@@ -46,6 +37,8 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
+Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lifepillar/vim-colortemplate'
@@ -53,11 +46,13 @@ Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
+Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mgee/lightline-bufferline'
 Plug 'mhinz/vim-signify'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 Plug 'ncm2/float-preview.nvim'
 Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-html-subscope'
 Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-syntax'
@@ -66,9 +61,14 @@ Plug 'ncm2/ncm2-ultisnips'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
+Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
 Plug 'rhysd/git-messenger.vim'
+Plug 'RRethy/vim-hexokinase'
+Plug 'Shougo/echodoc.vim'
+Plug 'Shougo/neco-syntax'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
+Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tfnico/vim-gradle'
 Plug 'tomtom/tlib_vim'
@@ -80,9 +80,10 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
+Plug 'Valloric/ListToggle'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'vim-scripts/python_match.vim'
+Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
