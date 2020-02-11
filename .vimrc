@@ -934,9 +934,6 @@ augroup dirvishconfiguration
   " Disable spell checking for the Dirvish buffers
   autocmd FileType dirvish setlocal nospell
 
-  " " Enable :Gstatus and friends
-  " autocmd FileType dirvish call fugitive#detect(@%)
-
   " Map `gr` to reload the Dirvish buffer
   autocmd FileType dirvish nnoremap <silent><buffer> gr :<C-U>Dirvish %<CR>
 
