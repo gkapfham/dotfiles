@@ -1,5 +1,5 @@
 ## Create needed directories in the .config
-createdirs:
+create:
 	@# Create the dunst directory
 	mkdir -p ~/.config/dunst
 	@# Since the nvim directory links to .vim
@@ -34,7 +34,7 @@ stow-nvim:
 stow: stow-code stow-dunst stow-email stow-git stow-nvim
 
 ## Create directories and stow all of the dotfiles in correct directories
-dotfiles: createdirs stow
+dotfiles: create stow
 
 ## Display a help message listing all tasks
 help:
