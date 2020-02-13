@@ -34,8 +34,12 @@ stow-nvim:
 stow-shell:
 	stow -t ~/ shell
 
+## Run stow on system
+stow-system:
+	stow -t ~/ system
+
 ## Run stow for all rules for all subdirectories
-stow: stow-code stow-dunst stow-email stow-git stow-nvim stow-shell
+stow: stow-code stow-dunst stow-email stow-git stow-nvim stow-shell stow-system
 
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: create stow
