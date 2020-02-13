@@ -8,11 +8,15 @@ stow-code:
 
 ## Run stow on dunst
 stow-dunst:
-	stow -t ~/.config dunst
+	stow -t ~/.config/dunst dunst
 
 ## Run stow on email
 stow-email:
 	stow -t ~/ email
+
+## Run stow on git
+stow-git:
+	stow -t ~/ git
 
 ## Run stow for all rules for all subdirectories
 stow: stow-code stow-dunst stow-email
@@ -24,4 +28,5 @@ dotfiles: createdirs stow
 help:
 	make -rpn | sed -n -e '/^$$/ { n ; /^[^ .#][^ ]*:/ { s/:.*$$// ; p ; } ; }' | sort -u
 
+## Specify that the default is full installation of the dotfiles
 .DEFAULT_GOAL := dotfiles
