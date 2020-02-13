@@ -1,6 +1,14 @@
 ## Create needed directories in the .config
 createdirs:
-	mkdir -p .config/dunst
+	@# Create the dunst directory
+	mkdir -p ~/.config/dunst
+	@# Since the nvim directory links to .vim
+	@# (supporting both Vim and Neovim), then
+	@# remove the symbolic link to the nvim directory
+	rm ~/.config/nvim
+	@# Re-create the symbolic link to the nvim directory,
+	@# with no error since it was previously deleted
+	ln -s ~/.vim ~/.config/nvim
 
 ## Run stow on code
 stow-code:
@@ -18,8 +26,12 @@ stow-email:
 stow-git:
 	stow -t ~/ git
 
+## Run stow on nvim
+stow-nvim:
+	stow -t ~/.config/nvim nvim
+
 ## Run stow for all rules for all subdirectories
-stow: stow-code stow-dunst stow-email
+stow: stow-code stow-dunst stow-email stow-git stow-nvim
 
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: createdirs stow
