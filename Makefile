@@ -8,7 +8,7 @@ stow-code:
 
 ## Run stow on dunst
 stow-dunst:
-	stow -t ~/ dunst
+	stow -t ~/.config dunst
 
 ## Run stow on email
 stow-email:
