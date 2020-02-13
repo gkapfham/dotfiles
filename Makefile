@@ -30,8 +30,12 @@ stow-git:
 stow-nvim:
 	stow -t ~/.config/nvim nvim
 
+## Run stow on shell
+stow-shell:
+	stow -t ~/ shell
+
 ## Run stow for all rules for all subdirectories
-stow: stow-code stow-dunst stow-email stow-git stow-nvim
+stow: stow-code stow-dunst stow-email stow-git stow-nvim stow-shell
 
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: create stow
