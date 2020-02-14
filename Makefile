@@ -38,22 +38,6 @@ create-nvim:
 ## Create the needed directories in the .config/ directory
 create: create-dunst create-i3 create-polybar create-nvim
 
-# @# Create the dunst/ directory
-# mkdir -p ~/.config/dunst
-# @# Create the i3/ directory
-# mkdir -p ~/.config/i3
-# @# Create the polybar/ directory
-# mkdir -p ~/.config/polybar
-# @# Since the nvim directory links to .vim/
-# @# (thereby supporting both Vim and Neovim), then
-# @# remove the symbolic link to the nvim/ directory
-# rm ~/.config/nvim
-# @# Re-create the symbolic link to the nvim/ directory,
-# @# now with no error since it was previously deleted
-# @# This assumes that the .vim/ directory was already
-# @# create by external step not connect to this Makefile
-# ln -s ~/.vim ~/.config/nvim
-
 ## Run stow on code
 stow-code:
 	stow -t ~/ code
