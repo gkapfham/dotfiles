@@ -42,8 +42,12 @@ stow-system:
 stow-tmux:
 	stow -t ~/ tmux
 
+## Run stow on tool
+stow-tool:
+	stow -t ~/ tool
+
 ## Run stow for all rules for all subdirectories
-stow: stow-code stow-dunst stow-email stow-git stow-nvim stow-shell stow-system stow-tmux
+stow: stow-code stow-dunst stow-email stow-git stow-nvim stow-shell stow-system stow-tmux stow-tool
 
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: create stow
