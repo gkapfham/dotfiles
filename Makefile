@@ -46,8 +46,16 @@ stow-tmux:
 stow-tool:
 	stow -t ~/ tool
 
+## Run stow on vim
+stow-vim:
+	stow -t ~/ vim
+
+## Run stow on writing
+stow-writing:
+	stow -t ~/ writing
+
 ## Run stow for all rules for all subdirectories
-stow: stow-code stow-dunst stow-email stow-git stow-nvim stow-shell stow-system stow-tmux stow-tool
+stow: stow-code stow-dunst stow-email stow-git stow-nvim stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing
 
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: create stow
