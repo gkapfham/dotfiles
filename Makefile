@@ -1,4 +1,4 @@
-## Create needed directories in the .config
+## Create needed directories in the .config/ directory
 create:
 	@# Create the dunst directory
 	mkdir -p ~/.config/dunst
