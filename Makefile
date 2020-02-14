@@ -1,7 +1,9 @@
 ## Create needed directories in the .config/ directory
 create:
-	@# Create the dunst directory
+	@# Create the dunst/ directory
 	mkdir -p ~/.config/dunst
+	@# Create the i3/ directory
+	mkdir -p ~/.config/i3
 	@# Since the nvim directory links to .vim
 	@# (supporting both Vim and Neovim), then
 	@# remove the symbolic link to the nvim directory
@@ -27,6 +29,10 @@ stow-email:
 ## Run stow on git
 stow-git:
 	stow -t ~/ git
+
+## Run stow on i3
+stow-i3:
+	stow -t ~/.config/i3 i3
 
 ## Run stow on nvim
 stow-nvim:
@@ -57,7 +63,7 @@ stow-writing:
 	stow -t ~/ writing
 
 ## Run stow for all rules for all subdirectories
-stow: stow-code stow-dunst stow-email stow-git stow-nvim stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing
+stow: stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing
 
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: create stow
