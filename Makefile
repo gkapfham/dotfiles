@@ -2,14 +2,14 @@
 ## that were manually created, setting the
 ## stage for the use of Stow with other rules
 purge:
-	rm ~/.Rprofile
-	rm ~/.mailcap
-	rm ~/.msmtprc
-	rm ~/.muttprintrc
-	rm ~/.muttrc
-	rm ~/.signature
-	rm ~/.gitconfig
-	rm ~/.gitignore_global
+	rm -f ~/.Rprofile
+	rm -f ~/.mailcap
+	rm -f ~/.msmtprc
+	rm -f ~/.muttprintrc
+	rm -f ~/.muttrc
+	rm -f ~/.signature
+	rm -f ~/.gitconfig
+	rm -f ~/.gitignore_global
 
 ## Create the needed dunst/ directory in .config/
 create-dunst:
