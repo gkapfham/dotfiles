@@ -1,11 +1,30 @@
-## Create the needed directories in the .config/ directory
-create:
-	@# Create the dunst/ directory
+## Purge all of the existing symlinks
+## that were manually created, setting the
+## stage for the use of Stow with other rules
+purge:
+	rm ~/.Rprofile
+	rm ~/.mailcap
+	rm ~/.msmtprc
+	rm ~/.muttprintrc
+	rm ~/.muttrc
+	rm ~/.signature
+	rm ~/.gitconfig
+	rm ~/.gitignore_global
+
+## Create the needed dunst/ directory in .config/
+create-dunst:
 	mkdir -p ~/.config/dunst
-	@# Create the i3/ directory
+
+## Create the needed i3/ directory in .config/
+create-i3:
 	mkdir -p ~/.config/i3
-	@# Create the polybar/ directory
+
+## Create the needed polybar/ directory in .config/
+create-polybar:
 	mkdir -p ~/.config/polybar
+
+## Create the needed nvim directory and link in .config/
+create-nvim:
 	@# Since the nvim directory links to .vim/
 	@# (thereby supporting both Vim and Neovim), then
 	@# remove the symbolic link to the nvim/ directory
@@ -15,6 +34,25 @@ create:
 	@# This assumes that the .vim/ directory was already
 	@# create by external step not connect to this Makefile
 	ln -s ~/.vim ~/.config/nvim
+
+## Create the needed directories in the .config/ directory
+create: create-dunst create-i3 create-polybar create-nvim
+
+# @# Create the dunst/ directory
+# mkdir -p ~/.config/dunst
+# @# Create the i3/ directory
+# mkdir -p ~/.config/i3
+# @# Create the polybar/ directory
+# mkdir -p ~/.config/polybar
+# @# Since the nvim directory links to .vim/
+# @# (thereby supporting both Vim and Neovim), then
+# @# remove the symbolic link to the nvim/ directory
+# rm ~/.config/nvim
+# @# Re-create the symbolic link to the nvim/ directory,
+# @# now with no error since it was previously deleted
+# @# This assumes that the .vim/ directory was already
+# @# create by external step not connect to this Makefile
+# ln -s ~/.vim ~/.config/nvim
 
 ## Run stow on code
 stow-code:
@@ -36,13 +74,19 @@ stow-git:
 stow-i3:
 	stow -t ~/.config/i3 i3
 
+stow-i3: create-i3
+
 ## Run stow on nvim
 stow-nvim:
 	stow -t ~/.config/nvim nvim
 
+stow-nvim: create-nvim
+
 ## Run stow on polybar
 stow-polybar:
 	stow -t ~/.config/polybar polybar
+
+stow-polybar: create-polybar
 
 ## Run stow on shell
 stow-shell:
