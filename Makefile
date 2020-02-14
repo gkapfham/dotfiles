@@ -13,14 +13,17 @@ purge:
 
 ## Create the needed dunst/ directory in .config/
 create-dunst:
+	rm -rf ~/.config/dunst
 	mkdir -p ~/.config/dunst
 
 ## Create the needed i3/ directory in .config/
 create-i3:
+	rm -rf ~/.config/i3
 	mkdir -p ~/.config/i3
 
 ## Create the needed polybar/ directory in .config/
 create-polybar:
+	rm -rf ~/.config/polybar
 	mkdir -p ~/.config/polybar
 
 ## Create the needed nvim directory and link in .config/
