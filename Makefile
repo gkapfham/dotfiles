@@ -1,16 +1,18 @@
-## Create needed directories in the .config/ directory
+## Create the needed directories in the .config/ directory
 create:
 	@# Create the dunst/ directory
 	mkdir -p ~/.config/dunst
 	@# Create the i3/ directory
 	mkdir -p ~/.config/i3
-	@# Since the nvim directory links to .vim
-	@# (supporting both Vim and Neovim), then
-	@# remove the symbolic link to the nvim directory
+	@# Create the polybar/ directory
+	mkdir -p ~/.config/polybar
+	@# Since the nvim directory links to .vim/
+	@# (thereby supporting both Vim and Neovim), then
+	@# remove the symbolic link to the nvim/ directory
 	rm ~/.config/nvim
-	@# Re-create the symbolic link to the nvim directory,
-	@# with no error since it was previously deleted
-	@# This assumes that the .vim directory was already
+	@# Re-create the symbolic link to the nvim/ directory,
+	@# now with no error since it was previously deleted
+	@# This assumes that the .vim/ directory was already
 	@# create by external step not connect to this Makefile
 	ln -s ~/.vim ~/.config/nvim
 
@@ -38,6 +40,10 @@ stow-i3:
 stow-nvim:
 	stow -t ~/.config/nvim nvim
 
+## Run stow on polybar
+stow-polybar:
+	stow -t ~/.config/polybar polybar
+
 ## Run stow on shell
 stow-shell:
 	stow -t ~/ shell
@@ -63,7 +69,7 @@ stow-writing:
 	stow -t ~/ writing
 
 ## Run stow for all rules for all subdirectories
-stow: stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing
+stow: stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing
 
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: create stow
