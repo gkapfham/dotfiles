@@ -10,6 +10,21 @@ purge:
 	rm -f ~/.signature
 	rm -f ~/.gitconfig
 	rm -f ~/.gitignore_global
+	rm -rf ~/.oh-my-zsh.sh
+	rm -rf ~/.zshrc
+	rm -rf ~/.compton.conf
+	rm -rf ~/.gtkrc-2.0
+	rm -rf ~/.inputrc
+	rm -rf ~/.profile
+	rm -rf ~/.Xresources
+	rm -rf ~/.tmux.conf
+	rm -rf ~/.ctags
+	rm -rf ~/.urlview
+	rm -rf ~/.gvimrc
+	rm -rf ~/.minivimrc
+	rm -rf ~/.vimrc
+	rm -rf ~/.bibtoolrsc
+	rm -rf ~/.latexmkrc
 
 ## Create the needed dunst/ directory in .config/
 create-dunst:
