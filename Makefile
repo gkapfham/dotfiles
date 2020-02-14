@@ -31,12 +31,14 @@ create-nvim:
 	@# Since the nvim directory links to .vim/
 	@# (thereby supporting both Vim and Neovim), then
 	@# remove the symbolic link to the nvim/ directory
-	rm ~/.config/nvim
+	rm -rf ~/.config/nvim
 	@# Re-create the symbolic link to the nvim/ directory,
 	@# now with no error since it was previously deleted
 	@# This assumes that the .vim/ directory was already
 	@# create by external step not connect to this Makefile
 	ln -s ~/.vim ~/.config/nvim
+	@# Delete the init.vim file as it will later be stowed
+	rm -rf ~/.config/nvim/init.vim
 
 ## Create the needed directories in the .config/ directory
 create: create-dunst create-i3 create-polybar create-nvim
