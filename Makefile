@@ -8,6 +8,8 @@ create:
 	rm ~/.config/nvim
 	@# Re-create the symbolic link to the nvim directory,
 	@# with no error since it was previously deleted
+	@# This assumes that the .vim directory was already
+	@# create by external step not connect to this Makefile
 	ln -s ~/.vim ~/.config/nvim
 
 ## Run stow on code
