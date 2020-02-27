@@ -27,9 +27,10 @@
 
 # gkapfham in ~/.zsh exa --long --header --git --classify --all
 # Permissions Size User     Date Modified Name
-# drwxrwxr-x     - gkapfham  3 Feb 17:40  fast-syntax-highlighting/
-# drwxrwxr-x     - gkapfham  3 Feb 17:22  zsh-autosuggestions/
-# drwxrwxr-x     - gkapfham  4 Feb 16:50  zsh-git-prompt/
+# drwxrwxr-x     - gkapfham  3 Feb  2019  fast-syntax-highlighting/
+# drwxrwxr-x     - gkapfham 27 Feb  9:53  fzf-tab/
+# drwxrwxr-x     - gkapfham  3 Feb  2019  zsh-autosuggestions/
+# drwxrwxr-x     - gkapfham  4 Feb  2019  zsh-git-prompt/
 
 # Note that the zsh-git-prompt is heavily modified.
 
@@ -174,6 +175,11 @@ plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
 # Load customized oh-my-zsh script
 source $HOME/.oh-my-zsh.sh
 
+# Plugin: fzf-tab
+# Note: must be sourced after all other plugins to ensure
+# that tab-completion binds to it and not to oh-my-zsh method
+source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
+
 # Plugin: Git-stacular prompt with zsh-git-prompt
 # Note: local modifications to this plugin
 source $HOME/.zsh/zsh-git-prompt/zshrc.sh
@@ -293,6 +299,17 @@ export FZF_DEFAULT_OPTS='
 #   --color=fg+:143,bg+:234,hl+:172
 #   --color=info:110,prompt:110,pointer:172
 #   --color=marker:172,spinner:96,header:96'
+
+FZF_TAB_OPTS=(
+    --ansi   # Enable ANSI color support, necessary for showing groups
+    --expect='$FZF_TAB_CONTINUOUS_TRIGGER' # For continuous completion
+    # '--color=hl:$(( $#headers == 0 ? 108 : 255 ))'
+    --nth=2,3 --delimiter='\0'  # Don't search FZF_TAB_PREFIX
+    --layout=reverse --height='${FZF_TMUX_HEIGHT:=75%}'
+    --tiebreak=begin -m --bind=tab:down,ctrl-j:accept,change:top,ctrl-space:toggle --cycle
+    '--query=$query'   # $query will be expanded to query string at runtime.
+    '--header-lines=$#headers' # $#headers will be expanded to lines of headers at runtime
+)
 
 # Setup fzf, its auto-completions, and key bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
