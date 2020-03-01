@@ -26,6 +26,10 @@ purge:
 	rm -rf ~/.bibtoolrsc
 	rm -rf ~/.latexmkrc
 
+## Create the .config/ directory to store subdirectories
+create-config:
+	mkdir -p ~/.config
+
 ## Create the needed dunst/ directory in .config/
 create-dunst:
 	rm -rf ~/.config/dunst
@@ -55,8 +59,20 @@ create-nvim:
 	@# Delete the init.vim file as it will later be stowed
 	rm -rf ~/.config/nvim/init.vim
 
-## Create the needed directories in the .config/ directory
-create: create-dunst create-i3 create-polybar create-nvim
+## Create the needed directories for external zsh plugins
+## that are stored in the dotfiles repository as submodules
+
+## Create the .zsh/ directory for the zsh plugins
+create-zsh:
+	mkdir -p .zsh/
+
+## Create the needed fzf-tab/ directory in .zsh/
+create-fzf-tab:
+	rm -rf ~/.zsh/fzf-tab
+	mkdir -p ~/.zsh/fzf-tab
+
+## Create the needed directories in the .config/ and .zsh/ directories
+create: create-config create-dunst create-i3 create-polybar create-nvim create-zsh create-fzf-tab
 
 ## Run stow on code
 stow-code:
@@ -116,11 +132,20 @@ stow-vim:
 stow-writing:
 	stow -t ~/ writing
 
+## Run stow on external dependencies
+
+## Run stow on fzf-tab
+stow-fzf-tab:
+	stow -t ~/.zsh/fzf-tab fzftab
+
 ## Run stow for all rules for all subdirectories
 stow: stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing
 
+## Run stow for all rules for the external dependencies
+stow-external: stow-fzf-tab
+
 ## Create directories and stow all of the dotfiles in correct directories
-dotfiles: create stow
+dotfiles: create stow stow-external
 
 ## Display a help message listing all tasks
 help:
