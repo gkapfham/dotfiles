@@ -1,0 +1,3 @@
+[submodule "fzftab"]
+	path = fzftab
+	url = git@github.com:Aloxaf/fzf-tab.git
