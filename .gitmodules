@@ -1,3 +1,9 @@
 [submodule "fzftab"]
 	path = fzftab
 	url = git@github.com:Aloxaf/fzf-tab.git
+[submodule "fastsyntaxhighlighting"]
+	path = fastsyntaxhighlighting
+	url = git@github.com:zdharma/fast-syntax-highlighting.git
+[submodule "zshgitprompt"]
+	path = zshgitprompt
+	url = git@github.com:gkapfham/zsh-git-prompt.git
