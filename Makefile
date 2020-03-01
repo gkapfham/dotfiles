@@ -1,3 +1,5 @@
+## Purge all of the existing dotfiles {{{
+
 ## Purge all of the existing symlinks
 ## that were manually created, setting the
 ## stage for the use of Stow with other rules
@@ -25,6 +27,10 @@ purge:
 	rm -rf ~/.vimrc
 	rm -rf ~/.bibtoolrsc
 	rm -rf ~/.latexmkrc
+
+## }}}
+
+## Create all required directories for dotfiles {{{
 
 ## Create the .config/ directory to store subdirectories
 create-config:
@@ -59,8 +65,15 @@ create-nvim:
 	@# Delete the init.vim file as it will later be stowed
 	rm -rf ~/.config/nvim/init.vim
 
+## }}}
+
+## Create all required directories for external dependencies {{{
+
 ## Create the needed directories for external zsh plugins
 ## that are stored in the dotfiles repository as submodules
+
+## Curating these repositories ensures that the dotfiles
+## repository is entirely self-contained and installable
 
 ## Create the .zsh/ directory for the zsh plugins
 create-zsh:
@@ -71,8 +84,9 @@ create-fzf-tab:
 	rm -rf ~/.zsh/fzf-tab
 	mkdir -p ~/.zsh/fzf-tab
 
-## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-dunst create-i3 create-polybar create-nvim create-zsh create-fzf-tab
+## }}}
+
+## Run stow on internal dotfiles {{{
 
 ## Run stow on code
 stow-code:
@@ -94,18 +108,21 @@ stow-git:
 stow-i3:
 	stow -t ~/.config/i3 i3
 
+## Running stow on i3 depends on creating i3 directory
 stow-i3: create-i3
 
 ## Run stow on nvim
 stow-nvim:
 	stow -t ~/.config/nvim nvim
 
+## Running stow on nvim depends on creating nvim directory
 stow-nvim: create-nvim
 
 ## Run stow on polybar
 stow-polybar:
 	stow -t ~/.config/polybar polybar
 
+## Running stow on polybar depends on creating polybar directory
 stow-polybar: create-polybar
 
 ## Run stow on shell
@@ -132,11 +149,18 @@ stow-vim:
 stow-writing:
 	stow -t ~/ writing
 
-## Run stow on external dependencies
+## Run stow on external dependencies {{{
 
 ## Run stow on fzf-tab
 stow-fzf-tab:
 	stow -t ~/.zsh/fzf-tab fzftab
+
+# }}}
+
+## Composite rules {{{
+
+## Create the needed directories in the .config/ and .zsh/ directories
+create: create-config create-dunst create-i3 create-polybar create-nvim create-zsh create-fzf-tab
 
 ## Run stow for all rules for all subdirectories
 stow: stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing
@@ -147,9 +171,15 @@ stow-external: stow-fzf-tab
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: create stow stow-external
 
+# }}}
+
+## Help {{{
+
 ## Display a help message listing all tasks
 help:
 	make -rpn | sed -n -e '/^$$/ { n ; /^[^ .#][^ ]*:/ { s/:.*$$// ; p ; } ; }' | sort -u
 
 ## Specify that the default is full installation of the dotfiles
 .DEFAULT_GOAL := dotfiles
+
+# }}}
