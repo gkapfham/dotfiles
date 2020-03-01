@@ -79,10 +79,20 @@ create-nvim:
 create-zsh:
 	mkdir -p .zsh/
 
+## Create the needed fast-syntax-highlighting/ directory in .zsh/
+create-fast-syntax-highlighting:
+	rm -rf ~/.zsh/fast-syntax-highlighting
+	mkdir -p ~/.zsh/fast-syntax-highlighting
+
 ## Create the needed fzf-tab/ directory in .zsh/
 create-fzf-tab:
 	rm -rf ~/.zsh/fzf-tab
 	mkdir -p ~/.zsh/fzf-tab
+
+## Create the needed zsh-git-prompt/ directory in .zsh/
+create-zsh-git-prompt:
+	rm -rf ~/.zsh/zsh-git-prompt
+	mkdir -p ~/.zsh/zsh-git-prompt
 
 ## }}}
 
@@ -151,22 +161,30 @@ stow-writing:
 
 ## Run stow on external dependencies {{{
 
+## Run stow on fast-syntax-highlighting
+stow-fast-syntax-highlighting:
+	stow -t ~/.zsh/fast-syntax-highlighting fastsyntaxhighlighting
+
 ## Run stow on fzf-tab
 stow-fzf-tab:
 	stow -t ~/.zsh/fzf-tab fzftab
+
+## Run stow on zsh-git-prompt
+stow-zsh-git-prompt:
+	stow -t ~/.zsh/zsh-git-prompt zshgitprompt
 
 # }}}
 
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-dunst create-i3 create-polybar create-nvim create-zsh create-fzf-tab
+create: create-config create-dunst create-i3 create-polybar create-nvim create-zsh create-fzf-tab create-zsh-git-prompt create-fast-syntax-highlighting
 
 ## Run stow for all rules for all subdirectories
 stow: stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing
 
 ## Run stow for all rules for the external dependencies
-stow-external: stow-fzf-tab
+stow-external: stow-fzf-tab stow-zsh-git-prompt stow-fast-syntax-highlighting
 
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: create stow stow-external
