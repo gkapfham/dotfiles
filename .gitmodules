@@ -7,3 +7,6 @@
 [submodule "zshgitprompt"]
 	path = zshgitprompt
 	url = git@github.com:gkapfham/zsh-git-prompt.git
+[submodule "zshautosuggestions"]
+	path = zshautosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git
