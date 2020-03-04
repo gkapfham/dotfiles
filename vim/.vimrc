@@ -39,6 +39,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+Plug 'Konfekt/vim-sentence-chopper'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lifepillar/vim-colortemplate'
@@ -759,6 +760,23 @@ let g:tex_flavor = 'tex'
 " Vimtex requires
 set hidden
 
+" Use latexindent to break up paragraphs
+nmap gr <plug>(ChopSentences)
+xmap gr <plug>(ChopSentences)
+
+" Pass options to latexindent
+" --> line wrap at 80 words to match :StandardWrap
+let g:latexindent_yaml_options = 'modifyLineBreaks:textWrapOptions:columns:80'
+
+" Insert a comment symbol for LaTeX on current line
+" Note that it would be ideal if it was possible
+" to configure latexindent to take this step.
+" However, I cannot configure latexindent to insert
+" a comment symbol between every sentence.
+nmap <Space>c :execute "normal! i" . split(&commentstring, '%s')[0]<CR>
+
+" let customizedcomment = split(&commentstring, '%s')[0]
+
 " }}}
 
 " Completion {{{
@@ -845,7 +863,7 @@ set smartcase
 
 " Make :grep use ripgrep and use -uu to not ignore files
 " This is an alternative to :Rg or :Ag which ignore some files
-set grepprg=rg\ --vimgrep\ -uu\ --no-heading\ --smart-case
+set grepprg=rg\ -uu\ --vimgrep\ --no-heading\ --smart-case
 
 " }}}
 
@@ -1017,6 +1035,9 @@ command! FZFMine call fzf#run({
       \  'sink':    'e',
       \  'options': '-m -x +s --no-bold --cycle',
       \  'down':    '25%'})
+
+" Re-define the Rg command so that it considers hidden files
+command! -bang -nargs=* Rg call fzf#vim#grep("rg -uu --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)
 
 " Define key combinations
 nmap <C-h> :FZFHidden <CR>
