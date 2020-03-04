@@ -761,6 +761,8 @@ let g:tex_flavor = 'tex'
 set hidden
 
 " Use latexindent to break up paragraphs
+" This yields commands like "grip" for formatting with latexindent
+" It is still possible to use commands like "gwip" for paragraph formatting
 nmap gr <plug>(ChopSentences)
 xmap gr <plug>(ChopSentences)
 
@@ -768,14 +770,14 @@ xmap gr <plug>(ChopSentences)
 " --> line wrap at 80 words to match :StandardWrap
 let g:latexindent_yaml_options = 'modifyLineBreaks:textWrapOptions:columns:80'
 
-" Insert a comment symbol for LaTeX on current line
+" Insert a comment symbol for LaTeX on current line,
+" ensuring that only the comment is on that line.
+"
 " Note that it would be ideal if it was possible
 " to configure latexindent to take this step.
 " However, I cannot configure latexindent to insert
 " a comment symbol between every sentence.
 nmap <Space>c :execute "normal! i" . split(&commentstring, '%s')[0]<CR>
-
-" let customizedcomment = split(&commentstring, '%s')[0]
 
 " }}}
 
