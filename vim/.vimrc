@@ -1039,6 +1039,7 @@ command! FZFMine call fzf#run({
       \  'down':    '25%'})
 
 " Re-define the Rg command so that it considers hidden files
+" Note that the use of "-uu" includes the hidden files
 command! -bang -nargs=* Rg call fzf#vim#grep("rg -uu --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)
 
 " Define key combinations
