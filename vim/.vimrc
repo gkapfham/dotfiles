@@ -484,9 +484,9 @@ augroup gitmessenger
 function! SetupGitMessengerPopup() abort
     " Go into the git-messenger pop-up to navigate
     nmap <Leader>gg <Plug>(git-messenger-into-popup)
-    " Go to an older commit
+    " Go to an older commit with CTRL-o
     nmap <buffer><C-o> o
-    " Go to a newer commit
+    " Go to a newer commit with CTRL-i
     nmap <buffer><C-i> O
 endfunction
 autocmd FileType gitmessengerpopup call SetupGitMessengerPopup()
