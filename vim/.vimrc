@@ -747,8 +747,15 @@ let g:vimtex_view_method = 'mupdf'
 let g:vimtex_view_mupdf_options = '-r 288'
 let g:vimtex_compiler_progname = 'nvr'
 
-" Set keymap for viewing the table of contents
+" Define mapping to generate and view the table of contents
 nnoremap <leader>lt :VimtexTocToggle<cr>
+
+" Define mapping to run a "single-shot" compilation
+" Note that this is especially useful when the LaTeX
+" document requires a long background compilation
+" that is so expensive to always run that if limits
+" the ability to use the text editor interactively
+nnoremap <Space>ll :VimtexCompileSS<cr>
 
 " Conceal option
 set conceallevel=1
