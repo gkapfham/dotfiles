@@ -82,20 +82,20 @@ ln -s ~/configure/dotfiles/.bibtoolrsc .bibtoolrsc
 As an alternative to manually creating all of the symbolic links in the
 aforementioned fashion, this repository has a `Makefile` with rules that use
 `stow` to create these symbolic links automatically. If a system already
-contains dotfiles and you want to remove them from the system, then please type
-the command `make purge`. Now, typing the command `make dotfiles` will create
-all the needed directories and subdirectories and make symbolic links to the
-dotfiles in this repository from the correct destination directory.
+contains dotfiles that you no longer needed and you want to remove them from the
+system, then please type the command `make purge`. Next, typing the command
+`make dotfiles` will create all the needed directories and subdirectories and
+make symbolic links to the dotfiles in this repository from the correct
+destination directories.
 
 ## Problems or Praise
 
 If you have any problems with downloading or understanding these configuration
-files, then please create an issue associated with this Git repository using
-the "Issues" link at the top of this site. As the sole contributor to the
-`dotfiles` repository, I will do everything possible to resolve your issue and
-ensure that all of the configurations are clear and, potentially, best suited
-to working in your development environment. Remember, this repository is being
-made publicly available so as to provide examples of how to write
-configurations for programs like `vim` and `nvim`. If you find that these files
-help you in preparing your own configurations, then I also encourage you to
-"star" and "watch" this project!
+files, then please create an issue associated with this Git repository using the
+"Issues" link at the top of this site. As the sole contributor to the `dotfiles`
+repository, I will do everything possible to resolve your issue and ensure that
+all the configurations are clear and, potentially, best suited to working in
+your development environment. Remember, this repository is being made publicly
+available to provide examples of how to write configurations for programs like
+`vim` and `nvim`. If you find that these files help you in preparing your own
+configurations, then I also encourage you to "star" and "watch" this project!
