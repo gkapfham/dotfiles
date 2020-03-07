@@ -171,7 +171,7 @@ HIST_STAMPS="mm/dd/yyyy"
 source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Plugin: Request all plugins from oh-my-zsh
-plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
+plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator vi-mode virtualenv)
 
 # Load customized oh-my-zsh script
 source $HOME/.oh-my-zsh.sh
