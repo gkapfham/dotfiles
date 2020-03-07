@@ -166,8 +166,9 @@ ZSH_THEME="norm-gkapfham"
 # Timestamps
 HIST_STAMPS="mm/dd/yyyy"
 
-# Plugin: fast-syntax-highlighting
-source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+# Plugin: was fast-syntax-highlighting
+# Plugin: now zsh-syntax-highlighting
+source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Plugin: Request all plugins from oh-my-zsh
 plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
@@ -175,15 +176,35 @@ plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
 # Load customized oh-my-zsh script
 source $HOME/.oh-my-zsh.sh
 
+# Plugin: Git-stacular prompt with zsh-git-prompt
+# Note: local modifications to this plugin
+source $HOME/.zsh/zsh-git-prompt/zshrc.sh
+GIT_PROMPT_EXECUTABLE="haskell"
+
 # Plugin: fzf-tab
 # Note: must be sourced after all other plugins to ensure
 # that tab-completion binds to it and not to oh-my-zsh method
 source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 
-# Plugin: Git-stacular prompt with zsh-git-prompt
-# Note: local modifications to this plugin
-source $HOME/.zsh/zsh-git-prompt/zshrc.sh
-GIT_PROMPT_EXECUTABLE="haskell"
+# Define the default fzf command used by fzf-tab
+# Note: colors defined here because this plugin
+# does not adopt the standard colors for fzf
+# as defined later in this file
+FZF_TAB_COMMAND=(
+    fzf
+    --ansi
+    --expect='$continuous_trigger'
+    --color='fg:#a9a9a9,bg:#1c1c1c,hl:#5f8700'
+    --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700'
+    --color='info:#87afd7,prompt:#87afd7,pointer:#d78700'
+    --color='marker:#d78700,spinner:#875f87,header:#875f87'
+    --nth=2,3 --delimiter='\x00'
+    --layout=reverse --height='${FZF_TMUX_HEIGHT:=75%}'
+    --tiebreak=begin -m --bind=tab:down,ctrl-j:accept,change:top,ctrl-space:toggle --cycle
+    '--query=$query'
+    '--header-lines=$#headers'
+)
+zstyle ':fzf-tab:*' command $FZF_TAB_COMMAND
 
 # Toggle git cache
 function toggle_git() {
