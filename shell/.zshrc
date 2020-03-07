@@ -452,6 +452,15 @@ function chpwd() {
   exa --group-directories-first --grid --long --sort=name
 }
 
+# Display the palette of the 256 colors used in terminal
+palette() {
+    local -a colors
+    for i in {000..255}; do
+        colors+=("%F{$i}$i%f")
+    done
+    print -cP $colors
+}
+
 # }}}
 
 # Redefine Aliases {{{
