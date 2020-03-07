@@ -25,16 +25,18 @@
 
 # External Plugins {{{
 
-# gkapfham in ~/.zsh exa --long --header --git --classify --all
+#  gkapfham  ~/.zsh exa --long --header --git --classify --all
 # Permissions Size User     Date Modified Name
-# drwxrwxr-x     - gkapfham  3 Feb  2019  fast-syntax-highlighting/
-# drwxrwxr-x     - gkapfham 27 Feb  9:53  fzf-tab/
-# drwxrwxr-x     - gkapfham  3 Feb  2019  zsh-autosuggestions/
-# drwxrwxr-x     - gkapfham  4 Feb  2019  zsh-git-prompt/
+# drwxrwxr-x     - gkapfham  7 Mar 14:15  fzf-tab/
+# drwxrwxr-x     - gkapfham  7 Mar 14:15  gitstatus/
+# drwxrwxr-x     - gkapfham  7 Mar 14:15  zsh-autosuggestions/
+# drwxrwxr-x     - gkapfham  7 Mar 14:15  zsh-git-prompt/
+# drwxrwxr-x     - gkapfham  7 Mar 14:15  zsh-syntax-highlighting/
 
-# Note that the zsh-git-prompt is heavily modified.
-
-# }}}
+# NOTES:
+# -- zsh-git-prompt is heavily modified
+# -- gitstatus is heavily modified
+# -- zsh-git-prompt is deprecated for gitstatus
 
 # Exports {{{
 
