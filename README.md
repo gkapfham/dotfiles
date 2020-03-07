@@ -79,11 +79,13 @@ directory containing this repository.
 ln -s ~/configure/dotfiles/.bibtoolrsc .bibtoolrsc
 ```
 
-It is worth noting that I use the `.vimrc` file to configure both `vim` and
-`nvim`. To do this, I have created the `.nvim` directory to be a symbolic link
-to the `.vim` directory. Next, this `.nvim` directory contains a file called
-`init.vim` that is a symbolic link to the `~/.vimrc` file that is itself a
-symbolic link to the `.vimrc` provided by this repository.
+As an alternative to manually creating all of the symbolic links in the
+aforementioned fashion, this repository has a `Makefile` with rules that use
+`stow` to create these symbolic links automatically. If a system already
+contains dotfiles and you want to remove them from the system, then please type
+the command `make purge`. Now, typing the command `make dotfiles` will create
+all the needed directories and subdirectories and make symbolic links to the
+dotfiles in this repository from the correct destination directory.
 
 ## Problems or Praise
 
