@@ -1,12 +1,1 @@
-[submodule "fzftab"]
-	path = fzftab
-	url = https://github.com:Aloxaf/fzf-tab.git
-[submodule "fastsyntaxhighlighting"]
-	path = fastsyntaxhighlighting
-	url = https://github.com:zdharma/fast-syntax-highlighting.git
-[submodule "zshgitprompt"]
-	path = zshgitprompt
-	url = https://github.com:gkapfham/zsh-git-prompt.git
-[submodule "zshautosuggestions"]
-	path = zshautosuggestions
-	url = https://github.com:zsh-users/zsh-autosuggestions.git
+
