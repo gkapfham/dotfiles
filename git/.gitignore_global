@@ -215,6 +215,10 @@ tags.lock
 tags.temp
 tags.tmp
 
+# Haskell #
+###########
+.stack-work
+
 # Extra files #
 ###############
 *.xmi
