@@ -176,10 +176,12 @@ plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
 # Load customized oh-my-zsh script
 source $HOME/.oh-my-zsh.sh
 
-# Plugin: Git-stacular prompt with zsh-git-prompt
+# Plugin: Fast, git-stacular prompt with gitstatus
 # Note: local modifications to this plugin
-source $HOME/.zsh/zsh-git-prompt/zshrc.sh
-GIT_PROMPT_EXECUTABLE="haskell"
+source ~/.zsh/gitstatus/gitstatus.prompt.zsh
+
+# source $HOME/.zsh/zsh-git-prompt/zshrc.sh
+# GIT_PROMPT_EXECUTABLE="haskell"
 
 # Plugin: fzf-tab
 # Note: must be sourced after all other plugins to ensure
@@ -463,3 +465,6 @@ alias ls="exa --color=always"
 # zprof
 
 # }}}
+
+# # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
