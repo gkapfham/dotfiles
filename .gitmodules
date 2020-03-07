@@ -10,3 +10,6 @@
 [submodule "zshautosuggestions"]
 	path = zshautosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule "gitstatus"]
+	path = gitstatus
+	url = https://github.com/gkapfham/gitstatus.git
