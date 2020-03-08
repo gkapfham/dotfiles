@@ -210,34 +210,34 @@ FZF_TAB_COMMAND=(
 )
 zstyle ':fzf-tab:*' command $FZF_TAB_COMMAND
 
-# Toggle git cache
-function toggle_git() {
-    if [ -n "${ZSH_THEME_GIT_PROMPT_CACHE}" ]; then
-        unset ZSH_THEME_GIT_PROMPT_CACHE
-        echo "Cache  = ✘"
-    else
-        ZSH_THEME_GIT_PROMPT_CACHE="true"
-        echo "Cache  = ✔"
-    fi
-}
-alias tg=toggle_git
-
-# Echo git cache
-function echo_git() {
-    if [ -n "${ZSH_THEME_GIT_PROMPT_CACHE}" ]; then
-        echo "Cache  = ✔"
-    else
-        echo "Cache  = ✘"
-    fi
-}
-alias eg=echo_git
-
 # Plugin: zsh-autosuggestions
 source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 bindkey '^ ' autosuggest-accept
+
+# # Toggle git cache
+# function toggle_git() {
+#     if [ -n "${ZSH_THEME_GIT_PROMPT_CACHE}" ]; then
+#         unset ZSH_THEME_GIT_PROMPT_CACHE
+#         echo "Cache  = ✘"
+#     else
+#         ZSH_THEME_GIT_PROMPT_CACHE="true"
+#         echo "Cache  = ✔"
+#     fi
+# }
+# alias tg=toggle_git
+
+# # Echo git cache
+# function echo_git() {
+#     if [ -n "${ZSH_THEME_GIT_PROMPT_CACHE}" ]; then
+#         echo "Cache  = ✔"
+#     else
+#         echo "Cache  = ✘"
+#     fi
+# }
+# alias eg=echo_git
 
 # }}}
 
