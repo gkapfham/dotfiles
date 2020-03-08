@@ -304,14 +304,13 @@ export FZF_DEFAULT_OPTS='
 #   --color=marker:172,spinner:96,header:96'
 
 FZF_TAB_OPTS=(
-    --ansi   # Enable ANSI color support, necessary for showing groups
-    --expect='$FZF_TAB_CONTINUOUS_TRIGGER' # For continuous completion
-    # '--color=hl:$(( $#headers == 0 ? 108 : 255 ))'
-    --nth=2,3 --delimiter='\0'  # Don't search FZF_TAB_PREFIX
+    --ansi
+    --expect='$FZF_TAB_CONTINUOUS_TRIGGER'
+    --nth=2,3 --delimiter='\0'
     --layout=reverse --height='${FZF_TMUX_HEIGHT:=75%}'
     --tiebreak=begin -m --bind=tab:down,ctrl-j:accept,change:top,ctrl-space:toggle --cycle
-    '--query=$query'   # $query will be expanded to query string at runtime.
-    '--header-lines=$#headers' # $#headers will be expanded to lines of headers at runtime
+    '--query=$query'
+    '--header-lines=$#headers'
 )
 
 # Setup fzf, its auto-completions, and key bindings
