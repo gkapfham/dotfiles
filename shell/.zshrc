@@ -27,11 +27,12 @@
 
 #  gkapfham  ~/.zsh exa --long --header --git --classify --all
 # Permissions Size User     Date Modified Name
-# drwxrwxr-x     - gkapfham  7 Mar 14:15  fzf-tab/
-# drwxrwxr-x     - gkapfham  7 Mar 14:15  gitstatus/
-# drwxrwxr-x     - gkapfham  7 Mar 14:15  zsh-autosuggestions/
-# drwxrwxr-x     - gkapfham  7 Mar 14:15  zsh-git-prompt/
-# drwxrwxr-x     - gkapfham  7 Mar 14:15  zsh-syntax-highlighting/
+# drwxrwxr-x     - gkapfham  8 Mar 20:20  fast-syntax-highlighting/
+# drwxrwxr-x     - gkapfham  8 Mar 20:20  fzf-tab/
+# drwxrwxr-x     - gkapfham  8 Mar 20:20  gitstatus/
+# drwxrwxr-x     - gkapfham  8 Mar 20:20  zsh-autosuggestions/
+# drwxrwxr-x     - gkapfham  8 Mar 20:20  zsh-git-prompt/
+# drwxrwxr-x     - gkapfham  8 Mar 20:20  zsh-syntax-highlighting/
 
 # NOTES:
 # -- zsh-git-prompt is heavily modified
