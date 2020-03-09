@@ -999,6 +999,9 @@ omap ab <Plug>(textobj-sandwich-auto-a)
 " instead of 'is' to avoid conflict with sentence.
 " The intuition is that these 'query' for a
 " delimiter and then dynamically match a region.
+" Use example: recent optimizations after
+" saif" --> "recent optimizations"
+" because the f" will search for quote mark
 xmap iq <Plug>(textobj-sandwich-query-i)
 omap iq <Plug>(textobj-sandwich-query-i)
 xmap aq <Plug>(textobj-sandwich-query-a)
