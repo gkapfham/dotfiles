@@ -35,9 +35,11 @@
 # drwxrwxr-x     - gkapfham  8 Mar 20:20  zsh-syntax-highlighting/
 
 # NOTES:
-# -- zsh-git-prompt is heavily modified
-# -- gitstatus is heavily modified
+# -- forked zsh-git-prompt is heavily modified
+# -- forked gitstatus is heavily modified
 # -- zsh-git-prompt is deprecated for gitstatus
+# -- both fast-syntax-highlighting and zsh-syntax-highlighting
+# are currently available, but the former is in current use
 
 # Exports {{{
 
