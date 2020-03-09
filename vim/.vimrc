@@ -987,7 +987,10 @@ let g:textobj_sandwich_no_default_key_mappings = 1
 
 " Remap the auto-mode sandwich operators
 " to the same mappings used by default
-" Usage example: file_name after saiw" --> "file_name"
+" - Usage example: file_name after saiw" --> "file_name"
+" - Usage example: recent optimizations after
+" saif" --> "recent optimizations"
+" because the f" will search for quote mark
 xmap ib <Plug>(textobj-sandwich-auto-i)
 omap ib <Plug>(textobj-sandwich-auto-i)
 xmap ab <Plug>(textobj-sandwich-auto-a)
@@ -999,9 +1002,6 @@ omap ab <Plug>(textobj-sandwich-auto-a)
 " instead of 'is' to avoid conflict with sentence.
 " The intuition is that these 'query' for a
 " delimiter and then dynamically match a region.
-" Use example: recent optimizations after
-" saif" --> "recent optimizations"
-" because the f" will search for quote mark
 xmap iq <Plug>(textobj-sandwich-query-i)
 omap iq <Plug>(textobj-sandwich-query-i)
 xmap aq <Plug>(textobj-sandwich-query-a)
