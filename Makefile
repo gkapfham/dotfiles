@@ -205,13 +205,13 @@ stow-git-status:
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-dunst create-i3 create-polybar create-nvim create-zsh create-fzf-tab create-zsh-git-prompt create-git-status create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-dunst create-i3 create-polybar create-nvim create-zsh create-fzf-tab create-zsh-git-prompt create-git-status create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
 stow: stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing
 
 ## Run stow for all rules for the external dependencies
-stow-external: stow-fzf-tab stow-zsh-git-prompt stow-git-status stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
+stow-external: stow-fzf-tab stow-zsh-git-prompt stow-git-status stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
 
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: create stow stow-external
