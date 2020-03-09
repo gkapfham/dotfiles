@@ -285,7 +285,8 @@ bindkey '^B' fzf-fasd-widget
 # FZF {{{
 
 # Match the vim-vitamin-onec colorscheme
-# https://github.com/gkapfham/vim-vitamin-onec
+# Color scheme: https://github.com/gkapfham/vim-vitamin-onec
+# 256 Color reference: https://jonasjacek.github.io/colors/
 export FZF_DEFAULT_OPTS='
   --no-bold
   --cycle
