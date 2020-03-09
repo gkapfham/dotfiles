@@ -169,9 +169,10 @@ ZSH_THEME="norm-gkapfham"
 HIST_STAMPS="mm/dd/yyyy"
 
 # Plugin: zsh-syntax-highlighting
-source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Plugin: was fast-syntax-highlighting
+# Plugin: fast-syntax-highlighting
+source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # Plugin: Request all plugins from oh-my-zsh
 plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator vi-mode virtualenv)
