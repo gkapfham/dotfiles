@@ -219,6 +219,10 @@ tags.tmp
 ###########
 .stack-work
 
+# Z shell #
+###########
+*.zwc
+
 # Extra files #
 ###############
 *.xmi
