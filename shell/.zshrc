@@ -185,7 +185,7 @@ source $HOME/.oh-my-zsh.sh
 
 # Plugin: Fast, git-stacular prompt with gitstatus
 # Note: local modifications to this plugin
-source ~/.zsh/gitstatus/gitstatus.prompt.zsh
+source $HOME/.zsh/gitstatus/gitstatus.prompt.zsh
 
 # Plugin: fzf-tab
 # Note: must be sourced after all other plugins to ensure
