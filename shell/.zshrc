@@ -187,9 +187,6 @@ source $HOME/.oh-my-zsh.sh
 # Note: local modifications to this plugin
 source ~/.zsh/gitstatus/gitstatus.prompt.zsh
 
-# source $HOME/.zsh/zsh-git-prompt/zshrc.sh
-# GIT_PROMPT_EXECUTABLE="haskell"
-
 # Plugin: fzf-tab
 # Note: must be sourced after all other plugins to ensure
 # that tab-completion binds to it and not to oh-my-zsh method
