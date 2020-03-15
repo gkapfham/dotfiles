@@ -171,6 +171,7 @@ ZSH_THEME="norm-gkapfham"
 # Timestamps
 HIST_STAMPS="mm/dd/yyyy"
 
+# NOTE: use this plugin as a backup in case alternate is unavailable
 # Plugin: zsh-syntax-highlighting
 # source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
