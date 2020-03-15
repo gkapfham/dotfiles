@@ -25,7 +25,7 @@
 
 # External Plugins {{{
 
-#  gkapfham  ~/.zsh exa --long --header --git --classify --all
+# ﰌ gkapfham  ~/.zsh exa --long --header --git --classify --all
 # Permissions Size User     Date Modified Name
 # drwxrwxr-x     - gkapfham  8 Mar 20:20  fast-syntax-highlighting/
 # drwxrwxr-x     - gkapfham  8 Mar 20:20  fzf-tab/
