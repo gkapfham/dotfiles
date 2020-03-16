@@ -102,7 +102,7 @@ export PROMPT_EOL_MARK='    '
 
 # }}}
 
-# Aliases {{{
+# System Aliases {{{
 
 # Vim with a server
 alias vim="vim --servername VIM"
@@ -132,6 +132,10 @@ alias cat="bat"
 # Directory listing with a simple command
 alias ka="exa --group-directories-first --grid --long --sort=name"
 
+# }}}
+
+# Git Aliases {{{
+
 # Use git through the hub interface
 # Note that this does not change git's behavior
 alias git="hub"
@@ -153,6 +157,39 @@ alias gla="git log --graph $GIT_PRETTY_FORMAT_AUTHOR"
 
 # Display a colorized git log with all references and authors
 alias glaa='gla --all'
+
+# Define functions and an alias for switching between git branches
+# https://polothy.github.io/post/2019-08-19-fzf-git-checkout/
+fzf-git-branch() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+    git branch --color=always --all --sort=-committerdate |
+        grep -v HEAD |
+        fzf --height 75% --ansi --no-multi --preview-window right:65% \
+            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
+        sed "s/.* //"
+}
+
+# Run git checkout and call the previous function for display details about the branch
+fzf-git-checkout() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+    local branch
+    branch=$(fzf-git-branch)
+    if [[ "$branch" = "" ]]; then
+        echo "No branch selected."
+        return
+    fi
+    # If branch name starts with 'remotes/' then it is a remote branch. By
+    # using --track and a remote branch name, it is the same as:
+    # git checkout -b branchname --track origin/branchname
+    if [[ "$branch" = 'remotes/'* ]]; then
+        git checkout --track $branch
+    else
+        git checkout $branch;
+    fi
+}
+
+# Define an alias that uses fzf to select git branches
+alias gcob='fzf-git-checkout'
 
 # }}}
 
