@@ -1303,7 +1303,7 @@ augroup ImproveNcmTwoCompletion
   au TextChangedI * call ncm2#auto_trigger()
 augroup END
 
-" Pressing <Enter> while the pop-up menu is visible, hides the menu.
+" Pressing <Enter> while the pop-up menu is visible will hide menu.
 " Use this mapping to close the menu and also start a new line.
 " This configures the completion engine to make it more useful.
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
