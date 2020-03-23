@@ -81,7 +81,13 @@ export DISABLE_AUTO_TITLE=true
 export BROWSER=/usr/bin/google-chrome
 
 # Path
-export PATH="/opt/urserver:/opt/eclipse:$HOME/.npm-global/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$HOME/.local/kitty.app/bin:$HOME/.cargo/bin"
+# Strategy: place user-local binaries before system ones
+# Includes setup for:
+# --> Fuzzy finding with fzf
+# --> Go with go and .gocode
+# --> JavaScript npm
+# --> Rust with cargo
+export PATH="$HOME/.npm-global/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$HOME/.gocode/bin:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
 
 # Local Gem home
 export GEM_HOME=$HOME/.gem
