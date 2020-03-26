@@ -77,8 +77,8 @@ export BIBINPUTS=.
 # Shell title
 export DISABLE_AUTO_TITLE=true
 
-# Set the browser to Google Chrome
-export BROWSER=/usr/bin/google-chrome
+# Set the browser to Firefox
+export BROWSER=/usr/bin/firefox
 
 # Path
 # Strategy: place user-local binaries before system ones
