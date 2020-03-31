@@ -5,7 +5,7 @@
 
 # 2016 Oliver Kraitschy - http://okraits.de
 
-OPTIONS="Lock System\nReboot System\nShutdown System\nSuspend System"
+OPTIONS="Lock System\nRestart System\nShutdown System\nSuspend System"
 
 # source configuration or use default values
 if [ -f $HOME/.config/rofi-power/config ]; then
@@ -34,7 +34,7 @@ then
       Lock)
         eval $LOCKER
         ;;
-      Reboot)
+      Restart)
         systemctl reboot
         ;;
       Shutdown)
