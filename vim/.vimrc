@@ -1186,6 +1186,9 @@ end
 
 " Advanced FZF and Completion Settings {{{
 
+" Use an empty value to disable the preview window
+let g:fzf_preview_window = ''
+
 " Control FZF windows
 command! FZFMru call fzf#run({
       \  'source':  v:oldfiles,
