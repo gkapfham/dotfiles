@@ -350,6 +350,8 @@ export FZF_DEFAULT_OPTS='
 #   --color=info:110,prompt:110,pointer:172
 #   --color=marker:172,spinner:96,header:96'
 
+# Set completion options for the fzf-tab script that
+# supports tab completion with fzf in the shell
 FZF_TAB_OPTS=(
     --ansi
     --expect='$FZF_TAB_CONTINUOUS_TRIGGER'
