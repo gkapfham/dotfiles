@@ -379,8 +379,8 @@ endfunction
 
 " Display the name of the branch with a specialize symbol
 function! LightlineFugitive()
-  if exists('*fugitive#head')
-    let l:branch = fugitive#head()
+  if exists('*FugitiveHead')
+    let l:branch = FugitiveHead()
     return l:branch !=# '' ? ' שׂ '.l:branch : ''
   endif
   return ''
