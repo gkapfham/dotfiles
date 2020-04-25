@@ -223,6 +223,10 @@ tags.tmp
 ###########
 *.zwc
 
+# Jekyll #
+##########
+.jekyll-cache
+
 # Extra files #
 ###############
 *.xmi
