@@ -98,6 +98,9 @@ export GOPATH=$HOME/.gocode
 # No Java tools
 unset JAVA_TOOL_OPTIONS
 
+# No warning messages in Ruby
+export RUBYOPT='-W0'
+
 # Get correct spacing in python virtualenv_prompt_info
 export ZSH_THEME_VIRTUALENV_SUFFIX="] "
 
