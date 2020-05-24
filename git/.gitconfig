@@ -33,4 +33,13 @@
     brdelete = "!f() { : git checkout ; git branch -D $@; git push origin --delete $@; }; f"
 [alias]
     # Fetch all content from the origin
-    fa = fetch --all --prune --tags
+  fa = fetch --all --prune --tags
+# define command which will be used when "nvim" is set as a merge tool
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gvdiffsplit!\" \"$MERGED\"
+# set "nvim" as tool for merging
+[merge]
+  tool = nvim
+# automatically launch merge tool without displaying a prompt
+[mergetool]
+  prompt = false
