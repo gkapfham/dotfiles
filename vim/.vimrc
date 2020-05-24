@@ -977,6 +977,15 @@ augroup END
 " Run Fugitive commands asynchronously using AsyncRun
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
+" Resolve a merge conflict with a three-pane vertical split
+nnoremap <leader>gd :Gvdiffsplit!<CR>
+
+" Merge the "head" into the current file
+nnoremap gdh :diffget //2<CR>
+
+" Merge the "branch" into the remote file
+nnoremap gdb :diffget //3<CR>
+
 " }}}
 
 " Sandwich {{
