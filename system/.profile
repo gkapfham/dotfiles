@@ -38,3 +38,9 @@ hsetroot -solid "#1C1C1C"
 
 # export a variable that supports the use of dunst for notifications
 export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
+
+# make Caps Lock behave like Ctrl:
+setxkbmap -option ctrl:nocaps
+
+# make short-pressed Ctrl behave like Escape:
+xcape -e 'Control_L=Escape'
