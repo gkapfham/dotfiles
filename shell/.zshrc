@@ -145,10 +145,6 @@ alias ka="exa --group-directories-first --grid --long --sort=name"
 
 # Git Aliases {{{
 
-# Use git through the hub interface
-# Note that this does not change git's behavior
-alias git="hub"
-
 # Markdown pull request with hub
 alias hubmdpr="hub -c core.commentChar='%' pull-request"
 
