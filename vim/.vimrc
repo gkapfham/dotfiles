@@ -301,6 +301,12 @@ augroup peekabooconfiguration
   autocmd FileType peekaboo setlocal nospell
 augroup END
 
+" Briefly highlight the yanked region using the background color for visual highlights
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("Visual", 200)
+augroup END
+
 " }}}
 
 " Lightline for Status Line and Buffer Line {{{
