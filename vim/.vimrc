@@ -161,8 +161,11 @@ set undolevels=1000
 set undofile
 set undodir=~/.vim/undo
 
-" Source the vimrc file
+" Source the vimrc file with Reload
 command! Reload :source $MYVIMRC
+
+" Define a mapping to easy use of Reload
+nnoremap <leader>r :Reload<CR>
 
 " }}}
 
@@ -860,7 +863,21 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 function! SwitchBuffer()
   b#
 endfunction
+" Use either control or space to activate
 nmap <C-u> :call SwitchBuffer()<CR>
+nmap <Space>u :call SwitchBuffer()<CR>
+
+" Redefine the default mapping of <Leader><Leader> for
+" the easymotion prefix, which I do not use frequently.
+" Note that the default for this mapping conflicts with
+" the following mapping created for the colon key
+map <Leader><Space> <Plug>(easymotion-prefix)
+
+" Define <leader<leader> to create a colon in both
+" normal mode and visual mode, thereby avoiding
+" the need to frequently type the shift key
+nnoremap <leader><leader> :
+vnoremap <leader><leader> :
 
 " }}}
 
@@ -992,6 +1009,9 @@ nnoremap gdh :diffget //2<CR>
 " Merge the "branch" into the remote file
 nnoremap gdb :diffget //3<CR>
 
+" Perform a Gcommit with a mapping
+nnoremap <leader>gc :Gcommit %<CR>
+
 " }}}
 
 " Sandwich {{
@@ -1067,15 +1087,33 @@ command! FZFMine call fzf#run({
 " Note that the use of "-uu" includes the hidden files
 command! -bang -nargs=* Rg call fzf#vim#grep("rg -uu --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)
 
-" Define key combinations
+" Define key combinations for using FZF
+" Ensure that important mappings are available with either CTRL or Space
+
+" Display and fuzzy search through:
+
+" --> Hidden files
 nmap <C-h> :FZFHidden <CR>
+nmap <Space>h :FZFHidden <CR>
+
+" --> Non-hidden files
 nmap <C-p> :FZFMine <CR>
+nmap <Space>p :FZFMine <CR>
+
+" --> Lines of buffer or all lines or marks
 nmap <Space>b :BLines <CR>
 nmap <Space>r :Lines <CR>
 nmap <Space>m :Marks <CR>
+
+" --> Tags in buffer or all tags
 nmap <Space>t :BTags <CR>
 nmap <Space>y :Tags <CR>
+
+" --> Names of open buffers
 nnoremap <Tab> :Buffers <CR>
+nnoremap <Space>i :Buffers <CR>
+
+" --> Files matching search terms with either Ag or Rg
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
