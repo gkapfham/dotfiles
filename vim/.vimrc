@@ -65,6 +65,7 @@ Plug 'pgdouyon/vim-evanesco'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
 Plug 'rhysd/git-messenger.vim'
+Plug 'romainl/vim-devdocs'
 Plug 'RRethy/vim-hexokinase'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-syntax'
@@ -165,7 +166,7 @@ set undodir=~/.vim/undo
 command! Reload :source $MYVIMRC
 
 " Define a mapping to easy use of Reload
-nnoremap <leader>r :Reload<CR>
+nnoremap <leader>rr :Reload<CR>
 
 " }}}
 
@@ -650,6 +651,8 @@ augroup END
 let g:jsx_ext_required = 0
 
 " Syntax highlighting for Java
+" NOTE: Documentation for these variables
+" did not place them in an augroup
 let java_highlight_all=1
 let java_highlight_functions=1
 let java_highlight_functions=1
@@ -658,6 +661,8 @@ let java_space_errors=1
 let java_comment_strings=1
 
 " Plugin configuration for R
+" NOTE: Documentation for these variables
+" did not place them in an augroup
 let R_assign = 2
 let R_openpdf = 0
 let R_show_args = 1
@@ -668,7 +673,7 @@ let g:jedi#force_py_version = 3
 " Run the black formatter on current Python file
 " NOTE: this is not the standard method, but
 " I adopted it because Black did not work well
-" with virtual environments created by Pipenv
+" with virtual environments created by tools like Pipenv
 command! Black cexpr system('black ' . shellescape(expand('%')))<bar>:checktime
 
 " Run the black formatter on all of the Python files
@@ -723,6 +728,9 @@ let g:ale_linters = {
 " Configure the symbols for linting warnings and errors
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
+
+" Define a keymap for searching in devdocs.io for word under cursor
+nnoremap <leader>dd :DD <C-R><C-W><CR>
 
 " }}}
 
