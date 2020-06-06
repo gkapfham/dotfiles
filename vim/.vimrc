@@ -1017,8 +1017,11 @@ nnoremap gdh :diffget //2<CR>
 " Merge the "branch" into the remote file
 nnoremap gdb :diffget //3<CR>
 
-" Perform a Gcommit with a mapping
-nnoremap <leader>gc :Gcommit %<CR>
+" Perform a Gcommit for the current file with a mapping
+nnoremap <leader>gcf :Gcommit %<CR>
+
+" Perform a Gcommit for all modified files with a mapping
+nnoremap <leader>gca :Gcommit -a<CR>
 
 " }}}
 
