@@ -59,6 +59,10 @@ export EXA_COLORS="uu=0;33:gu=0;33:ur=0;33:uw=0;31"
 # correctly set the title of terminal
 export TERM="xterm-256color"
 
+# indicate support for 24-bit true-color
+# which is supported by neovim and pastel
+export COLORTERM='truecolor'
+
 # Character encoding
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
