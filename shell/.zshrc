@@ -145,6 +145,9 @@ alias cat="bat"
 # Directory listing with a simple command
 alias ka="exa --group-directories-first --grid --long --sort=name"
 
+# Fake the control center into thinking I'm using gnome shell
+alias gnome-control-center="env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
+
 # }}}
 
 # Git Aliases {{{
