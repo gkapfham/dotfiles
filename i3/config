@@ -226,6 +226,13 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
+bindsym Control+$mod+u focus output left
+bindsym Control+$mod+i focus output right
+
+# Moving workspaces between screen
+bindsym Control+$mod+less move workspace to output left
+bindsym Control+$mod+greater move workspace to output left
+
 # Focus the parent container
 # NOTE: Commented out since it conflicts with FZF in neovim
 # bindsym $mod+a focus parent
