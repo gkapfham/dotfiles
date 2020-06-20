@@ -484,6 +484,11 @@ function chpwd() {
   exa --group-directories-first --grid --long --sort=name
 }
 
+# Connect to the external display
+function external() {
+  xrandr --output HDMI-1 --above eDP-1 --auto
+}
+
 # }}}
 
 # Redefine Aliases {{{
