@@ -11,9 +11,9 @@ set $mod Mod1
 # https://thomashunter.name/i3-configurator/
 
 # Class                 border  bground text    indicator child_border
-client.focused          #333333 #333333 #FFFFFF #333333   #AEA79F
-client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
-client.unfocused        #333333 #222222 #888888 #292D2E   #222222
+client.focused          #333333 #333333 #dfdfdf #333333   #AEA79F
+client.focused_inactive #404040 #404040 #dfdfdf #484E50   #5F676A
+client.unfocused        #404040 #404040 #888888 #292D2E   #222222
 client.urgent           #2F343A #772953 #FFFFFF #772953   #772953
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
@@ -226,16 +226,30 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-bindsym Control+$mod+u focus output left
-bindsym Control+$mod+i focus output right
-
-# Moving workspaces between screen
-bindsym Control+$mod+less move workspace to output left
-bindsym Control+$mod+greater move workspace to output left
 
 # Focus the parent container
 # NOTE: Commented out since it conflicts with FZF in neovim
 # bindsym $mod+a focus parent
+
+# }}}
+
+# Monitors {{{
+
+# Move focus to the
+
+# --> top (i.e., external) monitor
+bindsym Control+$mod+u focus output up
+
+# --> bottom (i.e., laptop) monitor
+bindsym Control+$mod+i focus output down
+
+# Moving container to the
+
+# --> top (i.e., external) monitor
+bindsym Control+$mod+less move workspace to output up
+
+# --> bottom (i.e., laptop) monitor
+bindsym Control+$mod+greater move workspace to output down
 
 # }}}
 
@@ -330,6 +344,7 @@ mode "Resize a Window" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
+
 # Enter the resize mode
 bindsym $mod+r mode "Resize a Window"
 
