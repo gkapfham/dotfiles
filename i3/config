@@ -20,7 +20,7 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 # Font for window titles
 font pango:Hack Nerd Font Regular 20
 
-# Wallpaper
+# Wallpaper that is a solid grey color
 exec_always --no-startup-id hsetroot -solid "#1C1C1C"
 
 # }}}
