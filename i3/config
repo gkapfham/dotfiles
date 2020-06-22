@@ -123,11 +123,11 @@ set $ws18 "18"
 set $ws19 "19"
 set $ws20 "20"
 
-# Go to the left workspace
-bindsym Control+$mod+h workspace prev
+# Go to the left workspace on the same monitor
+bindsym Control+$mod+h workspace prev_on_output
 
-# Go to the right workspace
-bindsym Control+$mod+l workspace next
+# Go to the right workspace on the same monitor
+bindsym Control+$mod+l workspace next_on_output
 
 # Move window to the workspace on the right
 bindsym Control+Shift+h move to workspace prev
