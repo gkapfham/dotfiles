@@ -488,9 +488,9 @@ function chpwd() {
   exa --group-directories-first --grid --long --sort=name
 }
 
-# Connect to the external display
-function external() {
-  xrandr --output HDMI-1 --above eDP-1 --auto
+# Connect to the external monitor
+function connect-external-monitor() {
+  xrandr --output DP-1 --above eDP-1 --auto
 }
 
 # }}}
