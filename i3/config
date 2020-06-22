@@ -7,7 +7,7 @@ set $mod Mod1
 
 # Looks {{{
 
-# Colors
+# Create and preview colors:
 # https://thomashunter.name/i3-configurator/
 
 # Class                 border  bground text    indicator child_border
