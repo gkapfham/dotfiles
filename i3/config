@@ -52,6 +52,11 @@ exec --no-startup-id killall -q notify-osd
 # Run dunst to display the notifications
 exec_always --no-startup-id ~/.config/dunst/scripts/dunst-launch.sh
 
+# Run xbanish to hide the cursor by default
+# Note that this is already default for terminal
+# windows, but not common for other programs
+exec_always --no-startup-id xbanish
+
 # }}}
 
 # Rofi {{{
@@ -256,6 +261,12 @@ bindsym Control+$mod+less move workspace to output up
 
 # --> bottom (i.e., laptop) monitor
 bindsym Control+$mod+greater move workspace to output down
+
+# Always move to the mouse to the newest output
+# Note that this is currently the default behavior, with
+# the other option being 'none' which will not move the
+# cursor to the new output when you move the focus there
+mouse_warping output
 
 # NOTE: It is also possible to move containers to outputs,
 # but this feature is not currently enabled in i3
