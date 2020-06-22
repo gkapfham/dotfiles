@@ -113,6 +113,10 @@ export ZSH_THEME_VIRTUALENV_SUFFIX="] "
 # May appear when using Tmuxinator to start tmux
 export PROMPT_EOL_MARK='    '
 
+# Define the TERMINAL variable for i3 window manager,
+# which consults this for running the i3-sensible-terminal
+export TERMINAL='gnome-terminal'
+
 # }}}
 
 # System Aliases {{{
