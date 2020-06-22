@@ -74,7 +74,7 @@ bindsym Control+$mod+plus exec $rofi-system
 
 # Rofi for workspaces
 set $rofi-switch-workspace "~/.config/i3/scripts/i3-switch-workspace.sh"
-bindsym Control+$mod+b exec $rofi-switch-workspace
+bindsym Control+$mod+g exec $rofi-switch-workspace
 
 # Rofi for keymap reminders
 set $rofi-reminder "~/.config/i3/scripts/i3-keymaps.sh"
@@ -134,6 +134,8 @@ bindsym Control+Shift+h move to workspace prev
 
 # Move window to the workspace on the left
 bindsym Control+Shift+l move to workspace next
+
+bindsym Control+$mod+b workspace back_and_forth
 
 # Move window to the scratchpad
 bindsym Control+Shift+s move scratchpad
@@ -226,7 +228,6 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-
 # Focus the parent container
 # NOTE: Commented out since it conflicts with FZF in neovim
 # bindsym $mod+a focus parent
@@ -250,6 +251,10 @@ bindsym Control+$mod+less move workspace to output up
 
 # --> bottom (i.e., laptop) monitor
 bindsym Control+$mod+greater move workspace to output down
+
+# NOTE: It is also possible to move containers to outputs,
+# but this feature is not currently enabled in i3
+# https://unix.stackexchange.com/questions/397100/i3wm-how-to-move-windows-between-monitors
 
 # }}}
 
