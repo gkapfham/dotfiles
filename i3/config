@@ -100,6 +100,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # Define names for default workspaces
 # Note that these are not numbers
+
 # 1 through 10
 set $ws1 "1"
 set $ws2 "2"
@@ -110,6 +111,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
+
 # 10 through 20
 set $ws10 "10"
 set $ws11 "11"
@@ -135,6 +137,7 @@ bindsym Control+Shift+h move to workspace prev
 # Move window to the workspace on the left
 bindsym Control+Shift+l move to workspace next
 
+# Move to the previously focused workspace
 bindsym Control+$mod+b workspace back_and_forth
 
 # Move window to the scratchpad
