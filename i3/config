@@ -148,7 +148,7 @@ bindsym Control+Shift+s move scratchpad
 bindsym Control+$mod+s scratchpad show
 
 # Switch to a specified workspace
-# 1 through 10
+# --> 1 through 10
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
 bindsym $mod+3 workspace number 3
@@ -161,7 +161,7 @@ bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
 
 # Switch to a specified (extended) workspace
-# 11 through 20
+# --> 11 through 20
 set $mode_switch_workspace "Switch to Workspace"
 mode $mode_switch_workspace {
     bindsym $mod+1 workspace number 11; mode "default"
@@ -176,11 +176,12 @@ mode $mode_switch_workspace {
     bindsym $mod+0 workspace number 20; mode "default"
     bindsym Escape mode "default"
 }
+
 # Enter the extended workspace switching mode
 bindsym $mod+w mode $mode_switch_workspace
 
 # Move focused container to workspace
-# 1 through 10
+# --> 1 through 10
 bindsym Control+$mod+1 move container to workspace number 1
 bindsym Control+$mod+2 move container to workspace number 2
 bindsym Control+$mod+3 move container to workspace number 3
@@ -193,7 +194,7 @@ bindsym Control+$mod+9 move container to workspace number 9
 bindsym Control+$mod+0 move container to workspace number 10
 
 # Move to a specified (extended) workspace
-# 11 through 20
+# --> 11 through 20
 set $mode_move_workspace "Move to Workspace"
 mode $mode_move_workspace {
     bindsym Control+$mod+1 move container to workspace number 11; mode "default"
@@ -208,6 +209,7 @@ mode $mode_move_workspace {
     bindsym Control+$mod+0 move container to workspace number 20; mode "default"
     bindsym Escape mode "default"
 }
+
 # Enter the extended workspace move mode
 bindsym $mod+e mode $mode_move_workspace
 
