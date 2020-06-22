@@ -241,7 +241,7 @@ bindsym $mod+Right focus right
 
 # Monitors {{{
 
-# Move focus to the
+# Move focus to the:
 
 # --> top (i.e., external) monitor
 bindsym Control+$mod+u focus output up
@@ -249,7 +249,7 @@ bindsym Control+$mod+u focus output up
 # --> bottom (i.e., laptop) monitor
 bindsym Control+$mod+i focus output down
 
-# Moving container to the
+# Moving container to the:
 
 # --> top (i.e., external) monitor
 bindsym Control+$mod+less move workspace to output up
