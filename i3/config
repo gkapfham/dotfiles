@@ -55,7 +55,7 @@ exec_always --no-startup-id ~/.config/dunst/scripts/dunst-launch.sh
 # Run xbanish to hide the cursor by default
 # Note that this is already default for terminal
 # windows, but not common for other programs
-exec_always --no-startup-id xbanish
+exec --no-startup-id xbanish
 
 # }}}
 
