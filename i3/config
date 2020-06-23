@@ -246,15 +246,27 @@ bindsym $mod+Right focus right
 
 # Monitors {{{
 
+# Note that the following two commands are like "toggles" in that
+# i3 will "wrap around" if you are already on "up" and the command
+# moves the focus to "up", thereby moving it to "bottom"
+
 # Move focus to the:
 
-# --> top (i.e., external) monitor
+# --> top (i.e., external) monitor and wrap around
 bindsym Control+$mod+u focus output up
 
-# --> bottom (i.e., laptop) monitor
-bindsym Control+$mod+i focus output down
+# Move container to the:
 
-# Moving container to the:
+# Note that I tried to "chain" this with a focus output up and it
+# did not work or did not work reliably after testing
+
+# --> top (i.e., external) monitor and wrap around
+bindsym Control+$mod+i move container to output up
+
+# Note that both of these commands are not strictly needed due
+# to the fact that up/down commands are actually toggles
+
+# Moving workspace to the:
 
 # --> top (i.e., external) monitor
 bindsym Control+$mod+less move workspace to output up
@@ -267,10 +279,6 @@ bindsym Control+$mod+greater move workspace to output down
 # the other option being 'none' which will not move the
 # cursor to the new output when you move the focus there
 mouse_warping output
-
-# NOTE: It is also possible to move containers to outputs,
-# but this feature is not currently enabled in i3
-# https://unix.stackexchange.com/questions/397100/i3wm-how-to-move-windows-between-monitors
 
 # }}}
 
