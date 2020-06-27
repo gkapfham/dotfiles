@@ -88,10 +88,12 @@ export BROWSER=/usr/bin/firefox
 # Strategy: place user-local binaries before system ones
 # Includes setup for:
 # --> Fuzzy finding with fzf
-# --> Go with go and .gocode
+# --> Local binaries
 # --> JavaScript npm
 # --> Rust with cargo
-export PATH="$HOME/.npm-global/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$HOME/.gocode/bin:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
+# --> Go with .gocode
+# --> Poetry with .poetry
+export PATH="$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin::$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
 
 # Local Gem home
 export GEM_HOME=$HOME/.gem
