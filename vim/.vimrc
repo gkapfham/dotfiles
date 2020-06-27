@@ -729,9 +729,6 @@ let g:ale_linters = {
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 
-" Define a keymap for searching in devdocs.io for word under cursor
-nnoremap <leader>dd :DD <C-R><C-W><CR>
-
 " }}}
 
 " Markdown {{{
