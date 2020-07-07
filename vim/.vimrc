@@ -9,6 +9,7 @@ Plug 'airblade/vim-rooter'
 Plug 'andymass/vim-matchup'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
+Plug 'cespare/vim-toml'
 Plug 'Chiel92/vim-autoformat'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'chrisbra/unicode.vim'
@@ -335,7 +336,7 @@ let g:lightline = {
       \ 'colorscheme': 'vitaminonec',
       \ 'active': {
       \   'left': [ [ 'mode', 'spell', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'context', 'modified' ] ],
+      \             [ 'fugitive', 'readonly', 'filename', 'python', 'context', 'modified' ] ],
       \   'right': [['lineinfo'], ['percent'], ['linter_warnings', 'linter_errors', 'linter_ok', 'fileformat', 'fileencoding', 'filetype'], ['gutentags']]
       \ },
       \ 'component_function': {
@@ -349,7 +350,8 @@ let g:lightline = {
       \   'linter_warnings': 'LightlineLinterWarnings',
       \   'linter_errors': 'LightlineLinterErrors',
       \   'linter_ok': 'LightlineLinterOK',
-      \   'context': 'NearestMethodOrFunction'
+      \   'context': 'NearestMethodOrFunction',
+      \   'python': 'LightlinePythonEnvironment'
       \ },
       \ 'component_type': {
       \   'readonly': 'error',
@@ -370,6 +372,12 @@ augroup END
 " Display a diagnostic message when gutentags updates
 function! LightlineGutentags()
   return gutentags#statusline() !=# '' ? '  Tags ' : 'Tags '
+endfunction
+
+" Display a diagnostic message when running Python in a virtual environment
+function! LightlinePythonEnvironment()
+  let l:venv = $VIRTUAL_ENV
+  return l:venv !=# '' ? ' '.split(l:venv, '/')[-1] : ''
 endfunction
 
 " Display a lock symbol if the file is read-only (e.g., help files)
