@@ -799,13 +799,17 @@ xmap gr <plug>(ChopSentences)
 " --> line wrap at 80 words to match :StandardWrap
 let g:latexindent_yaml_options = 'modifyLineBreaks:textWrapOptions:columns:80'
 
-" Insert a comment symbol for LaTeX on current line,
-" ensuring that only the comment is on that line.
-"
-" Note that it would be ideal if it was possible
-" to configure latexindent to take this step.
-" However, I cannot configure latexindent to insert
-" a comment symbol between every sentence.
+" Do not use a space after the comment string symbol in LaTeX
+augroup latexcomments
+  autocmd!
+  autocmd FileType tex setlocal commentstring=%%s
+augroup END
+
+" }}}
+
+" Comments {{{
+
+" Insert a comment symbol on the current line at cursor location
 nmap <Space>c :execute "normal! i" . split(&commentstring, '%s')[0]<CR>
 
 " }}}
