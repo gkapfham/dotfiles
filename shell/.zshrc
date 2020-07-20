@@ -107,6 +107,9 @@ unset JAVA_TOOL_OPTIONS
 # No warning messages in Ruby
 export RUBYOPT='-W0'
 
+# No color formatting with pre-commit
+export PRE_COMMIT_COLOR='never'
+
 # Get correct spacing in python virtualenv_prompt_info
 export ZSH_THEME_VIRTUALENV_SUFFIX="] "
 
