@@ -11,14 +11,14 @@ set $mod Mod1
 # https://thomashunter.name/i3-configurator/
 
 # Class                 border  bground text    indicator child_border
-client.focused          #333333 #333333 #dfdfdf #333333   #AEA79F
+client.focused          #333333 #333333 #bcbcbc #333333   #333333
 client.focused_inactive #404040 #404040 #dfdfdf #484E50   #5F676A
 client.unfocused        #404040 #404040 #888888 #292D2E   #222222
-client.urgent           #2F343A #772953 #FFFFFF #772953   #772953
+client.urgent           #2F343A #333333 #bcbcbc #772953   #772953
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
 # Font for window titles
-font pango:Hack Nerd Font Regular 20
+font pango:Hack Nerd Font Regular 12
 
 # Wallpaper that is a solid grey color
 exec_always --no-startup-id hsetroot -solid "#1C1C1C"
@@ -28,19 +28,20 @@ exec_always --no-startup-id hsetroot -solid "#1C1C1C"
 # Startup {{{
 
 # Run compton for fast screen redraws and compositing
-exec --no-startup-id compton
+# exec --no-startup-id compton
 
 # Run the settings daemon to control scaling
-exec --no-startup-id gnome-settings-daemon
+# exec --no-startup-id gnome-settings-daemon
 
 # Run the network-monitor applet
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 
 # Run polybar to display the fully configured status bar
 exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
 
 # Run the dynamic workspace renaming program
-exec_always --no-startup-id exec ~/.cargo/bin/i3wsr
+# exec_always --no-startup-id exec ~/.cargo/bin/i3wsr
+exec_always --no-startup-id exec i3wsr
 
 # Run numlockx to turn off numlock by default
 # This prevents numlock from displaying in i3lock-color
@@ -73,17 +74,20 @@ bindsym Control+$mod+n exec $rofi-desktop
 set $rofi-windows "rofi -modi 'window' -show window"
 bindsym Control+$mod+m exec $rofi-windows
 
+# Rofi for workspaces
+set $rofi-switch-workspace "~/.config/i3/scripts/i3-switch-workspace.sh"
+bindsym Control+$mod+v exec $rofi-switch-workspace
+
 # Rofi for system control
 set $rofi-system "~/.config/i3/scripts/i3-system.sh 'i3-msg exit'"
 bindsym Control+$mod+plus exec $rofi-system
 
-# Rofi for workspaces
-set $rofi-switch-workspace "~/.config/i3/scripts/i3-switch-workspace.sh"
-bindsym Control+$mod+g exec $rofi-switch-workspace
-
 # Rofi for keymap reminders
 set $rofi-reminder "~/.config/i3/scripts/i3-keymaps.sh"
 bindsym Control+$mod+r exec $rofi-reminder
+
+# Rofi for the display and insertion of an emoji
+bindsym Control+$mod+y exec "rofimoji"
 
 # }}}
 
@@ -384,24 +388,42 @@ bindsym $mod+r mode "Resize a Window"
 
 # Media {{{
 
-# Increase the volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
+# # Increase the volume
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5%
+
+# # Decrease the volume
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5%
 
 # Decrease the volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5%
+bindsym XF86AudioLowerVolume  exec "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-5%'"
+
+# Increase the volume
+bindsym XF86AudioRaiseVolume  exec "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '+5%'"
 
 # Mute the audio
-bindsym XF86AudioMute exec --no-startup-id pavolume mute
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 2 toggle
+bindsym XF86AudioMute exec "/usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle"
+
+# # Mute the audio
+# bindsym XF86AudioMute exec --no-startup-id pavolume mute
+# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute 2 toggle
 
 # Use the light backlight modification tool
 # This works as long as the light program is in the sudoers file
 
 # Increase the brightness of the screen
-bindsym XF86MonBrightnessUp exec --no-startup-id sudo /usr/bin/light -s sysfs/backlight/auto -A 5
+# bindsym XF86MonBrightnessUp exec --no-startup-id sudo /usr/bin/light -s sysfs/backlight/auto -A 5
 
 # Decrease the brightness of the screen
-bindsym XF86MonBrightnessDown exec --no-startup-id sudo /usr/bin/light -s sysfs/backlight/auto -U 5
+# bindsym XF86MonBrightnessDown exec --no-startup-id sudo /usr/bin/light -s sysfs/backlight/auto -U 5
+
+# Increase the brightness of the screen
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+
+# Decrease the brightness of the screen
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+
+# Set to maximum brightness
+bindsym $mod+Shift+b exec xbacklight -set 100
 
 # }}}
 
