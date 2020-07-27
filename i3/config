@@ -27,20 +27,10 @@ exec_always --no-startup-id hsetroot -solid "#1C1C1C"
 
 # Startup {{{
 
-# Run compton for fast screen redraws and compositing
-# exec --no-startup-id compton
-
-# Run the settings daemon to control scaling
-# exec --no-startup-id gnome-settings-daemon
-
-# Run the network-monitor applet
-# exec --no-startup-id nm-applet
-
 # Run polybar to display the fully configured status bar
 exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
 
 # Run the dynamic workspace renaming program
-# exec_always --no-startup-id exec ~/.cargo/bin/i3wsr
 exec_always --no-startup-id exec i3wsr
 
 # Run numlockx to turn off numlock by default
@@ -54,8 +44,8 @@ exec --no-startup-id killall -q notify-osd
 exec_always --no-startup-id ~/.config/dunst/scripts/dunst-launch.sh
 
 # Run xbanish to hide the cursor by default
-# Note that this is already default for terminal
-# windows, but not common for other programs
+# Note that this is already default for some terminal
+# windows, but not common for other programs like Firefox
 exec --no-startup-id xbanish
 
 # }}}
