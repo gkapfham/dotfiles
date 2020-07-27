@@ -395,10 +395,3 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 bindsym $mod+Shift+b exec xbacklight -set 100
 
 # }}}
-
-# Deprecated {{{
-
-# exec_always --no-startup-id xrdb -load ~/.Xresources
-# exec_always --no-startup-id xsetroot -cursor_name left_ptr
-
-# }}}
