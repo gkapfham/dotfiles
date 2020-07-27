@@ -53,6 +53,8 @@ exec --no-startup-id xbanish
 # Rofi {{{
 
 # Rofi for programs
+# Note that this can access the programs installed
+# in the ~/.local/bin directory
 set $rofi-program "rofi -modi 'run' -show run"
 bindsym Control+$mod+p exec $rofi-program
 
@@ -91,7 +93,7 @@ floating_modifier $mod
 # Programs {{{
 
 # Terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacrity
 
 # }}}
 
@@ -231,10 +233,6 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
-# Focus the parent container
-# NOTE: Commented out since it conflicts with FZF in neovim
-# bindsym $mod+a focus parent
 
 # }}}
 
