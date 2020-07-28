@@ -765,12 +765,17 @@ command! -range=% Backtick <line1>,<line2> :s/'/`/g
 " LaTeX {{{
 
 " Configure vimtex
+" --> Do not fold
 let g:vimtex_fold_enabled = 0
+" --> Do not open quickfix for warnings
 let g:vimtex_quickfix_open_on_warning = 0
+" --> Do not show the help message
 let g:vimtex_index_show_help = 0
-" let g:vimtex_view_method = 'mupdf'
+" --> Use zathura for the PDF viewer
 let g:vimtex_view_method = 'zathura'
-" let g:vimtex_view_mupdf_options = '-r 288'
+" --> Use the nvr program (Neovim-remote)
+"     to facilitate communication between
+"     Neovim and the Zathura PDF viewer
 let g:vimtex_compiler_progname = 'nvr'
 
 " Define mapping to generate and view the table of contents
