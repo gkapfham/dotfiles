@@ -79,7 +79,8 @@ set $rofi-reminder "~/.config/i3/scripts/i3-keymaps.sh"
 bindsym Control+$mod+r exec $rofi-reminder
 
 # Rofi for the display and insertion of an emoji
-bindsym Control+$mod+y exec "rofimoji"
+# Only show the five most recent icons in the menu bar
+bindsym Control+$mod+y exec "rofimoji --max-recent 5"
 
 # }}}
 
