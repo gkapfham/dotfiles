@@ -2,6 +2,8 @@ set nocompatible
 
 " Plug {{{
 
+" Tell plug to look into a non-standard
+" directory to find all of the plugins
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
@@ -241,7 +243,7 @@ set ttimeoutlen=10
 " Display indentation
 set autoindent
 " WARNING: may crash Neovim 0.4.0-dev
-" set copyindent
+set copyindent
 set shiftwidth=2
 set smartindent
 
@@ -387,7 +389,7 @@ endfunction
 
 " Display symbols, not dictionaries, to indicate that spell-checking runs
 function! LightlineSpell()
-  return &spell ? 'A-Z✔ ' : ''
+  return &spell ? 'A-Z ' : ''
 endfunction
 
 " Display file name with symbol or '*' for 'No Name'
@@ -693,11 +695,12 @@ let g:formatter_yapf_style = 'pep8'
 
 " Set the hosts programs for Python and Python3
 " This improves performance when loading plugins using Python
-let g:python_host_prog  = '/usr/bin/python'
+" Note that /usr/bin/python defaults to Python3
+let g:python_host_prog  = '/usr/bin/python2'
 if filereadable('/usr/local/bin/python3')
   let g:python3_host_prog = '/usr/local/bin/python3'
 else
-  let g:python3_host_prog = '/usr/bin/python3'
+  let g:python3_host_prog = '/usr/bin/python'
 endif
 
 " Turn on the EchoDoc plugin for languages like Python
@@ -765,8 +768,9 @@ command! -range=% Backtick <line1>,<line2> :s/'/`/g
 let g:vimtex_fold_enabled = 0
 let g:vimtex_quickfix_open_on_warning = 0
 let g:vimtex_index_show_help = 0
-let g:vimtex_view_method = 'mupdf'
-let g:vimtex_view_mupdf_options = '-r 288'
+" let g:vimtex_view_method = 'mupdf'
+let g:vimtex_view_method = 'zathura'
+" let g:vimtex_view_mupdf_options = '-r 288'
 let g:vimtex_compiler_progname = 'nvr'
 
 " Define mapping to generate and view the table of contents
@@ -786,7 +790,7 @@ let g:tex_conceal='abdmgs'
 " Use tex over plaintex
 let g:tex_flavor = 'tex'
 
-" Vimtex requires
+" Required by the vimtex plugin
 set hidden
 
 " Use latexindent to break up paragraphs
@@ -1089,12 +1093,36 @@ command! FZFMru call fzf#run({
       \  'options': '-m -x +s --no-bold --cycle',
       \  'down':    '25%')}
 
-" Load hidden files
-command! FZFHidden call fzf#run({
-      \  'source':  'rg --hidden --ignore .git -l -g ""',
-      \  'sink':    'e',
-      \  'options': '-m -x +s --no-bold --cycle',
-      \  'down':    '25%'})
+" Use rg by default
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+  set grepprg=rg\ --vimgrep
+endif
+
+" A nicer Files preview with FZF and bat
+" docs - https://github.com/junegunn/fzf.vim#example-customizing-files-command
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+" " Load hidden files
+" command! FZFHidden call fzf#run({
+"       \  'source':  'rg --hidden --ignore .git -l -g ""',
+"       \  'sink':    'e',
+"       \  'options': '-m -x +s --no-bold --cycle',
+"       \  'down':    '25%'})
+
+" command! -bang -nargs=* All
+"   \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --no-ignore-vcs --glob "!{node_modules/*,.git/*}"', 'down': '25%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
+
+" command! -bang -nargs=* All
+"   \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --no-ignore-vcs --glob "!{node_modules/*,.git/*}"', 'down': '25%', 'options': '-m -x +s --no-bold --cycle' }))
+
+" " Load hidden files
+" command! FZFHidden call fzf#run({
+"       \  'source':  'rg --files --hidden --no-ignore-vcs --glob "!{node_modules/*,.git/*}"',
+"       \  'sink':    'e',
+"       \  'options': '-m -x +s --no-bold --cycle',
+"       \  'down':    '25%'})
 
 " Load non-hidden files
 command! FZFMine call fzf#run({
@@ -1103,22 +1131,33 @@ command! FZFMine call fzf#run({
       \  'options': '-m -x +s --no-bold --cycle',
       \  'down':    '25%'})
 
+" " Re-define the Rg command so that it considers hidden files
+"
+" " Note that the use of "-uu" includes the hidden files
+
+" command! -bang -nargs=* Rg call fzf#vim#grep("rg -uu --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)
+
 " Re-define the Rg command so that it considers hidden files
+"
 " Note that the use of "-uu" includes the hidden files
-command! -bang -nargs=* Rg call fzf#vim#grep("rg -uu --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg -uu --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
 
 " Define key combinations for using FZF
 " Ensure that important mappings are available with either CTRL or Space
 
 " Display and fuzzy search through:
 
-" --> Hidden files
-nmap <C-h> :FZFHidden <CR>
-nmap <Space>h :FZFHidden <CR>
+" " --> Hidden files
+" nmap <C-h> :FZFHidden <CR>
+" nmap <Space>h :FZFHidden <CR>
 
-" --> Non-hidden files
-nmap <C-p> :FZFMine <CR>
-nmap <Space>p :FZFMine <CR>
+" --> All files, including hidden files, but not
+" those files stored in a .git directory
+nmap <C-p> :Files <CR>
+nmap <Space>p :Files <CR>
 
 " --> Lines of buffer or all lines or marks
 nmap <Space>b :BLines <CR>
@@ -1262,25 +1301,25 @@ end
 " Use an empty value to disable the preview window
 let g:fzf_preview_window = ''
 
-" Control FZF windows
-command! FZFMru call fzf#run({
-      \  'source':  v:oldfiles,
-      \  'sink':    'e',
-      \  'options': '-m -x +s --no-bold --cycle',
-      \  'down':    '10%',
-      \  'window':  'enew'})
-command! FZFHidden call fzf#run({
-      \  'source':  'ag --hidden --ignore .git -l -g ""',
-      \  'sink':    'e',
-      \  'options': '-m -x +s --no-bold --cycle',
-      \  'window':  'enew'})
-command! -bang FZFMine call fzf#run({
-      \  'source':  'ag --ignore .git -l -g ""',
-      \  'sink':    'e',
-      \  'options': '-m -x +s --no-bold --cycle',
-      \  'down':    '100%',
-      \  'window':  'enew'})
-let g:fzf_layout = { 'window': 'enew' }
+" " Control FZF windows
+" command! FZFMru call fzf#run({
+"       \  'source':  v:oldfiles,
+"       \  'sink':    'e',
+"       \  'options': '-m -x +s --no-bold --cycle',
+"       \  'down':    '10%',
+"       \  'window':  'enew'})
+" command! FZFHidden call fzf#run({
+"       \  'source':  'ag --hidden --ignore .git -l -g ""',
+"       \  'sink':    'e',
+"       \  'options': '-m -x +s --no-bold --cycle',
+"       \  'window':  'enew'})
+" command! -bang FZFMine call fzf#run({
+"       \  'source':  'ag --ignore .git -l -g ""',
+"       \  'sink':    'e',
+"       \  'options': '-m -x +s --no-bold --cycle',
+"       \  'down':    '100%',
+"       \  'window':  'enew'})
+" let g:fzf_layout = { 'window': 'enew' }
 
 " Use FZF to search through the TOC of a LaTeX document
 nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
