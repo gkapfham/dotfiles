@@ -131,10 +131,6 @@ export TERMINAL='alacritty'
 # Configure bat to use a matching theme
 export BAT_THEME='Vitamin-Onec'
 
-# Configure where the system will look for
-# the, as an example, .desktop files
-export XDG_DATA_HOME="$HOME/.local/share"
-
 # }}}
 
 # System Aliases {{{
