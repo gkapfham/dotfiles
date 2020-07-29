@@ -148,14 +148,8 @@ alias htop="htop -C"
 # IPython
 alias ipython="ipython --TerminalInteractiveShell.editing_mode=vi"
 
-# Twitter
-alias twitter="/usr/local/bin/t"
-
 # Npm without non-Ubuntu packages
 alias npm="npm --no-optional"
-
-# Bat with a special color scheme
-# alias bat="bat --theme=\"base16\""
 
 # More and cat are aliased to bat
 alias more="bat"
@@ -164,10 +158,8 @@ alias cat="bat"
 # Directory listing with a simple command
 alias ka="exa --group-directories-first --grid --long --sort=name"
 
+# Always run pacman as root
 alias pacman="sudo pacman"
-
-# Fake the control center into thinking I'm using gnome shell
-# alias gnome-control-center="env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
 
 # }}}
 
@@ -432,12 +424,12 @@ tmm() {
     mux "$session"
 }
 
-# Display all of the recent directories -- matches search term
-t() {
-  fasdlist=$( fasd -d -l -r $1 | \
-    fzf --query="$1 " --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle) &&
-    cd "$fasdlist"
-}
+# # Display all of the recent directories -- matches search term
+# t() {
+#   fasdlist=$( fasd -d -l -r $1 | \
+#     fzf --query="$1 " --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle) &&
+#     cd "$fasdlist"
+# }
 
 # Define the name of a tmux pane, display in the status-right
 function workspace {
