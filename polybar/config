@@ -2,12 +2,11 @@
 ; Define colors to be centered by dark grey
 ; Some of these colors are not used now
 background = #333333
-background-alt = #dfdfdf
-foreground = #dfdfdf
-foreground-alt = #555
+background-alt = #c6c6c6
+foreground = #bcbcbc
 primary = #616161
 secondary = #e60053
-alert = #bd2c40
+alert = #616161
 green = #009300
 yellow = #E95420
 red = #f90000
@@ -38,13 +37,13 @@ module-margin-left = 1
 module-margin-right = 1
 
 ; Specify the main font
-font-0 = "Hack Nerd Font:size=22;5"
+font-0 = "Hack Nerd Font:size=24;5"
 
 ; Specify the icon font
-font-1 = "Hack Nerd Font:size=22;5"
+font-1 = "Hack Nerd Font:size=24;5"
 
 ; Specify the emphasis font for the i3 workspaces
-font-2 = "Hack Nerd Font:size=22:weight=bold;5"
+font-2 = "Hack Nerd Font:size=24:weight=bold;5"
 
 ; Display the i3 workspaces on the left
 modules-left = i3
@@ -80,7 +79,7 @@ margin-bottom = 5
 ; Display details about the wireless network
 [module/network]
 type = internal/network
-interface = wlp2s0
+interface = wlp0s20f3
 interval = 3.0
 udspeed-minwidth = 0
 format-connected-prefix = " "
@@ -152,7 +151,7 @@ label = %percentage_used%%
 type = internal/date
 interval = 1
 
-date = %a %b %d
+date =  %a %b %d
 time = "%I:%M %p "
 label = %date% %time%
 
