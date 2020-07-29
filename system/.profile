@@ -3,7 +3,7 @@
 
 # set PATH so that it includes:
 
-# --> a "private" bin if it exists
+# --> a "user" bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
