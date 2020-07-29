@@ -15,11 +15,10 @@ configure the programs regularly used by me, [Gregory M.
 Kapfhammer](https://www.gregorykapfhammer.com/). Please note that the dotfiles
 in this repository are, at least to some extent, "hard-coded" to work for my
 development environment and projects. For instance, I created these
-configuration files under the assumption that a developer will use Ubuntu
-16.04. Even though they are heavily customized, my hope is that they are
-largely reusable and, additionally, will give examples of how to configure
-various programs such as `i3`, `mutt`, `nvim`, `polybar`, `tmux`, `vim`, and
-`zsh`.
+configuration files under the assumption that a developer will use Arch Linux.
+Even though they are heavily customized, my hope is that they are largely
+reusable and, additionally, will give examples of how to configure various
+programs such as `i3`, `mutt`, `nvim`, `polybar`, `tmux`, `vim`, and `zsh`.
 
 This is a summary of the dotfiles that I create and maintain:
 
