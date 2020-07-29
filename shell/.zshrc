@@ -93,7 +93,11 @@ export BROWSER=/usr/bin/firefox
 # --> Rust with cargo
 # --> Go with .gocode
 # --> Poetry with .poetry
-export PATH="$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin::$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
+export PATH="$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin::$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
+
+export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
+
+export PYENV_ROOT="$HOME/.pyenv"
 
 # Local Gem home
 export GEM_HOME=$HOME/.gem
@@ -120,7 +124,14 @@ export PROMPT_EOL_MARK='    '
 
 # Define the TERMINAL variable for i3 window manager,
 # which consults this for running the i3-sensible-terminal
-export TERMINAL='gnome-terminal'
+export TERMINAL='alacritty'
+
+# Configure bat to use a matching theme
+export BAT_THEME='Vitamin-Onec'
+
+export XDG_DATA_HOME="$HOME/.local/share"
+
+# export XDG_CONFIG_HOME="$HOME/.config"
 
 # }}}
 
@@ -145,7 +156,7 @@ alias twitter="/usr/local/bin/t"
 alias npm="npm --no-optional"
 
 # Bat with a special color scheme
-alias bat="bat --theme=\"Tomorrow Night\""
+# alias bat="bat --theme=\"base16\""
 
 # More and cat are aliased to bat
 alias more="bat"
@@ -154,8 +165,10 @@ alias cat="bat"
 # Directory listing with a simple command
 alias ka="exa --group-directories-first --grid --long --sort=name"
 
+alias pacman="sudo pacman"
+
 # Fake the control center into thinking I'm using gnome shell
-alias gnome-control-center="env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
+# alias gnome-control-center="env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
 
 # }}}
 
@@ -229,15 +242,20 @@ ZSH_THEME="norm-gkapfham"
 # Timestamps
 HIST_STAMPS="mm/dd/yyyy"
 
+source ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
+
 # NOTE: use this plugin as a backup in case alternate is unavailable
 # Plugin: zsh-syntax-highlighting
 # source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Plugin: fast-syntax-highlighting
-source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+zsh-defer source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # Plugin: Request all plugins from oh-my-zsh
 plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator vi-mode virtualenv)
+
+# rehash
+autoload -Uz compinit && compinit
 
 # Load customized oh-my-zsh script
 source $HOME/.oh-my-zsh.sh
@@ -249,7 +267,7 @@ source $HOME/.zsh/gitstatus/gitstatus.prompt.zsh
 # Plugin: fzf-tab
 # Note: must be sourced after all other plugins to ensure
 # that tab-completion binds to it and not to oh-my-zsh method
-source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
+zsh-defer source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 
 # Define the default fzf command used by fzf-tab
 # Note: colors defined here because this plugin
@@ -288,7 +306,7 @@ fasd_cache="$HOME/.fasd-init-zsh"
 if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
   fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
 fi
-source "$fasd_cache"
+zsh-defer source "$fasd_cache"
 unset fasd_cache
 
 # Use FZF to filter the output of FASD anywhere is a command
@@ -378,7 +396,7 @@ FZF_TAB_OPTS=(
 )
 
 # Setup fzf, its auto-completions, and key bindings
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
 
 # Trigger fzf completion using the semi-colon key instead of **
 export FZF_COMPLETION_TRIGGER=';'
@@ -432,29 +450,32 @@ function workspace {
 
 # Travis {{{
 
-# Lazy load completion of travis command after first call
-# Note that this reduces startup time for a shell at the
-# cost of making travis not available until run first time
-travis() {
-  unfunction "$0"
-  [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
-  travis "$@"
-}
+# # Lazy load completion of travis command after first call
+# # Note that this reduces startup time for a shell at the
+# # cost of making travis not available until run first time
+# travis() {
+#   unfunction "$0"
+#   [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+#   travis "$@"
+# }
 
 # }}}
 
 # Pyenv {{{
 
+export PATH="$HOME/.pyenv/bin:$PATH"
+zsh-defer eval "$(command pyenv init -)"
+
 # Lazy load completion of pyenv command after first call
 # Note that this reduces startup time for a shell at the
 # cost of making pyenv not available until run first time
-export PATH="$HOME/.pyenv/bin:$PATH"
-pyenv() {
-  unfunction "$0"
-  eval "$(command pyenv init -)"
-  eval "$(command pyenv virtualenv-init -)"
-  pyenv "$@"
-}
+
+# pyenv() {
+#   unfunction "$0"
+#   eval "$(command pyenv init -)"
+#   # eval "$(command pyenv virtualenv-init -)"
+#   pyenv "$@"
+# }
 
 # }}}
 
@@ -463,6 +484,16 @@ pyenv() {
 # Ensure that Pipenv can find the version of Python
 # that is managed by the Pyenv tool
 export PIPENV_PYTHON="$HOME/.pyenv/shims/python"
+
+# }}}
+
+# Perl {{{
+
+# Ensure that the user-install version of cpanm is
+# available to neovim, enabling health checks to pass
+if (command -v perl && command -v cpanm) >/dev/null 2>&1; then
+  test -d "$HOME/perl5/lib/perl5" && eval $(perl -I "$HOME/perl5/lib/perl5" -Mlocal::lib)
+fi
 
 # }}}
 
@@ -495,7 +526,7 @@ function chpwd() {
 
 # Connect to the external monitor
 function connect-external-monitor() {
-  xrandr --output DP-1 --above eDP-1 --auto
+  xrandr --output DP3 --above eDP1 --auto
 }
 
 # }}}
@@ -506,6 +537,24 @@ function connect-external-monitor() {
 alias ls="exa --color=always"
 
 # }}}
+
+if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
+  export COLORTERM="truecolor"
+fi
+
+# _-accept-line () {
+#     emulate -L zsh
+#     local -a WORDS
+#     WORDS=( ${(z)BUFFER} )
+#     # Unfortunately ${${(z)BUFFER}[1]} works only for at least two words,
+#     # thus I had to use additional variable WORDS here.
+#     local -r FIRSTWORD=${WORDS[1]}
+#     local -r GREEN=$'\e[32m' RESET_COLORS=$'\e[0m'
+#     [[ "$(whence -w $FIRSTWORD 2>/dev/null)" == "${FIRSTWORD}: alias" ]] &&
+#         echo -nE $'\n'"${GREEN}Executing $(whence $FIRSTWORD)${RESET_COLORS}"
+#     zle .accept-line
+# }
+# zle -N accept-line _-accept-line
 
 # Benchmarking {{{
 
