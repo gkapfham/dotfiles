@@ -448,17 +448,6 @@ function workspace {
 export PATH="$HOME/.pyenv/bin:$PATH"
 zsh-defer eval "$(command pyenv init -)"
 
-# Lazy load completion of pyenv command after first call
-# Note that this reduces startup time for a shell at the
-# cost of making pyenv not available until run first time
-
-# pyenv() {
-#   unfunction "$0"
-#   eval "$(command pyenv init -)"
-#   # eval "$(command pyenv virtualenv-init -)"
-#   pyenv "$@"
-# }
-
 # }}}
 
 # Pipenv {{{
