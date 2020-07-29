@@ -95,21 +95,23 @@ export BROWSER=/usr/bin/firefox
 # --> Poetry with .poetry
 export PATH="$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin::$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
 
+# Add the bin directory for Ruby gems to the Path
 export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
 
+# Local pyenv home
 export PYENV_ROOT="$HOME/.pyenv"
 
 # Local Gem home
 export GEM_HOME=$HOME/.gem
+
+# No warning messages in Ruby
+export RUBYOPT='-W0'
 
 # Local Go program home
 export GOPATH=$HOME/.gocode
 
 # No Java tools
 unset JAVA_TOOL_OPTIONS
-
-# No warning messages in Ruby
-export RUBYOPT='-W0'
 
 # No color formatting with pre-commit
 export PRE_COMMIT_COLOR='never'
@@ -129,16 +131,13 @@ export TERMINAL='alacritty'
 # Configure bat to use a matching theme
 export BAT_THEME='Vitamin-Onec'
 
+# Configure where the system will look for
+# the, as an example, .desktop files
 export XDG_DATA_HOME="$HOME/.local/share"
-
-# export XDG_CONFIG_HOME="$HOME/.config"
 
 # }}}
 
 # System Aliases {{{
-
-# Vim with a server
-alias vim="vim --servername VIM"
 
 # MuPDF resolution
 alias mupdf="mupdf -r 288"
