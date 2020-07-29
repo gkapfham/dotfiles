@@ -3,7 +3,7 @@
 !
 
 ! Set the font to match i3 and program configuration
-rofi.font: Hack\ Nerd\ Font\ Regular\ 48
+rofi.font: Hack\ Nerd\ Font\ Regular\ 54
 
 ! Set the color theme for rofi
 rofi.color-enabled: true
@@ -29,11 +29,14 @@ rofi.xoffset: 0
 rofi.yoffset: -200
 
 !
-! Cursor theme
+! Display scaling
 !
 
-! Define the cursor size and theme
-! Note that this is not reliable
-! and hard to set on Ubuntu 16.04
-Xcursor.theme: moblin
-Xcursor.size: 16
+! Xft settings for HIDPI
+Xft.dpi:        230
+Xft.rgba:       rgb
+Xft.autohint:   0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting:    1
+Xft.antialias:  1
