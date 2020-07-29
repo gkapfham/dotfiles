@@ -2,7 +2,7 @@
 ! Rofi theme
 !
 
-! Set the font to match i3 and program configuration
+! Set the font to match i3 and all other programs
 rofi.font: Hack\ Nerd\ Font\ Regular\ 54
 
 ! Set the color theme for rofi
@@ -32,7 +32,7 @@ rofi.yoffset: -200
 ! Display scaling
 !
 
-! Xft settings for HIDPI
+! Xft settings for HiDPI
 Xft.dpi:        230
 Xft.rgba:       rgb
 Xft.autohint:   0
