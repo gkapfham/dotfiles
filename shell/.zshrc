@@ -194,7 +194,8 @@ fzf-git-branch() {
         sed "s/.* //"
 }
 
-# Run git checkout and call the previous function for display details about the branch
+# Run git checkout and call the previous function
+# for display details about the branch
 fzf-git-checkout() {
     git rev-parse HEAD > /dev/null 2>&1 || return
     local branch
@@ -233,6 +234,9 @@ ZSH_THEME="norm-gkapfham"
 # Timestamps
 HIST_STAMPS="mm/dd/yyyy"
 
+# Use the zsh-defer to ensure that the
+# sourcing of select scripts happens in the
+# background, thus decreasing shell startup time
 source ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
 
 # NOTE: use this plugin as a backup in case alternate is unavailable
@@ -243,9 +247,16 @@ source ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
 zsh-defer source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # Plugin: Request all plugins from oh-my-zsh
+# NOTE: these are all loaded in the .oh-my-zsh.sh script
+# and some of these could be loaded through zsh-defer.
+# However, not all of them work with zsh-defer and thus
+# right now I am trading the extra startup cost for simplicity.
 plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator vi-mode virtualenv)
 
-# rehash
+# Reload all of the completion modules before
+# sourcing the specialized Oh-My-Zsh script
+# NOTE: this is needed to avoid errors
+# shell startup and after typing each command
 autoload -Uz compinit && compinit
 
 # Load customized oh-my-zsh script
@@ -300,7 +311,7 @@ fi
 zsh-defer source "$fasd_cache"
 unset fasd_cache
 
-# Use FZF to filter the output of FASD anywhere is a command
+# Use FZF to filter the output of FASD anywhere it is a command
 autoload -U modify-current-argument
 fzf-fasd-widget() {
   # divide the commands buffer into words
@@ -424,31 +435,11 @@ tmm() {
     mux "$session"
 }
 
-# # Display all of the recent directories -- matches search term
-# t() {
-#   fasdlist=$( fasd -d -l -r $1 | \
-#     fzf --query="$1 " --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle) &&
-#     cd "$fasdlist"
-# }
-
 # Define the name of a tmux pane, display in the status-right
 function workspace {
   readonly name=${1:?"Specify the name of the workspace."}
   tmux select-pane -T $name
 }
-
-# }}}
-
-# Travis {{{
-
-# # Lazy load completion of travis command after first call
-# # Note that this reduces startup time for a shell at the
-# # cost of making travis not available until run first time
-# travis() {
-#   unfunction "$0"
-#   [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
-#   travis "$@"
-# }
 
 # }}}
 
