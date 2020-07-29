@@ -1,6 +1,6 @@
 [user]
-    email = gkapfham@allegheny.edu
-    name = Gregory M. Kapfhammer
+	email = gkapfham@allegheny.edu
+	name = Gregory M. Kapfhammer
 [push]
     default = simple
 [core]
