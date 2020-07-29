@@ -1,16 +1,16 @@
 # ~/.profile: executed by the command interpreter for login shells.
+# Reference: https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout
 
-# # if running bash
-# if [ -n "$BASH_VERSION" ]; then
-#     # include .bashrc if it exists
-#     if [ -f "$HOME/.bashrc" ]; then
-#     . "$HOME/.bashrc"
-#     fi
-# fi
+# set PATH so that it includes:
 
-# set PATH so that it includes user's private bin if it exists
+# --> a "private" bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
+fi
+
+# --> a "local" bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
 ## enable the GTK configuration
@@ -46,7 +46,6 @@ export XDG_DATA_HOME="$HOME/.local/share"
 
 export QT_QPA_PLATFORMTHEME=gtk2
 
-export PATH="$PATH:$HOME/.local/bin"
 
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
