@@ -1123,10 +1123,6 @@ command! -bang -nargs=* Rg
 
 " Display and fuzzy search through:
 
-" " --> Hidden files
-" nmap <C-h> :FZFHidden <CR>
-" nmap <Space>h :FZFHidden <CR>
-
 " --> All files, including hidden files, but not
 " those files stored in a .git directory
 nmap <C-p> :Files <CR>
