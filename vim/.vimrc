@@ -1100,47 +1100,13 @@ command! FZFMru call fzf#run({
 
 " Use rg by default
 if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --glob "!{node_modules/*,.git/*}"'
   set grepprg=rg\ --vimgrep
 endif
 
-" A nicer Files preview with FZF and bat
-" docs - https://github.com/junegunn/fzf.vim#example-customizing-files-command
+" A Files preview with FZF and bat
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-" " Load hidden files
-" command! FZFHidden call fzf#run({
-"       \  'source':  'rg --hidden --ignore .git -l -g ""',
-"       \  'sink':    'e',
-"       \  'options': '-m -x +s --no-bold --cycle',
-"       \  'down':    '25%'})
-
-" command! -bang -nargs=* All
-"   \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --no-ignore-vcs --glob "!{node_modules/*,.git/*}"', 'down': '25%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
-
-" command! -bang -nargs=* All
-"   \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --no-ignore-vcs --glob "!{node_modules/*,.git/*}"', 'down': '25%', 'options': '-m -x +s --no-bold --cycle' }))
-
-" " Load hidden files
-" command! FZFHidden call fzf#run({
-"       \  'source':  'rg --files --hidden --no-ignore-vcs --glob "!{node_modules/*,.git/*}"',
-"       \  'sink':    'e',
-"       \  'options': '-m -x +s --no-bold --cycle',
-"       \  'down':    '25%'})
-
-" Load non-hidden files
-command! FZFMine call fzf#run({
-      \  'source':  'rg --ignore .git -l -g ""',
-      \  'sink':    'e',
-      \  'options': '-m -x +s --no-bold --cycle',
-      \  'down':    '25%'})
-
-" " Re-define the Rg command so that it considers hidden files
-"
-" " Note that the use of "-uu" includes the hidden files
-
-" command! -bang -nargs=* Rg call fzf#vim#grep("rg -uu --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, <bang>0)
 
 " Re-define the Rg command so that it considers hidden files
 "
@@ -1151,7 +1117,9 @@ command! -bang -nargs=* Rg
   \   fzf#vim#with_preview(), <bang>0)
 
 " Define key combinations for using FZF
-" Ensure that important mappings are available with either CTRL or Space
+"
+" Ensure that important mappings are
+" available with either CTRL or Space
 
 " Display and fuzzy search through:
 
@@ -1306,13 +1274,14 @@ end
 " Use an empty value to disable the preview window
 let g:fzf_preview_window = ''
 
-" " Control FZF windows
-" command! FZFMru call fzf#run({
-"       \  'source':  v:oldfiles,
-"       \  'sink':    'e',
-"       \  'options': '-m -x +s --no-bold --cycle',
-"       \  'down':    '10%',
-"       \  'window':  'enew'})
+" Control FZF windows
+command! FZFMru call fzf#run({
+      \  'source':  v:oldfiles,
+      \  'sink':    'e',
+      \  'options': '-m -x +s --no-bold --cycle',
+      \  'down':    '10%',
+      \  'window':  'enew'})
+
 " command! FZFHidden call fzf#run({
 "       \  'source':  'ag --hidden --ignore .git -l -g ""',
 "       \  'sink':    'e',
