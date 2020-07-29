@@ -1,4 +1,5 @@
-# ~/.profile: executed by the command interpreter for login shells.
+# ~/.profile: executed by the shell at the time of login
+#
 # Reference: https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout
 
 # set PATH so that it includes:
