@@ -220,10 +220,10 @@ set ssl_verify_dates=yes
 set ssl_verify_host=yes
 
 # Configure the logins with GPG decryption for the password
-set my_secure_password="`gpg --quiet --for-your-eyes-only -d ~/.mutt/password.gpg`"
+source "gpg -dq $HOME/.mutt/password.gpg |"
 set imap_user="gkapfham@allegheny.edu"
-set imap_pass=$my_secure_password
-set smtp_pass=$my_secure_password
+set imap_pass=$my_pass
+set smtp_pass=$my_pass
 set smtp_url="smtp://gkapfham@allegheny.edu@smtp.gmail.com:587/"
 
 # Set the certificates used for communication
