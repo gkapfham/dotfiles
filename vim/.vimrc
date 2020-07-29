@@ -1274,26 +1274,13 @@ end
 " Use an empty value to disable the preview window
 let g:fzf_preview_window = ''
 
-" Control FZF windows
+" Control style of FZF windows for MRU switching
 command! FZFMru call fzf#run({
       \  'source':  v:oldfiles,
       \  'sink':    'e',
       \  'options': '-m -x +s --no-bold --cycle',
       \  'down':    '10%',
       \  'window':  'enew'})
-
-" command! FZFHidden call fzf#run({
-"       \  'source':  'ag --hidden --ignore .git -l -g ""',
-"       \  'sink':    'e',
-"       \  'options': '-m -x +s --no-bold --cycle',
-"       \  'window':  'enew'})
-" command! -bang FZFMine call fzf#run({
-"       \  'source':  'ag --ignore .git -l -g ""',
-"       \  'sink':    'e',
-"       \  'options': '-m -x +s --no-bold --cycle',
-"       \  'down':    '100%',
-"       \  'window':  'enew'})
-" let g:fzf_layout = { 'window': 'enew' }
 
 " Use FZF to search through the TOC of a LaTeX document
 nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
