@@ -14,7 +14,7 @@ set $mod Mod1
 client.focused          #333333 #333333 #bcbcbc #333333   #333333
 client.focused_inactive #404040 #404040 #dfdfdf #484E50   #5F676A
 client.unfocused        #404040 #404040 #888888 #292D2E   #222222
-client.urgent           #2F343A #333333 #bcbcbc #772953   #772953
+client.urgent           #2F343A #333333 #bcbcbc #5F8700   #5F8700
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
 # Font for window titles
@@ -364,6 +364,8 @@ mode "Resize a Window" {
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
+        # resize to a 1080p resolution
+        bindsym v resize set 1930 1130
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
