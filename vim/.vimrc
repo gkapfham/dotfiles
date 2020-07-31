@@ -85,6 +85,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
+Plug 'twitvim/twitvim', {'on': 'PosttoTwitter'}
 Plug 'Valloric/ListToggle'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-scripts/python_match.vim'
