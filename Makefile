@@ -58,13 +58,6 @@ create-tmux:
 	mkdir -p ~/.config/tmux/plugins
 	mkdir -p ~/.config/tmux/plugins/tpm
 
-## Create the needed .tmux/ directory in home
-create-tpm:
-	rm -rf ~/.tmux
-	mkdir -p ~/.tmux
-	mkdir -p ~/.tmux/plugins
-	mkdir -p ~/.tmux/plugins/tpm
-
 ## Create the needed nvim directory and link in .config/
 create-nvim:
 	@# Since the nvim directory links to .vim/
@@ -78,6 +71,17 @@ create-nvim:
 	ln -s ~/.vim ~/.config/nvim
 	@# Delete the init.vim file as it will later be stowed
 	rm -rf ~/.config/nvim/init.vim
+
+## }}}
+
+## Create all required directories for additional (but non-external) programs {{{
+
+## Create the needed .tmux/ directory in home
+create-tpm:
+	rm -rf ~/.tmux
+	mkdir -p ~/.tmux
+	mkdir -p ~/.tmux/plugins
+	mkdir -p ~/.tmux/plugins/tpm
 
 ## }}}
 
