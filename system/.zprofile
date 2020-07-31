@@ -14,9 +14,6 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# # export a variable that supports the use of dunst for notifications
-# export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
-
 # Configure where the system will look for
 # the, as an example, .desktop files
 export XDG_DATA_HOME="$HOME/.local/share"
