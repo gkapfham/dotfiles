@@ -83,6 +83,11 @@ create-tpm:
 	mkdir -p ~/.tmux/plugins
 	mkdir -p ~/.tmux/plugins/tpm
 
+## Create the needed .local/bin directory in home
+create-bin:
+	rm -rf ~/.local/bin
+	mkdir -p ~/.local/bin
+
 ## }}}
 
 ## Create all required directories for external dependencies {{{
@@ -225,18 +230,25 @@ stow-git-status:
 stow-tpm:
 	stow -t ~/.tmux/plugins/tpm tpm
 
-## Running stow on tmux depends on creating tmux directory
+## Running stow on tpm depends on creating tpm directory
 stow-tmux: create-tpm
+
+## Run stow on bin
+stow-bin:
+	stow -t ~/.local/bin bin
+
+## Running stow on bin depends on creating bin directory
+stow-bin: create-bin
 
 # }}}
 
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-dunst create-i3 create-polybar create-tmux create-tpm create-nvim create-zsh create-fzf-tab create-zsh-git-prompt create-git-status create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-dunst create-i3 create-polybar create-tmux create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zsh-git-prompt create-git-status create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-tmux stow-tpm stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing
+stow: stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zsh-git-prompt stow-git-status stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
