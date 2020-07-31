@@ -200,7 +200,7 @@ stow-vim:
 stow-writing:
 	stow -t ~/ writing
 
-## Run stow on external dependencies {{{
+## Run stow on external dependencies and other programs {{{
 
 ## Run stow on fast-syntax-highlighting
 stow-fast-syntax-highlighting:
@@ -240,6 +240,10 @@ stow-bin:
 ## Running stow on bin depends on creating bin directory
 stow-bin: create-bin
 
+## Run stow on applications
+stow-applications:
+	stow -t ~/.local/share/applications applications
+
 # }}}
 
 ## Composite rules {{{
@@ -248,7 +252,7 @@ stow-bin: create-bin
 create: create-config create-dunst create-i3 create-polybar create-tmux create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zsh-git-prompt create-git-status create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing
+stow: stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zsh-git-prompt stow-git-status stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
