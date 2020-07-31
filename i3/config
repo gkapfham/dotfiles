@@ -380,21 +380,34 @@ bindsym $mod+r mode "Resize a Window"
 # Media {{{
 
 # Decrease the volume
-bindsym XF86AudioLowerVolume  exec "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-5%'"
+bindsym XF86AudioLowerVolume exec "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-5%'"
 
 # Increase the volume
-bindsym XF86AudioRaiseVolume  exec "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '+5%'"
+bindsym XF86AudioRaiseVolume exec "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '+5%'"
 
 # Mute the audio
 bindsym XF86AudioMute exec "/usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle"
 
 # Increase the brightness of the screen
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
 
 # Decrease the brightness of the screen
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
 
 # Set to maximum brightness
-bindsym $mod+Shift+b exec xbacklight -set 100
+bindsym $mod+Shift+b exec "xbacklight -set 100"
+
+# }}}
+
+# Screenshots {{{
+
+# Perform a full screen capture of the active window and save to a file
+bindsym Print exec "maim -i $(xdotool getactivewindow) ~/working/media/screenshots/`date +%Y-%m-%d_%H:%M:%S`.png"
+
+# Perform a full screen capture of the active window and copy to the clipboard
+bindsym Control+Print exec "exec maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png"
+
+# Perform a selection caption and copy to the clipboard
+bindsym Shift+Print exec "exec maim -s | xclip -selection clipboard -t image/png"
 
 # }}}
