@@ -44,6 +44,7 @@ This is a summary of the dotfiles that I create and maintain:
 - `.tmux.conf`: configuration of the `tmux` terminal multiplexing tool
 - `.urlview`: configuration for the `urlview` program used with `mutt` and `tmux`
 - `.vimrc`: configuration for the `nvim` and `vim` text editors
+- `.xinitrc`: configuration for to set environment variables and to start i3
 - `.zshrc`: configuration for the `zsh` shell to use oh-my-zsh
 - `.config/dunst`: configuration and scripts for the `dunst` notification manager
 - `.config/i3`: configuration and scripts for the `i3` window manager
