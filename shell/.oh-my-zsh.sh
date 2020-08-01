@@ -82,9 +82,9 @@ fi
 # CUSTOMIZED:
 for plugin ($plugins); do
   if [ -f $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh ]; then
-    source $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh
+    zsh-defer source $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh
   elif [ -f $ZSH/plugins/$plugin/$plugin.plugin.zsh ]; then
-    source $ZSH/plugins/$plugin/$plugin.plugin.zsh
+    zsh-defer source $ZSH/plugins/$plugin/$plugin.plugin.zsh
   fi
 done
 
