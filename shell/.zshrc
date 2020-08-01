@@ -247,7 +247,6 @@ zsh-defer source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.pl
 # and some of these could be loaded through zsh-defer.
 # However, not all of them work with zsh-defer and thus
 # right now I am trading the extra startup cost for simplicity.
-# plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator vi-mode virtualenv)
 plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
 
 # Reload all of the completion modules before
