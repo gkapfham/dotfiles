@@ -1,2 +1,4 @@
 #!/bin/sh
-env QT_SCALE_FACTOR=2 QT_AUTO_SCREEN_SCALE_FACTOR=0 webcamoid
+# Note that using "$@" will pass to the obs program
+# the inputs that are passed to this script
+env QT_SCALE_FACTOR=2 QT_AUTO_SCREEN_SCALE_FACTOR=0 webcamoid "$@"
