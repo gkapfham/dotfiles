@@ -68,6 +68,9 @@ create-termite:
 	rm -rf ~/.config/termite
 	mkdir -p ~/.config/termite
 
+## Create the needed termite/ directory in .config/
+create-zsh-theme:
+	mkdir -p ~/.oh-my-zsh/custom/themes
 
 ## Create the needed nvim directory and link in .config/
 create-nvim:
@@ -222,6 +225,10 @@ stow-vim:
 stow-writing:
 	stow -t ~/ writing
 
+## Run stow on zshtheme
+stow-zshtheme:
+	stow -t ~/.oh-my-zsh/custom/themes zshtheme
+
 ## Run stow on external dependencies and other programs {{{
 
 ## Run stow on fast-syntax-highlighting
@@ -271,10 +278,10 @@ stow-applications:
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-dunst create-i3 create-polybar create-termite create-tmux create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zsh-git-prompt create-git-status create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-dunst create-i3 create-polybar create-termite create-tmux create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zsh-theme create-zsh-git-prompt create-git-status create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing stow-applications
+stow: stow-alacritty stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zsh-git-prompt stow-git-status stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions

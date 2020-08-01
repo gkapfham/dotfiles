@@ -1,0 +1,5 @@
+# PROMPT='%{$fg[yellow]%}gkapfham@%m in %{$fg[green]%}%2~%{$reset_color%}$(gitHUD zsh)%{$reset_color%} '
+# PROMPT='%{$fg[yellow]%}gkapfham@%m in %{$fg[green]%}%2~%{$reset_color%}$(git-radar --zsh)%{$reset_color%} '
+# PROMPT='%{$fg[yellow]%}gkapfham@%m in %{$fg[green]%}%2~ %{$reset_color%}$(git_super_status)%{$reset_color%}'
+# PROMPT='%{$fg[yellow]%}λ %m %{$fg[green]%}%c %{$fg[yellow]%}→ $(git_super_status)%{$reset_color%}'
+PROMPT='%{$fg_bold[yellow]%}gkapfham in %{$fg_bold[green]%}%2~ $(virtualenv_prompt_info)%{$reset_color%}$(git_super_status)%{$reset_color%}'

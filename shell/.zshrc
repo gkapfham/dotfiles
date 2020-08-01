@@ -225,7 +225,7 @@ DISABLE_AUTO_UPDATE=true
 ZSH=$HOME/.oh-my-zsh
 
 # Default theme
-ZSH_THEME="norm-gkapfham"
+ZSH_THEME="vitamin-onec"
 
 # Timestamps
 HIST_STAMPS="mm/dd/yyyy"
