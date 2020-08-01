@@ -141,6 +141,11 @@ create-zsh-git-prompt:
 	rm -rf ~/.zsh/zsh-git-prompt
 	mkdir -p ~/.zsh/zsh-git-prompt
 
+## Create the needed zsh-defer/ directory in .zsh/
+create-zsh-defer:
+	rm -rf ~/.zsh/zsh-defer
+	mkdir -p ~/.zsh/zsh-defer
+
 ## Create the needed gitstatus/ directory in .zsh/
 create-git-status:
 	rm -rf ~/.zsh/gitstatus
@@ -243,13 +248,17 @@ stow-zsh-syntax-highlighting:
 stow-fzf-tab:
 	stow -t ~/.zsh/fzf-tab fzftab
 
-## Run stow on zsh-git-prompt
+## Run stow on zsh-auto-suggestions
 stow-zsh-auto-suggestions:
 	stow -t ~/.zsh/zsh-autosuggestions zshautosuggestions
 
 ## Run stow on zsh-git-prompt
 stow-zsh-git-prompt:
 	stow -t ~/.zsh/zsh-git-prompt zshgitprompt
+
+## Run stow on zsh-defer
+stow-zshdefer:
+	stow -t ~/.zsh/zsh-defer zshdefer
 
 ## Run stow on gitstatus
 stow-git-status:
@@ -278,13 +287,13 @@ stow-applications:
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-dunst create-i3 create-polybar create-termite create-tmux create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zsh-theme create-zsh-git-prompt create-git-status create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-dunst create-i3 create-polybar create-termite create-tmux create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zsh-theme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
 stow: stow-alacritty stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
-stow-external: stow-fzf-tab stow-zsh-git-prompt stow-git-status stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
+stow-external: stow-fzf-tab stow-zsh-git-prompt stow-zshdefer stow-git-status stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
 
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: create stow stow-external
