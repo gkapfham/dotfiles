@@ -247,7 +247,8 @@ zsh-defer source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.pl
 # and some of these could be loaded through zsh-defer.
 # However, not all of them work with zsh-defer and thus
 # right now I am trading the extra startup cost for simplicity.
-plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator vi-mode virtualenv)
+# plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator vi-mode virtualenv)
+plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
 
 # Reload all of the completion modules before
 # sourcing the specialized Oh-My-Zsh script
@@ -257,6 +258,10 @@ autoload -Uz compinit && compinit
 
 # Load customized oh-my-zsh script
 source $HOME/.oh-my-zsh.sh
+
+# Load the shrink-path plugin used in the prompt because
+# it cannot be loaded by zsh-defer source without error
+source $HOME/.oh-my-zsh/plugins/shrink-path/shrink-path.plugin.zsh
 
 # Plugin: Fast, git-stacular prompt with gitstatus
 # Note: local modifications to this plugin
