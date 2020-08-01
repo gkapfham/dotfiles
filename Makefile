@@ -280,6 +280,10 @@ dotfiles: create stow stow-external
 help:
 	make -rpn | sed -n -e '/^$$/ { n ; /^[^ .#][^ ]*:/ { s/:.*$$// ; p ; } ; }' | sort -u
 
+# }}}
+
+## Default {{{
+
 ## Specify that the default is full installation of the dotfiles
 .DEFAULT_GOAL := dotfiles
 
