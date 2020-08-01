@@ -36,6 +36,11 @@ Furge:
 create-config:
 	mkdir -p ~/.config
 
+## Create the needed alacritty/ directory in .config/
+create-alacritty:
+	rm -rf ~/.config/alacritty
+	mkdir -p ~/.config/alacritty
+
 ## Create the needed dunst/ directory in .config/
 create-dunst:
 	rm -rf ~/.config/dunst
@@ -62,6 +67,7 @@ create-tmux:
 create-termite:
 	rm -rf ~/.config/termite
 	mkdir -p ~/.config/termite
+
 
 ## Create the needed nvim directory and link in .config/
 create-nvim:
@@ -140,6 +146,10 @@ create-git-status:
 ## }}}
 
 ## Run stow on internal dotfiles {{{
+
+## Run stow on alacritty
+stow-alacritty:
+	stow -t ~/.config/alacritty alacritty
 
 ## Run stow on code
 stow-code:
@@ -264,7 +274,7 @@ stow-applications:
 create: create-config create-dunst create-i3 create-polybar create-termite create-tmux create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zsh-git-prompt create-git-status create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing stow-applications
+stow: stow-alacritty stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zsh-git-prompt stow-git-status stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
