@@ -215,7 +215,7 @@ alias gcob='fzf-git-checkout'
 
 # }}}
 
-# Oh-My-Zsh and Plugin {{{
+# Oh-My-Zsh and Zsh Plugins/Scripts {{{
 
 # Save startup time by disabling
 DISABLE_UPDATE_PROMPT=true
