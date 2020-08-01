@@ -262,6 +262,10 @@ source $HOME/.oh-my-zsh.sh
 # it cannot be loaded by zsh-defer source without error
 source $HOME/.oh-my-zsh/plugins/shrink-path/shrink-path.plugin.zsh
 
+# Load the vi-mode plugin used in the prompt because
+# it cannot be loaded by zsh-defer source without error
+source $HOME/.oh-my-zsh/plugins/vi-mode/vi-mode.plugin.zsh
+
 # Plugin: Fast, git-stacular prompt with gitstatus
 # Note: local modifications to this plugin
 source $HOME/.zsh/gitstatus/gitstatus.prompt.zsh
