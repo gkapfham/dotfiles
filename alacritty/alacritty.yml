@@ -141,25 +141,8 @@ colors:
 # Allow terminal applications to change Alacritty's window title.
 dynamic_title: true
 
-#cursor:
-  # Cursor style
-  #
-  # Values for `style`:
-  #   - ▇ Block
-  #   - _ Underline
-  #   - | Beam
-  #style: Block
-
-  # Vi mode cursor style
-  #
-  # If the vi mode cursor style is `None` or not specified, it will fall back to
-  # the style of the active value of the normal cursor.
-  #
-  # See `cursor.style` for available options.
-  #vi_mode_style: None
-
-  # If this is `true`, the cursor will be rendered as a hollow box when the
-  # window is not focused.
+# If this is `true`, the cursor will be rendered as a hollow box when the
+# window is not focused.
 cursor:
   style: Block
   unfocused_hollow: true
