@@ -3,7 +3,7 @@
 ## Purge all of the existing symlinks
 ## that were manually created, setting the
 ## stage for the use of Stow with other rules
-Furge:
+purge:
 	rm -f ~/.Rprofile
 	rm -f ~/.mailcap
 	rm -f ~/.msmtprc
