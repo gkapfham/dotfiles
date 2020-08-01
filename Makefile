@@ -1,3 +1,9 @@
+## Ensure that commands use zsh instead of sh {{{
+
+SHELL=zsh
+
+# }}}
+
 ## Purge all of the existing dotfiles {{{
 
 ## Purge all of the existing symlinks
@@ -284,6 +290,22 @@ stow-applications:
 
 # }}}
 
+## Create the Z-shell word code files {{{
+
+## Run stow on applications
+zcompile-shell-scripts:
+	zcompile ~/.zshrc
+	zcompile ~/.oh-my-zsh.sh
+	zcompile ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+	zcompile ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
+	zcompile ~/.zsh/gitstatus/gitstatus.prompt.sh
+	zcompile ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+	zcompile ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
+
+zcompile-shell-scripts: stow-external
+
+# }}}
+
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
@@ -296,7 +318,7 @@ stow: stow-alacritty stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim 
 stow-external: stow-fzf-tab stow-zsh-git-prompt stow-zshdefer stow-git-status stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
 
 ## Create directories and stow all of the dotfiles in correct directories
-dotfiles: create stow stow-external
+dotfiles: create stow stow-external zcompile-shell-scripts
 
 # }}}
 
