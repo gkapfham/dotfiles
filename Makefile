@@ -47,6 +47,11 @@ create-alacritty:
 	rm -rf ~/.config/alacritty
 	mkdir -p ~/.config/alacritty
 
+## Create the needed bat/ directory in .config/
+create-bat:
+	rm -rf ~/.config/bat
+	mkdir -p ~/.config/bat
+
 ## Create the needed dunst/ directory in .config/
 create-dunst:
 	rm -rf ~/.config/dunst
@@ -169,6 +174,13 @@ create-git-status:
 ## Run stow on alacritty
 stow-alacritty:
 	stow -t ~/.config/alacritty alacritty
+
+## Run stow on bat
+stow-bat:
+	stow -t ~/.config/bat bat
+
+## Running stow on bat depends on creating bat directory
+stow-bat: create-bat
 
 ## Run stow on code
 stow-code:
@@ -323,10 +335,10 @@ zcompile-shell-scripts: stow-external
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-dunst create-i3 create-polybar create-termite create-tmux create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-alacritty create-bat create-dunst create-i3 create-polybar create-termite create-tmux create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-zathura stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-bat stow-code stow-dunst stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-zathura stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zsh-git-prompt stow-zshdefer stow-git-status stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
