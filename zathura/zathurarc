@@ -1,0 +1,15 @@
+set font "Hack Nerd Font 12"
+
+set default-bg "#1C1C1C"
+
+set highlight-active-color "#949494"
+set highlight-color "#D0D0D0"
+
+set synctex true
+set synctex-editor-command "nvr --remote +"%line" "%file""
+
+set statusbar-fg "#BCBCBC"
+set statusbar-bg "#333333"
+
+set inputbar-fg "#BCBCBC"
+set inputbar-bg "#333333"
