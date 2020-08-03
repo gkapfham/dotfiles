@@ -6,6 +6,11 @@ SHELL=zsh
 
 ## Purge all of the existing dotfiles {{{
 
+# NOTE: This is not updated for all directories
+# that may need to be purged. With that said, it
+# is likely that this rule is no longer needed
+# since the create rules also delete directories.
+
 ## Purge all of the existing symlinks
 ## that were manually created, setting the
 ## stage for the use of Stow with other rules
