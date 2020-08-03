@@ -305,6 +305,8 @@ stow-gtk3: create-gtk3
 stow-mime:
 	stow -t ~/.config/ mime
 
+## Running stow on the mime directory depends on the mime file
+## not being currently in existence, so purge it first
 stow-mime: purge-mime
 
 ## Run stow on nvim
