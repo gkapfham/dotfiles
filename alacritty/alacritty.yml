@@ -139,7 +139,7 @@ colors:
     white:   '0xa3abb3'
 
 # Allow terminal applications to change Alacritty's window title.
-dynamic_title: true
+window.dynamic_title: true
 
 # If this is `true`, the cursor will be rendered as a hollow box when the
 # window is not focused.
