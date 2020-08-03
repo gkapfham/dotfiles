@@ -195,7 +195,11 @@ color indicator  color15  default
 color markers    color237 default
 color message    color246 default
 color normal     color246 default
-color progress   white    color237
+#
+# NOTE: This does not work on mutt
+#
+# color progress   white    color237
+#
 color quoted     color13  default
 color search     white    default
 color signature  color3   default
