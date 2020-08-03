@@ -312,7 +312,7 @@ augroup END
 " Briefly highlight the yanked region using the background color for visual highlights
 augroup highlight_yank
     autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("Visual", 200)
+    au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Visual", timeout=150}
 augroup END
 
 " }}}
