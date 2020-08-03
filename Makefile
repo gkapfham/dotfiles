@@ -60,6 +60,7 @@ create-alacritty:
 	rm -rf ~/.config/alacritty
 	mkdir -p ~/.config/alacritty
 
+## Depends on the creation of the .config directory
 create-alacritty: create-config
 
 ## Create the needed bat/ directory in .config/
@@ -67,10 +68,16 @@ create-bat:
 	rm -rf ~/.config/bat
 	mkdir -p ~/.config/bat
 
+## Depends on the creation of the .config directory
+create-bat: create-config
+
 ## Create the needed dunst/ directory in .config/
 create-dunst:
 	rm -rf ~/.config/dunst
 	mkdir -p ~/.config/dunst
+
+## Depends on the creation of the .config directory
+create-bat: create-config
 
 ## Create the needed gtk-2.0/ directory in .config/
 create-gtk2:
