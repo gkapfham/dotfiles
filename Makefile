@@ -41,10 +41,6 @@ purge:
 
 ## }}}
 
-## NOTE: All of the create rules should probably depend on
-## the create-config rule if they are referencing that directory
-## (i.e., create-alacritty actually depends on create-config).
-
 ## Create all required directories for dotfiles {{{
 
 ## Create the .config/ directory to store subdirectories
@@ -368,6 +364,9 @@ stow-zathura: create-zathura
 stow-zshtheme:
 	stow -t ~/.oh-my-zsh/custom/themes zshtheme
 
+# Running stow on zshtheme depends on creating the theme's directory
+stow-zshtheme: create-zshtheme
+
 # }}}
 
 ## Run stow on external dependencies and other programs {{{
@@ -376,36 +375,57 @@ stow-zshtheme:
 stow-fast-syntax-highlighting:
 	stow -t ~/.zsh/fast-syntax-highlighting fastsyntaxhighlighting
 
+## Running stow depends on the creation of associated directory
+stow-fast-syntax-highlighting: create-fast-syntax-highlighting
+
 ## Run stow on zsh-syntax-highlighting
 stow-zsh-syntax-highlighting:
 	stow -t ~/.zsh/zsh-syntax-highlighting zshsyntaxhighlighting
+
+## Running stow depends on the creation of associated directory
+stow-zsh-syntax-highlighting: create-zsh-syntax-highlighting
 
 ## Run stow on fzf-tab
 stow-fzf-tab:
 	stow -t ~/.zsh/fzf-tab fzftab
 
+## Running stow depends on the creation of associated directory
+stow-fzf-tab: create-fzf-tab
+
 ## Run stow on zsh-auto-suggestions
 stow-zsh-auto-suggestions:
 	stow -t ~/.zsh/zsh-autosuggestions zshautosuggestions
+
+## Running stow depends on the creation of associated directory
+stow-zsh-autosuggestions: create-zsh-autosuggestions
 
 ## Run stow on zsh-git-prompt
 stow-zsh-git-prompt:
 	stow -t ~/.zsh/zsh-git-prompt zshgitprompt
 
+## Running stow depends on the creation of associated directory
+stow-zsh-autosuggestions: create-zsh-autosuggestions
+
 ## Run stow on zsh-defer
 stow-zshdefer:
 	stow -t ~/.zsh/zsh-defer zshdefer
 
+## Running stow depends on the creation of associated directory
+stow-zshdefer: create-zshdefer
+
 ## Run stow on gitstatus
 stow-git-status:
 	stow -t ~/.zsh/gitstatus gitstatus
+
+## Running stow depends on the creation of associated directory
+stow-git-status: create-git-status
 
 ## Run stow on tpm
 stow-tpm:
 	stow -t ~/.tmux/plugins/tpm tpm
 
 ## Running stow on tpm depends on creating tpm directory
-stow-tmux: create-tpm
+stow-tpm: create-tpm
 
 ## Run stow on bin
 stow-bin:
