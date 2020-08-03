@@ -41,16 +41,26 @@ purge:
 
 ## }}}
 
+## NOTE: All of the create rules should probably depend on
+## the create-config rule if they are referencing that directory
+## (i.e., create-alacritty actually depends on create-config).
+
 ## Create all required directories for dotfiles {{{
 
 ## Create the .config/ directory to store subdirectories
 create-config:
 	mkdir -p ~/.config
 
+## Create the .config/ directory to store subdirectories
+purge-mime:
+	rm ~/.config/mimeapps.list
+
 ## Create the needed alacritty/ directory in .config/
 create-alacritty:
 	rm -rf ~/.config/alacritty
 	mkdir -p ~/.config/alacritty
+
+create-alacritty: create-config
 
 ## Create the needed bat/ directory in .config/
 create-bat:
@@ -184,6 +194,11 @@ create-git-status:
 
 ## }}}
 
+# NOTE: These rules work because of the way in which the
+# composite rules are structured. However, they should all
+# have their dependencies explicitly declared like
+# the stow-bat rule.
+
 ## Run stow on internal dotfiles {{{
 
 ## Run stow on alacritty
@@ -233,6 +248,12 @@ stow-gtk3:
 
 ## Running stow on gtk3 depends on creating gtk3 directory
 stow-gtk3: create-gtk3
+
+## Run stow on mime
+stow-mime:
+	stow -t ~/.config/ mime
+
+stow-mime: purge-mime
 
 ## Run stow on nvim
 stow-nvim:
@@ -370,7 +391,7 @@ zcompile-shell-scripts: stow-external
 create: create-config create-alacritty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-polybar create-termite create-tmux create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-bat stow-code stow-dunst stow-gtk2 stow-gtk3 stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-zathura stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-bat stow-code stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-zathura stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zsh-git-prompt stow-zshdefer stow-git-status stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
