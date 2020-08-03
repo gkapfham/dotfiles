@@ -62,6 +62,11 @@ create-gtk2:
 	rm -rf ~/.config/gtk-2.0
 	mkdir -p ~/.config/gtk-2.0
 
+## Create the needed gtk-3.0/ directory in .config/
+create-gtk2:
+	rm -rf ~/.config/gtk-2.0
+	mkdir -p ~/.config/gtk-2.0
+
 ## Create the needed i3/ directory in .config/
 create-i3:
 	rm -rf ~/.config/i3
