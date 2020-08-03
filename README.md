@@ -49,7 +49,7 @@ created and actively maintain:
 - `.config/bat/themes`: theme configuration to ensure that `bat` looks like `nvim`
 - `.config/alacritty`: configuration and color scheme for the `alacritty` terminal window
 - `.config/dunst`: configuration and scripts for the `dunst` notification manager
-- `.config/gtkrc-2.0`: legacy configuration of GTK 2.0 to support legacy GTK programs on Arch Linux
+- `.config/gtkrc-2.0`: configuration of GTK 2.0 to support legacy GTK programs on Arch Linux
 - `.config/gtkrc-3.0`: configuration of GTK 3.0 to support GTK programs on Arch Linux
 - `.config/i3`: configuration and scripts for the `i3` window manager
 - `.config/polybar`: configuration and scripts for the `polybar` used with `i3`
