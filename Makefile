@@ -269,6 +269,9 @@ stow-code:
 stow-dunst:
 	stow -t ~/.config/dunst dunst
 
+## Running stow on dunst depends on creating dunst directory
+stow-dunst: create-dunst
+
 ## Run stow on email
 stow-email:
 	stow -t ~/ email
