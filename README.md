@@ -39,13 +39,15 @@ This is a summary of the dotfiles that I create and maintain:
 - `.muttprintrc`: configuration of the `muttprint` program for printing emails
 - `.muttrc`: configuration of the `mutt` mail user agent
 - `.oh-my-zsh.sh`: customized script to load the oh-my-zsh framework
-- `.profile`: script to run when logging into the `i3` window manager
+- `.zprofile`: script to run when first starting the shell environment
 - `.signature`: footer displayed by `mutt` in all email messages
 - `.tmux.conf`: configuration of the `tmux` terminal multiplexing tool
 - `.urlview`: configuration for the `urlview` program used with `mutt` and `tmux`
 - `.vimrc`: configuration for the `nvim` and `vim` text editors
 - `.xinitrc`: configuration for to set environment variables and to start i3
 - `.zshrc`: configuration for the `zsh` shell to use oh-my-zsh
+- `.config/bat/themes`: theme configuration to ensure that `bat` looks like `nvim`
+- `.config/alacritty`: configuration and for the `alacritty` terminal window
 - `.config/dunst`: configuration and scripts for the `dunst` notification manager
 - `.config/i3`: configuration and scripts for the `i3` window manager
 - `.config/polybar`: configuration and scripts for the `polybar` used with `i3`
