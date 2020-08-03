@@ -330,7 +330,8 @@ stow-applications:
 
 ## Create the Z-shell word code files {{{
 
-## Run stow on applications
+## Run the zcompile command on zsh scripts to
+## potentially increase the speed of source-ing the script
 zcompile-shell-scripts:
 	zcompile ~/.zshrc
 	zcompile ~/.oh-my-zsh.sh
@@ -340,6 +341,8 @@ zcompile-shell-scripts:
 	zcompile ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 	zcompile ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
 
+## Running the zcompile command depends on creating those
+## directories and the installation of the scripts in advance
 zcompile-shell-scripts: stow-external
 
 # }}}
