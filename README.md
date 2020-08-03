@@ -20,7 +20,8 @@ Even though they are heavily customized, my hope is that they are largely
 reusable and, additionally, will give examples of how to configure various
 programs such as `i3`, `mutt`, `nvim`, `polybar`, `tmux`, `vim`, and `zsh`.
 
-This is a summary of the dotfiles that I create and maintain:
+This is a summary of some of the dotfiles and program configurations that I
+created and actively maintain:
 
 - `.Rprofile`: initialization for the R programming language
 - `.Xresources`: configuration for the Rofi for displaying menus
@@ -29,7 +30,7 @@ This is a summary of the dotfiles that I create and maintain:
 - `.compton.conf`: configuration for the `compton` compositor used with `i3`
 - `.gitconfig`: configuration file for Git, including customized aliases
 - `.gitignore_global`: configuration of the files to exclude from Git repositories
-- `.gtkrc-2.0`: legacy configuration of GTK 2.0 to support `gvim` on Ubuntu
+- `.gtkrc-2.0`: legacy configuration of GTK 2.0 to support legacy programs on Arch Linux
 - `.gvimrc`: legacy configuration of `gvim` text editor
 - `.inputrc`: configuration of all input-enabled tools with vi-like mappings
 - `.latexmkrc`: configuration for the `latexmk` wrapper for LaTeX compilers
@@ -47,10 +48,12 @@ This is a summary of the dotfiles that I create and maintain:
 - `.xinitrc`: configuration for to set environment variables and to start i3
 - `.zshrc`: configuration for the `zsh` shell to use oh-my-zsh
 - `.config/bat/themes`: theme configuration to ensure that `bat` looks like `nvim`
-- `.config/alacritty`: configuration and for the `alacritty` terminal window
+- `.config/alacritty`: configuration and color scheme for the `alacritty` terminal window
 - `.config/dunst`: configuration and scripts for the `dunst` notification manager
 - `.config/i3`: configuration and scripts for the `i3` window manager
 - `.config/polybar`: configuration and scripts for the `polybar` used with `i3`
+- `.config/termite`: configuration and color scheme for the `termite` terminal window
+- `.config/zathura`: configuration for the `zathura ` PDF viewer
 
 Are you looking for some neat configurations to sharpen your own dotfiles? If
 so, then I encourage you to review the `.vimrc`, `.zshrc`, and `.tmux.conf`
