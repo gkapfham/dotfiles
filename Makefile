@@ -222,7 +222,7 @@ create-zsh-git-prompt:
 create-zsh-git-prompt: create-zsh
 
 ## Create the needed zsh-defer/ directory in .zsh/
-create-zsh-defer:
+create-zshdefer:
 	rm -rf ~/.zsh/zsh-defer
 	mkdir -p ~/.zsh/zsh-defer
 
@@ -249,6 +249,9 @@ create-git-status: create-zsh
 ## Run stow on alacritty
 stow-alacritty:
 	stow -t ~/.config/alacritty alacritty
+
+## Running stow depends on the creation of the directory
+stow-alacritty: create-alacritty
 
 ## Run stow on bat
 stow-bat:
@@ -416,6 +419,9 @@ stow-zshdefer: create-zshdefer
 ## Run stow on gitstatus
 stow-git-status:
 	stow -t ~/.zsh/gitstatus gitstatus
+
+## Running stow depends on the creation of associated directory
+stow-zshdefer: create-zshdefer
 
 ## Running stow depends on the creation of associated directory
 stow-git-status: create-git-status
