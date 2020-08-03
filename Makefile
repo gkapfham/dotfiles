@@ -84,20 +84,32 @@ create-gtk2:
 	rm -rf ~/.config/gtk-2.0
 	mkdir -p ~/.config/gtk-2.0
 
+## Depends on the creation of the .config directory
+create-gtk2: create-config
+
 ## Create the needed gtk-3.0/ directory in .config/
 create-gtk3:
 	rm -rf ~/.config/gtk-3.0
 	mkdir -p ~/.config/gtk-3.0
+
+## Depends on the creation of the .config directory
+create-gtk3: create-config
 
 ## Create the needed i3/ directory in .config/
 create-i3:
 	rm -rf ~/.config/i3
 	mkdir -p ~/.config/i3
 
+## Depends on the creation of the .config directory
+create-i3: create-config
+
 ## Create the needed polybar/ directory in .config/
 create-polybar:
 	rm -rf ~/.config/polybar
 	mkdir -p ~/.config/polybar
+
+## Depends on the creation of the .config directory
+create-polybar: create-config
 
 ## Create the needed tmux/ directory in .config/
 create-tmux:
@@ -106,17 +118,26 @@ create-tmux:
 	mkdir -p ~/.config/tmux/plugins
 	mkdir -p ~/.config/tmux/plugins/tpm
 
+## Depends on the creation of the .config directory
+create-tmux: create-config
+
 ## Create the needed termite/ directory in .config/
 create-termite:
 	rm -rf ~/.config/termite
 	mkdir -p ~/.config/termite
+
+## Depends on the creation of the .config directory
+create-termite: create-config
 
 ## Create the needed zathura/ directory in .config/
 create-zathura:
 	rm -rf ~/.config/zathura
 	mkdir -p ~/.config/zathura
 
-## Create the needed termite/ directory in .config/
+## Depends on the creation of the .config directory
+create-zathura: create-config
+
+## Create the needed directory in ~/.oh-my-zsh for the custom themes
 create-zshtheme:
 	mkdir -p ~/.oh-my-zsh/custom/themes
 
