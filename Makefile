@@ -169,35 +169,56 @@ create-fast-syntax-highlighting:
 	rm -rf ~/.zsh/fast-syntax-highlighting
 	mkdir -p ~/.zsh/fast-syntax-highlighting
 
+## Depends on the creation of the .zsh directory
+create-fast-syntax-highlighting: create-zsh
+
 ## Create the needed zsh-syntax-highlighting/ directory in .zsh/
 create-zsh-syntax-highlighting:
 	rm -rf ~/.zsh/zsh-syntax-highlighting
 	mkdir -p ~/.zsh/zsh-syntax-highlighting
+
+## Depends on the creation of the .zsh directory
+create-zsh-syntax-highlighting: create-zsh
 
 ## Create the needed fzf-tab/ directory in .zsh/
 create-fzf-tab:
 	rm -rf ~/.zsh/fzf-tab
 	mkdir -p ~/.zsh/fzf-tab
 
+## Depends on the creation of the .zsh directory
+create-fzf-tab: create-zsh
+
 ## Create the needed zsh-auto-suggestions/ directory in .zsh/
 create-zsh-auto-suggestions:
 	rm -rf ~/.zsh/zsh-autosuggestions
 	mkdir -p ~/.zsh/zsh-autosuggestions
+
+## Depends on the creation of the .zsh directory
+create-zsh-auto-suggestions: create-zsh
 
 ## Create the needed zsh-git-prompt/ directory in .zsh/
 create-zsh-git-prompt:
 	rm -rf ~/.zsh/zsh-git-prompt
 	mkdir -p ~/.zsh/zsh-git-prompt
 
+## Depends on the creation of the .zsh directory
+create-zsh-git-prompt: create-zsh
+
 ## Create the needed zsh-defer/ directory in .zsh/
 create-zsh-defer:
 	rm -rf ~/.zsh/zsh-defer
 	mkdir -p ~/.zsh/zsh-defer
 
+## Depends on the creation of the .zsh directory
+create-zsh-defer: create-zsh
+
 ## Create the needed gitstatus/ directory in .zsh/
 create-git-status:
 	rm -rf ~/.zsh/gitstatus
 	mkdir -p ~/.zsh/gitstatus
+
+## Depends on the creation of the .zsh directory
+create-git-status: create-zsh
 
 ## }}}
 
