@@ -63,6 +63,22 @@ i3 window manager? Then, you are invited to review the `.config/i3` and
 groupings with beginning and ending marks that respectively look like `{{{` and
 `}}}`, thereby helping to group the regions.
 
+To ensure that my development environment is largely self-contained, this
+repository also includes Git submodules of the packages that I actively use in,
+for instance, the `zsh` shell. When I needed to heavily customize a specific
+plugin or tool I forked a specific GitHub repository and then made my
+improvements in that fork. Otherwise, I added the needed repository as a
+sub-module to this one. These are the current submodules that I maintain:
+
+- fastsyntaxhighlighting
+- fzftab
+- gitstatus
+- tpm
+- zshautosuggestions
+- zshdefer
+- zshgitprompt
+- zshsyntaxhighlighting
+
 ## Installation Instructions
 
 You can type the following command if you want to clone this repository:
