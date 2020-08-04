@@ -312,6 +312,14 @@ stow-mime:
 ## not being currently in existence, so purge it first
 stow-mime: purge-mime
 
+## Run stow on trolltech
+stow-trolltech:
+	stow -t ~/.config/ trolltech
+
+## Running stow on the mime directory depends on the trolltech file
+## not being currently in existence, so purge it first
+stow-trolltech: purge-trolltech
+
 ## Run stow on nvim
 stow-nvim:
 	stow -t ~/.config/nvim nvim
@@ -475,7 +483,7 @@ zcompile-shell-scripts: stow-external
 create: create-config create-alacritty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-polybar create-termite create-tmux create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-bat stow-code stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-zathura stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-bat stow-code stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-zathura stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tmux stow-tool stow-vim stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zsh-git-prompt stow-zshdefer stow-git-status stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
