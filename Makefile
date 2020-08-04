@@ -47,9 +47,13 @@ purge:
 create-config:
 	mkdir -p ~/.config
 
-## Create the .config/ directory to store subdirectories
+## Remove the mimeapps.list file from the .config directory
 purge-mime:
 	rm ~/.config/mimeapps.list
+
+## Remove the Trolltech.conf file from the .config directory
+purge-trolltech:
+	rm ~/.config/Trolltech.conf
 
 ## Create the needed alacritty/ directory in .config/
 create-alacritty:
