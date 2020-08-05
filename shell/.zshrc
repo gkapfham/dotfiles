@@ -43,6 +43,9 @@
 
 # Exports {{{
 
+# Define the shell to always be zsh
+export SHELL="/usr/sbin/zsh"
+
 # Redefine the LS_COLORS so that:
 # --> directories are not displayed as bold
 export LS_COLORS="rs=0:di=0;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
@@ -233,21 +236,22 @@ HIST_STAMPS="mm/dd/yyyy"
 # Use the zsh-defer to ensure that the
 # sourcing of select scripts happens in the
 # background, thus decreasing shell startup time
-source ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
+# source ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
 
 # NOTE: use this plugin as a backup in case alternate is unavailable
 # Plugin: zsh-syntax-highlighting
 # source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Plugin: fast-syntax-highlighting
-zsh-defer source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+# zsh-defer source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # Plugin: Request all plugins from oh-my-zsh
 # NOTE: these are all loaded in the .oh-my-zsh.sh script
 # and some of these could be loaded through zsh-defer.
 # However, not all of them work with zsh-defer and thus
 # right now I am trading the extra startup cost for simplicity.
-plugins=(colored-man-pages git git-extras tmux tmuxinator vi-mode virtualenv)
+plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator vi-mode virtualenv)
 
 # Reload all of the completion modules before
 # sourcing the specialized Oh-My-Zsh script
@@ -258,13 +262,13 @@ autoload -Uz compinit && compinit
 # Load customized oh-my-zsh script
 source $HOME/.oh-my-zsh.sh
 
-# Load the shrink-path plugin used in the prompt because
-# it cannot be loaded by zsh-defer source without error
-source $HOME/.oh-my-zsh/plugins/shrink-path/shrink-path.plugin.zsh
+# # Load the shrink-path plugin used in the prompt because
+# # it cannot be loaded by zsh-defer source without error
+# source $HOME/.oh-my-zsh/plugins/shrink-path/shrink-path.plugin.zsh
 
-# Load the vi-mode plugin used in the prompt because
-# it cannot be loaded by zsh-defer source without error
-source $HOME/.oh-my-zsh/plugins/vi-mode/vi-mode.plugin.zsh
+# # Load the vi-mode plugin used in the prompt because
+# # it cannot be loaded by zsh-defer source without error
+# source $HOME/.oh-my-zsh/plugins/vi-mode/vi-mode.plugin.zsh
 
 # Plugin: Fast, git-stacular prompt with gitstatus
 # Note: local modifications to this plugin
@@ -273,7 +277,8 @@ source $HOME/.zsh/gitstatus/gitstatus.prompt.zsh
 # Plugin: fzf-tab
 # Note: must be sourced after all other plugins to ensure
 # that tab-completion binds to it and not to oh-my-zsh method
-zsh-defer source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
+# zsh-defer source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
+source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 
 # Define the default fzf command used by fzf-tab
 # Note: colors defined here because this plugin
@@ -312,7 +317,8 @@ fasd_cache="$HOME/.fasd-init-zsh"
 if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
   fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
 fi
-zsh-defer source "$fasd_cache"
+# zsh-defer source "$fasd_cache"
+source "$fasd_cache"
 unset fasd_cache
 
 # Use FZF to filter the output of FASD anywhere it is a command
@@ -402,7 +408,8 @@ FZF_TAB_OPTS=(
 )
 
 # Setup fzf, its auto-completions, and key bindings
-[ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Trigger fzf completion using the semi-colon key instead of **
 export FZF_COMPLETION_TRIGGER=';'
@@ -433,8 +440,8 @@ tms() {
 
 # Display all of the possible tmuxinators with fzf
 tmm() {
-  # NOTE: Use the /bin/ls command since "ls" is now aliased to use "exa" command
-  session=$( /bin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
+  # NOTE: Use the /usr/sbin/ls command since "ls" is now aliased to use "exa" command
+  session=$( /usr/sbin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
     fzf --query="$1" --select-1 --exit-0 --cycle) &&
     tmuxinator "$session"
 }
@@ -450,7 +457,8 @@ function workspace {
 # Pyenv {{{
 
 export PATH="$HOME/.pyenv/bin:$PATH"
-zsh-defer eval "$(command pyenv init -)"
+# zsh-defer eval "$(command pyenv init - zsh --no-rehash)"
+eval "$(command pyenv init - zsh --no-rehash)"
 
 # }}}
 
