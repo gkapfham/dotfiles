@@ -233,24 +233,21 @@ ZSH_THEME="vitamin-onec"
 # Timestamps
 HIST_STAMPS="mm/dd/yyyy"
 
-# Use the zsh-defer to ensure that the
-# sourcing of select scripts happens in the
-# background, thus decreasing shell startup time
-# source ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
-
 # NOTE: use this plugin as a backup in case alternate is unavailable
 # Plugin: zsh-syntax-highlighting
 # source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Plugin: fast-syntax-highlighting
-# zsh-defer source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # Plugin: Request all plugins from oh-my-zsh
+#
 # NOTE: these are all loaded in the .oh-my-zsh.sh script
 # and some of these could be loaded through zsh-defer.
-# However, not all of them work with zsh-defer and thus
-# right now I am trading the extra startup cost for simplicity.
+#
+# However, not all of them work with zsh-defer and some
+# benchmarking suggests that there is not any/much improvement
+# in performance. As such, they are all being included here!
 plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator vi-mode virtualenv)
 
 # Reload all of the completion modules before
@@ -261,14 +258,6 @@ autoload -Uz compinit && compinit
 
 # Load customized oh-my-zsh script
 source $HOME/.oh-my-zsh.sh
-
-# # Load the shrink-path plugin used in the prompt because
-# # it cannot be loaded by zsh-defer source without error
-# source $HOME/.oh-my-zsh/plugins/shrink-path/shrink-path.plugin.zsh
-
-# # Load the vi-mode plugin used in the prompt because
-# # it cannot be loaded by zsh-defer source without error
-# source $HOME/.oh-my-zsh/plugins/vi-mode/vi-mode.plugin.zsh
 
 # Plugin: Fast, git-stacular prompt with gitstatus
 # Note: local modifications to this plugin
@@ -317,7 +306,6 @@ fasd_cache="$HOME/.fasd-init-zsh"
 if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
   fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
 fi
-# zsh-defer source "$fasd_cache"
 source "$fasd_cache"
 unset fasd_cache
 
@@ -408,7 +396,6 @@ FZF_TAB_OPTS=(
 )
 
 # Setup fzf, its auto-completions, and key bindings
-# [ -f ~/.fzf.zsh ] && zsh-defer source ~/.fzf.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Trigger fzf completion using the semi-colon key instead of **
@@ -457,7 +444,6 @@ function workspace {
 # Pyenv {{{
 
 export PATH="$HOME/.pyenv/bin:$PATH"
-# zsh-defer eval "$(command pyenv init - zsh --no-rehash)"
 eval "$(command pyenv init - zsh --no-rehash)"
 
 # }}}
