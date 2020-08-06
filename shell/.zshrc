@@ -493,11 +493,6 @@ function chpwd() {
   exa --group-directories-first --grid --long --sort=name
 }
 
-# Connect to the external monitor
-function connect-external-monitor() {
-  xrandr --output DP3 --above eDP1 --auto
-}
-
 # }}}
 
 # Redefine Aliases {{{
