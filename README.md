@@ -55,6 +55,7 @@ created and actively maintain:
 - `.config/polybar`: configuration and scripts for the `polybar` used with `i3`
 - `.config/termite`: configuration and color scheme for the `termite` terminal window
 - `.config/zathura`: configuration for the `zathura ` PDF viewer
+- `.local/bin`: scripts for regular use through the terminal window and `rofi`
 
 Are you looking for some neat configurations to sharpen your own dotfiles? If
 so, then I encourage you to review the `.vimrc`, `.zshrc`, and `.tmux.conf`
@@ -108,7 +109,11 @@ contains dotfiles that you no longer needed and you want to remove them from the
 system, then please type the command `make purge`. Next, typing the command
 `make dotfiles` will create all the needed directories and subdirectories and
 make symbolic links to the dotfiles in this repository from the correct
-destination directories.
+destination directories. In summary, the main command to type is:
+
+```shell
+make dotfiles
+```
 
 ## Problems or Praise
 
