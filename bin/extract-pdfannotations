@@ -15,7 +15,7 @@ def main():
         page = doc[i]
         for annot in page.annots():
             annotations = annotations + 1
-            print("* Page " + str(i) + ": " + annot.info["content"] + "\n")
+            print("* Page " + str(i+1) + ": " + annot.info["content"] + "\n")
     print("Extracted " + str(annotations) + " annotations from " + str(doc.pageCount) + " pages")
 
 
