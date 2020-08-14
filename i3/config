@@ -368,7 +368,7 @@ mode "Resize a Window" {
         # --> 1080p resolution required by OBS
         bindsym v resize set 1930 1135
         # --> small box for scene triggers in OBS
-        bindsym m resize set 300 300
+        bindsym w resize set 300 300
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
