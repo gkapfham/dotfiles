@@ -564,6 +564,8 @@ endfunction
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 " Define a command to support the toggle of Vista's display of tags
+" NOTE: There is a defect, most likely in Vista, that causes the
+" lightline display to disappear after using this command.
 nnoremap <Space>v :Vista!!<cr>
 
 " Enable the display of icons in the Vista interface
