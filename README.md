@@ -118,11 +118,13 @@ make dotfiles
 ## Problems or Praise
 
 If you have any problems with downloading or understanding these configuration
-files, then please create an issue associated with this Git repository using the
-"Issues" link at the top of this site. As the sole contributor to the `dotfiles`
-repository, I will do everything possible to resolve your issue and ensure that
-all the configurations are clear and, potentially, best suited to working in
-your development environment. Remember, this repository is being made publicly
-available to provide examples of how to write configurations for programs like
-`vim` and `nvim`. If you find that these files help you in preparing your own
-configurations, then I also encourage you to "star" and "watch" this project!
+files, then please create an issue associated with this Git repository using
+the [Issues](https://github.com/gkapfham/dotfiles/issues) link at the top of
+this repository. As the sole contributor to the `dotfiles` repository, I will
+do everything possible to resolve your issue and ensure that all the
+configurations are clear and, potentially, best suited to working in your
+development environment. Remember, this repository is being made publicly
+available to provide examples of how to write configurations for programs
+like `vim` and `nvim`. If you find that these files help you in preparing
+your own configurations, then I also encourage you to "star" and "watch" this
+project!
