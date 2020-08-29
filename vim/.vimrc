@@ -458,6 +458,17 @@ let g:lightline.tabline          = {'left': [['buffers']], 'right': [['bufnum']]
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 
+" Configure the display symbol in lightline buffer listing for
+" file types that do not have a default display symbol
+" --> Default
+let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = ''
+" --> Dictionary
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
+" --> LaTeX
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tex'] = ''
+" --> BibTeX
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['bib'] = ''
+
 " }}}
 
 " Version Control {{{
