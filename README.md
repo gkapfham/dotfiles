@@ -72,14 +72,14 @@ plugin or tool I forked a specific GitHub repository and then made my
 improvements in that fork. Otherwise, I added the needed repository as a
 sub-module to this one. These are the current submodules that I maintain:
 
-- fastsyntaxhighlighting
-- fzftab
-- gitstatus
-- tpm
-- zshautosuggestions
-- zshdefer
-- zshgitprompt
-- zshsyntaxhighlighting
+- `fastsyntaxhighlighting`
+- `fzftab`
+- `gitstatus`
+- `tpm`
+- `zshautosuggestions`
+- `zshdefer`
+- `zshgitprompt`
+- `zshsyntaxhighlighting`
 
 ## Installation Instructions
 
