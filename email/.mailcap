@@ -1,4 +1,4 @@
-application/pdf; $HOME/bin/mutt-bgrun zathura %s
+application/pdf; $HOME/.local/bin/mutt-bgrun zathura %s
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; mutt-bgrun soffice --nologo --writer '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx
 application/msword; mutt-bgrun soffice --nologo --writer '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx
 application/vnd.ms-powerpoint; mutt-bgrun soffice --nologo '%s'; edit=soffice -no-oosplash --writer '%s'; test=test -n "$DISPLAY"; description="Office Open XML Document"; nametemplate=%s.docx
