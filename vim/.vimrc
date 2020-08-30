@@ -464,10 +464,12 @@ let g:lightline.component_type   = {'buffers': 'tabsel'}
 let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = ''
 " --> Dictionary
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
+" --> BibTeX
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['bib'] = ''
 " --> LaTeX
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tex'] = ''
-" --> BibTeX
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['bib'] = ''
+" --> Shell
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sh'] = ''
 
 " }}}
 
