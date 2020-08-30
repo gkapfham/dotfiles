@@ -20,14 +20,6 @@ eval $(/usr/sbin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ss
 export $(/usr/sbin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
 dbus-update-activation-environment --systemd DISPLAY
 
-# export a variable that supports the use of dunst for notifications
-#export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
-
-#export GDK_SCALE=2
-#export GDK_DPI_SCALE=1.25
-
-#export PATH="/home/gkapfham/.fzf/bin:/home/gkapfham/.local/bin:"
-
 # startx /usr/sbin/i3
 #
 exec i3
