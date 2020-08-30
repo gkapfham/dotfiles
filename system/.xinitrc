@@ -21,5 +21,4 @@ export $(/usr/sbin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,
 dbus-update-activation-environment --systemd DISPLAY
 
 # startx /usr/sbin/i3
-#
 exec i3
