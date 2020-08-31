@@ -468,6 +468,8 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['bib'] = ''
 " --> LaTeX
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tex'] = ''
+" --> Markdown
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['markdown'] = ''
 " --> Shell
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sh'] = ''
 
