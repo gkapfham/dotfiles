@@ -366,7 +366,11 @@ mode "Resize a Window" {
         bindsym Right resize grow width 10 px or 10 ppt
         # resize to:
         # --> 1080p resolution required by OBS
+        #     for Termite and Chromium
         bindsym v resize set 1930 1135
+        # --> 1080p resolution required by OBS
+        #     for VSCode
+        bindsym c resize set 1920 1080
         # --> small box for scene triggers in OBS
         bindsym w resize set 300 300
         # back to normal: Enter or Escape or $mod+r
