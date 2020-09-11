@@ -69,7 +69,7 @@ Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
 Plug 'rhysd/git-messenger.vim'
 Plug 'romainl/vim-devdocs'
-Plug 'RRethy/vim-hexokinase'
+" Plug 'RRethy/vim-hexokinase'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
@@ -95,6 +95,7 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
@@ -297,7 +298,8 @@ let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
 let g:matchup_matchparen_status_offscreen = 0
 
 " Enable for all filetypes
-let g:Hexokinase_ftAutoload = ['colortemplate', 'conf', 'css', 'html', 'markdown']
+" let g:Hexokinase_ftAutoload = ['colortemplate', 'conf', 'css', 'html', 'markdown']
+lua require'colorizer'.setup()
 
 " Increase size of display of all registers through the peekaboo plugin
 let g:peekaboo_window = 'vert bo 40new'
