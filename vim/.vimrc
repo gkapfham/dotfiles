@@ -62,14 +62,13 @@ Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-syntax'
 Plug 'ncm2/ncm2-tagprefix'
 Plug 'ncm2/ncm2-ultisnips'
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
 Plug 'rhysd/git-messenger.vim'
-Plug 'romainl/vim-devdocs'
-" Plug 'RRethy/vim-hexokinase'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
@@ -95,7 +94,6 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
-Plug 'norcalli/nvim-colorizer.lua'
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
