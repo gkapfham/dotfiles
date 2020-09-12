@@ -295,8 +295,7 @@ let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
 " Do not display the match of an offscreen delimiter
 let g:matchup_matchparen_status_offscreen = 0
 
-" Enable for all filetypes
-" let g:Hexokinase_ftAutoload = ['colortemplate', 'conf', 'css', 'html', 'markdown']
+" Enable the Lua-based color highlighter for all filetypes
 lua require'colorizer'.setup()
 
 " Increase size of display of all registers through the peekaboo plugin
