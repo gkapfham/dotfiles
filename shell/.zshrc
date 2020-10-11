@@ -157,6 +157,10 @@ alias cat="bat"
 # Directory listing with a simple command
 alias ka="exa --group-directories-first --grid --long --sort=name"
 
+# Use the exa command to display a tree,
+# ensuring better color scheme
+alias tree="exa --tree"
+
 # Always run pacman as root
 alias pacman="sudo pacman"
 
