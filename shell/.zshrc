@@ -159,7 +159,7 @@ alias ka="exa --group-directories-first --grid --long --sort=name"
 
 # Use the exa command to display a tree,
 # ensuring better color scheme
-alias tree="exa --tree"
+alias tree="exa --tree --level=2 --long"
 
 # Always run pacman as root
 alias pacman="sudo pacman"
