@@ -45,13 +45,14 @@ font-1 = "Hack Nerd Font:size=24;5"
 ; Specify the emphasis font for the i3 workspaces
 font-2 = "Hack Nerd Font:size=24:weight=bold;5"
 
-; Display the i3 workspaces on the left
+; Left panel: display the i3 workspaces
 modules-left = i3
 
-; Display multiple modules on the right
-modules-right = cpu memory battery0 backlight pulseaudio network date
+; Middle panel: display the network statistics
+modules-center = network cpu temperature memory
 
-; Do not display any modules in the middle
+; Right panel: display cpu, memory, battery, screen light, audio, and calendar
+modules-right = battery0 backlight pulseaudio  date
 
 ; Configure the tray to display the network-manager applet
 ; Disable the tray and do not display the network-manager applet
@@ -82,16 +83,18 @@ type = internal/network
 interface = wlp0s20f3
 interval = 3.0
 udspeed-minwidth = 0
-format-connected-prefix = " "
+format-connected-prefix = ""
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
-label-connected = %essid% 說 %signal%
-label-disconnected = Disconnected
+label-connected = %upspeed:9% 祝%downspeed:9%     %essid%  說 %signal:2%
+label-packetloss =   %essid% 說 %signal:2% %upspeed:9% 祝%downspeed:9% 
+label-disconnected =  Disconnected
 
 ; Display the i3 workspaces
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
+format-prefix = "  "
 index-sort = true
 wrapping-scroll = false
 pin-workspaces = true
@@ -133,18 +136,28 @@ label-urgent-padding = 2
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = "龍"
 ;format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.background}
-label = %percentage:2%%
+label = %percentage:3%%
+
+; Display the temperature of the processor
+[module/temperature]
+type = internal/temperature
+interval = 1
+thermal-zone = 0
+format-prefix = "﨎 "
+hwmon-path = /sys/devices/pci0000:00/0000:00:1d.0/0000:57:00.0/hwmon/hwmon0/temp1_input
+format = <label>
+label = %temperature-c:2%
 
 ; Display the use of the memory
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = ""
 format-underline = ${colors.background}
-label = %percentage_used%%
+label = %percentage_used:3%%
 
 ; Display the date
 [module/date]
@@ -162,19 +175,19 @@ format-underline = ${colors.background}
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <ramp-volume> <label-volume>
-label-volume = %percentage%%
+format-volume = <label-volume>
+label-volume =  %percentage:3%%
 label-volume-foreground = ${root.foreground}
 format-volume-underline = ${colors.background}
 
 format-muted-prefix = "婢"
-label-muted = %percentage%%
+label-muted = %percentage:2%%
 label-muted-foreground = #666
 format-muted-underline = ${colors.background}
 
-ramp-volume-0 = "奄"
-ramp-volume-1 = "奔"
-ramp-volume-2 = "墳"
+;ramp-volume-0 = "奄"
+;ramp-volume-1 = "奔"
+;ramp-volume-2 = "墳"
 
 ; Display the level of the battery
 [module/battery0]
@@ -183,23 +196,23 @@ battery = BAT0
 adapter = AC
 full-at = 99
 
-label-charging = %percentage%%
+label-charging = %percentage:3%%
 format-charging-prefix = " "
 format-charging = <label-charging>
 format-charging-underline = ${colors.background}
 
-label-discharging = %percentage%%
+label-discharging = %percentage:3%%
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${colors.background}
 
-label-full = %percentage%%
+label-full = %percentage:3%%
 format-full-prefix = " "
 format-full-underline = ${colors.background}
 
-ramp-capacity-0 = ""
-ramp-capacity-1 = ""
-ramp-capacity-2 = ""
-ramp-capacity-3 = ""
+ramp-capacity-0 = " "
+ramp-capacity-1 = " "
+ramp-capacity-2 = " "
+ramp-capacity-3 = " "
 
 ; Display backlight details
 ; Note that this works even though i3 uses light
@@ -208,6 +221,4 @@ type = internal/backlight
 card = intel_backlight
 format = <label>
 format-prefix = " "
-label = %percentage%%
-
-
+label = %percentage:3%%
