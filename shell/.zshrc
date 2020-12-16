@@ -164,6 +164,11 @@ alias tree="exa --tree --level=2 --long"
 # Always run pacman as root
 alias pacman="sudo pacman"
 
+# Alias to search for packages in yay (which includes non-AUR)
+# and 1) then display details about the package in an fzf preview and
+# 2) display the details about the package in shell after selection
+alias yaysearch="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -Si"
+
 # }}}
 
 # Git Aliases {{{
