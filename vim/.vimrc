@@ -787,7 +787,7 @@ let g:vimtex_fold_enabled = 0
 " --> Do not open quickfix for warnings
 let g:vimtex_quickfix_open_on_warning = 0
 " --> Do not show the help message
-let g:vimtex_index_show_help = 0
+" let g:vimtex_index_show_help = 0
 " --> Use zathura for the PDF viewer
 let g:vimtex_view_method = 'zathura'
 " --> Use the nvr program (Neovim-remote)
@@ -1228,7 +1228,7 @@ endif
 
 " Use nvr for remove communication
 if has("nvim")
-  let g:vimtex_latexmk_progname = 'nvr'
+  let g:vimtex_compiler_progname = 'nvr'
 endif
 
 " Leave using a different command than ESC
