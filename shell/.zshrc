@@ -131,6 +131,13 @@ export PROMPT_EOL_MARK='    '
 # which consults this for running the i3-sensible-terminal
 export TERMINAL='alacritty'
 
+# Define the pager used for manual pages to be Neovim,
+# making it possible to then use <Leader>c to load the
+# location list and navigate the sections in the man page.
+# Note that it is also possible to use "gO" to load
+# the location list instead of <Leader>c.
+export MANPAGER='nvim +Man!'
+
 # Configure bat to use a matching theme
 export BAT_THEME='Vitamin-Onec'
 
