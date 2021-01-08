@@ -132,10 +132,10 @@ export PROMPT_EOL_MARK='    '
 export TERMINAL='alacritty'
 
 # Define the pager used for manual pages to be Neovim,
-# making it possible to then use <Leader>c to load the
-# location list and navigate the sections in the man page.
-# Note that it is also possible to use "gO" to load
-# the location list instead of <Leader>c.
+# making it possible to then use "gO" to populate and load the
+# location list and then navigate the sections in the man page.
+# Note that after population of the location list it is possible
+# to it again by using <Leader>c instead of "gO".
 export MANPAGER='nvim +Man!'
 
 # Configure bat to use a matching theme
