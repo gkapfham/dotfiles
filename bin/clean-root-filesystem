@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# NOTE: This script cleans the root drive because I incorrectly
+# made the root volume only contain 25 GB of space, which is
+# not enough for the (sometimes large) pacman cache and the
+# system journal that can span across multiple days.
+
+echo "Starting free space:"
+
+df -h
+
+echo ""
+
+echo "Use journalctl to clean old entries from the system journal:"
+sudo journalctl --vacuum-time=7d
+
+echo ""
+
+echo "Keep only the last version of the programs installed by pacman:"
+sudo paccache -rk 1
+
+echo ""
+
+echo "Remove all of the versions of the un-installed programs managed pacman:"
+sudo paccache -ruk 0
+
+echo ""
+
+echo "Ending free space:"
+
+df -h
+
+echo ""
