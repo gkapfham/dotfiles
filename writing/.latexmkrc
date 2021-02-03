@@ -18,11 +18,16 @@ push @generated_exts, "run.xml";
 $latex = 'latex --src-specials %O %S';
 $pdflatex = 'pdflatex -file-line-error -synctex=1 -interaction=nonstopmode -shell-escape %O %S';
 
-# If zero, check for a previously running previewer on the same file and update it.  If nonzero, always start a new previewer.
+# If zero, check for a previously running previewer on the same file and update
+# it.  If nonzero, always start a new previewer.
 $new_viewer_always = 0;
 
-# How to make the PDF viewer update its display when the PDF file changes.  See the man page for a description of each method.
+# How to make the PDF viewer update its display when the PDF file changes.  See
+# the man page for a description of each method.
 $pdf_update_method = 2;
+
+# Instead of using the default PDF viewer, preview all PDFs using Zathura
+$pdf_previewer = 'zathura';
 
 # When PDF update method 2 is used, the number of the Unix signal to send
 $pdf_update_signal = 'SIGHUP';
