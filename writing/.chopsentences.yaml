@@ -1,0 +1,12 @@
+modifyLineBreaks:
+    textWrapOptions:
+         columns: 80
+    oneSentencePerLine:
+        manipulateSentences: 1
+        removeSentenceLineBreaks: 1
+        textWrapSentences: 1
+
+replacements:
+  -
+    substitution: s/(^[A-Z])/\t$1/mg
+    when: after
