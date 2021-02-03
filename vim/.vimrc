@@ -839,8 +839,9 @@ nmap gr <plug>(ChopSentences)
 xmap gr <plug>(ChopSentences)
 
 " Pass options to latexindent
-" --> line wrap at 80 words to match :StandardWrap
-let g:latexindent_yaml_options = 'modifyLineBreaks:textWrapOptions:columns:80'
+" Note that latexindent will reference the ~/.indentconfig.yaml
+" file which will point to the ~/.chopsentences.yaml file
+let g:latexindent_options = '-m -r'
 
 " Do not use a space after the comment string symbol in LaTeX
 augroup latexcomments
