@@ -764,6 +764,12 @@ let g:ale_linters = {
       \   'python': ['flake8', 'pylint', 'pydocstyle'],
       \}
 
+" Configure the fixers run by ALE
+" All files: remove trailing lines and blank spaces
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
+
 " Configure the symbols for linting warnings and errors
 let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
