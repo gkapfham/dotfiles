@@ -31,6 +31,8 @@ created and actively maintain:
 - `.gitconfig`: configuration file for Git, including customized aliases
 - `.gitignore_global`: configuration of the files to exclude from Git repositories
 - `.gvimrc`: legacy configuration of `gvim` text editor
+- `.indentconfig.yaml`: pointer to configurations for the `latexindent` program
+- `.chopsentences.yaml`: configuration for the `latexindent` program to do semantic linefeeds
 - `.inputrc`: configuration of all input-enabled tools with `vi`-like mappings
 - `.latexmkrc`: configuration for the `latexmk` wrapper for LaTeX compilers
 - `.mailcap`: configuration for how MIME-enabled programs load files
