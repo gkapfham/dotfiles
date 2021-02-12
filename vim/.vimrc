@@ -616,6 +616,14 @@ let g:vista#renderer#icons = {
 
 " }}}
 
+" Snippets {{{
+
+" Use the old version of the snipMate parser
+" to support backwards compatibility of old snippets
+let g:snipMate = { 'snippet_version' : 0 }
+
+" }}}
+
 " Programming Languages {{{
 
 " Automatically identify the filetype
