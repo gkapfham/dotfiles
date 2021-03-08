@@ -127,6 +127,6 @@ do everything possible to resolve your issue and ensure that all the
 configurations are clear and, potentially, best suited to working in your
 development environment. Remember, this repository is being made publicly
 available to provide examples of how to write configurations for programs
-like `vim` and `nvim`. If you find that these files help you in preparing
-your own configurations, then I also encourage you to "star" and "watch" this
-project!
+like `vim`, `nvim`, and `i3`. If you find that these files help you in
+preparing your own configurations, then I also encourage you to "star" and
+"watch" this project!
