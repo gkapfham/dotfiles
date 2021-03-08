@@ -35,4 +35,3 @@ _fasd_zsh_cmd_complete() {
 # enbale command mode completion
 compctl -U -K _fasd_zsh_cmd_complete -V fasd -x 'C[-1,-*e],s[-]n[1,e]' -c - \
   'c[-1,-A][-1,-D]' -f -- fasd fasd_cd
-
