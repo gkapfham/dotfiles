@@ -23,7 +23,6 @@ Plug 'filipekiss/ncm2-look.vim'
 Plug 'garbas/vim-snipmate'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'honza/vim-snippets'
-Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
 Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
@@ -42,6 +41,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+Plug 'kevinhwang91/nvim-bqf'
 Plug 'Konfekt/vim-sentence-chopper'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -64,6 +64,7 @@ Plug 'ncm2/ncm2-tagprefix'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
@@ -86,6 +87,7 @@ Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
 Plug 'twitvim/twitvim', {'on': 'PosttoTwitter'}
 Plug 'Valloric/ListToggle'
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-scripts/python_match.vim'
 Plug 'vim-scripts/SyntaxAttr.vim'
@@ -526,6 +528,27 @@ function! SetupGitMessengerPopup() abort
 endfunction
 autocmd FileType gitmessengerpopup call SetupGitMessengerPopup()
 augroup END
+
+" }}}
+
+" Treesitter {{{
+
+" Use the treesitter for all of the possible languages available
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  -- one of "all", "maintained" (parsers with maintainers),
+  -- or a list of languages
+  ensure_installed = "maintained",
+  highlight = {
+    -- false will disable the whole extension
+    enable = true,
+  },
+  indent = {
+    -- false disables because Python Treesitter is buggy right now
+    enable = false
+  }
+}
+EOF
 
 " }}}
 
