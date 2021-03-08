@@ -1102,10 +1102,10 @@ nnoremap gdh :diffget //2<CR>
 nnoremap gdb :diffget //3<CR>
 
 " Perform a Gcommit for the current file with a mapping
-nnoremap <leader>gcf :Gcommit %<CR>
+nnoremap <leader>gcf :Git commit %<CR>
 
 " Perform a Gcommit for all modified files with a mapping
-nnoremap <leader>gca :Gcommit -a<CR>
+nnoremap <leader>gca :Git commit -a<CR>
 
 " }}}
 
