@@ -19,6 +19,7 @@ if [ "$diagnostic" -eq 0 ]; then
     echo "Hooray, the backup worked correctly!"
 else
     echo "Oops, the backup did not work correctly!"
+    echo "Make sure that you run 'sudo mount /dev/sda1 /mnt/usb/' on vatomauro"
 fi
 
 echo ""
