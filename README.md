@@ -59,7 +59,7 @@ created and actively maintain:
 - `.config/zathura`: configuration for the `zathura ` PDF viewer
 - `.local/bin`: scripts for regular use through the terminal window and `rofi`
 
-Are you looking for some neat configurations to sharpen your own dotfiles? If
+Are you looking for some neat configurations to improved your own dotfiles? If
 so, then I encourage you to review the `.vimrc`, `.zshrc`, and `.tmux.conf`
 files that I regularly improve. Interesting in learning how to configuration the
 i3 window manager? Then, you are invited to review the `.config/i3` and
