@@ -141,6 +141,11 @@ export MANPAGER='nvim +Man!'
 # Configure bat to use a matching theme
 export BAT_THEME='Vitamin-Onec'
 
+# Configure less to use lesspipe.sh so that it is possible
+# to perform conversion of files to plaintext. For instance,
+# using "less file.pdf" will now file.pdf's text in the terminal
+export LESSOPEN="|lesspipe.sh %s"
+
 # }}}
 
 # System Aliases {{{
