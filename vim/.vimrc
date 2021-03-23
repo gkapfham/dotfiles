@@ -41,7 +41,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-Plug 'kevinhwang91/nvim-bqf'
+Plug 'kevinhwang91/nvim-bqf', { 'branch': 'main' }
 Plug 'Konfekt/vim-sentence-chopper'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
