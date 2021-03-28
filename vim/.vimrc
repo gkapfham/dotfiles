@@ -542,7 +542,7 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
   highlight = {
     -- false will disable the whole extension
-    enable = true,
+    enable = false,
   },
   indent = {
     -- false disables because Python Treesitter is buggy right now
