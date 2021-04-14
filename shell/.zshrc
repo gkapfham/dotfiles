@@ -437,7 +437,10 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Zsh-Vi-Mode {{{
 
 # Run all of the code in this function after
-# initializing the zsh-vi-mode plugin
+# initializing the zsh-vi-mode plugin. Note that
+# many of these steps are needed because of the
+# fact that the zsh-vi-mode plugin overwrites
+# keybindings, making it necessary to run again
 function zvm_after_init() {
 
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
