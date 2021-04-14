@@ -261,6 +261,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Plugin: fast-syntax-highlighting
 source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+# Plugin: zsh-vi-mode
 source $HOME/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Plugin: Request all plugins from oh-my-zsh
@@ -555,6 +556,11 @@ ZVM_VI_HIGHLIGHT_BACKGROUND="#303030"
 # Define a slightly faster timeout delay for key
 # pressed in the zsh-vi-mode plugin
 ZVM_KEYTIMEOUT=0.2
+
+# Disable the cursor mode because using terminals
+# and Neovim in tmux will cause this value to
+# change depending on the mode for Neovim
+ZVM_CURSOR_STYLE_ENABLED=false
 
 # Run this function every time that the
 # zsh-vi-mode plugin detects that the
