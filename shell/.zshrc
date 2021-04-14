@@ -543,7 +543,7 @@ function zvm_after_init() {
 }
 
 # Configure the shell so that it uses jk for escape
-ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+ZVM_VI_INSERT_ESCAPE_BINDKEY="jk"
 
 # Customize the background color of highlights in
 # the terminal window when in visual mode. Note that
