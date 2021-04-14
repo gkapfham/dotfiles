@@ -22,3 +22,6 @@
 [submodule "zshdefer"]
 	path = zshdefer
 	url = https://github.com/romkatv/zsh-defer.git
+[submodule "zshvimode"]
+	path = zshvimode
+	url = https://github.com/jeffreytse/zsh-vi-mode.git
