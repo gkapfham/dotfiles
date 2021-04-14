@@ -564,7 +564,7 @@ ZVM_KEYTIMEOUT=0.2
 function zvm_after_select_vi_mode() {
   case $ZVM_MODE in
     $ZVM_MODE_NORMAL)
-     RPROMPT="%{$fg_bold[red]%}%{$reset_color%}"
+     RPROMPT="%{$fg_bold[red]%}%{$reset_color%}"
      zle reset-prompt
     ;;
     $ZVM_MODE_INSERT)
