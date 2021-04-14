@@ -249,6 +249,14 @@ create-git-status:
 ## Depends on the creation of the .zsh directory
 create-git-status: create-zsh
 
+## Create the needed gitstatus/ directory in .zsh/
+create-zsh-vi-mode:
+	rm -rf ~/.zsh/zsh-vi-mode
+	mkdir -p ~/.zsh/zsh-vi-mode
+
+## Depends on the creation of the .zsh directory
+create-git-status: create-zsh
+
 ## }}}
 
 # NOTE: These rules work because of the way in which the
@@ -448,10 +456,14 @@ stow-git-status:
 	stow -t ~/.zsh/gitstatus gitstatus
 
 ## Running stow depends on the creation of associated directory
-stow-zshdefer: create-zshdefer
+stow-git-status: create-git-status
+
+## Run stow on zshvimode
+stow-zsh-vi-mode:
+	stow -t ~/.zsh/zsh-vi-mode zshvimode
 
 ## Running stow depends on the creation of associated directory
-stow-git-status: create-git-status
+stow-zsh-vi-mode: create-zsh-vi-mode
 
 ## Run stow on tpm
 stow-tpm:
@@ -501,7 +513,7 @@ create: create-config create-alacritty create-bat create-dunst create-gtk2 creat
 stow: stow-alacritty stow-bat stow-code stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-zathura stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tool stow-vim stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
-stow-external: stow-fzf-tab stow-zsh-git-prompt stow-zshdefer stow-git-status stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
+stow-external: stow-fzf-tab stow-zsh-git-prompt stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
 
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: create stow stow-external zcompile-shell-scripts
