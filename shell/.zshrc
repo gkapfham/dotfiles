@@ -261,6 +261,8 @@ HIST_STAMPS="mm/dd/yyyy"
 # Plugin: fast-syntax-highlighting
 source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+source $HOME/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 # Plugin: Request all plugins from oh-my-zsh
 #
 # NOTE: these are all loaded in the .oh-my-zsh.sh script
@@ -269,7 +271,8 @@ source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 # However, not all of them work with zsh-defer and some
 # benchmarking suggests that there is not any/much improvement
 # in performance. As such, they are all being included here!
-plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator vi-mode virtualenv)
+# plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator vi-mode virtualenv)
+plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator virtualenv)
 
 # Reload all of the completion modules before
 # sourcing the specialized Oh-My-Zsh script
@@ -419,6 +422,106 @@ FZF_TAB_OPTS=(
 # Setup fzf, its auto-completions, and key bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+function zvm_after_init() {
+
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+  ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+  ZSH_AUTOSUGGEST_USE_ASYNC=1
+  bindkey '^ ' autosuggest-accept
+
+# Use FZF to filter the output of FASD anywhere it is a command
+autoload -U modify-current-argument
+fzf-fasd-widget() {
+  # divide the commands buffer into words
+  local words i beginword start
+  i=0
+  start=1
+  beginword=0
+  words=("${(z)BUFFER}")
+  while (( beginword <= CURSOR )); do
+          (( i++ ))
+          (( beginword += ${#words[$i]}+1 ))
+  done
+  # extract the first and current words
+  # extract the first letter as a potential trigger
+  FIRSTWORD="$words[$start]"
+  CURRENTWORD="$words[$i]"
+  TRIGGERLETTER=${CURRENTWORD:0:1}
+  # the trigger of "," was used, so start
+  # the use of FASD and FZF with this word
+  if [ "$TRIGGERLETTER" = "," ]; then
+    unset 'words[${#words[@]}]'
+    PASTWORDS=${words[@]}
+    CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
+    LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
+      fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
+  # the trigger of "," was not used, so
+  # search interactively based on user input
+  else
+    PASTWORDS=${words[@]}
+    CURRENTWORD=""
+    LBUFFER="${PASTWORDS} $(fasd -d -l -r $CURRENTWORD | \
+      fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
+  fi
+  # update the prompt with the result of using FASD and FZF
+  local ret=$?
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
+# Create a binding so that you can type "cd ,pract^B"
+# (as an example) to trigger this integrated widget
+zle     -N   fzf-fasd-widget
+bindkey '^B' fzf-fasd-widget
+# Use FZF to filter the output of FASD anywhere it is a command
+autoload -U modify-current-argument
+fzf-fasd-widget() {
+  # divide the commands buffer into words
+  local words i beginword start
+  i=0
+  start=1
+  beginword=0
+  words=("${(z)BUFFER}")
+  while (( beginword <= CURSOR )); do
+          (( i++ ))
+          (( beginword += ${#words[$i]}+1 ))
+  done
+  # extract the first and current words
+  # extract the first letter as a potential trigger
+  FIRSTWORD="$words[$start]"
+  CURRENTWORD="$words[$i]"
+  TRIGGERLETTER=${CURRENTWORD:0:1}
+  # the trigger of "," was used, so start
+  # the use of FASD and FZF with this word
+  if [ "$TRIGGERLETTER" = "," ]; then
+    unset 'words[${#words[@]}]'
+    PASTWORDS=${words[@]}
+    CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
+    LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
+      fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
+  # the trigger of "," was not used, so
+  # search interactively based on user input
+  else
+    PASTWORDS=${words[@]}
+    CURRENTWORD=""
+    LBUFFER="${PASTWORDS} $(fasd -d -l -r $CURRENTWORD | \
+      fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
+  fi
+  # update the prompt with the result of using FASD and FZF
+  local ret=$?
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
+# Create a binding so that you can type "cd ,pract^B"
+# (as an example) to trigger this integrated widget
+zle     -N   fzf-fasd-widget
+bindkey '^B' fzf-fasd-widget
+
+}
+
 # Trigger fzf completion using the semi-colon key instead of **
 export FZF_COMPLETION_TRIGGER=';'
 
@@ -428,10 +531,40 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # }}}
 
-# Bindkey {{{
+# Zsh-Vi-Mode {{{
 
 # Configure the shell so that it uses jk for escape
-bindkey -M viins 'jk' vi-cmd-mode
+# bindkey -M viins 'jk' vi-cmd-mode
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+
+ZVM_VI_HIGHLIGHT_BACKGROUND="#303030"
+
+ZVM_KEYTIMEOUT=0.1
+
+function zvm_after_select_vi_mode() {
+  case $ZVM_MODE in
+    $ZVM_MODE_NORMAL)
+     RPROMPT="%{$fg_bold[red]%}%{$reset_color%}"
+     zle reset-prompt
+    ;;
+    $ZVM_MODE_INSERT)
+     RPROMPT=""
+     zle reset-prompt
+    ;;
+    $ZVM_MODE_VISUAL)
+     RPROMPT="%{$fg_bold[red]%}%{$reset_color%}"
+     zle reset-prompt
+    ;;
+    $ZVM_MODE_VISUAL_LINE)
+     RPROMPT="%{$fg_bold[red]%}%{$reset_color%}"
+     zle reset-prompt
+    ;;
+    $ZVM_MODE_REPLACE)
+     RPROMPT="%{$fg_bold[red]%}%{$reset_color%}"
+     zle reset-prompt
+    ;;
+  esac
+}
 
 # }}}
 
