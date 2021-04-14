@@ -1305,11 +1305,6 @@ nnoremap <Space>a :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 
 " Neovim Configuration {{{
 
-" " Do not use a different cursor shape
-" if has("nvim")
-"   " set guicursor=
-" endif
-
 " Use nvr for remove communication
 if has("nvim")
   let g:vimtex_compiler_progname = 'nvr'
