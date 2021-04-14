@@ -7,6 +7,7 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'junegunn/vim-peekaboo'
 Plug 'airblade/vim-rooter'
 Plug 'andymass/vim-matchup'
 Plug 'bkad/CamelCaseMotion'
@@ -36,7 +37,6 @@ Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
@@ -84,6 +84,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
+Plug 'tversteeg/registers.nvim'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
 Plug 'twitvim/twitvim', {'on': 'PosttoTwitter'}
@@ -302,14 +303,16 @@ let g:matchup_matchparen_status_offscreen = 0
 lua require'colorizer'.setup()
 
 " Increase size of display of all registers through the peekaboo plugin
-let g:peekaboo_window = 'vert bo 40new'
+" let g:peekaboo_window = 'vert bo 40new'
 
-" Special configuration for peekaboo buffers
-augroup peekabooconfiguration
-  autocmd!
-  " Disable spell checking for the peekaboo buffers
-  autocmd FileType peekaboo setlocal nospell
-augroup END
+" " Special configuration for peekaboo buffers
+" augroup peekabooconfiguration
+"   autocmd!
+"   " Disable spell checking for the peekaboo buffers
+"   autocmd FileType peekaboo setlocal nospell
+" augroup END
+
+let g:registers_show_empty_registers = 0
 
 " Briefly highlight the yanked region using the background color for visual highlights
 augroup highlight_yank
@@ -591,6 +594,11 @@ let g:highlighter#auto_update = 2
 
 " Perform tag generation in existence of a '.maketags' marker file
 let g:gutentags_project_root = ['.maketags']
+
+" Only allow Gutentags to generate a tag file that indexes the files
+" that are returned by a tool like ripgrep, which is already configured
+" to ignore those files that are inside of the .gitignore file
+let g:gutentags_file_list_command = 'rg --files'
 
 " Use Vista to determine the context (e.g., function definition)
 function! NearestMethodOrFunction() abort
@@ -968,7 +976,7 @@ let maplocalleader=','
 let mapleader=','
 
 " Move through CamelCase text
-call camelcasemotion#CreateMotionMappings('<leader>')
+call camelcasemotion#CreateMotionMappings('<space>')
 
 " Navigate through wrapped text
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
@@ -1222,8 +1230,8 @@ nmap <C-p> :Files <CR>
 nmap <Space>p :Files <CR>
 
 " --> Lines of buffer or all lines or marks
-nmap <Space>b :BLines <CR>
-nmap <Space>r :Lines <CR>
+" nmap <Space>b :BLines <CR>
+nmap <Space>r :BLines <CR>
 nmap <Space>m :Marks <CR>
 
 " --> Tags in buffer or all tags
@@ -1297,10 +1305,10 @@ nnoremap <Space>a :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 
 " Neovim Configuration {{{
 
-" Do not use a different cursor shape
-if has("nvim")
-  set guicursor=
-endif
+" " Do not use a different cursor shape
+" if has("nvim")
+"   " set guicursor=
+" endif
 
 " Use nvr for remove communication
 if has("nvim")
