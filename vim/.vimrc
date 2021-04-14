@@ -7,7 +7,6 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
-" Plug 'junegunn/vim-peekaboo'
 Plug 'airblade/vim-rooter'
 Plug 'andymass/vim-matchup'
 Plug 'bkad/CamelCaseMotion'
