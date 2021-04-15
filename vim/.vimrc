@@ -1222,7 +1222,6 @@ nmap <C-p> :Files <CR>
 nmap <Space>p :Files <CR>
 
 " --> Lines of buffer or all lines or marks
-" nmap <Space>b :BLines <CR>
 nmap <Space>r :BLines <CR>
 nmap <Space>m :Marks <CR>
 
