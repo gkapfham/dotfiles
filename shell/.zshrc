@@ -272,7 +272,6 @@ source $HOME/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # However, not all of them work with zsh-defer and some
 # benchmarking suggests that there is not any/much improvement
 # in performance. As such, they are all being included here!
-# plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator vi-mode virtualenv)
 plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator virtualenv)
 
 # Reload all of the completion modules before
