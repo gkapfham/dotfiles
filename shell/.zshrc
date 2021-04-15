@@ -294,26 +294,6 @@ source $HOME/.zsh/gitstatus/gitstatus.prompt.zsh
 # zsh-defer source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 
-# # Define the default fzf command used by fzf-tab
-# # Note: colors defined here because this plugin
-# # does not adopt the standard colors for fzf
-# # as defined later in this file
-# FZF_TAB_COMMAND=(
-#     fzf
-#     --ansi
-#     --expect='$continuous_trigger'
-#     --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700'
-#     --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700'
-#     --color='info:#87afd7,prompt:#87afd7,pointer:#d78700'
-#     --color='marker:#d78700,spinner:#875f87,header:#875f87'
-#     --nth=2,3 --delimiter='\x00'
-#     --layout=reverse --height='${FZF_TMUX_HEIGHT:=75%}'
-#     --tiebreak=begin -m --bind=tab:down,ctrl-j:accept,change:top,ctrl-space:toggle --cycle
-#     '--query=$query'
-#     '--header-lines=$#headers'
-# )
-# zstyle ':fzf-tab:*' command $FZF_TAB_COMMAND
-
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 
