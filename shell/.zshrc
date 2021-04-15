@@ -293,21 +293,26 @@ source $HOME/.zsh/gitstatus/gitstatus.prompt.zsh
 # zsh-defer source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 
-# disable sort when completing `git checkout`
+# Disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 
-# set descriptions format to enable group support
+# Set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
 
-# set list-colors to enable filename colorizing
+# Set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# preview directory's content with exa when completing cd
+# Preview directory's content with exa when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 
-# switch group using `,` and `.`
+# Switch group using `,` and `.` (note that different
+# groups might include different types of branches when
+# tab completing a git checkout command)
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
+# Set the default color to be the color 245 out of
+# the 256 colors available in the terminal window the color 245 out of
+# the 256 colors available in the terminal window
 zstyle ':fzf-tab:*' default-color $'\033[38;5;245m'
 
 zstyle ':fzf-tab:*' show-group full
@@ -682,6 +687,8 @@ function chpwd() {
 # Color Commands {{{
 
 # Print the 256 color palette
+# Online version available at:
+# https://jonasjacek.github.io/colors/
 palette() {
     local -a colors
     for i in {000..255}; do
@@ -690,8 +697,10 @@ palette() {
     print -cP $colors
 }
 
-# Print the zsh color code for a 256 color number
-printc() {
+# Print the zsh color code for a 256 color number.
+# This command is useful because it yields the
+# color code used with Fzf-Tab and with LS_COLORS.
+printcolor() {
     local color="%F{$1}"
     echo -E ${(qqqq)${(%)color}}
 }
