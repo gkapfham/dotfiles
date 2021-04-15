@@ -302,7 +302,9 @@ zstyle ':completion:*:descriptions' format '[%d]'
 # Set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# Preview directory's content with exa when completing cd
+# Preview directory's content with exa when completing cd,
+# thereby showing a preview window with Fzf to the right
+# of the cd command that shows the contents of current directory
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 
 # Switch group using `,` and `.` (note that different
@@ -315,10 +317,17 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 # the 256 colors available in the terminal window
 zstyle ':fzf-tab:*' default-color $'\033[38;5;245m'
 
+# Set that when groups are available (i.e., there are different
+# types of completions that are possible) the names of the
+# groups should be visible at the top of the Fzf-Tab menu
 zstyle ':fzf-tab:*' show-group full
 
+# Do not show a symbol to the left of a file or a directory
 zstyle ':fzf-tab:*' prefix ''
 
+# Pass commands to the Fzf program that defines the colors. These
+# colors are the same as those used to configure Fzf when it runs
+# otherwise in the terminal window or in a text editor like Vim or Neovim
 zstyle ":fzf-tab:*" fzf-flags --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87'
 
 # Plugin: zsh-autosuggestions
