@@ -301,6 +301,9 @@ let g:matchup_matchparen_status_offscreen = 0
 " Enable the Lua-based color highlighter for all filetypes
 lua require'colorizer'.setup()
 
+" Do not show empty registers when previewing the
+" registers that are available upon pressing, for
+" instance, the " key when in normal mode
 let g:registers_show_empty_registers = 0
 
 " Briefly highlight the yanked region using the background color for visual highlights
