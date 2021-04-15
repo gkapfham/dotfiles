@@ -301,16 +301,6 @@ let g:matchup_matchparen_status_offscreen = 0
 " Enable the Lua-based color highlighter for all filetypes
 lua require'colorizer'.setup()
 
-" Increase size of display of all registers through the peekaboo plugin
-" let g:peekaboo_window = 'vert bo 40new'
-
-" " Special configuration for peekaboo buffers
-" augroup peekabooconfiguration
-"   autocmd!
-"   " Disable spell checking for the peekaboo buffers
-"   autocmd FileType peekaboo setlocal nospell
-" augroup END
-
 let g:registers_show_empty_registers = 0
 
 " Briefly highlight the yanked region using the background color for visual highlights
