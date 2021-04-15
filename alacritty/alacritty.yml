@@ -125,7 +125,7 @@ colors:
     blue:    '0x87afd7'
     magenta: '0x875f87'
     cyan:    '0xd75f5f'
-    white:   '0xa3abb3'
+    white:   '0xb2b2b2'
 
   # Bright colors
   bright:
@@ -136,7 +136,7 @@ colors:
     blue:    '0x87afd7'
     magenta: '0x875f87'
     cyan:    '0xd75f5f'
-    white:   '0xa3abb3'
+    white:   '0xb2b2b2'
 
 # Allow terminal applications to change Alacritty's window title.
 window.dynamic_title: true
