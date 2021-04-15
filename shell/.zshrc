@@ -294,25 +294,48 @@ source $HOME/.zsh/gitstatus/gitstatus.prompt.zsh
 # zsh-defer source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 
-# Define the default fzf command used by fzf-tab
-# Note: colors defined here because this plugin
-# does not adopt the standard colors for fzf
-# as defined later in this file
-FZF_TAB_COMMAND=(
-    fzf
-    --ansi
-    --expect='$continuous_trigger'
-    --color='fg:#a9a9a9,bg:#1c1c1c,hl:#5f8700'
-    --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700'
-    --color='info:#87afd7,prompt:#87afd7,pointer:#d78700'
-    --color='marker:#d78700,spinner:#875f87,header:#875f87'
-    --nth=2,3 --delimiter='\x00'
-    --layout=reverse --height='${FZF_TMUX_HEIGHT:=75%}'
-    --tiebreak=begin -m --bind=tab:down,ctrl-j:accept,change:top,ctrl-space:toggle --cycle
-    '--query=$query'
-    '--header-lines=$#headers'
-)
-zstyle ':fzf-tab:*' command $FZF_TAB_COMMAND
+# # Define the default fzf command used by fzf-tab
+# # Note: colors defined here because this plugin
+# # does not adopt the standard colors for fzf
+# # as defined later in this file
+# FZF_TAB_COMMAND=(
+#     fzf
+#     --ansi
+#     --expect='$continuous_trigger'
+#     --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700'
+#     --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700'
+#     --color='info:#87afd7,prompt:#87afd7,pointer:#d78700'
+#     --color='marker:#d78700,spinner:#875f87,header:#875f87'
+#     --nth=2,3 --delimiter='\x00'
+#     --layout=reverse --height='${FZF_TMUX_HEIGHT:=75%}'
+#     --tiebreak=begin -m --bind=tab:down,ctrl-j:accept,change:top,ctrl-space:toggle --cycle
+#     '--query=$query'
+#     '--header-lines=$#headers'
+# )
+# zstyle ':fzf-tab:*' command $FZF_TAB_COMMAND
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+zstyle ':fzf-tab:*' default-color $'\033[38;5;245m'
+
+zstyle ':fzf-tab:*' show-group full
+
+zstyle ':fzf-tab:*' prefix ''
+
+zstyle ":fzf-tab:*" fzf-flags --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87'
 
 # Plugin: zsh-autosuggestions
 source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -392,7 +415,7 @@ export FZF_DEFAULT_OPTS='
   --no-bold
   --cycle
   --bind ctrl-f:page-down,ctrl-b:page-up
-  --color=fg:#a9a9a9,bg:#1c1c1c,hl:#5f8700
+  --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
   --color=marker:#d78700,spinner:#875f87,header:#875f87'
@@ -410,21 +433,20 @@ export FZF_DEFAULT_OPTS='
 #   --color=info:110,prompt:110,pointer:172
 #   --color=marker:172,spinner:96,header:96'
 
-# Set completion options for the fzf-tab script that
-# supports tab completion with fzf in the shell
-FZF_TAB_OPTS=(
-    --ansi
-    --expect='$FZF_TAB_CONTINUOUS_TRIGGER'
-    --nth=2,3 --delimiter='\0'
-    --layout=reverse --height='${FZF_TMUX_HEIGHT:=75%}'
-    --tiebreak=begin -m --bind=tab:down,ctrl-j:accept,change:top,ctrl-space:toggle --cycle
-    '--query=$query'
-    '--header-lines=$#headers'
-)
+# # Set completion options for the fzf-tab script that
+# # supports tab completion with fzf in the shell
+# FZF_TAB_OPTS=(
+#     --ansi
+#     --expect='$FZF_TAB_CONTINUOUS_TRIGGER'
+#     --nth=2,3 --delimiter='\0'
+#     --layout=reverse --height='${FZF_TMUX_HEIGHT:=75%}'
+#     --tiebreak=begin -m --bind=tab:down,ctrl-j:accept,change:top,ctrl-space:toggle --cycle
+#     '--query=$query'
+#     '--header-lines=$#headers'
+# )
 
 # Setup fzf, its auto-completions, and key bindings
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 
 # Trigger fzf completion using the semi-colon key instead of **
 export FZF_COMPLETION_TRIGGER=';'
@@ -544,7 +566,10 @@ function zvm_after_init() {
 }
 
 # Configure the shell so that it uses jk for escape
+# --> when currently in insert mode
 ZVM_VI_INSERT_ESCAPE_BINDKEY="jk"
+# --> when currently in visual mode
+ZVM_VI_VISUAL_ESCAPE_BINDKEY="jk"
 
 # Customize the background color of highlights in
 # the terminal window when in visual mode. Note that
@@ -671,6 +696,25 @@ secure() {
 function chpwd() {
   emulate -L zsh
   exa --group-directories-first --grid --long --sort=name
+}
+
+# }}}
+
+# Color Commands {{{
+
+# Print the 256 color palette
+palette() {
+    local -a colors
+    for i in {000..255}; do
+        colors+=("%F{$i}$i%f")
+    done
+    print -cP $colors
+}
+
+# Print the zsh color code for a 256 color number
+printc() {
+    local color="%F{$1}"
+    echo -E ${(qqqq)${(%)color}}
 }
 
 # }}}
