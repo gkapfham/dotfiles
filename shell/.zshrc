@@ -332,9 +332,21 @@ zstyle ":fzf-tab:*" fzf-flags --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color
 
 # Plugin: zsh-autosuggestions
 source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Set a light grey color as the foreground color for the suggestion
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+
+# Disable autosuggestions for buffers longer than the specified length
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+
+# Perform autosuggestions in an async fashion
 ZSH_AUTOSUGGEST_USE_ASYNC=1
+
+# First type to find a suggestion from the history and, if
+# a match is not found, suggest one from the zsh completion engine
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+# Use CTRL-<Space> to accept a specific auto suggestion
 bindkey '^ ' autosuggest-accept
 
 # }}}
