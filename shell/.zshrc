@@ -90,13 +90,14 @@ export BROWSER=/usr/bin/firefox
 # Path
 # Strategy: place user-local binaries before system ones
 # Includes setup for:
+# --> Contained Python with pipx
 # --> Fuzzy finding with fzf
 # --> Local binaries
 # --> JavaScript npm
 # --> Rust with cargo
 # --> Go with .gocode
 # --> Poetry with .poetry
-export PATH="$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin::$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
+export PATH="$HOME/.local/pipx/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin::$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
 
 # Add the bin directory for Ruby gems to the Path
 export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
@@ -145,6 +146,18 @@ export BAT_THEME='Vitamin-Onec'
 # to perform conversion of files to plaintext. For instance,
 # using "less file.pdf" will now file.pdf's text in the terminal
 export LESSOPEN="|lesspipe.sh %s"
+
+# Configure pipx to install itself and other managed
+# Python programs to a directory only for pipx. Note
+# that this ensures that pipx and other programs are
+# not installed to ~./local/bin/ which is a directory
+# that the Makefile in this repository overwrites
+export PIPX_BIN_DIR="$HOME/.local/pipx/bin"
+
+# Set the home for the pipx program, using the default
+# value that would be used without setting here. Note
+# that setting this variable makes the default explicit.
+export PIPX_HOME="$HOME/.local/pipx"
 
 # }}}
 
