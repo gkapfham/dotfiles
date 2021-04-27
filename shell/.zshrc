@@ -285,7 +285,7 @@ source $HOME/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # However, not all of them work with zsh-defer and some
 # benchmarking suggests that there is not any/much improvement
 # in performance. As such, they are all being included here!
-plugins=(colored-man-pages git git-extras shrink-path tmux tmuxinator virtualenv)
+plugins=(git git-extras shrink-path tmux tmuxinator virtualenv)
 
 # Reload all of the completion modules before
 # sourcing the specialized Oh-My-Zsh script
@@ -668,6 +668,18 @@ function workspace {
 
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(command pyenv init - zsh --no-rehash)"
+
+# }}}
+
+# Nvm {{{
+
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
+  alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
+  alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
+fi
 
 # }}}
 
