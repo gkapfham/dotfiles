@@ -448,21 +448,6 @@ export FZF_DEFAULT_OPTS='
 #   --color=info:110,prompt:110,pointer:172
 #   --color=marker:172,spinner:96,header:96'
 
-# # Set completion options for the fzf-tab script that
-# # supports tab completion with fzf in the shell
-# FZF_TAB_OPTS=(
-#     --ansi
-#     --expect='$FZF_TAB_CONTINUOUS_TRIGGER'
-#     --nth=2,3 --delimiter='\0'
-#     --layout=reverse --height='${FZF_TMUX_HEIGHT:=75%}'
-#     --tiebreak=begin -m --bind=tab:down,ctrl-j:accept,change:top,ctrl-space:toggle --cycle
-#     '--query=$query'
-#     '--header-lines=$#headers'
-# )
-
-# Setup fzf, its auto-completions, and key bindings
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # Trigger fzf completion using the semi-colon key instead of **
 export FZF_COMPLETION_TRIGGER=';'
 
