@@ -339,8 +339,8 @@ let g:lightline = {
       \ 'colorscheme': 'vitaminonec',
       \ 'active': {
       \   'left': [ [ 'mode', 'spell', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'python', 'context', 'modified' ] ],
-      \   'right': [['lineinfo'], ['percent'], ['linter_warnings', 'linter_errors', 'linter_ok', 'fileformat', 'fileencoding', 'filetype'], ['gutentags']]
+      \             [ 'fugitive', 'readonly', 'filename', 'python', 'context', 'modified', 'gitsigns' ] ],
+      \   'right': [ ['lineinfo'], ['percent'], ['linter_warnings', 'linter_errors', 'linter_ok', 'fileformat', 'fileencoding', 'filetype'], ['gutentags'] ]
       \ },
       \ 'component_function': {
       \   'readonly': 'LightlineReadonly',
@@ -349,6 +349,7 @@ let g:lightline = {
       \   'filetype': 'LightlineFiletype',
       \   'fileformat': 'LightlineFileformat',
       \   'filename': 'LightlineFilename',
+      \   'gitsigns': 'LightlineGitsigns',
       \   'gutentags': 'LightlineGutentags',
       \   'linter_warnings': 'LightlineLinterWarnings',
       \   'linter_errors': 'LightlineLinterErrors',
