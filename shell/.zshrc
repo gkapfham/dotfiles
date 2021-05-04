@@ -420,6 +420,7 @@ bindkey '^B' fzf-fasd-widget
 
 # FZF {{{
 
+# Setup fzf, its auto-completions, and key bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Match the vim-vitamin-onec colorscheme
