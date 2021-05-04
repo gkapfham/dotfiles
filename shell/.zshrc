@@ -172,9 +172,6 @@ alias htop="htop -C"
 # IPython
 alias ipython="ipython --TerminalInteractiveShell.editing_mode=vi"
 
-# Npm without non-Ubuntu packages
-alias npm="npm --no-optional"
-
 # More and cat are aliased to bat
 alias more="bat"
 alias cat="bat"
