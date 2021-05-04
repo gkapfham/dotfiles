@@ -136,7 +136,7 @@ export TERMINAL='alacritty'
 # making it possible to then use "gO" to populate and load the
 # location list and then navigate the sections in the man page.
 # Note that after population of the location list it is possible
-# to it again by using <Leader>c instead of "gO".
+# to view sections again by using <Leader>c instead of "gO".
 export MANPAGER='nvim +Man!'
 
 # Configure bat to use a matching theme
