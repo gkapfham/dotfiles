@@ -300,7 +300,6 @@ source $HOME/.zsh/gitstatus/gitstatus.prompt.zsh
 # Plugin: fzf-tab
 # Note: must be sourced after all other plugins to ensure
 # that tab-completion binds to it and not to oh-my-zsh method
-# zsh-defer source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 
 # Disable sort when completing `git checkout`
