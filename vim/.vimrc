@@ -366,7 +366,7 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
-" Use Vista to determine the context (e.g., function definition)
+" Display file context using Vista (e.g., function definition)
 function! NearestMethodOrFunction() abort
   let l:nearestmethod = get(b:, 'vista_nearest_method_or_function', '')
   return l:nearestmethod !=# '' ?  ' '.get(b:, 'vista_nearest_method_or_function', '') : ' *'
