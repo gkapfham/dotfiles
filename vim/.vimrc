@@ -475,6 +475,10 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sh'] = ''
 
 " Version Control {{{
 
+lua <<EOF
+  require('gitsigns').setup()
+EOF
+
 " Only allow signify to manage Git repos
 " This enables signify to perform faster
 let g:signify_vcs_list = ['git']
