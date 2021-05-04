@@ -46,6 +46,7 @@ Plug 'kristijanhusak/vim-dirvish-git'
 Plug 'kshenoy/vim-signature'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'lifepillar/vim-colortemplate'
 Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
@@ -53,7 +54,7 @@ Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mgee/lightline-bufferline'
-Plug 'mhinz/vim-signify'
+" Plug 'mhinz/vim-signify'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 Plug 'ncm2/float-preview.nvim'
 Plug 'ncm2/ncm2-bufword'
@@ -65,6 +66,7 @@ Plug 'ncm2/ncm2-tagprefix'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
@@ -476,8 +478,50 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sh'] = ''
 " Version Control {{{
 
 lua <<EOF
-  require('gitsigns').setup()
+require('gitsigns').setup {
+  signs = {
+    add          = {hl = 'DiffAdd'   , text = '+', numhl='None'   , linehl='None'},
+    change       = {hl = 'DiffChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'DiffDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'DiffDelete', text = '^', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'DiffChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+  },
+  numhl = false,
+  linehl = false,
+  keymaps = {
+    -- Default keymap options
+    noremap = true,
+    buffer = true,
+
+    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
+    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
+
+    ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+    ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+    ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+    ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+    ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+    ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+
+    -- Text objects
+    ['o ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
+    ['x ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>'
+  },
+  watch_index = {
+    interval = 1000
+  },
+  current_line_blame = false,
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil, -- Use default
+  use_decoration_api = true,
+  use_internal_diff = true,  -- If luajit is present
+}
 EOF
+
+" lua <<EOF
+"   require('gitsigns').setup()
+" EOF
 
 " Only allow signify to manage Git repos
 " This enables signify to perform faster
