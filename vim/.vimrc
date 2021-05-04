@@ -366,6 +366,12 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
+" Use Vista to determine the context (e.g., function definition)
+function! NearestMethodOrFunction() abort
+  let l:nearestmethod = get(b:, 'vista_nearest_method_or_function', '')
+  return l:nearestmethod !=# '' ?  ' '.get(b:, 'vista_nearest_method_or_function', '') : ' *'
+endfunction
+
 " Display a diagnostic message when gutentags updates
 function! LightlineGitsigns()
   let l:gitstatus = get(b:,'gitsigns_status','')
@@ -623,11 +629,6 @@ let g:gutentags_project_root = ['.maketags']
 " that are returned by a tool like ripgrep, which is already configured
 " to ignore those files that are inside of the .gitignore file
 let g:gutentags_file_list_command = 'rg --files'
-
-" Use Vista to determine the context (e.g., function definition)
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
 
 " Always run the function to capture the context
 " Note that using an augroup does not seem to work correctly
