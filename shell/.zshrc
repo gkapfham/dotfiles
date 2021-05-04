@@ -466,8 +466,10 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # keybindings, making it necessary to run again
 function zvm_after_init() {
 
+  # Re-source the use of fzf in zsh after starting zsh-vi-mode
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+  # Re-Source and configure the zsh-auto-suggestions plugin
   source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
   ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
   ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
@@ -648,6 +650,7 @@ function workspace {
 
 # Pyenv {{{
 
+# Fast load of pyenv immediately upon shell startup
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(command pyenv init - zsh --no-rehash)"
 
@@ -655,6 +658,9 @@ eval "$(command pyenv init - zsh --no-rehash)"
 
 # Nvm {{{
 
+# Lazy load nvm to avoid slow shell startup times
+# Note that this requires you to type one of these
+# commands before they will initially work
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
