@@ -480,11 +480,11 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sh'] = ''
 lua <<EOF
 require('gitsigns').setup {
   signs = {
-    add          = {hl = 'DiffAdd'   , text = '+', numhl='None'   , linehl='None'},
-    change       = {hl = 'DiffChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    delete       = {hl = 'DiffDelete', text = '-', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    topdelete    = {hl = 'DiffDelete', text = '^', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    changedelete = {hl = 'DiffChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    add          = {hl = 'DiffAdd'   , text = '+', numhl='None', linehl='None'},
+    change       = {hl = 'DiffChange', text = '~', numhl='None', linehl='None'},
+    delete       = {hl = 'DiffDelete', text = '-', numhl='None', linehl='None'},
+    topdelete    = {hl = 'DiffDelete', text = '^', numhl='None', linehl='None'},
+    changedelete = {hl = 'DiffChange', text = '~', numhl='None', linehl='None'},
   },
   numhl = false,
   linehl = false,
