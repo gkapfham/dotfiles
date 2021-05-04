@@ -365,6 +365,12 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
+" Display a diagnostic message when gutentags updates
+function! LightlineGitsigns()
+  let l:gitstatus = get(b:,'gitsigns_status','')
+  return l:gitstatus !=# '' ?  ' '.get(b:,'gitsigns_status','') : ''
+endfunction
+
 " Ensure that the lightline status bar updates
 augroup GutentagsStatusLineRefresher
   autocmd!
