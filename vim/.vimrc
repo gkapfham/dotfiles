@@ -369,7 +369,7 @@ let g:lightline = {
 " Display file context using Vista (e.g., function definition)
 function! NearestMethodOrFunction() abort
   let l:nearestmethod = get(b:, 'vista_nearest_method_or_function', '')
-  return l:nearestmethod !=# '' ?  ' '.get(b:, 'vista_nearest_method_or_function', '') : ' *'
+  return l:nearestmethod !=# '' ?  ' '.get(b:, 'vista_nearest_method_or_function', '') : ''
 endfunction
 
 " Display a diagnostic message when gutentags updates
@@ -521,14 +521,15 @@ require('gitsigns').setup {
     ['x ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>'
   },
   watch_index = {
-    interval = 1000
+    interval = 500
   },
+  attach_to_untracked = false,
   current_line_blame = false,
-  sign_priority = 6,
+  sign_priority = 5,
   update_debounce = 100,
-  status_formatter = nil, -- Use default
+  status_formatter = nil,
   use_decoration_api = true,
-  use_internal_diff = true,  -- If luajit is present
+  use_internal_diff = true,
 }
 EOF
 
