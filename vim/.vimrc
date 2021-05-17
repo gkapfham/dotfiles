@@ -290,7 +290,7 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 map <F5> :call SyntaxAttr() <CR>
 
 " Display the current block of text/code in a highlighting limelight
-nmap <Space>f :Limelight!! <CR>
+nmap <Space>ff :Limelight!! <CR>
 
 " Display the signature of a function in the footer of the screen
 noremap <Space>s :PreviewSignature! <CR>
