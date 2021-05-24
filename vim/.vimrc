@@ -105,6 +105,8 @@ Plug 'folke/which-key.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-github.nvim'
+Plug 'fhill2/telescope-ultisnips.nvim'
 
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
@@ -720,8 +722,7 @@ lua << EOF
       group = " ", -- symbol prepended to a group
     },
     window = {
-      border = "none", -- none, single, double, shadow
-      position = "bottom", -- bottom, top
+      border = "single", -- none, single, double, shadow position = "bottom", -- bottom, top
       margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
       padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
     },
@@ -1308,7 +1309,7 @@ xmap aq <Plug>(textobj-sandwich-query-a)
 omap aq <Plug>(textobj-sandwich-query-a)
 
 " Disable the s command for deleting characters
-" Reference: https://github.com/machakann/vim-sandwich/issues/62
+" Reference: https://github.com/machakann/Vim-sandwich/issues/62
 map <silent> s <nop>
 map <silent> S <nop>
 
@@ -1318,6 +1319,50 @@ map <silent> S <nop>
 
 lua << EOF
 require('telescope').setup {
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
+    },
+    prompt_position = "bottom",
+    prompt_prefix = "> ",
+    selection_caret = "> ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "reset",
+    sorting_strategy = "descending",
+    layout_strategy = "horizontal",
+    layout_defaults = {
+      horizontal = {
+        mirror = false,
+      },
+      vertical = {
+        mirror = false,
+      },
+    },
+    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_ignore_patterns = {},
+    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    shorten_path = true,
+    winblend = 0,
+    width = 0.75,
+    preview_cutoff = 120,
+    results_height = 1,
+    results_width = 0.8,
+    border = {},
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    color_devicons = true,
+    use_less = true,
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+    file_previewer = require'telescope.previewers'.cat.new,
+    grep_previewer = require'telescope.previewers'.vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.qflist.new,
+  },
   extensions = {
     fzf = {
       fuzzy = true,                    -- false will only do exact matching
@@ -1328,14 +1373,42 @@ require('telescope').setup {
     }
   }
 }
--- To get fzf loaded and working with telescope, you need to call
--- load_extension, somewhere after setup function:
+-- load extensions after calling setup function
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('ultisnips')
 EOF
+
+" --> All files, including hidden files, but not
+" those files stored in a .git directory
+nmap <C-p> :Telescope git_files <CR>
+nmap <Space>p :Telescope git_files <CR>
+
+" --> All files, but not including hidden files
+nmap <C-o> :Telescope find_files <CR>
+nmap <Space>o :Telescope find_files <CR>
+
+" --> Lines of buffer or all lines or marks
+nmap <Space>r :Telescope current_buffer_fuzzy_find <CR>
+nmap <Space>m :Telescope marks <CR>
+
+" --> Tags in buffer or all tags
+nmap <Space>t :Telescope current_buffer_tags <CR>
+nmap <Space>y :Telescope tags <CR>
+
+" --> Names of open buffers
+nnoremap <Tab> :Telescope buffers <CR>
+nnoremap <Space>i :Telescope buffers <CR>
+
+" --> Available snippets with UltiSnips
+nnoremap <Space>s :Telescope ultisnips <CR>
 
 " }}}
 
 " FZF {{{
+
+" --> Files matching search terms with either Ag or Rg
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -1380,26 +1453,26 @@ command! -bang -nargs=* Rg
 
 " Display and fuzzy search through:
 
-" --> All files, including hidden files, but not
-" those files stored in a .git directory
-nmap <C-p> :Files <CR>
-nmap <Space>p :Files <CR>
+" " --> All files, including hidden files, but not
+" " those files stored in a .git directory
+" nmap <C-p> :Files <CR>
+" nmap <Space>p :Files <CR>
 
-" --> Lines of buffer or all lines or marks
-nmap <Space>r :BLines <CR>
-nmap <Space>m :Marks <CR>
+" " --> Lines of buffer or all lines or marks
+" nmap <Space>r :BLines <CR>
+" nmap <Space>m :Marks <CR>
 
-" --> Tags in buffer or all tags
-nmap <Space>t :BTags <CR>
-nmap <Space>y :Tags <CR>
+" " --> Tags in buffer or all tags
+" nmap <Space>t :BTags <CR>
+" nmap <Space>y :Tags <CR>
 
-" --> Names of open buffers
-nnoremap <Tab> :Buffers <CR>
-nnoremap <Space>i :Buffers <CR>
+" " --> Names of open buffers
+" nnoremap <Tab> :Buffers <CR>
+" nnoremap <Space>i :Buffers <CR>
 
-" --> Files matching search terms with either Ag or Rg
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+" " --> Files matching search terms with either Ag or Rg
+" nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+" nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
 " Add in a format string for controlling how FZF displays the git log
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
