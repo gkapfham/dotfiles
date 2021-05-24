@@ -102,6 +102,12 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
 Plug 'folke/which-key.nvim'
 
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
 " Conditionally load ncm2 for Vim8 and Neovim
 "
 " Running Neovim, so a connector is not needed
@@ -581,7 +587,7 @@ require'nvim-treesitter.configs'.setup {
   },
   indent = {
     -- false disables because Python Treesitter is buggy right now
-    enable = false
+    enable = true
   }
 }
 EOF
@@ -1305,6 +1311,27 @@ omap aq <Plug>(textobj-sandwich-query-a)
 " Reference: https://github.com/machakann/vim-sandwich/issues/62
 map <silent> s <nop>
 map <silent> S <nop>
+
+" }}}
+
+" Telescope {{{
+
+lua << EOF
+require('telescope').setup {
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = false, -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
+    }
+  }
+}
+-- To get fzf loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+require('telescope').load_extension('fzf')
+EOF
 
 " }}}
 
