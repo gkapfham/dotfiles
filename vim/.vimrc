@@ -1269,6 +1269,9 @@ nnoremap <leader>gcf :Git commit %<CR>
 " Perform a Gcommit for all modified files with a mapping
 nnoremap <leader>gca :Git commit -a<CR>
 
+" Get the status of the repository
+nnoremap <leader>gs :Git <CR>
+
 " }}}
 
 " Sandwich {{
