@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+# Reference:
+# https://stackoverflow.com/questions/50801270/extract-comments-from-pdf
+
+import sys
+import fitz
+
+
+def main():
+    input_filename = sys.argv[1]
+    doc = fitz.open(input_filename)
+    annotations = 0
+    for i in range(doc.pageCount):
+        page = doc[i]
+        for annot in page.annots():
+            annotations = annotations + 1
+            print("* Page " + str(i+1) + ": " + annot.info["content"] + "\n")
+    print("Extracted " + str(annotations) + " annotations from " + str(doc.pageCount) + " pages")
+
+
+if __name__ == "__main__":
+    main()

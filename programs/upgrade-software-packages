@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# NOTE: This script performs a system update using the yay program. It also
+# shows how much free space there is on the disk before and after the upgrade.
+# Remember that the use of yay will update both those packages in Arch user
+# repositories and those in the official Arch package repositories.
+
+echo "Starting free space:"
+
+df -h
+
+echo ""
+
+echo "Use yay to upgrade the packages:"
+yay -Syu
+
+echo ""
+
+echo "Ending free space:"
+
+df -h
+
+echo ""
