@@ -66,7 +66,7 @@ Plug 'ncm2/ncm2-syntax'
 Plug 'ncm2/ncm2-tagprefix'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'norcalli/nvim-colorizer.lua'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
@@ -580,7 +580,10 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
   highlight = {
     -- false will disable the whole extension
-    enable = True,
+    enable = true,
+    -- true gives more syntax information
+    -- false (sometimes) gives better highlighting in LaTeX
+    additional_vim_regex_highlighting = false,
   },
   indent = {
     -- false disables because Python Treesitter is buggy right now
