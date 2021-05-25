@@ -1403,6 +1403,12 @@ nmap <Space>m :Telescope marks <CR>
 nmap <Space>tt :Telescope current_buffer_tags <CR>
 nmap <Space>y :Telescope tags <CR>
 
+" --> Code components search using Treesitter
+nnoremap <Space>ts :Telescope treesitter <CR>
+
+" --> All matches in non-hidden files for word under cursor
+nnoremap <Space>gs :Telescope grep_string hidden=true <CR>
+
 " --> Names of open buffers
 nnoremap <Tab> :Telescope buffers <CR>
 nnoremap <Space>i :Telescope buffers <CR>
@@ -1415,16 +1421,9 @@ nnoremap <Space>h :Telescope command_history <CR>
 " --> Spelling fix suggestions
 nnoremap <Space>z :Telescope spell_suggest <CR>
 
-" --> Code components search using Treesitter
-nnoremap <Space>ts :Telescope treesitter <CR>
-
-" --> All matches in non-hidden files for word under cursor
-nnoremap <Space>gs :Telescope grep_string hidden=true<CR>
-
 " }}}
 
 " FZF {{{
-
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
