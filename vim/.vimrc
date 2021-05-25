@@ -1389,8 +1389,9 @@ nmap <Space>p :Telescope git_files <CR>
 " (always respects the .gitignore file)
 nmap <Space>o :Telescope find_files <CR>
 
-" --> Lines of buffer or all lines or marks
+" --> Lines or marks of buffer
 nmap <Space>r :Telescope current_buffer_fuzzy_find <CR>
+nmap <C-m> :Telescope marks <CR>
 nmap <Space>m :Telescope marks <CR>
 
 " --> Tags in buffer or all tags
