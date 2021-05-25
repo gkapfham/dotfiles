@@ -19,7 +19,9 @@ Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
 Plug 'fgrsnau/ncm2-otherbuf', {'branch': 'master'}
+Plug 'fhill2/telescope-ultisnips.nvim'
 Plug 'filipekiss/ncm2-look.vim'
+Plug 'folke/which-key.nvim'
 Plug 'garbas/vim-snipmate'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'honza/vim-snippets'
@@ -67,6 +69,11 @@ Plug 'ncm2/ncm2-ultisnips'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope-github.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
@@ -100,15 +107,6 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
-Plug 'folke/which-key.nvim'
-
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-github.nvim'
-Plug 'fhill2/telescope-ultisnips.nvim'
-
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
@@ -693,7 +691,7 @@ lua << EOF
       -- the presets plugin, adds help for a bunch of default keybindings in Neovim
       -- No actual key bindings are created
       spelling = {
-        enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+        enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
         suggestions = 20, -- how many suggestions should be shown in the list?
       },
       presets = {
@@ -709,13 +707,6 @@ lua << EOF
     -- add operators that will trigger motion and text object completion
     -- to enable all native operators, set the preset / operators plugin above
     operators = { gc = "Comments" },
-    key_labels = {
-      -- override the label used to display some keys. It doesn't effect WK in any other way.
-      -- For example:
-      -- ["<space>"] = "SPC",
-      -- ["<cr>"] = "RET",
-      -- ["<tab>"] = "TAB",
-    },
     icons = {
       breadcrumb = "", -- symbol used in the command line area that shows your active key combo
       separator = "", -- symbol used between a key and it's label
@@ -1020,7 +1011,7 @@ augroup END
 " Comments {{{
 
 " Insert a comment symbol on the current line at cursor location
-nmap <Space>c :execute "normal! i" . split(&commentstring, '%s')[0]<CR>
+nmap <Space>cc :execute "normal! i" . split(&commentstring, '%s')[0]<CR>
 
 " }}}
 
@@ -1318,6 +1309,7 @@ map <silent> S <nop>
 " Telescope {{{
 
 lua << EOF
+local actions = require('telescope.actions')
 require('telescope').setup {
   defaults = {
     vimgrep_arguments = {
@@ -1328,6 +1320,14 @@ require('telescope').setup {
       '--line-number',
       '--column',
       '--smart-case'
+    },
+    mappings = {
+    i = {
+      ["<esc>"] = actions.close,
+      },
+    n = {
+      ["<esc>"] = actions.close,
+      },
     },
     prompt_position = "bottom",
     prompt_prefix = "> ",
@@ -1360,6 +1360,8 @@ require('telescope').setup {
     use_less = true,
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
     file_previewer = require'telescope.previewers'.cat.new,
+    -- Does not work due to treesitter problem
+    -- file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
     grep_previewer = require'telescope.previewers'.vimgrep.new,
     qflist_previewer = require'telescope.previewers'.qflist.new,
   },
@@ -1380,11 +1382,12 @@ EOF
 
 " --> All files, including hidden files, but not
 " those files stored in a .git directory
+" (always respects the .gitignore file)
 nmap <C-p> :Telescope git_files <CR>
 nmap <Space>p :Telescope git_files <CR>
 
 " --> All files, but not including hidden files
-nmap <C-o> :Telescope find_files <CR>
+" (always respects the .gitignore file)
 nmap <Space>o :Telescope find_files <CR>
 
 " --> Lines of buffer or all lines or marks
@@ -1401,6 +1404,15 @@ nnoremap <Space>i :Telescope buffers <CR>
 
 " --> Available snippets with UltiSnips
 nnoremap <Space>s :Telescope ultisnips <CR>
+
+" --> Recently run commands
+nnoremap <Space>h :Telescope command_history <CR>
+
+" --> Spelling fix suggestions
+nnoremap <Space>z :Telescope spell_suggest <CR>
+
+" --> All symbols registered by Neovim's Treesitter
+nnoremap <Space>cs :Telescope treesitter <CR>
 
 " }}}
 
