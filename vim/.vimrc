@@ -56,7 +56,6 @@ Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mgee/lightline-bufferline'
-" Plug 'mhinz/vim-signify'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 Plug 'ncm2/float-preview.nvim'
 Plug 'ncm2/ncm2-bufword'
