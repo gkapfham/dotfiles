@@ -1369,8 +1369,7 @@ require('telescope').setup {
       fuzzy = true,                    -- false will only do exact matching
       override_generic_sorter = false, -- override the generic sorter
       override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
+      case_mode = "smart_case",        -- "ignore_case", "respect_case", or "smart_case"
     }
   }
 }
@@ -1414,13 +1413,12 @@ nnoremap <Space>z :Telescope spell_suggest <CR>
 " --> All symbols registered by Neovim's Treesitter
 nnoremap <Space>cs :Telescope treesitter <CR>
 
+nnoremap <Space>gs :Telescope grep_string
+
 " }}}
 
 " FZF {{{
 
-" --> Files matching search terms with either Ag or Rg
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -1428,17 +1426,17 @@ xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
 " Insert mode completion for words, paths, files, and lines in the buffer
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
+" imap <c-x><c-k> <plug>(fzf-complete-word)
+" imap <c-x><c-f> <plug>(fzf-complete-path)
+" imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+" imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Define a custom command for loading MRU files with FZF
-command! FZFMru call fzf#run({
-      \  'source':  v:oldfiles,
-      \  'sink':    'e',
-      \  'options': '-m -x +s --no-bold --cycle',
-      \  'down':    '25%')}
+" command! FZFMru call fzf#run({
+      " \  'source':  v:oldfiles,
+      " \  'sink':    'e',
+      " \  'options': '-m -x +s --no-bold --cycle',
+      " \  'down':    '25%')}
 
 " Use rg by default
 if executable('rg')
@@ -1446,9 +1444,9 @@ if executable('rg')
   set grepprg=rg\ --vimgrep
 endif
 
-" A Files preview with FZF and bat
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" " A Files preview with FZF and bat
+" command! -bang -nargs=? -complete=dir Files
+"     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " Re-define the Rg command so that it considers hidden files
 "
@@ -1458,8 +1456,12 @@ command! -bang -nargs=* Rg
   \   'rg -uu --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
+" --> Files matching search terms with either Ag or Rg
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+
 " Add in a format string for controlling how FZF displays the git log
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
+" let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
 
 " Configure the FZF statusline in Neovim
 function! s:fzf_statusline()
