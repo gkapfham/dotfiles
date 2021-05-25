@@ -1387,8 +1387,8 @@ autocmd FileType TelescopePrompt call ncm2#disable_for_buffer()
 " --> All files, including hidden files, but not
 " those files stored in a .git directory
 " (always respects the .gitignore file)
-nmap <C-p> :Telescope git_files <CR>
-nmap <Space>p :Telescope git_files <CR>
+nmap <C-p> :Telescope find_files hidden=true <CR>
+nmap <Space>p :Telescope find_files hidden=true <CR>
 
 " --> All files, but not including hidden files
 " (always respects the .gitignore file)
@@ -1400,14 +1400,13 @@ nmap <C-m> :Telescope marks <CR>
 nmap <Space>m :Telescope marks <CR>
 
 " --> Tags in buffer or all tags
-nmap <Space>t :Telescope current_buffer_tags <CR>
+nmap <Space>tt :Telescope current_buffer_tags <CR>
 nmap <Space>y :Telescope tags <CR>
 
 " --> Names of open buffers
 nnoremap <Tab> :Telescope buffers <CR>
 nnoremap <Space>i :Telescope buffers <CR>
 
-" --> Available snippets with UltiSnips
 nnoremap <Space>s :Telescope ultisnips <CR>
 
 " --> Recently run commands
@@ -1416,10 +1415,11 @@ nnoremap <Space>h :Telescope command_history <CR>
 " --> Spelling fix suggestions
 nnoremap <Space>z :Telescope spell_suggest <CR>
 
-" --> All symbols registered by Neovim's Treesitter
-nnoremap <Space>cs :Telescope treesitter <CR>
+" --> Code components search using Treesitter
+nnoremap <Space>ts :Telescope treesitter <CR>
 
-nnoremap <Space>gs :Telescope grep_string
+" --> All matches in non-hidden files for word under cursor
+nnoremap <Space>gs :Telescope grep_string hidden=true<CR>
 
 " }}}
 
