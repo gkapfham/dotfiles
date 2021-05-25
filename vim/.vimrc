@@ -93,7 +93,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
-" Plug 'tversteeg/registers.nvim'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
 Plug 'twitvim/twitvim', {'on': 'PosttoTwitter'}
