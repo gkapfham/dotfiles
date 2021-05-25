@@ -1457,34 +1457,6 @@ command! -bang -nargs=* Rg
   \   'rg -uu --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
 
-" Define key combinations for using FZF
-"
-" Ensure that important mappings are
-" available with either CTRL or Space
-
-" Display and fuzzy search through:
-
-" " --> All files, including hidden files, but not
-" " those files stored in a .git directory
-" nmap <C-p> :Files <CR>
-" nmap <Space>p :Files <CR>
-
-" " --> Lines of buffer or all lines or marks
-" nmap <Space>r :BLines <CR>
-" nmap <Space>m :Marks <CR>
-
-" " --> Tags in buffer or all tags
-" nmap <Space>t :BTags <CR>
-" nmap <Space>y :Tags <CR>
-
-" " --> Names of open buffers
-" nnoremap <Tab> :Buffers <CR>
-" nnoremap <Space>i :Buffers <CR>
-
-" " --> Files matching search terms with either Ag or Rg
-" nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-" nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
-
 " Add in a format string for controlling how FZF displays the git log
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
 
