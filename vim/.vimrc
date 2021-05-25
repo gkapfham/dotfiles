@@ -1465,6 +1465,9 @@ command! -bang -nargs=* Rg
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
+" Use FZF to search through the TOC of a LaTeX document
+nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
+
 " Add in a format string for controlling how FZF displays the git log
 " let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
 
@@ -1585,24 +1588,21 @@ end
 
 " }}}
 
-" Advanced FZF and Completion Settings {{{
+" Completion Settings with ncm2 {{{
 
-" Use an empty value to disable the preview window
-let g:fzf_preview_window = ''
+" " Use an empty value to disable the preview window
+" let g:fzf_preview_window = ''
 
-" Allow FZF to display across the entire screen
-let g:fzf_layout = { 'window': 'enew' }
+" " Allow FZF to display across the entire screen
+" let g:fzf_layout = { 'window': 'enew' }
 
-" Control style of FZF windows for MRU switching
-command! FZFMru call fzf#run({
-      \  'source':  v:oldfiles,
-      \  'sink':    'e',
-      \  'options': '-m -x +s --no-bold --cycle',
-      \  'down':    '10%',
-      \  'window':  'enew'})
-
-" Use FZF to search through the TOC of a LaTeX document
-nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
+" " Control style of FZF windows for MRU switching
+" command! FZFMru call fzf#run({
+"       \  'source':  v:oldfiles,
+"       \  'sink':    'e',
+"       \  'options': '-m -x +s --no-bold --cycle',
+"       \  'down':    '10%',
+"       \  'window':  'enew'})
 
 " Enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
