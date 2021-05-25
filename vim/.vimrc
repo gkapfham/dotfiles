@@ -1381,6 +1381,9 @@ require('telescope').load_extension('fzf')
 require('telescope').load_extension('ultisnips')
 EOF
 
+" Do not allow ncm2 to complete when in the TelescopePrompt
+autocmd FileType TelescopePrompt call ncm2#disable_for_buffer()
+
 " --> All files, including hidden files, but not
 " those files stored in a .git directory
 " (always respects the .gitignore file)
