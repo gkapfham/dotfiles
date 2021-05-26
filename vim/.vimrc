@@ -1435,6 +1435,8 @@ nnoremap <Space>z :Telescope spell_suggest <CR>
 " FZF {{{
 
 " Define unique colors for FZF's display
+" inside of Neovim (note that these colors
+" match telescope.nvim and not FZF in terminal)
 let g:fzf_colors =
     \ { 'fg':      ['fg', 'Normal'],
       \ 'bg':      ['bg', 'Normal'],
