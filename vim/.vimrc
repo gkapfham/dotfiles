@@ -1384,6 +1384,10 @@ EOF
 " Do not allow ncm2 to complete when in the TelescopePrompt
 autocmd FileType TelescopePrompt call ncm2#disable_for_buffer()
 
+" Command mappings for Telescope to find:
+" (note that Ctrl-mappings are provided for some commands
+" when those are ones for which there is a muscle memory)
+
 " --> All files, including hidden files, but not
 " those files stored in a .git directory
 " (always respects the .gitignore file)
