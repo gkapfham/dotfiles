@@ -1407,7 +1407,9 @@ nmap <Space>y :Telescope tags <CR>
 nnoremap <Space>ts :Telescope treesitter <CR>
 
 " --> All matches in non-hidden files for word under cursor
-nnoremap <Space>gs :Telescope grep_string hidden=true <CR>
+" (only works for the specific word under the cursor, meaning
+" that this is not a :Telescope live_grep)
+nnoremap <Space>gs :Telescope grep_string <CR>
 
 " --> Names of open buffers
 nnoremap <Tab> :Telescope buffers <CR>
