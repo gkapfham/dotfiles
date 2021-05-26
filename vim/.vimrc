@@ -1452,11 +1452,6 @@ let g:fzf_colors =
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Comment'] }
 
-" Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
 " Use rg by default
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --glob "!{node_modules/*,.git/*}"'
@@ -1477,6 +1472,11 @@ nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 
 " Use FZF to search through the TOC of a LaTeX document
 nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
+
+" Show the mappings that are currently available
+nmap <leader><tab> <plug>(fzf--n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
 
 " }}}
 
