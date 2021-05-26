@@ -1,3 +1,4 @@
+set encoding=utf-8
 scriptencoding utf-8
 
 " Plug {{{
@@ -197,9 +198,6 @@ let g:limelight_conceal_guifg = '#585858'
 
 " Display Improvements {{{
 
-" Display encoding to UTF-8
-set encoding=utf-8
-
 " Display italics in terminal
 set t_ZH=[3m
 set t_ZR=[23m
@@ -243,6 +241,8 @@ set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
 set list
 
 " Display with faster timeouts in the TUI
+" Setting also influences how quickly the
+" WhichKey menu will appear with hints
 set timeoutlen=500
 set ttimeoutlen=10
 
