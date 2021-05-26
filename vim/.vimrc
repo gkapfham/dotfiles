@@ -1452,10 +1452,6 @@ if executable('rg')
   set grepprg=rg\ --vimgrep
 endif
 
-" " A Files preview with FZF and bat
-" command! -bang -nargs=? -complete=dir Files
-"     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
 " Re-define the Rg command so that it considers hidden files
 "
 " Note that the use of "-uu" includes the hidden files
