@@ -14,7 +14,6 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'cespare/vim-toml'
 Plug 'Chiel92/vim-autoformat'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
-" Plug 'chrisbra/unicode.vim'
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
@@ -30,7 +29,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
 Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
-" Plug 'jez/vim-github-hub'
 Plug 'jgdavey/tslime.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jreybert/vimagit'
@@ -66,7 +64,6 @@ Plug 'ncm2/ncm2-syntax'
 Plug 'ncm2/ncm2-tagprefix'
 Plug 'ncm2/ncm2-ultisnips'
 Plug 'norcalli/nvim-colorizer.lua'
-" Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
@@ -76,7 +73,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
-" Plug 'rbonvall/vim-textobj-latex', {'for': 'tex'}
 Plug 'rhysd/git-messenger.vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-syntax'
