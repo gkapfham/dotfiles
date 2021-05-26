@@ -1592,20 +1592,6 @@ end
 
 " Completion Settings with ncm2 {{{
 
-" " Use an empty value to disable the preview window
-" let g:fzf_preview_window = ''
-
-" " Allow FZF to display across the entire screen
-" let g:fzf_layout = { 'window': 'enew' }
-
-" " Control style of FZF windows for MRU switching
-" command! FZFMru call fzf#run({
-"       \  'source':  v:oldfiles,
-"       \  'sink':    'e',
-"       \  'options': '-m -x +s --no-bold --cycle',
-"       \  'down':    '10%',
-"       \  'window':  'enew'})
-
 " Enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
 
