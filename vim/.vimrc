@@ -1425,6 +1425,22 @@ nnoremap <Space>z :Telescope spell_suggest <CR>
 
 " FZF {{{
 
+" Define unique colors for FZF's display
+let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Normal'],
+      \ 'fg+':     ['fg', 'String', 'Normal', 'Normal'],
+      \ 'bg+':     ['bg', 'Normal', 'Normal'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Comment'],
+      \ 'prompt':  ['fg', 'Identifier'],
+      \ 'pointer': ['fg', 'Identifier'],
+      \ 'marker':  ['fg', 'Identifier'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
@@ -1471,15 +1487,15 @@ nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
 " Add in a format string for controlling how FZF displays the git log
 " let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
 
-" Configure the FZF statusline in Neovim
-function! s:fzf_statusline()
-  " Define colors for the statusline
-  setlocal statusline=%#fzf1#\ \%#fzf2#\ \FIND\ \ %#fzf3#
-endfunction
+" " Configure the FZF statusline in Neovim
+" function! s:fzf_statusline()
+"   " Define colors for the statusline
+"   setlocal statusline=%#fzf1#\ \%#fzf2#\ \FIND\ \ %#fzf3#
+" endfunction
 
-" Display a customized statusline when invoking fzf
-" NOTE: this will not always trigger if in an augroup
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
+" " Display a customized statusline when invoking fzf
+" " NOTE: this will not always trigger if in an augroup
+" autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 " }}}
 
