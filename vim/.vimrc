@@ -1398,16 +1398,18 @@ nmap <Space>p :Telescope find_files hidden=true <CR>
 " (always respects the .gitignore file)
 nmap <Space>o :Telescope find_files <CR>
 
-" --> Lines or marks of buffer
+" --> Lines or marks of the current buffer
 nmap <Space>r :Telescope current_buffer_fuzzy_find <CR>
 nmap <C-m> :Telescope marks <CR>
 nmap <Space>m :Telescope marks <CR>
 
-" --> Tags in buffer or all tags
+" --> Tags in buffer or all tags across the project directory
 nmap <Space>tt :Telescope current_buffer_tags <CR>
 nmap <Space>y :Telescope tags <CR>
 
 " --> Code components search using Treesitter
+" (does not display anything if there is no treesitter
+" for a specific language, like with the .vimrc file)
 nnoremap <Space>ts :Telescope treesitter <CR>
 
 " --> All matches in non-hidden files for word under cursor
@@ -1419,12 +1421,13 @@ nnoremap <Space>gs :Telescope grep_string <CR>
 nnoremap <Tab> :Telescope buffers <CR>
 nnoremap <Space>i :Telescope buffers <CR>
 
+" --> Ultisnips-based snippets available for buffer
 nnoremap <Space>s :Telescope ultisnips <CR>
 
 " --> Recently run commands
 nnoremap <Space>h :Telescope command_history <CR>
 
-" --> Spelling fix suggestions
+" --> Spelling fix suggestions for word under cursor
 nnoremap <Space>z :Telescope spell_suggest <CR>
 
 " }}}
