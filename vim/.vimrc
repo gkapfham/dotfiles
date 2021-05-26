@@ -1434,6 +1434,11 @@ nnoremap <Space>z :Telescope spell_suggest <CR>
 
 " FZF {{{
 
+" NOTE: FZF is used in conjunction with telescope.nvim because
+" plugins like wiki.vim are integrated with FZF. Moreover,
+" although FZF commands are no longer directly integrated into
+" the workflow with nnoremap's, they are still available if needed.
+
 " Define unique colors for FZF's display
 " inside of Neovim (note that these colors
 " match telescope.nvim and not FZF in terminal)
