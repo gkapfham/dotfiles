@@ -1,4 +1,5 @@
-set nocompatible
+scriptencoding utf-8
+" set nocompatible
 
 " Plug {{{
 
