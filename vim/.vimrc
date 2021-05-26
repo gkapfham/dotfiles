@@ -1467,9 +1467,6 @@ nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 " Use FZF to search through the TOC of a LaTeX document
 nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
 
-" Add in a format string for controlling how FZF displays the git log
-" let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(blue)%C(bold)%cr"'
-
 " " Configure the FZF statusline in Neovim
 " function! s:fzf_statusline()
 "   " Define colors for the statusline
