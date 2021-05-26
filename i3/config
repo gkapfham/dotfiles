@@ -50,7 +50,7 @@ exec --no-startup-id xbanish
 
 # Run picom to provide compositing, which especially
 # seems to reduce screen artifacts for Zathura windows
-exec --no-startup-id picom -CGb
+# exec --no-startup-id picom -CGb
 
 # }}}
 
