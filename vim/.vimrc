@@ -1446,13 +1446,6 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
-" Define a custom command for loading MRU files with FZF
-" command! FZFMru call fzf#run({
-      " \  'source':  v:oldfiles,
-      " \  'sink':    'e',
-      " \  'options': '-m -x +s --no-bold --cycle',
-      " \  'down':    '25%')}
-
 " Use rg by default
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --glob "!{node_modules/*,.git/*}"'
