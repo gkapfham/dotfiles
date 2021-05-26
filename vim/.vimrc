@@ -1467,16 +1467,6 @@ nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
 " Use FZF to search through the TOC of a LaTeX document
 nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
 
-" " Configure the FZF statusline in Neovim
-" function! s:fzf_statusline()
-"   " Define colors for the statusline
-"   setlocal statusline=%#fzf1#\ \%#fzf2#\ \FIND\ \ %#fzf3#
-" endfunction
-
-" " Display a customized statusline when invoking fzf
-" " NOTE: this will not always trigger if in an augroup
-" autocmd! User FzfStatusLine call <SID>fzf_statusline()
-
 " }}}
 
 " Tmux {{{
