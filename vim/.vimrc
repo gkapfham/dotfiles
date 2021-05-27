@@ -537,7 +537,7 @@ let g:magit_default_sections = ['commit', 'staged', 'unstaged']
 let g:magit_default_fold_level = 1
 
 " Define a command to load magit in full-screen mode
-nmap <Space>g :MagitOnly <CR>
+nmap <Space>gg :MagitOnly <CR>
 
 " Special configuration for magit buffers
 augroup magitconfiguration
@@ -1411,6 +1411,9 @@ nnoremap <Space>ts :Telescope treesitter <CR>
 " (only works for the specific word under the cursor, meaning
 " that this is not a :Telescope live_grep)
 nnoremap <Space>gs :Telescope grep_string <CR>
+
+" --> All matches in non-hidden files for input word
+nnoremap <Space>ga :Telescope live_grep <CR>
 
 " --> Names of open buffers
 nnoremap <Tab> :Telescope buffers <CR>
