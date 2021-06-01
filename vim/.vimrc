@@ -101,6 +101,7 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
+Plug 'pwntester/octo.nvim'
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
