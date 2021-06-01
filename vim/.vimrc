@@ -1446,7 +1446,7 @@ let g:fzf_colors =
       \ 'hl':      ['fg', 'Normal'],
       \ 'fg+':     ['fg', 'String', 'Normal', 'Normal'],
       \ 'bg+':     ['bg', 'Normal', 'Normal'],
-      \ 'hl+':     ['fg', 'Statement'],
+      \ 'hl+':     ['fg', 'Identifier'],
       \ 'info':    ['fg', 'PreProc'],
       \ 'border':  ['fg', 'Comment'],
       \ 'prompt':  ['fg', 'Identifier'],
