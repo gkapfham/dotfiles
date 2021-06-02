@@ -103,7 +103,6 @@ Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'xolox/vim-misc'
-Plug 'pwntester/octo.nvim'
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
@@ -1115,7 +1114,7 @@ set grepprg=rg\ -uu\ --vimgrep\ --no-heading\ --smart-case
 
 " }}}
 
-" Advanced Keyboard Movement with easymotion {{{
+" Advanced Keyboard Movement with Easymotion {{{
 
 " Make f (single-character search) and
 " <leader>f (two-character search) with easymotion.
@@ -1358,7 +1357,7 @@ require('telescope').setup {
     results_width = 0.8,
     border = {},
     borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-    color_devicons = true,
+    color_devicons = false,
     use_less = true,
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
     file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
