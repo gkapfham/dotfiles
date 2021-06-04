@@ -92,7 +92,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
-Plug 'twitvim/twitvim', {'on': 'PosttoTwitter'}
+" Plug 'twitvim/twitvim', {'on': 'PosttoTwitter'}
 Plug 'Valloric/ListToggle'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-pandoc/vim-pandoc-syntax'
