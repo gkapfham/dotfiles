@@ -526,10 +526,10 @@ require('gitsigns').setup {
   },
   attach_to_untracked = false,
   current_line_blame = false,
-  sign_priority = 5,
-  update_debounce = 100,
+  sign_priority = 1,
+  update_debounce = 50,
   status_formatter = nil,
-  use_decoration_api = true,
+  use_decoration_api = false,
   use_internal_diff = true,
 }
 EOF
