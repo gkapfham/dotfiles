@@ -74,7 +74,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
-" Plug 'pwntester/octo.nvim'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'rhysd/git-messenger.vim'
 Plug 'Shougo/echodoc.vim'
@@ -93,7 +92,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
-" Plug 'twitvim/twitvim', {'on': 'PosttoTwitter'}
 Plug 'Valloric/ListToggle'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-pandoc/vim-pandoc-syntax'
