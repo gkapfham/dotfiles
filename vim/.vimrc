@@ -82,6 +82,7 @@ Plug 'Shougo/neco-syntax'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'tfnico/vim-gradle'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
