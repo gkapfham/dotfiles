@@ -31,7 +31,7 @@ Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
 Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
 Plug 'jgdavey/tslime.vim'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
@@ -101,6 +101,7 @@ Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
+Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
 
 " Conditionally load ncm2 for Vim8 and Neovim
@@ -1158,24 +1159,28 @@ nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
-" Toggle off the auto-completion of pairs
-let g:AutoPairsShortcutToggle = '<leader>apt'
+lua << EOF
+require('nvim-autopairs').setup()
+EOF
 
-" Configure AutoPairs for several programming languages
-augroup autopairsconfiguration
-  " Add correct comments for HTML
-  au FileType html let b:AutoPairs = AutoPairsDefine({'<!--' : '-->'}, [])
-  " Add correct comments for Markdown
-  au FileType markdown let b:AutoPairs = AutoPairsDefine({'<!--' : '-->'}, [])
-  " Add correct comments for Liquid
-  au FileType liquid let b:AutoPairs = AutoPairsDefine({'{% comment %}' : '{% comment %}'}, [])
-  " Disable single-quote pairing for LaTeX
-  " Perform two steps to ensure that a reload or a new load does not error
-  " 1. Add all of the potential tags for LaTeX
-  au FileType tex let b:AutoPairs = AutoPairsDefine({'(':')', '[':']', '{':'}','"':'"', '`':'`', "'":"'"}, [])
-  " 2. Remove the single quote matching with causes problems
-  au FileType tex let b:AutoPairs = AutoPairsDefine({'(':')', '[':']', '{':'}','"':'"', '`':'`'}, ["'"])
-augroup END
+" " Toggle off the auto-completion of pairs
+" let g:AutoPairsShortcutToggle = '<leader>apt'
+
+" " Configure AutoPairs for several programming languages
+" augroup autopairsconfiguration
+"   " Add correct comments for HTML
+"   au FileType html let b:AutoPairs = AutoPairsDefine({'<!--' : '-->'}, [])
+"   " Add correct comments for Markdown
+"   au FileType markdown let b:AutoPairs = AutoPairsDefine({'<!--' : '-->'}, [])
+"   " Add correct comments for Liquid
+"   au FileType liquid let b:AutoPairs = AutoPairsDefine({'{% comment %}' : '{% comment %}'}, [])
+"   " Disable single-quote pairing for LaTeX
+"   " Perform two steps to ensure that a reload or a new load does not error
+"   " 1. Add all of the potential tags for LaTeX
+"   " au FileType tex let b:AutoPairs = AutoPairsDefine({'(':')', '[':']', '{':'}','"':'"', '`':'`', "'":"'"}, [])
+"   " 2. Remove the single quote matching with causes problems
+"   " au FileType tex let b:AutoPairs = AutoPairsDefine({'(':')', '[':']', '{':'}','"':'"', '`':'`'}, ["'"])
+" augroup END
 
 " Remove trailing whitespace
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
@@ -1327,6 +1332,7 @@ require('telescope').setup {
       },
     n = {
       ["<esc>"] = actions.close,
+      ["<cr>"] = false,
       },
     },
     prompt_position = "bottom",
@@ -1396,11 +1402,12 @@ nmap <Space>o :Telescope find_files <CR>
 
 " --> Lines or marks of the current buffer
 nmap <Space>r :Telescope current_buffer_fuzzy_find <CR>
-nmap <C-m> :Telescope marks <CR>
+" nmap <C-m> :Telescope marks <CR>
 nmap <Space>m :Telescope marks <CR>
 
 " --> Tags in buffer or all tags across the project directory
-nmap <Space>tt :Telescope current_buffer_tags <CR>
+nmap <Space>tt :Telescope tags <CR>
+nmap <Space>tb :Telescope current_buffer_tags <CR>
 nmap <Space>y :Telescope tags <CR>
 
 " --> Code components search using Treesitter
