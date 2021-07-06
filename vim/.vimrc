@@ -596,10 +596,6 @@ neogit.setup {
 }
 EOF
 
-" Configure magit to display in a minimal fashion
-" let g:magit_default_sections = ['commit', 'staged', 'unstaged']
-" let g:magit_default_fold_level = 1
-
 " Define a command to load magit in full-screen mode
 nmap <Space>gg :Neogit <CR>
 
@@ -609,16 +605,6 @@ augroup neogitconfiguration
   " Disable spell checking for the magit buffers
   autocmd FileType NeogitStatus setlocal nospell
 augroup END
-
-" " Special configuration for magit buffers
-" augroup magitconfiguration
-"   autocmd!
-"   " Disable spell checking for the magit buffers
-"   autocmd FileType magit setlocal nospell
-
-  " " Do not display trailing spaces in magit
-  " autocmd FileType magit setlocal listchars=tab:▸▹,extends:#,precedes:#,nbsp:⌻
-" augroup END
 
 " Configure the git-messenger
 augroup gitmessenger
