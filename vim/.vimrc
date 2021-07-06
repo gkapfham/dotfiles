@@ -1198,25 +1198,6 @@ lua << EOF
 require('nvim-autopairs').setup()
 EOF
 
-" " Toggle off the auto-completion of pairs
-" let g:AutoPairsShortcutToggle = '<leader>apt'
-
-" " Configure AutoPairs for several programming languages
-" augroup autopairsconfiguration
-"   " Add correct comments for HTML
-"   au FileType html let b:AutoPairs = AutoPairsDefine({'<!--' : '-->'}, [])
-"   " Add correct comments for Markdown
-"   au FileType markdown let b:AutoPairs = AutoPairsDefine({'<!--' : '-->'}, [])
-"   " Add correct comments for Liquid
-"   au FileType liquid let b:AutoPairs = AutoPairsDefine({'{% comment %}' : '{% comment %}'}, [])
-"   " Disable single-quote pairing for LaTeX
-"   " Perform two steps to ensure that a reload or a new load does not error
-"   " 1. Add all of the potential tags for LaTeX
-"   " au FileType tex let b:AutoPairs = AutoPairsDefine({'(':')', '[':']', '{':'}','"':'"', '`':'`', "'":"'"}, [])
-"   " 2. Remove the single quote matching with causes problems
-"   " au FileType tex let b:AutoPairs = AutoPairsDefine({'(':')', '[':']', '{':'}','"':'"', '`':'`'}, ["'"])
-" augroup END
-
 " Remove trailing whitespace
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
