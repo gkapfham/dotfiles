@@ -1558,10 +1558,10 @@ let g:tslime_always_current_session = 1
 " Testing {{{
 
 " Run all/part of a test suite
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ta :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
 
 " Run the test suite async and display in quickfix
 let test#strategy = "tslime"
