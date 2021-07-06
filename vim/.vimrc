@@ -44,6 +44,7 @@ Plug 'kevinhwang91/nvim-bqf', { 'branch': 'main' }
 Plug 'Konfekt/vim-sentence-chopper'
 Plug 'kristijanhusak/vim-dirvish-git'
 Plug 'kshenoy/vim-signature'
+Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
 Plug 'lewis6991/gitsigns.nvim'
@@ -78,6 +79,7 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
+Plug 'sindrets/diffview.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'sudormrfbin/cheatsheet.nvim'
@@ -103,8 +105,6 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
-Plug 'sindrets/diffview.nvim'
-Plug 'lervag/lists.vim'
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
