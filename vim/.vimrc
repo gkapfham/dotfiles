@@ -1442,8 +1442,14 @@ nmap <Space>r :Telescope current_buffer_fuzzy_find <CR>
 nmap <Space>m :Telescope marks <CR>
 
 " --> Tags in buffer or all tags across the project directory
+" define mappings for both Telescope and FZF since tag-based
+" navigation with Telescope fails with error, especially for:
+"  -- LaTeX
+"  -- Markdown
 nmap <Space>tt :Telescope tags <CR>
+nmap <Leader>tt :Tags <CR>
 nmap <Space>tb :Telescope current_buffer_tags <CR>
+nmap <Leader>tb :BTags <CR>
 nmap <Space>y :Telescope tags <CR>
 
 " --> Code components search using Treesitter
