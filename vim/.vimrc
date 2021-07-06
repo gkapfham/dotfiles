@@ -1008,6 +1008,9 @@ nnoremap <leader>lt :VimtexTocToggle<cr>
 " the ability to use the text editor interactively
 nnoremap <Space>ll :VimtexCompileSS<cr>
 
+" Disable syntax highlighting provided by vimtex plugin
+let g:vimtex_syntax_enabled = 0
+
 " Conceal option
 set conceallevel=1
 let g:tex_conceal='abdmgs'
