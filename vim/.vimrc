@@ -493,6 +493,8 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sh'] = ''
 
 " Version Control {{{
 
+# diffview.nvim plugin
+
 lua <<EOF
 local cb = require'diffview.config'.diffview_callback
 require'diffview'.setup {
@@ -532,8 +534,7 @@ require'diffview'.setup {
 }
 EOF
 
-" Define a command to load magit in full-screen mode
-nmap <Space>gg :Neogit <CR>
+# gitsigns.nvim plugin
 
 lua <<EOF
 require('gitsigns').setup {
@@ -574,6 +575,8 @@ require('gitsigns').setup {
   use_internal_diff = true,
 }
 EOF
+
+# neogit plugin
 
 lua <<EOF
 local neogit = require("neogit")
