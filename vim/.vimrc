@@ -1483,8 +1483,19 @@ nnoremap <Space>z :Telescope spell_suggest <CR>
 
 " NOTE: FZF is used in conjunction with telescope.nvim because
 " plugins like wiki.vim are integrated with FZF. Moreover,
-" although FZF commands are no longer directly integrated into
+" although all FZF commands are no longer directly integrated into
 " the workflow with nnoremap's, they are still available if needed.
+
+" NOTE: There are alternate FZF-based commands for the use of,
+" for instance, tags and grepping because Telescope's variants
+" do not work correctly or do not work efficiently enough.
+"
+" The Telescope-based commands are prefixed with <Space>
+" and the FZF-based commands are prefixed with <Leader>
+
+" Define the layout of FZF's window so that it matches the height
+" and width of the Telescope window
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.85 } }
 
 " Define unique colors for FZF's display
 " inside of Neovim (note that these colors
