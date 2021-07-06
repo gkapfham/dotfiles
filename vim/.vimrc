@@ -106,6 +106,7 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
 Plug 'sindrets/diffview.nvim'
+Plug 'lervag/lists.vim'
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
@@ -909,10 +910,12 @@ let g:ale_sign_error = '✗'
 " First command: Make a list item in markdown a task
 " Second command: Mark a task in markdown as done
 " These two commands work for normal mode and visual mode
-nnoremap <silent> <Space>w :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[<space>]<space>/<CR>0f]h
-nnoremap <silent> <Space>d :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[X]<space>/<CR>0f]h
-vnoremap <silent> <Space>w :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[<space>]<space>/<CR>0f]h
-vnoremap <silent> <Space>d :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[X]<space>/<CR>0f]h
+" nnoremap <silent> <Space>w :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[<space>]<space>/<CR>0f]h
+" nnoremap <silent> <Space>d :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[X]<space>/<CR>0f]h
+" vnoremap <silent> <Space>w :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[<space>]<space>/<CR>0f]h
+" vnoremap <silent> <Space>d :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[X]<space>/<CR>0f]h
+
+let g:lists_filetypes = ['markdown', 'wiki']
 
 " Convert the checkmark symbol, which is not on the keyboard, to a dash.
 " This command enables suitable display of GatorGrader results in markdown files.
