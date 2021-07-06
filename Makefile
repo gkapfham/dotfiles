@@ -474,7 +474,7 @@ stow-tpm: create-tpm
 
 ## Run stow on bin
 stow-bin:
-	stow -t ~/.local/bin bin
+	stow -t ~/.local/bin programs
 
 ## Running stow on bin depends on creating bin directory
 stow-bin: create-bin

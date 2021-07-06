@@ -1,0 +1,4 @@
+#!/bin/sh
+# Note that using "$@" will pass to the alacritty terminal
+# the inputs that are passed to this script
+chromium --force-device-scale-factor=2.25 "$@"
