@@ -1450,7 +1450,6 @@ nmap <Space>tt :Telescope tags <CR>
 nmap <Leader>tt :Tags <CR>
 nmap <Space>tb :Telescope current_buffer_tags <CR>
 nmap <Leader>tb :BTags <CR>
-nmap <Space>y :Telescope tags <CR>
 
 " --> Code components search using Treesitter
 " (does not display anything if there is no treesitter
