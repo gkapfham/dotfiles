@@ -48,6 +48,9 @@ exec_always --no-startup-id ~/.config/dunst/scripts/dunst-launch.sh
 # windows, but not common for other programs like Firefox
 exec --no-startup-id xbanish
 
+# Run xbindkeys program to ensure that mouse buttons work as configured
+exec --no-startup-id xbindkeys -f ~/.xbindkeysrc
+
 # Run picom to provide compositing, which especially
 # seems to reduce screen artifacts for Zathura windows
 # exec --no-startup-id picom -CGb
