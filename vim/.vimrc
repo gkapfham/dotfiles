@@ -84,6 +84,7 @@ Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'tfnico/vim-gradle'
+Plug 'TimUntersberger/neogit'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -104,7 +105,6 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
-Plug 'TimUntersberger/neogit'
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
