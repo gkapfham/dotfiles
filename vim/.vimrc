@@ -105,6 +105,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+Plug 'sindrets/diffview.nvim'
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
