@@ -1358,31 +1358,24 @@ require('telescope').setup {
       ["<cr>"] = false,
       },
     },
-    prompt_position = "bottom",
+    layout_config = {
+      horizontal = {
+        height = 0.8,
+        width = 0.9
+      }
+    },
     prompt_prefix = "> ",
     selection_caret = "> ",
     entry_prefix = "  ",
     initial_mode = "insert",
-    selection_strategy = "reset",
+    selection_strategy = "closest",
     sorting_strategy = "descending",
     layout_strategy = "horizontal",
-    layout_defaults = {
-      horizontal = {
-        mirror = false,
-      },
-      vertical = {
-        mirror = false,
-      },
-    },
     file_sorter =  require'telescope.sorters'.get_fuzzy_file,
     file_ignore_patterns = {},
     generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
     shorten_path = true,
     winblend = 0,
-    width = 0.75,
-    preview_cutoff = 120,
-    results_height = 1,
-    results_width = 0.8,
     border = {},
     borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
     color_devicons = false,
@@ -1392,12 +1385,17 @@ require('telescope').setup {
     grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
   },
+  pickers = {
+    buffers = {
+        sort_lastused = true,
+      }
+  },
   extensions = {
     fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = false, -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- "ignore_case", "respect_case", or "smart_case"
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
     }
   }
 }
