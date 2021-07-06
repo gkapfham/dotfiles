@@ -1460,9 +1460,11 @@ nnoremap <Space>ts :Telescope treesitter <CR>
 " (only works for the specific word under the cursor, meaning
 " that this is not a :Telescope live_grep)
 nnoremap <Space>gs :Telescope grep_string <CR>
+nnoremap <Leader>gs :Rg <C-R><C-W><CR>
 
 " --> All matches in non-hidden files for input word
 nnoremap <Space>ga :Telescope live_grep <CR>
+nnoremap <Leader>ga :Rg <CR>
 
 " --> Names of open buffers
 nnoremap <Tab> :Telescope buffers <CR>
