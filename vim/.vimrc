@@ -74,6 +74,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
+Plug 'Pocco81/AutoSave.nvim'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'rhysd/git-messenger.vim'
 Plug 'Shougo/echodoc.vim'
