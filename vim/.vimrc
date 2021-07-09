@@ -610,7 +610,7 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
     -- true gives more syntax information
     -- false (sometimes) gives better highlighting in LaTeX
-    additional_vim_regex_highlighting = false,
+    additional_vim_regex_highlighting = true,
   },
   indent = {
     -- false disables because Python Treesitter is buggy right now
