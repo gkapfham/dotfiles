@@ -614,7 +614,7 @@ require'nvim-treesitter.configs'.setup {
   },
   indent = {
     -- false disables because Python Treesitter is buggy right now
-    enable = true
+    enable = false
   }
 }
 EOF
