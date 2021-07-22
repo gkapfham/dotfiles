@@ -14,7 +14,7 @@ Plug 'andymass/vim-matchup'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
 Plug 'cespare/vim-toml'
-Plug 'Chiel92/vim-autoformat'
+" Plug 'Chiel92/vim-autoformat'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
@@ -1136,17 +1136,17 @@ require'compe'.setup {
     },
     tmux = {
       disabled = false,
-      all_panes = true
+      all_panes = false
     },
     path = true;
     buffer = true;
     calc = true;
     nvim_lsp = true;
     nvim_lua = true;
-    vsnip = true;
+    vsnip = false;
     ultisnips = true;
     spell = false;
-    luasnip = true;
+    luasnip = false;
   };
 }
 EOF
