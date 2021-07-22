@@ -9,6 +9,7 @@ call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
 Plug 'airblade/vim-rooter'
+Plug 'andersevenrud/compe-tmux'
 Plug 'andymass/vim-matchup'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
@@ -23,6 +24,7 @@ Plug 'folke/which-key.nvim'
 Plug 'garbas/vim-snipmate'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'honza/vim-snippets'
+Plug 'hrsh7th/nvim-compe'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
 Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
@@ -62,6 +64,8 @@ Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 " Plug 'ncm2/ncm2-syntax'
 " Plug 'ncm2/ncm2-tagprefix'
 " Plug 'ncm2/ncm2-ultisnips'
+Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
@@ -72,6 +76,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'Pocco81/AutoSave.nvim'
+Plug 'prabirshrestha/async.vim'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'rhysd/git-messenger.vim'
 " Plug 'Shougo/echodoc.vim'
@@ -101,15 +106,10 @@ Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
-Plug 'windwp/nvim-autopairs'
-Plug 'xolox/vim-misc'
-Plug 'hrsh7th/nvim-compe'
-Plug 'neovim/nvim-lspconfig'
-Plug 'andersevenrud/compe-tmux'
-Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
-Plug 'prabirshrestha/async.vim'
+Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
+Plug 'xolox/vim-misc'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
