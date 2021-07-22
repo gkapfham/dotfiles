@@ -18,9 +18,9 @@ Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
-Plug 'fgrsnau/ncm2-otherbuf', {'branch': 'master'}
+" Plug 'fgrsnau/ncm2-otherbuf', {'branch': 'master'}
 Plug 'fhill2/telescope-ultisnips.nvim'
-Plug 'filipekiss/ncm2-look.vim'
+" Plug 'filipekiss/ncm2-look.vim'
 Plug 'folke/which-key.nvim'
 Plug 'garbas/vim-snipmate'
 Plug 'gkapfham/vim-vitamin-onec'
@@ -49,21 +49,21 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'lifepillar/vim-colortemplate'
-Plug 'liuchengxu/vista.vim'
+" Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mgee/lightline-bufferline'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
-Plug 'ncm2/float-preview.nvim'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-html-subscope'
-Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-syntax'
-Plug 'ncm2/ncm2-tagprefix'
-Plug 'ncm2/ncm2-ultisnips'
+" Plug 'ncm2/float-preview.nvim'
+" Plug 'ncm2/ncm2-bufword'
+" Plug 'ncm2/ncm2-html-subscope'
+" Plug 'ncm2/ncm2-jedi'
+" Plug 'ncm2/ncm2-path'
+" Plug 'ncm2/ncm2-syntax'
+" Plug 'ncm2/ncm2-tagprefix'
+" Plug 'ncm2/ncm2-ultisnips'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
@@ -76,8 +76,8 @@ Plug 'pgdouyon/vim-evanesco'
 Plug 'Pocco81/AutoSave.nvim'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'rhysd/git-messenger.vim'
-Plug 'Shougo/echodoc.vim'
-Plug 'Shougo/neco-syntax'
+" Plug 'Shougo/echodoc.vim'
+" Plug 'Shougo/neco-syntax'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'sindrets/diffview.nvim'
 Plug 'SirVer/ultisnips'
@@ -105,19 +105,35 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+Plug 'hrsh7th/nvim-compe'
+Plug 'neovim/nvim-lspconfig'
+Plug 'andersevenrud/compe-tmux'
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'prabirshrestha/async.vim'
+Plug 'windwp/nvim-ts-autotag'
+
+" Plug 'stackline/vim-asynctags'
+
+" Plug 'folke/trouble.nvim'
+" Plug 'ray-x/lsp_signature.nvim'
+" Plug 'glepnir/lspsaga.nvim'
+" Plug 'kabouzeid/nvim-lspinstall'
+" Plug 'folke/lsp-colors.nvim'
+" Plug 'nvim-treesitter/playground'
 
 " Conditionally load ncm2 for Vim8 and Neovim
 "
 " Running Neovim, so a connector is not needed
-if has('nvim')
-  Plug 'ncm2/ncm2'
-  Plug 'roxma/nvim-yarp'
+" if has('nvim')
+  " Plug 'ncm2/ncm2'
+  " Plug 'roxma/nvim-yarp'
 " Running Vim8, so a connector is needed
-else
-  Plug 'ncm2/ncm2'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+" else
+  " Plug 'ncm2/ncm2'
+  " Plug 'roxma/nvim-yarp'
+  " Plug 'roxma/vim-hug-neovim-rpc'
+" endif
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -197,6 +213,29 @@ colorscheme vitaminonec
 " highlight groups to move to color scheme
 let g:limelight_conceal_ctermfg = 240
 let g:limelight_conceal_guifg = '#585858'
+
+lua <<EOF
+require "nvim-treesitter.configs".setup {
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false, -- Whether the query persists across vim sessions
+    keybindings = {
+      toggle_query_editor = 'o',
+      toggle_hl_groups = 'i',
+      toggle_injected_languages = 't',
+      toggle_anonymous_nodes = 'a',
+      toggle_language_display = 'I',
+      focus_language = 'f',
+      unfocus_language = 'F',
+      update = 'R',
+      goto_node = '<cr>',
+      show_help = '?',
+    },
+  }
+}
+EOF
 
 " }}}
 
@@ -357,7 +396,6 @@ let g:lightline = {
       \   'linter_warnings': 'LightlineLinterWarnings',
       \   'linter_errors': 'LightlineLinterErrors',
       \   'linter_ok': 'LightlineLinterOK',
-      \   'context': 'NearestMethodOrFunction',
       \   'python': 'LightlinePythonEnvironment'
       \ },
       \ 'component_type': {
@@ -369,11 +407,13 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
-" Display file context using Vista (e.g., function definition)
-function! NearestMethodOrFunction() abort
-  let l:nearestmethod = get(b:, 'vista_nearest_method_or_function', '')
-  return l:nearestmethod !=# '' ?  ' '.get(b:, 'vista_nearest_method_or_function', '') : ''
-endfunction
+" \   'context': 'NearestMethodOrFunction',
+
+" " Display file context using Vista (e.g., function definition)
+" function! NearestMethodOrFunction() abort
+"   let l:nearestmethod = get(b:, 'vista_nearest_method_or_function', '')
+"   return l:nearestmethod !=# '' ?  ' '.get(b:, 'vista_nearest_method_or_function', '') : ''
+" endfunction
 
 " Display a diagnostic message when gutentags updates
 function! LightlineGitsigns()
@@ -658,7 +698,13 @@ set tags=./tags;/,tags;/
 let g:highlighter#auto_update = 2
 
 " Perform tag generation in existence of a '.maketags' marker file
-let g:gutentags_project_root = ['.maketags']
+" let g:gutentags_project_root = ['.maketags']
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['package.json', '.git']
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 0
 
 " Only allow Gutentags to generate a tag file that indexes the files
 " that are returned by a tool like ripgrep, which is already configured
@@ -667,7 +713,7 @@ let g:gutentags_file_list_command = 'rg --files'
 
 " Always run the function to capture the context
 " Note that using an augroup does not seem to work correctly
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 " Define a command to support the toggle of Vista's display of tags
 " NOTE: There is a defect, most likely in Vista, that causes the
@@ -922,6 +968,7 @@ let g:ale_linters = {
       \   'python': ['flake8', 'pylint', 'pydocstyle'],
       \}
 
+
 " Configure the fixers run by ALE
 " All files: remove trailing lines and blank spaces
 let g:ale_fixers = {
@@ -1047,6 +1094,51 @@ nmap <Space>cc :execute "normal! i" . split(&commentstring, '%s')[0]<CR>
 
 " }}}
 
+" Language Servers {{{
+
+lua <<EOF
+local lsp_installer = require'nvim-lsp-installer'
+function common_on_attach(client, bufnr)
+  -- do stuff
+  print("契Starting Language Server");
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  opts ={silent = true, noremap = true}
+  buf_set_keymap('n', 'K', '<cmd> lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd> lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd> lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+end
+local installed_servers = lsp_installer.get_installed_servers()
+for _, server in pairs(installed_servers) do
+    opts = {
+        on_attach = common_on_attach,
+    }
+    server:setup(opts)
+end
+--opts ={expr = true, noremap = true}
+--vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+--buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+--buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+EOF
+
+" nnoremap <Space>k :lua vim.lsp.buf.signature_help() <CR>
+" nnoremap <Space>e :lua vim.lsp.diagnostic.show_line_diagnostics() <CR>
+" nnoremap <Space>c :lua vim.lsp.diagnostic.set_loclist() <CR>
+" nnoremap ]d :lua vim.lsp.diagnostic.goto_next() <CR>
+" nnoremap [d :lua vim.lsp.diagnostic.goto_prev() <CR>
+
+lua <<EOF
+-- require'lspinstall'.setup() -- important
+-- local servers = require'lspinstall'.installed_servers()
+-- for _, server in pairs(servers) do
+--  require'lspconfig'[server].setup{}
+-- end
+EOF
+
+" }}}
+
 " Completion {{{
 
 " Define basic completion function
@@ -1061,12 +1153,12 @@ set complete-=k complete+=k
 set complete+=kspell
 set complete+=]
 
-" Completion menus
-set wildmenu
-set wildmode=longest:full,full
+" " Completion menus
+" set wildmenu
+" set wildmode=longest:full,full
 
 " Set the completion approach for the engine
-set completeopt=noinsert,menuone,noselect
+set completeopt=menuone,noselect
 
 " Completion engine is compatible with UltiSnips
 let g:UltiSnipsExpandTrigger='<C-k>'
@@ -1074,13 +1166,65 @@ let g:UltiSnipsJumpForwardTrigger='<C-k>'
 let g:UltiSnipsJumpBackwardTrigger='<C-j>'
 
 " Completion compatible with the tmux-complete
-let g:tmuxcomplete#trigger = 'omnifunc'
+" let g:tmuxcomplete#trigger = 'omnifunc'
 
 " Do not echo messages (nor will searches)
 set noshowmode
 
 " Infer the case when doing completion
 set infercase
+
+lua <<EOF
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  resolve_timeout = 800;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = {
+    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+    max_width = 120,
+    min_width = 60,
+    max_height = math.floor(vim.o.lines * 0.3),
+    min_height = 1,
+  };
+  source = {
+    omni = {
+        filetypes = {'tex'},
+    },
+    tmux = {
+      disabled = false,
+      all_panes = true
+    },
+    path = true;
+    buffer = true;
+    calc = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    vsnip = true;
+    ultisnips = true;
+    spell = false;
+    luasnip = true;
+  };
+}
+EOF
+
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " }}}
 
@@ -1099,7 +1243,7 @@ let maplocalleader=','
 let mapleader=','
 
 " Move through CamelCase text
-call camelcasemotion#CreateMotionMappings('<space>')
+call camelcasemotion#CreateMotionMappings('<space><space>')
 
 " Navigate through wrapped text
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
@@ -1197,6 +1341,23 @@ vmap <C-Down> ]egv
 lua << EOF
 require('nvim-autopairs').setup()
 EOF
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  autotag = {
+    enable = true,
+  }
+}
+EOF
+
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   autotag = {
+"     enable = true,
+"     filetypes = {"html", "xml", "javascript", "vue", "liquid", "markdown"},
+"   }
+" }
+" EOF
 
 " Remove trailing whitespace
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
@@ -1380,6 +1541,9 @@ require('telescope').setup {
         width = 0.9
       }
     },
+    path_display = {
+      "shorten",
+    },
     prompt_prefix = "> ",
     selection_caret = "> ",
     entry_prefix = "  ",
@@ -1390,7 +1554,6 @@ require('telescope').setup {
     file_sorter =  require'telescope.sorters'.get_fuzzy_file,
     file_ignore_patterns = {},
     generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
-    shorten_path = true,
     winblend = 0,
     border = {},
     borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
@@ -1478,6 +1641,14 @@ nnoremap <Space>h :Telescope command_history <CR>
 
 " --> Spelling fix suggestions for word under cursor
 nnoremap <Space>z :Telescope spell_suggest <CR>
+
+" --> Language server mappings
+" -- Navigation
+nnoremap <Space>gd :Telescope lsp_definitions <CR>
+nnoremap <Space>gr :Telescope lsp_references <CR>
+" -- Diagnostics
+nnoremap <Space>dd :Telescope lsp_document_diagnostics <CR>
+nnoremap <Space>wd :Telescope lsp_workspace_diagnostics <CR>
 
 " }}}
 
@@ -1652,119 +1823,122 @@ end
 
 " Completion Settings with ncm2 {{{
 
-" Enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
+" " Enable ncm2 for all buffers
+" autocmd BufEnter * call ncm2#enable_for_buffer()
 
-" Configure ncm2 so that it appears quickly
-let ncm2#popup_delay = 1
+" " Configure ncm2 so that it appears quickly
+" let ncm2#popup_delay = 1
 
-" Show a preview of completion details
-" For instance, useful to see Python function signature
-" Do not display in a bottom-screen doc, instead near menu
-let g:float_preview#docked = 0
+" " Show a preview of completion details
+" " For instance, useful to see Python function signature
+" " Do not display in a bottom-screen doc, instead near menu
+" let g:float_preview#docked = 0
 
-" Configure the floating preview window for completions
-augroup my_floating_window_configuration
-function! DisableExtras()
-  call nvim_win_set_option(g:float_preview#win, 'number', v:false)
-  call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:false)
-  call nvim_win_set_option(g:float_preview#win, 'cursorline', v:false)
-  call nvim_win_set_option(g:float_preview#win, 'spell', v:false)
-endfunction
-autocmd User FloatPreviewWinOpen call DisableExtras()
-augroup END
+" " Configure the floating preview window for completions
+" augroup my_floating_window_configuration
+" function! DisableExtras()
+"   call nvim_win_set_option(g:float_preview#win, 'number', v:false)
+"   call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:false)
+"   call nvim_win_set_option(g:float_preview#win, 'cursorline', v:false)
+"   call nvim_win_set_option(g:float_preview#win, 'spell', v:false)
+" endfunction
+" autocmd User FloatPreviewWinOpen call DisableExtras()
+" augroup END
 
-" Use a matcher and a sorter that work together
-let g:ncm2#matcher = 'abbrfuzzy'
-let g:ncm2#sorter = 'abbrfuzzy'
+" " Use a matcher and a sorter that work together
+" let g:ncm2#matcher = 'abbrfuzzy'
+" let g:ncm2#sorter = 'abbrfuzzy'
 
-" Follow vimtex's documentation to configuration ncm2
-" This ensures that labels and references complete correctly
-augroup my_cm_setup
-  autocmd!
-  autocmd BufEnter * call ncm2#enable_for_buffer()
-  autocmd Filetype tex call ncm2#register_source({
-        \ 'name' : 'vimtex-cmds',
-        \ 'priority': 8,
-        \ 'complete_length': -1,
-        \ 'scope': ['tex'],
-        \ 'matcher': {'name': 'prefix', 'key': 'word'},
-        \ 'word_pattern': '\w+',
-        \ 'complete_pattern': g:vimtex#re#ncm2#cmds,
-        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-        \ })
-  autocmd Filetype tex call ncm2#register_source({
-        \ 'name' : 'vimtex-labels',
-        \ 'priority': 8,
-        \ 'complete_length': -1,
-        \ 'scope': ['tex'],
-        \ 'matcher': {'name': 'combine',
-        \             'matchers': [
-        \               {'name': 'substr', 'key': 'word'},
-        \               {'name': 'substr', 'key': 'menu'},
-        \             ]},
-        \ 'word_pattern': '\w+',
-        \ 'complete_pattern': g:vimtex#re#ncm2#labels,
-        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-        \ })
-  autocmd Filetype tex call ncm2#register_source({
-        \ 'name' : 'vimtex-files',
-        \ 'priority': 8,
-        \ 'complete_length': -1,
-        \ 'scope': ['tex'],
-        \ 'matcher': {'name': 'combine',
-        \             'matchers': [
-        \               {'name': 'abbrfuzzy', 'key': 'word'},
-        \               {'name': 'abbrfuzzy', 'key': 'abbr'},
-        \             ]},
-        \ 'word_pattern': '\w+',
-        \ 'complete_pattern': g:vimtex#re#ncm2#files,
-        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-        \ })
-  autocmd Filetype tex call ncm2#register_source({
-        \ 'name' : 'bibtex',
-        \ 'priority': 8,
-        \ 'complete_length': -1,
-        \ 'scope': ['tex'],
-        \ 'matcher': {'name': 'combine',
-        \             'matchers': [
-        \               {'name': 'prefix', 'key': 'word'},
-        \               {'name': 'abbrfuzzy', 'key': 'abbr'},
-        \               {'name': 'abbrfuzzy', 'key': 'menu'},
-        \             ]},
-        \ 'word_pattern': '\w+',
-        \ 'complete_pattern': g:vimtex#re#ncm2#bibtex,
-        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-        \ })
-augroup END
+" " Follow vimtex's documentation to configuration ncm2
+" " This ensures that labels and references complete correctly
+" augroup my_cm_setup
+"   autocmd!
+"   autocmd BufEnter * call ncm2#enable_for_buffer()
+"   autocmd Filetype tex call ncm2#register_source({
+"         \ 'name' : 'vimtex-cmds',
+"         \ 'priority': 8,
+"         \ 'complete_length': -1,
+"         \ 'scope': ['tex'],
+"         \ 'matcher': {'name': 'prefix', 'key': 'word'},
+"         \ 'word_pattern': '\w+',
+"         \ 'complete_pattern': g:vimtex#re#ncm2#cmds,
+"         \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+"         \ })
+"   autocmd Filetype tex call ncm2#register_source({
+"         \ 'name' : 'vimtex-labels',
+"         \ 'priority': 8,
+"         \ 'complete_length': -1,
+"         \ 'scope': ['tex'],
+"         \ 'matcher': {'name': 'combine',
+"         \             'matchers': [
+"         \               {'name': 'substr', 'key': 'word'},
+"         \               {'name': 'substr', 'key': 'menu'},
+"         \             ]},
+"         \ 'word_pattern': '\w+',
+"         \ 'complete_pattern': g:vimtex#re#ncm2#labels,
+"         \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+"         \ })
+"   autocmd Filetype tex call ncm2#register_source({
+"         \ 'name' : 'vimtex-files',
+"         \ 'priority': 8,
+"         \ 'complete_length': -1,
+"         \ 'scope': ['tex'],
+"         \ 'matcher': {'name': 'combine',
+"         \             'matchers': [
+"         \               {'name': 'abbrfuzzy', 'key': 'word'},
+"         \               {'name': 'abbrfuzzy', 'key': 'abbr'},
+"         \             ]},
+"         \ 'word_pattern': '\w+',
+"         \ 'complete_pattern': g:vimtex#re#ncm2#files,
+"         \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+"         \ })
+"   autocmd Filetype tex call ncm2#register_source({
+"         \ 'name' : 'bibtex',
+"         \ 'priority': 8,
+"         \ 'complete_length': -1,
+"         \ 'scope': ['tex'],
+"         \ 'matcher': {'name': 'combine',
+"         \             'matchers': [
+"         \               {'name': 'prefix', 'key': 'word'},
+"         \               {'name': 'abbrfuzzy', 'key': 'abbr'},
+"         \               {'name': 'abbrfuzzy', 'key': 'menu'},
+"         \             ]},
+"         \ 'word_pattern': '\w+',
+"         \ 'complete_pattern': g:vimtex#re#ncm2#bibtex,
+"         \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+"         \ })
+" augroup END
 
-" CTRL-c doesn't trigger the InsertLeave autocmd, so map to <ESC> instead
-inoremap <c-c> <ESC>
+" " CTRL-c doesn't trigger the InsertLeave autocmd, so map to <ESC> instead
+" inoremap <c-c> <ESC>
 
-" Enable auto complete for `<backspace>`, `<c-w>` keys
-augroup ImproveNcmTwoCompletion
-  au TextChangedI * call ncm2#auto_trigger()
-augroup END
+" " Enable auto complete for `<backspace>`, `<c-w>` keys
+" augroup ImproveNcmTwoCompletion
+"   au TextChangedI * call ncm2#auto_trigger()
+" augroup END
 
-" Pressing <Enter> while the pop-up menu is visible will hide menu.
-" Use this mapping to close the menu and also start a new line.
-" This configures the completion engine to make it more useful.
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" " Pressing <Enter> while the pop-up menu is visible will hide menu.
+" " Use this mapping to close the menu and also start a new line.
+" " This configures the completion engine to make it more useful.
+" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
-" Enable the ncm2 completion engine to use the "look" dictionary
-let g:ncm2_look_enabled = 1
+" " Enable the ncm2 completion engine to use the "look" dictionary
+" let g:ncm2_look_enabled = 1
 
-" Configure deoplete to use Tab for forward and backward movement
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
+" " Configure deoplete to use Tab for forward and backward movement
+" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
 
-" Disable jedi-vim auto-completion and enable call-signatures options
-let g:jedi#auto_initialization = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#completions_command = ''
-let g:jedi#completions_enabled = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = '1'
-let g:jedi#smart_auto_mappings = 0
+" " Disable jedi-vim auto-completion and enable call-signatures options
+" let g:jedi#auto_initialization = 0
+" let g:jedi#auto_vim_configuration = 0
+" let g:jedi#completions_command = ''
+" let g:jedi#completions_enabled = 0
+" let g:jedi#popup_on_dot = 0
+" let g:jedi#show_call_signatures = '1'
+" let g:jedi#smart_auto_mappings = 0
+
+" TabLineFill          brightwhite       cyan
+" TabLineSel           brightwhite       cyan
 
 " }}}
