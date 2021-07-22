@@ -1272,11 +1272,17 @@ EOF
 
 lua << EOF
 require'nvim-treesitter.configs'.setup {
+  matchup = {
+    enable = true,              -- mandatory, false will disable the whole extension
+  },
   autotag = {
     enable = true,
   }
 }
 EOF
+
+" Configure the matchup plugin to display diagnostics about location
+nnoremap <c-k> :<c-u>MatchupWhereAmI<CR>
 
 " Remove trailing whitespace
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
