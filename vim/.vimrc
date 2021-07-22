@@ -113,15 +113,6 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'prabirshrestha/async.vim'
 Plug 'windwp/nvim-ts-autotag'
 
-" Plug 'stackline/vim-asynctags'
-
-" Plug 'folke/trouble.nvim'
-" Plug 'ray-x/lsp_signature.nvim'
-" Plug 'glepnir/lspsaga.nvim'
-" Plug 'kabouzeid/nvim-lspinstall'
-" Plug 'folke/lsp-colors.nvim'
-" Plug 'nvim-treesitter/playground'
-
 " Conditionally load ncm2 for Vim8 and Neovim
 "
 " Running Neovim, so a connector is not needed
