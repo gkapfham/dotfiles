@@ -1278,15 +1278,6 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-"   autotag = {
-"     enable = true,
-"     filetypes = {"html", "xml", "javascript", "vue", "liquid", "markdown"},
-"   }
-" }
-" EOF
-
 " Remove trailing whitespace
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
