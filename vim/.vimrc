@@ -113,19 +113,6 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'prabirshrestha/async.vim'
 Plug 'windwp/nvim-ts-autotag'
 
-" Conditionally load ncm2 for Vim8 and Neovim
-"
-" Running Neovim, so a connector is not needed
-" if has('nvim')
-  " Plug 'ncm2/ncm2'
-  " Plug 'roxma/nvim-yarp'
-" Running Vim8, so a connector is needed
-" else
-  " Plug 'ncm2/ncm2'
-  " Plug 'roxma/nvim-yarp'
-  " Plug 'roxma/vim-hug-neovim-rpc'
-" endif
-
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
 
