@@ -221,6 +221,7 @@ set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
 set list
 
 " Display with faster timeouts in the TUI
+"
 " Setting also influences how quickly the
 " WhichKey menu will appear with hints
 set timeoutlen=500
