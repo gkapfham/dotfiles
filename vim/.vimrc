@@ -552,14 +552,18 @@ augroup gitmessenger
 " Define a mapping to navigate the git-messenger pop-up
 function! SetupGitMessengerPopup() abort
     " Go into the git-messenger pop-up to navigate
-    nmap <Leader>gg <Plug>(git-messenger-into-popup)
-    " Go to an older commit with CTRL-o
-    nmap <buffer><C-o> o
-    " Go to a newer commit with CTRL-i
-    nmap <buffer><C-i> O
+    nmap <Leader>gg :GitMessenger <CR>
+    " After going into the pop-up with another
+    " use of the <Leader>gg mapping, then:
+    " --> Go to an older commit with CTRL-j
+    nmap <buffer><C-j> o
+    " --> Go to a newer commit with CTRL-k
+    nmap <buffer><C-k> O
 endfunction
 autocmd FileType gitmessengerpopup call SetupGitMessengerPopup()
 augroup END
+
+" test
 
 " }}}
 
