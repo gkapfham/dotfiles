@@ -583,7 +583,12 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     -- false disables because Python Treesitter is buggy right now
     enable = false
-  }
+  },
+  -- enable treesitter for the matchup plugin that enhances matches
+  -- highlighting and movements using the % symbol
+  matchup = {
+    enable = true,
+  },
 }
 EOF
 
@@ -1270,16 +1275,16 @@ lua << EOF
 require('nvim-autopairs').setup()
 EOF
 
-lua << EOF
-require'nvim-treesitter.configs'.setup {
-  matchup = {
-    enable = true,
-  },
-  autotag = {
-    enable = true,
-  }
-}
-EOF
+" lua << EOF
+" require'nvim-treesitter.configs'.setup {
+"   matchup = {
+"     enable = true,
+"   },
+"   autotag = {
+"     enable = true,
+"   }
+" }
+" EOF
 
 " Configure the matchup plugin to display diagnostics about location
 nnoremap <c-k> :<c-u>MatchupWhereAmI<CR>
