@@ -269,9 +269,6 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr() <CR>
 
-" Display the signature of a function in the footer of the screen
-noremap <Space>s :PreviewSignature! <CR>
-
 " Display special characters as sign column marks
 let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
 
