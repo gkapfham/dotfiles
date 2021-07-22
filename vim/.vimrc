@@ -114,7 +114,10 @@ syntax spell toplevel
 set spellfile+=~/.config/nvim/spell/en.utf-8.add
 set spellfile+=.extra.utf-8.add
 
-" Correct spelling mistakes from insert mode
+" Correct spelling mistakes from insert mode when typing
+" Reference:
+" https://stackoverflow.com/questions/5312235/how-do-i-correct-vim-spelling-mistakes-quicker
+" Note that this mapping does not seem to work for all filetypes
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " Make changes automatically saved during Qdo
