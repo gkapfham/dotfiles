@@ -475,7 +475,7 @@ require'diffview'.setup {
 }
 EOF
 
-" gitsigns.nvim plugin
+" Configure the gitsigns.nvim plugin
 
 lua <<EOF
 require('gitsigns').setup {
