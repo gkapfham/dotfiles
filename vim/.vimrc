@@ -18,9 +18,7 @@ Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'easymotion/vim-easymotion'
-" Plug 'fgrsnau/ncm2-otherbuf', {'branch': 'master'}
 Plug 'fhill2/telescope-ultisnips.nvim'
-" Plug 'filipekiss/ncm2-look.vim'
 Plug 'folke/which-key.nvim'
 Plug 'garbas/vim-snipmate'
 Plug 'gkapfham/vim-vitamin-onec'
