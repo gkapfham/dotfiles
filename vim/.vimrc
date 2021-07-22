@@ -171,12 +171,6 @@ set termguicolors
 " Use customized colorscheme
 colorscheme vitaminonec
 
-" " Set color for concealment with limelight
-" " NOTE: In this file because there are no
-" " highlight groups to move to color scheme
-" let g:limelight_conceal_ctermfg = 240
-" let g:limelight_conceal_guifg = '#585858'
-
 " }}}
 
 " Display Improvements {{{
