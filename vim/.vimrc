@@ -269,9 +269,6 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr() <CR>
 
-" Display the current block of text/code in a highlighting limelight
-nmap <Space>ff :Limelight!! <CR>
-
 " Display the signature of a function in the footer of the screen
 noremap <Space>s :PreviewSignature! <CR>
 
@@ -638,7 +635,7 @@ let g:gutentags_project_root = ['package.json', '.git']
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1
-let g:gutentags_generate_on_empty_buffer = 0
+let g:gutentags_generate_on_empty_buffer = 1
 
 " Only allow Gutentags to generate a tag file that indexes the files
 " that are returned by a tool like ripgrep, which is already configured
