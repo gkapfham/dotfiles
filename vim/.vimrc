@@ -349,14 +349,6 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
-" \   'context': 'NearestMethodOrFunction',
-
-" " Display file context using Vista (e.g., function definition)
-" function! NearestMethodOrFunction() abort
-"   let l:nearestmethod = get(b:, 'vista_nearest_method_or_function', '')
-"   return l:nearestmethod !=# '' ?  ' '.get(b:, 'vista_nearest_method_or_function', '') : ''
-" endfunction
-
 " Display a diagnostic message when gutentags updates
 function! LightlineGitsigns()
   let l:gitstatus = get(b:,'gitsigns_status','')
