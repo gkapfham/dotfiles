@@ -283,7 +283,7 @@ lua require'colorizer'.setup()
 " Do not show empty registers when previewing the
 " registers that are available upon pressing, for
 " instance, the " key when in normal mode
-let g:registers_show_empty_registers = 0
+" let g:registers_show_empty_registers = 0
 
 " Briefly highlight the yanked region using the background color for visual highlights
 augroup highlight_yank
@@ -562,8 +562,6 @@ function! SetupGitMessengerPopup() abort
 endfunction
 autocmd FileType gitmessengerpopup call SetupGitMessengerPopup()
 augroup END
-
-" test
 
 " }}}
 
