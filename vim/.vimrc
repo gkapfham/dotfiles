@@ -17,7 +17,7 @@ Plug 'cespare/vim-toml'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
 Plug 'fhill2/telescope-ultisnips.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'garbas/vim-snipmate'
@@ -1206,7 +1206,7 @@ nmap <Space>u :call SwitchBuffer()<CR>
 " the easymotion prefix, which I do not use frequently.
 " Note that the default for this mapping conflicts with
 " the following mapping created for the colon key
-map <Leader><Space> <Plug>(easymotion-prefix)
+" map <Leader><Space> <Plug>(easymotion-prefix)
 
 " Define <leader<leader> to create a colon in both
 " normal mode and visual mode, thereby avoiding
@@ -1234,7 +1234,7 @@ set grepprg=rg\ -uu\ --vimgrep\ --no-heading\ --smart-case
 
 " }}}
 
-" Advanced Keyboard Movement with Easymotion {{{
+" Advanced Keyboard Movement with Lightspeed.nvim {{{
 
 " " Make f (single-character search) and
 " " <leader>f (two-character search) with easymotion.
