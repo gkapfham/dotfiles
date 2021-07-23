@@ -97,6 +97,12 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'xolox/vim-misc'
+" Plug 'justinmk/vim-sneak'
+Plug 'ggandor/lightspeed.nvim'
+
+" Plug 'phaazon/hop.nvim'
+
+" Plug 'ggandor/lightspeed.nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -274,6 +280,8 @@ let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
 
 " Do not display the match of an offscreen delimiter
 let g:matchup_matchparen_status_offscreen = 0
+
+let g:matchup_override_vimtex = 1
 
 " Enable the Lua-based color highlighter for all filetypes
 lua require'colorizer'.setup()
@@ -1228,21 +1236,40 @@ set grepprg=rg\ -uu\ --vimgrep\ --no-heading\ --smart-case
 
 " Advanced Keyboard Movement with Easymotion {{{
 
-" Make f (single-character search) and
-" <leader>f (two-character search) with easymotion.
-" Using <leader>f instead of "s" avoids a conflict
-" with the vim-sandwich plugin that uses "s" for sandwich-ing
-nmap f <Plug>(easymotion-s)
-nmap <leader>f <Plug>(easymotion-s2)
-nmap <leader>e <Plug>(easymotion-next)
-nmap <leader>E <Plug>(easymotion-prev)
+" " Make f (single-character search) and
+" " <leader>f (two-character search) with easymotion.
+" " Using <leader>f instead of "s" avoids a conflict
+" " with the vim-sandwich plugin that uses "s" for sandwich-ing
+" nmap f <Plug>(easymotion-s)
+" nmap <leader>f <Plug>(easymotion-s2)
+" nmap <leader>e <Plug>(easymotion-next)
+" nmap <leader>E <Plug>(easymotion-prev)
 
-" Do not create the shaded background
-let g:EasyMotion_do_shade = 0
+" " Do not create the shaded background
+" let g:EasyMotion_do_shade = 0
 
-" Use uppercase letters
-let g:EasyMotion_use_upper = 1
-let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
+" " Use uppercase letters
+" let g:EasyMotion_use_upper = 1
+" let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
+
+lua << EOF
+require'lightspeed'.setup {
+  jump_to_first_match = false,
+  jump_on_partial_input_safety_timeout = 400,
+  -- This can get _really_ slow if the window has a lot of content,
+  -- turn it on only if your machine can always cope with it.
+  highlight_unique_chars = false,
+  grey_out_search_area = false,
+  match_only_the_start_of_same_char_seqs = true,
+  limit_ft_matches = 5,
+  full_inclusive_prefix_key = '<c-x>',
+  -- By default, the values of these will be decided at runtime,
+  -- based on `jump_to_first_match`.
+  labels = nil,
+  cycle_group_fwd_key = '<Tab>',
+  cycle_group_bwd_key = '<S-Tab>',
+}
+EOF
 
 " }}}
 
@@ -1382,38 +1409,40 @@ nnoremap <leader>gs :Git <CR>
 
 " }}}
 
-" Sandwich {{
+" Sandwich {{{
 
 " Do not use the default mappings to preserve
 " the use of the sentence object in technical writing
-let g:textobj_sandwich_no_default_key_mappings = 1
+" let g:textobj_sandwich_no_default_key_mappings = 1
 
-" Remap the auto-mode sandwich operators
-" to the same mappings used by default
-" - Usage example: file_name after saiw" --> "file_name"
-" - Usage example: recent optimizations after
-" saif" --> "recent optimizations"
-" because the f" will search for quote mark
-xmap ib <Plug>(textobj-sandwich-auto-i)
-omap ib <Plug>(textobj-sandwich-auto-i)
-xmap ab <Plug>(textobj-sandwich-auto-a)
-omap ab <Plug>(textobj-sandwich-auto-a)
+runtime macros/sandwich/keymap/surround.vim
 
-" Remap the query-mode sandwich operators
-" that work for dynamically detected regions.
-" Note that this uses, for instance, 'iq'
-" instead of 'is' to avoid conflict with sentence.
-" The intuition is that these 'query' for a
-" delimiter and then dynamically match a region.
-xmap iq <Plug>(textobj-sandwich-query-i)
-omap iq <Plug>(textobj-sandwich-query-i)
-xmap aq <Plug>(textobj-sandwich-query-a)
-omap aq <Plug>(textobj-sandwich-query-a)
+" " Remap the auto-mode sandwich operators
+" " to the same mappings used by default
+" " - Usage example: file_name after saiw" --> "file_name"
+" " - Usage example: recent optimizations after
+" " saif" --> "recent optimizations"
+" " because the f" will search for quote mark
+" xmap ib <Plug>(textobj-sandwich-auto-i)
+" omap ib <Plug>(textobj-sandwich-auto-i)
+" xmap ab <Plug>(textobj-sandwich-auto-a)
+" omap ab <Plug>(textobj-sandwich-auto-a)
+
+" " Remap the query-mode sandwich operators
+" " that work for dynamically detected regions.
+" " Note that this uses, for instance, 'iq'
+" " instead of 'is' to avoid conflict with sentence.
+" " The intuition is that these 'query' for a
+" " delimiter and then dynamically match a region.
+" xmap iq <Plug>(textobj-sandwich-query-i)
+" omap iq <Plug>(textobj-sandwich-query-i)
+" xmap aq <Plug>(textobj-sandwich-query-a)
+" omap aq <Plug>(textobj-sandwich-query-a)
 
 " Disable the s command for deleting characters
 " Reference: https://github.com/machakann/Vim-sandwich/issues/62
-map <silent> s <nop>
-map <silent> S <nop>
+" map <silent> s <nop>
+" map <silent> S <nop>
 
 " }}}
 
@@ -1560,7 +1589,7 @@ nnoremap <Space>ga :Telescope live_grep <CR>
 nnoremap <Leader>ga :Rg <CR>
 
 " --> Names of open buffers
-nnoremap <Tab> :Telescope buffers <CR>
+" nnoremap <Tab> :Telescope buffers <CR>
 nnoremap <Space>i :Telescope buffers <CR>
 
 " --> Ultisnips-based snippets available for buffer
