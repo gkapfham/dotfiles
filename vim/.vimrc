@@ -615,7 +615,7 @@ set foldtext=FancyFoldText()
 
 " Manual Pages {{{
 
-" Special configuration for man buffers
+" Define a special configuration for man buffers
 augroup manconfiguration
   autocmd!
   " Disable spell checking for the man buffers
