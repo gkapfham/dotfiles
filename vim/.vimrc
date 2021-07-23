@@ -645,10 +645,6 @@ let g:gutentags_generate_on_empty_buffer = 1
 " to ignore those files that are inside of the .gitignore file
 let g:gutentags_file_list_command = 'rg --files'
 
-" Always run the function to capture the context
-" Note that using an augroup does not seem to work correctly
-" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-
 " Define a command to support the toggle of Vista's display of tags
 " NOTE: There is a defect, most likely in Vista, that causes the
 " lightline display to disappear after using this command.
