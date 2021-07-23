@@ -645,38 +645,6 @@ let g:gutentags_generate_on_empty_buffer = 1
 " to ignore those files that are inside of the .gitignore file
 let g:gutentags_file_list_command = 'rg --files'
 
-" Enable the display of icons in the Vista interface
-let g:vista#renderer#enable_icon = 1
-
-" Configure how Vista shows a location when navigating its interface
-let g:vista_echo_cursor_strategy = 'echo'
-
-" Allow Vista to create data for display in the lightline
-let g:vista_disable_statusline = 0
-
-" Define icon mappings for the cases when the defaults do not match
-" Note that Vista defines "class" and "method" but not the plural
-" Summary of the icon definitions:
-" --> Java: classes, methods
-" --> LaTeX: labels, sections, subsections, subsubsections
-" --> VimScript: autocommand groups, commands, maps
-" --> Default: use a box with a circle instead of question mark
-let g:vista#renderer#icons = {
-\   'S': "\uf7fd",
-\   'c': "\uf7fd",
-\   's': "\uf7fd",
-\   'autocommand groups': "\uf136",
-\   'classes': "\uf0e8",
-\   'commands': "\uf8a3",
-\   'labels': "\uf71b",
-\   'maps': "\uf8a3",
-\   'methods': "\uf6a6",
-\   'sections': "\uf7fd",
-\   'subsections': "\uf7fd",
-\   'subsubsections': "\uf7fd",
-\   'default': "\uf7fd",
-\  }
-
 " }}}
 
 " WhichKey {{{
