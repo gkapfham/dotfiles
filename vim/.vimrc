@@ -723,11 +723,6 @@ filetype indent plugin on | syn on
 " the next line when pressing "return"
 set formatoptions+=r
 
-" Define a color scheme for Python source code highlighting
-augroup semshiconfiguration
-  let g:semshi#error_sign = v:false
-augroup END
-
 " Configure settings for different file types
 augroup configurationgroupforfiletypes
   autocmd!
