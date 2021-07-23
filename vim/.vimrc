@@ -161,7 +161,7 @@ set undodir=~/.vim/undo
 " Source the vimrc file with Reload
 command! Reload :source $MYVIMRC
 
-" Define a mapping to easy use of Reload
+" Define a mapping for the easy use of Reload
 nnoremap <leader>rr :Reload<CR>
 
 " }}}
