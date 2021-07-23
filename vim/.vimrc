@@ -645,11 +645,6 @@ let g:gutentags_generate_on_empty_buffer = 1
 " to ignore those files that are inside of the .gitignore file
 let g:gutentags_file_list_command = 'rg --files'
 
-" Define a command to support the toggle of Vista's display of tags
-" NOTE: There is a defect, most likely in Vista, that causes the
-" lightline display to disappear after using this command.
-nnoremap <Space>v :Vista!!<cr>
-
 " Enable the display of icons in the Vista interface
 let g:vista#renderer#enable_icon = 1
 
