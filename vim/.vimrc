@@ -568,7 +568,9 @@ augroup END
 " Treesitter {{{
 
 " Use the treesitter for all of the possible languages available
-lua <<EOF
+" Include the configuration for all plugins that use treesitter
+
+lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- one of "all", "maintained" (parsers with maintainers),
   -- or a list of languages
