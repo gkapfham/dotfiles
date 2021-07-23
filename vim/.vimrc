@@ -17,10 +17,10 @@ Plug 'cespare/vim-toml'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
-" Plug 'easymotion/vim-easymotion'
 Plug 'fhill2/telescope-ultisnips.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'garbas/vim-snipmate'
+Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'honza/vim-snippets'
 Plug 'hrsh7th/nvim-compe'
@@ -97,12 +97,6 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'xolox/vim-misc'
-" Plug 'justinmk/vim-sneak'
-Plug 'ggandor/lightspeed.nvim'
-
-" Plug 'phaazon/hop.nvim'
-
-" Plug 'ggandor/lightspeed.nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
