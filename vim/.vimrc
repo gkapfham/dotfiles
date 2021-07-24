@@ -312,6 +312,70 @@ augroup END
 
 " }}}
 
+" Basic Keyboard Movement {{{
+
+" Disable the arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+inoremap jk <ESC>
+inoremap <ESC> <NOP>
+
+" Define the leaders
+let maplocalleader=','
+let mapleader=','
+
+" Move through CamelCase text
+call camelcasemotion#CreateMotionMappings('<space><space>')
+
+" Navigate through wrapped text
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+" Navigate to the next linting warning/error
+nmap <silent> <C-k> <Plug>(ale_previous)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" Quickly switch between two recent buffers
+function! SwitchBuffer()
+  b#
+endfunction
+" Use either control or space to activate
+nmap <C-u> :call SwitchBuffer()<CR>
+nmap <Space>u :call SwitchBuffer()<CR>
+
+" Define <leader<leader> to create a colon in both
+" normal mode and visual mode, thereby avoiding
+" the need to frequently type the shift key
+nnoremap <leader><leader> :
+vnoremap <leader><leader> :
+
+" }}}
+"
+" Tags {{{
+
+" Specify where the tags are stored
+set tags=./tags;/,tags;/
+
+" Perform highlighting asynchronously when file is loaded or saved
+let g:highlighter#auto_update = 2
+
+" Configure gutentags plugin
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['package.json', '.git']
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 1
+
+" Only allow Gutentags to generate a tag file that indexes the files
+" that are returned by a tool like ripgrep, which is already configured
+" to ignore those files that are inside of the .gitignore file
+let g:gutentags_file_list_command = 'rg --files'
+
+" }}}
+
 " Lightline for Status Line and Buffer Line {{{
 
 " Always display the tabline so that lightline buffers can override
@@ -612,30 +676,6 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
-
-" }}}
-
-
-" Tags {{{
-
-" Specify where the tags are stored
-set tags=./tags;/,tags;/
-
-" Perform highlighting asynchronously when file is loaded or saved
-let g:highlighter#auto_update = 2
-
-" Configure gutentags plugin
-let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['package.json', '.git']
-let g:gutentags_generate_on_new = 1
-let g:gutentags_generate_on_missing = 1
-let g:gutentags_generate_on_write = 1
-let g:gutentags_generate_on_empty_buffer = 1
-
-" Only allow Gutentags to generate a tag file that indexes the files
-" that are returned by a tool like ripgrep, which is already configured
-" to ignore those files that are inside of the .gitignore file
-let g:gutentags_file_list_command = 'rg --files'
 
 " }}}
 
@@ -1063,47 +1103,6 @@ inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" }}}
-
-" Basic Keyboard Movement {{{
-
-" Disable the arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-inoremap jk <ESC>
-inoremap <ESC> <NOP>
-
-" Define the leaders
-let maplocalleader=','
-let mapleader=','
-
-" Move through CamelCase text
-call camelcasemotion#CreateMotionMappings('<space><space>')
-
-" Navigate through wrapped text
-nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-
-" Navigate to the next linting warning/error
-nmap <silent> <C-k> <Plug>(ale_previous)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-" Quickly switch between two recent buffers
-function! SwitchBuffer()
-  b#
-endfunction
-" Use either control or space to activate
-nmap <C-u> :call SwitchBuffer()<CR>
-nmap <Space>u :call SwitchBuffer()<CR>
-
-" Define <leader<leader> to create a colon in both
-" normal mode and visual mode, thereby avoiding
-" the need to frequently type the shift key
-nnoremap <leader><leader> :
-vnoremap <leader><leader> :
 
 " }}}
 
