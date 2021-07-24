@@ -1127,22 +1127,6 @@ set grepprg=rg\ -uu\ --vimgrep\ --no-heading\ --smart-case
 
 " Advanced Keyboard Movement with Lightspeed.nvim {{{
 
-" " Make f (single-character search) and
-" " <leader>f (two-character search) with easymotion.
-" " Using <leader>f instead of "s" avoids a conflict
-" " with the vim-sandwich plugin that uses "s" for sandwich-ing
-" nmap f <Plug>(easymotion-s)
-" nmap <leader>f <Plug>(easymotion-s2)
-" nmap <leader>e <Plug>(easymotion-next)
-" nmap <leader>E <Plug>(easymotion-prev)
-
-" " Do not create the shaded background
-" let g:EasyMotion_do_shade = 0
-
-" " Use uppercase letters
-" let g:EasyMotion_use_upper = 1
-" let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
-
 lua << EOF
 require'lightspeed'.setup {
   jump_to_first_match = false,
