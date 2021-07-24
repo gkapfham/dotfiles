@@ -958,7 +958,7 @@ nmap <Space>cc :execute "normal! i" . split(&commentstring, '%s')[0]<CR>
 
 " Language Servers {{{
 
-lua <<EOF
+lua << EOF
 local lsp_installer = require'nvim-lsp-installer'
 function common_on_attach(client, bufnr)
   -- do stuff
