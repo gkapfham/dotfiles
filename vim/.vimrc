@@ -1558,6 +1558,10 @@ nnoremap <Space>a :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 
 " Neovim Configuration {{{
 
+" Note that this entire configuration is specialized to
+" neovim and will not, in fact, run without error on Vim.
+" With that said, these are Neovim-specific customizations.
+
 " Do not use a different cursor shape
 if has("nvim")
   set guicursor=
