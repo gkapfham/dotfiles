@@ -16,7 +16,6 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'cespare/vim-toml'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'ColinKennedy/vim-textobj-block-party'
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'fhill2/telescope-ultisnips.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'garbas/vim-snipmate'
@@ -28,9 +27,7 @@ Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': '
 Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
-" Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
 Plug 'jgdavey/tslime.vim'
-" Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -41,7 +38,7 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'kevinhwang91/nvim-bqf', { 'branch': 'main' }
 Plug 'Konfekt/vim-sentence-chopper'
 Plug 'kristijanhusak/vim-dirvish-git'
-" Plug 'kshenoy/vim-signature'
+Plug 'kshenoy/vim-signature'
 Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
@@ -796,9 +793,6 @@ let R_assign = 2
 let R_openpdf = 0
 let R_show_args = 1
 
-" Force Jedi to use version 3
-let g:jedi#force_py_version = 3
-
 " Run the black formatter on current Python file
 " NOTE: this is not the standard method, but
 " I adopted it because Black did not work well
@@ -807,10 +801,6 @@ command! Black cexpr system('black ' . shellescape(expand('%')))<bar>:checktime
 
 " Run the black formatter on all of the Python files
 command! Blacken cexpr system('black **/*.py')<bar>:checktime
-
-" If using yapf, format Python code according to PEP8
-" Note that I should standardly use :Black and :Blacken
-let g:formatter_yapf_style = 'pep8'
 
 " Set the hosts programs for Python and Python3
 " This improves performance when loading plugins using Python
@@ -821,9 +811,6 @@ if filereadable('/usr/local/bin/python3')
 else
   let g:python3_host_prog = '/usr/bin/python'
 endif
-
-" Turn on the EchoDoc plugin for languages like Python
-let g:echodoc#enable_at_startup = 1
 
 " Indenting for HTML
 au BufRead,BufNewFile *.html set filetype=html
