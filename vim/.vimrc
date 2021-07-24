@@ -28,9 +28,9 @@ Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': '
 Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
-Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
+" Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
 Plug 'jgdavey/tslime.vim'
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -41,7 +41,7 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'kevinhwang91/nvim-bqf', { 'branch': 'main' }
 Plug 'Konfekt/vim-sentence-chopper'
 Plug 'kristijanhusak/vim-dirvish-git'
-Plug 'kshenoy/vim-signature'
+" Plug 'kshenoy/vim-signature'
 Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
@@ -53,7 +53,6 @@ Plug 'machakann/vim-swap'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mgee/lightline-bufferline'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
-Plug 'neovim/nvim-lspconfig'
 Plug 'neovim/nvim-lspconfig'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'nvim-lua/plenary.nvim'
@@ -1005,24 +1004,6 @@ for _, server in pairs(installed_servers) do
     }
     server:setup(opts)
 end
---opts ={expr = true, noremap = true}
---vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
---buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
---buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-EOF
-
-" nnoremap <Space>k :lua vim.lsp.buf.signature_help() <CR>
-" nnoremap <Space>e :lua vim.lsp.diagnostic.show_line_diagnostics() <CR>
-" nnoremap <Space>c :lua vim.lsp.diagnostic.set_loclist() <CR>
-" nnoremap ]d :lua vim.lsp.diagnostic.goto_next() <CR>
-" nnoremap [d :lua vim.lsp.diagnostic.goto_prev() <CR>
-
-lua <<EOF
--- require'lspinstall'.setup() -- important
--- local servers = require'lspinstall'.installed_servers()
--- for _, server in pairs(servers) do
---  require'lspconfig'[server].setup{}
--- end
 EOF
 
 " }}}
