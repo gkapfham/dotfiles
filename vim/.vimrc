@@ -1177,17 +1177,6 @@ lua << EOF
 require('nvim-autopairs').setup()
 EOF
 
-" lua << EOF
-" require'nvim-treesitter.configs'.setup {
-"   matchup = {
-"     enable = true,
-"   },
-"   autotag = {
-"     enable = true,
-"   }
-" }
-" EOF
-
 " Configure the matchup plugin to display diagnostics about location
 nnoremap <c-k> :<c-u>MatchupWhereAmI<CR>
 
