@@ -819,7 +819,7 @@ let g:html_indent_inctags = 'html,body,head,tbody,div'
 let g:pandoc#modules#disabled = ['folding']
 
 " Preview for Markdown
-let g:mkdp_browser = '/usr/bin/firefox'
+let g:mkdp_browser = '/usr/sbin/firefox'
 let g:mkdp_page_title = '${name}'
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
