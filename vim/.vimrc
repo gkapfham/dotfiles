@@ -852,14 +852,7 @@ let g:ale_sign_error = '✗'
 
 " Markdown {{{
 
-" First command: Make a list item in markdown a task
-" Second command: Mark a task in markdown as done
-" These two commands work for normal mode and visual mode
-" nnoremap <silent> <Space>w :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[<space>]<space>/<CR>0f]h
-" nnoremap <silent> <Space>d :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[X]<space>/<CR>0f]h
-" vnoremap <silent> <Space>w :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[<space>]<space>/<CR>0f]h
-" vnoremap <silent> <Space>d :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[X]<space>/<CR>0f]h
-
+" Use the lists.vim plugin for markdown and wiki filetypes
 let g:lists_filetypes = ['markdown', 'wiki']
 
 " Convert the checkmark symbol, which is not on the keyboard, to a dash.
