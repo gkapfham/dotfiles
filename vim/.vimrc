@@ -1011,7 +1011,7 @@ set noshowmode
 " Infer the case when doing completion
 set infercase
 
-lua <<EOF
+lua << EOF
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
