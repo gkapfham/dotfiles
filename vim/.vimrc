@@ -838,7 +838,6 @@ let g:ale_linters = {
       \   'python': ['flake8', 'pylint', 'pydocstyle'],
       \}
 
-
 " Configure the fixers run by ALE
 " All files: remove trailing lines and blank spaces
 let g:ale_fixers = {
