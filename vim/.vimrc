@@ -35,7 +35,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-Plug 'kevinhwang91/nvim-bqf', { 'branch': 'main' }
+Plug 'kevinhwang91/nvim-bqf', {'branch': 'main'}
 Plug 'Konfekt/vim-sentence-chopper'
 Plug 'kristijanhusak/vim-dirvish-git'
 Plug 'kshenoy/vim-signature'
@@ -87,7 +87,6 @@ Plug 'vim-scripts/python_match.vim'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
-Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
