@@ -69,7 +69,6 @@ Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'sindrets/diffview.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'tfnico/vim-gradle'
 Plug 'TimUntersberger/neogit'
 Plug 'tomtom/tlib_vim'
