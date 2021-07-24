@@ -997,10 +997,6 @@ set complete-=k complete+=k
 set complete+=kspell
 set complete+=]
 
-" " Completion menus
-" set wildmenu
-" set wildmode=longest:full,full
-
 " Set the completion approach for the engine
 set completeopt=menuone,noselect
 
@@ -1008,9 +1004,6 @@ set completeopt=menuone,noselect
 let g:UltiSnipsExpandTrigger='<C-k>'
 let g:UltiSnipsJumpForwardTrigger='<C-k>'
 let g:UltiSnipsJumpBackwardTrigger='<C-j>'
-
-" Completion compatible with the tmux-complete
-" let g:tmuxcomplete#trigger = 'omnifunc'
 
 " Do not echo messages (nor will searches)
 set noshowmode
