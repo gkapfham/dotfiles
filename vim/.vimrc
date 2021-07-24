@@ -624,7 +624,7 @@ set tags=./tags;/,tags;/
 " Perform highlighting asynchronously when file is loaded or saved
 let g:highlighter#auto_update = 2
 
-" Perform tag generation in existence of a '.maketags' marker file
+" Configure the gutentags plugin for improved performance and flexibility
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_project_root = ['package.json', '.git']
 let g:gutentags_generate_on_new = 1
