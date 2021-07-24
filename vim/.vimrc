@@ -1099,12 +1099,6 @@ endfunction
 nmap <C-u> :call SwitchBuffer()<CR>
 nmap <Space>u :call SwitchBuffer()<CR>
 
-" Redefine the default mapping of <Leader><Leader> for
-" the easymotion prefix, which I do not use frequently.
-" Note that the default for this mapping conflicts with
-" the following mapping created for the colon key
-" map <Leader><Space> <Plug>(easymotion-prefix)
-
 " Define <leader<leader> to create a colon in both
 " normal mode and visual mode, thereby avoiding
 " the need to frequently type the shift key
