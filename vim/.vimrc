@@ -1196,6 +1196,7 @@ nmap <silent> <leader>s :set spell!<CR>
 
 " File System {{{
 
+" Configure the dirvish plugin
 augroup dirvishconfiguration
   autocmd!
   " Disable spell checking for the Dirvish buffers
@@ -1237,7 +1238,7 @@ silent exe 'hi default link DirvishGitUntrackedDir DirvishPathTail'
 
 " }}}
 
-" Man Pages {{
+" Man Pages {{{
 
 " Fuzzy search through the man pages with Fzf and then
 " display the selected man page inside of Vim
@@ -1245,7 +1246,7 @@ command! -nargs=? Superman call fzf#run(fzf#wrap({'source': 'man -k -s 1 '.shell
 
 " }}}
 
-" Fugitive {{
+" Fugitive {{{
 
 " Run Fugitive commands asynchronously using AsyncRun
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
