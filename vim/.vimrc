@@ -495,6 +495,52 @@ command! -nargs=? Superman call fzf#run(fzf#wrap({'source': 'man -k -s 1 '.shell
 
 " }}}
 
+" Text Manipulation {{{
+
+" Insert a blank line at end of line
+nmap oo Ojk
+
+" Insert a blank line at cursor
+nnoremap oO i<CR><ESC>
+
+" Support the backspace key in insert mode
+set backspace=indent,eol,start
+
+" Interactive EasyAlign in visual mode (e.g., 'vipga')
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g., gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
+lua << EOF
+require('nvim-autopairs').setup()
+EOF
+
+" Configure the matchup plugin to display diagnostics about location
+nnoremap <c-k> :<c-u>MatchupWhereAmI<CR>
+
+" Remove trailing whitespace
+nnoremap <Leader>rtw :%s/\s\+$//e<CR>
+
+" Fix a misspelling with next-best word
+nmap <silent> zn <Plug>(SpellRotateForward)
+nmap <silent> zp <Plug>(SpellRotateBackward)
+vmap <silent> zn <Plug>(SpellRotateForwardV)
+vmap <silent> zp <Plug>(SpellRotateBackwardV)
+
+" Toggle the display of spelling mistakes
+nmap <silent> <leader>s :set spell!<CR>
+
+" }}}
+
 " Lightline for Status Line and Buffer Line {{{
 
 " Always display the tabline so that lightline buffers can override
@@ -794,6 +840,33 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
   },
 }
+EOF
+
+" }}}
+
+" Language Servers {{{
+
+lua << EOF
+local lsp_installer = require'nvim-lsp-installer'
+function common_on_attach(client, bufnr)
+  -- do stuff
+  print("契Starting Language Server");
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  opts ={silent = true, noremap = true}
+  buf_set_keymap('n', 'K', '<cmd> lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd> lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd> lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+end
+local installed_servers = lsp_installer.get_installed_servers()
+for _, server in pairs(installed_servers) do
+    opts = {
+        on_attach = common_on_attach,
+    }
+    server:setup(opts)
+end
 EOF
 
 " }}}
@@ -1115,33 +1188,6 @@ nmap <Space>cc :execute "normal! i" . split(&commentstring, '%s')[0]<CR>
 
 " }}}
 
-" Language Servers {{{
-
-lua << EOF
-local lsp_installer = require'nvim-lsp-installer'
-function common_on_attach(client, bufnr)
-  -- do stuff
-  print("契Starting Language Server");
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  opts ={silent = true, noremap = true}
-  buf_set_keymap('n', 'K', '<cmd> lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd> lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '<space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd> lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-end
-local installed_servers = lsp_installer.get_installed_servers()
-for _, server in pairs(installed_servers) do
-    opts = {
-        on_attach = common_on_attach,
-    }
-    server:setup(opts)
-end
-EOF
-
-" }}}
-
 " Completion {{{
 
 " Define basic completion function
@@ -1263,52 +1309,6 @@ require'lightspeed'.setup {
   cycle_group_bwd_key = '<S-Tab>',
 }
 EOF
-
-" }}}
-
-" Text Manipulation {{{
-
-" Insert a blank line at end of line
-nmap oo Ojk
-
-" Insert a blank line at cursor
-nnoremap oO i<CR><ESC>
-
-" Support the backspace key in insert mode
-set backspace=indent,eol,start
-
-" Interactive EasyAlign in visual mode (e.g., 'vipga')
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g., gaip)
-nmap ga <Plug>(EasyAlign)
-
-" Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-
-" Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-lua << EOF
-require('nvim-autopairs').setup()
-EOF
-
-" Configure the matchup plugin to display diagnostics about location
-nnoremap <c-k> :<c-u>MatchupWhereAmI<CR>
-
-" Remove trailing whitespace
-nnoremap <Leader>rtw :%s/\s\+$//e<CR>
-
-" Fix a misspelling with next-best word
-nmap <silent> zn <Plug>(SpellRotateForward)
-nmap <silent> zp <Plug>(SpellRotateBackward)
-vmap <silent> zn <Plug>(SpellRotateForwardV)
-vmap <silent> zp <Plug>(SpellRotateBackwardV)
-
-" Toggle the display of spelling mistakes
-nmap <silent> <leader>s :set spell!<CR>
 
 " }}}
 
@@ -1621,5 +1621,3 @@ endfunction
 nnoremap <Space>a :w<cr>:call AltCommand(expand('%'), ':e')<cr>
 
 " }}}
-
-
