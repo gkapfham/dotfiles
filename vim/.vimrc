@@ -538,7 +538,7 @@ nmap <Space>gg :Neogit <CR>
 " Special configuration for neogit buffers
 augroup neogitconfiguration
   autocmd!
-  " Disable spell checking for the magit buffers
+  " Disable spell checking for the neogit buffers
   autocmd FileType NeogitStatus setlocal nospell
 augroup END
 
