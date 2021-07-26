@@ -899,6 +899,370 @@ EOF
 
 " }}}
 
+" Completion {{{
+
+" Define basic completion function
+set omnifunc=syntaxcomplete#Complete
+
+" Define the dictionaries
+set dictionary-=/usr/share/dict/american-english
+set dictionary+=/usr/share/dict/american-english
+
+" Completion includes dictionaries
+set complete-=k complete+=k
+set complete+=kspell
+set complete+=]
+
+" Set the completion approach for the engine
+set completeopt=menuone,noselect
+
+" Completion engine is compatible with UltiSnips
+let g:UltiSnipsExpandTrigger='<C-k>'
+let g:UltiSnipsJumpForwardTrigger='<C-k>'
+let g:UltiSnipsJumpBackwardTrigger='<C-j>'
+
+" Do not echo messages (nor will searches)
+set noshowmode
+
+" Infer the case when doing completion
+set infercase
+
+lua << EOF
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  resolve_timeout = 800;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = {
+    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+    max_width = 120,
+    min_width = 60,
+    max_height = math.floor(vim.o.lines * 0.3),
+    min_height = 1,
+  };
+  source = {
+    omni = {
+        filetypes = {'tex'},
+    },
+    tmux = {
+      disabled = false,
+      all_panes = false
+    },
+    path = true;
+    buffer = true;
+    calc = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    vsnip = false;
+    ultisnips = true;
+    spell = false;
+    luasnip = false;
+  };
+}
+EOF
+
+" Configure completion keys to be similar to those for ncm2
+" (e.g., allow for the use of tab to move through completion menu)
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" }}}
+
+" Advanced Search Highlighting {{{
+
+" Incrementally highlight the search matches
+set incsearch
+
+" Support the highlighting of words
+nnoremap <silent><expr> <Leader>i (&hls && v:hlsearch ? ':set nohlsearch' : ':set hlsearch')."\n"
+
+" Carefully ignore the case of words when searching
+set ignorecase
+set smartcase
+
+" Make :grep use ripgrep and use -uu to not ignore files
+" This is an alternative to :Rg or :Ag which ignore some files
+set grepprg=rg\ -uu\ --vimgrep\ --no-heading\ --smart-case
+
+" }}}
+
+" Advanced Keyboard Movement with Lightspeed.nvim {{{
+
+lua << EOF
+require'lightspeed'.setup {
+  jump_to_first_match = false,
+  jump_on_partial_input_safety_timeout = 400,
+  -- This can get _really_ slow if the window has a lot of content,
+  -- turn it on only if your machine can always cope with it.
+  highlight_unique_chars = false,
+  grey_out_search_area = false,
+  match_only_the_start_of_same_char_seqs = true,
+  limit_ft_matches = 5,
+  full_inclusive_prefix_key = '<c-x>',
+  -- By default, the values of these will be decided at runtime,
+  -- based on `jump_to_first_match`.
+  labels = nil,
+  cycle_group_fwd_key = '<Tab>',
+  cycle_group_bwd_key = '<S-Tab>',
+}
+EOF
+
+" }}}
+
+" Telescope {{{
+
+lua << EOF
+local actions = require('telescope.actions')
+require('telescope').setup {
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      '--hidden',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
+    },
+    mappings = {
+    i = {
+      ["<esc>"] = actions.close,
+      },
+    n = {
+      ["<esc>"] = actions.close,
+      ["<cr>"] = false,
+      },
+    },
+    layout_config = {
+      horizontal = {
+        height = 0.8,
+        width = 0.9
+      }
+    },
+    path_display = {
+      "shorten",
+    },
+    prompt_prefix = "> ",
+    selection_caret = "> ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "closest",
+    sorting_strategy = "descending",
+    layout_strategy = "horizontal",
+    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_ignore_patterns = {},
+    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    winblend = 0,
+    border = {},
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    color_devicons = false,
+    use_less = true,
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+  },
+  pickers = {
+    buffers = {
+        sort_lastused = true,
+      }
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    }
+  }
+}
+-- load extensions after calling setup function
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('ultisnips')
+EOF
+
+" Command mappings for Telescope to find:
+" (note that Ctrl-mappings are provided for some commands
+" when those are ones for which there is a muscle memory)
+
+" --> All files, including hidden files, but not
+" those files stored in a .git directory
+" (always respects the .gitignore file)
+nmap <C-p> :Telescope find_files hidden=true <CR>
+nmap <Space>p :Telescope find_files hidden=true <CR>
+
+" --> All files, but not including hidden files
+" (always respects the .gitignore file)
+nmap <Space>o :Telescope find_files <CR>
+
+" --> Lines or marks of the current buffer
+nmap <Space>r :Telescope current_buffer_fuzzy_find <CR>
+nmap <Space>m :Telescope marks <CR>
+
+" --> Tags in buffer or all tags across the project directory
+" define mappings for both Telescope and FZF since tag-based
+" navigation with Telescope fails with error, especially for:
+"  -- LaTeX
+"  -- Markdown
+nmap <Space>tt :Telescope tags <CR>
+nmap <Leader>tt :Tags <CR>
+nmap <Space>tb :Telescope current_buffer_tags <CR>
+nmap <Leader>tb :BTags <CR>
+
+" --> Code components search using Treesitter
+" (does not display anything if there is no treesitter
+" for a specific language, like with the .vimrc file)
+nnoremap <Space>ts :Telescope treesitter <CR>
+
+" --> All matches in non-hidden files for word under cursor
+" (only works for the specific word under the cursor, meaning
+" that this is not a :Telescope live_grep)
+nnoremap <Space>gs :Telescope grep_string <CR>
+nnoremap <Leader>gs :Rg <C-R><C-W><CR>
+
+" --> All matches in non-hidden files for input word
+nnoremap <Space>ga :Telescope live_grep <CR>
+nnoremap <Leader>ga :Rg <CR>
+
+" --> Names of open buffers
+" nnoremap <Tab> :Telescope buffers <CR>
+nnoremap <Space>i :Telescope buffers <CR>
+
+" --> Ultisnips-based snippets available for buffer
+nnoremap <Space>s :Telescope ultisnips <CR>
+
+" --> Recently run commands
+nnoremap <Space>h :Telescope command_history <CR>
+
+" --> Spelling fix suggestions for word under cursor
+nnoremap <Space>z :Telescope spell_suggest <CR>
+
+" --> Language server mappings
+" -- Navigation
+nnoremap <Space>gd :Telescope lsp_definitions <CR>
+nnoremap <Space>gr :Telescope lsp_references <CR>
+" -- Diagnostics
+nnoremap <Space>dd :Telescope lsp_document_diagnostics <CR>
+nnoremap <Space>wd :Telescope lsp_workspace_diagnostics <CR>
+
+" }}}
+
+" FZF {{{
+
+" NOTE: FZF is used in conjunction with telescope.nvim because
+" plugins like wiki.vim are integrated with FZF. Moreover,
+" although all FZF commands are no longer directly integrated into
+" the workflow with nnoremap's, they are still available if needed.
+
+" NOTE: There are alternate FZF-based commands for the use of,
+" for instance, tags and grepping because Telescope's variants
+" do not work correctly or do not work efficiently enough.
+"
+" The Telescope-based commands are prefixed with <Space>
+" and the FZF-based commands are prefixed with <Leader>
+
+" Define the layout of FZF's window so that it matches the height
+" and width of the Telescope window
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.85 } }
+
+" Define unique colors for FZF's display
+" inside of Neovim (note that these colors
+" match telescope.nvim and not FZF in terminal)
+let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Normal'],
+      \ 'fg+':     ['fg', 'String', 'Normal', 'Normal'],
+      \ 'bg+':     ['bg', 'Normal', 'Normal'],
+      \ 'hl+':     ['fg', 'Identifier'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Comment'],
+      \ 'prompt':  ['fg', 'Identifier'],
+      \ 'pointer': ['fg', 'Identifier'],
+      \ 'marker':  ['fg', 'Identifier'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+
+" Use rg by default
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --glob "!{node_modules/*,.git/*}"'
+  set grepprg=rg\ --vimgrep
+endif
+
+" Re-define the Rg command so that it considers hidden files
+"
+" Note that the use of "-uu" includes the hidden files
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg -uu --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
+" --> Files matching search terms with either Ag or Rg
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+
+" Use FZF to search through the TOC of a LaTeX document
+nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
+
+" Show the mappings that are currently available
+nmap <leader><tab> <plug>(fzf--n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" }}}
+
+" AutoSave {{{
+
+lua << EOF
+local autosave = require("autosave")
+autosave.setup(
+    {
+        enabled = true,
+        execution_message = " Auto-saved at " .. vim.fn.strftime("%I:%M:%S %p"),
+        events = {"InsertLeave", "TextChanged"},
+        conditions = {
+            exists = true,
+            filetype_is_not = {},
+            modifiable = true
+        },
+        write_all_buffers = false,
+        on_off_commands = true,
+        clean_command_line_interval = 2500
+    }
+)
+EOF
+
+" }}}
+
+" Sandwich {{{
+
+" Do not use the default mappings to preserve
+" the use of the sentence object in technical writing
+" let g:textobj_sandwich_no_default_key_mappings = 1
+
+" Do not use the default mappings to preserve
+" the use of "s" from the lightspeed plugin;
+" instead use the default bindings of surround
+" while gaining the benefits of sandwich
+runtime macros/sandwich/keymap/surround.vim
+
+" }}}
+
 " WhichKey {{{
 
 lua << EOF
@@ -1213,370 +1577,6 @@ augroup END
 
 " Insert a comment symbol on the current line at cursor location
 nmap <Space>cc :execute "normal! i" . split(&commentstring, '%s')[0]<CR>
-
-" }}}
-
-" Completion {{{
-
-" Define basic completion function
-set omnifunc=syntaxcomplete#Complete
-
-" Define the dictionaries
-set dictionary-=/usr/share/dict/american-english
-set dictionary+=/usr/share/dict/american-english
-
-" Completion includes dictionaries
-set complete-=k complete+=k
-set complete+=kspell
-set complete+=]
-
-" Set the completion approach for the engine
-set completeopt=menuone,noselect
-
-" Completion engine is compatible with UltiSnips
-let g:UltiSnipsExpandTrigger='<C-k>'
-let g:UltiSnipsJumpForwardTrigger='<C-k>'
-let g:UltiSnipsJumpBackwardTrigger='<C-j>'
-
-" Do not echo messages (nor will searches)
-set noshowmode
-
-" Infer the case when doing completion
-set infercase
-
-lua << EOF
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  resolve_timeout = 800;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = {
-    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1,
-  };
-  source = {
-    omni = {
-        filetypes = {'tex'},
-    },
-    tmux = {
-      disabled = false,
-      all_panes = false
-    },
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    vsnip = false;
-    ultisnips = true;
-    spell = false;
-    luasnip = false;
-  };
-}
-EOF
-
-" Configure completion keys to be similar to those for ncm2
-" (e.g., allow for the use of tab to move through completion menu)
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" }}}
-
-" Advanced Search Highlighting {{{
-
-" Incrementally highlight the search matches
-set incsearch
-
-" Support the highlighting of words
-nnoremap <silent><expr> <Leader>i (&hls && v:hlsearch ? ':set nohlsearch' : ':set hlsearch')."\n"
-
-" Carefully ignore the case of words when searching
-set ignorecase
-set smartcase
-
-" Make :grep use ripgrep and use -uu to not ignore files
-" This is an alternative to :Rg or :Ag which ignore some files
-set grepprg=rg\ -uu\ --vimgrep\ --no-heading\ --smart-case
-
-" }}}
-
-" Advanced Keyboard Movement with Lightspeed.nvim {{{
-
-lua << EOF
-require'lightspeed'.setup {
-  jump_to_first_match = false,
-  jump_on_partial_input_safety_timeout = 400,
-  -- This can get _really_ slow if the window has a lot of content,
-  -- turn it on only if your machine can always cope with it.
-  highlight_unique_chars = false,
-  grey_out_search_area = false,
-  match_only_the_start_of_same_char_seqs = true,
-  limit_ft_matches = 5,
-  full_inclusive_prefix_key = '<c-x>',
-  -- By default, the values of these will be decided at runtime,
-  -- based on `jump_to_first_match`.
-  labels = nil,
-  cycle_group_fwd_key = '<Tab>',
-  cycle_group_bwd_key = '<S-Tab>',
-}
-EOF
-
-" }}}
-
-" Sandwich {{{
-
-" Do not use the default mappings to preserve
-" the use of the sentence object in technical writing
-" let g:textobj_sandwich_no_default_key_mappings = 1
-
-" Do not use the default mappings to preserve
-" the use of "s" from the lightspeed plugin;
-" instead use the default bindings of surround
-" while gaining the benefits of sandwich
-runtime macros/sandwich/keymap/surround.vim
-
-" }}}
-
-" AutoSave {{{
-
-lua << EOF
-local autosave = require("autosave")
-autosave.setup(
-    {
-        enabled = true,
-        execution_message = " Auto-saved at " .. vim.fn.strftime("%I:%M:%S %p"),
-        events = {"InsertLeave", "TextChanged"},
-        conditions = {
-            exists = true,
-            filetype_is_not = {},
-            modifiable = true
-        },
-        write_all_buffers = false,
-        on_off_commands = true,
-        clean_command_line_interval = 2500
-    }
-)
-EOF
-
-" }}}
-
-" Telescope {{{
-
-lua << EOF
-local actions = require('telescope.actions')
-require('telescope').setup {
-  defaults = {
-    vimgrep_arguments = {
-      'rg',
-      '--hidden',
-      '--color=never',
-      '--no-heading',
-      '--with-filename',
-      '--line-number',
-      '--column',
-      '--smart-case'
-    },
-    mappings = {
-    i = {
-      ["<esc>"] = actions.close,
-      },
-    n = {
-      ["<esc>"] = actions.close,
-      ["<cr>"] = false,
-      },
-    },
-    layout_config = {
-      horizontal = {
-        height = 0.8,
-        width = 0.9
-      }
-    },
-    path_display = {
-      "shorten",
-    },
-    prompt_prefix = "> ",
-    selection_caret = "> ",
-    entry_prefix = "  ",
-    initial_mode = "insert",
-    selection_strategy = "closest",
-    sorting_strategy = "descending",
-    layout_strategy = "horizontal",
-    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-    file_ignore_patterns = {},
-    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
-    winblend = 0,
-    border = {},
-    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-    color_devicons = false,
-    use_less = true,
-    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-  },
-  pickers = {
-    buffers = {
-        sort_lastused = true,
-      }
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case",
-    }
-  }
-}
--- load extensions after calling setup function
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('ultisnips')
-EOF
-
-" Command mappings for Telescope to find:
-" (note that Ctrl-mappings are provided for some commands
-" when those are ones for which there is a muscle memory)
-
-" --> All files, including hidden files, but not
-" those files stored in a .git directory
-" (always respects the .gitignore file)
-nmap <C-p> :Telescope find_files hidden=true <CR>
-nmap <Space>p :Telescope find_files hidden=true <CR>
-
-" --> All files, but not including hidden files
-" (always respects the .gitignore file)
-nmap <Space>o :Telescope find_files <CR>
-
-" --> Lines or marks of the current buffer
-nmap <Space>r :Telescope current_buffer_fuzzy_find <CR>
-nmap <Space>m :Telescope marks <CR>
-
-" --> Tags in buffer or all tags across the project directory
-" define mappings for both Telescope and FZF since tag-based
-" navigation with Telescope fails with error, especially for:
-"  -- LaTeX
-"  -- Markdown
-nmap <Space>tt :Telescope tags <CR>
-nmap <Leader>tt :Tags <CR>
-nmap <Space>tb :Telescope current_buffer_tags <CR>
-nmap <Leader>tb :BTags <CR>
-
-" --> Code components search using Treesitter
-" (does not display anything if there is no treesitter
-" for a specific language, like with the .vimrc file)
-nnoremap <Space>ts :Telescope treesitter <CR>
-
-" --> All matches in non-hidden files for word under cursor
-" (only works for the specific word under the cursor, meaning
-" that this is not a :Telescope live_grep)
-nnoremap <Space>gs :Telescope grep_string <CR>
-nnoremap <Leader>gs :Rg <C-R><C-W><CR>
-
-" --> All matches in non-hidden files for input word
-nnoremap <Space>ga :Telescope live_grep <CR>
-nnoremap <Leader>ga :Rg <CR>
-
-" --> Names of open buffers
-" nnoremap <Tab> :Telescope buffers <CR>
-nnoremap <Space>i :Telescope buffers <CR>
-
-" --> Ultisnips-based snippets available for buffer
-nnoremap <Space>s :Telescope ultisnips <CR>
-
-" --> Recently run commands
-nnoremap <Space>h :Telescope command_history <CR>
-
-" --> Spelling fix suggestions for word under cursor
-nnoremap <Space>z :Telescope spell_suggest <CR>
-
-" --> Language server mappings
-" -- Navigation
-nnoremap <Space>gd :Telescope lsp_definitions <CR>
-nnoremap <Space>gr :Telescope lsp_references <CR>
-" -- Diagnostics
-nnoremap <Space>dd :Telescope lsp_document_diagnostics <CR>
-nnoremap <Space>wd :Telescope lsp_workspace_diagnostics <CR>
-
-" }}}
-
-" FZF {{{
-
-" NOTE: FZF is used in conjunction with telescope.nvim because
-" plugins like wiki.vim are integrated with FZF. Moreover,
-" although all FZF commands are no longer directly integrated into
-" the workflow with nnoremap's, they are still available if needed.
-
-" NOTE: There are alternate FZF-based commands for the use of,
-" for instance, tags and grepping because Telescope's variants
-" do not work correctly or do not work efficiently enough.
-"
-" The Telescope-based commands are prefixed with <Space>
-" and the FZF-based commands are prefixed with <Leader>
-
-" Define the layout of FZF's window so that it matches the height
-" and width of the Telescope window
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.85 } }
-
-" Define unique colors for FZF's display
-" inside of Neovim (note that these colors
-" match telescope.nvim and not FZF in terminal)
-let g:fzf_colors =
-    \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Normal'],
-      \ 'fg+':     ['fg', 'String', 'Normal', 'Normal'],
-      \ 'bg+':     ['bg', 'Normal', 'Normal'],
-      \ 'hl+':     ['fg', 'Identifier'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'border':  ['fg', 'Comment'],
-      \ 'prompt':  ['fg', 'Identifier'],
-      \ 'pointer': ['fg', 'Identifier'],
-      \ 'marker':  ['fg', 'Identifier'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
-
-" Use rg by default
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --glob "!{node_modules/*,.git/*}"'
-  set grepprg=rg\ --vimgrep
-endif
-
-" Re-define the Rg command so that it considers hidden files
-"
-" Note that the use of "-uu" includes the hidden files
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg -uu --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
-
-" --> Files matching search terms with either Ag or Rg
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
-
-" Use FZF to search through the TOC of a LaTeX document
-nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
-
-" Show the mappings that are currently available
-nmap <leader><tab> <plug>(fzf--n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
 
 " }}}
 
