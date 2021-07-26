@@ -487,7 +487,7 @@ silent exe 'hi default link DirvishGitUntrackedDir DirvishPathTail'
 
 " }}}
 
-" Man Pages {{{
+" Manual Pages {{{
 
 " Fuzzy search through the man pages with Fzf and then
 " display the selected man page inside of Vim
