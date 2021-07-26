@@ -705,11 +705,39 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sh'] = ''
 
 " }}}
 
-" Version Control Plugins {{{
+" Fugitive {{{
+
+" Run Fugitive commands asynchronously using AsyncRun
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+
+" Resolve a merge conflict with a three-pane vertical split
+nnoremap <leader>gd :Gvdiffsplit!<CR>
+
+" Merge the "head" into the current file
+nnoremap gdh :diffget //2<CR>
+
+" Merge the "branch" into the remote file
+nnoremap gdb :diffget //3<CR>
+
+" Perform a Gcommit for the current hunk with a mapping
+nnoremap <leader>gcc :Git commit <CR>
+
+" Perform a Gcommit for the current file with a mapping
+nnoremap <leader>gcf :Git commit %<CR>
+
+" Perform a Gcommit for all modified files with a mapping
+nnoremap <leader>gca :Git commit -a<CR>
+
+" Get the status of the repository
+nnoremap <leader>gs :Git <CR>
+
+" }}}
+
+" Specialized Version Control Plugins {{{
 
 " Configure the diffview.nvim plugin
 
-lua <<EOF
+lua << EOF
 local cb = require'diffview.config'.diffview_callback
 require'diffview'.setup {
   diff_binaries = false,
@@ -725,7 +753,7 @@ EOF
 
 " Configure the gitsigns.nvim plugin
 
-lua <<EOF
+lua << EOF
 require('gitsigns').setup {
   signs = {
     add          = {hl = 'DiffAdd'   , text = '+', numhl='None', linehl='None'},
@@ -1309,34 +1337,6 @@ require'lightspeed'.setup {
   cycle_group_bwd_key = '<S-Tab>',
 }
 EOF
-
-" }}}
-
-" Fugitive {{{
-
-" Run Fugitive commands asynchronously using AsyncRun
-command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
-
-" Resolve a merge conflict with a three-pane vertical split
-nnoremap <leader>gd :Gvdiffsplit!<CR>
-
-" Merge the "head" into the current file
-nnoremap gdh :diffget //2<CR>
-
-" Merge the "branch" into the remote file
-nnoremap gdb :diffget //3<CR>
-
-" Perform a Gcommit for the current hunk with a mapping
-nnoremap <leader>gcc :Git commit <CR>
-
-" Perform a Gcommit for the current file with a mapping
-nnoremap <leader>gcf :Git commit %<CR>
-
-" Perform a Gcommit for all modified files with a mapping
-nnoremap <leader>gca :Git commit -a<CR>
-
-" Get the status of the repository
-nnoremap <leader>gs :Git <CR>
 
 " }}}
 
