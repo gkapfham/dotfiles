@@ -788,7 +788,7 @@ require('gitsigns').setup {
   sign_priority = 1,
   update_debounce = 50,
   status_formatter = nil,
-  use_decoration_api = false,
+  -- use_decoration_api = false,
   use_internal_diff = true,
 }
 EOF
@@ -934,10 +934,15 @@ require'compe'.setup {
   debug = false;
   min_length = 1;
   preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  resolve_timeout = 800;
-  incomplete_delay = 400;
+  -- throttle_time = 80;
+  throttle_time = 0;
+  -- source_timeout = 200;
+  source_timeout = 100;
+  -- resolve_timeout = 800;
+  -- resolve_timeout = 400;
+  resolve_timeout = 100;
+  -- incomplete_delay = 200;
+  incomplete_delay = 0;
   max_abbr_width = 100;
   max_kind_width = 100;
   max_menu_width = 100;
@@ -1228,24 +1233,24 @@ omap <leader><tab> <plug>(fzf-maps-o)
 
 " AutoSave {{{
 
-lua << EOF
-local autosave = require("autosave")
-autosave.setup(
-    {
-        enabled = true,
-        execution_message = " Auto-saved at " .. vim.fn.strftime("%I:%M:%S %p"),
-        events = {"InsertLeave", "TextChanged"},
-        conditions = {
-            exists = true,
-            filetype_is_not = {},
-            modifiable = true
-        },
-        write_all_buffers = false,
-        on_off_commands = true,
-        clean_command_line_interval = 2500
-    }
-)
-EOF
+" lua << EOF
+" local autosave = require("autosave")
+" autosave.setup(
+"     {
+"         enabled = true,
+"         execution_message = " Auto-saved at " .. vim.fn.strftime("%I:%M:%S %p"),
+"         events = {"InsertLeave", "TextChanged"},
+"         conditions = {
+"             exists = true,
+"             filetype_is_not = {},
+"             modifiable = true
+"         },
+"         write_all_buffers = false,
+"         on_off_commands = true,
+"         clean_command_line_interval = 2500
+"     }
+" )
+" EOF
 
 " }}}
 
