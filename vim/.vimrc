@@ -10,7 +10,7 @@ call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
 Plug 'airblade/vim-rooter'
-Plug 'andersevenrud/compe-tmux'
+" Plug 'andersevenrud/compe-tmux'
 Plug 'andymass/vim-matchup'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
@@ -23,7 +23,7 @@ Plug 'garbas/vim-snipmate'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'honza/vim-snippets'
-Plug 'hrsh7th/nvim-compe'
+" Plug 'hrsh7th/nvim-compe'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
 Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
@@ -92,6 +92,7 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'xolox/vim-misc'
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -520,9 +521,9 @@ nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
-lua << EOF
-require('nvim-autopairs').setup()
-EOF
+" lua << EOF
+" require('nvim-autopairs').setup()
+" EOF
 
 " Configure the matchup plugin to display diagnostics about location
 nnoremap <c-k> :<c-u>MatchupWhereAmI<CR>
@@ -889,11 +890,13 @@ function common_on_attach(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
 end
 local installed_servers = lsp_installer.get_installed_servers()
+local coq = require "coq"
 for _, server in pairs(installed_servers) do
     opts = {
         on_attach = common_on_attach,
     }
     server:setup(opts)
+    --server:setup(coq.lsp_ensure_capabilities())
 end
 EOF
 
@@ -917,8 +920,8 @@ set complete+=]
 set completeopt=menuone,noselect
 
 " Completion engine is compatible with UltiSnips
-let g:UltiSnipsExpandTrigger='<C-k>'
-let g:UltiSnipsJumpForwardTrigger='<C-k>'
+let g:UltiSnipsExpandTrigger='<C-g>'
+let g:UltiSnipsJumpForwardTrigger='<C-g>'
 let g:UltiSnipsJumpBackwardTrigger='<C-j>'
 
 " Do not echo messages (nor will searches)
@@ -927,63 +930,87 @@ set noshowmode
 " Infer the case when doing completion
 set infercase
 
-lua << EOF
-require'compe'.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  -- throttle_time = 80;
-  throttle_time = 0;
-  -- source_timeout = 200;
-  source_timeout = 100;
-  -- resolve_timeout = 800;
-  -- resolve_timeout = 400;
-  resolve_timeout = 100;
-  -- incomplete_delay = 200;
-  incomplete_delay = 0;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = {
-    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1,
-  };
-  source = {
-    omni = {
-        filetypes = {'tex'},
-    },
-    tmux = {
-      disabled = false,
-      all_panes = false
-    },
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    vsnip = false;
-    ultisnips = true;
-    spell = false;
-    luasnip = false;
-  };
-}
-EOF
+" lua << EOF
+" require'compe'.setup {
+"   enabled = true;
+"   autocomplete = true;
+"   debug = false;
+"   min_length = 1;
+"   preselect = 'enable';
+"   -- throttle_time = 80;
+"   throttle_time = 0;
+"   -- source_timeout = 200;
+"   -- source_timeout = 100;
+"   source_timeout = 100;
+"   -- resolve_timeout = 800;
+"   -- resolve_timeout = 400;
+"   -- resolve_timeout = 100;
+"   resolve_timeout = 100;
+"   -- incomplete_delay = 200;
+"   incomplete_delay = 50;
+"   max_abbr_width = 100;
+"   max_kind_width = 100;
+"   max_menu_width = 100;
+"   documentation = {
+"     border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+"     winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+"     max_width = 120,
+"     min_width = 60,
+"     max_height = math.floor(vim.o.lines * 0.3),
+"     min_height = 1,
+"   };
+"   source = {
+"     omni = {
+"         filetypes = {'tex'},
+"     },
+"     tmux = {
+"       disabled = false,
+"       all_panes = false
+"     },
+"     path = true;
+"     buffer = true;
+"     calc = true;
+"     nvim_lsp = true;
+"     nvim_lua = true;
+"     vsnip = false;
+"     ultisnips = true;
+"     spell = false;
+"     luasnip = false;
+"   };
+" }
+" EOF
 
-" Configure completion keys to be similar to those for ncm2
-" (e.g., allow for the use of tab to move through completion menu)
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+autocmd VimEnter * COQnow --shut-up
+
+" let g:coq_settings = { 'auto_start': v:true | 'shut-up' }
+
+" Incrementally and sometimes
+" sometimes and sorters and selection_strategy
+
+let g:coq_settings = { 'keymap.recommended': v:false }
+
+" Keybindings
+ino <silent><expr> <Esc>   pumvisible() ? "\<C-e>" : "\<Esc>"
+ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
+ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
+ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
+ino <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
+
+" lua << EOF
+" function _G.CR()
+"   if vim.fn.pumvisible() ~= 0 then
+"     if vim.fn.complete_info().selected ~= -1 then
+"       return vim.api.nvim_replace_termcodes('<C-y>', true, true, true)
+"     else
+"       return vim.api.nvim_replace_termcodes('<C-e>', true, true, true) .. require('nvim-autopairs').autopairs_cr()
+"     end
+"   else
+"     return require('nvim-autopairs').autopairs_cr()
+"   end
+" end
+" vim.api.nvim_set_keymap('i', '<CR>', 'v:lua.CR()', { expr = true, noremap = true })
+" EOF
 
 " }}}
 
