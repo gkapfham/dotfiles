@@ -233,8 +233,8 @@ tags.tmp
 *.xmi
 *.sync
 
-# NodeJS and JavaScript#
-# ######################
+# NodeJS and JavaScript #
+# #######################
 
 # Logs
 logs
@@ -353,3 +353,7 @@ out
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Material for Mkdocs #
+# #####################
+site
