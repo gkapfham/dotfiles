@@ -93,6 +93,7 @@ Plug 'windwp/nvim-autopairs'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'xolox/vim-misc'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -890,13 +891,11 @@ function common_on_attach(client, bufnr)
   buf_set_keymap('n', '[d', '<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
 end
 local installed_servers = lsp_installer.get_installed_servers()
-local coq = require "coq"
 for _, server in pairs(installed_servers) do
     opts = {
         on_attach = common_on_attach,
     }
     server:setup(opts)
-    --server:setup(coq.lsp_ensure_capabilities())
 end
 EOF
 
@@ -920,8 +919,8 @@ set complete+=]
 set completeopt=menuone,noselect
 
 " Completion engine is compatible with UltiSnips
-let g:UltiSnipsExpandTrigger='<C-g>'
-let g:UltiSnipsJumpForwardTrigger='<C-g>'
+let g:UltiSnipsExpandTrigger='<C-s>'
+let g:UltiSnipsJumpForwardTrigger='<C-s>'
 let g:UltiSnipsJumpBackwardTrigger='<C-j>'
 
 " Do not echo messages (nor will searches)
