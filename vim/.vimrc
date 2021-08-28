@@ -979,22 +979,22 @@ set infercase
 " }
 " EOF
 
+" Always start coq.nvim when entering buffer
 autocmd VimEnter * COQnow --shut-up
 
-" let g:coq_settings = { 'auto_start': v:true | 'shut-up' }
-
-" Incrementally and sometimes
-" sometimes and sorters and selection_strategy
-
+" Disable the default coq.nvim keybindings
 let g:coq_settings = { 'keymap.recommended': v:false }
 
-" Keybindings
+" Specify customized coq.nvim settings
 ino <silent><expr> <Esc>   pumvisible() ? "\<C-e>" : "\<Esc>"
 ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
 ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
 ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
 ino <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
+
+" Additional coq.nvim settings
+let g:coq_settings = {"display.pum.source_context" : [" [", "] "]}
 
 " lua << EOF
 " function _G.CR()
