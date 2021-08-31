@@ -994,7 +994,7 @@ ino <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
 
 " Additional coq.nvim settings
-let g:coq_settings = {"display.pum.source_context" : [" [", "] "]}
+let g:coq_settings = {"display.pum.source_context" : ["  ", " "], "display.pum.kind_context" : [" 綠", " "]}
 
 " lua << EOF
 " function _G.CR()
