@@ -89,11 +89,12 @@ Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
-Plug 'windwp/nvim-autopairs'
-Plug 'windwp/nvim-ts-autotag'
+" Plug 'windwp/nvim-autopairs'
+" Plug 'windwp/nvim-ts-autotag'
 Plug 'xolox/vim-misc'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'onsails/lspkind-nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -575,8 +576,8 @@ let g:lightline = {
       \   'filetype': 'LightlineFiletype',
       \   'fileformat': 'LightlineFileformat',
       \   'filename': 'LightlineFilename',
-      \   'gitsigns': 'LightlineGitsigns',
       \   'gutentags': 'LightlineGutentags',
+      \   'gitsigns': 'LightlineGitsigns',
       \   'linter_warnings': 'LightlineLinterWarnings',
       \   'linter_errors': 'LightlineLinterErrors',
       \   'linter_ok': 'LightlineLinterOK',
@@ -591,9 +592,10 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
+
 " Display a diagnostic message when gutentags updates
 function! LightlineGitsigns()
-  let l:gitstatus = get(b:,'gitsigns_status','')
+  let l:gitstatus = get(b:,'Gitsigns_status','')
   return l:gitstatus !=# '' ?  ' '.get(b:,'gitsigns_status','') : ''
 endfunction
 
@@ -710,7 +712,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sh'] = ''
 " Fugitive {{{
 
 " Run Fugitive commands asynchronously using AsyncRun
-command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+" command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
 " Resolve a merge conflict with a three-pane vertical split
 nnoremap <leader>gd :Gvdiffsplit!<CR>
@@ -743,9 +745,9 @@ lua << EOF
 local cb = require'diffview.config'.diffview_callback
 require'diffview'.setup {
   diff_binaries = false,
+  use_icons = false,
   file_panel = {
     width = 35,
-    use_icons = false
   },
   key_bindings = {
     disable_defaults = false
@@ -785,13 +787,16 @@ require('gitsigns').setup {
   watch_index = {
     interval = 500
   },
+  diff_opts = {
+    internal = true
+  },
   attach_to_untracked = false,
   current_line_blame = false,
   sign_priority = 1,
   update_debounce = 50,
   status_formatter = nil,
   -- use_decoration_api = false,
-  use_internal_diff = true,
+  -- use_internal_diff = true,
 }
 EOF
 
@@ -929,72 +934,22 @@ set noshowmode
 " Infer the case when doing completion
 set infercase
 
-" lua << EOF
-" require'compe'.setup {
-"   enabled = true;
-"   autocomplete = true;
-"   debug = false;
-"   min_length = 1;
-"   preselect = 'enable';
-"   -- throttle_time = 80;
-"   throttle_time = 0;
-"   -- source_timeout = 200;
-"   -- source_timeout = 100;
-"   source_timeout = 100;
-"   -- resolve_timeout = 800;
-"   -- resolve_timeout = 400;
-"   -- resolve_timeout = 100;
-"   resolve_timeout = 100;
-"   -- incomplete_delay = 200;
-"   incomplete_delay = 50;
-"   max_abbr_width = 100;
-"   max_kind_width = 100;
-"   max_menu_width = 100;
-"   documentation = {
-"     border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-"     winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-"     max_width = 120,
-"     min_width = 60,
-"     max_height = math.floor(vim.o.lines * 0.3),
-"     min_height = 1,
-"   };
-"   source = {
-"     omni = {
-"         filetypes = {'tex'},
-"     },
-"     tmux = {
-"       disabled = false,
-"       all_panes = false
-"     },
-"     path = true;
-"     buffer = true;
-"     calc = true;
-"     nvim_lsp = true;
-"     nvim_lua = true;
-"     vsnip = false;
-"     ultisnips = true;
-"     spell = false;
-"     luasnip = false;
-"   };
-" }
-" EOF
-
 " Always start coq.nvim when entering buffer
 autocmd VimEnter * COQnow --shut-up
 
-" Disable the default coq.nvim keybindings
-let g:coq_settings = { 'keymap.recommended': v:false }
+" " Disable the default coq.nvim keybindings
+" let g:coq_settings = { 'keymap.recommended': v:false }
 
-" Specify customized coq.nvim settings
-ino <silent><expr> <Esc>   pumvisible() ? "\<C-e>" : "\<Esc>"
-ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
-ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
-ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
-ino <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
+" " Specify customized coq.nvim settings
+" ino <silent><expr> <Esc>   pumvisible() ? "\<C-e>" : "\<Esc>"
+" ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
+" ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
+" ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
+" ino <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
 
 " Additional coq.nvim settings
-let g:coq_settings = {"display.pum.source_context" : ["  ", " "], "display.pum.kind_context" : [" 綠", " "]}
+let g:coq_settings = {"display.pum.source_context" : ["  ", " "], "display.pum.kind_context" : [" ", " "], 'auto_start': 'shut-up'}
 
 " lua << EOF
 " function _G.CR()
@@ -1086,7 +1041,7 @@ require('telescope').setup {
       }
     },
     path_display = {
-      "shorten",
+      "absolute",
     },
     prompt_prefix = "> ",
     selection_caret = "> ",
@@ -1123,7 +1078,7 @@ require('telescope').setup {
   }
 }
 -- load extensions after calling setup function
-require('telescope').load_extension('fzf')
+-- require('telescope').load_extension('fzf')
 require('telescope').load_extension('ultisnips')
 EOF
 
