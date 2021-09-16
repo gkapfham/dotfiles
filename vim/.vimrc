@@ -712,7 +712,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sh'] = ''
 " Fugitive {{{
 
 " Run Fugitive commands asynchronously using AsyncRun
-" command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
 " Resolve a merge conflict with a three-pane vertical split
 nnoremap <leader>gd :Gvdiffsplit!<CR>
