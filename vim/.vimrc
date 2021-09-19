@@ -94,7 +94,7 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'xolox/vim-misc'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-Plug 'onsails/lspkind-nvim'
+" Plug 'onsails/lspkind-nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
