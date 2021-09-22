@@ -937,16 +937,16 @@ set infercase
 " Always start coq.nvim when entering buffer
 autocmd VimEnter * COQnow --shut-up
 
-" " Disable the default coq.nvim keybindings
-" let g:coq_settings = { 'keymap.recommended': v:false }
+" Disable the default coq.nvim keybindings
+let g:coq_settings = { 'keymap.recommended': v:false }
 
-" " Specify customized coq.nvim settings
-" ino <silent><expr> <Esc>   pumvisible() ? "\<C-e>" : "\<Esc>"
-" ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
-" ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
-" ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
-" ino <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-" ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
+" Specify customized coq.nvim settings
+ino <silent><expr> <Esc>   pumvisible() ? "\<C-e>" : "\<Esc>"
+ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
+ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
+ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
+ino <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
 
 " Additional coq.nvim settings
 let g:coq_settings = {"display.pum.source_context" : ["  ", " "], "display.pum.kind_context" : [" ", " "], 'auto_start': 'shut-up'}
