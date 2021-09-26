@@ -946,21 +946,6 @@ ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
 " Additional coq.nvim settings
 let g:coq_settings = {"display.pum.source_context" : ["  ", " "], "display.pum.kind_context" : [" ", " "], 'auto_start': 'shut-up'}
 
-" lua << EOF
-" function _G.CR()
-"   if vim.fn.pumvisible() ~= 0 then
-"     if vim.fn.complete_info().selected ~= -1 then
-"       return vim.api.nvim_replace_termcodes('<C-y>', true, true, true)
-"     else
-"       return vim.api.nvim_replace_termcodes('<C-e>', true, true, true) .. require('nvim-autopairs').autopairs_cr()
-"     end
-"   else
-"     return require('nvim-autopairs').autopairs_cr()
-"   end
-" end
-" vim.api.nvim_set_keymap('i', '<CR>', 'v:lua.CR()', { expr = true, noremap = true })
-" EOF
-
 " }}}
 
 " Advanced Search Highlighting {{{
