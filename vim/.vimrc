@@ -10,7 +10,6 @@ call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
 Plug 'airblade/vim-rooter'
-" Plug 'andersevenrud/compe-tmux'
 Plug 'andymass/vim-matchup'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
@@ -23,7 +22,6 @@ Plug 'garbas/vim-snipmate'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'honza/vim-snippets'
-" Plug 'hrsh7th/nvim-compe'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
 Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
@@ -89,12 +87,9 @@ Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
-" Plug 'windwp/nvim-autopairs'
-" Plug 'windwp/nvim-ts-autotag'
 Plug 'xolox/vim-misc'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-" Plug 'onsails/lspkind-nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
