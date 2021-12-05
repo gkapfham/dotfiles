@@ -43,6 +43,7 @@ Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'lewis6991/impatient.nvim'
 Plug 'lifepillar/vim-colortemplate'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
@@ -52,8 +53,10 @@ Plug 'mgee/lightline-bufferline'
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
+Plug 'nathom/filetype.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'numToStr/Comment.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
@@ -74,13 +77,14 @@ Plug 'tfnico/vim-gradle'
 Plug 'TimUntersberger/neogit'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
+Plug 'tweekmonster/startuptime.vim'
 Plug 'Valloric/ListToggle'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-pandoc/vim-pandoc-syntax'
@@ -97,6 +101,14 @@ Plug 'xolox/vim-misc'
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
+
+" Use the impatient plugin to speed
+" the loading of all Lua components;
+" must be done in advance of all the
+" other plugins that use Lua
+lua << EOF
+require('impatient')
+EOF
 
 " }}}
 
@@ -1589,6 +1601,11 @@ augroup END
 " }}}
 
 " Comments {{{
+
+" Use the comment.nvim plugin
+lua << EOF
+require('Comment').setup()
+EOF
 
 " Insert a comment symbol on the current line at cursor location
 nmap <Space>cc :execute "normal! i" . split(&commentstring, '%s')[0]<CR>
