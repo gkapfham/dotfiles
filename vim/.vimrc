@@ -1045,8 +1045,6 @@ require'lightspeed'.setup {
 }
 EOF
 
-" autocmd ColorScheme * lua require'lightspeed'.init_highlight(true)
-
 " }}}
 
 " Telescope {{{
