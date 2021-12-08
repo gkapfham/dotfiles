@@ -1400,8 +1400,8 @@ augroup configurationgroupforfiletypes
     setlocal wrap linebreak textwidth=80
   endfunction
 
-  # Always set the file type to mail when reading a temporary file
-  # that was created by the mutt mail user agent
+  " Always set the file type to mail when reading a temporary file
+  " that was created by the mutt mail user agent
   autocmd BufNewFile,BufRead ~/.mutt/tmp/mutt* set filetype=mail
 
   " When linting is costly in Java, only perform it in normal mode
