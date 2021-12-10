@@ -49,7 +49,7 @@ font-2 = "Hack Nerd Font:size=24:weight=bold;5"
 modules-left = i3
 
 ; Middle panel: display the network statistics
-modules-center = network cpu temperature memory
+modules-center = wireless-network wired-network cpu temperature memory
 
 ; Right panel: display cpu, memory, battery, screen light, audio, and calendar
 modules-right = battery0 backlight pulseaudio  date
@@ -77,18 +77,30 @@ screenchange-reload = true
 margin-top = 5
 margin-bottom = 5
 
+; Display details about the wired network
+[module/wired-network]
+type = internal/network
+interface = enp3s0u2u4
+interval = 3.0
+udspeed-minwidth = 0
+format-connected-prefix = "ﯱ Wired "
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+label-connected =  %upspeed:8% 祝%downspeed:8% 
+; label-disconnected = Disconnected
+
 ; Display details about the wireless network
-[module/network]
+[module/wireless-network]
 type = internal/network
 interface = wlp0s20f3
 interval = 3.0
 udspeed-minwidth = 0
-format-connected-prefix = ""
+format-connected-prefix = "ﯱ Wireless "
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
-label-connected = %upspeed:9% 祝%downspeed:9%     %essid%  說 %signal:2%
+label-connected = %upspeed:8% 祝%downspeed:8%     %essid%  說 %signal:2%
 label-packetloss =   %essid% 說 %signal:2% %upspeed:9% 祝%downspeed:9% 
-label-disconnected =  Disconnected
+; label-disconnected =  Disconnected
 
 ; Display the i3 workspaces
 [module/i3]
