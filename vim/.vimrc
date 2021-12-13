@@ -14,6 +14,7 @@ Plug 'andymass/vim-matchup'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
 Plug 'cespare/vim-toml'
+Plug 'chentau/marks.nvim'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'fhill2/telescope-ultisnips.nvim'
@@ -38,7 +39,7 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'kevinhwang91/nvim-bqf', {'branch': 'main'}
 Plug 'Konfekt/vim-sentence-chopper'
 Plug 'kristijanhusak/vim-dirvish-git'
-Plug 'kshenoy/vim-signature'
+" Plug 'kshenoy/vim-signature'
 Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
@@ -342,7 +343,7 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 map <F5> :call SyntaxAttr() <CR>
 
 " Display special characters as sign column marks
-let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
+" let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
 
 " Do not display the match of an offscreen delimiter
 let g:matchup_matchparen_status_offscreen = 0
@@ -358,6 +359,40 @@ augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Visual", timeout=150}
 augroup END
+
+" }}}
+
+" Marks.nvim {{{
+
+lua << EOF
+require'marks'.setup {
+  -- whether to map keybinds or not. default true
+  default_mappings = false,
+  -- whether movements cycle back to the beginning/end of buffer. default true
+  cyclic = true,
+  -- whether the shada file is updated after modifying uppercase marks. default false
+  force_write_shada = false,
+  -- how often (in ms) to redraw signs/recompute mark positions.
+  -- higher values will have better performance but may cause visual lag,
+  -- while lower values may cause performance penalties. default 150.
+  refresh_interval = 150,
+  -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
+  -- marks, and bookmarks.
+  -- can be either a table with all/none of the keys, or a single number, in which case
+  -- the priority applies to all marks.
+  -- default 10.
+  sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+  -- define mappings that are different than the default
+  mappings = {
+    next = "]m",
+    prev = "[m",
+    delete = "dm",
+    delete_line = "dm-",
+    delete_buf = "dm<space>",
+    preview = "m;",
+  }
+}
+EOF
 
 " }}}
 
