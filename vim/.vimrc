@@ -1,3 +1,4 @@
+" vim:fdm=marker:fdl=0:
 set encoding=utf-8
 scriptencoding utf-8
 
@@ -13,58 +14,49 @@ Plug 'andymass/vim-matchup'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
 Plug 'cespare/vim-toml'
-Plug 'Chiel92/vim-autoformat'
+Plug 'chentau/marks.nvim'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'ColinKennedy/vim-textobj-block-party'
-Plug 'davidhalter/jedi-vim', {'for': 'python'}
-Plug 'easymotion/vim-easymotion'
-Plug 'fgrsnau/ncm2-otherbuf', {'branch': 'master'}
 Plug 'fhill2/telescope-ultisnips.nvim'
-Plug 'filipekiss/ncm2-look.vim'
 Plug 'folke/which-key.nvim'
 Plug 'garbas/vim-snipmate'
+Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'honza/vim-snippets'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
 Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
-Plug 'jeetsukumaran/vim-pythonsense', {'for': 'python'}
 Plug 'jgdavey/tslime.vim'
-Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-Plug 'kevinhwang91/nvim-bqf', { 'branch': 'main' }
+Plug 'kevinhwang91/nvim-bqf', {'branch': 'main'}
 Plug 'Konfekt/vim-sentence-chopper'
 Plug 'kristijanhusak/vim-dirvish-git'
-Plug 'kshenoy/vim-signature'
 Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'lewis6991/impatient.nvim'
 Plug 'lifepillar/vim-colortemplate'
-Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mgee/lightline-bufferline'
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
-Plug 'ncm2/float-preview.nvim'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-html-subscope'
-Plug 'ncm2/ncm2-jedi'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-syntax'
-Plug 'ncm2/ncm2-tagprefix'
-Plug 'ncm2/ncm2-ultisnips'
+Plug 'nathom/filetype.nvim'
+Plug 'neovim/nvim-lspconfig'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'numToStr/Comment.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
@@ -73,27 +65,24 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
-Plug 'Pocco81/AutoSave.nvim'
+Plug 'prabirshrestha/async.vim'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'rhysd/git-messenger.vim'
-Plug 'Shougo/echodoc.vim'
-Plug 'Shougo/neco-syntax'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'sindrets/diffview.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'tfnico/vim-gradle'
 Plug 'TimUntersberger/neogit'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
+Plug 'tweekmonster/startuptime.vim'
 Plug 'Valloric/ListToggle'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-pandoc/vim-pandoc-syntax'
@@ -101,28 +90,23 @@ Plug 'vim-scripts/python_match.vim'
 Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
-Plug 'wellle/tmux-complete.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
-
-" Conditionally load ncm2 for Vim8 and Neovim
-"
-" Running Neovim, so a connector is not needed
-if has('nvim')
-  Plug 'ncm2/ncm2'
-  Plug 'roxma/nvim-yarp'
-" Running Vim8, so a connector is needed
-else
-  Plug 'ncm2/ncm2'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
+
+" Use the impatient plugin to speed
+" the loading of all Lua components;
+" must be done in advance of all the
+" other plugins that use Lua
+lua << EOF
+require('impatient')
+EOF
 
 " }}}
 
@@ -135,7 +119,10 @@ syntax spell toplevel
 set spellfile+=~/.config/nvim/spell/en.utf-8.add
 set spellfile+=.extra.utf-8.add
 
-" Correct spelling mistakes from insert mode
+" Correct spelling mistakes from insert mode when typing
+" Reference:
+" https://stackoverflow.com/questions/5312235/how-do-i-correct-vim-spelling-mistakes-quicker
+" Note that this mapping does not seem to work for all filetypes
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " Make changes automatically saved during Qdo
@@ -179,7 +166,7 @@ set undodir=~/.vim/undo
 " Source the vimrc file with Reload
 command! Reload :source $MYVIMRC
 
-" Define a mapping to easy use of Reload
+" Define a mapping for the easy use of Reload
 nnoremap <leader>rr :Reload<CR>
 
 " }}}
@@ -192,11 +179,72 @@ set termguicolors
 " Use customized colorscheme
 colorscheme vitaminonec
 
-" Set color for concealment with limelight
-" NOTE: In this file because there are no
-" highlight groups to move to color scheme
-let g:limelight_conceal_ctermfg = 240
-let g:limelight_conceal_guifg = '#585858'
+" }}}
+
+" Neovim Configuration {{{
+
+" Note that this entire configuration is specialized to
+" neovim and will not, in fact, run without error on Vim.
+" With that said, these are Neovim-specific customizations.
+
+" Do not use a different cursor shape
+if has("nvim")
+  set guicursor=
+endif
+
+" Use nvr for remove communication
+if has("nvim")
+  let g:vimtex_compiler_progname = 'nvr'
+endif
+
+" Leave using a different command than ESC
+if has("nvim")
+  inoremap <ESC> <C-\><C-n>
+  tnoremap jk <C-\><C-n>
+  nmap oo O<ESC>
+endif
+
+" Use the new inccommand
+if has("nvim")
+  set inccommand=split
+endif
+
+" Set the clipboard to use xclip (not xsel)
+if has("nvim")
+  let g:clipboard = {
+        \   'name': 'NeovimClipboard',
+        \   'copy': {
+        \      '+': 'xclip -i -selection clipboard',
+        \      '*': 'xclip -i -selection clipboard',
+        \    },
+        \   'paste': {
+        \      '+': 'xclip -o -selection clipboard',
+        \      '*': 'xclip -o -selection clipboard',
+        \   },
+        \   'cache_enabled': 1,
+        \ }
+endif
+
+" Highlight trailing spaces
+if has("nvim")
+  match ExtraWhitespace /\s\+$\|\t/
+  augroup extra_whitespace
+    autocmd!
+    autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+    autocmd BufWinLeave * call clearmatches()
+  augroup END
+endif
+
+" Ensure that Neovim exits quickly and gives no line numbers when using fzf
+if has('nvim')
+  aug fzf_setup
+    au!
+    au TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
+    au TermOpen term://*FZF setlocal nonumber nornu
+  aug END
+end
 
 " }}}
 
@@ -245,6 +293,7 @@ set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
 set list
 
 " Display with faster timeouts in the TUI
+"
 " Setting also influences how quickly the
 " WhichKey menu will appear with hints
 set timeoutlen=500
@@ -292,31 +341,273 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr() <CR>
 
-" Display the current block of text/code in a highlighting limelight
-nmap <Space>ff :Limelight!! <CR>
-
-" Display the signature of a function in the footer of the screen
-noremap <Space>s :PreviewSignature! <CR>
-
-" Display special characters as sign column marks
-let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
-
 " Do not display the match of an offscreen delimiter
 let g:matchup_matchparen_status_offscreen = 0
 
+" Configure the matchup plugin to override defaults in vimtex
+let g:matchup_override_vimtex = 1
+
 " Enable the Lua-based color highlighter for all filetypes
 lua require'colorizer'.setup()
-
-" Do not show empty registers when previewing the
-" registers that are available upon pressing, for
-" instance, the " key when in normal mode
-let g:registers_show_empty_registers = 0
 
 " Briefly highlight the yanked region using the background color for visual highlights
 augroup highlight_yank
     autocmd!
     au TextYankPost * silent! lua vim.highlight.on_yank {higroup="Visual", timeout=150}
 augroup END
+
+" }}}
+
+" Marks.nvim {{{
+
+lua << EOF
+require'marks'.setup {
+  -- do not use the default keybindings
+  default_mappings = false,
+  -- make movements cycle back to the beginning/end of buffer
+  cyclic = true,
+  -- do not save the marks into the shada file
+  force_write_shada = false,
+  -- how often (in ms) to redraw signs/recompute mark positions.
+  -- higher values will have better performance but may cause visual lag,
+  -- while lower values may cause performance penalties. default 150.
+  refresh_interval = 150,
+  -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
+  -- marks, and bookmarks.
+  -- can be either a table with all/none of the keys, or a single number, in which case
+  -- the priority applies to all marks.
+  sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+  -- define mappings that are different than the default
+  mappings = {
+    next = "]m",
+    prev = "[m",
+    delete = "dm",
+    delete_line = "dm-",
+    delete_buf = "dm<space>",
+    preview = "m;",
+  }
+}
+EOF
+
+" }}}
+
+" Folding {{{
+
+function! FancyFoldText()
+  let l:line = getline(v:foldstart)
+  let l:nucolwidth = &foldcolumn + &number * &numberwidth
+  let l:windowwidth = winwidth(0) - l:nucolwidth - 3
+  let l:foldedlinecount = v:foldend - v:foldstart
+  let l:onetab = strpart('          ', 0, &tabstop)
+  let l:line = substitute(l:line, '\t', l:onetab, 'g')
+  let l:line = strpart(l:line, 0, l:windowwidth - 2 -len(l:foldedlinecount))
+  let l:fillcharcount = l:windowwidth - len(l:line) - len(l:foldedlinecount)
+  return l:line . ' ' . repeat(' ',l:fillcharcount-8) . l:foldedlinecount . ' lines ' . ' '
+endfunction
+set foldtext=FancyFoldText()
+
+" }}}
+
+" Manual Pages {{{
+
+" Define a special configuration for man buffers
+augroup manconfiguration
+  autocmd!
+  " Disable spell checking for the man buffers
+  autocmd FileType man setlocal nospell
+augroup END
+
+" }}}
+
+" Basic Keyboard Movement {{{
+
+" Disable the arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+inoremap jk <ESC>
+inoremap <ESC> <NOP>
+
+" Define the leaders
+let maplocalleader=','
+let mapleader=','
+
+" Move through CamelCase text
+call camelcasemotion#CreateMotionMappings('<space><space>')
+
+" Navigate through wrapped text
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+" Navigate to the next linting warning/error
+nmap <silent> <C-k> <Plug>(ale_previous)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" Quickly switch between two recent buffers
+function! SwitchBuffer()
+  b#
+endfunction
+" Use either control or space to activate
+nmap <C-u> :call SwitchBuffer()<CR>
+nmap <Space>u :call SwitchBuffer()<CR>
+
+" Define <leader<leader> to create a colon in both
+" normal mode and visual mode, thereby avoiding
+" the need to frequently type the shift key
+nnoremap <leader><leader> :
+vnoremap <leader><leader> :
+
+" }}}
+
+" Tags {{{
+
+" Specify where the tags are stored
+set tags=./tags;/,tags;/
+
+" Perform highlighting asynchronously when file is loaded or saved
+let g:highlighter#auto_update = 2
+
+" Configure gutentags plugin
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['package.json', '.git']
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 1
+
+" Only allow Gutentags to generate a tag file that indexes the files
+" that are returned by a tool like ripgrep, which is already configured
+" to ignore those files that are inside of the .gitignore file
+let g:gutentags_file_list_command = 'rg --files'
+
+" }}}
+
+" File System {{{
+
+" Configure the dirvish plugin
+augroup dirvishconfiguration
+  autocmd!
+  " Disable spell checking for the Dirvish buffers
+  autocmd FileType dirvish setlocal nospell
+
+  " Map `gr` to reload the Dirvish buffer
+  autocmd FileType dirvish nnoremap <silent><buffer> gr :<C-U>Dirvish %<CR>
+
+  " Map `gh` to hide dot-prefixed files
+  " To toggle this, press `gr` to reload
+  autocmd FileType dirvish nnoremap <silent><buffer>
+        \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
+augroup END
+
+" Define the symbols used to indicate the status of the
+" version control repository in a dirvish buffer
+let g:dirvish_git_indicators = {
+\ 'Modified'  : '!',
+\ 'Staged'    : '+',
+\ 'Untracked' : '?',
+\ 'Renamed'   : '➜',
+\ 'Unmerged'  : '═',
+\ 'Ignored'   : '',
+\ 'Unknown'   : ''
+\ }
+
+" Define the highlight color for version control details in dirvish
+let g:gitstatus = 'guifg=#d78700 ctermfg=172'
+
+" Define the color scheme to always be the same color;
+" this is acceptable because the symbols vary.
+silent exe 'hi default DirvishGitModified '.g:gitstatus
+silent exe 'hi default DirvishGitStaged '.g:gitstatus
+silent exe 'hi default DirvishGitRenamed '.g:gitstatus
+silent exe 'hi default DirvishGitUnmerged '.g:gitstatus
+silent exe 'hi default DirvishGitIgnored guifg=NONE guibg=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=NONE'
+silent exe 'hi default DirvishGitUntracked guifg=NONE guibg=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=NONE'
+silent exe 'hi default link DirvishGitUntrackedDir DirvishPathTail'
+
+" }}}
+
+" Manual Pages {{{
+
+" Fuzzy search through the man pages with Fzf and then
+" display the selected man page inside of Vim
+command! -nargs=? Superman call fzf#run(fzf#wrap({'source': 'man -k -s 1 '.shellescape(<q-args>).' | cut -d " " -f 1', 'sink': 'tab Man', 'options': ['--preview', 'MANPAGER=cat MANWIDTH='.(&columns/2-4).' man {}']}))
+
+" }}}
+
+" Text Manipulation {{{
+
+" Insert a blank line at end of line
+nmap oo Ojk
+
+" Insert a blank line at cursor
+nnoremap oO i<CR><ESC>
+
+" Support the backspace key in insert mode
+set backspace=indent,eol,start
+
+" Interactive EasyAlign in visual mode (e.g., 'vipga')
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g., gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
+" Configure the autopairs.nvim plugin
+lua << EOF
+local remap = vim.api.nvim_set_keymap
+local npairs = require('nvim-autopairs')
+
+npairs.setup({ map_bs = false, map_cr = false })
+vim.g.coq_settings = { keymap = { recommended = false } }
+
+-- skip it, if you use another global object
+_G.MUtils= {}
+
+MUtils.CR = function()
+  if vim.fn.pumvisible() ~= 0 then
+    if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
+      return npairs.esc('<c-y>')
+    else
+      return npairs.esc('<c-e>') .. npairs.autopairs_cr()
+    end
+  else
+    return npairs.autopairs_cr()
+  end
+end
+remap('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true, noremap = true })
+
+MUtils.BS = function()
+  if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
+    return npairs.esc('<c-e>') .. npairs.autopairs_bs()
+  else
+    return npairs.autopairs_bs()
+  end
+end
+remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
+EOF
+
+" Configure the matchup plugin to display diagnostics about location
+nnoremap <c-k> :<c-u>MatchupWhereAmI<CR>
+
+" Remove trailing whitespace
+nnoremap <Leader>rtw :%s/\s\+$//e<CR>
+
+" Fix a misspelling with next-best word
+nmap <silent> zn <Plug>(SpellRotateForward)
+nmap <silent> zp <Plug>(SpellRotateBackward)
+vmap <silent> zn <Plug>(SpellRotateForwardV)
+vmap <silent> zp <Plug>(SpellRotateBackwardV)
+
+" Toggle the display of spelling mistakes
+nmap <silent> <leader>s :set spell!<CR>
 
 " }}}
 
@@ -352,12 +643,11 @@ let g:lightline = {
       \   'filetype': 'LightlineFiletype',
       \   'fileformat': 'LightlineFileformat',
       \   'filename': 'LightlineFilename',
-      \   'gitsigns': 'LightlineGitsigns',
       \   'gutentags': 'LightlineGutentags',
+      \   'gitsigns': 'LightlineGitsigns',
       \   'linter_warnings': 'LightlineLinterWarnings',
       \   'linter_errors': 'LightlineLinterErrors',
       \   'linter_ok': 'LightlineLinterOK',
-      \   'context': 'NearestMethodOrFunction',
       \   'python': 'LightlinePythonEnvironment'
       \ },
       \ 'component_type': {
@@ -369,15 +659,10 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
-" Display file context using Vista (e.g., function definition)
-function! NearestMethodOrFunction() abort
-  let l:nearestmethod = get(b:, 'vista_nearest_method_or_function', '')
-  return l:nearestmethod !=# '' ?  ' '.get(b:, 'vista_nearest_method_or_function', '') : ''
-endfunction
 
 " Display a diagnostic message when gutentags updates
 function! LightlineGitsigns()
-  let l:gitstatus = get(b:,'gitsigns_status','')
+  let l:gitstatus = get(b:,'Gitsigns_status','')
   return l:gitstatus !=# '' ?  ' '.get(b:,'gitsigns_status','') : ''
 endfunction
 
@@ -491,17 +776,45 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sh'] = ''
 
 " }}}
 
-" Version Control Plugins {{{
+" Fugitive {{{
+
+" Run Fugitive commands asynchronously using AsyncRun
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+
+" Resolve a merge conflict with a three-pane vertical split
+nnoremap <leader>gd :Gvdiffsplit!<CR>
+
+" Merge the "head" into the current file
+nnoremap gdh :diffget //2<CR>
+
+" Merge the "branch" into the remote file
+nnoremap gdb :diffget //3<CR>
+
+" Perform a Gcommit for the current hunk with a mapping
+nnoremap <leader>gcc :Git commit <CR>
+
+" Perform a Gcommit for the current file with a mapping
+nnoremap <leader>gcf :Git commit %<CR>
+
+" Perform a Gcommit for all modified files with a mapping
+nnoremap <leader>gca :Git commit -a<CR>
+
+" Get the status of the repository
+nnoremap <leader>gs :Git <CR>
+
+" }}}
+
+" Specialized Version Control Plugins {{{
 
 " Configure the diffview.nvim plugin
 
-lua <<EOF
+lua << EOF
 local cb = require'diffview.config'.diffview_callback
 require'diffview'.setup {
   diff_binaries = false,
+  use_icons = false,
   file_panel = {
     width = 35,
-    use_icons = false
   },
   key_bindings = {
     disable_defaults = false
@@ -509,9 +822,9 @@ require'diffview'.setup {
 }
 EOF
 
-" gitsigns.nvim plugin
+" Configure the gitsigns.nvim plugin
 
-lua <<EOF
+lua << EOF
 require('gitsigns').setup {
   signs = {
     add          = {hl = 'DiffAdd'   , text = '+', numhl='None', linehl='None'},
@@ -541,13 +854,16 @@ require('gitsigns').setup {
   watch_index = {
     interval = 500
   },
+  diff_opts = {
+    internal = true
+  },
   attach_to_untracked = false,
   current_line_blame = false,
   sign_priority = 1,
   update_debounce = 50,
   status_formatter = nil,
-  use_decoration_api = false,
-  use_internal_diff = true,
+  -- use_decoration_api = false,
+  -- use_internal_diff = true,
 }
 EOF
 
@@ -577,7 +893,7 @@ nmap <Space>gg :Neogit <CR>
 " Special configuration for neogit buffers
 augroup neogitconfiguration
   autocmd!
-  " Disable spell checking for the magit buffers
+  " Disable spell checking for the neogit buffers
   autocmd FileType NeogitStatus setlocal nospell
 augroup END
 
@@ -586,11 +902,13 @@ augroup gitmessenger
 " Define a mapping to navigate the git-messenger pop-up
 function! SetupGitMessengerPopup() abort
     " Go into the git-messenger pop-up to navigate
-    nmap <Leader>gg <Plug>(git-messenger-into-popup)
-    " Go to an older commit with CTRL-o
-    nmap <buffer><C-o> o
-    " Go to a newer commit with CTRL-i
-    nmap <buffer><C-i> O
+    nmap <Leader>gg :GitMessenger <CR>
+    " After going into the pop-up with another
+    " use of the <Leader>gg mapping, then:
+    " --> Go to an older commit with CTRL-j
+    nmap <buffer><C-j> o
+    " --> Go to a newer commit with CTRL-k
+    nmap <buffer><C-k> O
 endfunction
 autocmd FileType gitmessengerpopup call SetupGitMessengerPopup()
 augroup END
@@ -600,7 +918,9 @@ augroup END
 " Treesitter {{{
 
 " Use the treesitter for all of the possible languages available
-lua <<EOF
+" Include the configuration for all plugins that use treesitter
+
+lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- one of "all", "maintained" (parsers with maintainers),
   -- or a list of languages
@@ -615,96 +935,361 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     -- false disables because Python Treesitter is buggy right now
     enable = false
-  }
+  },
+  -- enable treesitter for the matchup plugin that enhances matches
+  -- highlighting and movements using the % symbol
+  matchup = {
+    enable = true,
+  },
 }
 EOF
 
 " }}}
 
-" Folding {{{
+" Language Servers {{{
 
-function! FancyFoldText()
-  let l:line = getline(v:foldstart)
-  let l:nucolwidth = &foldcolumn + &number * &numberwidth
-  let l:windowwidth = winwidth(0) - l:nucolwidth - 3
-  let l:foldedlinecount = v:foldend - v:foldstart
-  let l:onetab = strpart('          ', 0, &tabstop)
-  let l:line = substitute(l:line, '\t', l:onetab, 'g')
-  let l:line = strpart(l:line, 0, l:windowwidth - 2 -len(l:foldedlinecount))
-  let l:fillcharcount = l:windowwidth - len(l:line) - len(l:foldedlinecount)
-  return l:line . ' ' . repeat(' ',l:fillcharcount-8) . l:foldedlinecount . ' lines ' . ' '
-endfunction
-set foldtext=FancyFoldText()
+lua << EOF
+local lsp_installer = require'nvim-lsp-installer'
+function common_on_attach(client, bufnr)
+  -- do stuff
+  print("契Starting Language Server");
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  opts ={silent = true, noremap = true}
+  buf_set_keymap('n', 'K', '<cmd> lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd> lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd> lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+end
+local installed_servers = lsp_installer.get_installed_servers()
+for _, server in pairs(installed_servers) do
+    opts = {
+        on_attach = common_on_attach,
+    }
+    server:setup(opts)
+end
+EOF
 
 " }}}
 
-" Manual Pages {{{
+" Completion {{{
 
-" Special configuration for man buffers
-augroup manconfiguration
-  autocmd!
-  " Disable spell checking for the man buffers
-  autocmd FileType man setlocal nospell
-augroup END
+" Define basic completion function
+set omnifunc=syntaxcomplete#Complete
+
+" Define the dictionaries
+set dictionary-=/usr/share/dict/american-english
+set dictionary+=/usr/share/dict/american-english
+
+" Completion includes dictionaries
+set complete-=k complete+=k
+set complete+=kspell
+set complete+=]
+
+" Set the completion approach for the engine
+set completeopt=menuone,noselect
+
+" Completion engine is compatible with UltiSnips
+let g:UltiSnipsExpandTrigger='<C-s>'
+let g:UltiSnipsJumpForwardTrigger='<C-s>'
+let g:UltiSnipsJumpBackwardTrigger='<C-j>'
+
+" Do not echo messages (nor will searches)
+set noshowmode
+
+" Infer the case when doing completion
+set infercase
+
+" Always start coq.nvim when entering buffer
+autocmd VimEnter * COQnow --shut-up
+
+" Disable the default coq.nvim keybindings
+let g:coq_settings = { 'keymap.recommended': v:false }
+
+" Specify customized coq.nvim settings
+ino <silent><expr> <Esc>   pumvisible() ? "\<C-e>" : "\<Esc>"
+ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
+ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
+ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
+ino <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
+
+" Additional coq.nvim settings
+let g:coq_settings = {"display.pum.source_context" : ["  ", " "], "display.pum.kind_context" : [" ", " "], 'auto_start': 'shut-up'}
+
+" Basic configuration for the wilder.nvim plugin
+" that makes searching in the wildmenu possible
+call wilder#setup({'modes': [':', '/', '?']})
+
+" Configure the wilder.nvim so that it supports
+" the theme from the lightline and renders in it;
+" this means that the completion items render in
+" the lightline at the bottom of the screen. Nice!
+call wilder#set_option('renderer', wilder#wildmenu_renderer(
+      \ wilder#wildmenu_lightline_theme({
+      \   'highlights': {},
+      \   'highlighter': wilder#basic_highlighter(),
+      \   'separator': ' · ',
+      \ })))
 
 " }}}
 
-" Tags {{{
+" Advanced Search Highlighting {{{
 
-" Specify where the tags are stored
-set tags=./tags;/,tags;/
+" Incrementally highlight the search matches
+set incsearch
 
-" Perform highlighting asynchronously when file is loaded or saved
-let g:highlighter#auto_update = 2
+" Support the highlighting of words
+nnoremap <silent><expr> <Leader>i (&hls && v:hlsearch ? ':set nohlsearch' : ':set hlsearch')."\n"
 
-" Perform tag generation in existence of a '.maketags' marker file
-let g:gutentags_project_root = ['.maketags']
+" Carefully ignore the case of words when searching
+set ignorecase
+set smartcase
 
-" Only allow Gutentags to generate a tag file that indexes the files
-" that are returned by a tool like ripgrep, which is already configured
-" to ignore those files that are inside of the .gitignore file
-let g:gutentags_file_list_command = 'rg --files'
+" Make :grep use ripgrep and use -uu to not ignore files
+" This is an alternative to :Rg or :Ag which ignore some files
+set grepprg=rg\ -uu\ --vimgrep\ --no-heading\ --smart-case
 
-" Always run the function to capture the context
-" Note that using an augroup does not seem to work correctly
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+" }}}
 
-" Define a command to support the toggle of Vista's display of tags
-" NOTE: There is a defect, most likely in Vista, that causes the
-" lightline display to disappear after using this command.
-nnoremap <Space>v :Vista!!<cr>
+" Advanced Keyboard Movement with Lightspeed.nvim {{{
 
-" Enable the display of icons in the Vista interface
-let g:vista#renderer#enable_icon = 1
+lua << EOF
+require'lightspeed'.setup {
+  --[[ jump_to_first_match = false, ]]
+  jump_on_partial_input_safety_timeout = 400,
+  -- This can get _really_ slow if the window has a lot of content,
+  -- turn it on only if your machine can always cope with it.
+  highlight_unique_chars = false,
+  grey_out_search_area = false,
+  match_only_the_start_of_same_char_seqs = true,
+  limit_ft_matches = 5,
+  --[[ full_inclusive_prefix_key = '<c-x>', ]]
+  -- By default, the values of these will be decided at runtime,
+  -- based on `jump_to_first_match`.
+  labels = nil,
+  cycle_group_fwd_key = '<Tab>',
+  cycle_group_bwd_key = '<S-Tab>',
+}
+EOF
 
-" Configure how Vista shows a location when navigating its interface
-let g:vista_echo_cursor_strategy = 'echo'
+" }}}
 
-" Allow Vista to create data for display in the lightline
-let g:vista_disable_statusline = 0
+" Telescope {{{
 
-" Define icon mappings for the cases when the defaults do not match
-" Note that Vista defines "class" and "method" but not the plural
-" Summary of the icon definitions:
-" --> Java: classes, methods
-" --> LaTeX: labels, sections, subsections, subsubsections
-" --> VimScript: autocommand groups, commands, maps
-" --> Default: use a box with a circle instead of question mark
-let g:vista#renderer#icons = {
-\   'S': "\uf7fd",
-\   'c': "\uf7fd",
-\   's': "\uf7fd",
-\   'autocommand groups': "\uf136",
-\   'classes': "\uf0e8",
-\   'commands': "\uf8a3",
-\   'labels': "\uf71b",
-\   'maps': "\uf8a3",
-\   'methods': "\uf6a6",
-\   'sections': "\uf7fd",
-\   'subsections': "\uf7fd",
-\   'subsubsections': "\uf7fd",
-\   'default': "\uf7fd",
-\  }
+lua << EOF
+local actions = require('telescope.actions')
+require('telescope').setup {
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      '--hidden',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
+    },
+    mappings = {
+    i = {
+      ["<esc>"] = actions.close,
+      },
+    n = {
+      ["<esc>"] = actions.close,
+      ["<cr>"] = false,
+      },
+    },
+    layout_config = {
+      horizontal = {
+        height = 0.8,
+        width = 0.9
+      }
+    },
+    path_display = {
+      "absolute",
+    },
+    prompt_prefix = "> ",
+    selection_caret = "> ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "closest",
+    sorting_strategy = "descending",
+    layout_strategy = "horizontal",
+    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_ignore_patterns = {},
+    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    winblend = 0,
+    border = {},
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    color_devicons = false,
+    use_less = true,
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+  },
+  pickers = {
+    buffers = {
+        sort_lastused = true,
+      }
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    }
+  }
+}
+-- load extensions after calling setup function
+-- require('telescope').load_extension('fzf')
+require('telescope').load_extension('ultisnips')
+EOF
+
+" Command mappings for Telescope to find:
+" (note that Ctrl-mappings are provided for some commands
+" when those are ones for which there is a muscle memory)
+
+" --> All files, including hidden files, but not
+" those files stored in a .git directory
+" (always respects the .gitignore file)
+nmap <C-p> :Telescope find_files hidden=true <CR>
+nmap <Space>p :Telescope find_files hidden=true <CR>
+
+" --> All files, but not including hidden files
+" (always respects the .gitignore file)
+nmap <Space>o :Telescope find_files <CR>
+
+" --> Lines or marks of the current buffer
+nmap <Space>r :Telescope current_buffer_fuzzy_find <CR>
+nmap <Space>m :Telescope marks <CR>
+
+" --> Tags in buffer or all tags across the project directory
+" define mappings for both Telescope and FZF since tag-based
+" navigation with Telescope fails with error, especially for:
+"  -- LaTeX
+"  -- Markdown
+nmap <Space>tt :Telescope tags <CR>
+nmap <Leader>tt :Tags <CR>
+nmap <Space>tb :Telescope current_buffer_tags <CR>
+nmap <Leader>tb :BTags <CR>
+
+" --> Code components search using Treesitter
+" (does not display anything if there is no treesitter
+" for a specific language, like with the .vimrc file)
+nnoremap <Space>ts :Telescope treesitter <CR>
+
+" --> All matches in non-hidden files for word under cursor
+" (only works for the specific word under the cursor, meaning
+" that this is not a :Telescope live_grep)
+nnoremap <Space>gs :Telescope grep_string <CR>
+nnoremap <Leader>gs :Rg <C-R><C-W><CR>
+
+" --> All matches in non-hidden files for input word
+nnoremap <Space>ga :Telescope live_grep <CR>
+nnoremap <Leader>ga :Rg <CR>
+
+" --> Names of open buffers
+" nnoremap <Tab> :Telescope buffers <CR>
+nnoremap <Space>i :Telescope buffers <CR>
+
+" --> Ultisnips-based snippets available for buffer
+nnoremap <Space>s :Telescope ultisnips <CR>
+
+" --> Recently run commands
+nnoremap <Space>h :Telescope command_history <CR>
+
+" --> Spelling fix suggestions for word under cursor
+nnoremap <Space>z :Telescope spell_suggest <CR>
+
+" --> Language server mappings
+" -- Navigation
+nnoremap <Space>gd :Telescope lsp_definitions <CR>
+nnoremap <Space>gr :Telescope lsp_references <CR>
+" -- Diagnostics
+nnoremap <Space>dd :Telescope lsp_document_diagnostics <CR>
+nnoremap <Space>wd :Telescope lsp_workspace_diagnostics <CR>
+
+" }}}
+
+" FZF {{{
+
+" NOTE: FZF is used in conjunction with telescope.nvim because
+" plugins like wiki.vim are integrated with FZF. Moreover,
+" although all FZF commands are no longer directly integrated into
+" the workflow with nnoremap's, they are still available if needed.
+
+" NOTE: There are alternate FZF-based commands for the use of,
+" for instance, tags and grepping because Telescope's variants
+" do not work correctly or do not work efficiently enough.
+"
+" The Telescope-based commands are prefixed with <Space>
+" and the FZF-based commands are prefixed with <Leader>
+
+" Define the layout of FZF's window so that it matches the height
+" and width of the Telescope window
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.85 } }
+
+" Define unique colors for FZF's display
+" inside of Neovim (note that these colors
+" match telescope.nvim and not FZF in terminal)
+let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Normal'],
+      \ 'fg+':     ['fg', 'String', 'Normal', 'Normal'],
+      \ 'bg+':     ['bg', 'Normal', 'Normal'],
+      \ 'hl+':     ['fg', 'Identifier'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Comment'],
+      \ 'prompt':  ['fg', 'Identifier'],
+      \ 'pointer': ['fg', 'Identifier'],
+      \ 'marker':  ['fg', 'Identifier'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+
+" Use rg by default
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --glob "!{node_modules/*,.git/*}"'
+  set grepprg=rg\ --vimgrep
+endif
+
+" Re-define the Rg command so that it considers hidden files
+"
+" Note that the use of "-uu" includes the hidden files
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg -uu --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
+" --> Files matching search terms with either Ag or Rg
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+
+" Use FZF to search through the TOC of a LaTeX document
+nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
+
+" Show the mappings that are currently available
+nmap <leader><tab> <plug>(fzf--n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" }}}
+
+" Sandwich {{{
+
+" Do not use the default mappings to preserve
+" the use of the sentence object in technical writing
+" let g:textobj_sandwich_no_default_key_mappings = 1
+
+" Do not use the default mappings to preserve
+" the use of "s" from the lightspeed plugin;
+" instead use the default bindings of surround
+" while gaining the benefits of sandwich
+runtime macros/sandwich/keymap/surround.vim
 
 " }}}
 
@@ -784,11 +1369,6 @@ filetype indent plugin on | syn on
 " the next line when pressing "return"
 set formatoptions+=r
 
-" Define a color scheme for Python source code highlighting
-augroup semshiconfiguration
-  let g:semshi#error_sign = v:false
-augroup END
-
 " Configure settings for different file types
 augroup configurationgroupforfiletypes
   autocmd!
@@ -825,6 +1405,10 @@ augroup configurationgroupforfiletypes
     setlocal formatoptions=jtcqn
     setlocal wrap linebreak textwidth=80
   endfunction
+
+  " Always set the file type to mail when reading a temporary file
+  " that was created by the mutt mail user agent
+  autocmd BufNewFile,BufRead ~/.mutt/tmp/mutt* set filetype=mail
 
   " When linting is costly in Java, only perform it in normal mode
   autocmd Filetype java call SetJavaLintingOptions()
@@ -863,9 +1447,6 @@ let R_assign = 2
 let R_openpdf = 0
 let R_show_args = 1
 
-" Force Jedi to use version 3
-let g:jedi#force_py_version = 3
-
 " Run the black formatter on current Python file
 " NOTE: this is not the standard method, but
 " I adopted it because Black did not work well
@@ -874,10 +1455,6 @@ command! Black cexpr system('black ' . shellescape(expand('%')))<bar>:checktime
 
 " Run the black formatter on all of the Python files
 command! Blacken cexpr system('black **/*.py')<bar>:checktime
-
-" If using yapf, format Python code according to PEP8
-" Note that I should standardly use :Black and :Blacken
-let g:formatter_yapf_style = 'pep8'
 
 " Set the hosts programs for Python and Python3
 " This improves performance when loading plugins using Python
@@ -889,9 +1466,6 @@ else
   let g:python3_host_prog = '/usr/bin/python'
 endif
 
-" Turn on the EchoDoc plugin for languages like Python
-let g:echodoc#enable_at_startup = 1
-
 " Indenting for HTML
 au BufRead,BufNewFile *.html set filetype=html
 let g:html_indent_inctags = 'html,body,head,tbody,div'
@@ -900,7 +1474,7 @@ let g:html_indent_inctags = 'html,body,head,tbody,div'
 let g:pandoc#modules#disabled = ['folding']
 
 " Preview for Markdown
-let g:mkdp_browser = '/usr/bin/firefox'
+let g:mkdp_browser = '/usr/sbin/firefox'
 let g:mkdp_page_title = '${name}'
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
@@ -936,14 +1510,7 @@ let g:ale_sign_error = '✗'
 
 " Markdown {{{
 
-" First command: Make a list item in markdown a task
-" Second command: Mark a task in markdown as done
-" These two commands work for normal mode and visual mode
-" nnoremap <silent> <Space>w :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[<space>]<space>/<CR>0f]h
-" nnoremap <silent> <Space>d :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[X]<space>/<CR>0f]h
-" vnoremap <silent> <Space>w :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[<space>]<space>/<CR>0f]h
-" vnoremap <silent> <Space>d :s/^\s*\(-<space>\\|\*<space>\)\?\zs\(\[[^\]]*\]<space>\)\?\ze./[X]<space>/<CR>0f]h
-
+" Use the lists.vim plugin for markdown and wiki filetypes
 let g:lists_filetypes = ['markdown', 'wiki']
 
 " Convert the checkmark symbol, which is not on the keyboard, to a dash.
@@ -1042,506 +1609,13 @@ augroup END
 
 " Comments {{{
 
+" Use the comment.nvim plugin
+lua << EOF
+require('Comment').setup()
+EOF
+
 " Insert a comment symbol on the current line at cursor location
 nmap <Space>cc :execute "normal! i" . split(&commentstring, '%s')[0]<CR>
-
-" }}}
-
-" Completion {{{
-
-" Define basic completion function
-set omnifunc=syntaxcomplete#Complete
-
-" Define the dictionaries
-set dictionary-=/usr/share/dict/american-english
-set dictionary+=/usr/share/dict/american-english
-
-" Completion includes dictionaries
-set complete-=k complete+=k
-set complete+=kspell
-set complete+=]
-
-" Completion menus
-set wildmenu
-set wildmode=longest:full,full
-
-" Set the completion approach for the engine
-set completeopt=noinsert,menuone,noselect
-
-" Completion engine is compatible with UltiSnips
-let g:UltiSnipsExpandTrigger='<C-k>'
-let g:UltiSnipsJumpForwardTrigger='<C-k>'
-let g:UltiSnipsJumpBackwardTrigger='<C-j>'
-
-" Completion compatible with the tmux-complete
-let g:tmuxcomplete#trigger = 'omnifunc'
-
-" Do not echo messages (nor will searches)
-set noshowmode
-
-" Infer the case when doing completion
-set infercase
-
-" }}}
-
-" Basic Keyboard Movement {{{
-
-" Disable the arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-inoremap jk <ESC>
-inoremap <ESC> <NOP>
-
-" Define the leaders
-let maplocalleader=','
-let mapleader=','
-
-" Move through CamelCase text
-call camelcasemotion#CreateMotionMappings('<space>')
-
-" Navigate through wrapped text
-nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-
-" Navigate to the next linting warning/error
-nmap <silent> <C-k> <Plug>(ale_previous)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-" Quickly switch between two recent buffers
-function! SwitchBuffer()
-  b#
-endfunction
-" Use either control or space to activate
-nmap <C-u> :call SwitchBuffer()<CR>
-nmap <Space>u :call SwitchBuffer()<CR>
-
-" Redefine the default mapping of <Leader><Leader> for
-" the easymotion prefix, which I do not use frequently.
-" Note that the default for this mapping conflicts with
-" the following mapping created for the colon key
-map <Leader><Space> <Plug>(easymotion-prefix)
-
-" Define <leader<leader> to create a colon in both
-" normal mode and visual mode, thereby avoiding
-" the need to frequently type the shift key
-nnoremap <leader><leader> :
-vnoremap <leader><leader> :
-
-" }}}
-
-" Advanced Search Highlighting {{{
-
-" Incrementally highlight the search matches
-set incsearch
-
-" Support the highlighting of words
-nnoremap <silent><expr> <Leader>i (&hls && v:hlsearch ? ':set nohlsearch' : ':set hlsearch')."\n"
-
-" Carefully ignore the case of words when searching
-set ignorecase
-set smartcase
-
-" Make :grep use ripgrep and use -uu to not ignore files
-" This is an alternative to :Rg or :Ag which ignore some files
-set grepprg=rg\ -uu\ --vimgrep\ --no-heading\ --smart-case
-
-" }}}
-
-" Advanced Keyboard Movement with Easymotion {{{
-
-" Make f (single-character search) and
-" <leader>f (two-character search) with easymotion.
-" Using <leader>f instead of "s" avoids a conflict
-" with the vim-sandwich plugin that uses "s" for sandwich-ing
-nmap f <Plug>(easymotion-s)
-nmap <leader>f <Plug>(easymotion-s2)
-nmap <leader>e <Plug>(easymotion-next)
-nmap <leader>E <Plug>(easymotion-prev)
-
-" Do not create the shaded background
-let g:EasyMotion_do_shade = 0
-
-" Use uppercase letters
-let g:EasyMotion_use_upper = 1
-let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
-
-" }}}
-
-" Text Manipulation {{{
-
-" Insert a blank line at end of line
-nmap oo Ojk
-
-" Insert a blank line at cursor
-nnoremap oO i<CR><ESC>
-
-" Support the backspace key in insert mode
-set backspace=indent,eol,start
-
-" Interactive EasyAlign in visual mode (e.g., 'vipga')
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g., gaip)
-nmap ga <Plug>(EasyAlign)
-
-" Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-
-" Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-lua << EOF
-require('nvim-autopairs').setup()
-EOF
-
-" Remove trailing whitespace
-nnoremap <Leader>rtw :%s/\s\+$//e<CR>
-
-" Fix a misspelling with next-best word
-nmap <silent> zn <Plug>(SpellRotateForward)
-nmap <silent> zp <Plug>(SpellRotateBackward)
-vmap <silent> zn <Plug>(SpellRotateForwardV)
-vmap <silent> zp <Plug>(SpellRotateBackwardV)
-
-" Toggle the display of spelling mistakes
-nmap <silent> <leader>s :set spell!<CR>
-
-" }}}
-
-" File System {{{
-
-augroup dirvishconfiguration
-  autocmd!
-  " Disable spell checking for the Dirvish buffers
-  autocmd FileType dirvish setlocal nospell
-
-  " Map `gr` to reload the Dirvish buffer
-  autocmd FileType dirvish nnoremap <silent><buffer> gr :<C-U>Dirvish %<CR>
-
-  " Map `gh` to hide dot-prefixed files
-  " To toggle this, press `gr` to reload
-  autocmd FileType dirvish nnoremap <silent><buffer>
-        \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
-augroup END
-
-" Define the symbols used to indicate the status of the
-" version control repository in a dirvish buffer
-let g:dirvish_git_indicators = {
-\ 'Modified'  : '!',
-\ 'Staged'    : '+',
-\ 'Untracked' : '?',
-\ 'Renamed'   : '➜',
-\ 'Unmerged'  : '═',
-\ 'Ignored'   : '',
-\ 'Unknown'   : ''
-\ }
-
-" Define the highlight color for version control details in dirvish
-let g:gitstatus = 'guifg=#d78700 ctermfg=172'
-
-" Define the color scheme to always be the same color;
-" this is acceptable because the symbols vary.
-silent exe 'hi default DirvishGitModified '.g:gitstatus
-silent exe 'hi default DirvishGitStaged '.g:gitstatus
-silent exe 'hi default DirvishGitRenamed '.g:gitstatus
-silent exe 'hi default DirvishGitUnmerged '.g:gitstatus
-silent exe 'hi default DirvishGitIgnored guifg=NONE guibg=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=NONE'
-silent exe 'hi default DirvishGitUntracked guifg=NONE guibg=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=NONE'
-silent exe 'hi default link DirvishGitUntrackedDir DirvishPathTail'
-
-" }}}
-
-" Man Pages {{
-
-" Fuzzy search through the man pages with Fzf and then
-" display the selected man page inside of Vim
-command! -nargs=? Superman call fzf#run(fzf#wrap({'source': 'man -k -s 1 '.shellescape(<q-args>).' | cut -d " " -f 1', 'sink': 'tab Man', 'options': ['--preview', 'MANPAGER=cat MANWIDTH='.(&columns/2-4).' man {}']}))
-
-" }}}
-
-" Fugitive {{
-
-" Run Fugitive commands asynchronously using AsyncRun
-command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
-
-" Resolve a merge conflict with a three-pane vertical split
-nnoremap <leader>gd :Gvdiffsplit!<CR>
-
-" Merge the "head" into the current file
-nnoremap gdh :diffget //2<CR>
-
-" Merge the "branch" into the remote file
-nnoremap gdb :diffget //3<CR>
-
-" Perform a Gcommit for the current hunk with a mapping
-nnoremap <leader>gcc :Git commit <CR>
-
-" Perform a Gcommit for the current file with a mapping
-nnoremap <leader>gcf :Git commit %<CR>
-
-" Perform a Gcommit for all modified files with a mapping
-nnoremap <leader>gca :Git commit -a<CR>
-
-" Get the status of the repository
-nnoremap <leader>gs :Git <CR>
-
-" }}}
-
-" Sandwich {{
-
-" Do not use the default mappings to preserve
-" the use of the sentence object in technical writing
-let g:textobj_sandwich_no_default_key_mappings = 1
-
-" Remap the auto-mode sandwich operators
-" to the same mappings used by default
-" - Usage example: file_name after saiw" --> "file_name"
-" - Usage example: recent optimizations after
-" saif" --> "recent optimizations"
-" because the f" will search for quote mark
-xmap ib <Plug>(textobj-sandwich-auto-i)
-omap ib <Plug>(textobj-sandwich-auto-i)
-xmap ab <Plug>(textobj-sandwich-auto-a)
-omap ab <Plug>(textobj-sandwich-auto-a)
-
-" Remap the query-mode sandwich operators
-" that work for dynamically detected regions.
-" Note that this uses, for instance, 'iq'
-" instead of 'is' to avoid conflict with sentence.
-" The intuition is that these 'query' for a
-" delimiter and then dynamically match a region.
-xmap iq <Plug>(textobj-sandwich-query-i)
-omap iq <Plug>(textobj-sandwich-query-i)
-xmap aq <Plug>(textobj-sandwich-query-a)
-omap aq <Plug>(textobj-sandwich-query-a)
-
-" Disable the s command for deleting characters
-" Reference: https://github.com/machakann/Vim-sandwich/issues/62
-map <silent> s <nop>
-map <silent> S <nop>
-
-" }}}
-
-" AutoSave {{{
-
-lua << EOF
-local autosave = require("autosave")
-autosave.setup(
-    {
-        enabled = true,
-        execution_message = " Auto-saved at " .. vim.fn.strftime("%I:%M:%S %p"),
-        events = {"InsertLeave", "TextChanged"},
-        conditions = {
-            exists = true,
-            filetype_is_not = {},
-            modifiable = true
-        },
-        write_all_buffers = false,
-        on_off_commands = true,
-        clean_command_line_interval = 2500
-    }
-)
-EOF
-
-" }}}
-
-" Telescope {{{
-
-lua << EOF
-local actions = require('telescope.actions')
-require('telescope').setup {
-  defaults = {
-    vimgrep_arguments = {
-      'rg',
-      '--hidden',
-      '--color=never',
-      '--no-heading',
-      '--with-filename',
-      '--line-number',
-      '--column',
-      '--smart-case'
-    },
-    mappings = {
-    i = {
-      ["<esc>"] = actions.close,
-      },
-    n = {
-      ["<esc>"] = actions.close,
-      ["<cr>"] = false,
-      },
-    },
-    layout_config = {
-      horizontal = {
-        height = 0.8,
-        width = 0.9
-      }
-    },
-    prompt_prefix = "> ",
-    selection_caret = "> ",
-    entry_prefix = "  ",
-    initial_mode = "insert",
-    selection_strategy = "closest",
-    sorting_strategy = "descending",
-    layout_strategy = "horizontal",
-    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-    file_ignore_patterns = {},
-    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
-    shorten_path = true,
-    winblend = 0,
-    border = {},
-    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-    color_devicons = false,
-    use_less = true,
-    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-  },
-  pickers = {
-    buffers = {
-        sort_lastused = true,
-      }
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case",
-    }
-  }
-}
--- load extensions after calling setup function
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('ultisnips')
-EOF
-
-" Do not allow ncm2 to complete when in the TelescopePrompt
-autocmd FileType TelescopePrompt call ncm2#disable_for_buffer()
-
-" Command mappings for Telescope to find:
-" (note that Ctrl-mappings are provided for some commands
-" when those are ones for which there is a muscle memory)
-
-" --> All files, including hidden files, but not
-" those files stored in a .git directory
-" (always respects the .gitignore file)
-nmap <C-p> :Telescope find_files hidden=true <CR>
-nmap <Space>p :Telescope find_files hidden=true <CR>
-
-" --> All files, but not including hidden files
-" (always respects the .gitignore file)
-nmap <Space>o :Telescope find_files <CR>
-
-" --> Lines or marks of the current buffer
-nmap <Space>r :Telescope current_buffer_fuzzy_find <CR>
-nmap <Space>m :Telescope marks <CR>
-
-" --> Tags in buffer or all tags across the project directory
-" define mappings for both Telescope and FZF since tag-based
-" navigation with Telescope fails with error, especially for:
-"  -- LaTeX
-"  -- Markdown
-nmap <Space>tt :Telescope tags <CR>
-nmap <Leader>tt :Tags <CR>
-nmap <Space>tb :Telescope current_buffer_tags <CR>
-nmap <Leader>tb :BTags <CR>
-
-" --> Code components search using Treesitter
-" (does not display anything if there is no treesitter
-" for a specific language, like with the .vimrc file)
-nnoremap <Space>ts :Telescope treesitter <CR>
-
-" --> All matches in non-hidden files for word under cursor
-" (only works for the specific word under the cursor, meaning
-" that this is not a :Telescope live_grep)
-nnoremap <Space>gs :Telescope grep_string <CR>
-nnoremap <Leader>gs :Rg <C-R><C-W><CR>
-
-" --> All matches in non-hidden files for input word
-nnoremap <Space>ga :Telescope live_grep <CR>
-nnoremap <Leader>ga :Rg <CR>
-
-" --> Names of open buffers
-nnoremap <Tab> :Telescope buffers <CR>
-nnoremap <Space>i :Telescope buffers <CR>
-
-" --> Ultisnips-based snippets available for buffer
-nnoremap <Space>s :Telescope ultisnips <CR>
-
-" --> Recently run commands
-nnoremap <Space>h :Telescope command_history <CR>
-
-" --> Spelling fix suggestions for word under cursor
-nnoremap <Space>z :Telescope spell_suggest <CR>
-
-" }}}
-
-" FZF {{{
-
-" NOTE: FZF is used in conjunction with telescope.nvim because
-" plugins like wiki.vim are integrated with FZF. Moreover,
-" although all FZF commands are no longer directly integrated into
-" the workflow with nnoremap's, they are still available if needed.
-
-" NOTE: There are alternate FZF-based commands for the use of,
-" for instance, tags and grepping because Telescope's variants
-" do not work correctly or do not work efficiently enough.
-"
-" The Telescope-based commands are prefixed with <Space>
-" and the FZF-based commands are prefixed with <Leader>
-
-" Define the layout of FZF's window so that it matches the height
-" and width of the Telescope window
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.85 } }
-
-" Define unique colors for FZF's display
-" inside of Neovim (note that these colors
-" match telescope.nvim and not FZF in terminal)
-let g:fzf_colors =
-    \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Normal'],
-      \ 'fg+':     ['fg', 'String', 'Normal', 'Normal'],
-      \ 'bg+':     ['bg', 'Normal', 'Normal'],
-      \ 'hl+':     ['fg', 'Identifier'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'border':  ['fg', 'Comment'],
-      \ 'prompt':  ['fg', 'Identifier'],
-      \ 'pointer': ['fg', 'Identifier'],
-      \ 'marker':  ['fg', 'Identifier'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
-
-" Use rg by default
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore --hidden --follow --glob "!{node_modules/*,.git/*}"'
-  set grepprg=rg\ --vimgrep
-endif
-
-" Re-define the Rg command so that it considers hidden files
-"
-" Note that the use of "-uu" includes the hidden files
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg -uu --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
-
-" --> Files matching search terms with either Ag or Rg
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
-
-" Use FZF to search through the TOC of a LaTeX document
-nnoremap <leader>lf :call vimtex#fzf#run('ctli')<cr>
-
-" Show the mappings that are currently available
-nmap <leader><tab> <plug>(fzf--n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
 
 " }}}
 
@@ -1584,187 +1658,5 @@ endfunction
 
 " Find the alternate file for the current path and then open it
 nnoremap <Space>a :w<cr>:call AltCommand(expand('%'), ':e')<cr>
-
-" }}}
-
-" Neovim Configuration {{{
-
-" Do not use a different cursor shape
-if has("nvim")
-  set guicursor=
-endif
-
-" Use nvr for remove communication
-if has("nvim")
-  let g:vimtex_compiler_progname = 'nvr'
-endif
-
-" Leave using a different command than ESC
-if has("nvim")
-  inoremap <ESC> <C-\><C-n>
-  tnoremap jk <C-\><C-n>
-  nmap oo O<ESC>
-endif
-
-" Use the new inccommand
-if has("nvim")
-  set inccommand=split
-endif
-
-" Set the clipboard to use xclip (not xsel)
-if has("nvim")
-  let g:clipboard = {
-        \   'name': 'NeovimClipboard',
-        \   'copy': {
-        \      '+': 'xclip -i -selection clipboard',
-        \      '*': 'xclip -i -selection clipboard',
-        \    },
-        \   'paste': {
-        \      '+': 'xclip -o -selection clipboard',
-        \      '*': 'xclip -o -selection clipboard',
-        \   },
-        \   'cache_enabled': 1,
-        \ }
-endif
-
-" Highlight trailing spaces
-if has("nvim")
-  match ExtraWhitespace /\s\+$\|\t/
-  augroup extra_whitespace
-    autocmd!
-    autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-    autocmd BufWinLeave * call clearmatches()
-  augroup END
-endif
-
-" Ensure that Neovim exits quickly and gives no line numbers when using fzf
-if has('nvim')
-  aug fzf_setup
-    au!
-    au TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
-    au TermOpen term://*FZF setlocal nonumber nornu
-  aug END
-end
-
-" }}}
-
-" Completion Settings with ncm2 {{{
-
-" Enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
-
-" Configure ncm2 so that it appears quickly
-let ncm2#popup_delay = 1
-
-" Show a preview of completion details
-" For instance, useful to see Python function signature
-" Do not display in a bottom-screen doc, instead near menu
-let g:float_preview#docked = 0
-
-" Configure the floating preview window for completions
-augroup my_floating_window_configuration
-function! DisableExtras()
-  call nvim_win_set_option(g:float_preview#win, 'number', v:false)
-  call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:false)
-  call nvim_win_set_option(g:float_preview#win, 'cursorline', v:false)
-  call nvim_win_set_option(g:float_preview#win, 'spell', v:false)
-endfunction
-autocmd User FloatPreviewWinOpen call DisableExtras()
-augroup END
-
-" Use a matcher and a sorter that work together
-let g:ncm2#matcher = 'abbrfuzzy'
-let g:ncm2#sorter = 'abbrfuzzy'
-
-" Follow vimtex's documentation to configuration ncm2
-" This ensures that labels and references complete correctly
-augroup my_cm_setup
-  autocmd!
-  autocmd BufEnter * call ncm2#enable_for_buffer()
-  autocmd Filetype tex call ncm2#register_source({
-        \ 'name' : 'vimtex-cmds',
-        \ 'priority': 8,
-        \ 'complete_length': -1,
-        \ 'scope': ['tex'],
-        \ 'matcher': {'name': 'prefix', 'key': 'word'},
-        \ 'word_pattern': '\w+',
-        \ 'complete_pattern': g:vimtex#re#ncm2#cmds,
-        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-        \ })
-  autocmd Filetype tex call ncm2#register_source({
-        \ 'name' : 'vimtex-labels',
-        \ 'priority': 8,
-        \ 'complete_length': -1,
-        \ 'scope': ['tex'],
-        \ 'matcher': {'name': 'combine',
-        \             'matchers': [
-        \               {'name': 'substr', 'key': 'word'},
-        \               {'name': 'substr', 'key': 'menu'},
-        \             ]},
-        \ 'word_pattern': '\w+',
-        \ 'complete_pattern': g:vimtex#re#ncm2#labels,
-        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-        \ })
-  autocmd Filetype tex call ncm2#register_source({
-        \ 'name' : 'vimtex-files',
-        \ 'priority': 8,
-        \ 'complete_length': -1,
-        \ 'scope': ['tex'],
-        \ 'matcher': {'name': 'combine',
-        \             'matchers': [
-        \               {'name': 'abbrfuzzy', 'key': 'word'},
-        \               {'name': 'abbrfuzzy', 'key': 'abbr'},
-        \             ]},
-        \ 'word_pattern': '\w+',
-        \ 'complete_pattern': g:vimtex#re#ncm2#files,
-        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-        \ })
-  autocmd Filetype tex call ncm2#register_source({
-        \ 'name' : 'bibtex',
-        \ 'priority': 8,
-        \ 'complete_length': -1,
-        \ 'scope': ['tex'],
-        \ 'matcher': {'name': 'combine',
-        \             'matchers': [
-        \               {'name': 'prefix', 'key': 'word'},
-        \               {'name': 'abbrfuzzy', 'key': 'abbr'},
-        \               {'name': 'abbrfuzzy', 'key': 'menu'},
-        \             ]},
-        \ 'word_pattern': '\w+',
-        \ 'complete_pattern': g:vimtex#re#ncm2#bibtex,
-        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-        \ })
-augroup END
-
-" CTRL-c doesn't trigger the InsertLeave autocmd, so map to <ESC> instead
-inoremap <c-c> <ESC>
-
-" Enable auto complete for `<backspace>`, `<c-w>` keys
-augroup ImproveNcmTwoCompletion
-  au TextChangedI * call ncm2#auto_trigger()
-augroup END
-
-" Pressing <Enter> while the pop-up menu is visible will hide menu.
-" Use this mapping to close the menu and also start a new line.
-" This configures the completion engine to make it more useful.
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-
-" Enable the ncm2 completion engine to use the "look" dictionary
-let g:ncm2_look_enabled = 1
-
-" Configure deoplete to use Tab for forward and backward movement
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-TAB>"
-
-" Disable jedi-vim auto-completion and enable call-signatures options
-let g:jedi#auto_initialization = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#completions_command = ''
-let g:jedi#completions_enabled = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = '1'
-let g:jedi#smart_auto_mappings = 0
 
 " }}}
