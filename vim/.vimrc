@@ -39,7 +39,6 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'kevinhwang91/nvim-bqf', {'branch': 'main'}
 Plug 'Konfekt/vim-sentence-chopper'
 Plug 'kristijanhusak/vim-dirvish-git'
-" Plug 'kshenoy/vim-signature'
 Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
@@ -341,9 +340,6 @@ map <F4> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F5> :call SyntaxAttr() <CR>
-
-" Display special characters as sign column marks
-" let g:SignatureIncludeMarkers = '▶︎⏺@#$%ˆ&*('
 
 " Do not display the match of an offscreen delimiter
 let g:matchup_matchparen_status_offscreen = 0
