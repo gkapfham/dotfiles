@@ -95,10 +95,10 @@ type = internal/network
 interface = wlp0s20f3
 interval = 3.0
 udspeed-minwidth = 0
-format-connected-prefix = ""
+format-connected-prefix = " "
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
-label-connected = %upspeed:8% 祝%downspeed:8%     %essid%  說 %signal:2%
+label-connected = %upspeed:9% 祝%downspeed:9%     %essid%  說 %signal:2%
 label-packetloss =   %essid% 說 %signal:2% %upspeed:9% 祝%downspeed:9% 
 ; label-disconnected =  Disconnected
 
