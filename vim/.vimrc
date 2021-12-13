@@ -362,11 +362,11 @@ augroup END
 
 lua << EOF
 require'marks'.setup {
-  -- whether to map keybinds or not. default true
+  -- do not use the default keybindings
   default_mappings = false,
-  -- whether movements cycle back to the beginning/end of buffer. default true
+  -- make movements cycle back to the beginning/end of buffer
   cyclic = true,
-  -- whether the shada file is updated after modifying uppercase marks. default false
+  -- do not save the marks into the shada file
   force_write_shada = false,
   -- how often (in ms) to redraw signs/recompute mark positions.
   -- higher values will have better performance but may cause visual lag,
@@ -376,7 +376,6 @@ require'marks'.setup {
   -- marks, and bookmarks.
   -- can be either a table with all/none of the keys, or a single number, in which case
   -- the priority applies to all marks.
-  -- default 10.
   sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
   -- define mappings that are different than the default
   mappings = {
