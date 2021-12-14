@@ -1209,6 +1209,7 @@ nnoremap <Space>z :Telescope spell_suggest <CR>
 " -- Navigation
 nnoremap <Space>gd :Telescope lsp_definitions <CR>
 nnoremap <Space>gr :Telescope lsp_references <CR>
+
 " -- Diagnostics
 nnoremap <Space>dd :Telescope lsp_document_diagnostics <CR>
 nnoremap <Space>wd :Telescope lsp_workspace_diagnostics <CR>
@@ -1307,13 +1308,13 @@ lua << EOF
         suggestions = 20, -- how many suggestions should be shown in the list?
       },
       presets = {
-        operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-        motions = true, -- adds help for motions
-        text_objects = true, -- help for text objects triggered after entering an operator
-        windows = true, -- default bindings on <c-w>
-        nav = true, -- misc bindings to work with windows
-        z = true, -- bindings for folds, spelling and others prefixed with z
-        g = true, -- bindings for prefixed with g
+        operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+        motions = false, -- adds help for motions
+        text_objects = false, -- help for text objects triggered after entering an operator
+        windows = false, -- default bindings on <c-w>
+        nav = false, -- misc bindings to work with windows
+        z = false, -- bindings for folds, spelling and others prefixed with z
+        g = false, -- bindings for prefixed with g
       },
     },
     -- add operators that will trigger motion and text object completion
@@ -1337,7 +1338,7 @@ lua << EOF
     ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "}, -- hide mapping boilerplate
     show_help = false, -- show help message on the command line when the popup is visible
-    triggers = "auto", -- automatically setup triggers
+    triggers = "", -- automatically setup triggers
     -- triggers = {"<leader>"} -- or specify a list manually
     triggers_blacklist = {
       -- list of mode / prefixes that should never be hooked by WhichKey
@@ -1348,6 +1349,9 @@ lua << EOF
     },
   }
 EOF
+
+" Support the manual triggering of WhichKey
+nnoremap <Space>wk :WhichKey <CR>
 
 " }}}
 
