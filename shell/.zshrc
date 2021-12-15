@@ -649,6 +649,9 @@ function workspace {
 
 # Asdf-vm {{{
 
+# Setup asdf-vm so that shims are available for all installed plugins
+# Currently using asdf-vm to manage:
+# --> Python
 . /opt/asdf-vm/asdf.sh
 
 # }}}
