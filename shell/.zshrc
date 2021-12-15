@@ -96,14 +96,13 @@ export BROWSER=/usr/bin/firefox
 # --> JavaScript npm
 # --> Rust with cargo
 # --> Go with .gocode
-# --> Poetry with .poetry
 export PATH="$HOME/.local/pipx/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin::$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
 
 # Add the bin directory for Ruby gems to the Path
 export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
 
-# Local pyenv home
-export PYENV_ROOT="$HOME/.pyenv"
+# # Local pyenv home
+# export PYENV_ROOT="$HOME/.pyenv"
 
 # Local Gem home
 export GEM_HOME=$HOME/.gem
@@ -648,11 +647,17 @@ function workspace {
 
 # }}}
 
+# Asdf-vm {{{
+
+. /opt/asdf-vm/asdf.sh
+
+# }}}
+
 # Pyenv {{{
 
-# Fast load of pyenv immediately upon shell startup
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(command pyenv init - zsh --no-rehash)"
+# # Fast load of pyenv immediately upon shell startup
+# export PATH="$HOME/.pyenv/bin:$PATH"
+# eval "$(command pyenv init - zsh --no-rehash)"
 
 # }}}
 
