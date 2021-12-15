@@ -36,12 +36,6 @@ export GDK_DPI_SCALE=1.25
 # as was selected through lxappearance for a GTK theme
 export QT_QPA_PLATFORMTHEME=gtk2
 
-# Startup pyenv so that it can also be correctly
-# sourced inside the .zshrc file
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-
 # Start the i3 window manager using the startx command
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
