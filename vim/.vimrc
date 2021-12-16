@@ -1555,6 +1555,17 @@ nnoremap <Space>fc :WikiFzfToc <CR>
 
 " LaTeX {{{
 
+" Note about error in vimtex workflow:
+" - Open LaTeX main document in nvim
+" - Start to compile the document with ,ll
+" - Zathura opens the document correctly
+" - Make a single change to the document
+" - Error: Zathura closes the document
+" - Start the preview of document with ,lv
+" - Zathura opens document correctly
+" - All remaining edits now work correctly
+" - Same error is evident if running latexmk separately
+
 " Configure vimtex
 " --> Do not fold
 let g:vimtex_fold_enabled = 0
@@ -1568,6 +1579,24 @@ let g:vimtex_view_method = 'zathura'
 "     to facilitate communication between
 "     Neovim and the Zathura PDF viewer
 let g:vimtex_compiler_progname = 'nvr'
+
+" Configure the latexmk compiler; especially
+" turning off the callback as this seems to
+" generate error messages when compiling
+" and using the zathura program.
+let g:vimtex_compiler_latexmk = {
+    \ 'build_dir' : '',
+    \ 'callback' : 0,
+    \ 'continuous' : 1,
+    \ 'executable' : 'latexmk',
+    \ 'hooks' : [],
+    \ 'options' : [
+    \   '-verbose',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \   '-interaction=nonstopmode',
+    \ ],
+    \}
 
 " Define mapping to generate and view the table of contents
 nnoremap <leader>lt :VimtexTocToggle<cr>
