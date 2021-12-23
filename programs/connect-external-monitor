@@ -129,7 +129,7 @@
 
 # Command for above output:
 
-xrandr --output DP1-3 --above eDP1 --auto
+xrandr --output DP1 --above eDP1 --auto
 
 # Either command leads to connecting the
 # two displays together so that the external display
