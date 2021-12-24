@@ -99,7 +99,10 @@ export BROWSER=/usr/bin/firefox
 export PATH="$HOME/.local/pipx/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin::$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
 
 # Add the bin directory for Ruby gems to the Path
+# --> Ruby gems as managed by Ruby installed by operating system
 export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
+# --> Ruby gems as managed by Ruby installed by asdf-vm
+export PATH="$PATH:$HOME/.gem/bin"
 
 # # Local pyenv home
 # export PYENV_ROOT="$HOME/.pyenv"
@@ -189,6 +192,9 @@ alias pacman="sudo pacman"
 # and 1) then display details about the package in an fzf preview and
 # 2) display the details about the package in shell after selection
 alias yaysearch="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -Si"
+
+# Alias the go-t command to t
+alias t="go-t"
 
 # }}}
 
