@@ -53,7 +53,14 @@
 
     # The geometry of the window:
     #   [{width}]x{height}[+/-{x}+/-{y}]
-    geometry = "850x5-18+75"
+    # geometry = "1850x50-18+75"
+    # The geometry of the window:
+    # --> uses the new specification standard
+    # --> specifies a (min,max) size
+    # --> specifies location of the notification
+    width = (850,1050)
+    height = (100,350)
+    origin = top-right
 
     # Shrink window if it's smaller than the width
     # Will be ignored if width is 0.
