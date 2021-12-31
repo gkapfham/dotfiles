@@ -1074,6 +1074,18 @@ require'lightspeed'.setup {
 }
 EOF
 
+" Use the ; key to repeat a specific use of an invocation using,
+" for instance, an f or an s. This means that if you have previously
+" typed "f c" then you can you a ";" and it will jump to the next
+" matching letter c in the file. This also works for "s cr" as well.
+let g:lightspeed_last_motion = ''
+augroup lightspeed_last_motion
+autocmd!
+autocmd User LightspeedSxEnter let g:lightspeed_last_motion = 'sx'
+autocmd User LightspeedFtEnter let g:lightspeed_last_motion = 'ft'
+augroup end
+map <expr> ; g:lightspeed_last_motion == 'sx' ? "<Plug>Lightspeed_;_sx" : "<Plug>Lightspeed_;_ft"
+
 " }}}
 
 " Telescope {{{
