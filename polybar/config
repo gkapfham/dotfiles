@@ -80,10 +80,10 @@ margin-bottom = 5
 ; Display details about the wired network
 [module/wired-network]
 type = internal/network
-interface = enp3s0u2u4
+interface = enp6s0
 interval = 3.0
 udspeed-minwidth = 0
-format-connected-prefix = "ﯱ"
+format-connected-prefix = "ﯱ "
 format-connected = <label-connected>
 format-disconnected = <label-disconnected>
 label-connected =  %upspeed:8% 祝%downspeed:8% 
