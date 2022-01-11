@@ -755,16 +755,63 @@ printcolor() {
 
 # }}}
 
+# Neovim {{{
+
+# Make sure that Neovim uses full 24-bit color
+if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
+  export COLORTERM="truecolor"
+fi
+
+# }}}
+
+# Zoxide {{{
+
+# NOTE: Use of "cd<Space><Tab>" does not work. After selecting
+# one of the directories with fzf the cd command (which is
+# aliased to "cd" does not actually change to that directory)
+
+# NOTE: I also tried to use "--cmd cd" in the following eval
+# command and then this caused two of the "zoxide: no match
+# found" errors to appear at each prompt display. This is
+# a reference to resolve the problem, but it did not work:
+#
+# https://github.com/ajeetdsouza/zoxide/issues/270
+
+# Initialize the zoxide tool
+eval "$(zoxide init zsh)"
+
+# Define the color scheme for FZF, which zoxide uses
+# when allowing the selection of directories; this
+# color scheme matches (but not exactly, not sure
+# why) the one used with the fzf-tab tool.
+export _ZO_FZF_OPTS="--no-bold --cycle
+  --bind ctrl-f:page-down,ctrl-b:page-up
+  --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
+  --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
+  --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
+  --color=marker:#d78700,spinner:#875f87,header:#875f87"
+
+# Always use the z command when running a "cd"; this
+# means that you can type "cd <partial-dir>" and it
+# will take you to <actual-dir> which is the highest
+# match in the database based on name and score.
+alias cd="z"
+
+# Make it easy to quickly search through the entire
+# database of directories in a fuzzy fashion. This
+# command can accept a <partial-dir> or no directory
+# at all, in which case you can fuzzy search with
+# Fzf through everything stored in the database.
+alias f="zi"
+
+# }}}
+
 # Redefine Aliases {{{
 
 # Already defined in oh-my-zsh, redefine to use exa
 alias ls="exa --color=always"
 
 # }}}
-
-if [ -n "${NVIM_LISTEN_ADDRESS+x}" ]; then
-  export COLORTERM="truecolor"
-fi
 
 # Benchmarking {{{
 
