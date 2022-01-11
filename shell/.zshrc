@@ -675,13 +675,14 @@ function workspace {
 # Lazy load nvm to avoid slow shell startup times
 # Note that this requires you to type one of these
 # commands before they will initially work
-if [ -s "$HOME/.nvm/nvm.sh" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-  alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
-  alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
-  alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
-fi
+
+# if [ -s "$HOME/.nvm/nvm.sh" ]; then
+#   export NVM_DIR="$HOME/.nvm"
+#   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+#   alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
+#   alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
+#   alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
+# fi
 
 # }}}
 
