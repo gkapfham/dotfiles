@@ -25,7 +25,7 @@ Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'honza/vim-snippets'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
 Plug 'jgdavey/tslime.vim'
@@ -49,7 +49,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'mgee/lightline-bufferline'
+" Plug 'mgee/lightline-bufferline'
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
@@ -88,12 +88,21 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-scripts/python_match.vim'
 Plug 'vim-scripts/SyntaxAttr.vim'
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+" Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'folke/trouble.nvim'
+Plug 'mfussenegger/nvim-lint'
+Plug 'nvim-lua/lsp-status.nvim'
+" Plug 'josa42/nvim-lightline-lsp'
+" Plug 'nanozuki/tabby.nvim'
+" Plug 'akinsho/bufferline.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -613,52 +622,265 @@ nmap <silent> <leader>s :set spell!<CR>
 
 " Lightline for Status Line and Buffer Line {{{
 
-" Always display the tabline so that lightline buffers can override
-set showtabline=2
+lua << EOF
+-- =============================================================================
+-- lightline to lualine theme converter
+-- Author: shadman
+-- License: MIT License
+-- =============================================================================
 
-" Display icons in lightline buffer at screen top
-let g:lightline#bufferline#enable_devicons = 1
+-- Instructions
 
-" Do not shorten the path of a buffer
-let g:lightline#bufferline#shorten_path = 1
+-- 1. Source this file in neovim with lightline installed
+-- 2. execute :lua light2lualine_theme_converter('theme_name')
 
-" Do not show the buffer, as :b num nav not needed
-let g:lightline#bufferline#show_number = 0
+local M = {}
 
-" Define a name of 'No Name' buffer
-let g:lightline#bufferline#unnamed = '*'
+function M.convert(name)
+  -- Change this to wherever you wana place the output files
+  local install_dir = nil
+  local var_name = "lightline#colorscheme#"..name.."#palette"
+  vim.cmd("let tmp = "..var_name)
+  local theme = vim.g[var_name]
 
-" Configure the lightline according to documentation and examples from statico/dotfiles
-let g:lightline = {
-      \ 'colorscheme': 'vitaminonec',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'spell', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'python', 'gitsigns', 'context', 'modified' ] ],
-      \   'right': [ ['lineinfo'], ['percent'], ['linter_warnings', 'linter_errors', 'linter_ok', 'fileformat', 'fileencoding', 'filetype'], ['gutentags'] ]
-      \ },
-      \ 'component_function': {
-      \   'readonly': 'LightlineReadonly',
-      \   'fugitive': 'LightlineFugitive',
-      \   'spell': 'LightlineSpell',
-      \   'filetype': 'LightlineFiletype',
-      \   'fileformat': 'LightlineFileformat',
-      \   'filename': 'LightlineFilename',
-      \   'gutentags': 'LightlineGutentags',
-      \   'gitsigns': 'LightlineGitsigns',
-      \   'linter_warnings': 'LightlineLinterWarnings',
-      \   'linter_errors': 'LightlineLinterErrors',
-      \   'linter_ok': 'LightlineLinterOK',
-      \   'python': 'LightlinePythonEnvironment'
-      \ },
-      \ 'component_type': {
-      \   'readonly': 'error',
-      \   'linter_warnings': 'warning',
-      \   'linter_errors': 'error'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-\ }
+  local lua_theme = {}
 
+  for mode, sections in pairs(theme) do
+    if mode ~= 'tabline' then
+      lua_theme[mode] = {}
+      lua_theme[mode].a = {}
+      lua_theme[mode].b = {}
+      lua_theme[mode].c = {}
+      lua_theme[mode].a.fg = sections['left'][1][1]
+      lua_theme[mode].a.bg = sections['left'][1][2]
+      if sections['left'][2] then
+        lua_theme[mode].b.fg = sections['left'][2][1]
+        lua_theme[mode].b.bg = sections['left'][2][2]
+      elseif sections['right'] then
+        lua_theme[mode].b.fg = sections['right'][1][1]
+        lua_theme[mode].b.bg = sections['right'][1][2]
+      end
+      if sections['middle'] then
+        lua_theme[mode].c.fg = sections['middle'][1][1]
+        lua_theme[mode].c.bg = sections['middle'][1][2]
+      end
+    end
+  end
+
+  local colors = {}
+  local next_color = 0
+
+  local function color_insert(color)
+    for k, v in pairs(colors) do
+      if v == color then
+        return nil
+      end
+    end
+    colors["color"..next_color] = color
+    next_color = next_color + 1
+    return nil
+  end
+
+  local function get_color(color)
+    for k, v in pairs(colors) do
+      if v == color then
+        return 'colors.'..k
+      end
+    end
+    colors["color"..next_color] = color
+    next_color = next_color + 1
+    return color
+  end
+
+  for mode, sections in pairs(lua_theme) do
+    for component, parts in pairs(sections) do
+      color_insert(parts.fg)
+      color_insert(parts.bg)
+    end
+  end
+
+  local file
+  if install_dir then
+    file = io.open(install_dir..name..'.lua', 'w')
+  else
+    file = io.open(name..'.lua', 'w')
+  end
+  file:write([[
+-- =============================================================================
+-- Genarated by lightline to lualine theme converter
+--   https://gist.github.com/shadmansaleh/000871c9a608a012721c6acc6d7a19b9
+-- License: MIT License
+-- =============================================================================
+
+]])
+  file:write('local colors = {\n')
+  for k, v in pairs(colors) do
+    file:write(string.format('  %-8s = "%s",\n', k, v))
+  end
+  file:write('}\n\n')
+
+
+  file:write('local '..name..' = {\n')
+  for mode, sections in pairs(lua_theme) do
+    file:write('  '..mode..' = {\n')
+    for component, parts in pairs(sections) do
+      if parts.fg ~= nil and parts.bg ~= nil then
+        if component == 'a' then
+          file:write(string.format('    %s = { fg = %s, bg = %s , gui = "bold", },\n',
+            component, get_color(parts.fg), get_color(parts.bg)))
+        else
+          file:write(string.format('    %s = { fg = %s, bg = %s },\n',
+            component, get_color(parts.fg), get_color(parts.bg)))
+        end
+      end
+    end
+    file:write('  },\n')
+  end
+  file:write('}\n\n')
+  file:write('return '..name)
+  file:close()
+end
+
+light2lualine_theme_converter = M.convert
+return M
+EOF
+
+lua << EOF
+local colors = {
+  color2   = "#87afd7",
+  color7   = "#e06c75",
+  color10  = "#afaf5f",
+  color6   = "#626262",
+  color3   = "#875f87",
+  color1   = "#262626",
+  color0   = "#bcbcbc",
+}
+local vitaminonec = {
+  normal = {
+    b = { fg = colors.color0, bg = colors.color1 },
+    a = { fg = colors.color1, bg = colors.color2 , gui = "bold", },
+    c = { fg = colors.color0, bg = colors.color1 },
+  },
+  visual = {
+    b = { fg = colors.color0, bg = colors.color1 },
+    a = { fg = colors.color1, bg = colors.color3 , gui = "bold", },
+  },
+  inactive = {
+    b = { fg = colors.color0, bg = colors.color1 },
+    a = { fg = colors.color0, bg = colors.color1 , gui = "bold", },
+    c = { fg = colors.color6, bg = colors.color1 },
+  },
+  replace = {
+    b = { fg = colors.color0, bg = colors.color1 },
+    a = { fg = colors.color1, bg = colors.color7 , gui = "bold", },
+  },
+  insert = {
+    b = { fg = colors.color0, bg = colors.color1 },
+    a = { fg = colors.color1, bg = colors.color10 , gui = "bold", },
+  },
+}
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = vitaminonec,
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff'},
+    lualine_c = {'filename'},
+    lualine_x = {'diagnostics', 'encoding', 'fileformat', {'filetype', colored=false}},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {
+    lualine_a = {'buffers'},
+    lualine_b = {'tabs'},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {"require'lsp-status'.status()"},
+    lualine_z = {}
+  },
+  extensions = {}
+}
+EOF
+
+" lua << EOF
+" require("bufferline").setup{}
+" EOF
+
+" lua << EOF
+" require("tabby").setup({
+"     tabline = require("tabby.presets").tab_with_top_win,
+" })
+" EOF
+
+" " Always display the tabline so that lightline buffers can override
+" set showtabline=2
+
+" " Display icons in lightline buffer at screen top
+" let g:lightline#bufferline#enable_devicons = 1
+
+" " Do not shorten the path of a buffer
+" let g:lightline#bufferline#shorten_path = 1
+
+" " Do not show the buffer, as :b num nav not needed
+" let g:lightline#bufferline#show_number = 0
+
+" " Define a name of 'No Name' buffer
+" let g:lightline#bufferline#unnamed = '*'
+
+" call lightline#lsp#register()
+
+" let g:lightline = {
+"   \   'active': {
+"   \     'left': [[  'lsp_info', 'lsp_hints', 'lsp_errors', 'lsp_warnings', 'lsp_ok' ], [ 'lsp_status' ]]
+"   \   }
+"   \ }
+
+" register compoments:
+" call lightline#lsp#register()
+
+" let g:lightline = {
+"       \ 'colorscheme': 'vitaminonec',
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'spell', 'paste' ],
+"       \             [ 'fugitive', 'readonly', 'filename', 'python', 'gitsigns', 'context', 'modified' ] ],
+"       \   'right': [ ['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype'], ['gutentags'] ]
+"       \ },
+"       \ 'component_function': {
+"       \   'readonly': 'LightlineReadonly',
+"       \   'fugitive': 'LightlineFugitive',
+"       \   'spell': 'LightlineSpell',
+"       \   'filetype': 'LightlineFiletype',
+"       \   'fileformat': 'LightlineFileformat',
+"       \   'filename': 'LightlineFilename',
+"       \   'gutentags': 'LightlineGutentags',
+"       \   'gitsigns': 'LightlineGitsigns',
+"       \   'linter_warnings': 'LightlineLinterWarnings',
+"       \   'linter_errors': 'LightlineLinterErrors',
+"       \   'linter_ok': 'LightlineLinterOK',
+"       \   'python': 'LightlinePythonEnvironment'
+"       \ },
+"       \ 'component_type': {
+"       \   'readonly': 'error',
+"       \   'linter_warnings': 'warning',
+"       \   'linter_errors': 'error'
+"       \ },
+"       \ 'separator': { 'left': '', 'right': '' },
+"       \ 'subseparator': { 'left': '', 'right': '' }
+" \ }
 
 " Display a diagnostic message when gutentags updates
 function! LightlineGitsigns()
@@ -666,17 +888,17 @@ function! LightlineGitsigns()
   return l:gitstatus !=# '' ?  ' '.get(b:,'gitsigns_status','') : ''
 endfunction
 
-" Ensure that the lightline status bar updates
-augroup GutentagsStatusLineRefresher
-  autocmd!
-  autocmd User GutentagsUpdating call lightline#update()
-  autocmd User GutentagsUpdated call lightline#update()
-augroup END
+" " Ensure that the lightline status bar updates
+" augroup GutentagsStatusLineRefresher
+"   autocmd!
+"   autocmd User GutentagsUpdating call lightline#update()
+"   autocmd User GutentagsUpdated call lightline#update()
+" augroup END
 
-" Display a diagnostic message when gutentags updates
-function! LightlineGutentags()
-  return gutentags#statusline() !=# '' ? '  Tags ' : 'Tags '
-endfunction
+" " Display a diagnostic message when gutentags updates
+" function! LightlineGutentags()
+"   return gutentags#statusline() !=# '' ? '  Tags ' : 'Tags '
+" endfunction
 
 " Display a diagnostic message when running Python in a virtual environment
 function! LightlinePythonEnvironment()
@@ -754,10 +976,10 @@ augroup alecallconfiguration
   autocmd User ALELint call s:MaybeUpdateLightline()
 augroup END
 
-" Configure the lightline buffer listing at top of the screen
-let g:lightline.tabline          = {'left': [['buffers']], 'right': [['bufnum']]}
-let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-let g:lightline.component_type   = {'buffers': 'tabsel'}
+" " Configure the lightline buffer listing at top of the screen
+" let g:lightline.tabline          = {'left': [['buffers']], 'right': [['bufnum']]}
+" let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+" let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 " Configure the display symbol in lightline buffer listing for
 " file types that do not have a default display symbol
@@ -954,9 +1176,10 @@ function common_on_attach(client, bufnr)
   -- do stuff
   print("契Starting Language Server");
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  opts ={silent = true, noremap = true}
+  opts = {silent = true, noremap = true}
   buf_set_keymap('n', 'K', '<cmd> lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd> lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  -- buf_set_keymap('n', '<space>e', '<cmd> lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd> lua vim.diagnostic.open_float(0, {scope="line"})<CR>', opts)
   buf_set_keymap('n', '<space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd> lua vim.lsp.diagnostic.goto_next()<CR>', opts)
@@ -970,6 +1193,69 @@ for _, server in pairs(installed_servers) do
     server:setup(opts)
 end
 EOF
+
+" }}}
+
+" Linting through Language Server Protocol {{{
+
+" lua << EOF
+" local null_ls = require("null-ls")
+" local sources = {
+"     null_ls.builtins.code_actions.gitsigns,
+"     null_ls.builtins.diagnostics.flake8,
+"     null_ls.builtins.diagnostics.codespell,
+" }
+" null_ls.setup({ sources = sources })
+" null_ls.register({ sources = sources })
+" EOF
+
+lua << EOF
+require('lint').linters_by_ft = {
+  python = {'pydocstyle',}
+}
+EOF
+
+au BufWritePost * :lua require('lint').try_lint()
+
+lua << EOF
+local lsp_status = require('lsp-status')
+-- Put this somewhere near lsp_status.register_progress()
+  lsp_status.config({
+    indicator_errors = 'E',
+    indicator_warnings = 'W',
+    indicator_info = 'i',
+    indicator_hint = '?',
+    indicator_ok = 'Ok',
+  })
+lsp_status.register_progress()
+EOF
+
+" lua << EOF
+" local function nvim_create_augroups(definitions)
+"     for group_name, definition in pairs(definitions) do
+"         api.nvim_command("augroup " .. group_name)
+"         api.nvim_command("autocmd!")
+"         for _, def in ipairs(definition) do
+"             -- if type(def) == 'table' and type(def[#def]) == 'function' then
+"             -- 	def[#def] = lua_callback(def[#def])
+"             -- end
+"             local command = table.concat(vim.tbl_flatten {"autocmd", def}, " ")
+"             api.nvim_command(command)
+"         end
+"         api.nvim_command("augroup END")
+"     end
+" end
+
+" nvim_create_augroups({lint = {{"BufWritePost", "<buffer>", "lua require('lint').try_lint()"}}})
+" EOF
+
+" lua << EOF
+"   require("trouble").setup {
+"     -- your configuration comes here
+"     -- or leave it empty to use the default settings
+"     -- refer to the configuration section below
+"   }
+" EOF
 
 " }}}
 
@@ -1224,7 +1510,8 @@ nnoremap <Space>gr :Telescope lsp_references <CR>
 
 " -- Diagnostics
 nnoremap <Space>dd :Telescope lsp_document_diagnostics <CR>
-nnoremap <Space>wd :Telescope lsp_workspace_diagnostics <CR>
+nnoremap <Space>dd :Telescope diagnostics bufnr=0 <CR>
+nnoremap <Space>wd :Telescope diagnostics <CR>
 
 " }}}
 
