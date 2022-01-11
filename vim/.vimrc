@@ -98,7 +98,7 @@ Plug 'xolox/vim-misc'
 Plug 'kyazdani42/nvim-web-devicons'
 " Plug 'folke/trouble.nvim'
 Plug 'mfussenegger/nvim-lint'
-Plug 'nvim-lua/lsp-status.nvim'
+" Plug 'nvim-lua/lsp-status.nvim'
 " Plug 'josa42/nvim-lightline-lsp'
 " Plug 'nanozuki/tabby.nvim'
 " Plug 'akinsho/bufferline.nvim'
@@ -767,11 +767,11 @@ local vitaminonec = {
   },
   inactive = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color0, bg = colors.color1 , gui = "bold", },
+    a = { fg = colors.color0, bg = colors.color1 , gui = "none", },
     c = { fg = colors.color6, bg = colors.color1 },
   },
   replace = {
-    b = { fg = colors.color0, bg = colors.color1 },
+   jb = { fg = colors.color0, bg = colors.color1 },
     a = { fg = colors.color1, bg = colors.color7 , gui = "bold", },
   },
   insert = {
@@ -792,7 +792,13 @@ require('lualine').setup {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff'},
     lualine_c = {'filename'},
-    lualine_x = {'diagnostics', 'encoding', 'fileformat', {'filetype', colored=false}},
+    lualine_x = {{'diagnostics',
+                  symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}},
+                  'encoding', {'fileformat', symbols = {
+          unix = 'unix',
+          dos = 'docs',
+          mac = 'mac',
+        }}, {'filetype', colored=false, }},
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },
@@ -806,10 +812,10 @@ require('lualine').setup {
   },
   tabline = {
     lualine_a = {'buffers'},
-    lualine_b = {'tabs'},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {"require'lsp-status'.status()"},
+    lualine_b = {''},
+    lualine_c = {''},
+    lualine_x = {{'filename', path=1}},
+    lualine_y = {},
     lualine_z = {}
   },
   extensions = {}
