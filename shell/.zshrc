@@ -104,8 +104,6 @@ export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
 # --> Ruby gems as managed by Ruby installed by asdf-vm
 export PATH="$PATH:$HOME/.gem/bin"
 
-# # Local pyenv home
-# export PYENV_ROOT="$HOME/.pyenv"
 
 # Local Gem home
 export GEM_HOME=$HOME/.gem
@@ -662,7 +660,10 @@ function workspace {
 
 # }}}
 
-# Pyenv {{{
+# DEPRECATED Pyenv {{{
+
+# # Local pyenv home
+# export PYENV_ROOT="$HOME/.pyenv"
 
 # # Fast load of pyenv immediately upon shell startup
 # export PATH="$HOME/.pyenv/bin:$PATH"
