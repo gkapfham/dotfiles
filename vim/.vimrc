@@ -956,6 +956,7 @@ require('lint').linters_by_ft = {
   python = {'flake8', 'pydocstyle', 'pylint'},
   tex = {'chktex'},
   vim = {'vint'},
+  zsh = {'shellcheck'},
 }
 EOF
 
