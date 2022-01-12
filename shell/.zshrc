@@ -671,7 +671,7 @@ function workspace {
 
 # }}}
 
-# Nvm {{{
+# DEPRECATED nvm {{{
 
 # Lazy load nvm to avoid slow shell startup times
 # Note that this requires you to type one of these
@@ -690,7 +690,8 @@ function workspace {
 # Pipenv {{{
 
 # Ensure that Pipenv can find the version of Python
-# that is managed by the Pyenv tool
+# that is managed by the Pyenv tool; note that
+# this is used infrequently for Python development
 export PIPENV_PYTHON="$HOME/.pyenv/shims/python"
 
 # }}}
