@@ -1185,7 +1185,10 @@ nnoremap <Leader>ga :Rg <CR>
 nnoremap <Space>i :Telescope buffers <CR>
 
 " --> Ultisnips-based snippets available for buffer
-nnoremap <Space>s :Telescope ultisnips <CR>
+nnoremap <Space>us :Telescope ultisnips <CR>
+
+" --> Spelling suggestion and correction
+nnoremap <Space>ss :Telescope spell_suggest <CR>
 
 " --> Recently run commands
 nnoremap <Space>h :Telescope command_history <CR>
