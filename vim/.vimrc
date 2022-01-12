@@ -1172,20 +1172,21 @@ nnoremap <Space>h :Telescope command_history <CR>
 " --> Spelling fix suggestions for word under cursor
 nnoremap <Space>z :Telescope spell_suggest <CR>
 
+" --> Run the previous telescope command
+nnoremap <Space>gp :Telescope resume <CR>
+
 " --> Language server mappings
 " -- Navigation
 nnoremap <Space>gd :Telescope lsp_definitions <CR>
 nnoremap <Space>gr :Telescope lsp_references <CR>
 
+" -- Symbols
+nnoremap <Space>ds :Telescope lsp_document_symbols <CR>
+nnoremap <Space>ws :Telescope lsp_workspace_symbols <CR>
+
 " -- Diagnostics
-" nnoremap <Space>dd :Telescope lsp_document_diagnostics <CR>
 nnoremap <Space>dd :Telescope diagnostics bufnr=0 <CR>
 nnoremap <Space>wd :Telescope diagnostics <CR>
-
-" -- Symbols
-" nnoremap <Space>dd :Telescope lsp_document_diagnostics <CR>
-nnoremap <Space>ds :Telescope lsp_document_symbols <CR>
-nnoremap <Space>ws :Telescope lsp_workspace_symols <CR>
 
 " }}}
 
