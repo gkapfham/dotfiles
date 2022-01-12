@@ -104,8 +104,6 @@ export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
 # --> Ruby gems as managed by Ruby installed by asdf-vm
 export PATH="$PATH:$HOME/.gem/bin"
 
-# # Local pyenv home
-# export PYENV_ROOT="$HOME/.pyenv"
 
 # Local Gem home
 export GEM_HOME=$HOME/.gem
@@ -662,7 +660,10 @@ function workspace {
 
 # }}}
 
-# Pyenv {{{
+# DEPRECATED Pyenv {{{
+
+# # Local pyenv home
+# export PYENV_ROOT="$HOME/.pyenv"
 
 # # Fast load of pyenv immediately upon shell startup
 # export PATH="$HOME/.pyenv/bin:$PATH"
@@ -670,25 +671,27 @@ function workspace {
 
 # }}}
 
-# Nvm {{{
+# DEPRECATED nvm {{{
 
 # Lazy load nvm to avoid slow shell startup times
 # Note that this requires you to type one of these
 # commands before they will initially work
-if [ -s "$HOME/.nvm/nvm.sh" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-  alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
-  alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
-  alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
-fi
+
+# if [ -s "$HOME/.nvm/nvm.sh" ]; then
+#   export NVM_DIR="$HOME/.nvm"
+#   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+#   alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
+#   alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
+#   alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
+# fi
 
 # }}}
 
 # Pipenv {{{
 
 # Ensure that Pipenv can find the version of Python
-# that is managed by the Pyenv tool
+# that is managed by the Pyenv tool; note that
+# this is used infrequently for Python development
 export PIPENV_PYTHON="$HOME/.pyenv/shims/python"
 
 # }}}

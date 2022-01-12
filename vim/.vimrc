@@ -25,7 +25,6 @@ Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'honza/vim-snippets'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
-Plug 'itchyny/lightline.vim'
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
 Plug 'jgdavey/tslime.vim'
@@ -49,7 +48,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'mgee/lightline-bufferline'
+" Plug 'mgee/lightline-bufferline'
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
@@ -88,12 +87,14 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-scripts/python_match.vim'
 Plug 'vim-scripts/SyntaxAttr.vim'
-Plug 'w0rp/ale'
 Plug 'wellle/targets.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'mfussenegger/nvim-lint'
+Plug 'nvim-lualine/lualine.nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
@@ -408,17 +409,6 @@ set foldtext=FancyFoldText()
 
 " }}}
 
-" Manual Pages {{{
-
-" Define a special configuration for man buffers
-augroup manconfiguration
-  autocmd!
-  " Disable spell checking for the man buffers
-  autocmd FileType man setlocal nospell
-augroup END
-
-" }}}
-
 " Basic Keyboard Movement {{{
 
 " Disable the arrow keys
@@ -529,6 +519,13 @@ silent exe 'hi default link DirvishGitUntrackedDir DirvishPathTail'
 
 " Manual Pages {{{
 
+" Define a special configuration for man buffers
+augroup manconfiguration
+  autocmd!
+  " Disable spell checking for the man buffers
+  autocmd FileType man setlocal nospell
+augroup END
+
 " Fuzzy search through the man pages with Fzf and then
 " display the selected man page inside of Vim
 command! -nargs=? Superman call fzf#run(fzf#wrap({'source': 'man -k -s 1 '.shellescape(<q-args>).' | cut -d " " -f 1', 'sink': 'tab Man', 'options': ['--preview', 'MANPAGER=cat MANWIDTH='.(&columns/2-4).' man {}']}))
@@ -611,168 +608,126 @@ nmap <silent> <leader>s :set spell!<CR>
 
 " }}}
 
-" Lightline for Status Line and Buffer Line {{{
+" Lualine {{{
 
-" Always display the tabline so that lightline buffers can override
-set showtabline=2
+lua << EOF
+ -- Define the color scheme for the lualine
+local colors = {
+  color2   = "#87afd7",
+  color7   = "#e06c75",
+  color10  = "#afaf5f",
+  color6   = "#626262",
+  color3   = "#875f87",
+  color1   = "#262626",
+  color0   = "#bcbcbc",
+}
+local vitaminonec = {
+  normal = {
+    b = { fg = colors.color0, bg = colors.color1 },
+    a = { fg = colors.color1, bg = colors.color2 , gui = "bold", },
+    c = { fg = colors.color0, bg = colors.color1 },
+  },
+  visual = {
+    b = { fg = colors.color0, bg = colors.color1 },
+    a = { fg = colors.color1, bg = colors.color3 , gui = "bold", },
+  },
+  inactive = {
+    b = { fg = colors.color0, bg = colors.color1 },
+    a = { fg = colors.color0, bg = colors.color1 , gui = "none", },
+    c = { fg = colors.color6, bg = colors.color1 },
+  },
+  replace = {
+   jb = { fg = colors.color0, bg = colors.color1 },
+    a = { fg = colors.color1, bg = colors.color7 , gui = "bold", },
+  },
+  insert = {
+    b = { fg = colors.color0, bg = colors.color1 },
+    a = { fg = colors.color1, bg = colors.color10 , gui = "bold", },
+  },
+}
 
-" Display icons in lightline buffer at screen top
-let g:lightline#bufferline#enable_devicons = 1
+-- Setup the lualine plugin.
+-- Use the theme that was previously
+-- specified directly above.
+-- Display components in all four
+-- corners of the Neovim status lines.
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = vitaminonec,
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  -- Bottom section of status line
+  sections = {
+    -- Bottom left display
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff'},
+    lualine_c = {'StatuslineReadonly', {'filename', path=1}},
+    -- Bottom right display
+    lualine_x = {'encoding', {'fileformat', symbols = {
+                    unix = 'unix',
+                    dos = 'docs',
+                    mac = 'mac',
+                }}, {'filetype', colored=false}},
+    lualine_y = {'filesize', 'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {
+    lualine_a = {{'buffers', show_modified_status = true}},
+    lualine_b = {''},
+    lualine_c = {''},
+    lualine_x = {{'diagnostics', symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}}},
+    lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags'},
+    lualine_z = {'StatuslineSpell'}
+  },
+  extensions = {'quickfix'}
+}
+EOF
 
-" Do not shorten the path of a buffer
-let g:lightline#bufferline#shorten_path = 1
+" }}}
 
-" Do not show the buffer, as :b num nav not needed
-let g:lightline#bufferline#show_number = 0
+" Support Functions for Lualine {{{
 
-" Define a name of 'No Name' buffer
-let g:lightline#bufferline#unnamed = '*'
-
-" Configure the lightline according to documentation and examples from statico/dotfiles
-let g:lightline = {
-      \ 'colorscheme': 'vitaminonec',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'spell', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'python', 'gitsigns', 'context', 'modified' ] ],
-      \   'right': [ ['lineinfo'], ['percent'], ['linter_warnings', 'linter_errors', 'linter_ok', 'fileformat', 'fileencoding', 'filetype'], ['gutentags'] ]
-      \ },
-      \ 'component_function': {
-      \   'readonly': 'LightlineReadonly',
-      \   'fugitive': 'LightlineFugitive',
-      \   'spell': 'LightlineSpell',
-      \   'filetype': 'LightlineFiletype',
-      \   'fileformat': 'LightlineFileformat',
-      \   'filename': 'LightlineFilename',
-      \   'gutentags': 'LightlineGutentags',
-      \   'gitsigns': 'LightlineGitsigns',
-      \   'linter_warnings': 'LightlineLinterWarnings',
-      \   'linter_errors': 'LightlineLinterErrors',
-      \   'linter_ok': 'LightlineLinterOK',
-      \   'python': 'LightlinePythonEnvironment'
-      \ },
-      \ 'component_type': {
-      \   'readonly': 'error',
-      \   'linter_warnings': 'warning',
-      \   'linter_errors': 'error'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-\ }
-
-
-" Display a diagnostic message when gutentags updates
-function! LightlineGitsigns()
-  let l:gitstatus = get(b:,'Gitsigns_status','')
-  return l:gitstatus !=# '' ?  ' '.get(b:,'gitsigns_status','') : ''
-endfunction
-
-" Ensure that the lightline status bar updates
-augroup GutentagsStatusLineRefresher
-  autocmd!
-  autocmd User GutentagsUpdating call lightline#update()
-  autocmd User GutentagsUpdated call lightline#update()
-augroup END
-
-" Display a diagnostic message when gutentags updates
-function! LightlineGutentags()
-  return gutentags#statusline() !=# '' ? '  Tags ' : 'Tags '
+" Display a diagnostic message when gutentags updates;
+" this is specifically useful because tag generation is a
+" long-running process for large files. As such it is
+" useful to know that the long-running process is operating.
+function! StatuslineGutentags()
+  return gutentags#statusline() !=# '' ? '  Tags  ' : 'Tags  '
 endfunction
 
 " Display a diagnostic message when running Python in a virtual environment
-function! LightlinePythonEnvironment()
+function! StatuslinePythonEnvironment()
+  " Extract only the name of the virtual environment from the
+  " VIRTUAL_ENV variable; note that it also includes the full
+  " directory to the virtual environment that is not suitable
+  " for including in a section of a status line.
   let l:venv = $VIRTUAL_ENV
   return l:venv !=# '' ? ' '.split(l:venv, '/')[-1] : ''
 endfunction
 
 " Display a lock symbol if the file is read-only (e.g., help files)
-function! LightlineReadonly()
+function! StatuslineReadonly()
   return &readonly ? '' : ''
 endfunction
 
-" Display symbols, not dictionaries, to indicate that spell-checking runs
-function! LightlineSpell()
-  return &spell ? 'A-Z ' : ''
+" Display symbols, not dictionaries, to indicate that spell-checking is running
+function! StatuslineSpell()
+  " Use a different configuration to show whether
+  " or not spell checking is currently running
+  return &spell ? 'A-Z ' : 'A-Z '
 endfunction
-
-" Display file name with symbol or '*' for 'No Name'
-function! LightlineFilename()
-  return '' !=# expand('%:t') ? ' '.expand('%:t') : ' *'
-endfunction
-
-" Display the name of the branch with a specialize symbol
-function! LightlineFugitive()
-  if exists('*FugitiveHead')
-    let l:branch = FugitiveHead()
-    return l:branch !=# '' ? ' שׂ '.l:branch : ''
-  endif
-  return ''
-endfunction
-
-" Detect and display the file type, using a dev-icon
-function! LightlineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() . ' ' : 'no ft ') : ''
-endfunction
-
-" Detect and display the file format, using a dev-icon
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) . ' ' : ''
-endfunction
-
-" Collect, count, and display the linter warnings from ale
-function! LightlineLinterWarnings() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ', l:all_non_errors)
-endfunction
-
-" Collect, count, and display the linter errors from ale
-function! LightlineLinterErrors() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ', l:all_errors)
-endfunction
-
-" Since there are no warnings or errors, display a zero count
-function! LightlineLinterOK() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '0   0 ' : ''
-endfunction
-
-" Update and show lightline but only if it's visible
-function! s:MaybeUpdateLightline()
-  if exists('#lightline')
-    call lightline#update()
-  end
-endfunction
-
-" Update the lightline linting errors if it is enabled
-augroup alecallconfiguration
-  autocmd User ALELint call s:MaybeUpdateLightline()
-augroup END
-
-" Configure the lightline buffer listing at top of the screen
-let g:lightline.tabline          = {'left': [['buffers']], 'right': [['bufnum']]}
-let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-let g:lightline.component_type   = {'buffers': 'tabsel'}
-
-" Configure the display symbol in lightline buffer listing for
-" file types that do not have a default display symbol
-" --> Default
-let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = ''
-" --> Dictionary
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
-" --> BibTeX
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['bib'] = ''
-" --> LaTeX
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tex'] = ''
-" --> Markdown
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['markdown'] = ''
-" --> Shell
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sh'] = ''
 
 " }}}
 
@@ -954,9 +909,10 @@ function common_on_attach(client, bufnr)
   -- do stuff
   print("契Starting Language Server");
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  opts ={silent = true, noremap = true}
+  opts = {silent = true, noremap = true}
   buf_set_keymap('n', 'K', '<cmd> lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd> lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  -- buf_set_keymap('n', '<space>e', '<cmd> lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd> lua vim.diagnostic.open_float(0, {scope="line"})<CR>', opts)
   buf_set_keymap('n', '<space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd> lua vim.lsp.diagnostic.goto_next()<CR>', opts)
@@ -970,6 +926,26 @@ for _, server in pairs(installed_servers) do
     server:setup(opts)
 end
 EOF
+
+" }}}
+
+" Linting with nvim-lint {{{
+
+lua << EOF
+-- load and configure the linting plugin
+-- pick specific linters for specific file types
+require('lint').linters_by_ft = {
+  mail = {'proselint'},
+  markdown = {'markdownlint', 'proselint'},
+  python = {'flake8', 'pydocstyle', 'pylint'},
+  tex = {'chktex'},
+  vim = {'vint'},
+  zsh = {'shellcheck'},
+}
+EOF
+
+" Always run the linters whenever a file is saved
+au BufWritePost * :lua require('lint').try_lint()
 
 " }}}
 
@@ -1209,7 +1185,10 @@ nnoremap <Leader>ga :Rg <CR>
 nnoremap <Space>i :Telescope buffers <CR>
 
 " --> Ultisnips-based snippets available for buffer
-nnoremap <Space>s :Telescope ultisnips <CR>
+nnoremap <Space>us :Telescope ultisnips <CR>
+
+" --> Spelling suggestion and correction
+nnoremap <Space>ss :Telescope spell_suggest <CR>
 
 " --> Recently run commands
 nnoremap <Space>h :Telescope command_history <CR>
@@ -1217,14 +1196,21 @@ nnoremap <Space>h :Telescope command_history <CR>
 " --> Spelling fix suggestions for word under cursor
 nnoremap <Space>z :Telescope spell_suggest <CR>
 
+" --> Run the previous telescope command
+nnoremap <Space>gp :Telescope resume <CR>
+
 " --> Language server mappings
 " -- Navigation
 nnoremap <Space>gd :Telescope lsp_definitions <CR>
 nnoremap <Space>gr :Telescope lsp_references <CR>
 
+" -- Symbols
+nnoremap <Space>ds :Telescope lsp_document_symbols <CR>
+nnoremap <Space>ws :Telescope lsp_workspace_symbols <CR>
+
 " -- Diagnostics
-nnoremap <Space>dd :Telescope lsp_document_diagnostics <CR>
-nnoremap <Space>wd :Telescope lsp_workspace_diagnostics <CR>
+nnoremap <Space>dd :Telescope diagnostics bufnr=0 <CR>
+nnoremap <Space>wd :Telescope diagnostics <CR>
 
 " }}}
 
