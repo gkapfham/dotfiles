@@ -620,9 +620,10 @@ nmap <silent> <leader>s :set spell!<CR>
 
 " }}}
 
-" Lightline for Status Line and Buffer Line {{{
+" Lualine for Status Line and Buffer Line {{{
 
 lua << EOF
+ -- Define the color scheme for the lualine
 local colors = {
   color2   = "#87afd7",
   color7   = "#e06c75",
@@ -656,6 +657,7 @@ local vitaminonec = {
     a = { fg = colors.color1, bg = colors.color10 , gui = "bold", },
   },
 }
+-- Setup the lualine plugin
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -668,14 +670,14 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff'},
-    lualine_c = {'filename'},
+    lualine_c = {'StatuslineReadonly', {'filename', path=1}},
     lualine_x = {{'diagnostics',
                   symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}},
                   'encoding', {'fileformat', symbols = {
-          unix = 'unix',
-          dos = 'docs',
-          mac = 'mac',
-        }}, {'filetype', colored=false, }},
+                    unix = 'unix',
+                    dos = 'docs',
+                    mac = 'mac',
+                }}, {'filetype', colored=false}},
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },
@@ -691,116 +693,37 @@ require('lualine').setup {
     lualine_a = {'buffers'},
     lualine_b = {''},
     lualine_c = {''},
-    lualine_x = {{'filename', path=1}},
-    lualine_y = {},
-    lualine_z = {}
+    lualine_x = {'StatuslinePythonEnvironment'},
+    lualine_y = {'StatuslineGutentags'},
+    lualine_z = {'StatuslineSpell'}
   },
-  extensions = {}
+  extensions = {'fugitive', 'quickfix'}
 }
 EOF
 
-" lua << EOF
-" require("bufferline").setup{}
-" EOF
-
-" lua << EOF
-" require("tabby").setup({
-"     tabline = require("tabby.presets").tab_with_top_win,
-" })
-" EOF
-
-" " Always display the tabline so that lightline buffers can override
-" set showtabline=2
-
-" " Display icons in lightline buffer at screen top
-" let g:lightline#bufferline#enable_devicons = 1
-
-" " Do not shorten the path of a buffer
-" let g:lightline#bufferline#shorten_path = 1
-
-" " Do not show the buffer, as :b num nav not needed
-" let g:lightline#bufferline#show_number = 0
-
-" " Define a name of 'No Name' buffer
-" let g:lightline#bufferline#unnamed = '*'
-
-" call lightline#lsp#register()
-
-" let g:lightline = {
-"   \   'active': {
-"   \     'left': [[  'lsp_info', 'lsp_hints', 'lsp_errors', 'lsp_warnings', 'lsp_ok' ], [ 'lsp_status' ]]
-"   \   }
-"   \ }
-
-" register compoments:
-" call lightline#lsp#register()
-
-" let g:lightline = {
-"       \ 'colorscheme': 'vitaminonec',
-"       \ 'active': {
-"       \   'left': [ [ 'mode', 'spell', 'paste' ],
-"       \             [ 'fugitive', 'readonly', 'filename', 'python', 'gitsigns', 'context', 'modified' ] ],
-"       \   'right': [ ['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype'], ['gutentags'] ]
-"       \ },
-"       \ 'component_function': {
-"       \   'readonly': 'LightlineReadonly',
-"       \   'fugitive': 'LightlineFugitive',
-"       \   'spell': 'LightlineSpell',
-"       \   'filetype': 'LightlineFiletype',
-"       \   'fileformat': 'LightlineFileformat',
-"       \   'filename': 'LightlineFilename',
-"       \   'gutentags': 'LightlineGutentags',
-"       \   'gitsigns': 'LightlineGitsigns',
-"       \   'linter_warnings': 'LightlineLinterWarnings',
-"       \   'linter_errors': 'LightlineLinterErrors',
-"       \   'linter_ok': 'LightlineLinterOK',
-"       \   'python': 'LightlinePythonEnvironment'
-"       \ },
-"       \ 'component_type': {
-"       \   'readonly': 'error',
-"       \   'linter_warnings': 'warning',
-"       \   'linter_errors': 'error'
-"       \ },
-"       \ 'separator': { 'left': '', 'right': '' },
-"       \ 'subseparator': { 'left': '', 'right': '' }
-" \ }
-
 " Display a diagnostic message when gutentags updates
-function! LightlineGitsigns()
-  let l:gitstatus = get(b:,'Gitsigns_status','')
-  return l:gitstatus !=# '' ?  ' '.get(b:,'gitsigns_status','') : ''
+function! StatuslineGutentags()
+  return gutentags#statusline() !=# '' ? '  Tags ' : 'Tags '
 endfunction
 
-" " Ensure that the lightline status bar updates
-" augroup GutentagsStatusLineRefresher
-"   autocmd!
-"   autocmd User GutentagsUpdating call lightline#update()
-"   autocmd User GutentagsUpdated call lightline#update()
-" augroup END
-
-" " Display a diagnostic message when gutentags updates
-" function! LightlineGutentags()
-"   return gutentags#statusline() !=# '' ? '  Tags ' : 'Tags '
-" endfunction
-
 " Display a diagnostic message when running Python in a virtual environment
-function! LightlinePythonEnvironment()
+function! StatuslinePythonEnvironment()
   let l:venv = $VIRTUAL_ENV
   return l:venv !=# '' ? ' '.split(l:venv, '/')[-1] : ''
 endfunction
 
 " Display a lock symbol if the file is read-only (e.g., help files)
-function! LightlineReadonly()
+function! StatuslineReadonly()
   return &readonly ? '' : ''
 endfunction
 
 " Display symbols, not dictionaries, to indicate that spell-checking runs
-function! LightlineSpell()
-  return &spell ? 'A-Z ' : ''
+function! StatuslineSpell()
+  return &spell ? 'A-Z ' : 'A-Z '
 endfunction
 
 " Display file name with symbol or '*' for 'No Name'
-function! LightlineFilename()
+function! StatuslineFilename()
   return '' !=# expand('%:t') ? ' '.expand('%:t') : ' *'
 endfunction
 
@@ -822,62 +745,6 @@ endfunction
 function! LightLineFileformat()
   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) . ' ' : ''
 endfunction
-
-" Collect, count, and display the linter warnings from ale
-function! LightlineLinterWarnings() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ', l:all_non_errors)
-endfunction
-
-" Collect, count, and display the linter errors from ale
-function! LightlineLinterErrors() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d ', l:all_errors)
-endfunction
-
-" Since there are no warnings or errors, display a zero count
-function! LightlineLinterOK() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '0   0 ' : ''
-endfunction
-
-" Update and show lightline but only if it's visible
-function! s:MaybeUpdateLightline()
-  if exists('#lightline')
-    call lightline#update()
-  end
-endfunction
-
-" Update the lightline linting errors if it is enabled
-augroup alecallconfiguration
-  autocmd User ALELint call s:MaybeUpdateLightline()
-augroup END
-
-" " Configure the lightline buffer listing at top of the screen
-" let g:lightline.tabline          = {'left': [['buffers']], 'right': [['bufnum']]}
-" let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-" let g:lightline.component_type   = {'buffers': 'tabsel'}
-
-" Configure the display symbol in lightline buffer listing for
-" file types that do not have a default display symbol
-" --> Default
-let g:WebDevIconsUnicodeDecorateFileNodesDefaultSymbol = ''
-" --> Dictionary
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
-" --> BibTeX
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['bib'] = ''
-" --> LaTeX
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tex'] = ''
-" --> Markdown
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['markdown'] = ''
-" --> Shell
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['sh'] = ''
 
 " }}}
 
@@ -1079,22 +946,15 @@ EOF
 
 " }}}
 
-" Linting through Language Server Protocol {{{
-
-" lua << EOF
-" local null_ls = require("null-ls")
-" local sources = {
-"     null_ls.builtins.code_actions.gitsigns,
-"     null_ls.builtins.diagnostics.flake8,
-"     null_ls.builtins.diagnostics.codespell,
-" }
-" null_ls.setup({ sources = sources })
-" null_ls.register({ sources = sources })
-" EOF
+" Linting {{{
 
 lua << EOF
 require('lint').linters_by_ft = {
-  python = {'pydocstyle',}
+  mail = {'proselint'},
+  markdown = {'markdownlint', 'proselint'},
+  python = {'flake8', 'pydocstyle', 'pylint'},
+  tex = {'chktex'},
+  vim = {'vint'},
 }
 EOF
 
@@ -1392,9 +1252,14 @@ nnoremap <Space>gd :Telescope lsp_definitions <CR>
 nnoremap <Space>gr :Telescope lsp_references <CR>
 
 " -- Diagnostics
-nnoremap <Space>dd :Telescope lsp_document_diagnostics <CR>
+" nnoremap <Space>dd :Telescope lsp_document_diagnostics <CR>
 nnoremap <Space>dd :Telescope diagnostics bufnr=0 <CR>
 nnoremap <Space>wd :Telescope diagnostics <CR>
+
+" -- Symbols
+" nnoremap <Space>dd :Telescope lsp_document_diagnostics <CR>
+nnoremap <Space>ds :Telescope lsp_document_symbols <CR>
+nnoremap <Space>ws :Telescope lsp_workspace_symols <CR>
 
 " }}}
 
