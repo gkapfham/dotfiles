@@ -409,17 +409,6 @@ set foldtext=FancyFoldText()
 
 " }}}
 
-" Manual Pages {{{
-
-" Define a special configuration for man buffers
-augroup manconfiguration
-  autocmd!
-  " Disable spell checking for the man buffers
-  autocmd FileType man setlocal nospell
-augroup END
-
-" }}}
-
 " Basic Keyboard Movement {{{
 
 " Disable the arrow keys
@@ -529,6 +518,13 @@ silent exe 'hi default link DirvishGitUntrackedDir DirvishPathTail'
 " }}}
 
 " Manual Pages {{{
+
+" Define a special configuration for man buffers
+augroup manconfiguration
+  autocmd!
+  " Disable spell checking for the man buffers
+  autocmd FileType man setlocal nospell
+augroup END
 
 " Fuzzy search through the man pages with Fzf and then
 " display the selected man page inside of Vim
