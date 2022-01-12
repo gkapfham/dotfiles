@@ -697,7 +697,7 @@ require('lualine').setup {
     lualine_y = {'StatuslineGutentags'},
     lualine_z = {'StatuslineSpell'}
   },
-  extensions = {'fugitive', 'quickfix'}
+  extensions = {'quickfix'}
 }
 EOF
 
@@ -946,7 +946,7 @@ EOF
 
 " }}}
 
-" Linting {{{
+" Linting with nvim-lint {{{
 
 lua << EOF
 require('lint').linters_by_ft = {
