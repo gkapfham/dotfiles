@@ -710,30 +710,6 @@ function! StatuslineSpell()
   return &spell ? 'A-Z ' : 'A-Z '
 endfunction
 
-" Display file name with symbol or '*' for 'No Name'
-function! StatuslineFilename()
-  return '' !=# expand('%:t') ? ' '.expand('%:t') : ' *'
-endfunction
-
-" " Display the name of the branch with a specialize symbol
-" function! LightlineFugitive()
-"   if exists('*FugitiveHead')
-"     let l:branch = FugitiveHead()
-"     return l:branch !=# '' ? ' שׂ '.l:branch : ''
-"   endif
-"   return ''
-" endfunction
-
-" " Detect and display the file type, using a dev-icon
-" function! LightlineFiletype()
-"   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() . ' ' : 'no ft ') : ''
-" endfunction
-
-" " Detect and display the file format, using a dev-icon
-" function! LightLineFileformat()
-"   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) . ' ' : ''
-" endfunction
-
 " }}}
 
 " Fugitive {{{
