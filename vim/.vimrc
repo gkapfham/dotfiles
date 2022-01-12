@@ -913,6 +913,7 @@ EOF
 
 lua << EOF
 -- load and configure the linting plugin
+-- pick specific linters for specific file types
 require('lint').linters_by_ft = {
   mail = {'proselint'},
   markdown = {'markdownlint', 'proselint'},
