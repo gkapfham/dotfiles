@@ -610,7 +610,6 @@ nmap <silent> <leader>s :set spell!<CR>
 
 " Lualine {{{
 
-" Define the lualine color scheme and then configure lualine
 lua << EOF
  -- Define the color scheme for the lualine
 local colors = {
@@ -688,14 +687,17 @@ require('lualine').setup {
     lualine_a = {{'buffers', show_modified_status = true}},
     lualine_b = {''},
     lualine_c = {''},
-    lualine_x = {{'diagnostics',
-                  symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}}},
+    lualine_x = {{'diagnostics', symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}}},
     lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags'},
     lualine_z = {'StatuslineSpell'}
   },
   extensions = {'quickfix'}
 }
 EOF
+
+" }}}
+
+" Support Functions for Lualine {{{
 
 " Display a diagnostic message when gutentags updates;
 " this is specifically useful because tag generation is a
