@@ -678,7 +678,7 @@ require('lualine').setup {
                     dos = 'docs',
                     mac = 'mac',
                 }}, {'filetype', colored=false}},
-    lualine_y = {'progress'},
+    lualine_y = {'filesize', 'progress'},
     lualine_z = {'location'}
   },
   inactive_sections = {
@@ -727,24 +727,24 @@ function! StatuslineFilename()
   return '' !=# expand('%:t') ? ' '.expand('%:t') : ' *'
 endfunction
 
-" Display the name of the branch with a specialize symbol
-function! LightlineFugitive()
-  if exists('*FugitiveHead')
-    let l:branch = FugitiveHead()
-    return l:branch !=# '' ? ' שׂ '.l:branch : ''
-  endif
-  return ''
-endfunction
+" " Display the name of the branch with a specialize symbol
+" function! LightlineFugitive()
+"   if exists('*FugitiveHead')
+"     let l:branch = FugitiveHead()
+"     return l:branch !=# '' ? ' שׂ '.l:branch : ''
+"   endif
+"   return ''
+" endfunction
 
-" Detect and display the file type, using a dev-icon
-function! LightlineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() . ' ' : 'no ft ') : ''
-endfunction
+" " Detect and display the file type, using a dev-icon
+" function! LightlineFiletype()
+"   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() . ' ' : 'no ft ') : ''
+" endfunction
 
-" Detect and display the file format, using a dev-icon
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) . ' ' : ''
-endfunction
+" " Detect and display the file format, using a dev-icon
+" function! LightLineFileformat()
+"   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) . ' ' : ''
+" endfunction
 
 " }}}
 
@@ -949,6 +949,7 @@ EOF
 " Linting with nvim-lint {{{
 
 lua << EOF
+-- load and configure the linting plugin
 require('lint').linters_by_ft = {
   mail = {'proselint'},
   markdown = {'markdownlint', 'proselint'},
@@ -958,20 +959,8 @@ require('lint').linters_by_ft = {
 }
 EOF
 
+" Always run the linters whenever a file is saved
 au BufWritePost * :lua require('lint').try_lint()
-
-lua << EOF
-local lsp_status = require('lsp-status')
--- Put this somewhere near lsp_status.register_progress()
-  lsp_status.config({
-    indicator_errors = 'E',
-    indicator_warnings = 'W',
-    indicator_info = 'i',
-    indicator_hint = '?',
-    indicator_ok = 'Ok',
-  })
-lsp_status.register_progress()
-EOF
 
 " }}}
 
