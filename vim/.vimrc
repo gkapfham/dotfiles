@@ -659,9 +659,7 @@ require('lualine').setup {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff'},
     lualine_c = {'StatuslineReadonly', {'filename', path=1}},
-    lualine_x = {{'diagnostics',
-                  symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}},
-                  'encoding', {'fileformat', symbols = {
+    lualine_x = {'encoding', {'fileformat', symbols = {
                     unix = 'unix',
                     dos = 'docs',
                     mac = 'mac',
@@ -681,8 +679,9 @@ require('lualine').setup {
     lualine_a = {'buffers'},
     lualine_b = {''},
     lualine_c = {''},
-    lualine_x = {'StatuslinePythonEnvironment'},
-    lualine_y = {'StatuslineGutentags'},
+    lualine_x = {{'diagnostics',
+                  symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}}},
+    lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags'},
     lualine_z = {'StatuslineSpell'}
   },
   extensions = {'quickfix'}
@@ -691,7 +690,7 @@ EOF
 
 " Display a diagnostic message when gutentags updates
 function! StatuslineGutentags()
-  return gutentags#statusline() !=# '' ? '  Tags ' : 'Tags '
+  return gutentags#statusline() !=# '' ? '  Tags  ' : 'Tags  '
 endfunction
 
 " Display a diagnostic message when running Python in a virtual environment
