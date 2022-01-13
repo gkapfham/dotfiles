@@ -688,8 +688,8 @@ require('lualine').setup {
     lualine_b = {''},
     lualine_c = {''},
     lualine_x = {{'diagnostics', symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}}},
-    lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags'},
-    lualine_z = {'StatuslineSpell'}
+    lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
+    lualine_z = {}
   },
   extensions = {'quickfix'}
 }
@@ -704,7 +704,7 @@ EOF
 " long-running process for large files. As such it is
 " useful to know that the long-running process is operating.
 function! StatuslineGutentags()
-  return gutentags#statusline() !=# '' ? '  Tags  ' : 'Tags  '
+  return gutentags#statusline() !=# '' ? '  Tags ' : 'Tags '
 endfunction
 
 " Display a diagnostic message when running Python in a virtual environment
