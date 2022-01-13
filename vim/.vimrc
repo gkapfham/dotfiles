@@ -704,7 +704,7 @@ EOF
 " long-running process for large files. As such it is
 " useful to know that the long-running process is operating.
 function! StatuslineGutentags()
-  return gutentags#statusline() !=# '' ? '  Tags ' : 'Tags '
+  return gutentags#statusline() !=# '' ? ' Tags ' : 'Tags '
 endfunction
 
 " Display a diagnostic message when running Python in a virtual environment
