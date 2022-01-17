@@ -947,6 +947,13 @@ EOF
 " Always run the linters whenever a file is saved
 au BufWritePost * :lua require('lint').try_lint()
 
+" Disable the display of linting diagnostics
+command! NoLint lua vim.diagnostic.config({virtual_text = false})
+
+" Enable the display of linting diagnostics;
+" note that, by default, linting is enabled
+command! ShowLint lua vim.diagnostic.config({virtual_text = true})
+
 " }}}
 
 " Completion {{{
