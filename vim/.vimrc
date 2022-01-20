@@ -73,161 +73,19 @@ runtime rc/manualpages.vim
 
 " }}}
 
-" Marks.nvim {{{
+" PLUGINS {{{
 
-lua << EOF
-require'marks'.setup {
-  -- do not use the default keybindings
-  default_mappings = false,
-  -- make movements cycle back to the beginning/end of buffer
-  cyclic = true,
-  -- do not save the marks into the shada file
-  force_write_shada = false,
-  -- how often (in ms) to redraw signs/recompute mark positions.
-  -- higher values will have better performance but may cause visual lag,
-  -- while lower values may cause performance penalties. default 150.
-  refresh_interval = 150,
-  -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
-  -- marks, and bookmarks.
-  -- can be either a table with all/none of the keys, or a single number, in which case
-  -- the priority applies to all marks.
-  sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
-  -- define mappings that are different than the default
-  mappings = {
-    next = "]m",
-    prev = "[m",
-    delete = "dm",
-    delete_line = "dm-",
-    delete_buf = "dm<space>",
-    preview = "m;",
-  }
-}
-EOF
+" marks.nvim {{{
+
+runtime rc/marksplugin.vim
 
 " }}}
 
+" lualine.nvim {{{
 
-
-" Lualine {{{
-
-lua << EOF
- -- Define the color scheme for the lualine
-local colors = {
-  color2   = "#87afd7",
-  color7   = "#e06c75",
-  color10  = "#afaf5f",
-  color6   = "#626262",
-  color3   = "#875f87",
-  color1   = "#262626",
-  color0   = "#bcbcbc",
-}
-local vitaminonec = {
-  normal = {
-    b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color2 , gui = "bold", },
-    c = { fg = colors.color0, bg = colors.color1 },
-  },
-  visual = {
-    b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color3 , gui = "bold", },
-  },
-  inactive = {
-    b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color0, bg = colors.color1 , gui = "none", },
-    c = { fg = colors.color6, bg = colors.color1 },
-  },
-  replace = {
-   jb = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color7 , gui = "bold", },
-  },
-  insert = {
-    b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color10 , gui = "bold", },
-  },
-}
-
--- Setup the lualine plugin.
--- Use the theme that was previously
--- specified directly above.
--- Display components in all four
--- corners of the Neovim status lines.
-require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = vitaminonec,
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-    disabled_filetypes = {},
-    always_divide_middle = true,
-  },
-  -- Bottom section of status line
-  sections = {
-    -- Bottom left display
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff'},
-    lualine_c = {'StatuslineReadonly', {'filename', path=1}},
-    -- Bottom right display
-    lualine_x = {'encoding', {'fileformat', symbols = {
-                    unix = 'unix',
-                    dos = 'docs',
-                    mac = 'mac',
-                }}, {'filetype', colored=false}},
-    lualine_y = {'filesize', 'progress'},
-    lualine_z = {'location'}
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {
-    lualine_a = {{'buffers', show_modified_status = true}},
-    lualine_b = {''},
-    lualine_c = {''},
-    lualine_x = {{'diagnostics', symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}}},
-    lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
-    lualine_z = {}
-  },
-  extensions = {'quickfix'}
-}
-EOF
+runtime rc/lualineplugin.vim
 
 " }}}
-
-" Support Functions for Lualine {{{
-
-" Display a diagnostic message when gutentags updates;
-" this is specifically useful because tag generation is a
-" long-running process for large files. As such it is
-" useful to know that the long-running process is operating.
-function! StatuslineGutentags()
-  return gutentags#statusline() !=# '' ? ' Tags ' : 'Tags '
-endfunction
-
-" Display a diagnostic message when running Python in a virtual environment
-function! StatuslinePythonEnvironment()
-  " Extract only the name of the virtual environment from the
-  " VIRTUAL_ENV variable; note that it also includes the full
-  " directory to the virtual environment that is not suitable
-  " for including in a section of a status line.
-  let l:venv = $VIRTUAL_ENV
-  return l:venv !=# '' ? ' '.split(l:venv, '/')[-1] : ''
-endfunction
-
-" Display a lock symbol if the file is read-only (e.g., help files)
-function! StatuslineReadonly()
-  return &readonly ? '' : ''
-endfunction
-
-" Display symbols, not dictionaries, to indicate that spell-checking is running
-function! StatuslineSpell()
-  " Use a different configuration to show whether
-  " or not spell checking is currently running
-  return &spell ? 'A-Z ' : 'A-Z '
-endfunction
 
 " }}}
 
