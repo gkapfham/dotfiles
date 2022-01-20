@@ -126,6 +126,9 @@ create-termite:
 	rm -rf ~/.config/termite
 	mkdir -p ~/.config/termite
 
+## Depends on the creation of the .config directory
+create-termite: create-config
+
 ## Create the needed urlscan/ directory in .config/
 create-urlscan:
 	rm -rf ~/.config/urlscan
@@ -133,9 +136,6 @@ create-urlscan:
 
 ## Depends on the creation of the .config directory
 create-urlscan: create-config
-
-## Depends on the creation of the .config directory
-create-termite: create-config
 
 ## Create the needed zathura/ directory in .config/
 create-zathura:
