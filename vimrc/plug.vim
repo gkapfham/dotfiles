@@ -7,6 +7,7 @@ call plug#begin('~/.vim/bundle')
 " Load plugins for Vim8 and Neovim
 Plug 'airblade/vim-rooter'
 Plug 'andymass/vim-matchup'
+Plug 'arkav/lualine-lsp-progress'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
 Plug 'cespare/vim-toml'
@@ -34,6 +35,7 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'kevinhwang91/nvim-bqf', {'branch': 'main'}
 Plug 'Konfekt/vim-sentence-chopper'
 Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
@@ -44,7 +46,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'MarcWeber/vim-addon-mw-utils'
-" Plug 'mgee/lightline-bufferline'
+Plug 'mfussenegger/nvim-lint'
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
@@ -52,6 +54,7 @@ Plug 'nathom/filetype.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'numToStr/Comment.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
@@ -88,9 +91,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'mfussenegger/nvim-lint'
-Plug 'nvim-lualine/lualine.nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
