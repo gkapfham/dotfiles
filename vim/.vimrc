@@ -1,4 +1,4 @@
-" vim:fdm=marker:fdl=0:
+" vim:fdm=marker:fdl=1:
 
 set encoding=utf-8
 scriptencoding utf-8
@@ -15,7 +15,7 @@ runtime rc/colortheme.vim
 
 " }}}
 
-" System {{{
+" System Configuration {{{
 
 runtime rc/system.vim
 
@@ -33,161 +33,21 @@ runtime rc/displaynice.vim
 
 " }}}
 
-" Marks.nvim {{{
+" Keyboard Movement {{{
 
-lua << EOF
-require'marks'.setup {
-  -- do not use the default keybindings
-  default_mappings = false,
-  -- make movements cycle back to the beginning/end of buffer
-  cyclic = true,
-  -- do not save the marks into the shada file
-  force_write_shada = false,
-  -- how often (in ms) to redraw signs/recompute mark positions.
-  -- higher values will have better performance but may cause visual lag,
-  -- while lower values may cause performance penalties. default 150.
-  refresh_interval = 150,
-  -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
-  -- marks, and bookmarks.
-  -- can be either a table with all/none of the keys, or a single number, in which case
-  -- the priority applies to all marks.
-  sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
-  -- define mappings that are different than the default
-  mappings = {
-    next = "]m",
-    prev = "[m",
-    delete = "dm",
-    delete_line = "dm-",
-    delete_buf = "dm<space>",
-    preview = "m;",
-  }
-}
-EOF
+runtime rc/movement.vim
 
 " }}}
 
-" Folding {{{
+" Tag Management {{{
 
-function! FancyFoldText()
-  let l:line = getline(v:foldstart)
-  let l:nucolwidth = &foldcolumn + &number * &numberwidth
-  let l:windowwidth = winwidth(0) - l:nucolwidth - 3
-  let l:foldedlinecount = v:foldend - v:foldstart
-  let l:onetab = strpart('          ', 0, &tabstop)
-  let l:line = substitute(l:line, '\t', l:onetab, 'g')
-  let l:line = strpart(l:line, 0, l:windowwidth - 2 -len(l:foldedlinecount))
-  let l:fillcharcount = l:windowwidth - len(l:line) - len(l:foldedlinecount)
-  return l:line . ' ' . repeat(' ',l:fillcharcount-8) . l:foldedlinecount . ' lines ' . ' '
-endfunction
-set foldtext=FancyFoldText()
-
-" }}}
-
-" Basic Keyboard Movement {{{
-
-" Disable the arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-inoremap jk <ESC>
-inoremap <ESC> <NOP>
-
-" Define the leaders
-let maplocalleader=','
-let mapleader=','
-
-" Move through CamelCase text
-call camelcasemotion#CreateMotionMappings('<space><space>')
-
-" Navigate through wrapped text
-nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
-
-" Navigate to the next linting warning/error
-nmap <silent> <C-k> <Plug>(ale_previous)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-" Quickly switch between two recent buffers
-function! SwitchBuffer()
-  b#
-endfunction
-" Use either control or space to activate
-nmap <C-u> :call SwitchBuffer()<CR>
-nmap <Space>u :call SwitchBuffer()<CR>
-
-" Define <leader<leader> to create a colon in both
-" normal mode and visual mode, thereby avoiding
-" the need to frequently type the shift key
-nnoremap <leader><leader> :
-vnoremap <leader><leader> :
-
-" }}}
-
-" Tags {{{
-
-" Specify where the tags are stored
-set tags=./tags;/,tags;/
-
-" Perform highlighting asynchronously when file is loaded or saved
-let g:highlighter#auto_update = 2
-
-" Configure gutentags plugin
-let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['package.json', '.git']
-let g:gutentags_generate_on_new = 1
-let g:gutentags_generate_on_missing = 1
-let g:gutentags_generate_on_write = 1
-let g:gutentags_generate_on_empty_buffer = 1
-
-" Only allow Gutentags to generate a tag file that indexes the files
-" that are returned by a tool like ripgrep, which is already configured
-" to ignore those files that are inside of the .gitignore file
-let g:gutentags_file_list_command = 'rg --files'
+runtime rc/tagmanagement.vim
 
 " }}}
 
 " File System {{{
 
-" Configure the dirvish plugin
-augroup dirvishconfiguration
-  autocmd!
-  " Disable spell checking for the Dirvish buffers
-  autocmd FileType dirvish setlocal nospell
-
-  " Map `gr` to reload the Dirvish buffer
-  autocmd FileType dirvish nnoremap <silent><buffer> gr :<C-U>Dirvish %<CR>
-
-  " Map `gh` to hide dot-prefixed files
-  " To toggle this, press `gr` to reload
-  autocmd FileType dirvish nnoremap <silent><buffer>
-        \ gh :silent keeppatterns g@\v/\.[^\/]+/?$@d<cr>
-augroup END
-
-" Define the symbols used to indicate the status of the
-" version control repository in a dirvish buffer
-let g:dirvish_git_indicators = {
-\ 'Modified'  : '!',
-\ 'Staged'    : '+',
-\ 'Untracked' : '?',
-\ 'Renamed'   : '➜',
-\ 'Unmerged'  : '═',
-\ 'Ignored'   : '',
-\ 'Unknown'   : ''
-\ }
-
-" Define the highlight color for version control details in dirvish
-let g:gitstatus = 'guifg=#d78700 ctermfg=172'
-
-" Define the color scheme to always be the same color;
-" this is acceptable because the symbols vary.
-silent exe 'hi default DirvishGitModified '.g:gitstatus
-silent exe 'hi default DirvishGitStaged '.g:gitstatus
-silent exe 'hi default DirvishGitRenamed '.g:gitstatus
-silent exe 'hi default DirvishGitUnmerged '.g:gitstatus
-silent exe 'hi default DirvishGitIgnored guifg=NONE guibg=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=NONE'
-silent exe 'hi default DirvishGitUntracked guifg=NONE guibg=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=NONE'
-silent exe 'hi default link DirvishGitUntrackedDir DirvishPathTail'
+runtime rc/filesystem.vim
 
 " }}}
 
@@ -281,6 +141,58 @@ vmap <silent> zp <Plug>(SpellRotateBackwardV)
 nmap <silent> <leader>s :set spell!<CR>
 
 " }}}
+
+
+" Marks.nvim {{{
+
+lua << EOF
+require'marks'.setup {
+  -- do not use the default keybindings
+  default_mappings = false,
+  -- make movements cycle back to the beginning/end of buffer
+  cyclic = true,
+  -- do not save the marks into the shada file
+  force_write_shada = false,
+  -- how often (in ms) to redraw signs/recompute mark positions.
+  -- higher values will have better performance but may cause visual lag,
+  -- while lower values may cause performance penalties. default 150.
+  refresh_interval = 150,
+  -- sign priorities for each type of mark - builtin marks, uppercase marks, lowercase
+  -- marks, and bookmarks.
+  -- can be either a table with all/none of the keys, or a single number, in which case
+  -- the priority applies to all marks.
+  sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+  -- define mappings that are different than the default
+  mappings = {
+    next = "]m",
+    prev = "[m",
+    delete = "dm",
+    delete_line = "dm-",
+    delete_buf = "dm<space>",
+    preview = "m;",
+  }
+}
+EOF
+
+" }}}
+
+" Folding {{{
+
+function! FancyFoldText()
+  let l:line = getline(v:foldstart)
+  let l:nucolwidth = &foldcolumn + &number * &numberwidth
+  let l:windowwidth = winwidth(0) - l:nucolwidth - 3
+  let l:foldedlinecount = v:foldend - v:foldstart
+  let l:onetab = strpart('          ', 0, &tabstop)
+  let l:line = substitute(l:line, '\t', l:onetab, 'g')
+  let l:line = strpart(l:line, 0, l:windowwidth - 2 -len(l:foldedlinecount))
+  let l:fillcharcount = l:windowwidth - len(l:line) - len(l:foldedlinecount)
+  return l:line . ' ' . repeat(' ',l:fillcharcount-8) . l:foldedlinecount . ' lines ' . ' '
+endfunction
+set foldtext=FancyFoldText()
+
+" }}}
+
 
 " Lualine {{{
 
