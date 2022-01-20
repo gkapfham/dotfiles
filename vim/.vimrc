@@ -47,7 +47,7 @@ runtime rc/movement.vim
 
 " }}}
 
-" Folding {{{
+" Fold Format {{{
 
 runtime rc/folding.vim
 

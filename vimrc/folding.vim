@@ -1,4 +1,4 @@
-" Folding {{{
+" Fold Format {{{
 
 function! FancyFoldText()
   let l:line = getline(v:foldstart)
