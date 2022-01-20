@@ -3,6 +3,8 @@
 set encoding=utf-8
 scriptencoding utf-8
 
+" BASELINE {{{
+
 " Add Plugins {{{
 
 runtime rc/plug.vim
@@ -21,13 +23,13 @@ runtime rc/system.vim
 
 " }}}
 
-" Neovim Configuration {{
+" Neovim Configuration {{{
 
 runtime rc/neovim.vim
 
 " }}}
 
-" Display Improvements {{
+" Display Improvements {{{
 
 runtime rc/displaynice.vim
 
@@ -36,6 +38,18 @@ runtime rc/displaynice.vim
 " Keyboard Movement {{{
 
 runtime rc/movement.vim
+
+" }}}
+
+" Text Manipulation {{{
+
+runtime rc/movement.vim
+
+" }}}
+
+" Folding {{{
+
+runtime rc/folding.vim
 
 " }}}
 
@@ -53,95 +67,11 @@ runtime rc/filesystem.vim
 
 " Manual Pages {{{
 
-" Define a special configuration for man buffers
-augroup manconfiguration
-  autocmd!
-  " Disable spell checking for the man buffers
-  autocmd FileType man setlocal nospell
-augroup END
-
-" Fuzzy search through the man pages with Fzf and then
-" display the selected man page inside of Vim
-command! -nargs=? Superman call fzf#run(fzf#wrap({'source': 'man -k -s 1 '.shellescape(<q-args>).' | cut -d " " -f 1', 'sink': 'tab Man', 'options': ['--preview', 'MANPAGER=cat MANWIDTH='.(&columns/2-4).' man {}']}))
+runtime rc/manualpages.vim
 
 " }}}
 
-" Text Manipulation {{{
-
-" Insert a blank line at end of line
-nmap oo Ojk
-
-" Insert a blank line at cursor
-nnoremap oO i<CR><ESC>
-
-" Support the backspace key in insert mode
-set backspace=indent,eol,start
-
-" Interactive EasyAlign in visual mode (e.g., 'vipga')
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g., gaip)
-nmap ga <Plug>(EasyAlign)
-
-" Bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-
-" Bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
-" Configure the autopairs.nvim plugin
-lua << EOF
-local remap = vim.api.nvim_set_keymap
-local npairs = require('nvim-autopairs')
-
-npairs.setup({ map_bs = false, map_cr = false })
-vim.g.coq_settings = { keymap = { recommended = false } }
-
--- skip it, if you use another global object
-_G.MUtils= {}
-
-MUtils.CR = function()
-  if vim.fn.pumvisible() ~= 0 then
-    if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
-      return npairs.esc('<c-y>')
-    else
-      return npairs.esc('<c-e>') .. npairs.autopairs_cr()
-    end
-  else
-    return npairs.autopairs_cr()
-  end
-end
-remap('i', '<cr>', 'v:lua.MUtils.CR()', { expr = true, noremap = true })
-
-MUtils.BS = function()
-  if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
-    return npairs.esc('<c-e>') .. npairs.autopairs_bs()
-  else
-    return npairs.autopairs_bs()
-  end
-end
-remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
-EOF
-
-" Configure the matchup plugin to display diagnostics about location
-nnoremap <c-k> :<c-u>MatchupWhereAmI<CR>
-
-" Remove trailing whitespace
-nnoremap <Leader>rtw :%s/\s\+$//e<CR>
-
-" Fix a misspelling with next-best word
-nmap <silent> zn <Plug>(SpellRotateForward)
-nmap <silent> zp <Plug>(SpellRotateBackward)
-vmap <silent> zn <Plug>(SpellRotateForwardV)
-vmap <silent> zp <Plug>(SpellRotateBackwardV)
-
-" Toggle the display of spelling mistakes
-nmap <silent> <leader>s :set spell!<CR>
-
 " }}}
-
 
 " Marks.nvim {{{
 
@@ -176,22 +106,6 @@ EOF
 
 " }}}
 
-" Folding {{{
-
-function! FancyFoldText()
-  let l:line = getline(v:foldstart)
-  let l:nucolwidth = &foldcolumn + &number * &numberwidth
-  let l:windowwidth = winwidth(0) - l:nucolwidth - 3
-  let l:foldedlinecount = v:foldend - v:foldstart
-  let l:onetab = strpart('          ', 0, &tabstop)
-  let l:line = substitute(l:line, '\t', l:onetab, 'g')
-  let l:line = strpart(l:line, 0, l:windowwidth - 2 -len(l:foldedlinecount))
-  let l:fillcharcount = l:windowwidth - len(l:line) - len(l:foldedlinecount)
-  return l:line . ' ' . repeat(' ',l:fillcharcount-8) . l:foldedlinecount . ' lines ' . ' '
-endfunction
-set foldtext=FancyFoldText()
-
-" }}}
 
 
 " Lualine {{{
