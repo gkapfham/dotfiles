@@ -62,8 +62,8 @@ require('lualine').setup {
                     dos = 'docs',
                     mac = 'mac',
                 }}, },
-    lualine_y = {'filesize', 'progress', 'location'},
-    lualine_z = {{'filetype', colored=false}}
+    lualine_y = {'progress', 'location'},
+    lualine_z = {'filesize', {'filetype', colored=false}}
   },
   inactive_sections = {
     lualine_a = {},
