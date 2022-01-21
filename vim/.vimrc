@@ -43,7 +43,19 @@ runtime rc/movement.vim
 
 " Text Manipulation {{{
 
-runtime rc/movement.vim
+runtime rc/texmanipulation.vim
+
+" }}}
+
+" Completion {{{
+
+runtime rc/completion.vim
+
+" }}}
+
+" Search Highlighting {{{
+
+runtime rc/searchhighlight.vim
 
 " }}}
 
@@ -87,6 +99,18 @@ runtime rc/languageserver.vim
 
 " }}}
 
+" Nvim-lint {{{
+
+runtime rc/nvimlintplugin.vim
+
+" }}}
+
+" Completion with UltiSnips, Coq.nvim, and Wilder.nvim {{{
+
+runtime rc/completionplugin.vim
+
+" }}}
+
 " Marks.nvim {{{
 
 runtime rc/marksplugin.vim
@@ -106,113 +130,6 @@ runtime rc/versioncontrol.vim
 " }}}
 
 " --> PLUGINS }}}
-
-" Linting with nvim-lint {{{
-
-lua << EOF
--- load and configure the linting plugin
--- pick specific linters for specific file types
-require('lint').linters_by_ft = {
-  mail = {'proselint'},
-  markdown = {'markdownlint', 'proselint'},
-  python = {'flake8', 'pydocstyle', 'pylint'},
-  tex = {'chktex'},
-  vim = {'vint'},
-  zsh = {'shellcheck'},
-}
-EOF
-
-" Always run the linters whenever a file is saved
-au BufWritePost * :lua require('lint').try_lint()
-
-" Disable the display of linting diagnostics
-command! NoLint lua vim.diagnostic.config({virtual_text = false})
-
-" Enable the display of linting diagnostics;
-" note that, by default, linting is enabled
-command! ShowLint lua vim.diagnostic.config({virtual_text = true})
-
-" }}}
-
-" Completion {{{
-
-" Define basic completion function
-set omnifunc=syntaxcomplete#Complete
-
-" Define the dictionaries
-set dictionary-=/usr/share/dict/american-english
-set dictionary+=/usr/share/dict/american-english
-
-" Completion includes dictionaries
-set complete-=k complete+=k
-set complete+=kspell
-set complete+=]
-
-" Set the completion approach for the engine
-set completeopt=menuone,noselect
-
-" Completion engine is compatible with UltiSnips
-let g:UltiSnipsExpandTrigger='<C-s>'
-let g:UltiSnipsJumpForwardTrigger='<C-s>'
-let g:UltiSnipsJumpBackwardTrigger='<C-j>'
-
-" Do not echo messages (nor will searches)
-set noshowmode
-
-" Infer the case when doing completion
-set infercase
-
-" Always start coq.nvim when entering buffer
-autocmd VimEnter * COQnow --shut-up
-
-" Disable the default coq.nvim keybindings
-let g:coq_settings = { 'keymap.recommended': v:false }
-
-" Specify customized coq.nvim settings
-ino <silent><expr> <Esc>   pumvisible() ? "\<C-e>" : "\<Esc>"
-ino <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
-ino <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
-ino <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
-ino <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"
-
-" Additional coq.nvim settings
-let g:coq_settings = {"display.pum.source_context" : ["  ", " "], "display.pum.kind_context" : [" ", " "], 'auto_start': 'shut-up'}
-
-" Basic configuration for the wilder.nvim plugin
-" that makes searching in the wildmenu possible
-call wilder#setup({'modes': [':', '/', '?']})
-
-" Configure the wilder.nvim so that it supports
-" the theme from the lightline and renders in it;
-" this means that the completion items render in
-" the lightline at the bottom of the screen. Nice!
-call wilder#set_option('renderer', wilder#wildmenu_renderer(
-      \ wilder#wildmenu_lightline_theme({
-      \   'highlights': {},
-      \   'highlighter': wilder#basic_highlighter(),
-      \   'separator': ' · ',
-      \ })))
-
-" }}}
-
-" Advanced Search Highlighting {{{
-
-" Incrementally highlight the search matches
-set incsearch
-
-" Support the highlighting of words
-nnoremap <silent><expr> <Leader>i (&hls && v:hlsearch ? ':set nohlsearch' : ':set hlsearch')."\n"
-
-" Carefully ignore the case of words when searching
-set ignorecase
-set smartcase
-
-" Make :grep use ripgrep and use -uu to not ignore files
-" This is an alternative to :Rg or :Ag which ignore some files
-set grepprg=rg\ -uu\ --vimgrep\ --no-heading\ --smart-case
-
-" }}}
 
 " Advanced Keyboard Movement with Lightspeed.nvim {{{
 
