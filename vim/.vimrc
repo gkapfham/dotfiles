@@ -111,12 +111,6 @@ runtime rc/completionplugin.vim
 
 " }}}
 
-" Marks.nvim {{{
-
-runtime rc/marksplugin.vim
-
-" }}}
-
 " Lualine.nvim {{{
 
 runtime rc/lualineplugin.vim
@@ -126,6 +120,12 @@ runtime rc/lualineplugin.vim
 " Version control: Fugitive, Diffview.nvim, and Neogit {{{
 
 runtime rc/versioncontrolplugin.vim
+
+" }}}
+
+" Marks.nvim {{{
+
+runtime rc/marksplugin.vim
 
 " }}}
 
