@@ -129,7 +129,7 @@ runtime rc/versioncontrolplugin.vim
 
 " }}}
 
-" autopairs.nvim {{{
+" Autopairs.nvim {{{
 
 runtime rc/autopairsplugin.vim
 
