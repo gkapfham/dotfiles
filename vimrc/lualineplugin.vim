@@ -57,13 +57,13 @@ require('lualine').setup {
     lualine_b = {'branch', 'diff'},
     lualine_c = {'StatuslineReadonly', {'filename', path=1}},
     -- Bottom right display
-    lualine_x = {'encoding', {'fileformat', symbols = {
+    lualine_x = {'lsp_progress', 'encoding', {'fileformat', symbols = {
                     unix = 'unix',
                     dos = 'docs',
                     mac = 'mac',
-                }}, {'filetype', colored=false}},
-    lualine_y = {'filesize', 'progress'},
-    lualine_z = {'location'}
+                }}, },
+    lualine_y = {'filesize', 'progress', 'location'},
+    lualine_z = {{'filetype', colored=false}}
   },
   inactive_sections = {
     lualine_a = {},
@@ -77,7 +77,7 @@ require('lualine').setup {
     lualine_a = {{'buffers', show_modified_status = true}},
     lualine_b = {},
     lualine_c = {},
-    lualine_x = {'lsp_progress', {'diagnostics', symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}}},
+    lualine_x = {{'diagnostics', symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}}},
     lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
     lualine_z = {}
   },
