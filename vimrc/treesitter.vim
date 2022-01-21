@@ -27,4 +27,7 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
+" Configure the matchup plugin to display diagnostics about location
+nnoremap <c-k> :MatchupWhereAmI<CR>
+
 " }}}
