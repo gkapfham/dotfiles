@@ -125,7 +125,13 @@ runtime rc/lualineplugin.vim
 
 " Version control: Fugitive, Diffview.nvim, and Neogit {{{
 
-runtime rc/versioncontrol.vim
+runtime rc/versioncontrolplugin.vim
+
+" }}}
+
+" autopairs.nvim {{{
+
+runtime rc/autopairsplugin.vim
 
 " }}}
 
