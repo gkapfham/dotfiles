@@ -57,9 +57,6 @@ end
 remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
 EOF
 
-" Configure the matchup plugin to display diagnostics about location
-nnoremap <c-k> :<c-u>MatchupWhereAmI<CR>
-
 " Remove trailing whitespace
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
