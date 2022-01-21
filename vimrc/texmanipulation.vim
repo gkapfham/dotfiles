@@ -23,7 +23,7 @@ nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
-" Configure the autopairs.nvim plugin
+" TODO: Configure the autopairs.nvim plugin
 lua << EOF
 local remap = vim.api.nvim_set_keymap
 local npairs = require('nvim-autopairs')
