@@ -73,4 +73,3 @@ vmap <silent> zp <Plug>(SpellRotateBackwardV)
 nmap <silent> <leader>s :set spell!<CR>
 
 " }}}
-
