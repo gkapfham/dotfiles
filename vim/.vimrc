@@ -3,7 +3,7 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-" BASELINE --> {{{
+" Baseline --> {{{
 
 " Add Plugins {{{
 
@@ -83,9 +83,9 @@ runtime rc/manualpages.vim
 
 " }}}
 
-" --> BASELINE }}}
+" --> Baseline }}}
 
-" PLUGINS --> {{{
+" Plugins --> {{{
 
 " Treesitter {{{
 
@@ -135,7 +135,7 @@ runtime rc/autopairsplugin.vim
 
 " }}}
 
-" --> PLUGINS }}}
+" --> Plugins }}}
 
 " Advanced Keyboard Movement with Lightspeed.nvim {{{
 
