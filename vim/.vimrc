@@ -5,83 +5,44 @@ scriptencoding utf-8
 
 " Baseline --> {{{
 
-" Add Plugins {{{
-
+" Add Plugins
 runtime rc/plug.vim
 
-" }}}
-
-" Color Scheme {{{
-
+" Color Scheme
 runtime rc/colortheme.vim
 
-" }}}
-
-" System Configuration {{{
-
+" System Configuration
 runtime rc/system.vim
 
-" }}}
-
-" Neovim Configuration {{{
-
+" Neovim Configuration
 runtime rc/neovim.vim
 
-" }}}
-
-" Display Improvements {{{
-
+" Display Improvements
 runtime rc/displaynice.vim
 
-" }}}
-
-" Keyboard Movement {{{
-
+" Keyboard Movement
 runtime rc/movement.vim
 
-" }}}
-
-" Text Manipulation {{{
-
+" Text Manipulation
 runtime rc/texmanipulation.vim
 
-" }}}
-
-" Completion {{{
-
+" Completion
 runtime rc/completion.vim
 
-" }}}
-
-" Search Highlighting {{{
-
+" Search Highlighting
 runtime rc/searchhighlight.vim
 
-" }}}
-
-" Fold Format {{{
-
+" Fold Format
 runtime rc/folding.vim
 
-" }}}
-
-" Tag Management {{{
-
+" Tag Management
 runtime rc/tagmanagement.vim
 
-" }}}
-
-" File System {{{
-
+" File System
 runtime rc/filesystem.vim
 
-" }}}
-
-" Manual Pages {{{
-
+" Manual Pages
 runtime rc/manualpages.vim
-
-" }}}
 
 " --> Baseline }}}
 
