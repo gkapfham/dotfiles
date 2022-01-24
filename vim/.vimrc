@@ -48,53 +48,29 @@ runtime rc/manualpages.vim
 
 " Plugins --> {{{
 
-" Treesitter {{{
-
+" Treesitter
 runtime rc/treesitter.vim
 
-" }}}
-
-" Language Server {{{
-
+" Language Server
 runtime rc/languageserver.vim
 
-" }}}
-
-" Nvim-lint {{{
-
+" Nvim-lint
 runtime rc/nvimlintplugin.vim
 
-" }}}
-
-" Completion with UltiSnips, Coq.nvim, and Wilder.nvim {{{
-
+" Completion with UltiSnips, Coq.nvim, and Wilder.nvim
 runtime rc/completionplugin.vim
 
-" }}}
-
-" Lualine.nvim {{{
-
+" Lualine.nvim
 runtime rc/lualineplugin.vim
 
-" }}}
-
-" Version control: Fugitive, Diffview.nvim, and Neogit {{{
-
+" Version control: Fugitive, Diffview.nvim, and Neogit
 runtime rc/versioncontrolplugin.vim
 
-" }}}
-
-" Marks.nvim {{{
-
+" Marks.nvim
 runtime rc/marksplugin.vim
 
-" }}}
-
-" Autopairs.nvim {{{
-
+" Autopairs.nvim
 runtime rc/autopairsplugin.vim
-
-" }}}
 
 " --> Plugins }}}
 
