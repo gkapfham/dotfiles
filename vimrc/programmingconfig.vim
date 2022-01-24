@@ -122,27 +122,4 @@ let g:mkdp_echo_preview_url = 1
 " Autodetect CSV
 autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 
-" " Define linting for email
-" let g:ale_linter_aliases = {'mail': 'tex', 'liquid': 'markdown'}
-
-" " Configure the linters run by ALE
-" " JavaScript: eslint
-" " HTML: htmlhint
-" " Python: flake8, pylint, pydocstyle
-" let g:ale_linters = {
-"       \   'javascript': ['eslint'],
-"       \   'html': ['htmlhint'],
-"       \   'python': ['flake8', 'pylint', 'pydocstyle'],
-"       \}
-
-" " Configure the fixers run by ALE
-" " All files: remove trailing lines and blank spaces
-" let g:ale_fixers = {
-" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-" \}
-
-" " Configure the symbols for linting warnings and errors
-" let g:ale_sign_warning = '▲'
-" let g:ale_sign_error = '✗'
-
 " }}}
