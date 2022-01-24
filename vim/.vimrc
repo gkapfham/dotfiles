@@ -57,7 +57,7 @@ runtime rc/languageserver.vim
 " Nvim-lint
 runtime rc/nvimlintplugin.vim
 
-" Completion with UltiSnips, Coq.nvim, and Wilder.nvim
+" Completion plugins: UltiSnips, Coq.nvim, and Wilder.nvim
 runtime rc/completionplugin.vim
 
 " Lualine.nvim
@@ -66,20 +66,20 @@ runtime rc/lualineplugin.vim
 " Version control: Fugitive, Diffview.nvim, and Neogit
 runtime rc/versioncontrolplugin.vim
 
+" Telescope.nvim
+runtime rc/telescopeplugin.vim
+
+" Lightspeed.nvim
+runtime rc/lightspeedplugin.vim
+
+" Fzf
+runtime rc/fzfplugin.vim
+
 " Marks.nvim
 runtime rc/marksplugin.vim
 
 " Autopairs.nvim
 runtime rc/autopairsplugin.vim
-
-" Lightspeed.nvim
-runtime rc/lightspeedplugin.vim
-
-" Telescope.nvim
-runtime rc/telescopeplugin.vim
-
-" Fzf
-runtime rc/fzfplugin.vim
 
 " --> Plugins }}}
 
