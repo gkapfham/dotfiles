@@ -34,7 +34,7 @@ return {
       -- Color of the scrollbar "thumb"; the portion that represents the current viewport
       scrollbar_thumb = "#222222",
       -- Color of the split lines between panes
-      split = "#444444",
+      split = "#5f8700",
       -- Configure the non-bright and bright colors to be the same
       -- Standard eight colors at the non-bright level
       ansi = {"#767676", "#d78700", "#5f8700", "#afaf5f", "#87afd7", "#875f87", "#d75f5f", "#b2b2b2"},
