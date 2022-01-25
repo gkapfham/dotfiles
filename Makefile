@@ -103,6 +103,14 @@ create-i3:
 ## Depends on the creation of the .config directory
 create-i3: create-config
 
+## Create the needed i3wsr/ directory in .config/
+create-i3wsr:
+	rm -rf ~/.config/i3wsr
+	mkdir -p ~/.config/i3wsr
+
+## Depends on the creation of the .config directory
+create-i3: create-config
+
 ## Create the needed polybar/ directory in .config/
 create-polybar:
 	rm -rf ~/.config/polybar
@@ -319,6 +327,13 @@ stow-i3:
 
 ## Running stow on i3 depends on creating i3 directory
 stow-i3: create-i3
+
+## Run stow on i3wsr
+stow-i3wsr:
+	stow -t ~/.config/i3wsr i3wsr
+
+## Running stow on i3wsr depends on creating i3wsr directory
+stow-i3wsr: create-i3wsr
 
 ## Run stow on gtk-2.0
 stow-gtk2:
