@@ -7,4 +7,4 @@ killall -q dunst
 while pgrep -u $UID -x dunst >/dev/null; do sleep 1; done
 
 # launch dunst
-dunst -config .config/dunst/dunstrc
+dunst -config ~/.config/dunst/dunstrc
