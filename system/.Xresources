@@ -2,41 +2,46 @@
 ! Rofi theme
 !
 
-! Set the font to match i3 and all other programs
-rofi.font: Hack\ Nerd\ Font\ Regular\ 54
+! ! Set the font to match i3 and all other programs
+! rofi.font: Hack\ Nerd\ Font\ Regular\ 54
 
-! Set the color theme for rofi
-rofi.color-enabled: true
-!                  bg       border   separator
-rofi.color-window: #1c1c1c, #1c1c1c, #767676
-!                  bg       fg       bg-alt   hl-bg    hl-fg
-rofi.color-normal: #1c1c1c, #767676, #1c1c1c, #767676, #1c1c1c
-rofi.color-active: #1c1c1c, #767676, #1c1c1c, #767676, #1c1c1c
-rofi.color-urgent: #1c1c1c, #5f8700, #1c1c1c, #5f8700, #1c1c1c
+! ! Set the color theme for rofi
+! rofi.color-enabled: true
+! !                  bg       border   separator
+! rofi.color-window: #1c1c1c, #1c1c1c, #767676
+! !                  bg       fg       bg-alt   hl-bg    hl-fg
+! rofi.color-normal: #1c1c1c, #767676, #1c1c1c, #767676, #1c1c1c
+! rofi.color-active: #1c1c1c, #767676, #1c1c1c, #767676, #1c1c1c
+! rofi.color-urgent: #1c1c1c, #5f8700, #1c1c1c, #5f8700, #1c1c1c
 
-! Set all other configurations for rofi
-rofi.bw: 5
-rofi.fixed_num_lines: 1
-rofi.hide-scrollbar: false
-rofi.hmode: false
-rofi.line-margin: 10
-rofi.lines: 5
-rofi.location: 6
-rofi.matching: fuzzy
-rofi.separator-style: none
-rofi.width: 50
-rofi.xoffset: 0
-rofi.yoffset: -200
+! ! Set all other configurations for rofi
+! rofi.bw: 5
+! rofi.fixed_num_lines: 1
+! rofi.hide-scrollbar: false
+! rofi.hmode: false
+! rofi.line-margin: 10
+! rofi.lines: 5
+! rofi.location: 6
+! rofi.matching: fuzzy
+! rofi.separator-style: none
+! rofi.width: 50
+! rofi.xoffset: 0
+! rofi.yoffset: -200
 
 !
 ! Display scaling
-!
 
 ! Xft settings for HiDPI
-Xft.dpi:        230
+Xft.dpi:        192
 Xft.rgba:       rgb
 Xft.autohint:   0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
 Xft.hinting:    1
 Xft.antialias:  1
+
+!
+! Display scaling
+
+Xcursor.theme: Adwaita
+Xcursor.size: 64
