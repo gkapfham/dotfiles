@@ -1,12 +1,22 @@
+-- create a new wezterm for configuration
 local wezterm = require 'wezterm';
+-- set all of the configuration values for wezterm
 return {
+  -- Use Hack Nerd Font as the main font and specify
+  -- the Noto Color Emoji font as the fallback in the
+  -- case in which Hack Nerd Font does not define
   font = wezterm.font_with_fallback({
     "Hack Nerd Font",
     "Noto Color Emoji"
   }),
+  -- Set the font size which works consistently across
+  -- all monitors and displays tested to date
   font_size = 16,
+  -- Do not enable a scroll bar
   enable_tab_bar = false,
+  -- Support scrolling back for 10,000 lines
   scrollback_lines = 10000,
+  -- Define the color scheme to match Vitamin-Onec
   colors = {
       foreground = "#8a8a8a",
       background = "#1c1c1c",
