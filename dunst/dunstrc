@@ -1,6 +1,6 @@
 [global]
     # Define a matching font
-    font = Hack Nerd Font Regular 22
+    font = Hack Nerd Font Regular 14
 
     # Allow a small subset of HTML markup:
     #   <b>bold</b>
@@ -58,7 +58,7 @@
     # --> uses the new specification standard
     # --> specifies a (min,max) size
     # --> specifies location of the notification
-    width = (850,1050)
+    width = (450,1050)
     height = (100,350)
     origin = top-right
 

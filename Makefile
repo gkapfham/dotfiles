@@ -103,6 +103,14 @@ create-i3:
 ## Depends on the creation of the .config directory
 create-i3: create-config
 
+## Create the needed i3wsr/ directory in .config/
+create-i3wsr:
+	rm -rf ~/.config/i3wsr
+	mkdir -p ~/.config/i3wsr
+
+## Depends on the creation of the .config directory
+create-i3: create-config
+
 ## Create the needed polybar/ directory in .config/
 create-polybar:
 	rm -rf ~/.config/polybar
@@ -126,6 +134,9 @@ create-termite:
 	rm -rf ~/.config/termite
 	mkdir -p ~/.config/termite
 
+## Depends on the creation of the .config directory
+create-termite: create-config
+
 ## Create the needed urlscan/ directory in .config/
 create-urlscan:
 	rm -rf ~/.config/urlscan
@@ -134,8 +145,13 @@ create-urlscan:
 ## Depends on the creation of the .config directory
 create-urlscan: create-config
 
+## Create the needed wezterm/ directory in .config/
+create-wezterm:
+	rm -rf ~/.config/wezterm
+	mkdir -p ~/.config/wezterm
+
 ## Depends on the creation of the .config directory
-create-termite: create-config
+create-wezterm: create-config
 
 ## Create the needed zathura/ directory in .config/
 create-zathura:
@@ -162,6 +178,12 @@ create-nvim:
 	ln -s ~/.vim ~/.config/nvim
 	@# Delete the init.vim file as it will later be stowed
 	rm -rf ~/.config/nvim/init.vim
+
+## Create the ~/.vim/rc directory that contains .vim files
+## that contain components of the .vimrc file
+create-vimrc:
+	rm -rf ~/.vim/rc
+	mkdir -p ~/.vim/rc
 
 ## }}}
 
@@ -306,6 +328,13 @@ stow-i3:
 ## Running stow on i3 depends on creating i3 directory
 stow-i3: create-i3
 
+## Run stow on i3wsr
+stow-i3wsr:
+	stow -t ~/.config/i3wsr i3wsr
+
+## Running stow on i3wsr depends on creating i3wsr directory
+stow-i3wsr: create-i3wsr
+
 ## Run stow on gtk-2.0
 stow-gtk2:
 	stow -t ~/.config/gtk-2.0 gtk-2.0
@@ -342,6 +371,13 @@ stow-nvim:
 
 ## Running stow on nvim depends on creating nvim directory
 stow-nvim: create-nvim
+
+## Run stow on vimrc
+stow-vimrc:
+	stow -t ~/.vim/rc vimrc
+
+## Running stow on vimrc depends on creating the ~/.vim/rc directory
+stow-vimrc: create-vimrc
 
 ## Run stow on polybar
 stow-polybar:
@@ -390,6 +426,13 @@ stow-urlscan:
 
 ## Running stow on urlscan depends on creating urlscan directory
 stow-urlscan: create-urlscan
+
+## Run stow on wezterm
+stow-wezterm:
+	stow -t ~/.config/wezterm wezterm
+
+## Running stow depends on the creation of the directory
+stow-wezterm: create-alacritty
 
 ## Run stow on zathura
 stow-zathura:
@@ -507,10 +550,10 @@ zcompile-shell-scripts: stow-external
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-alacritty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-polybar create-termite create-tmux create-urlscan create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-alacritty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-vimrc create-zsh create-fzf-tab create-zshtheme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-bat stow-code stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-i3 stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-zathura stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tool stow-vim stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-bat stow-code stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-i3 stow-i3wsr stow-email stow-git stow-nvim stow-vimrc stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tool stow-vim stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zsh-git-prompt stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions

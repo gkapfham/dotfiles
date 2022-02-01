@@ -104,6 +104,8 @@ export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
 # --> Ruby gems as managed by Ruby installed by asdf-vm
 export PATH="$PATH:$HOME/.gem/bin"
 
+# Local Poetry home
+export POETRY_HOME=$HOME/.poetry
 
 # Local Gem home
 export GEM_HOME=$HOME/.gem

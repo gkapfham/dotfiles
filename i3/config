@@ -33,7 +33,7 @@ exec_always --no-startup-id hsetroot -solid "#1C1C1C"
 exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
 
 # Run the dynamic workspace renaming program
-exec_always --no-startup-id exec i3wsr
+exec_always --no-startup-id exec i3wsr --config ~/.config/i3wsr/config.yml
 
 # Run numlockx to turn off numlock by default
 # This prevents numlock from displaying in i3lock-color

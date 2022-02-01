@@ -20,5 +20,10 @@ eval $(/usr/sbin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ss
 export $(/usr/sbin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
 dbus-update-activation-environment --systemd DISPLAY
 
+# load the .Xresources file so that scaling and cursor are set correctly;
+# note that this must take place before starting i3 or the results will
+# either be inconsistent or not work correctly
+xrdb ~/.Xresources
+
 # startx /usr/sbin/i3
 exec i3

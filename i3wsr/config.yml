@@ -1,0 +1,12 @@
+[aliases]
+
+# Substring match for wezterm
+# Note that this ensures that the
+# "org."-based name of wezterm is
+# not displayed on the polybar
+wezterm = "Wezterm"
+
+# Substring match for firefox
+# to use capitalization in a
+# consistent fashion
+firefox = "Firefox"
