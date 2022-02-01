@@ -105,4 +105,14 @@ lua << EOF
 require('impatient')
 EOF
 
+" NOTE: This runtime call does not work if it is
+" called directly from the sandwhichplugin.vim
+" file and from location of the vimrc file.
+
+" Do not use the default mappings to preserve
+" the use of "s" from the lightspeed plugin;
+" instead use the default bindings of surround
+" while gaining the benefits of sandwich
+runtime macros/sandwich/keymap/surround.vim
+
 " }}}
