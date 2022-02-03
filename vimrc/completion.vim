@@ -13,7 +13,7 @@ set complete+=kspell
 set complete+=]
 
 " Set the completion approach for the engine
-set completeopt=menuone,noselect
+set completeopt=menu,menuone,noselect
 
 " Do not echo messages (nor will searches)
 set noshowmode
