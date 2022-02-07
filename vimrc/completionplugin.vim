@@ -8,78 +8,137 @@ let g:UltiSnipsJumpBackwardTrigger='<C-j>'
 set completeopt=menu,menuone,noselect
 
 lua <<EOF
-  -- Setup nvim-cmp.
+-- define symbols for the icons used by nvim-cmp
+local kind_icons = {
+  Text = "",
+  Method = "",
+  Function = "",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "ﴯ",
+  Interface = "",
+  Module = "",
+  Property = "ﰠ",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = ""
+}
 
-  local cmp = require'cmp'
-
-  cmp.setup({
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-        vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      end,
+-- Setup nvim-cmp.
+local cmp = require'cmp'
+cmp.setup({
+  snippet = {
+    -- specify a snippet engine
+    expand = function(args)
+      vim.fn["UltiSnips#Anon"](args.body)
+    end,
+  },
+  -- use the custom view packaged by nvim-cmp, other options are 
+  view = {
+        entries = "custom"
+  },
+  formatting = {
+      format = function(entry, vim_item)
+        -- define the icons used for the completion labels
+        vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+        -- define labels for the completion menu
+        vim_item.menu = ({
+          buffer = "[Buffer]",
+          tmux = "[Tmux]",
+          nvim_lsp = "[LSP]",
+          luasnip = "[LuaSnip]",
+          nvim_lua = "[Lua]",
+          latex_symbols = "[LaTeX]",
+        })[entry.source.name]
+        return vim_item
+      end
     },
-
-    mapping = {
-      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable,
-      ['<C-e>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
-      ["<Tab>"] = cmp.mapping({
-                  c = function()
-                      if cmp.visible() then
-                          cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-                      else
-                          cmp.complete()
-                      end
-                  end,
-                  i = function(fallback)
-                      if cmp.visible() then
-                          cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-                      elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                          vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
-                      else
-                          fallback()
-                      end
-                  end,
-                  s = function(fallback)
-                      if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                          vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
-                      else
-                          fallback()
-                      end
-                  end
-              }),
-    },
-
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'ultisnips' },
-      { name = 'path' },
-    }, {
-      { name = 'buffer' },
-    })
+  -- define mappings for the keyboard commands when using completion menu
+  mapping = {
+    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-y>'] = cmp.config.disable,
+    ['<C-e>'] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ["<Tab>"] = cmp.mapping({
+                c = function()
+                    if cmp.visible() then
+                        cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+                    else
+                        cmp.complete()
+                    end
+                end,
+                i = function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+                    elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+                        vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
+                    else
+                        fallback()
+                    end
+                end,
+                s = function(fallback)
+                    if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+                        vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
+                    else
+                        fallback()
+                    end
+                end
+            }),
+  },
+  -- define the sources for the completions
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'tmux', },
+    { name = 'ultisnips' },
+    { name = 'path' },
+  }, {
+    { name = 'buffer' },
   })
+})
 
-  -- -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  -- cmp.setup.cmdline('/', {
-  --   sources = {
-  --     { name = 'buffer' }
-  --   }
-  -- })
-
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  -- use completion sources when forward-searching with "/"
   cmp.setup.cmdline('/', {
     sources = cmp.config.sources({
-      { name = 'path' }
+      { name = 'path' },
+      { name = 'buffer' }
     }, {
       { name = 'cmdline' }
     })
+  })
+
+  -- use completion sources when backward-searching with "?"
+  cmp.setup.cmdline('?', {
+    sources = cmp.config.sources({
+      { name = 'path' },
+      { name = 'buffer' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- use completion sources when running commands with ":"
+  require'cmp'.setup.cmdline(':', {
+    sources = {
+      { name = 'cmdline' }
+    }
   })
 
   -- -- Setup lspconfig.
@@ -108,19 +167,21 @@ EOF
 " " Additional coq.nvim settings
 " let g:coq_settings = {"display.pum.source_context" : ["  ", " "], "display.pum.kind_context" : [" ", " "], 'auto_start': 'shut-up'}
 
-" Basic configuration for the wilder.nvim plugin
-" that makes searching in the wildmenu possible
-call wilder#setup({'modes': [':', '/', '?']})
+" " Basic configuration for the wilder.nvim plugin
+" " that makes searching in the wildmenu possible
+" call wilder#setup({'modes': [':', '/', '?']})
 
-" Configure the wilder.nvim so that it supports
-" the theme from the lightline and renders in it;
-" this means that the completion items render in
-" the lightline at the bottom of the screen. Nice!
-call wilder#set_option('renderer', wilder#wildmenu_renderer(
-      \ wilder#wildmenu_lightline_theme({
-      \   'highlights': {},
-      \   'highlighter': wilder#basic_highlighter(),
-      \   'separator': ' · ',
-      \ })))
+" " Configure the wilder.nvim so that it supports
+" " the theme from the lightline and renders in it;
+" " this means that the completion items render in
+" " the lightline at the bottom of the screen. Nice!
+" call wilder#set_option('renderer', wilder#wildmenu_renderer(
+"       \ wilder#wildmenu_lightline_theme({
+"       \   'highlights': {},
+"       \   'highlighter': wilder#basic_highlighter(),
+"       \   'separator': ' · ',
+"       \ })))
+
+" this is a test for the THR
 
 " }}}
