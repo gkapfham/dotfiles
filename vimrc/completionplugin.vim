@@ -46,7 +46,7 @@ cmp.setup({
       vim.fn["UltiSnips#Anon"](args.body)
     end,
   },
-  -- use the custom view packaged by nvim-cmp, other options are 
+  -- use the custom view packaged by nvim-cmp
   view = {
         entries = "custom"
   },
@@ -106,47 +106,41 @@ cmp.setup({
   -- define the sources for the completions
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'treesitter' },
     { name = 'tmux', },
     { name = 'ultisnips' },
-    { name = 'path' },
   }, {
-    { name = 'buffer' },
+    { name = 'path' },
   })
 })
 
-  -- use completion sources when forward-searching with "/"
-  cmp.setup.cmdline('/', {
-    sources = cmp.config.sources({
-      { name = 'path' },
-      { name = 'buffer' }
-    }, {
-      { name = 'cmdline' }
-    })
+-- use completion sources when forward-searching with "/"
+cmp.setup.cmdline('/', {
+  sources = cmp.config.sources({
+    { name = 'path' },
+    { name = 'buffer' }
+  }, {
+    { name = 'cmdline' }
   })
+})
 
-  -- use completion sources when backward-searching with "?"
-  cmp.setup.cmdline('?', {
-    sources = cmp.config.sources({
-      { name = 'path' },
-      { name = 'buffer' }
-    }, {
-      { name = 'cmdline' }
-    })
+-- use completion sources when backward-searching with "?"
+cmp.setup.cmdline('?', {
+  sources = cmp.config.sources({
+    { name = 'path' },
+    { name = 'buffer' }
+  }, {
+    { name = 'cmdline' }
   })
+})
 
-  -- use completion sources when running commands with ":"
-  require'cmp'.setup.cmdline(':', {
-    sources = {
-      { name = 'cmdline' }
-    }
-  })
-
-  -- -- Setup lspconfig.
-  -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  -- -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-  -- require('lspconfig')['pyright'].setup {
-  --   capabilities = capabilities
-  -- }
+-- use completion sources when running commands with ":"
+require'cmp'.setup.cmdline(':', {
+  sources = {
+    { name = 'cmdline' }
+  }
+})
 
 EOF
 
@@ -181,7 +175,5 @@ EOF
 "       \   'highlighter': wilder#basic_highlighter(),
 "       \   'separator': ' · ',
 "       \ })))
-
-" this is a test for the THR
 
 " }}}
