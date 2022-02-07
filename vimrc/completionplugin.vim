@@ -5,7 +5,8 @@ let g:UltiSnipsExpandTrigger='<C-s>'
 let g:UltiSnipsJumpForwardTrigger='<C-s>'
 let g:UltiSnipsJumpBackwardTrigger='<C-j>'
 
-set completeopt=menu,menuone,noselect
+" Configure insertion mode completion
+set completeopt=menuone,noselect
 
 lua <<EOF
 -- define symbols for the icons used by nvim-cmp
