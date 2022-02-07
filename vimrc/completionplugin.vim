@@ -143,7 +143,6 @@ require'cmp'.setup.cmdline(':', {
     { name = 'cmdline' }
   }
 })
-
 EOF
 
 " Deprecated configuration for coq.nvim
