@@ -1,4 +1,4 @@
-" Completion with UltiSnips, Coq.nvim, and Wilder.nvim {{{
+" Completion plugins: UltiSnips and nvim-cmp and plugins for nvim-cmp {{{
 
 " Completion engine is compatible with UltiSnips
 let g:UltiSnipsExpandTrigger='<C-s>'
