@@ -18,7 +18,6 @@ Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'fhill2/telescope-ultisnips.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'garbas/vim-snipmate'
-" Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'honza/vim-snippets'
