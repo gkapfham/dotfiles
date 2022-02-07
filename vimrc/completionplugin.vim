@@ -56,12 +56,13 @@ cmp.setup({
         vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
         -- define labels for the completion menu
         vim_item.menu = ({
-          buffer = "[Buffer]",
-          tmux = "[Tmux]",
-          nvim_lsp = "[LSP]",
-          luasnip = "[LuaSnip]",
-          nvim_lua = "[Lua]",
-          latex_symbols = "[LaTeX]",
+          buffer = " Buffer",
+          cmdline = " Command",
+          nvim_lsp = " LSP",
+          path = "פּ Path",
+          tags = "笠Tags",
+          tmux = " Tmux",
+          treesitter = " Tree",
         })[entry.source.name]
         return vim_item
       end
@@ -108,6 +109,7 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'treesitter' },
+    { name = 'tags' },
     { name = 'tmux', },
     { name = 'ultisnips' },
   }, {
