@@ -144,6 +144,8 @@ require'cmp'.setup.cmdline(':', {
 
 EOF
 
+" Deprecated configuration for coq.nvim
+
 " " Always start coq.nvim when entering buffer
 " autocmd VimEnter * COQnow --shut-up
 
