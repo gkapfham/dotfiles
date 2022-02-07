@@ -9,7 +9,7 @@ let g:UltiSnipsJumpBackwardTrigger='<C-j>'
 set completeopt=menuone,noselect
 
 lua <<EOF
--- define symbols for the icons used by nvim-cmp
+-- Define symbols for the icons used by nvim-cmp
 local kind_icons = {
   Text = "",
   Method = "",
@@ -38,24 +38,24 @@ local kind_icons = {
   TypeParameter = ""
 }
 
--- Setup nvim-cmp.
+-- Setup nvim-cmp
 local cmp = require'cmp'
 cmp.setup({
   snippet = {
-    -- specify a snippet engine
+    -- Specify a snippet engine
     expand = function(args)
       vim.fn["UltiSnips#Anon"](args.body)
     end,
   },
-  -- use the custom view packaged by nvim-cmp
+  -- Use the custom view packaged by nvim-cmp
   view = {
         entries = "custom"
   },
   formatting = {
       format = function(entry, vim_item)
-        -- define the icons used for the completion labels
+        -- Define the icons used for the completion labels
         vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
-        -- define labels for the completion menu
+        -- Define labels for the completion menu
         vim_item.menu = ({
           buffer = " Buffer",
           cmdline = " Command",
@@ -68,7 +68,7 @@ cmp.setup({
         return vim_item
       end
     },
-  -- define mappings for the keyboard commands when using completion menu
+  -- Define mappings for the keyboard commands when using completion menu
   mapping = {
     ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
@@ -105,7 +105,7 @@ cmp.setup({
                 end
             }),
   },
-  -- define the sources for the completions
+  -- Define the sources for the completions
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'buffer' },
@@ -118,7 +118,7 @@ cmp.setup({
   })
 })
 
--- use completion sources when forward-searching with "/"
+-- Use completion sources when forward-searching with "/"
 cmp.setup.cmdline('/', {
   sources = cmp.config.sources({
     { name = 'path' },
@@ -128,7 +128,7 @@ cmp.setup.cmdline('/', {
   })
 })
 
--- use completion sources when backward-searching with "?"
+-- Use completion sources when backward-searching with "?"
 cmp.setup.cmdline('?', {
   sources = cmp.config.sources({
     { name = 'path' },
@@ -138,7 +138,7 @@ cmp.setup.cmdline('?', {
   })
 })
 
--- use completion sources when running commands with ":"
+-- Use completion sources when running commands with ":"
 require'cmp'.setup.cmdline(':', {
   sources = {
     { name = 'cmdline' }
