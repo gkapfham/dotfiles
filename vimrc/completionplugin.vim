@@ -62,7 +62,6 @@ cmp.setup({
           nvim_lsp = " LSP",
           path = "פּ Path",
           tags = "笠Tags",
-          tmux = " Tmux",
           treesitter = " Tree",
         })[entry.source.name]
         return vim_item
@@ -107,13 +106,13 @@ cmp.setup({
   },
   -- Define the sources for the completions
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'buffer' },
-    { name = 'treesitter' },
-    { name = 'tags' },
-    { name = 'tmux', },
+    { name = 'nvim_lsp', max_item_count = 10},
+    { name = 'buffer', max_item_count = 10},
+    { name = 'treesitter', max_item_count = 5},
+    { name = 'tags', max_item_count = 5},
     { name = 'ultisnips' },
   }, {
+    { name = 'tmux', },
     { name = 'path' },
   })
 })
