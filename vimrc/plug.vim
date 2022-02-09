@@ -33,7 +33,7 @@ Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'justinmk/vim-dirvish'
+" Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
@@ -100,6 +100,7 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+Plug 'kyazdani42/nvim-tree.lua'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
