@@ -77,7 +77,7 @@ cmp.setup({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
     ["<Tab>"] = cmp.mapping({
                 c = function()
                     if cmp.visible() then
@@ -106,9 +106,9 @@ cmp.setup({
   },
   -- Define the sources for the completions
   sources = cmp.config.sources({
-    { name = 'nvim_lsp', max_item_count = 10},
+    { name = 'nvim_lsp', max_item_count = 10, priority = 10},
     {
-      name = 'buffer', max_item_count = 10,
+      name = 'buffer', max_item_count = 10, priority = 10,
         option = {
           get_bufnrs = function()
             local bufs = {}
@@ -119,8 +119,8 @@ cmp.setup({
           end
         },
     },
-    { name = 'treesitter', max_item_count = 5},
-    { name = 'tags', max_item_count = 5},
+    { name = 'treesitter', max_item_count = 5, priority = 2.5},
+    { name = 'tags', max_item_count = 5, priority = 5},
     { name = 'ultisnips' },
   }, {
     { name = 'tmux', },
