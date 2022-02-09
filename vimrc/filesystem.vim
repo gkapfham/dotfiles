@@ -92,7 +92,7 @@ nvim_web_devicons.set_default_icon('', '#a8a8a8')
 EOF
 
 " Define a mapping for toggling the nvim-tree
-nnoremap <Space>- :NvimTreeToggle<CR>
+nnoremap <Space>0 :NvimTreeToggle<CR>
 
 " " Configure the dirvish plugin
 " augroup dirvishconfiguration
