@@ -8,7 +8,7 @@ let g:UltiSnipsJumpBackwardTrigger='<C-j>'
 " Configure insertion mode completion
 set completeopt=menuone,noselect
 
-lua <<EOF
+lua << EOF
 -- Define symbols for the icons used by nvim-cmp
 local kind_icons = {
   Text = "",
