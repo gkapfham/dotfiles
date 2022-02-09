@@ -39,7 +39,7 @@ Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'kevinhwang91/nvim-bqf', {'branch': 'main'}
 Plug 'Konfekt/vim-sentence-chopper'
-Plug 'kristijanhusak/vim-dirvish-git'
+" Plug 'kristijanhusak/vim-dirvish-git'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
