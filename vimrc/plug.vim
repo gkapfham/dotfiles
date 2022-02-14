@@ -38,6 +38,7 @@ Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'kevinhwang91/nvim-bqf', {'branch': 'main'}
 Plug 'Konfekt/vim-sentence-chopper'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -72,6 +73,7 @@ Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'ray-x/cmp-treesitter'
 Plug 'rhysd/git-messenger.vim'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
+Plug 'simrat39/symbols-outline.nvim'
 Plug 'sindrets/diffview.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
@@ -96,7 +98,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
-Plug 'kyazdani42/nvim-tree.lua'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
