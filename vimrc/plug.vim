@@ -50,8 +50,6 @@ Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mfussenegger/nvim-lint'
-" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-" Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 Plug 'nathom/filetype.nvim'
 Plug 'neovim/nvim-lspconfig'
