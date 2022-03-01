@@ -46,6 +46,7 @@ Plug 'lervag/wiki.vim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'lewis6991/impatient.nvim'
 Plug 'lifepillar/vim-colortemplate'
+Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
@@ -98,6 +99,7 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+
 " Plug 'goerz/jupytext.vim'
 " Plug 'dccsillag/magma-nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'bfredl/nvim-ipy'
