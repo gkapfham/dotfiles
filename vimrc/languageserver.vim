@@ -78,14 +78,21 @@ vim.g.symbols_outline = {
 }
 EOF
 
-" Configure the symbols_outline plugin
-augroup symbolsoutlineplugin
-  autocmd!
-  " Disable spell checking for the Outline buffers
-  autocmd FileType Outline setlocal nospell
-augroup END
+" " Configure the symbols_outline plugin
+" augroup symbolsoutlineplugin
+"   autocmd!
+"   " Disable spell checking for the Outline buffers
+"   autocmd FileType Outline setlocal nospell
+" augroup END
+
+" Enable icons
+let g:vista#renderer#enable_icon = 1
 
 " Define a mapping for toggling the symbols_outline
-nnoremap <Space>- :SymbolsOutline<CR>
+nnoremap <Space>- :Vista!!<CR>
+
+let g:vista_icon_indent = ["╰─ ", "├─ "]
+
+let g:vista_sidebar_width = "40"
 
 " }}}
