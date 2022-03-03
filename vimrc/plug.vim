@@ -100,6 +100,7 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
 
+" Plug 'akinsho/toggleterm.nvim'
 " Plug 'goerz/jupytext.vim'
 " Plug 'dccsillag/magma-nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'bfredl/nvim-ipy'
