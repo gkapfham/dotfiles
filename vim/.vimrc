@@ -57,7 +57,7 @@ runtime rc/languageserver.vim
 " Nvim-lint
 runtime rc/nvimlintplugin.vim
 
-" Completion plugins: UltiSnips, Coq.nvim, and Wilder.nvim
+" Completion plugins: UltiSnips and nvim-cmp and plugins for nvim-cmp
 runtime rc/completionplugin.vim
 
 " Lualine.nvim

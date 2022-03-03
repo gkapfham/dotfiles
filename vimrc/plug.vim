@@ -6,6 +6,7 @@ call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
 Plug 'airblade/vim-rooter'
+Plug 'andersevenrud/cmp-tmux'
 Plug 'andymass/vim-matchup'
 Plug 'arkav/lualine-lsp-progress'
 Plug 'bkad/CamelCaseMotion'
@@ -17,10 +18,14 @@ Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'fhill2/telescope-ultisnips.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'garbas/vim-snipmate'
-Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'honza/vim-snippets'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'janko-m/vim-test', {'for': 'python'}
@@ -28,13 +33,12 @@ Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'justinmk/vim-dirvish'
 Plug 'kana/vim-textobj-user'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'kevinhwang91/nvim-bqf', {'branch': 'main'}
 Plug 'Konfekt/vim-sentence-chopper'
-Plug 'kristijanhusak/vim-dirvish-git'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -42,15 +46,15 @@ Plug 'lervag/wiki.vim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'lewis6991/impatient.nvim'
 Plug 'lifepillar/vim-colortemplate'
+Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mfussenegger/nvim-lint'
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 Plug 'nathom/filetype.nvim'
+Plug 'neovim/nvim-lspconfig'
 Plug 'neovim/nvim-lspconfig'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'numToStr/Comment.nvim'
@@ -64,9 +68,13 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'prabirshrestha/async.vim'
+Plug 'quangnguyen30192/cmp-nvim-tags'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
+Plug 'ray-x/cmp-treesitter'
 Plug 'rhysd/git-messenger.vim'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
+" Plug 'simrat39/symbols-outline.nvim'
 Plug 'sindrets/diffview.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
@@ -91,6 +99,11 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+
+" Plug 'akinsho/toggleterm.nvim'
+" Plug 'goerz/jupytext.vim'
+" Plug 'dccsillag/magma-nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'bfredl/nvim-ipy'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
