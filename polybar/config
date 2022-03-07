@@ -159,7 +159,7 @@ type = internal/temperature
 interval = 1
 thermal-zone = 0
 format-prefix = "﨎 "
-hwmon-path = /sys/devices/pci0000:00/0000:00:1d.0/0000:57:00.0/hwmon/hwmon0/temp1_input
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input
 format = <label>
 label = %temperature-c:2%
 
