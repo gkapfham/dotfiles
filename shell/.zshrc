@@ -102,7 +102,7 @@ export PATH="$HOME/.local/pipx/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HO
 # --> Ruby gems as managed by Ruby installed by operating system
 export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
 # --> Ruby gems as managed by Ruby installed by asdf-vm
-export PATH="$PATH:$HOME/.gem/bin"
+export PATH="$HOME/.gem/bin:$PATH"
 
 # Local Poetry home
 export POETRY_HOME=$HOME/.poetry
