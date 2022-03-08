@@ -158,10 +158,10 @@ label = %percentage:3%%
 type = internal/temperature
 interval = 1
 thermal-zone = 0
-format-prefix = "﨎 "
+format-prefix = " "
 hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input
 format = <label>
-label = %temperature-c:2%
+label = %temperature-c:3%
 
 ; Display the use of the memory
 [module/memory]
