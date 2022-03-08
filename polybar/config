@@ -35,6 +35,7 @@ padding-right = 0
 ; Set 1 unit of margin by default
 module-margin-left = 1
 module-margin-right = 1
+module-margin-center = 1
 
 ; Specify the main font
 font-0 = "Hack Nerd Font:size=24;5"
@@ -52,7 +53,7 @@ modules-left = i3
 modules-center = wireless-network wired-network cpu temperature memory
 
 ; Right panel: display cpu, memory, battery, screen light, audio, and calendar
-modules-right = battery0 backlight pulseaudio  date
+modules-right = battery0 backlight pulseaudio date
 
 ; Configure the tray to display the network-manager applet
 ; Disable the tray and do not display the network-manager applet
@@ -148,7 +149,7 @@ label-urgent-padding = 2
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "龍"
+format-prefix = " "
 ;format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.background}
 label = %percentage:3%%
@@ -156,9 +157,9 @@ label = %percentage:3%%
 ; Display the temperature of the processor
 [module/temperature]
 type = internal/temperature
-interval = 1
+interval = 2
 thermal-zone = 0
-format-prefix = " "
+format-prefix = ""
 hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input
 format = <label>
 label = %temperature-c:3%
