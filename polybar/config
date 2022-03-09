@@ -49,7 +49,7 @@ font-2 = "Hack Nerd Font:size=24:weight=bold;5"
 ; Left panel: display the i3 workspaces
 modules-left = i3
 
-; Middle panel: display the network statistics
+; Middle panel: display the statistics on network, cpu, and memory
 modules-center = wireless-network wired-network cpu temperature memory
 
 ; Right panel: display cpu, memory, battery, screen light, audio, and calendar
@@ -160,9 +160,9 @@ type = internal/temperature
 interval = 2
 thermal-zone = 0
 format-prefix = ""
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon5/temp1_input
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input
 format = <label>
-label = %temperature-c:3%
+label = %temperature:2%
 
 ; Display the use of the memory
 [module/memory]
