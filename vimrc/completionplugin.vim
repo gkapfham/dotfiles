@@ -119,8 +119,8 @@ cmp.setup({
           end
         },
     },
-    { name = 'treesitter', max_item_count = 5, priority = 2.5},
-    { name = 'tags', max_item_count = 5, priority = 5},
+    { name = 'treesitter', max_item_count = 5, priority = 2.5 },
+    { name = 'tags', max_item_count = 5, priority = 5 },
     { name = 'ultisnips' },
   }, {
     { name = 'tmux', },
