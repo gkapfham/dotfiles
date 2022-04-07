@@ -62,6 +62,7 @@ cmp.setup({
           nvim_lsp = " LSP",
           -- The only omnicompletion in use is vimtex
           -- Customize the display to include contextual details (e.g., bibtex entry)
+          -- NOTE: this may display "nil" in cases when it is not available
           omni = " Omni " .. (vim.inspect(vim_item.menu):gsub("%'", ""):gsub('%"', "")),
           path = "פּ Path",
           tags = "笠Tags",
