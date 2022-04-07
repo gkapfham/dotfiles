@@ -161,6 +161,12 @@ require'cmp'.setup.cmdline(':', {
 })
 EOF
 
+# Disable completion
+command! NoCompletion :lua require('cmp').setup.buffer { enabled = false }
+
+# Enable completion
+command! Completion :lua require('cmp').setup.buffer { enabled = true }
+
 " Deprecated configuration for coq.nvim
 
 " " Always start coq.nvim when entering buffer
