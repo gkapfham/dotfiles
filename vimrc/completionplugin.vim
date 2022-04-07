@@ -60,7 +60,9 @@ cmp.setup({
           buffer = " Buffer",
           cmdline = " Command",
           nvim_lsp = " LSP",
-          omni = " Omni",
+          -- The only omnicompletion in use is vimtex
+          -- Customize the display to include contextual details (e.g., bibtex entry)
+          omni = " Omni " .. (vim.inspect(vim_item.menu):gsub("%'", ""):gsub('%"', "")),
           path = "פּ Path",
           tags = "笠Tags",
           treesitter = " Tree",
