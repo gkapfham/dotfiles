@@ -93,10 +93,10 @@ EOF
 " Define a mapping for toggling the nvim-tree
 nnoremap <Space>0 :NvimTreeToggle<CR>
 
-" Automatically close the nvim-tree window when
-" quitting nvim and closing the final buffer
-augroup autoclose
-  autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-augroup END
+" " Automatically close the nvim-tree window when
+" " quitting nvim and closing the final buffer
+" augroup autoclose
+"   " autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+" augroup END
 
 " }}}
