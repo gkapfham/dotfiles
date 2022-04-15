@@ -92,7 +92,7 @@ bindsym Control+$mod+r exec $rofi-reminder
 bindsym Control+$mod+y exec "rofimoji --max-recent 5"
 
 # Rofi for the display and insertion of espanso snippet
-bindsym Control+$mod+t exec "espanso match list | rofi -i -dmenu | xargs -I{} echo {} | awk -F ' - ' '{print $1}' | xargs -I{} espanso match exec {}"
+bindsym Control+$mod+t exec "export CM_LAUNCHER=rofi; clipmenu; xdotool key shift+Insert"
 
 # }}}
 
