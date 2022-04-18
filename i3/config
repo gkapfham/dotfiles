@@ -53,6 +53,9 @@ exec --no-startup-id xbanish
 # Run xbindkeys program to ensure that mouse buttons work as configured
 exec --no-startup-id xbindkeys -f ~/.xbindkeysrc
 
+# Run clipmenud to support capturing of the clipboard
+exec --no-startup-id clipmenud
+
 # Run picom to provide compositing, which especially
 # seems to reduce screen artifacts for Zathura windows
 # Do not use by default because it slows down screen redraws
