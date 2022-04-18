@@ -152,7 +152,7 @@ set trash="+[Gmail]/Trash"
 # Set the depth of the IMAP operation pipeline (the default is 15)
 # Setting the value to 0 makes mutt slower, but more perhaps more reliable
 # Increasing this value normally makes the interface more responsive
-set imap_pipeline_depth=30
+set imap_pipeline_depth=50
 
 # Define how frequently mutt tells IMAP server to persist connection
 set imap_keepalive=300
@@ -168,10 +168,10 @@ set mail_check=15
 # Sidebar {{{
 
 # Display the sidebar and show stats about each of the mailboxes
-set mail_check_stats
-set sidebar_visible
-set sidebar_next_new_wrap
-set sidebar_format="%B%?F? [%F]?%* %?N?%N/?%S"
+# set mail_check_stats
+# set sidebar_visible
+# set sidebar_next_new_wrap
+# set sidebar_format="%B%?F? [%F]?%* %?N?%N/?%S"
 
 # Configure navigation for the sidebar
 bind index,pager \cp sidebar-prev
