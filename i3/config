@@ -55,6 +55,7 @@ exec --no-startup-id xbindkeys -f ~/.xbindkeysrc
 
 # Run picom to provide compositing, which especially
 # seems to reduce screen artifacts for Zathura windows
+# Do not use by default because it slows down screen redraws
 # exec --no-startup-id picom -CGb
 
 # }}}
