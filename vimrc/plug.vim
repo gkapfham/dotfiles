@@ -4,6 +4,20 @@
 " directory to find all of the plugins
 call plug#begin('~/.vim/bundle')
 
+" Use the impatient plugin to speed
+" the loading of all Lua components;
+" must be done in advance of all the
+" other plugins that use Lua
+Plug 'lewis6991/impatient.nvim'
+
+call plug#end()
+
+lua << EOF
+require('impatient')
+EOF
+
+call plug#begin('~/.vim/bundle')
+
 " Load plugins for Vim8 and Neovim
 Plug 'airblade/vim-rooter'
 Plug 'andersevenrud/cmp-tmux'
@@ -45,7 +59,6 @@ Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'lewis6991/impatient.nvim'
 Plug 'lifepillar/vim-colortemplate'
 Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
@@ -110,14 +123,6 @@ Plug 'xolox/vim-misc'
 Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
-
-" Use the impatient plugin to speed
-" the loading of all Lua components;
-" must be done in advance of all the
-" other plugins that use Lua
-lua << EOF
-require('impatient')
-EOF
 
 " NOTE: This runtime call does not work if it is
 " called directly from the sandwhichplugin.vim
