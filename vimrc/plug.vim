@@ -88,7 +88,6 @@ Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'ray-x/cmp-treesitter'
 Plug 'rhysd/git-messenger.vim'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
-" Plug 'simrat39/symbols-outline.nvim'
 Plug 'sindrets/diffview.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
@@ -113,11 +112,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
-
-" Plug 'akinsho/toggleterm.nvim'
-" Plug 'goerz/jupytext.vim'
-" Plug 'dccsillag/magma-nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'bfredl/nvim-ipy'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
