@@ -13,4 +13,4 @@ export CM_HISTLENGTH=12
 # note that you need to paste with a
 # <CTRL-v> in order to insert the
 # content into the selected area
-clipmenu && xdotool key shift+Insert
+clipmenu
