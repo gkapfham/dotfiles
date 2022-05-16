@@ -26,7 +26,7 @@ Plug 'arkav/lualine-lsp-progress'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
 Plug 'cespare/vim-toml'
-Plug 'chentau/marks.nvim'
+Plug 'chentoast/marks.nvim'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'fhill2/telescope-ultisnips.nvim'
