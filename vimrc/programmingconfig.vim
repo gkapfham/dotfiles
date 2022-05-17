@@ -119,6 +119,9 @@ let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
 let g:mkdp_echo_preview_url = 1
 
+" Do not conceal syntax for Markdown files
+au FileType markdown setlocal conceallevel=0
+
 " Autodetect CSV
 autocmd BufRead,BufNewFile *.csv,*.dat set filetype=csv
 
