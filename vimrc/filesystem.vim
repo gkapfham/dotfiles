@@ -1,10 +1,5 @@
 " File System {{{
 
-" Set the default icon for the nvim-tree.lua
-let g:nvim_tree_icons = {
-    \ 'default': '',
-\}
-
 " Configure the nvim-tree.lua plugin
 lua << EOF
 require'nvim-tree'.setup {
@@ -15,10 +10,13 @@ require'nvim-tree'.setup {
   open_on_tab         = false,
   hijack_cursor       = false,
   update_cwd          = true,
-  -- update_to_buf_dir   = {
-    -- enable = true,
-    -- auto_open = true,
-  -- },
+  renderer = {
+   icons = {
+      glyphs = {
+          default = '',
+        }
+     }
+  },
   diagnostics = {
     enable = false,
     icons = {
@@ -93,10 +91,18 @@ EOF
 " Define a mapping for toggling the nvim-tree
 nnoremap <Space>0 :NvimTreeToggle<CR>
 
-" " Automatically close the nvim-tree window when
-" " quitting nvim and closing the final buffer
-" augroup autoclose
-"   " autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-" augroup END
+# Configure the toggleterm plugin
+lua << EOF
+require("toggleterm").setup{
+  start_in_insert = false,
+}
+EOF
+
+" Define a special configuration for man buffers
+augroup toggletermconfiguration
+  autocmd!
+  " Disable spell checking for the term buffers
+  au TermOpen * setlocal nospell
+augroup END
 
 " }}}
