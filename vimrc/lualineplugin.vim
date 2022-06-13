@@ -82,7 +82,7 @@ require('lualine').setup {
     lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
     lualine_z = {}
   },
-  extensions = {'quickfix'}
+  extensions = {'quickfix', 'toggleterm'}
 }
 EOF
 
