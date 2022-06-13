@@ -29,18 +29,4 @@ nmap <silent> <leader>ta :TestSuite<CR>
 nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tv :TestVisit<CR>
 
-" Find alternate files with alt: https://github.com/uptech/alt
-" For instance, the alternate file for display.py is test_display.py
-function! AltCommand(path, vim_command)
-  let l:alternate = system("alt " . a:path)
-  if empty(l:alternate)
-    echo 'Did not find alternate file for ' . a:path
-  else
-    exec a:vim_command . " " . l:alternate
-  endif
-endfunction
-
-" Find the alternate file for the current path and then open it
-nnoremap <Space>a :w<cr>:call AltCommand(expand('%'), ':e')<cr>
-
 " }}}
