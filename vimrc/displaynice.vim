@@ -72,7 +72,10 @@ set noshowmode
 set signcolumn=yes
 
 " Configure how quickly interface updates
-set updatetime=200
+set updatetime = 100
+
+" Work around a defect in Neovim for interface updates
+let g:cursorhold_updatetime = 100
 
 " Configure the display of parentheses matching
 let g:mta_use_matchparen_group = 0
