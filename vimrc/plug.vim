@@ -19,6 +19,17 @@ EOF
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'janko-m/vim-test', {'for': 'python'}
+Plug 'ColinKennedy/vim-textobj-block-party'
+Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+Plug 'Konfekt/vim-sentence-chopper'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
+Plug 'SirVer/ultisnips'
+Plug 'TimUntersberger/neogit'
+Plug 'Valloric/ListToggle'
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'airblade/vim-rooter'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'andersevenrud/cmp-tmux'
@@ -30,7 +41,6 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'cespare/vim-toml'
 Plug 'chentoast/marks.nvim'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
-Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'fhill2/telescope-ultisnips.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'garbas/vim-snipmate'
@@ -45,16 +55,13 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
-Plug 'janko-m/vim-test', {'for': 'python'}
 Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
-Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'kevinhwang91/nvim-bqf', {'branch': 'main'}
-Plug 'Konfekt/vim-sentence-chopper'
+Plug 'klen/nvim-test'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'lervag/lists.vim'
@@ -66,7 +73,6 @@ Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
-Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mfussenegger/nvim-lint'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 Plug 'nathom/filetype.nvim'
@@ -74,9 +80,9 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'neovim/nvim-lspconfig'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'numToStr/Comment.nvim'
-Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
 Plug 'nvim-telescope/telescope-github.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -86,15 +92,12 @@ Plug 'pgdouyon/vim-evanesco'
 Plug 'prabirshrestha/async.vim'
 Plug 'quangnguyen30192/cmp-nvim-tags'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'ray-x/cmp-treesitter'
 Plug 'rhysd/git-messenger.vim'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'sindrets/diffview.nvim'
-Plug 'SirVer/ultisnips'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tfnico/vim-gradle'
-Plug 'TimUntersberger/neogit'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
@@ -104,11 +107,9 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
 Plug 'tweekmonster/startuptime.vim'
-Plug 'Valloric/ListToggle'
-Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-scripts/python_match.vim'
 Plug 'vim-scripts/SyntaxAttr.vim'
+Plug 'vim-scripts/python_match.vim'
 Plug 'wellle/targets.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
