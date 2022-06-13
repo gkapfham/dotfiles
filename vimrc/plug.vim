@@ -20,8 +20,10 @@ call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
 Plug 'airblade/vim-rooter'
+Plug 'akinsho/toggleterm.nvim'
 Plug 'andersevenrud/cmp-tmux'
 Plug 'andymass/vim-matchup'
+Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'arkav/lualine-lsp-progress'
 Plug 'bkad/CamelCaseMotion'
 Plug 'bronson/vim-visual-star-search'
@@ -112,8 +114,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
-Plug 'antoinemadec/FixCursorHold.nvim'
-Plug 'nvim-neotest/neotest'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
