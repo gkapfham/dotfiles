@@ -91,7 +91,7 @@ EOF
 " Define a mapping for toggling the nvim-tree
 nnoremap <Space>0 :NvimTreeToggle<CR>
 
-# Configure the toggleterm plugin
+" Configure the toggleterm plugin
 lua << EOF
 require("toggleterm").setup{
   start_in_insert = false,
