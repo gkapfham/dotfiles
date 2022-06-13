@@ -36,7 +36,9 @@ require'diffview'.setup {
   diff_binaries = false,
   use_icons = false,
   file_panel = {
-    width = 35,
+    win_config = {
+      width = 35,
+    }
   },
   key_bindings = {
     disable_defaults = false
