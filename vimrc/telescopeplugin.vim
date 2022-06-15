@@ -94,6 +94,8 @@ nmap <Space>m :Telescope marks <CR>
 " navigation with Telescope fails with error, especially for:
 "  -- LaTeX
 "  -- Markdown
+" Note that <Space> always uses Telescope and
+" <Leader> always uses fzf
 nmap <Space>tt :Telescope tags <CR>
 nmap <Leader>tt :Tags <CR>
 nmap <Space>tb :Telescope current_buffer_tags <CR>
