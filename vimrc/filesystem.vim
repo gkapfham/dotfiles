@@ -105,4 +105,7 @@ augroup toggletermconfiguration
   au TermOpen * setlocal nospell
 augroup END
 
+" Define a mapping to open and close the toggleterm
+nnoremap <Space>te :ToggleTerm <CR>
+
 " }}}
