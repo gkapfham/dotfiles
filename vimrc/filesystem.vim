@@ -98,7 +98,7 @@ require("toggleterm").setup{
 }
 EOF
 
-" Define a special configuration for man buffers
+" Define a special configuration for terminal buffers
 augroup toggletermconfiguration
   autocmd!
   " Disable spell checking for the term buffers
