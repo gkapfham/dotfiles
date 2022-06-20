@@ -19,7 +19,6 @@ EOF
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
-" Plug 'janko-m/vim-test', {'for': 'python'}
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
