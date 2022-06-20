@@ -80,7 +80,7 @@ require('lualine').setup {
         show_modified_status = true,
         symbols = {
           modified = ' ●',
-          alternate_file = ' ',
+          alternate_file = ' ',
           directory =  '',
         },
       }
