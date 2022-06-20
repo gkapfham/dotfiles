@@ -106,6 +106,10 @@ augroup toggletermconfiguration
 augroup END
 
 " Define a mapping to open and close the toggleterm
+" A toggleterm can be used for quick access to a
+" terminal window when one through tmux is not
+" available or quick to access. Also, a toggleterm
+" can be easily used to run test suites!
 nnoremap <Space>te :ToggleTerm <CR>
 
 " }}}
