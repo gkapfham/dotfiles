@@ -75,14 +75,23 @@ require('lualine').setup {
     lualine_z = {}
   },
   tabline = {
-    lualine_a = {{'buffers', show_modified_status = true}},
+    lualine_a = {
+      {'buffers',
+        show_modified_status = true,
+        symbols = {
+          modified = ' ●',
+          alternate_file = ' ',
+          directory =  '',
+        },
+      }
+    },
     lualine_b = {},
     lualine_c = {},
     lualine_x = {{'diagnostics', symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}}},
     lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
     lualine_z = {}
   },
-  extensions = {'quickfix', 'toggleterm'}
+  extensions = {'quickfix', 'toggleterm'},
 }
 EOF
 
