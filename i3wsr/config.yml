@@ -6,7 +6,17 @@
 # not displayed on the polybar
 wezterm = "Wezterm"
 
+# Substring match for Brave-browser
+# to use short name and capitalization in a
+# consistent fashion
+Brave = "Brave"
+
 # Substring match for firefox
 # to use capitalization in a
 # consistent fashion
 firefox = "Firefox"
+
+# Substring match for discord
+# to use capitalization in a
+# consistent fashion
+discord = "Discord"
