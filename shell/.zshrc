@@ -84,8 +84,8 @@ export BIBINPUTS=.
 # Shell title
 export DISABLE_AUTO_TITLE=true
 
-# Set the browser to Firefox
-export BROWSER=/usr/bin/firefox
+# Set the browser to Brave
+export BROWSER=/usr/sbin/brave
 
 # Path
 # Strategy: place user-local binaries before system ones
