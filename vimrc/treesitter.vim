@@ -14,6 +14,9 @@ require'nvim-treesitter.configs'.setup {
     -- true gives more syntax information
     -- false (sometimes) gives better highlighting in LaTeX
     additional_vim_regex_highlighting = true,
+    -- disable use of treesitter highlighting
+    -- for markdown as the color choices are poor
+    disable = {"markdown"},
   },
   indent = {
     -- false disables because Python Treesitter is buggy right now
