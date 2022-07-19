@@ -12,6 +12,11 @@ env:
   # available, otherwise `xterm-256color` is used.
   TERM: xterm-255color
 
+bell:
+  # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
+  # disable the visual bell animation.
+  duration: 0
+
 #window:
   # Window dimensions (changes require restart)
   #
@@ -49,7 +54,7 @@ env:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  # decorations: full
+  decorations: none
 
   # Startup Mode (changes require restart)
   #
@@ -60,7 +65,7 @@ env:
   #
   # Values for `startup_mode` (macOS only):
   #   - SimpleFullscreen
-  #startup_mode: Windowed
+  startup_mode: Maximized
 
   # Window title
   #title: Alacritty
