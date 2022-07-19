@@ -13,6 +13,7 @@ function common_on_attach(client, bufnr)
   buf_set_keymap('n', '<space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd> lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', '<space>sm', '<cmd> lua print(vim.inspect(vim.lsp.buf_get_clients()[1].resolved_capabilities))<CR>', opts)
 end
 local installed_servers = lsp_installer.get_installed_servers()
 for _, server in pairs(installed_servers) do
