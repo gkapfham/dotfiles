@@ -79,13 +79,6 @@ vim.g.symbols_outline = {
 }
 EOF
 
-" " Configure the symbols_outline plugin
-" augroup symbolsoutlineplugin
-"   autocmd!
-"   " Disable spell checking for the Outline buffers
-"   autocmd FileType Outline setlocal nospell
-" augroup END
-
 " Enable icons
 let g:vista#renderer#enable_icon = 1
 
