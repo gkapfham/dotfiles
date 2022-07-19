@@ -77,6 +77,9 @@ set updatetime=100
 " Work around a defect in Neovim for interface updates
 let g:cursorhold_updatetime = 100
 
+" Disable visual bell
+set vb t_vb=
+
 " Configure the display of parentheses matching
 let g:mta_use_matchparen_group = 0
 let g:mta_set_default_matchtag_color = 0
