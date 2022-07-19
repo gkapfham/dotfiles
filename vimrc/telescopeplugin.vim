@@ -67,8 +67,17 @@ require('telescope').setup {
   }
 }
 -- load extensions after calling setup function
--- require('telescope').load_extension('fzf')
 require('telescope').load_extension('ultisnips')
+
+-- load and configure the refactoring telescope extension
+-- note that refactoring requires section of code in visual mode
+require("telescope").load_extension("refactoring")
+vim.api.nvim_set_keymap(
+    "v",
+    "<space>rr",
+    "<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
+    { noremap = true }
+)
 EOF
 
 " Command mappings for Telescope to find:
@@ -86,7 +95,7 @@ nmap <Space>p :Telescope find_files hidden=true <CR>
 nmap <Space>o :Telescope find_files <CR>
 
 " --> Lines or marks of the current buffer
-nmap <Space>r :Telescope current_buffer_fuzzy_find <CR>
+nmap <Space>rf :Telescope current_buffer_fuzzy_find <CR>
 nmap <Space>m :Telescope marks <CR>
 
 " --> Tags in buffer or all tags across the project directory
