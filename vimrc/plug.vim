@@ -76,7 +76,7 @@ Plug 'mfussenegger/nvim-lint'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 Plug 'nathom/filetype.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'neovim/nvim-lspconfig'
+" Plug 'neovim/nvim-lspconfig'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'numToStr/Comment.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -114,6 +114,8 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+" Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'ThePrimeagen/refactoring.nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
