@@ -26,6 +26,7 @@ Plug 'Konfekt/vim-sentence-chopper'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'SirVer/ultisnips'
+Plug 'ThePrimeagen/refactoring.nvim'
 Plug 'TimUntersberger/neogit'
 Plug 'Valloric/ListToggle'
 Plug 'Vimjas/vim-python-pep8-indent'
@@ -95,6 +96,7 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'sindrets/diffview.nvim'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'stevearc/dressing.nvim'
 Plug 'tfnico/vim-gradle'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
@@ -113,8 +115,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
-Plug 'ThePrimeagen/refactoring.nvim'
-Plug 'stevearc/dressing.nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
