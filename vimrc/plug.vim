@@ -116,6 +116,8 @@ Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
 " Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'ThePrimeagen/refactoring.nvim'
+Plug 'stevearc/dressing.nvim'
+" Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
