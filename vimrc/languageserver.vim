@@ -14,6 +14,8 @@ function common_on_attach(client, bufnr)
   buf_set_keymap('n', ']d', '<cmd> lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', '<space>sm', '<cmd> lua print(vim.inspect(vim.lsp.buf_get_clients()[1].resolved_capabilities))<CR>', opts)
+  buf_set_keymap('n', '<space>sm', '<cmd> lua print(vim.inspect(vim.lsp.buf_get_clients()[1].resolved_capabilities))<CR>', opts)
+  buf_set_keymap('n', '<space>rv', '<cmd> lua vim.lsp.buf.rename()<CR>', opts)
 end
 local installed_servers = lsp_installer.get_installed_servers()
 for _, server in pairs(installed_servers) do
@@ -76,6 +78,20 @@ vim.g.symbols_outline = {
         Operator = {icon = "+", hl = "TSOperator"},
         TypeParameter = {icon = "𝙏", hl = "TSParameter"}
     }
+}
+EOF
+
+lua << EOF
+require("dressing").setup {
+  input = {
+    winblend = 0,
+    winhighlight = 'NormalFloat:Normal',
+    override = function(conf)
+      conf.col = -1
+      conf.row = 0
+      return conf
+    end,
+  },
 }
 EOF
 
