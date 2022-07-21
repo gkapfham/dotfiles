@@ -76,7 +76,6 @@ Plug 'mfussenegger/nvim-lint'
 Plug 'mxw/vim-jsx', {'for': 'javascript.jsx'}
 Plug 'nathom/filetype.nvim'
 Plug 'neovim/nvim-lspconfig'
-" Plug 'neovim/nvim-lspconfig'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'numToStr/Comment.nvim'
 Plug 'nvim-lua/plenary.nvim'
