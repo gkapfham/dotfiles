@@ -30,22 +30,6 @@ nnoremap <leader>gs :Git <CR>
 
 " Configure the git-conflict.nvim plugin
 
-" lua << EOF
-" local cb = require'diffview.config'.diffview_callback
-" require'diffview'.setup {
-"   diff_binaries = false,
-"   use_icons = false,
-"   file_panel = {
-"     win_config = {
-"       width = 35,
-"     }
-"   },
-"   key_bindings = {
-"     disable_defaults = false
-"   }
-" }
-" EOF
-
 lua << EOF
 require('git-conflict').setup {
   default_mappings = true,
@@ -56,7 +40,6 @@ require('git-conflict').setup {
   }
 }
 EOF
-
 
 " Configure the gitsigns.nvim plugin
 
