@@ -28,23 +28,35 @@ nnoremap <leader>gs :Git <CR>
 
 " Specialized Version Control Plugins {{{
 
-" Configure the diffview.nvim plugin
+" Configure the git-conflict.nvim plugin
+
+" lua << EOF
+" local cb = require'diffview.config'.diffview_callback
+" require'diffview'.setup {
+"   diff_binaries = false,
+"   use_icons = false,
+"   file_panel = {
+"     win_config = {
+"       width = 35,
+"     }
+"   },
+"   key_bindings = {
+"     disable_defaults = false
+"   }
+" }
+" EOF
 
 lua << EOF
-local cb = require'diffview.config'.diffview_callback
-require'diffview'.setup {
-  diff_binaries = false,
-  use_icons = false,
-  file_panel = {
-    win_config = {
-      width = 35,
-    }
-  },
-  key_bindings = {
-    disable_defaults = false
+require('git-conflict').setup {
+  default_mappings = true,
+  disable_diagnostics = false,
+  highlights = {
+    incoming = 'DiffAdd',
+    current = 'DiffAdd',
   }
 }
 EOF
+
 
 " Configure the gitsigns.nvim plugin
 
