@@ -19,6 +19,7 @@ EOF
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'sindrets/diffview.nvim'
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
@@ -31,6 +32,7 @@ Plug 'TimUntersberger/neogit'
 Plug 'Valloric/ListToggle'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'airblade/vim-rooter'
+Plug 'akinsho/git-conflict.nvim'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'andersevenrud/cmp-tmux'
 Plug 'andymass/vim-matchup'
@@ -53,6 +55,7 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-omni'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
 Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'jgdavey/tslime.vim'
@@ -94,7 +97,6 @@ Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'ray-x/cmp-treesitter'
 Plug 'rhysd/git-messenger.vim'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
-Plug 'sindrets/diffview.nvim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'stevearc/dressing.nvim'
 Plug 'tfnico/vim-gradle'
