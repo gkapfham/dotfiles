@@ -19,6 +19,7 @@ EOF
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'bkad/CamelCaseMotion'
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
@@ -37,10 +38,10 @@ Plug 'andersevenrud/cmp-tmux'
 Plug 'andymass/vim-matchup'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'arkav/lualine-lsp-progress'
-Plug 'bkad/CamelCaseMotion'
 Plug 'brentyi/isort.vim'
 Plug 'bronson/vim-visual-star-search'
 Plug 'cespare/vim-toml'
+Plug 'chaoren/vim-wordmotion'
 Plug 'chentoast/marks.nvim'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'fhill2/telescope-ultisnips.nvim'
