@@ -12,9 +12,6 @@ inoremap <ESC> <NOP>
 let maplocalleader=','
 let mapleader=','
 
-" Move through CamelCase text
-" call camelcasemotion#CreateMotionMappings('<leader>')
-
 " Navigate through wrapped text
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
