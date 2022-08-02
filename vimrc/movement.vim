@@ -13,7 +13,7 @@ let maplocalleader=','
 let mapleader=','
 
 " Move through CamelCase text
-call camelcasemotion#CreateMotionMappings('<space><space>')
+" call camelcasemotion#CreateMotionMappings('<leader>')
 
 " Navigate through wrapped text
 nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
