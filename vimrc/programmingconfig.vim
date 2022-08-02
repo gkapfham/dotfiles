@@ -95,6 +95,10 @@ command! Black cexpr system('black ' . shellescape(expand('%')))<bar>:checktime
 " Run the black formatter on all of the Python files
 command! Blacken cexpr system('black **/*.py')<bar>:checktime
 
+" Define shortcuts for running the :Black and :Blacken commands
+nmap <Space>bw :Black <CR>
+nmap <Space>bb :Blacken <CR>
+
 " Set the hosts programs for Python and Python3
 " This improves performance when loading plugins using Python
 " Note that /usr/bin/python defaults to Python3
