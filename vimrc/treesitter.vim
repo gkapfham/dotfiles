@@ -149,7 +149,7 @@ require("aerial").setup({
   -- max_width = {40, 0.2} means "the lesser of 40 columns or 20% of total"
   max_width = { 40, 0.2 },
   width = nil,
-  min_width = 10,
+  min_width = { 04, 0.2 },
 
   -- Set default symbol icons to use patched font icons (see https://www.nerdfonts.com/)
   -- "auto" will set it to true if nvim-web-devicons or lspkind-nvim is installed.
@@ -178,7 +178,7 @@ require("aerial").setup({
   close_on_select = false,
 
   -- Show box drawing characters for the tree hierarchy
-  show_guides = false,
+  show_guides = true,
 
   -- The autocmds that trigger symbols update (not used for LSP backend)
   update_events = "TextChanged,InsertLeave",
