@@ -68,11 +68,12 @@ require('lualine').setup {
   -- Bottom section of status line
   sections = {
     -- Bottom left display
-    -- from left to right: {a} {b} {c}
+    -- from left (far left corner) to right (middle): {a} {b} {c}
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff'},
     lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", color={fg = "#bcbcbc", bg="#262626", depth=10}}, {search_count, type = "lua_expr"}},
     -- Bottom right display
+    -- from left (middle) to right (far right corner): {x} {y} {z}
     lualine_x = {'lsp_progress', 'encoding', {'fileformat', symbols = {
                     unix = 'unix',
                     dos = 'docs',
@@ -89,6 +90,8 @@ require('lualine').setup {
     lualine_y = {},
     lualine_z = {}
   },
+  -- do not use the winbar because it seems to cause
+  -- other plugins to crash and produce incorrect output
   -- winbar = {
     -- lualine_a = {{"filename", path=1, color={fg = "#bcbcbc", bg="#262626"}}},
     -- lualine_b = {{"aerial", color={fg = "#bcbcbc", bg="#262626"}}},
@@ -107,7 +110,7 @@ require('lualine').setup {
     },
     lualine_b = {},
     lualine_c = {},
-    lualine_x = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
+    lualine_x = {{'diagnostics', symbols = {error = ' ', warn = 'ﱥ ', info = ' ', hint = ' '}}},
     lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
     lualine_z = {}
   },
