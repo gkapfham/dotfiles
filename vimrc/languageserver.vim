@@ -3,7 +3,8 @@
 lua << EOF
 local lsp_installer = require'nvim-lsp-installer'
 function common_on_attach(client, bufnr)
-  -- do stuff
+  -- start of the language servce and connect to it the
+  -- other programs that use the language server
   print("契Starting Language Server");
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   opts = {silent = true, noremap = true}
