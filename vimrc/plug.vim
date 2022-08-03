@@ -118,6 +118,7 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
 Plug 'stevearc/aerial.nvim'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 
 " Plug 'nvim-treesitter/nvim-treesitter-context'
 " Plug 'SmiteshP/nvim-navic'
