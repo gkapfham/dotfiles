@@ -1,6 +1,30 @@
 " lualine.nvim {{{
 
 lua << EOF
+
+-- function search_cnt()
+--   local res = fn.searchcount()
+--   if res.total > 0 then
+--     return string.format("%s/%d %s", res.current, res.total, fn.getreg('/'))
+--    else
+--      return ""
+--   end
+-- end
+
+vim.o.shortmess = vim.o.shortmess .. "S"
+
+local function search_count()
+    if vim.api.nvim_get_vvar("hlsearch") == 1 then
+        local res = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
+
+        if res.total > 0 then
+            return string.format(" %d/%d %s", res.current, res.total, vim.fn.getreg('/'))
+        end
+    end
+
+    return ""
+end
+
  -- Define the color scheme for the lualine
 local colors = {
   color2   = "#87afd7",
@@ -56,7 +80,7 @@ require('lualine').setup {
     -- Bottom left display
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff'},
-    lualine_c = {'StatuslineReadonly', {'filename', path=1}},
+    lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", color={fg = "#bcbcbc", bg="#262626", depth=10}}, {search_count, type = "lua_expr"}},
     -- Bottom right display
     lualine_x = {'lsp_progress', 'encoding', {'fileformat', symbols = {
                     unix = 'unix',
@@ -74,6 +98,11 @@ require('lualine').setup {
     lualine_y = {},
     lualine_z = {}
   },
+  -- winbar = {
+    -- lualine_a = {{"filename", path=1, color={fg = "#bcbcbc", bg="#262626"}}},
+    -- lualine_b = {{"aerial", color={fg = "#bcbcbc", bg="#262626"}}},
+    -- lualine_y = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
+  -- },
   tabline = {
     lualine_a = {
       {'buffers',
@@ -87,11 +116,11 @@ require('lualine').setup {
     },
     lualine_b = {},
     lualine_c = {},
-    lualine_x = {{'diagnostics', symbols = {error = 'E', warn = 'W', info = 'I', hint = 'H'}}},
+    lualine_x = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
     lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
     lualine_z = {}
   },
-  extensions = {'quickfix', 'toggleterm'},
+  extensions = {'quickfix', 'toggleterm', 'aerial'},
 }
 EOF
 
@@ -128,5 +157,11 @@ function! StatuslineSpell()
   " or not spell checking is currently running
   return &spell ? 'A-Z ' : 'A-Z '
 endfunction
+
+" Display a file tree symbol
+function! FileTree()
+  return 'ﳖ'
+endfunction
+
 
 " }}}
