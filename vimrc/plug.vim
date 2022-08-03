@@ -119,9 +119,6 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
 
-" Plug 'nvim-treesitter/nvim-treesitter-context'
-" Plug 'SmiteshP/nvim-navic'
-
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
 
