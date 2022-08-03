@@ -85,7 +85,6 @@ cmp.setup({
           -- Customize the label to include contextual details (e.g., bibtex entry or reference details)
           omni = generate_omni_label(entry, vim_item),
           path = "פּ Path",
-          rg = " Scan",
           tags = "笠Tags",
           treesitter = " Tree",
         })[entry.source.name]
@@ -149,7 +148,6 @@ cmp.setup({
     { name = 'tags', max_item_count = 5, priority = 5 },
     { name = 'ultisnips' },
     { name = 'nvim_lsp_signature_help' },
-    { name = 'rg', max_item_count = 5, priority = 10},
   }, {
     { name = 'tmux', },
     { name = 'path' },
