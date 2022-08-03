@@ -246,8 +246,6 @@ require("aerial").setup({
 })
 EOF
 
-" set laststatus=3
-
 " Configure the matchup plugin to display diagnostics about location
 nnoremap <c-k> :MatchupWhereAmI<CR>
 
