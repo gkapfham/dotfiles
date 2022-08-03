@@ -72,7 +72,7 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'lifepillar/vim-colortemplate'
-Plug 'liuchengxu/vista.vim'
+" Plug 'liuchengxu/vista.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
@@ -117,6 +117,10 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+Plug 'stevearc/aerial.nvim'
+
+" Plug 'nvim-treesitter/nvim-treesitter-context'
+" Plug 'SmiteshP/nvim-navic'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
