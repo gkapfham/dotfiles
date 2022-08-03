@@ -1,27 +1,16 @@
 " lualine.nvim {{{
 
 lua << EOF
-
--- function search_cnt()
---   local res = fn.searchcount()
---   if res.total > 0 then
---     return string.format("%s/%d %s", res.current, res.total, fn.getreg('/'))
---    else
---      return ""
---   end
--- end
-
+-- Define a function for displaying the current result number
+-- out of total number of results when searching with / or ?
 vim.o.shortmess = vim.o.shortmess .. "S"
-
 local function search_count()
     if vim.api.nvim_get_vvar("hlsearch") == 1 then
         local res = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
-
         if res.total > 0 then
             return string.format(" %d/%d %s", res.current, res.total, vim.fn.getreg('/'))
         end
     end
-
     return ""
 end
 
@@ -66,6 +55,7 @@ local vitaminonec = {
 -- Display components in all four
 -- corners of the Neovim status lines.
 require('lualine').setup {
+  -- Define the global options for lualine
   options = {
     icons_enabled = true,
     theme = vitaminonec,
@@ -78,6 +68,7 @@ require('lualine').setup {
   -- Bottom section of status line
   sections = {
     -- Bottom left display
+    -- from left to right: {a} {b} {c}
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff'},
     lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", color={fg = "#bcbcbc", bg="#262626", depth=10}}, {search_count, type = "lua_expr"}},
