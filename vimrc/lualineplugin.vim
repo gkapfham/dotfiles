@@ -157,5 +157,4 @@ function! FileTree()
   return 'ﳖ'
 endfunction
 
-
 " }}}
