@@ -31,22 +31,6 @@ vim.keymap.set(
 )
 EOF
 
-let g:isort_vim_options = join([
-    \ '--multi-line 3',
-    \ '--trailing-comma',
-    \ '--force-single-line-imports',
-    \ '--force-grid-wrap 0',
-    \ '--use-parentheses',
-    \ '--ensure-newline-before-comments',
-    \ '--line-length 88',
-    \ ], ' ')
-
-augroup IsortMappings
-    autocmd!
-    autocmd FileType python nnoremap <buffer> <Leader>si :Isort<CR>
-    autocmd FileType python vnoremap <buffer> <Leader>si :Isort<CR>
-augroup END
-
 " Disable the display of linting diagnostics
 " command! NoLint lua vim.diagnostic.config({virtual_lines = false})
 
