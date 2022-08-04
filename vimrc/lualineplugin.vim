@@ -101,6 +101,9 @@ require('lualine').setup {
     lualine_a = {
       {'buffers',
         show_modified_status = true,
+        filetype_names = {
+          aerial="Aerial"
+        },
         symbols = {
           modified = ' ●',
           alternate_file = ' ',
@@ -154,7 +157,7 @@ endfunction
 
 " Display a file tree symbol
 function! FileTree()
-  return 'ﳖ'
+  return ''
 endfunction
 
 " }}}
