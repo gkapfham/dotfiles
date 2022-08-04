@@ -28,6 +28,10 @@ for _, server in pairs(installed_servers) do
 end
 EOF
 
+" Configure the dressing plugin that makes menus;
+" this is useful for renaming files and other types
+" of refactoring as the menus appear inside the editor
+" instead of appearing at the very bottom of the screen
 lua << EOF
 require("dressing").setup {
   input = {
