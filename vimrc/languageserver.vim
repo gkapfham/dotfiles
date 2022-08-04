@@ -42,14 +42,7 @@ require("dressing").setup {
 }
 EOF
 
-" Enable icons
-" let g:vista#renderer#enable_icon = 1
-
 " Define a mapping for toggling the symbols_outline
 nnoremap <Space>- :AerialToggle<CR>
-
-" let g:vista_icon_indent = ["╰─ ", "├─ "]
-
-" let g:vista_sidebar_width = "40"
 
 " }}}
