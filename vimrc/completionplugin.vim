@@ -168,6 +168,11 @@ cmp.setup({
 
 -- Use completion sources when forward-searching with "/"
 cmp.setup.cmdline('/', {
+  -- Disable all of the prior settings for nvim-cmp
+  -- so that completion supported by luasnip not triggered;
+  -- note that if this extra line is not added then
+  -- tab completion does not work for this mode
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     {name = 'path'},
     {name = 'buffer'}
@@ -178,6 +183,9 @@ cmp.setup.cmdline('/', {
 
 -- Use completion sources when backward-searching with "?"
 cmp.setup.cmdline('?', {
+  -- Disable all of the prior settings for nvim-cmp
+  -- (see previous note for full explanation)
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     {name = 'path'},
     {name = 'buffer'}
@@ -188,6 +196,9 @@ cmp.setup.cmdline('?', {
 
 -- Use completion sources when running commands with ":"
 require'cmp'.setup.cmdline(':', {
+  -- Disable all of the prior settings for nvim-cmp
+  -- (see previous note for full explanation)
+  mapping = cmp.mapping.preset.cmdline(),
   sources = {
     {name = 'cmdline'}
   }
