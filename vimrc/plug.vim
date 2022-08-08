@@ -19,13 +19,18 @@ EOF
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'SirVer/ultisnips'
+" Plug 'fhill2/telescope-ultisnips.nvim'
+" Plug 'garbas/vim-snipmate'
+" Plug 'honza/vim-snippets'
+" Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'Konfekt/vim-sentence-chopper'
+Plug 'L3MON4D3/LuaSnip'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
-" Plug 'SirVer/ultisnips'
 Plug 'ThePrimeagen/refactoring.nvim'
 Plug 'TimUntersberger/neogit'
 Plug 'Valloric/ListToggle'
@@ -37,17 +42,15 @@ Plug 'andersevenrud/cmp-tmux'
 Plug 'andymass/vim-matchup'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'arkav/lualine-lsp-progress'
+Plug 'benfowler/telescope-luasnip.nvim'
 Plug 'bronson/vim-visual-star-search'
 Plug 'cespare/vim-toml'
 Plug 'chaoren/vim-wordmotion'
 Plug 'chentoast/marks.nvim'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
-" Plug 'fhill2/telescope-ultisnips.nvim'
 Plug 'folke/which-key.nvim'
-" Plug 'garbas/vim-snipmate'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
-" Plug 'honza/vim-snippets'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -92,9 +95,10 @@ Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'prabirshrestha/async.vim'
 Plug 'quangnguyen30192/cmp-nvim-tags'
-" Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'rafamadriz/friendly-snippets'
 Plug 'ray-x/cmp-treesitter'
 Plug 'rhysd/git-messenger.vim'
+Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'skywind3000/asyncrun.vim'
 Plug 'stevearc/aerial.nvim'
@@ -117,8 +121,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
