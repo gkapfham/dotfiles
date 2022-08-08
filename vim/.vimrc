@@ -91,7 +91,7 @@ runtime rc/wikiplugin.vim
 runtime rc/sandwhichplugin.vim
 
 " Snipmate snippets
-runtime rc/snipmateplugin.vim
+" runtime rc/snipmateplugin.vim
 
 " Vimtex
 runtime rc/vimtexplugin.vim
