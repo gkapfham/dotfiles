@@ -25,7 +25,7 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'Konfekt/vim-sentence-chopper'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'ThePrimeagen/refactoring.nvim'
 Plug 'TimUntersberger/neogit'
 Plug 'Valloric/ListToggle'
@@ -42,12 +42,12 @@ Plug 'cespare/vim-toml'
 Plug 'chaoren/vim-wordmotion'
 Plug 'chentoast/marks.nvim'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
-Plug 'fhill2/telescope-ultisnips.nvim'
+" Plug 'fhill2/telescope-ultisnips.nvim'
 Plug 'folke/which-key.nvim'
-Plug 'garbas/vim-snipmate'
+" Plug 'garbas/vim-snipmate'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -92,7 +92,7 @@ Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
 Plug 'pgdouyon/vim-evanesco'
 Plug 'prabirshrestha/async.vim'
 Plug 'quangnguyen30192/cmp-nvim-tags'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+" Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'ray-x/cmp-treesitter'
 Plug 'rhysd/git-messenger.vim'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
@@ -117,6 +117,8 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
