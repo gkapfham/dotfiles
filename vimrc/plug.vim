@@ -34,7 +34,7 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'airblade/vim-rooter'
 Plug 'akinsho/git-conflict.nvim'
 Plug 'akinsho/toggleterm.nvim'
-Plug 'andersevenrud/cmp-tmux'
+" Plug 'andersevenrud/cmp-tmux'
 Plug 'andymass/vim-matchup'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'arkav/lualine-lsp-progress'
@@ -116,6 +116,7 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+Plug 'dmitmel/cmp-cmdline-history'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
