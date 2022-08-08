@@ -46,7 +46,11 @@ require("dressing").setup {
 }
 EOF
 
-" Define a mapping for toggling the symbols_outline
+" Define a mapping for toggling the Aerial plugin;
+" note that this plugin can handle outlines of
+" documents through a custom markdown parser and
+" then both LSP and treesitter. I think that it is
+" currently the only plugin support all of the backends.
 nnoremap <Space>- :AerialToggle<CR>
 
 " }}}
