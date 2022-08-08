@@ -58,4 +58,3 @@ EOF
 nnoremap <Space>wk :WhichKey <CR>
 
 " }}}
-
