@@ -67,7 +67,8 @@ require('telescope').setup {
   }
 }
 -- load extensions after calling setup function
-require('telescope').load_extension('ultisnips')
+-- require('telescope').load_extension('ultisnips')
+require('telescope').load_extension('luasnip')
 
 -- load and configure the refactoring telescope extension
 -- note that refactoring requires section of code in visual mode
@@ -130,7 +131,7 @@ nnoremap <Leader>ga :Rg <CR>
 nnoremap <Space>i :Telescope buffers <CR>
 
 " --> Ultisnips-based snippets available for buffer
-nnoremap <Space>si :Telescope ultisnips <CR>
+nnoremap <Space>si :Telescope luasnip <CR>
 
 " --> Spelling suggestion and correction
 nnoremap <Space>ss :Telescope spell_suggest <CR>
