@@ -1,9 +1,9 @@
 " Completion plugins: UltiSnips and nvim-cmp and plugins for nvim-cmp {{{
 
-" Completion engine is compatible with UltiSnips
-let g:UltiSnipsExpandTrigger='<C-s>'
-let g:UltiSnipsJumpForwardTrigger='<C-s>'
-let g:UltiSnipsJumpBackwardTrigger='<C-j>'
+" " Completion engine is compatible with UltiSnips
+" let g:UltiSnipsExpandTrigger='<C-s>'
+" let g:UltiSnipsJumpForwardTrigger='<C-s>'
+" let g:UltiSnipsJumpBackwardTrigger='<C-j>'
 
 " Configure insertion mode completion
 set completeopt=menuone,noselect
@@ -56,6 +56,16 @@ local kind_icons = {
   TypeParameter = ""
 }
 
+-- use { 'L3MON4D3/LuaSnip' }
+
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local luasnip = require("luasnip")
+local cmp = require("cmp")
+
 -- Setup nvim-cmp
 local cmp = require'cmp'
 cmp.setup({
@@ -66,12 +76,12 @@ cmp.setup({
   snippet = {
     -- Specify a snippet engine
     expand = function(args)
-      vim.fn["UltiSnips#Anon"](args.body)
-    end,
+      require'luasnip'.lsp_expand(args.body)
+    end
   },
   -- Use the custom view packaged by nvim-cmp
   view = {
-        entries = "custom"
+    entries = "custom"
   },
   formatting = {
       format = function(entry, vim_item)
@@ -87,6 +97,7 @@ cmp.setup({
           path = "פּ Path",
           tags = "笠Tags",
           treesitter = " Tree",
+          luasnip = " Snippet",
         })[entry.source.name]
         return vim_item
       end
@@ -102,31 +113,27 @@ cmp.setup({
       c = cmp.mapping.close(),
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
-    ["<Tab>"] = cmp.mapping({
-                c = function()
-                    if cmp.visible() then
-                        cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-                    else
-                        cmp.complete()
-                    end
-                end,
-                i = function(fallback)
-                    if cmp.visible() then
-                        cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-                    elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                        vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
-                    else
-                        fallback()
-                    end
-                end,
-                s = function(fallback)
-                    if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                        vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
-                    else
-                        fallback()
-                    end
-                end
-            }),
+    -- Define mappings for using snippets
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
   },
   -- Define the sources for the completions
   sources = cmp.config.sources({
@@ -146,7 +153,7 @@ cmp.setup({
     },
     { name = 'treesitter', max_item_count = 5, priority = 2.5 },
     { name = 'tags', max_item_count = 5, priority = 5 },
-    { name = 'ultisnips' },
+    { name = 'luasnip', max_item_count = 5, priority = 10 },
     { name = 'nvim_lsp_signature_help' },
   }, {
     { name = 'tmux', },
@@ -180,6 +187,33 @@ require'cmp'.setup.cmdline(':', {
     { name = 'cmdline' }
   }
 })
+
+-- Load the luasnips plugin and
+-- modules needed to define simple snippets
+local ls = require("luasnip")
+local s = ls.snippet
+local t = ls.text_node
+
+-- Define snippets for email messages
+ls.add_snippets("mail", {
+    s({trig = "tyakr", dscr = "Email Sign-Off"}, {
+        t({"Thank You and Kind Regards,", "", "\tGreg"}),
+    }),
+    s({trig = "taakr", dscr = "Email Sign-Off"}, {
+        t({"Thanks Again and Kind Regards,", "", "\tGreg"}),
+    }),
+    s({trig = "kr", dscr = "Email Sign-Off"}, {
+        t({"Kind Regards,", "", "\tGreg"}),
+    }),
+    s({trig = "ty", dscr = "Email Sign-Off"}, {
+        t({"Thank You,", "", "\tGreg"}),
+    }),
+}, {
+   key = "mail",
+})
+
+require("luasnip.loaders.from_vscode").lazy_load()
+
 EOF
 
 " Disable completion
