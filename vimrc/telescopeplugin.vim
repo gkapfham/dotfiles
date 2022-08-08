@@ -67,7 +67,6 @@ require('telescope').setup {
   }
 }
 -- load extensions after calling setup function
--- require('telescope').load_extension('ultisnips')
 require('telescope').load_extension('luasnip')
 
 -- load and configure the refactoring telescope extension
