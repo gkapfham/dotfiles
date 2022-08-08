@@ -1,4 +1,4 @@
-" Completion plugins: UltiSnips and nvim-cmp and plugins for nvim-cmp {{{
+" Completion plugins: nvim-cmp and plugins for nvim-cmp and luasnip {{{
 
 " Configure insertion mode completion
 set completeopt=menuone,noselect
@@ -178,7 +178,7 @@ require'cmp'.setup.cmdline(':', {
   }
 })
 
--- Load the luasnips plugin and
+-- Load the luasnip plugin and
 -- modules needed to define simple snippets
 local ls = require("luasnip")
 local s = ls.snippet
