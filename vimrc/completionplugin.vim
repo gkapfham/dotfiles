@@ -102,6 +102,7 @@ cmp.setup({
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
     -- Define mappings for using snippets
+    -- Go forward in the template holes for the snippet
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -113,6 +114,7 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
+    -- Go back in the template holes in the snippet
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
