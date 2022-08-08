@@ -44,7 +44,7 @@ Plug 'cespare/vim-toml'
 Plug 'chaoren/vim-wordmotion'
 Plug 'chentoast/marks.nvim'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
-Plug 'folke/which-key.nvim'
+" Plug 'folke/which-key.nvim'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'hrsh7th/cmp-buffer'
