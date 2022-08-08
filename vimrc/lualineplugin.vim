@@ -98,12 +98,21 @@ require('lualine').setup {
     -- lualine_y = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
   -- },
   tabline = {
+    -- Top left display
+    -- from left (far left corner) to right (middle): {a} {b} {c}
+    -- Note that {b} and {c} are currently disabled because there
+    -- are normally a significant number of buffers on display in {a}
     lualine_a = {
       {'buffers',
         show_modified_status = true,
+        -- Define a custom label for the Aerial buffer;
+        -- note that other plugins seem to do this automatically
+        -- but unless it is done for Aerial it will show a "No Name"
+        -- label whenever you change into the Aerial buffer
         filetype_names = {
           aerial="Aerial"
         },
+        -- Define symbols attached to each file in the tabline
         symbols = {
           modified = ' ●',
           alternate_file = ' ',
@@ -113,10 +122,14 @@ require('lualine').setup {
     },
     lualine_b = {},
     lualine_c = {},
+    -- Top right display
+    -- from left (middle) to right (far right corner): {x} {y} {z}
     lualine_x = {{'diagnostics', symbols = {error = ' ', warn = 'ﱥ ', info = ' ', hint = ' '}}},
     lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
     lualine_z = {}
   },
+  -- define the extensions which ensure that lualine
+  -- makes better customized menus when they are used
   extensions = {'quickfix', 'toggleterm', 'aerial'},
 }
 EOF
