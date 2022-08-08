@@ -203,26 +203,41 @@ local i = ls.insert_node
 -- Define snippets for email messages
 ls.add_snippets("mail", {
     -- Signatures at the end of an email message
-    s({trig = "tyakr", dscr = "Email Sign-Off"}, {
+    s({trig = "tyakr", dscr = "Detailed Email Sign-Off"}, {
         t({"Thank You and Kind Regards,", "", "\tGreg"}),
     }),
-    s({trig = "taakr", dscr = "Email Sign-Off"}, {
+    s({trig = "taakr", dscr = "Detailed Email Sign-Off"}, {
         t({"Thanks Again and Kind Regards,", "", "\tGreg"}),
     }),
-    s({trig = "kr", dscr = "Email Sign-Off"}, {
+    s({trig = "kr", dscr = "Kind Regards"}, {
         t({"Kind Regards,", "", "\tGreg"}),
     }),
-    s({trig = "ty", dscr = "Email Sign-Off"}, {
+    s({trig = "ty", dscr = "Thank You"}, {
         t({"Thank You,", "", "\tGreg"}),
     }),
     -- Greetings at the start of an email message
-    s({trig = "ha", dscr = "Email Greetings"}, {
-        t({"Hello Again "}),
+    s({trig = "hac", dscr = "Hello Again Colleagues"}, {
+        t({"Hello Again Colleagues"}),
+        t({",", "", ""}),
+    }),
+    s({trig = "hc", dscr = "Hello Colleagues"}, {
+        t({"Hello Colleagues"}),
+        t({",", "", ""}),
+    }),
+    s({trig = "h", dscr = "Hello"}, {
+        t({"Hello "}),
         i(1, {"Name"}),
         t({",", "", ""}),
-    })}, {
-   key = "mail",
-})
+        }),
+    s({trig = "ha", dscr = "Hello Again"}, {
+          t({"Hello Again "}),
+          i(1, {"Name"}),
+          t({",", "", ""}),
+          })
+  },
+  -- define the type of signatures in this table
+  {key = "mail",}
+)
 
 -- Load all of the VS Code snippets provided by friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
