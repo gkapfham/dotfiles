@@ -19,11 +19,6 @@ EOF
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
-" Plug 'SirVer/ultisnips'
-" Plug 'fhill2/telescope-ultisnips.nvim'
-" Plug 'garbas/vim-snipmate'
-" Plug 'honza/vim-snippets'
-" Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
