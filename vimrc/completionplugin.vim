@@ -161,7 +161,6 @@ cmp.setup({
     {name = 'luasnip', max_item_count = 5, priority = 10},
     {name = 'nvim_lsp_signature_help'},
   }, {
-    { name = 'tmux', },
     { name = 'path' },
   })
 })
@@ -175,7 +174,7 @@ cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     {name = 'path'},
-    {name = 'buffer'}
+    {name = 'buffer'},
   }, {
     {name = 'cmdline'}
   })
@@ -188,7 +187,7 @@ cmp.setup.cmdline('?', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     {name = 'path'},
-    {name = 'buffer'}
+    {name = 'buffer'},
   }, {
     {name = 'cmdline'}
   })
