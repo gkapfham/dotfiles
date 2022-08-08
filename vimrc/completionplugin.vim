@@ -51,18 +51,29 @@ local kind_icons = {
   TypeParameter = ""
 }
 
+-- Define the has_words_before function used in the
+-- integration between luasnip and nvim-cmp; note
+-- that this function must exist for other code in
+-- this file to work correctly
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+-- Load the luasnip and nvim-cmp plugins
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 
 -- Setup nvim-cmp
 local cmp = require'cmp'
 cmp.setup({
+  -- define the performance characteristics for nvim-cmp
   performance = {
-    throttle = 5,
+    throttle = 2,
     trigger_debounce_time = 50
   },
+  -- Specify a snippet engine
   snippet = {
-    -- Specify a snippet engine
     expand = function(args)
       require'luasnip'.lsp_expand(args.body)
     end
