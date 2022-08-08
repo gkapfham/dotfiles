@@ -142,8 +142,8 @@ cmp.setup({
   },
   -- Define the sources for the completions
   sources = cmp.config.sources({
-    { name = 'nvim_lsp', max_item_count = 10, priority = 10 },
-    { name = 'omni', max_item_count = 10, priority = 10 },
+    {name = 'nvim_lsp', max_item_count = 10, priority = 10},
+    {name = 'omni', max_item_count = 10, priority = 10},
     {
       name = 'buffer', max_item_count = 10, priority = 10,
         option = {
@@ -156,10 +156,10 @@ cmp.setup({
           end
         },
     },
-    { name = 'treesitter', max_item_count = 5, priority = 2.5 },
-    { name = 'tags', max_item_count = 5, priority = 5 },
-    { name = 'luasnip', max_item_count = 5, priority = 10 },
-    { name = 'nvim_lsp_signature_help' },
+    {name = 'treesitter', max_item_count = 5, priority = 2.5},
+    {name = 'tags', max_item_count = 5, priority = 5},
+    {name = 'luasnip', max_item_count = 5, priority = 10},
+    {name = 'nvim_lsp_signature_help'},
   }, {
     { name = 'tmux', },
     { name = 'path' },
@@ -169,32 +169,32 @@ cmp.setup({
 -- Use completion sources when forward-searching with "/"
 cmp.setup.cmdline('/', {
   sources = cmp.config.sources({
-    { name = 'path' },
-    { name = 'buffer' }
+    {name = 'path'},
+    {name = 'buffer'}
   }, {
-    { name = 'cmdline' }
+    {name = 'cmdline'}
   })
 })
 
 -- Use completion sources when backward-searching with "?"
 cmp.setup.cmdline('?', {
   sources = cmp.config.sources({
-    { name = 'path' },
-    { name = 'buffer' }
+    {name = 'path'},
+    {name = 'buffer'}
   }, {
-    { name = 'cmdline' }
+    {name = 'cmdline'}
   })
 })
 
 -- Use completion sources when running commands with ":"
 require'cmp'.setup.cmdline(':', {
   sources = {
-    { name = 'cmdline' }
+    {name = 'cmdline'}
   }
 })
 
--- Load the luasnip plugin and
--- modules needed to define simple snippets
+-- Re-load the luasnip plugin and
+-- the modules needed to define simple snippets
 local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
