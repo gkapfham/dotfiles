@@ -198,9 +198,11 @@ require'cmp'.setup.cmdline(':', {
 local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
+local i = ls.insert_node
 
 -- Define snippets for email messages
 ls.add_snippets("mail", {
+    -- Signatures at the end of an email message
     s({trig = "tyakr", dscr = "Email Sign-Off"}, {
         t({"Thank You and Kind Regards,", "", "\tGreg"}),
     }),
@@ -213,7 +215,12 @@ ls.add_snippets("mail", {
     s({trig = "ty", dscr = "Email Sign-Off"}, {
         t({"Thank You,", "", "\tGreg"}),
     }),
-}, {
+    -- Greetings at the start of an email message
+    s({trig = "ha", dscr = "Email Greetings"}, {
+        t({"Hello Again "}),
+        i(1, {"Name"}),
+        t({",", "", ""}),
+    })}, {
    key = "mail",
 })
 
