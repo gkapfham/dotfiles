@@ -67,7 +67,7 @@ local cmp = require("cmp")
 -- Setup nvim-cmp
 local cmp = require'cmp'
 cmp.setup({
-  -- define the performance characteristics for nvim-cmp
+  -- Define the performance characteristics for nvim-cmp
   performance = {
     throttle = 2,
     trigger_debounce_time = 50
@@ -82,6 +82,7 @@ cmp.setup({
   view = {
     entries = "custom"
   },
+  -- Configure the formatting of the completion menu
   formatting = {
       format = function(entry, vim_item)
         -- Define the icons used for the completion labels
@@ -112,7 +113,10 @@ cmp.setup({
       c = cmp.mapping.close(),
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
-    -- Define mappings for using snippets
+    -- Define mappings for using snippets; note that luasnip
+    -- works even when you have left the context of the snippet.
+    -- This means that you can jump back into the snippet by
+    -- using <S-Tab> even after going through every field.
     -- Go forward in the template holes for the snippet
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
