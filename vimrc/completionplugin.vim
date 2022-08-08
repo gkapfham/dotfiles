@@ -1,10 +1,5 @@
 " Completion plugins: UltiSnips and nvim-cmp and plugins for nvim-cmp {{{
 
-" " Completion engine is compatible with UltiSnips
-" let g:UltiSnipsExpandTrigger='<C-s>'
-" let g:UltiSnipsJumpForwardTrigger='<C-s>'
-" let g:UltiSnipsJumpBackwardTrigger='<C-j>'
-
 " Configure insertion mode completion
 set completeopt=menuone,noselect
 
@@ -55,13 +50,6 @@ local kind_icons = {
   Operator = "",
   TypeParameter = ""
 }
-
--- use { 'L3MON4D3/LuaSnip' }
-
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
 
 local luasnip = require("luasnip")
 local cmp = require("cmp")
@@ -212,6 +200,7 @@ ls.add_snippets("mail", {
    key = "mail",
 })
 
+-- Load all of the VS Code snippets provided by friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
 
 EOF
