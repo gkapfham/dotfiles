@@ -203,7 +203,7 @@ require'cmp'.setup.cmdline(':', {
   }
 })
 
--- Re-load the luasnip plugin and
+-- Re-load the luasnip plugin and then load
 -- the modules needed to define simple snippets
 local ls = require("luasnip")
 local s = ls.snippet
