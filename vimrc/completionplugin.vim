@@ -249,6 +249,50 @@ ls.add_snippets("mail", {
   {key = "mail",}
 )
 
+-- Define snippets for email messages
+ls.add_snippets("gitcommit", {
+    -- Simplified versions of conventional commits
+    s({trig = "break", dscr = "break: conventional commits"}, {
+        t({"break: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "chore", dscr = "chore: conventional commits"}, {
+        t({"chore: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "docs", dscr = "docs: conventional commits"}, {
+        t({"docs: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "feat", dscr = "feat: conventional commits"}, {
+        t({"feat: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "fix", dscr = "fix: conventional commits"}, {
+        t({"fix: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "refactor", dscr = "refactor: conventional commits"}, {
+        t({"refactor: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "style", dscr = "style: conventional commits"}, {
+        t({"style: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "test", dscr = "test: conventional commits"}, {
+        t({"test: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "try", dscr = "try: personalized conventional commits"}, {
+        t({"try: "}),
+        i(1, {"Message"}),
+        }),
+  },
+  -- define the type of signatures in this table
+  {key = "gitcommit",}
+)
+
 -- Load all of the VS Code snippets provided by friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
 
