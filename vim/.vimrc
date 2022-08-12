@@ -82,7 +82,7 @@ runtime rc/marksplugin.vim
 runtime rc/autopairsplugin.vim
 
 " WhichKey.nvim
-runtime rc/whichkeyplugin.vim
+" runtime rc/whichkeyplugin.vim
 
 " Wiki.vim
 runtime rc/wikiplugin.vim
