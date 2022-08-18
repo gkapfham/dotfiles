@@ -4,12 +4,19 @@ lua << EOF
 -- load and configure the linting plugin
 -- pick specific linters for specific file types
 require('lint').linters_by_ft = {
-  mail = {'proselint'},
-  markdown = {'markdownlint', 'proselint'},
-  python = {'flake8', 'pydocstyle', 'pylint'},
+  -- Disabled: using efmls
+  -- mail = {'proselint'},
+  -- Disabled: using efmls
+  -- markdown = {'markdownlint', 'proselint'},
+  markdown = {'markdownlint'},
+  -- Disabled: using efmls
+  -- python = {'flake8', 'pydocstyle', 'pylint'},
+  python = {'pydocstyle'},
   tex = {'chktex'},
-  vim = {'vint'},
-  zsh = {'shellcheck'},
+  -- Disabled: using efmls
+  -- vim = {'vint'},
+  -- Disabled: using efmls
+  -- zsh = {'shellcheck'},
 }
 EOF
 
