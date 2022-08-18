@@ -124,6 +124,10 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+Plug 'goerz/jupytext.vim'
+" Plug 'hkupty/iron.nvim'
+" Plug 'kassio/neoterm'
+" Plug 'mtikekar/nvim-send-to-term'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'

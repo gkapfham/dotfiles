@@ -98,12 +98,45 @@ require("toggleterm").setup{
 }
 EOF
 
+" lua << EOF
+" function send_visual_selection_to_terminal()
+"     -- Custom function to send visual selection to toggled terminal
+"     local current_window = vim.api.nvim_get_current_win()
+"
+"     -- Get the start and the end of the visual selection
+"     local b_line, b_col = unpack(vim.fn.getpos("'<"),2,3)
+"     local e_line, e_col = unpack(vim.fn.getpos("'>"),2,3)
+"     local lines = vim.api.nvim_buf_get_lines(0, b_line - 1, e_line, 0)
+"     if #lines == 0 then return end
+"
+"     -- Send each line to the terminal
+"     for _, v in ipairs(lines) do
+"         -- Trim string from spaces
+"         v = v:gsub("^%s+", ""):gsub("%s+$", "")
+"         require("toggleterm").exec(v, 1)
+"     end
+"
+"     -- Jump back with the cursor where we were at the beginning of the selection
+"     vim.api.nvim_set_current_win(current_window)
+"     vim.fn.cursor(b_line, b_col)
+" end
+" EOF
+"
+" command! -range ToggleTermSendCurrentVisual '<,'> lua send_visual_selection_to_terminal()<CR>
+
 " Define a special configuration for terminal buffers
 augroup toggletermconfiguration
   autocmd!
   " Disable spell checking for the term buffers
   au TermOpen * setlocal nospell
 augroup END
+
+" Designate interactive Python notebooks as Python files
+" as this is useful for editing with jupytext and then
+" an ipython running in a toggleterm
+" au VimEnter,BufRead,BufNewFile *.ipynb set filetype=python
+
+let g:jupytext_filetype_map = {'md': 'python'}
 
 " Define a mapping to open and close the toggleterm
 " A toggleterm can be used for quick access to a
