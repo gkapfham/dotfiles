@@ -117,6 +117,13 @@ Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
 Plug 'dmitmel/cmp-cmdline-history'
+Plug 'windwp/nvim-ts-autotag'
+Plug 'alvan/vim-closetag'
+" Plug 'jose-elias-alvarez/null-ls.nvim'
+" Plug 'sbdchd/neoformat'
+Plug 'creativenull/efmls-configs-nvim'
+" Plug 'mhartington/formatter.nvim'
+" Plug 'mattn/efm-langserver'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
