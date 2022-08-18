@@ -1,5 +1,11 @@
 " Nvim-lint {{{
 
+" Configure nvim-lint, avoiding its use when
+" possible and instead using efmls which provides
+" diagnostics a little faster and gives a label to
+" clearly indicate that the error came from a
+" specific linter, which nvim-lint does not do.
+
 lua << EOF
 -- load and configure the linting plugin
 -- pick specific linters for specific file types
