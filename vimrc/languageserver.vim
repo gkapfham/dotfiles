@@ -14,22 +14,34 @@ function common_on_attach(client, bufnr)
   print("契Starting Language Server");
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   opts = {silent = true, noremap = true, documentFormatting = True}
+  -- create all of the keybindings that have the following purposes:
+  -- display in a floating window details about symbol under cursor
   buf_set_keymap('n', 'K', '<cmd> lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd> lua vim.diagnostic.open_float(0, {scope="line"})<CR>', opts)
+  -- display in a floating window details about parameter to called function
   buf_set_keymap('n', '<space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>', opts)
+  -- display in a floating window diagnostics for the current line
+  buf_set_keymap('n', '<space>e', '<cmd> lua vim.diagnostic.open_float(0, {scope="line"})<CR>', opts)
+  -- send all of the diagnotics for the current window to the location list
   buf_set_keymap('n', '<space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  -- go to the next diagnostic
   buf_set_keymap('n', ']d', '<cmd> lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  -- go to the previous diagnotic
   buf_set_keymap('n', '[d', '<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', '<space>sm', '<cmd> lua print(vim.inspect(vim.lsp.buf_get_clients()[1].resolved_capabilities))<CR>', opts)
+  -- run a code action on the current line of code
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  -- rename the variable using a floating menu
   buf_set_keymap('n', '<space>rv', '<cmd> lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ff', '<cmd> lua vim.lsp.buf.formatting_sync()<CR>', opts)
-  buf_set_keymap('n', '<space>fb', '<cmd> lua vim.lsp.buf.formatting()<CR>', opts)
-  buf_set_keymap('v', '<space>fb', '<cmd> lua vim.lsp.buf.formatting()<CR>', opts)
+  -- reformat content (normal or visual mode) in a sync (i.e., blocking fashion)
+  buf_set_keymap('n', '<space>fb', '<cmd> lua vim.lsp.buf.formatting_sync()<CR>', opts)
+  buf_set_keymap('v', '<space>fb', '<cmd> lua vim.lsp.buf.formatting_sync()<CR>', opts)
+  -- reformat content (normal or visual mode) in a async (i.e., fast, non-blocking fashion)
+  buf_set_keymap('n', '<space>ff', '<cmd> lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('v', '<space>ff', '<cmd> lua vim.lsp.buf.formatting()<CR>', opts)
   -- attach the aerial plugin to this language server and the
   -- buffer so that it can provide code navigation
   require("aerial").on_attach(client, bufnr)
 end
+
 -- install each of the chosen language servers and then
 -- run the common_on_attach function for each of them
 local installed_servers = lsp_installer.get_installed_servers()
