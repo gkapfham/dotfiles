@@ -19,7 +19,14 @@ EOF
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'andersevenrud/cmp-tmux'
+" Plug 'folke/which-key.nvim'
+" Plug 'jose-elias-alvarez/null-ls.nvim'
+" Plug 'mattn/efm-langserver'
+" Plug 'mhartington/formatter.nvim'
+" Plug 'sbdchd/neoformat'
 " Plug 'tpope/vim-unimpaired'
+" Plug 'windwp/nvim-ts-autotag'
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
@@ -34,7 +41,7 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'airblade/vim-rooter'
 Plug 'akinsho/git-conflict.nvim'
 Plug 'akinsho/toggleterm.nvim'
-" Plug 'andersevenrud/cmp-tmux'
+Plug 'alvan/vim-closetag'
 Plug 'andymass/vim-matchup'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'arkav/lualine-lsp-progress'
@@ -44,7 +51,8 @@ Plug 'cespare/vim-toml'
 Plug 'chaoren/vim-wordmotion'
 Plug 'chentoast/marks.nvim'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
-" Plug 'folke/which-key.nvim'
+Plug 'creativenull/efmls-configs-nvim'
+Plug 'dmitmel/cmp-cmdline-history'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'hrsh7th/cmp-buffer'
@@ -116,14 +124,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
-Plug 'dmitmel/cmp-cmdline-history'
-Plug 'windwp/nvim-ts-autotag'
-Plug 'alvan/vim-closetag'
-" Plug 'jose-elias-alvarez/null-ls.nvim'
-" Plug 'sbdchd/neoformat'
-Plug 'creativenull/efmls-configs-nvim'
-" Plug 'mhartington/formatter.nvim'
-" Plug 'mattn/efm-langserver'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
