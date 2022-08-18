@@ -61,21 +61,71 @@ efmls.init {
     documentFormatting = true,
   },
 }
-local prettier_d = require 'efmls-configs.formatters.prettier_d'
+
+-- Linting and formatting for Python
 local black = require 'efmls-configs.formatters.black'
+local flake8 = require 'efmls-configs.linters.flake8'
+local pylint = require 'efmls-configs.linters.pylint'
+
+-- Linting and formatting for CSS, HTML, Markdown
+local prettier_d = require 'efmls-configs.formatters.prettier_d'
+local stylelint = require 'efmls-configs.linters.stylelint'
+
+-- Linting for bash, shell, and zsh
+local shellcheck = require 'efmls-configs.linters.shellcheck'
+
+-- Linting for vimscript
+local vint = require 'efmls-configs.linters.vint'
+
+-- Linting for writing
+local proselint = require 'efmls-configs.linters.proselint'
+
+-- Setup the various linters and formatters for file types
 efmls.setup {
+  -- all three shells
+  bash = {
+    linter = shellcheck,
+  },
+  sh = {
+    linter = shellcheck,
+  },
+  zsh = {
+    linter = shellcheck,
+  },
+  -- css
   css = {
     formatter = prettier_d,
+    linter = stylelint
   },
+  -- javascript
   javascript = {
     formatter = prettier_d,
   },
-  markdown = {
+  -- json
+  json = {
     formatter = prettier_d,
   },
+  -- email
+  mail = {
+    linter = proselint,
+  },
+  -- markdown:
+  -- still nvim-lint for markdownlint
+  markdown = {
+    formatter = prettier_d,
+    linter = proselint
+  },
+  -- python:
+  -- still nvim-lint for pydocstyle
   python = {
     formatter = black,
+    linter = {flake8, pylint}
   },
+  -- vim
+  vim = {
+    linter = vint,
+  },
+  -- yaml
   yaml = {
     formatter = prettier_d,
   },
