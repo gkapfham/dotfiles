@@ -6,7 +6,7 @@
 " require('nvim-ts-autotag').setup()
 " EOF
 
-let g:closetag_filetypes = 'markdown,liquid,html,xhtml,phtml'
+" let g:closetag_filetypes = 'markdown,liquid,html,xhtml,phtml'
 
 lua << EOF
 require("nvim-autopairs").setup {}
