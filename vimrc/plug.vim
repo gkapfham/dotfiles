@@ -56,7 +56,7 @@ Plug 'chentoast/marks.nvim'
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'creativenull/efmls-configs-nvim'
 Plug 'dmitmel/cmp-cmdline-history'
-Plug 'ggandor/lightspeed.nvim'
+" Plug 'ggandor/lightspeed.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
 Plug 'goerz/jupytext.vim'
 Plug 'hrsh7th/cmp-buffer'
@@ -128,6 +128,8 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+Plug 'ggandor/leap.nvim'
+Plug 'ggandor/flit.nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
