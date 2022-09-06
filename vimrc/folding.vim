@@ -1,5 +1,6 @@
 " Fold Format {{{
 
+" Define a function that will perform folding of text>
 function! FancyFoldText()
   let l:line = getline(v:foldstart)
   let l:nucolwidth = &foldcolumn + &number * &numberwidth
@@ -10,7 +11,11 @@ function! FancyFoldText()
   let l:line = strpart(l:line, 0, l:windowwidth - 2 -len(l:foldedlinecount))
   let l:fillcharcount = l:windowwidth - len(l:line) - len(l:foldedlinecount)
   return l:line . ' ' . repeat(' ',l:fillcharcount-8) . l:foldedlinecount . ' lines ' . ' '
-endfunction
+endfunction"<
+
+" Assign the FancyFoldText function to foldtext
+" so that it is always used which creating and
+" un-collapsing folds
 set foldtext=FancyFoldText()
 
 " }}}

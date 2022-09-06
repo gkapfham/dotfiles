@@ -1,9 +1,4 @@
-" Completion plugins: UltiSnips and nvim-cmp and plugins for nvim-cmp {{{
-
-" Completion engine is compatible with UltiSnips
-let g:UltiSnipsExpandTrigger='<C-s>'
-let g:UltiSnipsJumpForwardTrigger='<C-s>'
-let g:UltiSnipsJumpBackwardTrigger='<C-j>'
+" Completion plugins: nvim-cmp and plugins for nvim-cmp and luasnip {{{
 
 " Configure insertion mode completion
 set completeopt=menuone,noselect
@@ -56,23 +51,38 @@ local kind_icons = {
   TypeParameter = ""
 }
 
+-- Define the has_words_before function used in the
+-- integration between luasnip and nvim-cmp; note
+-- that this function must exist for other code in
+-- this file to work correctly
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+-- Load the luasnip and nvim-cmp plugins
+local luasnip = require("luasnip")
+local cmp = require("cmp")
+
 -- Setup nvim-cmp
 local cmp = require'cmp'
 cmp.setup({
+  -- Define the performance characteristics for nvim-cmp
   performance = {
-    throttle = 5,
+    throttle = 2,
     trigger_debounce_time = 50
   },
+  -- Specify a snippet engine
   snippet = {
-    -- Specify a snippet engine
     expand = function(args)
-      vim.fn["UltiSnips#Anon"](args.body)
-    end,
+      require'luasnip'.lsp_expand(args.body)
+    end
   },
   -- Use the custom view packaged by nvim-cmp
   view = {
-        entries = "custom"
+    entries = "custom"
   },
+  -- Configure the formatting of the completion menu
   formatting = {
       format = function(entry, vim_item)
         -- Define the icons used for the completion labels
@@ -87,6 +97,7 @@ cmp.setup({
           path = "פּ Path",
           tags = "笠Tags",
           treesitter = " Tree",
+          luasnip = " Snippet",
         })[entry.source.name]
         return vim_item
       end
@@ -102,36 +113,37 @@ cmp.setup({
       c = cmp.mapping.close(),
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = false }),
-    ["<Tab>"] = cmp.mapping({
-                c = function()
-                    if cmp.visible() then
-                        cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-                    else
-                        cmp.complete()
-                    end
-                end,
-                i = function(fallback)
-                    if cmp.visible() then
-                        cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-                    elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                        vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
-                    else
-                        fallback()
-                    end
-                end,
-                s = function(fallback)
-                    if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                        vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
-                    else
-                        fallback()
-                    end
-                end
-            }),
+    -- Define mappings for using snippets; note that luasnip
+    -- works even when you have left the context of the snippet.
+    -- This means that you can jump back into the snippet by
+    -- using <S-Tab> even after going through every field.
+    -- Go forward in the template holes for the snippet
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    -- Go back in the template holes in the snippet
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
   },
   -- Define the sources for the completions
   sources = cmp.config.sources({
-    { name = 'nvim_lsp', max_item_count = 10, priority = 10 },
-    { name = 'omni', max_item_count = 10, priority = 10 },
+    {name = 'nvim_lsp', max_item_count = 10, priority = 10},
+    {name = 'omni', max_item_count = 10, priority = 10},
     {
       name = 'buffer', max_item_count = 10, priority = 10,
         option = {
@@ -144,42 +156,146 @@ cmp.setup({
           end
         },
     },
-    { name = 'treesitter', max_item_count = 5, priority = 2.5 },
-    { name = 'tags', max_item_count = 5, priority = 5 },
-    { name = 'ultisnips' },
-    { name = 'nvim_lsp_signature_help' },
+    {name = 'treesitter', max_item_count = 5, priority = 2.5},
+    {name = 'tags', max_item_count = 5, priority = 5},
+    {name = 'luasnip', max_item_count = 5, priority = 10},
+    {name = 'nvim_lsp_signature_help'},
   }, {
-    { name = 'tmux', },
     { name = 'path' },
   })
 })
 
 -- Use completion sources when forward-searching with "/"
 cmp.setup.cmdline('/', {
+  -- Disable all of the prior settings for nvim-cmp
+  -- so that completion supported by luasnip not triggered;
+  -- note that if this extra line is not added then
+  -- tab completion does not work for this mode
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' },
-    { name = 'buffer' }
+    {name = 'path'},
+    {name = 'buffer'},
   }, {
-    { name = 'cmdline' }
+    {name = 'cmdline'}
   })
 })
 
 -- Use completion sources when backward-searching with "?"
 cmp.setup.cmdline('?', {
+  -- Disable all of the prior settings for nvim-cmp
+  -- (see previous note for full explanation)
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' },
-    { name = 'buffer' }
+    {name = 'path'},
+    {name = 'buffer'},
   }, {
-    { name = 'cmdline' }
+    {name = 'cmdline'}
   })
 })
 
 -- Use completion sources when running commands with ":"
 require'cmp'.setup.cmdline(':', {
+  -- Disable all of the prior settings for nvim-cmp
+  -- (see previous note for full explanation)
+  mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'cmdline' }
+    {name = 'cmdline'}
   }
 })
+
+-- Re-load the luasnip plugin and then load
+-- the modules needed to define simple snippets
+local ls = require("luasnip")
+local s = ls.snippet
+local t = ls.text_node
+local i = ls.insert_node
+
+-- Define snippets for email messages
+ls.add_snippets("mail", {
+    -- Signatures at the end of an email message
+    s({trig = "tyakr", dscr = "Detailed Email Sign-Off"}, {
+        t({"Thank You and Kind Regards,", "", "\tGreg"}),
+    }),
+    s({trig = "taakr", dscr = "Detailed Email Sign-Off"}, {
+        t({"Thanks Again and Kind Regards,", "", "\tGreg"}),
+    }),
+    s({trig = "kr", dscr = "Kind Regards"}, {
+        t({"Kind Regards,", "", "\tGreg"}),
+    }),
+    s({trig = "ty", dscr = "Thank You"}, {
+        t({"Thank You,", "", "\tGreg"}),
+    }),
+    -- Greetings at the start of an email message
+    s({trig = "hac", dscr = "Hello Again Colleagues"}, {
+        t({"Hello Again Colleagues"}),
+        t({",", "", ""}),
+    }),
+    s({trig = "hc", dscr = "Hello Colleagues"}, {
+        t({"Hello Colleagues"}),
+        t({",", "", ""}),
+    }),
+    s({trig = "h", dscr = "Hello"}, {
+        t({"Hello "}),
+        i(1, {"Name"}),
+        t({",", "", ""}),
+        }),
+    s({trig = "ha", dscr = "Hello Again"}, {
+          t({"Hello Again "}),
+          i(1, {"Name"}),
+          t({",", "", ""}),
+          })
+  },
+  -- define the type of signatures in this table
+  {key = "mail",}
+)
+
+-- Define snippets for email messages
+ls.add_snippets("gitcommit", {
+    -- Simplified versions of conventional commits
+    s({trig = "break", dscr = "break: conventional commits"}, {
+        t({"break: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "chore", dscr = "chore: conventional commits"}, {
+        t({"chore: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "docs", dscr = "docs: conventional commits"}, {
+        t({"docs: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "feat", dscr = "feat: conventional commits"}, {
+        t({"feat: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "fix", dscr = "fix: conventional commits"}, {
+        t({"fix: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "refactor", dscr = "refactor: conventional commits"}, {
+        t({"refactor: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "style", dscr = "style: conventional commits"}, {
+        t({"style: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "test", dscr = "test: conventional commits"}, {
+        t({"test: "}),
+        i(1, {"Message"}),
+        }),
+    s({trig = "try", dscr = "try: personalized conventional commits"}, {
+        t({"try: "}),
+        i(1, {"Message"}),
+        }),
+  },
+  -- define the type of signatures in this table
+  {key = "gitcommit",}
+)
+
+-- Load all of the VS Code snippets provided by friendly-snippets
+require("luasnip.loaders.from_vscode").lazy_load()
+
 EOF
 
 " Disable completion

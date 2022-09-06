@@ -81,17 +81,11 @@ runtime rc/marksplugin.vim
 " Autopairs.nvim
 runtime rc/autopairsplugin.vim
 
-" WhichKey.nvim
-runtime rc/whichkeyplugin.vim
-
 " Wiki.vim
 runtime rc/wikiplugin.vim
 
 " Sandwich
 runtime rc/sandwhichplugin.vim
-
-" Snipmate snippets
-runtime rc/snipmateplugin.vim
 
 " Vimtex
 runtime rc/vimtexplugin.vim

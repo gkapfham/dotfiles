@@ -16,7 +16,7 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = true,
     -- disable use of treesitter highlighting
     -- for languages as the color choices are poor
-    disable = {"markdown", "toml"},
+    disable = {"html", "markdown", "toml"},
   },
   indent = {
     -- false disables because Python Treesitter is buggy right now
