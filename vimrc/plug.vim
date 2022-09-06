@@ -19,18 +19,6 @@ EOF
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
-" Plug 'andersevenrud/cmp-tmux'
-" Plug 'chaoren/vim-wordmotion'
-" Plug 'folke/which-key.nvim'
-" Plug 'hkupty/iron.nvim'
-" Plug 'jose-elias-alvarez/null-ls.nvim'
-" Plug 'kassio/neoterm'
-" Plug 'mattn/efm-langserver'
-" Plug 'mhartington/formatter.nvim'
-" Plug 'mtikekar/nvim-send-to-term'
-" Plug 'sbdchd/neoformat'
-" Plug 'tpope/vim-unimpaired'
-" Plug 'windwp/nvim-ts-autotag'
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
