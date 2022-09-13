@@ -42,6 +42,14 @@ set shiftround
 set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
 set list
 
+" Ensure that tabs are not displayed in golang go;
+" recall that golang requires the use of tabs!
+augroup ft_go
+    au!
+    au Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+    au Filetype go setlocal listchars+=tab:\ \ 
+augroup END
+
 " Display with faster timeouts in the TUI
 "
 " Setting also influences how quickly the
