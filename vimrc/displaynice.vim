@@ -121,4 +121,3 @@ augroup highlight_yank
 augroup END
 
 " }}}
-
