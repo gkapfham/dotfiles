@@ -34,7 +34,7 @@ lua << EOF
 -- Call the setup function to change the default behavior
 require("aerial").setup({
   backends = { "treesitter", "lsp", "markdown" },
-  close_behavior = "auto",
+  attach_mode = "global",
   default_bindings = true,
   default_direction = "right",
   disable_max_lines = 10000,
@@ -83,7 +83,9 @@ require("aerial").setup({
   on_attach = nil,
   on_first_symbols = nil,
   open_automatic = false,
-  placement_editor_edge = false,
+  placement = "window",
+  -- placement_editor_edge = false,
+  close_automatic_events = {"unsupported"},
   post_jump_cmd = "normal! zz",
   close_on_select = false,
   show_guides = true,
