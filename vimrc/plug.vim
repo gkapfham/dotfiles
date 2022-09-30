@@ -19,8 +19,8 @@ EOF
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
-Plug 'airblade/vim-rooter'
-Plug 'akinsho/git-conflict.nvim'
+" Plug 'airblade/vim-rooter'
+" Plug 'akinsho/git-conflict.nvim'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'alvan/vim-closetag'
 Plug 'andymass/vim-matchup'
@@ -80,7 +80,7 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
-Plug 'nvim-telescope/telescope-github.nvim'
+" Plug 'nvim-telescope/telescope-github.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
@@ -98,7 +98,7 @@ Plug 'stevearc/aerial.nvim'
 Plug 'stevearc/dressing.nvim'
 Plug 'tfnico/vim-gradle'
 Plug 'ThePrimeagen/refactoring.nvim'
-Plug 'TimUntersberger/neogit'
+" Plug 'TimUntersberger/neogit'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
