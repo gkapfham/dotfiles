@@ -65,7 +65,8 @@ Plug 'lervag/lists.vim'
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'lifepillar/vim-colortemplate'
+Plug 'lifepillar/vim-colortemplate', {'for': 'colortemplate'}
+
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
