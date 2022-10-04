@@ -71,7 +71,8 @@ require('lualine').setup {
     -- from left (far left corner) to right (middle): {a} {b} {c}
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff'},
-    lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", color={fg = "#bcbcbc", bg="#262626", depth=10}}, {search_count, type = "lua_expr"}},
+    -- lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", color={fg = "#bcbcbc", bg="#262626", depth=10}}, {search_count, type = "lua_expr"}},
+    lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}, {search_count, type = "lua_expr"}},
     -- Bottom right display
     -- from left (middle) to right (far right corner): {x} {y} {z}
     lualine_x = {'lsp_progress', 'encoding', {'fileformat', symbols = {
