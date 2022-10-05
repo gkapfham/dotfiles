@@ -91,6 +91,7 @@ cmp.setup({
         vim_item.menu = ({
           buffer = " Buffer",
           cmdline = " Command",
+          fuzzy_buffer = " Fuzzy",
           nvim_lsp = " LSP",
           -- Customize the label to include contextual details (e.g., bibtex entry or reference details)
           omni = generate_omni_label(entry, vim_item),
@@ -177,6 +178,7 @@ cmp.setup.cmdline('/', {
   sources = cmp.config.sources({
     {name = 'path'},
     {name = 'buffer'},
+    {name = 'fuzzy_buffer'},
   }, {
     {name = 'cmdline'}
   })
@@ -190,7 +192,7 @@ cmp.setup.cmdline('?', {
   sources = cmp.config.sources({
     {name = 'path'},
     {name = 'buffer'},
-    {name = 'nvim_lsp_document_symbol'},
+    {name = 'fuzzy_buffer'},
   }, {
     {name = 'cmdline'}
   })
