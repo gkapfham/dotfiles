@@ -45,8 +45,8 @@ Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/cmp-omni'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
-Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
+" Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+" Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
 Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
@@ -66,7 +66,6 @@ Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'lifepillar/vim-colortemplate', {'for': 'colortemplate'}
-
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
@@ -85,7 +84,7 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
-Plug 'pgdouyon/vim-evanesco'
+" Plug 'pgdouyon/vim-evanesco'
 Plug 'prabirshrestha/async.vim'
 Plug 'quangnguyen30192/cmp-nvim-tags'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
@@ -97,7 +96,7 @@ Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
 Plug 'skywind3000/asyncrun.vim'
 Plug 'stevearc/aerial.nvim'
 Plug 'stevearc/dressing.nvim'
-Plug 'tfnico/vim-gradle'
+" Plug 'tfnico/vim-gradle'
 Plug 'ThePrimeagen/refactoring.nvim'
 " Plug 'TimUntersberger/neogit'
 Plug 'tomtom/tlib_vim'
@@ -118,6 +117,8 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+Plug 'romainl/vim-cool'
+Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
