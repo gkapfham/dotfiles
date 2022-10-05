@@ -21,11 +21,11 @@ function common_on_attach(client, bufnr)
   buf_set_keymap('n', '<space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>', opts)
   -- display in a floating window diagnostics for the current line
   buf_set_keymap('n', '<space>e', '<cmd> lua vim.diagnostic.open_float(0, {scope="line"})<CR>', opts)
-  -- send all of the diagnotics for the current window to the location list
+  -- send all of the diagnostics for the current window to the location list
   buf_set_keymap('n', '<space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   -- go to the next diagnostic
   buf_set_keymap('n', ']d', '<cmd> lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  -- go to the previous diagnotic
+  -- go to the previous diagnostic
   buf_set_keymap('n', '[d', '<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   -- run a code action on the current line of code
   buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
