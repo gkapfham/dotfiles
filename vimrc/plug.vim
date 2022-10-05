@@ -77,6 +77,7 @@ Plug 'lervag/wiki.vim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'lifepillar/vim-colortemplate', {'for': 'colortemplate'}
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'lukas-reineke/cmp-rg'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'mfussenegger/nvim-lint'
