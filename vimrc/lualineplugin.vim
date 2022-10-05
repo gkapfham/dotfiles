@@ -14,6 +14,17 @@ local function search_count()
     return ""
 end
 
+local function diff_source()
+  local gitsigns = vim.b.gitsigns_status_dict
+  if gitsigns then
+    return {
+      added = gitsigns.added,
+      modified = gitsigns.changed,
+      removed = gitsigns.removed
+    }
+  end
+end
+
  -- Define the color scheme for the lualine
 local colors = {
   color2   = "#87afd7",
@@ -65,13 +76,21 @@ require('lualine').setup {
     always_divide_middle = true,
     globalstatus = true,
   },
+  refresh = {
+      statusline = 100,
+      tabline = 100,
+      winbar = 100,
+  },
   -- Bottom section of status line
   sections = {
     -- Bottom left display
     -- from left (far left corner) to right (middle): {a} {b} {c}
+    -- lualine_a = {},
+    -- lualine_a = {'mode'},
     lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff'},
+    lualine_b = {'branch', {'diff', source = diff_source}},
     -- lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", color={fg = "#bcbcbc", bg="#262626", depth=10}}, {search_count, type = "lua_expr"}},
+    -- lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}, {search_count, type = "lua_expr"}},
     lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}, {search_count, type = "lua_expr"}},
     -- Bottom right display
     -- from left (middle) to right (far right corner): {x} {y} {z}
