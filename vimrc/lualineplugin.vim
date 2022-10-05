@@ -85,8 +85,6 @@ require('lualine').setup {
   sections = {
     -- Bottom left display
     -- from left (far left corner) to right (middle): {a} {b} {c}
-    -- lualine_a = {},
-    -- lualine_a = {'mode'},
     lualine_a = {'mode'},
     lualine_b = {'branch', {'diff', source = diff_source}},
     -- lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", color={fg = "#bcbcbc", bg="#262626", depth=10}}, {search_count, type = "lua_expr"}},
