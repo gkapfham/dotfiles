@@ -25,6 +25,14 @@ local function diff_source()
   end
 end
 
+local function encoding_prefix()
+  return ""
+end
+
+local function location_prefix()
+  return ""
+end
+
  -- Define the color scheme for the lualine
 local colors = {
   color2   = "#87afd7",
@@ -87,17 +95,15 @@ require('lualine').setup {
     -- from left (far left corner) to right (middle): {a} {b} {c}
     lualine_a = {'mode'},
     lualine_b = {'branch', {'diff', source = diff_source}},
-    -- lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", color={fg = "#bcbcbc", bg="#262626", depth=10}}, {search_count, type = "lua_expr"}},
-    -- lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}, {search_count, type = "lua_expr"}},
     lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}, {search_count, type = "lua_expr"}},
     -- Bottom right display
     -- from left (middle) to right (far right corner): {x} {y} {z}
-    lualine_x = {'lsp_progress', 'encoding', {'fileformat', symbols = {
-                    unix = 'unix',
-                    dos = 'docs',
-                    mac = 'mac',
-                }}, },
-    lualine_y = {'progress', 'location'},
+    lualine_x = {'lsp_progress', 'progress', 'location'},
+    lualine_y = {{encoding_prefix, type="lua_expr"}, 'encoding', {'fileformat', symbols = {
+                    unix = 'Unix - LF',
+                    dos = 'Win - CRLF',
+                    mac = 'Mac - CR',
+                }}},
     lualine_z = {'filesize', {'filetype', colored=false}}
   },
   inactive_sections = {
