@@ -95,6 +95,7 @@ cmp.setup({
           -- Customize the label to include contextual details (e.g., bibtex entry or reference details)
           omni = generate_omni_label(entry, vim_item),
           path = "פּ Path",
+          rg   = " Search",
           tags = "笠Tags",
           treesitter = " Tree",
           luasnip = " Snippet",
@@ -159,6 +160,7 @@ cmp.setup({
     {name = 'treesitter', max_item_count = 5, priority = 2.5},
     {name = 'tags', max_item_count = 5, priority = 5},
     {name = 'luasnip', max_item_count = 5, priority = 10},
+    {name = 'rg', max_item_count = 5, priority = 10, keyword_length = 3},
     {name = 'nvim_lsp_signature_help'},
   }, {
     { name = 'path' },
@@ -188,6 +190,7 @@ cmp.setup.cmdline('?', {
   sources = cmp.config.sources({
     {name = 'path'},
     {name = 'buffer'},
+    {name = 'nvim_lsp_document_symbol'},
   }, {
     {name = 'cmdline'}
   })
