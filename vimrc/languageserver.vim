@@ -170,12 +170,16 @@ EOF
 " currently the only plugin support all of the backends.
 nnoremap <Space>- :AerialToggle<CR>
 
+" Configure the notifier.nvim plugin to display notifications
+" in the right-hand corner of the screen; this will cause messages
+" from Neovim to display for a brief period of time. Otherwise,
+" these messages are often not visible and could be overlooked.
 lua << EOF
 require('notifier').setup {
   ignore_messages = {},
   components = {
     "nvim",
-    "lsp"  -- LSP status updates
+    "lsp"
   },
   notify = {
     clear_time = 2500,
