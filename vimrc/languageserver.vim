@@ -170,4 +170,20 @@ EOF
 " currently the only plugin support all of the backends.
 nnoremap <Space>- :AerialToggle<CR>
 
+lua << EOF
+require('notifier').setup {
+  ignore_messages = {},
+  components = {
+    "nvim",
+    "lsp"  -- LSP status updates
+  },
+  notify = {
+    clear_time = 2500,
+    min_level = vim.log.levels.DEBUG,
+  },
+  component_name_recall = true,
+  zindex = 50,
+}
+EOF
+
 " }}}
