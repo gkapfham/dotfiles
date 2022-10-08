@@ -162,6 +162,7 @@ cmp.setup({
     {name = 'tags', max_item_count = 5, priority = 5},
     {name = 'luasnip', max_item_count = 5, priority = 10},
     -- {name = 'rg', max_item_count = 5, priority = 12.5, keyword_length = 5},
+    {name = 'fuzzy_buffer', priority = 12.5},
     {name = 'nvim_lsp_signature_help'},
   }, {
     { name = 'path' },
@@ -308,3 +309,5 @@ command! NoCompletion :lua require('cmp').setup.buffer { enabled = false }
 
 " Enable completion
 command! Completion :lua require('cmp').setup.buffer { enabled = true }
+
+" }}}
