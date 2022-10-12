@@ -37,6 +37,12 @@ augroup quickfix
   autocmd FileType qf setlocal nospell
 augroup END
 
+" Disable spell checking in git
+augroup quickfix
+  autocmd!
+  autocmd FileType git setlocal nospell
+augroup END
+
 " Ignore these directories
 set wildignore+=*/build/**
 set wildignore+=*/.git/*
