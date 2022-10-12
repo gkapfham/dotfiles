@@ -32,13 +32,13 @@ au BufNewFile,BufRead,BufEnter *.sql  set nospell
 au BufNewFile,BufRead,BufEnter *.bib  set nospell
 
 " Disable spell checking in quickfix
-augroup quickfix
+augroup quickfixnospell
   autocmd!
   autocmd FileType qf setlocal nospell
 augroup END
 
 " Disable spell checking in git
-augroup quickfix
+augroup gitnospell
   autocmd!
   autocmd FileType git setlocal nospell
 augroup END
