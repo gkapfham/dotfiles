@@ -7,7 +7,7 @@ lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- one of "all", "maintained" (parsers with maintainers),
   -- or a list of languages; using a list of languages is faster at startup
-  ensure_installed = {"c", "go", "json", "lua", "markdown", "markdown_inline", "python"},
+  ensure_installed = {"c", "go", "json", "html", "lua", "markdown", "markdown_inline", "python"},
   highlight = {
     -- false will disable the whole extension
     enable = true,
