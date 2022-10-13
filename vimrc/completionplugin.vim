@@ -159,8 +159,12 @@ cmp.setup({
       end
     end, { "i", "s" }),
   },
-  -- Define the sources for the completions
+  -- Define the sources for the completions;
+  -- note that sources that appear earlier in the
+  -- list have higher priority. Also note that sources
+  -- with a higher priority have higher weighting on priority.
   sources = cmp.config.sources({
+    -- Define the first-tier of sources
     {name = 'luasnip', max_item_count = 5, priority = 10},
     {name = 'treesitter', max_item_count = 5, priority = 10},
     {name = 'nvim_lsp', max_item_count = 10, priority = 10},
@@ -181,7 +185,9 @@ cmp.setup({
     {name = 'omni', max_item_count = 5, priority = 1},
     {name = 'nvim_lsp_signature_help'},
   }, {
-    {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 5},
+    -- Define the second-tier of sources; these will only
+    -- appear when there is no active source from the first-tier
+    {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
     {name = 'path'},
   })
 })
