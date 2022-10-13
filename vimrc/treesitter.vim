@@ -6,8 +6,8 @@
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- one of "all", "maintained" (parsers with maintainers),
-  -- or a list of languages
-  ensure_installed = "all",
+  -- or a list of languages; using a list of languages is faster at startup
+  ensure_installed = {"c", "go", "json", "lua", "markdown", "markdown_inline", "python"},
   highlight = {
     -- false will disable the whole extension
     enable = true,
@@ -34,7 +34,7 @@ lua << EOF
 -- Call the setup function to change the default behavior
 require("aerial").setup({
   backends = { "treesitter", "lsp", "markdown" },
-  attach_mode = "global",
+  attach_mode = "window",
   default_bindings = true,
   default_direction = "right",
   disable_max_lines = 10000,
