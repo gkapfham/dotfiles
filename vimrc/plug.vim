@@ -30,7 +30,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-Plug 'Konfekt/vim-sentence-chopper'
+Plug 'Konfekt/vim-sentence-chopper', {'for': 'tex'}
 Plug 'L3MON4D3/LuaSnip'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
