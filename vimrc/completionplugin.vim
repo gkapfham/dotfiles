@@ -23,6 +23,8 @@ local function generate_omni_label(entry, vim_item)
 end
 
 -- Define symbols for the icons used by nvim-cmp
+-- These symbols will appear on the right-hand side
+-- of the actual completion suggested by nvim-cmp
 local kind_icons = {
   Text = "",
   Method = "",
