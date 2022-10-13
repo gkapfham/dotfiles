@@ -66,6 +66,12 @@ end
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 
+-- Load the cmp_dictionary source that will
+-- offer dictionary words as completion sources;
+-- note that I tried other plugins and this was
+-- the only one that seemed fast enough while
+-- also not making the completion menu not work well.
+-- It uses the standard dictionary provided with Linux.
 require("cmp_dictionary").setup({
     dic = {
         ["*"] = "/usr/share/dict/american-english",
