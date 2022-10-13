@@ -13,7 +13,7 @@ set dictionary+=/usr/share/dict/american-english
 " set complete+=]
 
 " Set the completion approach for the engine
-set completeopt=menuone,noselect
+" set completeopt=menuone,noselect
 
 " Do not echo messages (nor will searches)
 set noshowmode
