@@ -64,6 +64,12 @@ end
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 
+require("cmp_dictionary").setup({
+    dic = {
+        ["*"] = "/usr/share/dict/american-english",
+    },
+})
+
 -- Setup nvim-cmp
 local cmp = require'cmp'
 cmp.setup({
@@ -100,6 +106,7 @@ cmp.setup({
           tags = "笠Tags",
           treesitter = " Tree",
           luasnip = " Snippet",
+          dictionary = " Spell",
         })[entry.source.name]
         return vim_item
       end
@@ -144,10 +151,11 @@ cmp.setup({
   },
   -- Define the sources for the completions
   sources = cmp.config.sources({
+    {name = 'luasnip', max_item_count = 5, priority = 10},
+    {name = 'treesitter', max_item_count = 5, priority = 10},
     {name = 'nvim_lsp', max_item_count = 10, priority = 10},
-    {name = 'omni', max_item_count = 10, priority = 10},
     {
-      name = 'buffer', max_item_count = 10, priority = 10,
+      name = 'buffer', max_item_count = 10, priority = 20,
         option = {
           get_bufnrs = function()
             local bufs = {}
@@ -158,13 +166,13 @@ cmp.setup({
           end
         },
     },
-    {name = 'treesitter', max_item_count = 5, priority = 2.5},
     {name = 'tags', max_item_count = 5, priority = 5},
-    {name = 'luasnip', max_item_count = 5, priority = 5},
-    {name = 'fuzzy_buffer', max_item_count = 5, priority = 12.5},
+    {name = 'fuzzy_buffer', max_item_count = 5, priority = 1, keyword_length=3},
+    {name = 'omni', max_item_count = 5, priority = 1},
     {name = 'nvim_lsp_signature_help'},
   }, {
-    { name = 'path' },
+    {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 5},
+    {name = 'path'},
   })
 })
 
