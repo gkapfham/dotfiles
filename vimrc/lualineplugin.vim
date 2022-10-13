@@ -84,10 +84,11 @@ require('lualine').setup {
     always_divide_middle = true,
     globalstatus = true,
   },
+  -- Define how quickly the lualine must update
   refresh = {
-      statusline = 100,
-      tabline = 100,
-      winbar = 100,
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
   },
   -- Bottom section of status line
   sections = {
