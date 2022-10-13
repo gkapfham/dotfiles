@@ -101,7 +101,9 @@ cmp.setup({
       format = function(entry, vim_item)
         -- Define the icons used for the completion labels
         vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
-        -- Define labels for the completion menu
+        -- Define labels for the completion menu;
+        -- these will appear to the right of a completion
+        -- suggestion in the nvim-cmp menu
         vim_item.menu = ({
           buffer = " Buffer",
           cmdline = " Command",
@@ -110,7 +112,7 @@ cmp.setup({
           -- Customize the label to include contextual details (e.g., bibtex entry or reference details)
           omni = generate_omni_label(entry, vim_item),
           path = "פּ Path",
-          rg   = " Search",
+          rg = " Search",
           tags = "笠Tags",
           treesitter = " Tree",
           luasnip = " Snippet",
