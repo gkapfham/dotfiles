@@ -1,4 +1,4 @@
-" Completion {{{
+" Basic Completion {{{
 
 " Define basic completion function
 set omnifunc=syntaxcomplete#Complete
@@ -8,9 +8,9 @@ set dictionary-=/usr/share/dict/american-english
 set dictionary+=/usr/share/dict/american-english
 
 " Completion includes dictionaries
-set complete-=k complete+=k
-set complete+=kspell
-set complete+=]
+" set complete-=k complete+=k
+" set complete+=kspell
+" set complete+=]
 
 " Set the completion approach for the engine
 set completeopt=menuone,noselect
