@@ -324,7 +324,6 @@ ls.add_snippets("gitcommit", {
 
 -- Load all of the VS Code snippets provided by friendly-snippets
 require("luasnip.loaders.from_vscode").lazy_load()
-
 EOF
 
 " Disable completion
