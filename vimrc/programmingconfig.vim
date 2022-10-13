@@ -66,6 +66,9 @@ augroup configurationgroupforfiletypes
   endfunction
 augroup END
 
+" Disable the use of the perl provider and its check
+let g:loaded_perl_provider = 0
+
 " Syntax highlighting for JavaScript and JSX
 let g:jsx_ext_required = 0
 
