@@ -800,7 +800,7 @@ export _ZO_FZF_OPTS="--no-bold --cycle
 # means that you can type "cd <partial-dir>" and it
 # will take you to <actual-dir> which is the highest
 # match in the database based on name and score.
-alias cd="z"
+# alias cd="z"
 
 # Make it easy to quickly search through the entire
 # database of directories in a fuzzy fashion. This
