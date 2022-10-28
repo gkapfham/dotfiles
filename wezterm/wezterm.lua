@@ -16,6 +16,13 @@ return {
   enable_tab_bar = false,
   -- Support scrolling back for 10,000 lines
   scrollback_lines = 10000,
+  -- Decrease the animation_fps and
+  -- do not support a blinking cursor
+  -- so as to ensure good performance
+  animation_fps = 1,
+  cursor_blink_rate = 0,
+  -- Do no reload wezterm's when configuration changes
+  -- automatically_reload_config = false,
   -- Define the color scheme to match Vitamin-Onec
   colors = {
       foreground = "#8a8a8a",
