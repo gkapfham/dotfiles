@@ -22,7 +22,7 @@ return {
   animation_fps = 1,
   cursor_blink_rate = 0,
   -- Do no reload wezterm's when configuration changes
-  -- automatically_reload_config = false,
+  automatically_reload_config = false,
   -- Define the color scheme to match Vitamin-Onec
   colors = {
       foreground = "#8a8a8a",
