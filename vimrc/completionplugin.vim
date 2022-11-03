@@ -181,13 +181,13 @@ cmp.setup({
         },
     },
     {name = 'tags', max_item_count = 5, priority = 5},
-    {name = 'fuzzy_buffer', max_item_count = 5, priority = 1, keyword_length=3},
+    -- {name = 'fuzzy_buffer', max_item_count = 5, priority = 1, keyword_length=5},
     {name = 'omni', max_item_count = 5, priority = 1},
     {name = 'nvim_lsp_signature_help'},
   }, {
     -- Define the second-tier of sources; these will only
     -- appear when there is no active source from the first-tier
-    {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
+    {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 4},
     {name = 'path'},
   })
 })
