@@ -19,6 +19,14 @@ EOF
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
+" Plug 'Vimjas/vim-python-pep8-indent'
+" Plug 'antoinemadec/FixCursorHold.nvim'
+" Plug 'goerz/jupytext.vim'
+" Plug 'jalvesaq/Nvim-R', {'for': 'r'}
+" Plug 'lukas-reineke/cmp-rg'
+" Plug 'prabirshrestha/async.vim'
+" Plug 'skywind3000/asyncrun.vim'
+" Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
@@ -28,12 +36,10 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'ThePrimeagen/refactoring.nvim'
 Plug 'Valloric/ListToggle'
-Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'alvan/vim-closetag'
 Plug 'andymass/vim-matchup'
-Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'arkav/lualine-lsp-progress'
 Plug 'benfowler/telescope-luasnip.nvim'
 Plug 'bronson/vim-visual-star-search'
@@ -45,7 +51,6 @@ Plug 'dmitmel/cmp-cmdline-history'
 Plug 'ggandor/flit.nvim'
 Plug 'ggandor/leap.nvim'
 Plug 'gkapfham/vim-vitamin-onec'
-Plug 'goerz/jupytext.vim'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -53,7 +58,6 @@ Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th/cmp-omni'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'jalvesaq/Nvim-R', {'for': 'r'}
 Plug 'jgdavey/tslime.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
@@ -63,13 +67,12 @@ Plug 'kevinhwang91/nvim-bqf', {'branch': 'main'}
 Plug 'klen/nvim-test'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'lervag/lists.vim'
+Plug 'lervag/lists.vim', {'for': 'markdown'}
 Plug 'lervag/vimtex', {'for': 'tex'}
 Plug 'lervag/wiki.vim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'lifepillar/vim-colortemplate', {'for': 'colortemplate'}
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'lukas-reineke/cmp-rg'
 Plug 'machakann/vim-sandwich'
 Plug 'machakann/vim-swap'
 Plug 'mfussenegger/nvim-lint'
@@ -85,7 +88,6 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript.jsx'}
-Plug 'prabirshrestha/async.vim'
 Plug 'quangnguyen30192/cmp-nvim-tags'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'ray-x/cmp-treesitter'
@@ -93,7 +95,6 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'romainl/vim-cool'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'simnalamburt/vim-mundo', {'on': 'MundoToggle'}
-Plug 'skywind3000/asyncrun.vim'
 Plug 'stevearc/aerial.nvim'
 Plug 'stevearc/dressing.nvim'
 Plug 'tomtom/tlib_vim'
@@ -109,7 +110,6 @@ Plug 'tzachar/fuzzy.nvim'
 Plug 'uga-rosa/cmp-dictionary'
 Plug 'vigoux/notifier.nvim'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'vim-scripts/python_match.vim'
 Plug 'wellle/targets.vim'
 Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
