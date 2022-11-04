@@ -19,14 +19,6 @@ EOF
 call plug#begin('~/.vim/bundle')
 
 " Load plugins for Vim8 and Neovim
-" Plug 'TimUntersberger/neogit'
-" Plug 'airblade/vim-rooter'
-" Plug 'akinsho/git-conflict.nvim'
-" Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
-" Plug 'iamcco/markdown-preview.nvim', {'do': { -> mkdp#util#install() }, 'for': 'markdown'}
-" Plug 'nvim-telescope/telescope-github.nvim'
-" Plug 'pgdouyon/vim-evanesco'
-" Plug 'tfnico/vim-gradle'
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
