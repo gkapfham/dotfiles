@@ -187,7 +187,7 @@ cmp.setup({
   }, {
     -- Define the second-tier of sources; these will only
     -- appear when there is no active source from the first-tier
-    {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 4},
+    -- {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 4},
     {name = 'path'},
   })
 })
