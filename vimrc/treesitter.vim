@@ -36,7 +36,6 @@ require("aerial").setup({
   backends = { "treesitter", "lsp", "markdown" },
   attach_mode = "window",
   default_bindings = true,
-  default_direction = "right",
   disable_max_lines = 10000,
   disable_max_size = 2000000, -- Default 2MB
   filter_kind = {
@@ -73,14 +72,17 @@ require("aerial").setup({
     buftypes = "special",
     wintypes = "special",
   },
+  layout = {
+    default_direction = "right",
+    max_width = { 40, 0.2 },
+    min_width = { 04, 0.2 },
+  },
   link_folds_to_tree = false,
   link_tree_to_folds = true,
   manage_folds = false,
-  max_width = { 40, 0.2 },
   width = nil,
-  min_width = { 04, 0.2 },
   nerd_font = "auto",
-  on_attach = nil,
+  -- on_attach = nil,
   on_first_symbols = nil,
   open_automatic = false,
   placement = "window",
