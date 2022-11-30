@@ -50,8 +50,7 @@ font-2 = "Hack Nerd Font:size=24:weight=bold;5"
 modules-left = i3
 
 ; Middle panel: display the statistics on network, cpu, and memory
-; modules-center = wireless-network wired-network cpu temperature memory
-modules-center = wireless-network wired-network cpu memory
+modules-center = wireless-network wired-network cpu temperature memory
 
 ; Right panel: display cpu, memory, battery, screen light, audio, and calendar
 modules-right = battery0 backlight pulseaudio date
