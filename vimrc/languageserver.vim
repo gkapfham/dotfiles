@@ -39,7 +39,7 @@ function common_on_attach(client, bufnr)
   buf_set_keymap('v', '<space>ff', '<cmd> lua vim.lsp.buf.formatting()<CR>', opts)
   -- attach the aerial plugin to this language server and the
   -- buffer so that it can provide code navigation
-  require("aerial").on_attach(client, bufnr)
+  -- require("aerial").on_attach(client, bufnr)
 end
 
 -- install each of the chosen language servers and then
