@@ -434,6 +434,7 @@ bindkey '^B' fzf-fasd-widget
 export FZF_DEFAULT_OPTS='
   --no-bold
   --cycle
+  --no-separator
   --bind ctrl-f:page-down,ctrl-b:page-up
   --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
@@ -633,7 +634,7 @@ tms() {
   local session
   newsession=${1:-Work}
   session=$(tmux list-sessions -F "#{session_name}" | \
-    fzf --query="$1" --select-1 --exit-0 --cycle) &&
+    fzf --query="$1" --select-1 --exit-0 --cycle --no-separator) &&
     tmux attach-session -t "$session" || tmux new-session -s $newsession
 }
 
@@ -641,7 +642,7 @@ tms() {
 tmm() {
   # NOTE: Use the /usr/sbin/ls command since "ls" is now aliased to use "exa" command
   session=$( /usr/sbin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
-    fzf --query="$1" --select-1 --exit-0 --cycle) &&
+    fzf --query="$1" --select-1 --exit-0 --cycle --no-separator) &&
     tmuxinator "$session"
 }
 
@@ -789,7 +790,7 @@ eval "$(zoxide init zsh)"
 # when allowing the selection of directories; this
 # color scheme matches (but not exactly, not sure
 # why) the one used with the fzf-tab tool.
-export _ZO_FZF_OPTS="--no-bold --cycle
+export _ZO_FZF_OPTS="--no-bold --no-separator --cycle
   --bind ctrl-f:page-down,ctrl-b:page-up
   --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
