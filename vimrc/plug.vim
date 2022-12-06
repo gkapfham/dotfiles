@@ -65,7 +65,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
 Plug 'kevinhwang91/nvim-bqf', {'branch': 'main'}
 Plug 'klen/nvim-test'
-Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'lervag/lists.vim', {'for': 'markdown'}
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -116,6 +116,8 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
+Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'MunifTanjim/nui.nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
