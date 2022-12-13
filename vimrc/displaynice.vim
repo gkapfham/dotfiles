@@ -77,7 +77,7 @@ let g:lt_quickfix_list_toggle_map = '<leader>q'
 set noshowmode
 
 " Display the sign column for version control
-set signcolumn=yes
+set signcolumn=yes:1
 
 " Configure how quickly interface updates
 set updatetime=100
