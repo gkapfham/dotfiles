@@ -1,5 +1,9 @@
 " vimtex {{{
 
+" LaTeX files seem to no longer load the correct
+" syntax highlighting unless file type is set first
+autocmd BufNewFile,BufRead *.tex set filetype=tex
+
 " Note about error in vimtex workflow:
 " - Open LaTeX main document in nvim
 " - Start to compile the document with ,ll
@@ -19,6 +23,7 @@ let g:vimtex_quickfix_open_on_warning = 0
 " --> Do not show the help message
 " let g:vimtex_index_show_help = 0
 " --> Use zathura for the PDF viewer
+" let g:vimtex_view_method = 'sioyek'
 let g:vimtex_view_method = 'zathura'
 " --> Use the nvr program (Neovim-remote)
 "     to facilitate communication between
