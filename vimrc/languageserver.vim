@@ -144,6 +144,17 @@ efmls.setup {
 }
 EOF
 
+" Configure the signs in the signcolumn to match those that
+" are displayed in lualine; this will also ensure that all
+" of the telescope pickers display the same signs
+lua << EOF
+local signs = { Error = " ", Warn = "ﱥ ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
+end
+EOF
+
 " Configure the dressing plugin that makes menus;
 " this is useful for renaming files and other types
 " of refactoring as the menus appear inside the editor
