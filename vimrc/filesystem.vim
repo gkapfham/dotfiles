@@ -88,6 +88,7 @@ nvim_web_devicons.set_icon(new_icons)
 nvim_web_devicons.set_default_icon('', '#a8a8a8')
 EOF
 
+" Configure the neo-tree plugin
 lua << EOF
 require("neo-tree").setup({
         close_if_last_window = true,
