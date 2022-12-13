@@ -88,33 +88,33 @@ EOF
 
 " Configure the neogit plugin
 
-lua <<EOF
-local neogit = require("neogit")
-neogit.setup {
-  disable_signs = false,
-  disable_context_highlighting = true,
-  disable_commit_confirmation = true,
-  signs = {
-    -- { CLOSED, OPENED }
-    section = { ">", "v" },
-    item = { ">", "v" },
-    hunk = { "", "" },
-  },
-  integrations = {
-    diffview = true
-  },
-}
-EOF
+" lua <<EOF
+" local neogit = require("neogit")
+" neogit.setup {
+"   disable_signs = false,
+"   disable_context_highlighting = true,
+"   disable_commit_confirmation = true,
+"   signs = {
+"     -- { CLOSED, OPENED }
+"     section = { ">", "v" },
+"     item = { ">", "v" },
+"     hunk = { "", "" },
+"   },
+"   integrations = {
+"     diffview = true
+"   },
+" }
+" EOF
 
 " Define a command to load neogit in full-screen mode
-nmap <Space>gg :Neogit <CR>
+" nmap <Space>gg :Neogit <CR>
 
-" Special configuration for neogit buffers
-augroup neogitconfiguration
-  autocmd!
-  " Disable spell checking for the neogit buffers
-  autocmd FileType NeogitStatus setlocal nospell
-augroup END
+" " Special configuration for neogit buffers
+" augroup neogitconfiguration
+"   autocmd!
+"   " Disable spell checking for the neogit buffers
+"   autocmd FileType NeogitStatus setlocal nospell
+" augroup END
 
 " Configure the git-messenger
 augroup gitmessenger
