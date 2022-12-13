@@ -78,7 +78,7 @@ require('gitsigns').setup {
   },
   attach_to_untracked = false,
   current_line_blame = false,
-  sign_priority = 1,
+  sign_priority = 100,
   update_debounce = 50,
   status_formatter = nil,
   -- use_decoration_api = false,
