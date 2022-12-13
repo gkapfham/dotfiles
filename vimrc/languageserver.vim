@@ -162,8 +162,10 @@ EOF
 lua << EOF
 require("dressing").setup {
   input = {
-    winblend = 0,
-    winhighlight = 'NormalFloat:Normal',
+    win_options = {
+      winblend = 0,
+      winhighlight = 'NormalFloat:Normal',
+    },
     override = function(conf)
       conf.col = -1
       conf.row = 0
