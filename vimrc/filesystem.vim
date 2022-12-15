@@ -91,9 +91,9 @@ EOF
 " Configure the neo-tree plugin
 lua << EOF
 require("neo-tree").setup({
-        close_if_last_window = true,
+        close_if_last_window = false,
         popup_border_style = "rounded",
-        enable_git_status = true,
+        enable_git_status = false,
         enable_diagnostics = true,
         sort_case_insensitive = false,
         sort_function = nil,
@@ -132,14 +132,15 @@ require("neo-tree").setup({
           git_status = {
             symbols = {
               -- Change type
-              added     = "+",
-              modified  = "",
-              deleted   = "✖",
-              renamed   = "",
+              added     = "",
+              modified  = "",
+              deleted   = "",
+              renamed   = "",
               -- Status type
-              untracked = "",
+              untracked = "",
               ignored   = "",
-              unstaged  = "",
+              -- unstaged  = "",
+              unstaged  = "",
               staged    = "",
               conflict  = "",
             }
