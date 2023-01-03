@@ -21,11 +21,18 @@ return {
   -- so as to ensure good performance
   animation_fps = 1,
   cursor_blink_rate = 0,
+  -- Set the maximum fps in an attempt to
+  -- also ensure good performance
+  max_fps = 1,
+  -- Use the new experimental front-end in
+  -- a further attempt to improve performance
+  front_end = "WebGpu",
   -- Do no not reload wezterm's when configuration changes
   automatically_reload_config = false,
   -- Define the color scheme to match Vitamin-Onec
   colors = {
       foreground = "#8a8a8a",
+      -- foreground = "#949494",
       background = "#1c1c1c",
       -- Overrides the cell background color when the current cell is occupied by the
       -- cursor and the cursor style is set to Block
