@@ -3,7 +3,8 @@
 ; Some of these colors are not used now
 background = #333333
 background-alt = #c6c6c6
-foreground = #bcbcbc
+; foreground = #bcbcbc
+foreground = #a8a8af
 primary = #616161
 secondary = #e60053
 alert = #616161
@@ -51,7 +52,7 @@ modules-left = i3
 
 ; Middle panel: display the statistics on network, cpu, and memory
 modules-center = wireless-network wired-network cpu temperature memory
-;modules-center = wireless-network wired-network cpu memory
+; modules-center = wireless-network wired-network cpu memory
 
 ; Right panel: display cpu, memory, battery, screen light, audio, and calendar
 modules-right = battery0 backlight pulseaudio date
