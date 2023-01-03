@@ -148,7 +148,7 @@ EOF
 " are displayed in lualine; this will also ensure that all
 " of the telescope pickers display the same signs
 lua << EOF
-local signs = { Error = " ", Warn = "ﱥ ", Hint = " ", Info = " " }
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
