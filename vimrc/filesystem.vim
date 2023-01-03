@@ -207,7 +207,7 @@ require("neo-tree").setup({
             never_show_by_pattern = {
             },
           },
-          follow_current_file = true,
+          follow_current_file = false,
           group_empty_dirs = false,
           hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
                                                   -- in whatever position is specified in window.position
