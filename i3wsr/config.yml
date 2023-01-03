@@ -20,3 +20,8 @@ firefox = "Firefox"
 # to use capitalization in a
 # consistent fashion
 discord = "Discord"
+
+# Substring match for Kitty
+# to use capitalization in a
+# consistent fashion
+kitty = "Kitty"
