@@ -150,7 +150,8 @@ require('lualine').setup {
     lualine_c = {},
     -- Top right display
     -- from left (middle) to right (far right corner): {x} {y} {z}
-    lualine_x = {{'diagnostics', symbols = {error = ' ', warn = 'ﱥ ', info = ' ', hint = ' '}}},
+    -- lualine_x = {{'diagnostics', symbols = {error = ' ', warn = 'ﱥ ', info = ' ', hint = ' '}}},
+    lualine_x = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
     lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
     lualine_z = {}
   },
