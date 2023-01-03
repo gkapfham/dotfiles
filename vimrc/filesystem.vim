@@ -93,7 +93,7 @@ lua << EOF
 require("neo-tree").setup({
         close_if_last_window = false,
         popup_border_style = "rounded",
-        enable_git_status = false,
+        enable_git_status = true,
         enable_diagnostics = true,
         sort_case_insensitive = false,
         sort_function = nil,
@@ -208,7 +208,7 @@ require("neo-tree").setup({
             never_show_by_pattern = {
             },
           },
-          follow_current_file = false,
+          follow_current_file = true,
           group_empty_dirs = false,
           hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
                                                   -- in whatever position is specified in window.position
