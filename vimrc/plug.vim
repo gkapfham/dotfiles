@@ -23,9 +23,13 @@ call plug#begin('~/.vim/bundle')
 " Plug 'antoinemadec/FixCursorHold.nvim'
 " Plug 'goerz/jupytext.vim'
 " Plug 'jalvesaq/Nvim-R', {'for': 'r'}
+" Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'lukas-reineke/cmp-rg'
 " Plug 'prabirshrestha/async.vim'
 " Plug 'skywind3000/asyncrun.vim'
+" Plug 'tzachar/cmp-fuzzy-buffer'
+" Plug 'tzachar/fuzzy.nvim'
+" Plug 'uga-rosa/cmp-dictionary'
 " Plug 'vim-scripts/SyntaxAttr.vim'
 Plug 'ColinKennedy/vim-textobj-block-party'
 Plug 'KeitaNakamura/highlighter.nvim', {'do': ':UpdateRemotePlugins'}
@@ -33,6 +37,7 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'Konfekt/vim-sentence-chopper', {'for': 'tex'}
 Plug 'L3MON4D3/LuaSnip'
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'MunifTanjim/nui.nvim'
 Plug 'Quramy/vim-js-pretty-template', {'for': 'javascript.jsx'}
 Plug 'ThePrimeagen/refactoring.nvim'
 Plug 'Valloric/ListToggle'
@@ -65,7 +70,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
 Plug 'kevinhwang91/nvim-bqf', {'branch': 'main'}
 Plug 'klen/nvim-test'
-" Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'lervag/lists.vim', {'for': 'markdown'}
 Plug 'lervag/vimtex', {'for': 'tex'}
@@ -84,6 +88,7 @@ Plug 'numToStr/Comment.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do': 'make'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -105,9 +110,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tweekmonster/braceless.vim'
 Plug 'tweekmonster/spellrotate.vim'
 Plug 'tweekmonster/startuptime.vim'
-Plug 'tzachar/cmp-fuzzy-buffer'
-Plug 'tzachar/fuzzy.nvim'
-Plug 'uga-rosa/cmp-dictionary'
 Plug 'vigoux/notifier.nvim'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'vim-scripts/python_match.vim'
@@ -116,8 +118,6 @@ Plug 'whatyouhide/vim-textobj-xmlattr', {'for': ['html', 'md', 'liquid']}
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'windwp/nvim-autopairs'
 Plug 'xolox/vim-misc'
-Plug 'nvim-neo-tree/neo-tree.nvim'
-Plug 'MunifTanjim/nui.nvim'
 
 " Always load special fonts last
 Plug 'ryanoasis/vim-devicons'
