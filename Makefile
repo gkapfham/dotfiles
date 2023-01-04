@@ -175,11 +175,12 @@ create-nvim:
 	@# now with no error since it was previously deleted
 	@# This assumes that the .vim/ directory was already
 	@# create by external step not connect to this Makefile
-	ln -s ~/.vim ~/.config/nvim
+	# ln -s ~/.vim ~/.config/nvim
 	@# Delete the init.vim file as it will later be stowed
-	rm -rf ~/.config/nvim/init.vim
+	@# rm -rf ~/.config/nvim/init.vim
 	@# Delete the init.lua file as it will later be stowed
 	rm -rf ~/.config/nvim/init.lua
+	mkdir -p ~/.config/nvim
 
 ## Create the ~/.vim/rc directory that contains .vim files
 ## that contain components of the .vimrc file
@@ -552,10 +553,10 @@ zcompile-shell-scripts: stow-external
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-alacritty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-vimrc create-zsh create-fzf-tab create-zshtheme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-alacritty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-bat stow-code stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-i3 stow-i3wsr stow-email stow-git stow-nvim stow-vimrc stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tool stow-vim stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-bat stow-code stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-i3 stow-i3wsr stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tool stow-vim stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zsh-git-prompt stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions

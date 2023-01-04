@@ -1,5 +1,4 @@
--- require("lazyvim.config.lazy")
-
+-- bootstrap the use of lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -7,23 +6,42 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    "--branch=stable",
     lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
 
--- example using a list of specs with the default options
-vim.g.mapleader = "," -- make sure to set `mapleader` before lazy so your mappings are correct
+-- define the leader key
+vim.g.mapleader = ","
 
 require("lazy").setup({
-{
-    "gkapfham/vim-vitamin-onec",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      -- immediately load the colorscheme
-      vim.cmd([[colorscheme vitaminonec]])
-    end,
+  spec = "plugins",
+  defaults = { lazy = true, version = "*" },
+  install = { colorscheme = { "vitaminonec" } },
+  checker = { enabled = true },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
   },
 })
+
+local Util = require("lazy.core.util")
+Util.walk(vim.env.VIMRUNTIME .. "/plugin", function(path, name, t)
+  print(table.concat({ path, name, t }, " | "))
+end)
+
+Util.lsmod("plugins", function(modname, modpath)
+  print(modname .. ": " .. modpath)
+end)
+
