@@ -178,6 +178,8 @@ create-nvim:
 	ln -s ~/.vim ~/.config/nvim
 	@# Delete the init.vim file as it will later be stowed
 	rm -rf ~/.config/nvim/init.vim
+	@# Delete the init.lua file as it will later be stowed
+	rm -rf ~/.config/nvim/init.lua
 
 ## Create the ~/.vim/rc directory that contains .vim files
 ## that contain components of the .vimrc file
