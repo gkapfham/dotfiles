@@ -3,7 +3,7 @@
 
 return {
 
-  -- define the color scheme and load it
+  -- Define the color scheme and load it
   -- in a non-lazy fashion as needed immediately
   {
     "gkapfham/vim-vitamin-onec",
