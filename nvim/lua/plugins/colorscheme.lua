@@ -4,7 +4,7 @@
 return {
 
   -- Define the color scheme and load it
-  -- in a non-lazy fashion as needed immediately
+  -- non-lazyily as it must function immediately
   {
     "gkapfham/vim-vitamin-onec",
     lazy = false,
