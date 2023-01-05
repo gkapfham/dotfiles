@@ -139,7 +139,6 @@ return {
     priority = 1000,
     dependencies = {
       "arkav/lualine-lsp-progress",
-      "arkav/lualine-lsp-progress",
     },
     -- Configure
     config = function()
