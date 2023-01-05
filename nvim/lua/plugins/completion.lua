@@ -1,3 +1,21 @@
+-- Define a function that makes a label for omnicompletion
+local function generate_omni_label(entry, vim_item)
+  -- Extract the contents in the vim_item menu
+  label = vim.inspect(vim_item.menu)
+  -- Determine if the label is "nil"; importantly,
+  -- note that it is not the actual value of nil
+  -- but rather a string that contains "nil".
+  -- In this case, only return the basic label
+  if label == "nil" then
+    return " Omni"
+  -- The label is not "nil" and thus the entire contents
+  -- of the label need to appear; this is especially helpful
+  -- when display details from the vimtex plugin.
+  else
+    return " Omni " .. label:gsub("%'", ""):gsub('%"', "")
+  end
+end
+
 return {
 
   -- auto completion
@@ -15,7 +33,7 @@ return {
       local cmp = require("cmp")
       cmp.setup({
         completion = {
-          completeopt = "menu,menuone,noinsert",
+          completeopt = "menuone,noselect",
         },
         snippet = {
           expand = function(args)
