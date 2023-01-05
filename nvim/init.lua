@@ -45,6 +45,7 @@ require("lazy").setup({
 
 -- Load the files in the configure module
 require("configure.settings")
+require("configure.autocmds")
 require("configure.keymaps")
 require("configure.commands")
 
