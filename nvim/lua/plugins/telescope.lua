@@ -8,6 +8,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
+    -- Configure
     config = function()
 	local actions = require('telescope.actions')
 	require('telescope').setup {
@@ -75,6 +76,7 @@ return {
 	  }
 	}
     end,
+    -- Keys
     keys = {
       -- Buffers
       { "<Space>i", "<cmd> Telescope buffers <CR>", desc = "Telescope: Buffers" },
