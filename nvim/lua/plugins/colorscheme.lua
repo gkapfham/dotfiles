@@ -1,6 +1,10 @@
+-- File: plugin/colorscheme.lua
+-- Purpose: Configure the colorscheme
+
 return {
 
   -- define the color scheme and load it
+  -- in a non-lazy fashion as needed immediately
   {
     "gkapfham/vim-vitamin-onec",
     lazy = false,
