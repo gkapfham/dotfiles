@@ -60,4 +60,15 @@ return {
   -- User interface components
   "MunifTanjim/nui.nvim",
 
+  -- Automatically disable search highlighting when
+  -- it is not needed after searching
+  {
+    "asiryk/auto-hlsearch.nvim",
+    event = "BufReadPre",
+    config = function()
+      local auto_hlsearch = require("auto-hlsearch")
+      auto_hlsearch.setup()
+    end,
+  },
+
 }
