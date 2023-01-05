@@ -15,4 +15,10 @@ return {
     end,
   },
 
+  -- Color template creation
+  {
+    "lifepillar/vim-colortemplate",
+    ft = "colortemplate",
+  }
+
 }
