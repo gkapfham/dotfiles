@@ -39,3 +39,15 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
+
+-- Disable line numbering for specific filetypes
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = {
+    "lazy",
+  },
+  callback = function(event)
+    vim.cmd([[setlocal norelativenumber]])
+    vim.cmd([[setlocal nonumber]])
+  end,
+})
+
