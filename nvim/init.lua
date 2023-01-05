@@ -1,4 +1,4 @@
--- bootstrap the use of lazy.nvim
+-- Bootstrap the use of lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -12,10 +12,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- define the leader key
+-- Define the leader key
 vim.g.mapleader = ","
 
--- setup the lazy.nvim to search for lua files
+-- Setup the lazy.nvim to search for lua files
 -- in the plugins/ directory, load the color
 -- scheme, and make additional default settings
 require("lazy").setup({
@@ -43,10 +43,10 @@ require("lazy").setup({
   },
 })
 
--- source the keymaps.lua file in the configure/ directory
+-- Source the keymaps.lua file in the configure/ directory
 require("configure.keymaps")
 
--- source cthe commands.lua file in the configure/ directory
+-- Source cthe commands.lua file in the configure/ directory
 require("configure.commands")
 
 -- local Util = require("lazy.core.util")
