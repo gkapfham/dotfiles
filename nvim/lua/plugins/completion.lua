@@ -1,3 +1,7 @@
+-- File: plugin/completion.lua
+-- Purpose: Configure the nvim-cmp plugin
+-- and all of the plugins that enhance it
+
 -- Define a function that makes a label for omnicompletion
 local function generate_omni_label(entry, vim_item)
   -- Extract the contents in the vim_item menu
