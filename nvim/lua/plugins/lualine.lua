@@ -1,6 +1,8 @@
 -- File: lualine.lua
 -- Purpose: load and configure the lualine plugin
 
+-- Define functions in lua {{{
+
 -- Define a function for displaying the current result number
 -- out of total number of results when searching with / or ?
 vim.o.shortmess = vim.o.shortmess .. "S"
@@ -14,6 +16,9 @@ local function search_count()
     return ""
 end
 
+-- Define a function for showing diff information in the
+-- lualine through the use of the gitsigns plugin; note
+-- that this approach seems faster than one in lualine
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
   if gitsigns then
@@ -25,13 +30,19 @@ local function diff_source()
   end
 end
 
+-- Define a function that will display a symbol
+-- after the encoding for the current file
 local function encoding_prefix()
   return ""
 end
 
+-- Define a function that will display a symbol
+-- before the location of the current file
 local function location_prefix()
   return ""
 end
+
+--- }}}
 
  -- Define the color scheme for the lualine
 local colors = {
@@ -69,4 +80,161 @@ local vitaminonec = {
   },
 }
 
-return {}
+--- Define functions in vimscript using vim.cmd {{{
+
+-- Define a vimscript function to support lualine
+vim.cmd([[
+function! StatuslineGutentags()
+  return gutentags#statusline() !=# '' ? ' Tags ' : 'Tags '
+endfunction
+]])
+
+-- Define a vimscript function to support lualine
+vim.cmd([[
+function! StatuslinePythonEnvironment()
+  " Extract only the name of the virtual environment from the
+  " VIRTUAL_ENV variable; note that it also includes the full
+  " directory to the virtual environment that is not suitable
+  " for including in a section of a status line.
+  let l:venv = $VIRTUAL_ENV
+  return l:venv !=# '' ? ' '.split(l:venv, '/')[-1] : ''
+endfunction
+]])
+
+-- Define a vimscript function to support lualine
+vim.cmd([[
+function! StatuslineReadonly()
+  return &readonly ? '' : ''
+endfunction
+]])
+
+-- Define a vimscript function to support lualine
+vim.cmd([[
+function! StatuslineSpell()
+  " Use a different configuration to show whether
+  " or not spell checking is currently running
+  return &spell ? 'A-Z ' : 'A-Z '
+endfunction
+]])
+
+-- " Display a file tree symbol
+-- function! FileTree()
+--   return ''
+-- endfunction
+vim.cmd([[
+function! FileTree()
+  return ''
+endfunction
+]])
+
+--- }}}
+
+return {
+
+  -- Lualine
+  {
+    "nvim-lualine/lualine.nvim",
+    -- event = "VeryLazy",
+    lazy = false,
+    priority = 1000,
+    dependencies = {
+      "arkav/lualine-lsp-progress",
+      "arkav/lualine-lsp-progress",
+    },
+    -- Configure
+    config = function()
+	require('lualine').setup {
+	  -- Define the global options for lualine
+	  options = {
+	    icons_enabled = true,
+	    theme = vitaminonec,
+	    component_separators = { left = '', right = ''},
+	    section_separators = { left = '', right = ''},
+	    disabled_filetypes = {},
+	    always_divide_middle = true,
+	    globalstatus = true,
+	  },
+	  -- Define how quickly the lualine must update
+	  refresh = {
+	      statusline = 1000,
+	      tabline = 1000,
+	      winbar = 1000,
+	  },
+	  -- Bottom section of status line
+	  sections = {
+	    -- Bottom left display
+	    -- from left (far left corner) to right (middle): {a} {b} {c}
+	    lualine_a = {'mode'},
+	    lualine_b = {'branch', {'diff', source = diff_source}},
+	    lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}, {search_count, type = "lua_expr"}},
+	    -- Bottom right display
+	    -- from left (middle) to right (far right corner): {x} {y} {z}
+	    lualine_x = {'lsp_progress', 'progress', 'location'},
+	    lualine_y = {{encoding_prefix, type="lua_expr"}, 'encoding', {'fileformat', symbols = {
+			    unix = 'Unix - LF',
+			    dos = 'Win - CRLF',
+			    mac = 'Mac - CR',
+			}}},
+	    lualine_z = {'filesize', {'filetype', colored=false}}
+	  },
+	  inactive_sections = {
+	    lualine_a = {},
+	    lualine_b = {},
+	    lualine_c = {},
+	    lualine_x = {},
+	    lualine_y = {},
+	    lualine_z = {}
+	  },
+	  -- do not use the winbar because it seems to cause
+	  -- other plugins to crash and produce incorrect output
+	  -- winbar = {
+	    -- lualine_a = {{"filename", path=1, color={fg = "#bcbcbc", bg="#262626"}}},
+	    -- lualine_b = {{"aerial", color={fg = "#bcbcbc", bg="#262626"}}},
+	    -- lualine_y = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
+	  -- },
+	  tabline = {
+	    -- Top left display
+	    -- from left (far left corner) to right (middle): {a} {b} {c}
+	    -- Note that {b} and {c} are currently disabled because there
+	    -- are normally a significant number of buffers on display in {a}
+	    lualine_a = {
+	      {'buffers',
+		show_modified_status = true,
+		-- Define a custom label for the Aerial buffer;
+		-- note that other plugins seem to do this automatically
+		-- but unless it is done for Aerial it will show a "No Name"
+		-- label whenever you change into the Aerial buffer
+		filetype_names = {
+		  aerial="Aerial"
+		},
+		-- Define symbols attached to each file in the tabline
+		symbols = {
+		  modified = ' ●',
+		  alternate_file = ' ',
+		  directory =  '',
+		},
+	      }
+	    },
+	    lualine_b = {},
+	    lualine_c = {},
+	    -- Top right display
+	    -- from left (middle) to right (far right corner): {x} {y} {z}
+	    -- lualine_x = {{'diagnostics', symbols = {error = ' ', warn = 'ﱥ ', info = ' ', hint = ' '}}},
+	    lualine_x = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
+	    lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
+	    lualine_z = {}
+	  },
+	  -- define the extensions which ensure that lualine
+	  -- makes better customized menus when they are used
+	  extensions = {'quickfix', 'toggleterm', 'aerial'},
+	}
+    end,
+    -- Keys
+    keys = {
+      -- Buffers
+      { "<Space>i", "<cmd> Telescope buffers <CR>", desc = "Telescope: Buffers" },
+      { "<Space>rf", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Telescope: Buffers" },
+    } 
+  }	
+
+}
