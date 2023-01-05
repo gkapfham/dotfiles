@@ -15,11 +15,18 @@ vim.opt.rtp:prepend(lazypath)
 -- define the leader key
 vim.g.mapleader = ","
 
+-- setup the lazy.nvim to search for lua files
+-- in the plugins/ directory, load the color
+-- scheme, and make additional default settings
 require("lazy").setup({
   spec = "plugins",
   defaults = { lazy = true, version = "*" },
   install = { colorscheme = { "vitaminonec" } },
   checker = { enabled = true },
+  change_detection = {
+    enabled = true,
+    notify = false,
+  },
   performance = {
     rtp = {
       disabled_plugins = {
@@ -36,12 +43,14 @@ require("lazy").setup({
   },
 })
 
-local Util = require("lazy.core.util")
-Util.walk(vim.env.VIMRUNTIME .. "/plugin", function(path, name, t)
-  print(table.concat({ path, name, t }, " | "))
-end)
+require("configure.keymappings")
 
-Util.lsmod("plugins", function(modname, modpath)
-  print(modname .. ": " .. modpath)
-end)
+-- local Util = require("lazy.core.util")
+-- Util.walk(vim.env.VIMRUNTIME .. "/plugin", function(path, name, t)
+--  print(table.concat({ path, name, t }, " | "))
+-- end)
+
+-- Util.lsmod("plugins", function(modname, modpath)
+--  print(modname .. ": " .. modpath)
+-- end)
 
