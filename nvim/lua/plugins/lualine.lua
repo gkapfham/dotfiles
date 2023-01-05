@@ -230,12 +230,6 @@ return {
       extensions = {'quickfix', 'toggleterm', 'aerial'},
     }
   end,
-  -- Keys
-  keys = {
-    -- Buffers
-    { "<Space>i", "<cmd> Telescope buffers <CR>", desc = "Telescope: Buffers" },
-    { "<Space>rf", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Telescope: Buffers" },
-  } 
   }	
 
 }
