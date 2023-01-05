@@ -3,7 +3,7 @@
 
 return {
 
-  -- measure the startuptime
+  -- Measure the startuptime
   {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
@@ -12,7 +12,8 @@ return {
     end,
   },
 
-  -- library used by other plugins
+  -- Provide user interface support
+  -- for other neovim plugins
   "nvim-lua/plenary.nvim",
 
 }
