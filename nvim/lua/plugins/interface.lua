@@ -1,3 +1,6 @@
+-- File: interface.lua
+-- Purpose: load and configure plugins that control the display
+
 return {
 
   -- better vim.notify

@@ -1,3 +1,6 @@
+-- File: diagnostics.lua
+-- Purpose: load and configure plugins for diagnostic purposes
+
 return {
 
   -- measure the startuptime
