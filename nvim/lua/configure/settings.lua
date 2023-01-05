@@ -5,5 +5,6 @@
 vim.opt.signcolumn="yes:1"
 
 -- Disable the welcome message
-vim.cmd([[set shortmess=FIWacto]])
+-- vim.cmd([[set shortmess=FIWacto]])
+vim.opt.shortmess="FIWacto"
 
