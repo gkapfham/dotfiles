@@ -20,13 +20,20 @@ vim.g.mapleader = ","
 -- scheme, and make additional default settings
 require("lazy").setup({
   spec = "plugins",
+  -- always load all of the plugins in lazyily
   defaults = { lazy = true, version = "*" },
   install = { colorscheme = { "vitaminonec" } },
-  checker = { enabled = true },
+  -- do not automatically perform the check
+  -- for plugins and produce diagnostic message
+  checker = { enabled = false },
+  -- detect changes to the configuration and
+  -- attempt to reload but without notifications
   change_detection = {
     enabled = true,
-    notify = false,
+    notify = true,
   },
+  -- disable plugins that are internal to neovim;
+  -- they are not needed and hamper performance
   performance = {
     rtp = {
       disabled_plugins = {
@@ -42,6 +49,10 @@ require("lazy").setup({
     },
   },
 })
+
+-- Define the keymap for loading lazy dashboard
+vim.keymap.set("n", "<Space>sl", "<cmd>:Lazy<cr>")
+vim.keymap.set("n", "<leader>sl", "<cmd>:Lazy<cr>")
 
 -- Load the files in the configure module
 require("configure.settings")
