@@ -23,4 +23,5 @@ return {
 
   -- User interface components
   "MunifTanjim/nui.nvim",
+
 }
