@@ -1,3 +1,7 @@
+-- File: versioncontrol.lua
+-- Purpose: load and configure all plugins that
+-- integrate with the Git version control system
+
 return {
 
   -- Fugitive
@@ -66,7 +70,5 @@ return {
 	}
     end,
   },
-
-
 
 }
