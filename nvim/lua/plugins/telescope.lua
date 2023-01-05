@@ -4,7 +4,7 @@
 
 return {
 
-  -- fuzzy finder
+  -- Telescope
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
