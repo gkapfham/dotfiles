@@ -2,6 +2,7 @@
 
 -- Insert mode key mappings {{{
 
+-- remap escape
 vim.keymap.set("i", "jk", "<ESC>", { desc = "Custom keymap: Escape" })
 
 -- }}}
@@ -20,6 +21,7 @@ vim.keymap.set("n", "oO", "i<cr><ESC>", { desc = "Custom keymap: Insert a blank 
 
 -- quitting
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Custom keymap: Quit all" })
+vim.keymap.set("n", "<Space>qq", "<cmd>qa<cr>", { desc = "Custom keymap: Quit all" })
 
 -- }}}
 
