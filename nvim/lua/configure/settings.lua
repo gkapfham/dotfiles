@@ -13,9 +13,11 @@ vim.opt.shortmess="FIWacto"
 -- Display settings for vim.wo variables {{{
 
 -- Display numbers
-vim.wo.number=true
+vim.cmd([[set number]])
+-- vim.wo.number=true
 
 -- Display relative numbers
-vim.wo.relativenumber=true
+vim.cmd([[set relativenumber]])
+-- vim.wo.relativenumber=true
 
 --- }}}
