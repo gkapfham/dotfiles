@@ -7,6 +7,7 @@ return {
     priority = 1000,
     config = function()
       vim.cmd([[colorscheme vitaminonec]])
+      vim.cmd([[set termguicolors]])
     end,
   },
 
