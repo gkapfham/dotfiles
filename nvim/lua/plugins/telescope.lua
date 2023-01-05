@@ -89,6 +89,8 @@ return {
       { "<Space>k", "<cmd> Telescope keymaps <CR>", desc = "Telescope: Keymaps" },
       -- Marks 
       { "<Space>m", "<cmd> Telescope marks <CR>", desc = "Telescope: Marks" },
+      -- Notifications
+      { "<Space>sn", "<cmd> Telescope notify <CR>", desc = "Telescope: Notifications" },
       -- Reloader
       { "<Space>rr", "<cmd> Telescope reloader <CR>", desc = "Telescope: Reloader" },
       -- Searching
