@@ -43,11 +43,12 @@ require("lazy").setup({
   },
 })
 
--- Source the keymaps.lua file in the configure/ directory
+-- Load the files in the configure module
+require("configure.settings")
 require("configure.keymaps")
-
--- Source cthe commands.lua file in the configure/ directory
 require("configure.commands")
+
+-- Diagnostic that display at startup
 
 -- local Util = require("lazy.core.util")
 -- Util.walk(vim.env.VIMRUNTIME .. "/plugin", function(path, name, t)
