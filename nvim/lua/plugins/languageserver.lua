@@ -60,7 +60,12 @@ return {
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
       -- to support the display of the diagnostics
       require'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
-    end
+    end,
+    -- Keys
+    keys = {
+      -- Toggle virtual text from the language servers
+      { "<Space>sv", "<Plug>(toggle-lsp-diag-vtext)", desc = "Language Server: Toggle virtual text" },
+    }
   },
 
 }
