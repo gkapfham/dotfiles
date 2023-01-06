@@ -14,10 +14,8 @@ vim.opt.shortmess="FIWacto"
 
 -- Display numbers
 vim.cmd([[set number]])
--- vim.wo.number=true
 
 -- Display relative numbers
 vim.cmd([[set relativenumber]])
--- vim.wo.relativenumber=true
 
 --- }}}
