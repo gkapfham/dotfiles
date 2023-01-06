@@ -17,7 +17,7 @@ return {
           "bibtex",
           "c",
           "gitattributes",
-          "gitcommit",
+          -- "gitcommit",
           "gitignore",
           "go",
           "help",
