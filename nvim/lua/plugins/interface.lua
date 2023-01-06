@@ -21,7 +21,7 @@ return {
       vim.notify = customized_notify
       customized_notify.setup({
         background_colour = "#1c1c1c",
-        fps = 60,
+        fps = 30,
         icons = {
           DEBUG = "",
           ERROR = "",
@@ -32,7 +32,7 @@ return {
         level = 2,
         minimum_width = 50,
         render = "default",
-        stages = "fade",
+        stages = "fade_in_slide_out",
         timeout = 2000,
         top_down = true
       })
