@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Define the leader key
 vim.g.mapleader = ","
+vim.g.maplocalleader = ","
 
 -- Setup the lazy.nvim to search for lua files
 -- in the plugins/ directory, load the color
