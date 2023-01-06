@@ -1,5 +1,6 @@
 -- File: Languageserver.lua
--- Purpose: load and configure plugins that control the interface
+-- Purpose: load and configure plugins for installation
+-- and use of language servers protocol implementations
 
 return {
 
