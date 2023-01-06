@@ -118,9 +118,6 @@ endfunction
 ]])
 
 -- " Display a file tree symbol
--- function! FileTree()
---   return ''
--- endfunction
 vim.cmd([[
 function! FileTree()
 return ''
