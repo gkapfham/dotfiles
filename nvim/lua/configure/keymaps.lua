@@ -1,5 +1,7 @@
 -- Define keymaps not specifically connected to a plugin
 
+-- Use the nvim API
+
 -- Insert mode key mappings {{{
 
 -- remap escape
@@ -25,4 +27,18 @@ vim.keymap.set("n", "<Space>qq", "<cmd>qa<cr>", { desc = "Custom keymap: Quit al
 
 -- }}}
 
+-- Use vim.cmd
 
+vim.cmd([[
+" Remove trailing whitespace
+nnoremap <leader>rtw :%s/\s\+$//e<CR>
+
+" Fix a misspelling with next-best word
+nmap <silent> zn <Plug>(SpellRotateForward)
+nmap <silent> zp <Plug>(SpellRotateBackward)
+vmap <silent> zn <Plug>(SpellRotateForwardV)
+vmap <silent> zp <Plug>(SpellRotateBackwardV)
+
+" Toggle the display of spelling mistakes
+nmap <leader>s :set spell!<CR>
+]])
