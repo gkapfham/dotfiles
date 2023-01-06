@@ -3,23 +3,27 @@
 
 return {
 
-  -- lspconfig
+  -- Language servers with:
+  -- nvim-lspconfig
+  -- nvim-lsp-installer
+  -- toggle_lsp_diagnostics
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = {
       "williamboman/nvim-lsp-installer",
       "hrsh7th/cmp-nvim-lsp",
+      "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
     },
     config = function(plugin)
       local lsp_installer = require'nvim-lsp-installer'
       function common_on_attach(client, bufnr)
-        -- start of the language service and connect to it the
+        -- Start of the language service and connect to it the
         -- other programs that use the language server
         print("契Starting Language Server");
         local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
         opts = {silent = true, noremap = true, documentFormatting = True}
-        -- create all of the keybindings that have the following purposes:
+        -- Create all of the keybindings that have the following purposes:
         -- display in a floating window details about symbol under cursor
         buf_set_keymap('n', 'K', '<cmd> lua vim.lsp.buf.hover()<CR>', opts)
         -- display in a floating window details about parameter to called function
@@ -42,11 +46,8 @@ return {
         -- reformat content (normal or visual mode) in a async (i.e., fast, non-blocking fashion)
         buf_set_keymap('n', '<space>ff', '<cmd> lua vim.lsp.buf.formatting()<CR>', opts)
         buf_set_keymap('v', '<space>ff', '<cmd> lua vim.lsp.buf.formatting()<CR>', opts)
-        -- attach the aerial plugin to this language server and the
-        -- buffer so that it can provide code navigation
-        -- require("aerial").on_attach(client, bufnr)
       end
-      -- install each of the chosen language servers and then
+      -- Install each of the chosen language servers and then
       -- run the common_on_attach function for each of them
       local installed_servers = lsp_installer.get_installed_servers()
       for _, server in pairs(installed_servers) do
@@ -55,31 +56,10 @@ return {
           }
           server:setup(opts)
       end
+      -- Use toggle_lsp_diagnostics to disable the virtual_text and then
+      -- to support the display of the diagnostics
+      require'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
     end
   },
-
-  -- -- Mason
-  -- {
-  --   "williamboman/mason.nvim",
-  --   cmd = "Mason",
-  --   keys = {
-  --     { "<leader>sm", "<cmd>Mason<cr>", desc = "Mason" } },
-  --   ensure_installed = {
-  --     "stylua",
-  --     "shellcheck",
-  --     "shfmt",
-  --     "flake8",
-  --   },
-  --   config = function(plugin)
-  --     require("mason").setup()
-  --     local mr = require("mason-registry")
-  --     for _, tool in ipairs(plugin.ensure_installed) do
-  --       local p = mr.get_package(tool)
-  --       if not p:is_installed() then
-  --         p:install()
-  --       end
-  --     end
-  --   end,
-  -- },
 
 }
