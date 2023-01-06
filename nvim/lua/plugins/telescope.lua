@@ -94,6 +94,13 @@ return {
       { "<Space>th", "<cmd> Telescope command_history <CR>", desc = "Telescope: Command history" },
       -- Keymaps
       { "<Space>tk", "<cmd> Telescope keymaps <CR>", desc = "Telescope: Keymaps" },
+      -- Languageserver
+      { "<Space>gd", "<cmd> Telescope lsp_definitions <CR>", desc = "Telescope: Definitions" },
+      { "<Space>gr", "<cmd> Telescope lsp_references <CR>", desc = "Telescope: References" },
+      { "<Space>ds", "<cmd> Telescope lsp_document_symbols <CR>", desc = "Telescope: Document symbols" },
+      { "<Space>ws", "<cmd> Telescope lsp_workspace_symbols <CR>", desc = "Telescope: Workspace symbols" },
+      { "<Space>dd", "<cmd> Telescope diagnostics bufnr=0 <CR>", desc = "Telescope: Document diagnostics" },
+      { "<Space>wd", "<cmd> Telescope diagnostics <CR>", desc = "Telescope: Workspace diagnostics" },
       -- Marks 
       { "<Space>tm", "<cmd> Telescope marks <CR>", desc = "Telescope: Marks" },
       -- Notifications
@@ -114,6 +121,7 @@ return {
       { "<Space>tb", "<cmd> Telescope current_buffer_tags <CR>", desc = "Telescope: Buffer tags" },
       { "<leader>tb", "<cmd> Telescope tags <CR>", desc = "Telescope: Buffer tags" },
       -- Treesitter
+      { "<Space>ts", "<cmd> Telescope treesitter <CR>", desc = "Telescope: Treesitter " },
       { "<leader>ts", "<cmd> Telescope treesitter <CR>", desc = "Telescope: Treesitter " },
     }
   }
