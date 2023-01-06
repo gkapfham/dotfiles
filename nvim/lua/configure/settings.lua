@@ -10,7 +10,7 @@ vim.opt.shortmess="FIWacto"
 
 -- }}}
 
--- Display settings for vim.wo variables {{{
+-- Display settings through use of vim.cmd and then vimscript commands {{{
 
 -- Display numbers
 vim.cmd([[set number]])
@@ -18,9 +18,13 @@ vim.cmd([[set number]])
 -- Display relative numbers
 vim.cmd([[set relativenumber]])
 
--- }}}
-
--- Display settings through use of vim.cmd and then vimscript commands {{{
+-- Improved indentation
+vim.cmd([[
+set autoindent
+set copyindent
+set shiftwidth=2
+set smartindent
+]])
 
 -- Display linebreaks and tabs
 vim.cmd([[
