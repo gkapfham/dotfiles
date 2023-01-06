@@ -127,7 +127,8 @@ return {
               cmdline = " Command",
               fuzzy_buffer = " Fuzzy",
               nvim_lsp = " LSP",
-              -- Customize the label to include contextual details (e.g., bibtex entry or reference details)
+              -- Customize the label to include contextual details
+              -- (e.g., bibtex entry or reference details)
               omni = generate_omni_label(entry, vim_item),
               path = "פּ Path",
               rg = " Search",
@@ -208,6 +209,41 @@ return {
             {name = 'path'},
           })
       })
+    -- Use completion sources when forward-searching with "/"
+    cmp.setup.cmdline('/', {
+      -- Disable all of the prior settings for nvim-cmp
+      -- so that completion supported by luasnip not triggered;
+      -- note that if this extra line is not added then
+      -- tab completion does not work for this mode
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        {name = 'path'},
+        {name = 'buffer', max_item_count = 5},
+      }, {
+        {name = 'cmdline'}
+      })
+    })
+    -- Use completion sources when backward-searching with "?"
+    cmp.setup.cmdline('?', {
+      -- Disable all of the prior settings for nvim-cmp
+      -- (see previous note for full explanation)
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        {name = 'buffer', max_item_count = 5},
+        {name = 'path'},
+      }, {
+        {name = 'cmdline'}
+      })
+    })
+    -- Use completion sources when running commands with ":"
+    require'cmp'.setup.cmdline(':', {
+      -- Disable all of the prior settings for nvim-cmp
+      -- (see previous note for full explanation)
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        {name = 'cmdline'}
+      }
+    })
     end,
   },
 
