@@ -78,6 +78,7 @@ return {
       "hrsh7th/cmp-omni",
       "hrsh7th/cmp-path",
       "quangnguyen30192/cmp-nvim-tags",
+      "ray-x/cmp-treesitter",
       "saadparwaiz1/cmp_luasnip",
       "uga-rosa/cmp-dictionary",
       -- fuzzy buffer plugin with dependencies
