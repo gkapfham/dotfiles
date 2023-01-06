@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- Disable line numbering for specific filetypes
 vim.cmd([[
-autocmd filetype lazy setlocal norelativenumber nonumber
+autocmd filetype lazy setlocal nonumber
 ]])
 
 -- vim.api.nvim_create_autocmd({ "FileType" }, {
