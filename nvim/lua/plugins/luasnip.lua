@@ -51,6 +51,7 @@ return {
         )
       end,
     },
+    -- Additional configuration for the luasnip plugin
     config = {
       history = true,
       delete_check_events = "TextChanged",
