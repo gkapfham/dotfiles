@@ -181,13 +181,6 @@ return {
           lualine_y = {},
           lualine_z = {}
         },
-        -- do not use the winbar because it seems to cause
-        -- other plugins to crash and produce incorrect output
-        -- winbar = {
-        -- lualine_a = {{"filename", path=1, color={fg = "#bcbcbc", bg="#262626"}}},
-        -- lualine_b = {{"aerial", color={fg = "#bcbcbc", bg="#262626"}}},
-        -- lualine_y = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
-        -- },
         tabline = {
           -- Top left display
           -- from left (far left corner) to right (middle): {a} {b} {c}
