@@ -106,6 +106,8 @@ return {
       { "<Space>ga", "<cmd> Telescope live_grep <CR>", desc = "Telescope: Search for input string" },
       -- Snippets
       { "<Space>gs", "<cmd> Telescope luasnip <CR>", desc = "Telescope: Luasnip" },
+      -- Spelling
+      { "<Space>tz", "<cmd> Telescope spell_suggest <CR>", desc = "Telescope: Spelling suggestion" },
       -- Tags
       { "<Space>tt", "<cmd> Telescope tags <CR>", desc = "Telescope: Tags" },
       { "<leader>tt", "<cmd> Telescope tags <CR>", desc = "Telescope: Tags" },
