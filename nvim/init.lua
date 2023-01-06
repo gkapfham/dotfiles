@@ -14,6 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Define the leader key
 vim.g.mapleader = ","
+
+-- Define the localleader key
 vim.g.maplocalleader = ","
 
 -- Setup the lazy.nvim to search for lua files
