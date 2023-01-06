@@ -125,6 +125,7 @@ return {
             vim_item.menu = ({
               buffer = " Buffer",
               cmdline = " Command",
+              cmdline_history = " Command",
               fuzzy_buffer = " Fuzzy",
               nvim_lsp = " LSP",
               nvim_lsp_document_symbol = " LSP",
@@ -247,7 +248,8 @@ return {
         {name = 'buffer', max_item_count = 5, priority = 10},
         {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
       }, {
-        {name = 'cmdline'}
+        {name = 'cmdline'},
+        {name = 'cmdline_history'}
       })
     })
     -- Use completion sources when backward-searching with "?"
@@ -260,7 +262,8 @@ return {
         {name = 'buffer', max_item_count = 5},
         {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
       }, {
-        {name = 'cmdline'}
+        {name = 'cmdline'},
+        {name = 'cmdline_history'}
       })
     })
     -- Use completion sources when running commands with ":"
@@ -269,7 +272,8 @@ return {
       -- (see previous note for full explanation)
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
-        {name = 'cmdline'}
+        {name = 'cmdline'},
+        {name = 'cmdline_history'}
       }
     })
     end,
