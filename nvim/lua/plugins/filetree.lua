@@ -182,8 +182,8 @@ return {
       })
     end,
     keys = {
-      -- Activate
-      { "<Space>0", "<cmd> NeoTreeShowToggle<CR>", desc = "Neo-tree: Activate" },
+      -- Toggle display
+      { "<Space>0", "<cmd> NeoTreeShowToggle<CR>", desc = "Neo-tree: Toggle" },
     }
   }
 
