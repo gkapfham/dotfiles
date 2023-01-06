@@ -90,6 +90,8 @@ return {
       { "<C-p>", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>p", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>o", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
+      -- History
+      { "<Space>th", "<cmd> Telescope command_history <CR>", desc = "Telescope: Command history" },
       -- Keymaps
       { "<Space>tk", "<cmd> Telescope keymaps <CR>", desc = "Telescope: Keymaps" },
       -- Marks 
@@ -102,7 +104,6 @@ return {
       { "<Space>gs", "<cmd> Telescope grep_string <CR>", desc = "Telescope: Search for word under cursor" },
       { "<Leader>gs", "<cmd> Telescope grep_string <CR>", desc = "Telescope: Search for word under cursor" },
       { "<Space>ga", "<cmd> Telescope live_grep <CR>", desc = "Telescope: Search for input string" },
-      { "<Leader>ga", "<cmd> Rg <CR>", desc = "Ripgrep: Search for input string" },
       -- Snippets
       { "<Space>gs", "<cmd> Telescope luasnip <CR>", desc = "Telescope: Luasnip" },
       -- Tags
