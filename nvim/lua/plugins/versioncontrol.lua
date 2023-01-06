@@ -12,7 +12,7 @@ return {
       -- Keys: git status
       { "<Space>gg", ":Git <CR>", desc = "Fugitive: Git status" },
       { "<leader>gg", ":Git <CR>", desc = "Fugitive: Git status" },
-      -- Keys: git write 
+      -- Keys: git write
       { "<Space>gw", ":Gwrite <CR>", desc = "Fugitive: Git write to add file" },
       { "<leader>gw", ":Gwrite <CR>", desc = "Fugitive: Git write to add file" },
       -- Keys: git commit
