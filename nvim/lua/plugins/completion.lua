@@ -71,7 +71,7 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      -- stand-alone cmp plugins
+      -- Stand-alone cmp plugins
       "dmitmel/cmp-cmdline-history",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
@@ -81,13 +81,15 @@ return {
       "ray-x/cmp-treesitter",
       "saadparwaiz1/cmp_luasnip",
       "uga-rosa/cmp-dictionary",
-      -- fuzzy buffer plugin with dependencies
+      -- Fuzzy buffer plugin with dependencies
       {"romgrk/fzy-lua-native", build = "make"},
       "tzachar/cmp-fuzzy-buffer",
       "tzachar/fuzzy.nvim",
     },
     -- Configure the nvim-cmp plugin
     config = function()
+      -- Configure standard completion for menus
+      vim.cmd([[set completeopt=menuone,noselect]])
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       -- Configure the dictionary plugin
