@@ -37,12 +37,6 @@ local function encoding_prefix()
   return ""
 end
 
--- Define a function that will display a symbol
--- before the location of the current file
-local function location_prefix()
-  return ""
-end
-
 --- }}}
 
 -- Define the color scheme for the lualine
