@@ -1,3 +1,6 @@
+-- File: luasnip.lua
+-- Purpose: load and configure the luasnip plugin
+
 return {
 
   -- Snippet definition and insertion with luasnip
