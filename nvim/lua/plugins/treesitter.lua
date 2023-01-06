@@ -37,7 +37,7 @@ return {
           "vim",
           "yaml",
         },
-        highlight = { enable = true, disable = {"gitcommit"}, },
+        highlight = { enable = true, disable = {"latex"}, },
         indent = { enable = true },
         context_commentstring = { enable = true, enable_autocmd = false },
       })
