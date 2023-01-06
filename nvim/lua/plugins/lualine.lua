@@ -202,7 +202,6 @@ return {
             -- label whenever you change into the Aerial buffer
             filetype_names = {
               aerial="Aerial",
-              neotree="Tree"
             },
             -- Define symbols attached to each file in the tabline
             symbols = {
