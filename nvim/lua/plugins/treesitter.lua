@@ -1,4 +1,4 @@
--- File: treesitter.lua
+-- File: plugins/treesitter.lua
 -- Purpose: load and configure the treesitter
 -- that enables syntax highlighting and navigation
 
