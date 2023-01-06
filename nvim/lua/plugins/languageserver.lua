@@ -5,80 +5,81 @@ return {
 
   -- lspconfig
   {
-    "VonHeikemen/lsp-zero.nvim",
+    "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = {
-      "neovim/nvim-lspconfig",
-      "mason.nvim",
-      { "williamboman/mason-lspconfig.nvim", config = { automatic_installation = true } },
+      "williamboman/nvim-lsp-installer",
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function(plugin)
-      local lsp = require("lsp-zero")
-      lsp.preset("recommended")
-      -- Install these servers
-      lsp.ensure_installed({
-        "tsserver",
-        "eslint",
-        "sumneko_lua",
-        "pyright"
-      })
-      -- Pass arguments to a language server
-      lsp.configure("tsserver", {
-        on_attach = function(client, bufnr)
-          print("hello tsserver")
-        end,
-        settings = {
-          completions = {
-            completeFunctionCalls = true
-          }
-        }
-      })
-
-    lsp.set_preferences({
-      suggest_lsp_servers = true,
-      setup_servers_on_start = true,
-      set_lsp_keymaps = true,
-      configure_diagnostics = true,
-      cmp_capabilities = false,
-      manage_nvim_cmp = false,
-      call_servers = 'local',
-      sign_icons = {
-        error = '✘',
-        warn = '▲',
-        hint = '⚑',
-        info = ''
-      }
-    })
-          -- Configure lua language server for neovim
-          lsp.nvim_workspace()
-          lsp.setup()
-        end,
-
-  },
-
-  -- Mason
-  {
-    "williamboman/mason.nvim",
-    cmd = "Mason",
-    keys = {
-      { "<leader>sm", "<cmd>Mason<cr>", desc = "Mason" } },
-    ensure_installed = {
-      "stylua",
-      "shellcheck",
-      "shfmt",
-      "flake8",
-    },
-    config = function(plugin)
-      require("mason").setup()
-      local mr = require("mason-registry")
-      for _, tool in ipairs(plugin.ensure_installed) do
-        local p = mr.get_package(tool)
-        if not p:is_installed() then
-          p:install()
-        end
+      local lsp_installer = require'nvim-lsp-installer'
+      function common_on_attach(client, bufnr)
+        -- start of the language service and connect to it the
+        -- other programs that use the language server
+        print("契Starting Language Server");
+        local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+        opts = {silent = true, noremap = true, documentFormatting = True}
+        -- create all of the keybindings that have the following purposes:
+        -- display in a floating window details about symbol under cursor
+        buf_set_keymap('n', 'K', '<cmd> lua vim.lsp.buf.hover()<CR>', opts)
+        -- display in a floating window details about parameter to called function
+        buf_set_keymap('n', '<space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>', opts)
+        -- display in a floating window diagnostics for the current line
+        buf_set_keymap('n', '<space>e', '<cmd> lua vim.diagnostic.open_float(0, {scope="line"})<CR>', opts)
+        -- send all of the diagnostics for the current window to the location list
+        buf_set_keymap('n', '<space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+        -- go to the next diagnostic
+        buf_set_keymap('n', ']d', '<cmd> lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+        -- go to the previous diagnostic
+        buf_set_keymap('n', '[d', '<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+        -- run a code action on the current line of code
+        buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+        -- rename the variable using a floating menu
+        buf_set_keymap('n', '<space>rv', '<cmd> lua vim.lsp.buf.rename()<CR>', opts)
+        -- reformat content (normal or visual mode) in a sync (i.e., blocking fashion)
+        buf_set_keymap('n', '<space>fb', '<cmd> lua vim.lsp.buf.formatting_sync()<CR>', opts)
+        buf_set_keymap('v', '<space>fb', '<cmd> lua vim.lsp.buf.formatting_sync()<CR>', opts)
+        -- reformat content (normal or visual mode) in a async (i.e., fast, non-blocking fashion)
+        buf_set_keymap('n', '<space>ff', '<cmd> lua vim.lsp.buf.formatting()<CR>', opts)
+        buf_set_keymap('v', '<space>ff', '<cmd> lua vim.lsp.buf.formatting()<CR>', opts)
+        -- attach the aerial plugin to this language server and the
+        -- buffer so that it can provide code navigation
+        -- require("aerial").on_attach(client, bufnr)
       end
-    end,
+      -- install each of the chosen language servers and then
+      -- run the common_on_attach function for each of them
+      local installed_servers = lsp_installer.get_installed_servers()
+      for _, server in pairs(installed_servers) do
+          opts = {
+              on_attach = common_on_attach,
+          }
+          server:setup(opts)
+      end
+    end
   },
+
+  -- -- Mason
+  -- {
+  --   "williamboman/mason.nvim",
+  --   cmd = "Mason",
+  --   keys = {
+  --     { "<leader>sm", "<cmd>Mason<cr>", desc = "Mason" } },
+  --   ensure_installed = {
+  --     "stylua",
+  --     "shellcheck",
+  --     "shfmt",
+  --     "flake8",
+  --   },
+  --   config = function(plugin)
+  --     require("mason").setup()
+  --     local mr = require("mason-registry")
+  --     for _, tool in ipairs(plugin.ensure_installed) do
+  --       local p = mr.get_package(tool)
+  --       if not p:is_installed() then
+  --         p:install()
+  --       end
+  --     end
+  --   end,
+  -- },
 
 }
