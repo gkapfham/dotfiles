@@ -75,7 +75,9 @@ return {
       "dmitmel/cmp-cmdline-history",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-omni",
       "hrsh7th/cmp-path",
+      "quangnguyen30192/cmp-nvim-tags",
       "saadparwaiz1/cmp_luasnip",
       "uga-rosa/cmp-dictionary",
       -- fuzzy buffer plugin with dependencies
