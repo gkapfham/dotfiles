@@ -66,21 +66,6 @@ end
 
 return {
 
-  -- Snippet definition and insertion with luasnip
-  {
-    "L3MON4D3/LuaSnip",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-      end,
-    },
-    config = {
-      history = true,
-      delete_check_events = "TextChanged",
-    },
-  },
-
   -- Auto completion with nvim-cmp
   {
     "hrsh7th/nvim-cmp",
