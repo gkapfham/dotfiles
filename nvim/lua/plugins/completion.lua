@@ -89,7 +89,7 @@ return {
     -- Configure the nvim-cmp plugin
     config = function()
       -- Configure standard completion for menus
-      vim.cmd([[set completeopt=menuone,noselect]])
+      vim.cmd([[set completeopt=menu,menuone,noselect]])
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       -- Configure the dictionary plugin
