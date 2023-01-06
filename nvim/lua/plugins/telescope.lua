@@ -8,6 +8,9 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
+    dependencies = {
+      "benfowler/telescope-luasnip.nvim",
+    },
     -- Configure
     config = function()
       local actions = require('telescope.actions')
@@ -66,29 +69,31 @@ return {
             sort_lastused = true,
           }
         },
-        extensions = {
-          fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = "smart_case",
-          }
-        }
+        -- extensions = {
+        --   fzf = {
+        --     fuzzy = true,
+        --     override_generic_sorter = true,
+        --     override_file_sorter = true,
+        --     case_mode = "smart_case",
+        --   }
+        -- }
       }
+    -- Use the luasnip extension for telescope
+    require('telescope').load_extension('luasnip')
     end,
     -- Keys
     keys = {
       -- Buffers
       { "<Space>i", "<cmd> Telescope buffers <CR>", desc = "Telescope: Buffers" },
-      { "<Space>rf", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Telescope: Buffers" },
+      { "<Space>tf", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Telescope: Fuzzy search buffers" },
       -- Files 
-      { "<C-p>", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find Files (Hidden)" },
-      { "<Space>p", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find Files (Hidden)" },
+      { "<C-p>", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
+      { "<Space>p", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>o", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
       -- Keymaps
-      { "<Space>k", "<cmd> Telescope keymaps <CR>", desc = "Telescope: Keymaps" },
+      { "<Space>tk", "<cmd> Telescope keymaps <CR>", desc = "Telescope: Keymaps" },
       -- Marks 
-      { "<Space>m", "<cmd> Telescope marks <CR>", desc = "Telescope: Marks" },
+      { "<Space>tm", "<cmd> Telescope marks <CR>", desc = "Telescope: Marks" },
       -- Notifications
       { "<Space>sn", "<cmd> Telescope notify <CR>", desc = "Telescope: Notifications" },
       -- Reloader
@@ -98,7 +103,16 @@ return {
       { "<Leader>gs", "<cmd> Telescope grep_string <CR>", desc = "Telescope: Search for word under cursor" },
       { "<Space>ga", "<cmd> Telescope live_grep <CR>", desc = "Telescope: Search for input string" },
       { "<Leader>ga", "<cmd> Rg <CR>", desc = "Ripgrep: Search for input string" },
-    } 
-  }	
+      -- Snippets
+      { "<Space>gs", "<cmd> Telescope luasnip <CR>", desc = "Telescope: Luasnip" },
+      -- Tags
+      { "<Space>tt", "<cmd> Telescope tags <CR>", desc = "Telescope: Tags" },
+      { "<leader>tt", "<cmd> Telescope tags <CR>", desc = "Telescope: Tags" },
+      { "<Space>tb", "<cmd> Telescope current_buffer_tags <CR>", desc = "Telescope: Buffer tags" },
+      { "<leader>tb", "<cmd> Telescope tags <CR>", desc = "Telescope: Buffer tags" },
+      -- Treesitter
+      { "<leader>ts", "<cmd> Telescope treesitter <CR>", desc = "Telescope: Treesitter " },
+    }
+  }
 
 }
