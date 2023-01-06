@@ -60,6 +60,13 @@ return {
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
       -- to support the display of the diagnostics
       require'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
+      -- Define customized signs for diagnostics reported by the language server;
+      -- note that this will define the signs displayed in the gutter
+      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
+      end
     end,
     -- Keys
     keys = {
