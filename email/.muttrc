@@ -25,7 +25,8 @@ set edit_headers=yes
 # Editing {{{
 
 # Jump to the first blank link when editing the emails; skip the header
-set editor="nvim +/^$ ++1"
+# set editor="nvim +/^$ ++1"
+set editor="nvim"
 
 # Edit the emails in a local tmp/ directory, saving work from crashes
 set tmpdir="/home/gkapfham/.mutt/tmp"
