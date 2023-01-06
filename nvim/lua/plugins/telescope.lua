@@ -78,7 +78,7 @@ return {
       -- Buffers
       { "<Space>i", "<cmd> Telescope buffers <CR>", desc = "Telescope: Buffers" },
       { "<Space>tf", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Telescope: Fuzzy search buffers" },
-      -- Files 
+      -- Files
       { "<C-p>", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>p", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>o", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
@@ -93,7 +93,7 @@ return {
       { "<Space>ws", "<cmd> Telescope lsp_workspace_symbols <CR>", desc = "Telescope: Workspace symbols" },
       { "<Space>dd", "<cmd> Telescope diagnostics bufnr=0 <CR>", desc = "Telescope: Document diagnostics" },
       { "<Space>wd", "<cmd> Telescope diagnostics <CR>", desc = "Telescope: Workspace diagnostics" },
-      -- Marks 
+      -- Marks
       { "<Space>tm", "<cmd> Telescope marks <CR>", desc = "Telescope: Marks" },
       -- Notifications
       { "<Space>sn", "<cmd> Telescope notify <CR>", desc = "Telescope: Notifications" },
@@ -104,7 +104,7 @@ return {
       { "<Leader>gs", "<cmd> Telescope grep_string <CR>", desc = "Telescope: Search for word under cursor" },
       { "<Space>ga", "<cmd> Telescope live_grep <CR>", desc = "Telescope: Search for input string" },
       -- Snippets
-      { "<Space>gs", "<cmd> Telescope luasnip <CR>", desc = "Telescope: Luasnip" },
+      { "<Space>ss", "<cmd> Telescope luasnip <CR>", desc = "Telescope: Luasnip" },
       -- Spelling
       { "<Space>tz", "<cmd> Telescope spell_suggest <CR>", desc = "Telescope: Spelling suggestion" },
       -- Tags
