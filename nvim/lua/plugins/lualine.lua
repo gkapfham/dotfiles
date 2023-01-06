@@ -1,5 +1,6 @@
 -- File: lualine.lua
 -- Purpose: load and configure the lualine plugin
+-- and the extensions designed for lualine
 
 -- Define functions in lua {{{
 
@@ -208,7 +209,6 @@ return {
         lualine_c = {},
         -- Top right display
         -- from left (middle) to right (far right corner): {x} {y} {z}
-        -- lualine_x = {{'diagnostics', symbols = {error = ' ', warn = 'ﱥ ', info = ' ', hint = ' '}}},
         lualine_x = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
         lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
         lualine_z = {}
@@ -218,6 +218,6 @@ return {
       extensions = {'quickfix', 'toggleterm', 'aerial'},
     }
   end,
-  }	
+  }
 
 }
