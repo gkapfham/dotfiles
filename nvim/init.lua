@@ -54,10 +54,10 @@ require("lazy").setup({
 vim.keymap.set("n", "<Space>sl", "<cmd>:Lazy<cr>")
 vim.keymap.set("n", "<leader>sl", "<cmd>:Lazy<cr>")
 
--- Disable line numbering for specific filetypes
-vim.cmd([[
-autocmd filetype lazy setlocal nonumber
-]])
+-- -- Disable line numbering for specific filetypes
+-- vim.cmd([[
+-- autocmd filetype lazy setlocal nonumber
+-- ]])
 
 -- Load the files in the configure module
 require("configure.settings")
