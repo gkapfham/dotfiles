@@ -55,7 +55,6 @@ require("lazy").setup({
 
 -- Define the keymap for loading lazy dashboard
 vim.keymap.set("n", "<Space>sl", "<cmd>:Lazy<cr>")
-vim.keymap.set("n", "<leader>sl", "<cmd>:Lazy<cr>")
 
 -- -- Disable line numbering for specific filetypes
 -- vim.cmd([[
