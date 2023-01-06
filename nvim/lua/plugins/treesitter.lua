@@ -40,7 +40,6 @@ return {
         },
         highlight = { enable = true },
         indent = { enable = true },
-        matchup = { enable = true },
         context_commentstring = { enable = true, enable_autocmd = false },
       })
     end,
