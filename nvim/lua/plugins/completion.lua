@@ -73,8 +73,8 @@ return {
     dependencies = {
       -- Stand-alone cmp plugins
       "dmitmel/cmp-cmdline-history",
-      "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-omni",
       "hrsh7th/cmp-path",
       "quangnguyen30192/cmp-nvim-tags",
@@ -127,6 +127,7 @@ return {
               cmdline = " Command",
               fuzzy_buffer = " Fuzzy",
               nvim_lsp = " LSP",
+              nvim_lsp_document_symbol = " LSP",
               -- Customize the label to include contextual details
               -- (e.g., bibtex entry or reference details)
               omni = generate_omni_label(entry, vim_item),
@@ -255,8 +256,9 @@ return {
       -- (see previous note for full explanation)
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
-        {name = 'buffer', max_item_count = 5},
         {name = 'path'},
+        {name = 'buffer', max_item_count = 5},
+        {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
       }, {
         {name = 'cmdline'}
       })
