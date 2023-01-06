@@ -2,6 +2,8 @@
 -- Purpose: Configure the nvim-cmp plugin
 -- and all of the plugins that enhance it
 
+-- Support functions implemented in lua {{{
+
 -- Define a function that makes a label for omnicompletion
 local function generate_omni_label(entry, vim_item)
   -- Extract the contents in the vim_item menu
@@ -60,6 +62,8 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
+-- }}}
+
 return {
 
   -- Snippet definition and insertion with luasnip
@@ -82,13 +86,19 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
+      -- stand-alone cmp plugins
       "dmitmel/cmp-cmdline-history",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
       "uga-rosa/cmp-dictionary",
+      -- fuzzy buffer plugin with dependencies
+      {"romgrk/fzy-lua-native", build = "make"},
+      "tzachar/cmp-fuzzy-buffer",
+      "tzachar/fuzzy.nvim",
     },
+    -- Configure the nvim-cmp plugin
     config = function()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
@@ -202,6 +212,7 @@ return {
           {name = 'tags', max_item_count = 5, priority = 5},
           {name = 'omni', max_item_count = 5, priority = 1},
           {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
+          {name = 'fuzzy_buffer', max_item_count = 5, priority = 1},
           {name = 'nvim_lsp_signature_help'},
         }, {
             -- Define the second-tier of sources; these will only
@@ -218,7 +229,8 @@ return {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
         {name = 'path'},
-        {name = 'buffer', max_item_count = 5},
+        {name = 'buffer', max_item_count = 5, priority = 10},
+        {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
       }, {
         {name = 'cmdline'}
       })
