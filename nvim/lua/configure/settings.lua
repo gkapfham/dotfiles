@@ -18,6 +18,9 @@ vim.cmd([[set number]])
 -- Display relative numbers
 vim.cmd([[set relativenumber]])
 
+-- Display improved find and replace
+vim.cmd([[set inccommand=split]])
+
 -- Improved indentation
 vim.cmd([[
 set autoindent
@@ -39,6 +42,31 @@ vim.cmd([[
 set expandtab
 set smarttab
 set shiftround
+]])
+
+-- Display trailing spaces
+vim.cmd([[
+set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
+set list
+match ExtraWhitespace /\s\+$\|\t/
+augroup extra_whitespace
+  autocmd!
+  autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+  autocmd BufWinLeave * call clearmatches()
+augroup END
+]])
+
+-- Display goes to the next line
+vim.cmd([[
+set whichwrap+=<,>,h,l,[,]
+]])
+
+-- Navigate through wrapped text
+vim.cmd([[
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 ]])
 
 --- }}}
