@@ -3,11 +3,26 @@
 
 return {
 
+  -- Leap and flit
+  {
+    "ggandoj/leap.nvim",
+    event = "VeryLazy",
+    dependencies = { {"ggandor/flit.nvim", config = {
+      -- labeled_modes = "nv"
+      multiline = true,
+      eager_ops = true,
+      keymaps = { f = 'f', F = 'F', t = 't', T = 'T' }
+    } } },
+    config = function()
+      require("leap").add_default_mappings(true)
+    end,
+  },
+
   -- Pair movement and highlighting
   -- (note could not get vim-matchup to work)
   {
     "theHamsta/nvim-treesitter-pairs",
-    event = "BufReadPre",
+    event = "VeryLazy",
     config = function()
       require'nvim-treesitter.configs'.setup {
         pairs = {
