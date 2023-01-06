@@ -1,6 +1,17 @@
 -- File: plugins/vimtex.lua
 -- Purpose: load and configure the vimtex plugin
 
+-- Note about error in vimtex workflow:
+-- Open LaTeX main document in nvim
+-- Start to compile the document with ,ll
+-- Zathura opens the document correctly
+-- Make a single change to the document
+-- Error: Zathura closes the document
+-- Start the preview of document with ,lv
+-- Zathura opens document correctly
+-- All remaining edits now work correctly
+-- Same error is evident if running latexmk separately
+
 return {
 
   -- Vimtex
