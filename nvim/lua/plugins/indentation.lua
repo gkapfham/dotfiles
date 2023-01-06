@@ -3,13 +3,13 @@
 
 return {
 
-  -- User interface enhancements
-  {
-    "nmac427/guess-indent.nvim",
-    event = "BufReadPre",
-    config = function()
-      require('guess-indent').setup {}
-    end,
-  },
+  -- -- User interface enhancements
+  -- {
+  --   "nmac427/guess-indent.nvim",
+  --   event = "BufReadPre",
+  --   config = function()
+  --     require('guess-indent').setup {}
+  --   end,
+  -- },
 
 }
