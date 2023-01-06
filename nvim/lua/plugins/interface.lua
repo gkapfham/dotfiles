@@ -54,12 +54,6 @@ return {
     end,
   },
 
-  -- Icons
-  "nvim-tree/nvim-web-devicons",
-
-  -- User interface components
-  "MunifTanjim/nui.nvim",
-
   -- Automatically disable search highlighting when
   -- it is not needed after searching
   {
@@ -70,5 +64,11 @@ return {
       auto_hlsearch.setup()
     end,
   },
+
+  -- Icons
+  "nvim-tree/nvim-web-devicons",
+
+  -- User interface components
+  "MunifTanjim/nui.nvim",
 
 }
