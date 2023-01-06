@@ -5,45 +5,64 @@ return {
 
   -- lspconfig
   {
-    "neovim/nvim-lspconfig",
+    "VonHeikemen/lsp-zero.nvim",
     event = "BufReadPre",
     dependencies = {
+      "neovim/nvim-lspconfig",
       "mason.nvim",
       { "williamboman/mason-lspconfig.nvim", config = { automatic_installation = true } },
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function(plugin)
+      local lsp = require("lsp-zero")
+      lsp.preset("recommended")
+      -- Install these servers
+      lsp.ensure_installed({
+        "tsserver",
+        "eslint",
+        "sumneko_lua",
+        "pyright"
+      })
+      -- Pass arguments to a language server
+      lsp.configure("tsserver", {
+        on_attach = function(client, bufnr)
+          print("hello tsserver")
+        end,
+        settings = {
+          completions = {
+            completeFunctionCalls = true
+          }
+        }
+      })
 
-require('mason').setup()
-require('mason-lspconfig').setup({
-  ensure_installed = {
-    -- Replace these with whatever servers you want to install
-    'rust_analyzer',
-    'tsserver',
-    'pyright',
-  }
-})
-local lspconfig = require('lspconfig')
-require('mason-lspconfig').setup_handlers({
-  function(server_name)
-    lspconfig[server_name].setup({
-      on_attach = lsp_attach,
-      capabilities = lsp_capabilities,
+    lsp.set_preferences({
+      suggest_lsp_servers = true,
+      setup_servers_on_start = true,
+      set_lsp_keymaps = true,
+      configure_diagnostics = true,
+      cmp_capabilities = false,
+      manage_nvim_cmp = false,
+      call_servers = 'local',
+      sign_icons = {
+        error = '✘',
+        warn = '▲',
+        hint = '⚑',
+        info = ''
+      }
     })
-  end,
-})
-
-
-    end,
+          -- Configure lua language server for neovim
+          lsp.nvim_workspace()
+          lsp.setup()
+        end,
 
   },
 
--- cmdline tools and lsp servers
+  -- Mason
   {
-
     "williamboman/mason.nvim",
     cmd = "Mason",
-    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+    keys = {
+      { "<leader>sm", "<cmd>Mason<cr>", desc = "Mason" } },
     ensure_installed = {
       "stylua",
       "shellcheck",
@@ -61,7 +80,5 @@ require('mason-lspconfig').setup_handlers({
       end
     end,
   },
-
-
 
 }
