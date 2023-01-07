@@ -82,6 +82,20 @@ return {
       cmp.setup({
         -- Do not preselect items
         preselect = cmp.PreselectMode.None,
+        -- Define sorting order
+        sorting = {
+          comparators = {
+            cmp.config.compare.kind,
+            cmp.config.compare.order,
+            cmp.config.compare.score,
+            cmp.config.compare.exact,
+            cmp.config.compare.length,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.locality,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.offset,
+          },
+        },
         -- Define the performance characteristics for nvim-cmp
         performance = {
           throttle = 2,
@@ -190,7 +204,6 @@ return {
         -- with a higher priority have higher weighting on priority.
         sources = cmp.config.sources({
           -- Define the first-tier of sources
-          {name = 'luasnip', max_item_count = 5, priority = 10},
           {name = 'treesitter', max_item_count = 5, priority = 10},
           {name = 'nvim_lsp', max_item_count = 10, priority = 10},
           {
@@ -206,6 +219,7 @@ return {
             },
           },
           {name = 'tags', max_item_count = 5, priority = 5},
+          {name = 'luasnip', max_item_count = 5, priority = 10},
           {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'fuzzy_buffer', max_item_count = 5, priority = 1},
           {name = 'nvim_lsp_signature_help'},
@@ -215,46 +229,46 @@ return {
             {name = 'path'},
           })
       })
-    -- Use completion sources when forward-searching with "/"
-    cmp.setup.cmdline('/', {
-      -- Disable all of the prior settings for nvim-cmp
-      -- so that completion supported by luasnip not triggered;
-      -- note that if this extra line is not added then
-      -- tab completion does not work for this mode
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources({
-        {name = 'path'},
-        {name = 'buffer', max_item_count = 5, priority = 10},
-        {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
-      }, {
-        {name = 'cmdline'},
-        {name = 'cmdline_history'}
+      -- Use completion sources when forward-searching with "/"
+      cmp.setup.cmdline('/', {
+        -- Disable all of the prior settings for nvim-cmp
+        -- so that completion supported by luasnip not triggered;
+        -- note that if this extra line is not added then
+        -- tab completion does not work for this mode
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          {name = 'path'},
+          {name = 'buffer', max_item_count = 5, priority = 10},
+          {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
+        }, {
+            {name = 'cmdline'},
+            {name = 'cmdline_history'}
+          })
       })
-    })
-    -- Use completion sources when backward-searching with "?"
-    cmp.setup.cmdline('?', {
-      -- Disable all of the prior settings for nvim-cmp
-      -- (see previous note for full explanation)
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources({
-        {name = 'path'},
-        {name = 'buffer', max_item_count = 5},
-        {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
-      }, {
-        {name = 'cmdline'},
-        {name = 'cmdline_history'}
+      -- Use completion sources when backward-searching with "?"
+      cmp.setup.cmdline('?', {
+        -- Disable all of the prior settings for nvim-cmp
+        -- (see previous note for full explanation)
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          {name = 'path'},
+          {name = 'buffer', max_item_count = 5},
+          {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
+        }, {
+            {name = 'cmdline'},
+            {name = 'cmdline_history'}
+          })
       })
-    })
-    -- Use completion sources when running commands with ":"
-    require'cmp'.setup.cmdline(':', {
-      -- Disable all of the prior settings for nvim-cmp
-      -- (see previous note for full explanation)
-      mapping = cmp.mapping.preset.cmdline(),
-      sources = {
-        {name = 'cmdline'},
-        {name = 'cmdline_history'}
-      }
-    })
+      -- Use completion sources when running commands with ":"
+      require'cmp'.setup.cmdline(':', {
+        -- Disable all of the prior settings for nvim-cmp
+        -- (see previous note for full explanation)
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          {name = 'cmdline'},
+          {name = 'cmdline_history'}
+        }
+      })
     end,
   },
 
