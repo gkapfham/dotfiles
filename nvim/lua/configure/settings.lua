@@ -8,9 +8,19 @@ vim.opt.signcolumn="yes:1"
 -- Disable the welcome message
 vim.opt.shortmess="FIWacto"
 
+-- Improve performance
+vim.opt.lazyredraw = false
+
 -- }}}
 
 -- Display settings through use of vim.cmd and then vimscript commands {{{
+
+vim.cmd([[
+" Display screen redraws faster
+set nocursorcolumn
+set nocursorline
+set ttyfast
+]])
 
 -- Display numbers
 vim.cmd([[set number]])
@@ -35,6 +45,12 @@ set linebreak
 set showbreak=━━
 set breakindent
 set tabstop=4
+]])
+
+-- Separate linebreaks and tabs for Golang
+vim.cmd([[
+au Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+au Filetype go setlocal listchars+=tab:\ \ 
 ]])
 
 -- Insert spaces for a tab
