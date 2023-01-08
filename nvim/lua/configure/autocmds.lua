@@ -1,4 +1,5 @@
--- File: Define global autocommands
+-- File: configure/autocmds.lua
+-- Purpose: Define global autocommands
 
 -- Check if a file should be reloaded when it is changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, { command = "checktime" })
