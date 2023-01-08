@@ -95,7 +95,7 @@ return {
       { "<Space>p", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>o", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
       -- History
-      { "<Space>th", "<cmd> Telescope command_history <CR>", desc = "Telescope: Command history" },
+      { "<Space>tc", "<cmd> Telescope command_history <CR>", desc = "Telescope: Command history" },
       -- Keymaps
       { "<Space>tk", "<cmd> Telescope keymaps <CR>", desc = "Telescope: Keymaps" },
       -- Languageserver
