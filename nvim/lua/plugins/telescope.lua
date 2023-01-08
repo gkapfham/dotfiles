@@ -1,4 +1,4 @@
--- File: telescope.lua
+-- File: plugins/telescope.lua
 -- Purpose: load and configure the telescope plugin
 -- and those plugins that enhance telescope
 
