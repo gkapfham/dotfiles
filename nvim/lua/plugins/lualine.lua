@@ -149,9 +149,9 @@ return {
         },
         -- Define how quickly the lualine must update
         refresh = {
-          statusline = 1000,
-          tabline = 1000,
-          winbar = 1000,
+          statusline = 500,
+          tabline = 500,
+          winbar = 500,
         },
         -- Bottom section of status line
         sections = {
