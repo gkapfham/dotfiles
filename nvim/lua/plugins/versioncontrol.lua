@@ -1,4 +1,4 @@
--- File: versioncontrol.lua
+-- File: plugins/versioncontrol.lua
 -- Purpose: load and configure all plugins that
 -- integrate with the Git version control system
 
