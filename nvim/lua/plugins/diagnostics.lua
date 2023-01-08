@@ -1,4 +1,4 @@
--- File: diagnostics.lua
+-- File: plugins/diagnostics.lua
 -- Purpose: load and configure plugins for diagnostic purposes
 
 return {

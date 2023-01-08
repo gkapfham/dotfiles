@@ -1,4 +1,4 @@
--- File: filetree.lua
+-- File: plugins/filetree.lua
 -- Purpose: load and configure the neo-tree plugin
 
 return {

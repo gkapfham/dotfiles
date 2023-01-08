@@ -1,4 +1,4 @@
--- File: interface.lua
+-- File: plugins/interface.lua
 -- Purpose: load and configure plugins that control the interface
 
 return {

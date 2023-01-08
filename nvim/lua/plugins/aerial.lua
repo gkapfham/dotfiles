@@ -1,4 +1,4 @@
--- File: plugin/aerial.lua
+-- File: plugins/aerial.lua
 -- Purpose: Configure the aerial plugin
 -- for creation of a navigation sidebar
 

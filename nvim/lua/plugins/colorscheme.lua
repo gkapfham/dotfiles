@@ -1,4 +1,4 @@
--- File: plugin/colorscheme.lua
+-- File: plugins/colorscheme.lua
 -- Purpose: Configure the colorscheme
 
 return {

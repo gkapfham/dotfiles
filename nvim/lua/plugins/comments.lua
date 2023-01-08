@@ -1,4 +1,4 @@
--- File: plugin/comments.lua
+-- File: plugins/comments.lua
 -- Purpose: Configure the comment plugin
 -- and keymaps for the plugin
 
