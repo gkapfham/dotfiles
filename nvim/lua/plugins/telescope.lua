@@ -94,6 +94,8 @@ return {
       { "<C-p>", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>p", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>o", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
+      -- Help
+      { "<Space>th", "<cmd> Telescope help_tags <CR>", desc = "Telescope: Help tags" },
       -- History
       { "<Space>tc", "<cmd> Telescope command_history <CR>", desc = "Telescope: Command history" },
       -- Keymaps
