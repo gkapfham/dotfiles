@@ -1,4 +1,4 @@
--- File: plugin/completion.lua
+-- File: plugins/completion.lua
 -- Purpose: Configure the nvim-cmp plugin
 -- and all of the plugins that enhance it
 
@@ -218,10 +218,10 @@ return {
               end
             },
           },
+          {name = 'fuzzy_buffer', max_item_count = 5, priority = 1},
           {name = 'tags', max_item_count = 5, priority = 5},
           {name = 'luasnip', max_item_count = 5, priority = 10},
           {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
-          {name = 'fuzzy_buffer', max_item_count = 5, priority = 1},
           {name = 'nvim_lsp_signature_help'},
         }, {
             -- Define the second-tier of sources; these will only
