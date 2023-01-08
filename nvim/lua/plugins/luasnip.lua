@@ -49,7 +49,7 @@ return {
                   t({",", "", ""}),
                   })
           },
-          -- define the type of signatures in this table
+          -- Define the type of signatures in this table
           {key = "mail",}
         )
       end,
