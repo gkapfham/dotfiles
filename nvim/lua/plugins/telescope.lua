@@ -10,6 +10,7 @@ return {
     cmd = "Telescope",
     dependencies = {
       "benfowler/telescope-luasnip.nvim",
+      "ThePrimeagen/refactoring.nvim",
     },
     -- Configure
     config = function()
@@ -70,8 +71,19 @@ return {
           }
         },
       }
-    -- Use the luasnip extension for telescope
-    require('telescope').load_extension('luasnip')
+      -- Load the luasnip extension for telescope
+      require('telescope').load_extension('luasnip')
+      -- Load and configure the refactoring telescope extension;
+      -- note that refactoring requires section of code in visual mode
+      require("telescope").load_extension("refactoring")
+      -- Configure the keymap for refactoring; setting it here because
+      -- I do know how to set visual mode keymaps in keys section of spec
+      vim.api.nvim_set_keymap(
+        "v",
+        "<space>rr",
+        "<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
+        { noremap = true }
+      )
     end,
     -- Keys
     keys = {
