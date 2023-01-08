@@ -23,7 +23,7 @@ return {
         -- Start of the language service and connect to it the
         -- other programs that use the language server
         -- print("契Starting Language Server");
-        vim.notify(" Starting Language Server");
+        vim.notify(" Starting Language Server(s)");
         local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
         opts = {silent = true, noremap = true, documentFormatting = True}
         -- Create all of the keybindings that have the following purposes:
@@ -45,7 +45,7 @@ return {
         buf_set_keymap('n', '<space>rv', '<cmd> lua vim.lsp.buf.rename()<CR>', opts)
         -- reformat content (normal or visual mode) in a sync (i.e., blocking fashion)
         buf_set_keymap('n', '<space>ff', '<cmd> lua vim.lsp.buf.format()<CR>', opts)
-        buf_set_keymap('v', '<space>ff', '<cmd> lua vim.lsp.buf.format()<CR>', opts)
+        -- buf_set_keymap('v', '<space>ff', '<cmd> lua vim.lsp.buf.format()<CR>', opts)
       end
       -- Install each of the chosen language servers and then
       -- run the common_on_attach function for each of them
@@ -66,15 +66,19 @@ return {
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
       end
+      -- Configure null-ls for diagnostics and formatting
       local null_ls = require("null-ls")
       null_ls.setup({
           sources = {
+            null_ls.builtins.diagnostics.chktex,
+            null_ls.builtins.diagnostics.flake8,
             null_ls.builtins.diagnostics.pydocstyle,
-            null_ls.builtins.formatting.isort,
+            null_ls.builtins.diagnostics.pylint,
             null_ls.builtins.formatting.black,
+            null_ls.builtins.formatting.isort,
+            null_ls.builtins.formatting.prettierd,
           },
       })
-
     end,
     -- Keys
     keys = {
