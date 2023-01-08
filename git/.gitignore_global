@@ -354,6 +354,8 @@ out
 .yarn/install-state.gz
 .pnp.*
 
-# Material for Mkdocs #
-# #####################
+# Material for Mkdocs
 site
+
+# Spelling files for nvim
+en.utf-8.add.spl
