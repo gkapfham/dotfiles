@@ -89,11 +89,11 @@ return {
             cmp.config.compare.order,
             cmp.config.compare.score,
             cmp.config.compare.recently_used,
-            cmp.config.compare.exact,
             cmp.config.compare.length,
             cmp.config.compare.locality,
             cmp.config.compare.sort_text,
             cmp.config.compare.offset,
+            cmp.config.compare.exact,
           },
         },
         -- Define the performance characteristics for nvim-cmp
