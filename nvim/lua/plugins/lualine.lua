@@ -132,6 +132,7 @@ return {
     priority = 1000,
     dependencies = {
       "arkav/lualine-lsp-progress",
+      "ludovicchabant/vim-gutentags",
     },
     -- Configure
     config = function()
