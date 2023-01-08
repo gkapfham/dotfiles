@@ -1,4 +1,4 @@
--- File: movement.lua
+-- File: plugins/movement.lua
 -- Purpose: load and configure movement plugins
 
 return {
