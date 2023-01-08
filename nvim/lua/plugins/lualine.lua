@@ -206,7 +206,7 @@ return {
         -- Top right display
         -- from left (middle) to right (far right corner): {x} {y} {z}
         lualine_x = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
-        lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
+        lualine_y = {'StatuslineGutentags', 'StatuslineSpell', 'StatuslinePythonEnvironment'},
         lualine_z = {}
       },
       -- Define the extensions which ensure that lualine
