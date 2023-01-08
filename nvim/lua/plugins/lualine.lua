@@ -39,7 +39,10 @@ end
 
 --- }}}
 
--- Define the color scheme for the lualine
+-- Define the color scheme for the lualine;
+-- this matches the color scheme called
+-- vitaminonec; see the lua/plugins/colorscheme.lua
+-- for more details about the specific colorscheme
 local colors = {
   color2   = "#87afd7",
   color7   = "#e06c75",
