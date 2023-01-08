@@ -15,8 +15,8 @@ vim.opt.lazyredraw = false
 
 -- Display settings through use of vim.cmd and then vimscript commands {{{
 
+-- Display screen redraws faster
 vim.cmd([[
-" Display screen redraws faster
 set nocursorcolumn
 set nocursorline
 set ttyfast
@@ -30,6 +30,10 @@ vim.cmd([[set relativenumber]])
 
 -- Display improved find and replace
 vim.cmd([[set inccommand=split]])
+
+-- }}}
+
+-- Indentation settings through the use of vim.cmd and vimscript commands {{{
 
 -- Improved indentation
 vim.cmd([[
@@ -74,7 +78,11 @@ augroup extra_whitespace
 augroup END
 ]])
 
--- Display goes to the next line
+-- }}}
+
+-- Movement settings through the use of vim.cmd and vimscript commands {{{
+
+-- Word wrapping goes to the next line
 vim.cmd([[
 set whichwrap+=<,>,h,l,[,]
 ]])
@@ -85,4 +93,4 @@ nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
 nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 ]])
 
---- }}}
+-- }}}
