@@ -15,6 +15,7 @@ return {
       "williamboman/nvim-lsp-installer",
       "hrsh7th/cmp-nvim-lsp",
       "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
     },
     config = function(plugin)
       local lsp_installer = require'nvim-lsp-installer'
@@ -43,11 +44,8 @@ return {
         -- rename the variable using a floating menu
         buf_set_keymap('n', '<space>rv', '<cmd> lua vim.lsp.buf.rename()<CR>', opts)
         -- reformat content (normal or visual mode) in a sync (i.e., blocking fashion)
-        buf_set_keymap('n', '<space>fb', '<cmd> lua vim.lsp.buf.formatting_sync()<CR>', opts)
-        buf_set_keymap('v', '<space>fb', '<cmd> lua vim.lsp.buf.formatting_sync()<CR>', opts)
-        -- reformat content (normal or visual mode) in a async (i.e., fast, non-blocking fashion)
-        buf_set_keymap('n', '<space>ff', '<cmd> lua vim.lsp.buf.formatting()<CR>', opts)
-        buf_set_keymap('v', '<space>ff', '<cmd> lua vim.lsp.buf.formatting()<CR>', opts)
+        buf_set_keymap('n', '<space>ff', '<cmd> lua vim.lsp.buf.format()<CR>', opts)
+        buf_set_keymap('v', '<space>ff', '<cmd> lua vim.lsp.buf.format()<CR>', opts)
       end
       -- Install each of the chosen language servers and then
       -- run the common_on_attach function for each of them
@@ -68,6 +66,15 @@ return {
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
       end
+      local null_ls = require("null-ls")
+      null_ls.setup({
+          sources = {
+            null_ls.builtins.diagnostics.pydocstyle,
+            null_ls.builtins.formatting.isort,
+            null_ls.builtins.formatting.black,
+          },
+      })
+
     end,
     -- Keys
     keys = {
