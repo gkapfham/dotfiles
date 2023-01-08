@@ -83,19 +83,19 @@ return {
         -- Do not preselect items
         preselect = cmp.PreselectMode.None,
         -- Define sorting order
-        sorting = {
-          comparators = {
-            cmp.config.compare.kind,
-            cmp.config.compare.order,
-            cmp.config.compare.score,
-            cmp.config.compare.recently_used,
-            cmp.config.compare.length,
-            cmp.config.compare.locality,
-            cmp.config.compare.sort_text,
-            cmp.config.compare.offset,
-            cmp.config.compare.exact,
-          },
-        },
+        -- sorting = {
+        --   comparators = {
+        --     cmp.config.compare.kind,
+        --     cmp.config.compare.order,
+        --     cmp.config.compare.score,
+        --     cmp.config.compare.recently_used,
+        --     cmp.config.compare.length,
+        --     cmp.config.compare.locality,
+        --     cmp.config.compare.sort_text,
+        --     cmp.config.compare.offset,
+        --     cmp.config.compare.exact,
+        --   },
+        -- },
         -- Define the performance characteristics for nvim-cmp
         performance = {
           throttle = 2,
