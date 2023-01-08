@@ -10,8 +10,7 @@ return {
   -- toggle_lsp_diagnostics
   {
     "neovim/nvim-lspconfig",
-    -- event = "BufReadPre",
-    event = "VeryLazy",
+    event = "BufReadPre",
     dependencies = {
       "williamboman/nvim-lsp-installer",
       "hrsh7th/cmp-nvim-lsp",
@@ -22,7 +21,8 @@ return {
       function common_on_attach(client, bufnr)
         -- Start of the language service and connect to it the
         -- other programs that use the language server
-        print("契Starting Language Server");
+        -- print("契Starting Language Server");
+        vim.notify(" Starting Language Server");
         local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
         opts = {silent = true, noremap = true, documentFormatting = True}
         -- Create all of the keybindings that have the following purposes:
