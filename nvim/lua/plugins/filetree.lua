@@ -99,7 +99,7 @@ return {
             ["a"] = {
               "add",
               config = {
-                show_path = "none" -- "none", "relative", "absolute"
+                show_path = "none"
               }
             },
             ["A"] = "add_directory",
