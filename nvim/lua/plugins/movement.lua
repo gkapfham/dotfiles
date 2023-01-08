@@ -8,7 +8,6 @@ return {
     "ggandoj/leap.nvim",
     event = "VeryLazy",
     dependencies = { {"ggandor/flit.nvim", config = {
-      -- labeled_modes = "nv"
       multiline = true,
       eager_ops = true,
       keymaps = { f = 'f', F = 'F', t = 't', T = 'T' }
