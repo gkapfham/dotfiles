@@ -55,7 +55,7 @@ return {
   },
 
   -- Automatically disable search highlighting when
-  -- it is not needed after searching
+  -- it is not needed after performing a search
   {
     "asiryk/auto-hlsearch.nvim",
     event = "BufReadPre",
