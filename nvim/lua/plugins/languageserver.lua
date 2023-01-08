@@ -10,7 +10,8 @@ return {
   -- toggle_lsp_diagnostics
   {
     "neovim/nvim-lspconfig",
-    event = "BufReadPre",
+    -- event = "BufReadPre",
+    event = "VeryLazy",
     dependencies = {
       "williamboman/nvim-lsp-installer",
       "hrsh7th/cmp-nvim-lsp",
