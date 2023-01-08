@@ -1,4 +1,4 @@
--- File: lualine.lua
+-- File: plugins/lualine.lua
 -- Purpose: load and configure the lualine plugin
 -- and the extensions designed for lualine
 

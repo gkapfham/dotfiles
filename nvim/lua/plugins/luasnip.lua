@@ -1,4 +1,4 @@
--- File: luasnip.lua
+-- File: plugins/luasnip.lua
 -- Purpose: load and configure the luasnip plugin
 
 return {
