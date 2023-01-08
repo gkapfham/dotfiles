@@ -99,7 +99,7 @@ nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
 vim.cmd([[
 " Enable spell checking
-syntax spell toplevel
+" syntax spell toplevel
 
 " Configure the spelling files;
 " note that this is not ideal because
@@ -123,7 +123,7 @@ au BufNewFile,BufRead,BufEnter *.h      set nospell
 au BufNewFile,BufRead,BufEnter *.cpp    set nospell
 au BufNewFile,BufRead,BufEnter *.hpp    set nospell
 au BufNewFile,BufRead,BufEnter *.java   set nospell
-au BufNewFile,BufRead,BufEnter *.python set nospell
+au BufNewFile,BufRead,BufEnter *.py     set nospell
 au BufNewFile,BufRead,BufEnter *.sh     set nospell
 au BufNewFile,BufRead,BufEnter *.xml    set nospell
 au BufNewFile,BufRead,BufEnter *.sql    set nospell
