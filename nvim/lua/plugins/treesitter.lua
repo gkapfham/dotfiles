@@ -61,16 +61,6 @@ return {
         indent = { enable = true },
         -- Commenting
         context_commentstring = { enable = true, enable_autocmd = false },
-        -- Textobjects
-        -- textsubjects = {
-        --   enable = true,
-        --   -- prev_selection = ',',
-        --   keymaps = {
-        --     ['.'] = 'textsubjects-smart',
-        --     ['o;'] = 'textsubjects-container-outer',
-        --     ['i;'] = 'textsubjects-container-inner',
-        --   },
-        -- }
       })
     end,
   },
