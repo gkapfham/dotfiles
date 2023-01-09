@@ -12,7 +12,7 @@ return {
       local npairs = require('nvim-autopairs')
       npairs.setup({ map_bs = false, map_cr = false })
       vim.g.coq_settings = { keymap = { recommended = false } }
-      -- skip it, if you use another global object
+      -- Skip it, if you use another global object
       _G.MUtils= {}
       MUtils.CR = function()
         if vim.fn.pumvisible() ~= 0 then
@@ -51,6 +51,5 @@ return {
       require('nvim-ts-autotag').setup()
     end
   },
-
 
 }
