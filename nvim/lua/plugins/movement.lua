@@ -18,7 +18,9 @@ return {
   },
 
   -- Pair movement and highlighting
-  -- (note could not get vim-matchup to work)
+  -- (note could not get vim-matchup to work;
+  -- it crashes when using % and gives errors
+  -- suggesting a problem with treesitter integration)
   {
     "theHamsta/nvim-treesitter-pairs",
     event = "VeryLazy",
@@ -42,7 +44,6 @@ return {
           }
         }
       }
-
     end,
   },
 
