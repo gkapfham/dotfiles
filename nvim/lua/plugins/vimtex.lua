@@ -17,6 +17,10 @@ return {
   -- Vimtex
   {
     "lervag/vimtex",
+    dependencies = {
+      "whonore/vim-sentencer",
+    },
+
     ft = "tex",
     config = function()
       vim.cmd([[
@@ -72,8 +76,8 @@ return {
         " Use latexindent to break up paragraphs
         " This yields commands like "grip" for formatting with latexindent
         " It is still possible to use commands like "gwip" for paragraph formatting
-        nmap gr <plug>(ChopSentences)
-        xmap gr <plug>(ChopSentences)
+        " nmap gr <plug>(ChopSentences)
+        " xmap gr <plug>(ChopSentences)
         " Pass options to latexindent
         " Note that latexindent will reference the ~/.indentconfig.yaml
         " file which will point to the ~/.chopsentences.yaml file
