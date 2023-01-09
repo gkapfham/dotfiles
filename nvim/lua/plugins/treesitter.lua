@@ -4,6 +4,11 @@
 
 return {
 
+  {
+    "RRethy/nvim-treesitter-textsubjects",
+    event = "BufReadPre"
+  },
+
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
@@ -40,6 +45,15 @@ return {
         highlight = { enable = true, disable = {"latex", "markdown"}, },
         indent = { enable = true },
         context_commentstring = { enable = true, enable_autocmd = false },
+        textsubjects = {
+          enable = true,
+          -- prev_selection = ',',
+          keymaps = {
+            ['.'] = 'textsubjects-smart',
+            ['o;'] = 'textsubjects-container-outer',
+            ['i;'] = 'textsubjects-container-inner',
+          },
+        }
       })
     end,
   },
