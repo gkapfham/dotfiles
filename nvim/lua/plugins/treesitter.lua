@@ -4,9 +4,22 @@
 
 return {
 
+  -- Textobjects
   {
-    "RRethy/nvim-treesitter-textsubjects",
-    event = "BufReadPre"
+    "kana/vim-textobj-user",
+    dependencies = {
+      "ColinKennedy/vim-textobj-block-party",
+    },
+    event = "VeryLazy",
+    config = function()
+      vim.g.python3_host_prog = '/home/gkapfham/.asdf/shims/python'
+    end
+  },
+
+  -- Textobjects and motions for Python
+  {
+    "jeetsukumaran/vim-pythonsense",
+    event = "VeryLazy"
   },
 
   -- Treesitter
@@ -42,18 +55,22 @@ return {
           "vim",
           "yaml",
         },
+        -- Highlighting
         highlight = { enable = true, disable = {"latex", "markdown"}, },
+        -- Indenting
         indent = { enable = true },
+        -- Commenting
         context_commentstring = { enable = true, enable_autocmd = false },
-        textsubjects = {
-          enable = true,
-          -- prev_selection = ',',
-          keymaps = {
-            ['.'] = 'textsubjects-smart',
-            ['o;'] = 'textsubjects-container-outer',
-            ['i;'] = 'textsubjects-container-inner',
-          },
-        }
+        -- Textobjects
+        -- textsubjects = {
+        --   enable = true,
+        --   -- prev_selection = ',',
+        --   keymaps = {
+        --     ['.'] = 'textsubjects-smart',
+        --     ['o;'] = 'textsubjects-container-outer',
+        --     ['i;'] = 'textsubjects-container-inner',
+        --   },
+        -- }
       })
     end,
   },
