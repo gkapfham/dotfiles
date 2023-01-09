@@ -17,10 +17,6 @@ return {
   -- Vimtex
   {
     "lervag/vimtex",
-    dependencies = {
-      "whonore/vim-sentencer",
-    },
-
     ft = "tex",
     config = function()
       vim.cmd([[
