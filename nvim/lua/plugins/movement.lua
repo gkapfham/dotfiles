@@ -47,4 +47,32 @@ return {
     end,
   },
 
+  -- Marks
+  {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    config = function()
+      require'marks'.setup {
+        default_mappings = false,
+        cyclic = true,
+        force_write_shada = false,
+        refresh_interval = 150,
+        sign_priority = { lower=10, upper=15, builtin=8, bookmark=20 },
+        -- define mappings that are different than the default
+        mappings = {
+          next = "]a",
+          prev = "[a",
+          -- Note that "delete" requires next
+          -- that you give the actual mark;
+          -- this means that "dma" would
+          -- delete the mark called "a"
+          delete = "dm",
+          delete_line = "dm-",
+          delete_buf = "dm<space>",
+          preview = "m;",
+        }
+      }
+    end,
+  },
+
 }
