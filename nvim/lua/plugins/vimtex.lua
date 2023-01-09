@@ -81,7 +81,7 @@ return {
         " Pass options to latexindent
         " Note that latexindent will reference the ~/.indentconfig.yaml
         " file which will point to the ~/.chopsentences.yaml file
-        let g:latexindent_options = '-m -r'
+        " let g:latexindent_options = '-m -r'
         " Do not use a space after the comment string symbol in LaTeX
         augroup latexcomments
           autocmd!
