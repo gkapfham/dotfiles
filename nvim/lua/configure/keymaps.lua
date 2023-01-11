@@ -23,8 +23,8 @@ vim.keymap.set("n", "oo", "O<ESC>", { desc = "Custom keymap: Insert a blank line
 vim.keymap.set("n", "oO", "i<cr><ESC>", { desc = "Custom keymap: Insert a blank line at the cursor location" })
 
 -- Quitting
-vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Custom keymap: Quit all" })
-vim.keymap.set("n", "<Space>qq", "<cmd>qa<cr>", { desc = "Custom keymap: Quit all" })
+vim.keymap.set("n", "<leader>qq", "<cmd>qa!<cr>", { desc = "Custom keymap: Quit all" })
+vim.keymap.set("n", "<Space>qq", "<cmd>qa!<cr>", { desc = "Custom keymap: Quit all" })
 
 -- }}}
 
