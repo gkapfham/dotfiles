@@ -17,9 +17,9 @@ vim.opt.lazyredraw = false
 
 -- Display screen redraws faster
 vim.cmd([[
-set nocursorcolumn
-set nocursorline
-set ttyfast
+  set nocursorcolumn
+  set nocursorline
+  set ttyfast
 ]])
 
 -- Display numbers
@@ -37,24 +37,42 @@ vim.cmd([[set inccommand=split]])
 
 -- Improved indentation
 vim.cmd([[
-set autoindent
-set copyindent
-set shiftwidth=2
-set smartindent
+
+" Automatically identify the filetype
+" Always use syntax highlighting
+" filetype indent plugin on | syn on
+
+" Always continue a comment in code to
+" the next line when pressing "return"
+set formatoptions+=r
+
+  " set autoindent
+  set copyindent
+  set shiftwidth=2
+  " " set smartindent
+
+
+
 ]])
 
 -- Display linebreaks and tabs
 vim.cmd([[
-set linebreak
-set showbreak=━━
-set breakindent
-set tabstop=4
+  set linebreak
+  set showbreak=━━
+  " set breakindent
+  set tabstop=4
 ]])
+
+-- -- Separate linebreaks and tabs for Python
+-- vim.cmd([[
+--   autocmd Filetype python setlocal softtabstop=4
+--   autocmd Filetype python setlocal shiftwidth=4
+-- ]])
 
 -- Separate linebreaks and tabs for Golang
 vim.cmd([[
-au Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
-au Filetype go setlocal listchars+=tab:\ \ 
+  au Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
+  au Filetype go setlocal listchars+=tab:\ \ 
 ]])
 
 -- Insert spaces for a tab
@@ -64,18 +82,21 @@ set smarttab
 set shiftround
 ]])
 
+-- vim.opt.smartindent = true -- Insert indents automatically
+-- vim.opt.autoindent = true -- Insert indents automatically
+
 -- Display trailing spaces
 vim.cmd([[
-set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
-set list
-match ExtraWhitespace /\s\+$\|\t/
-augroup extra_whitespace
+  set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
+  set list
+  match ExtraWhitespace /\s\+$\|\t/
+  augroup extra_whitespace
   autocmd!
   autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
   autocmd BufWinLeave * call clearmatches()
-augroup END
+  augroup END
 ]])
 
 -- }}}
@@ -84,13 +105,13 @@ augroup END
 
 -- Word wrapping goes to the next line
 vim.cmd([[
-set whichwrap+=<,>,h,l,[,]
+  set whichwrap+=<,>,h,l,[,]
 ]])
 
 -- Navigate through wrapped text
 vim.cmd([[
-nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
-nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+  nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+  nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 ]])
 
 -- }}}
