@@ -38,11 +38,4 @@ return {
     end,
   },
 
-  -- -- Indenting
-  -- {
-  --   "Vimjas/vim-python-pep8-indent",
-  --   ft = "python",
-  -- },
-
-
 }
