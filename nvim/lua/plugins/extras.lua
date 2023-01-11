@@ -29,4 +29,20 @@ return {
     end,
   },
 
+  -- Align
+  {
+    "echasnovski/mini.align",
+    keys = { "ga" },
+    config = function()
+      require("mini.align").setup()
+    end,
+  },
+
+  -- -- Indenting
+  -- {
+  --   "Vimjas/vim-python-pep8-indent",
+  --   ft = "python",
+  -- },
+
+
 }
