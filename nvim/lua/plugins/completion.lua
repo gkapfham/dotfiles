@@ -242,7 +242,6 @@ return {
           {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
         }, {
             {name = 'cmdline'},
-            {name = 'cmdline_history'}
           })
       })
       -- Use completion sources when backward-searching with "?"
@@ -256,7 +255,6 @@ return {
           {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
         }, {
             {name = 'cmdline'},
-            {name = 'cmdline_history'}
           })
       })
       -- Use completion sources when running commands with ":"
@@ -264,10 +262,11 @@ return {
         -- Disable all of the prior settings for nvim-cmp
         -- (see previous note for full explanation)
         mapping = cmp.mapping.preset.cmdline(),
-        sources = {
+        sources = cmp.config.sources({
           {name = 'cmdline'},
-          {name = 'cmdline_history'}
-        }
+        }, {
+          {name = 'cmdline_history', max_item_count = 5}
+        })
       })
     end,
   },
