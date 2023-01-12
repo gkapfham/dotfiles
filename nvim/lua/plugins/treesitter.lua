@@ -16,9 +16,22 @@ return {
     end
   },
 
+  -- Textobjects like backticks
+  {
+    "wellle/targets.vim",
+    event = "VeryLazy"
+  },
+
   -- Textobjects and motions for Python
   {
     "jeetsukumaran/vim-pythonsense",
+    event = "VeryLazy"
+  },
+
+  -- Improve indentation that addresses
+  -- the limitation of treesitter for Python
+  {
+    "yioneko/nvim-yati",
     event = "VeryLazy"
   },
 
@@ -58,9 +71,15 @@ return {
         -- Highlighting
         highlight = { enable = true, disable = {"latex", "markdown"}, },
         -- Indenting
-        indent = { enable = true },
+        indent = { enable = false, },
         -- Commenting
         context_commentstring = { enable = true, enable_autocmd = false },
+        -- Alternate identing
+        yati = {
+          enable = true,
+          default_lazy = true,
+          default_fallback = "auto"
+        },
       })
     end,
   },
