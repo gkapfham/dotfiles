@@ -43,9 +43,11 @@ return {
         buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
         -- rename the variable using a floating menu
         buf_set_keymap('n', '<space>rv', '<cmd> lua vim.lsp.buf.rename()<CR>', opts)
-        -- reformat content (normal or visual mode) in a sync (i.e., blocking fashion)
+        -- reformat entire buffer content with a sync (i.e., reformat in a blocking fashion)
         buf_set_keymap('n', '<space>ff', '<cmd> lua vim.lsp.buf.format()<CR>', opts)
-        -- buf_set_keymap('v', '<space>ff', '<cmd> lua vim.lsp.buf.format()<CR>', opts)
+        -- attempt to tell the language server not to highlight semantic tokens
+        -- (note that this approach does not seem to work correctly)
+        client.server_capabilities.semanticTokensProvider = nil
       end
       -- Install each of the chosen language servers and then
       -- run the common_on_attach function for each of them
