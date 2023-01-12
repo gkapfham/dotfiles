@@ -56,11 +56,6 @@ require("lazy").setup({
 -- Define the keymap for loading lazy dashboard
 vim.keymap.set("n", "<Space>sl", "<cmd>:Lazy<cr>")
 
--- -- Disable line numbering for specific filetypes
--- vim.cmd([[
--- autocmd filetype lazy setlocal nonumber
--- ]])
-
 -- Load the files in the configure module
 require("configure.settings")
 require("configure.autocmds")
