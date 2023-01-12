@@ -23,26 +23,26 @@ vim.g.maplocalleader = ","
 -- scheme, and make additional default settings
 require("lazy").setup({
   spec = "plugins",
-  -- always load all of the plugins in lazyily
+  -- Always load all of the plugins in lazyily
   defaults = { lazy = true, version = "*" },
   install = { colorscheme = { "vitaminonec" } },
-  -- do not automatically perform the check
+  -- Do not automatically perform the check
   -- for plugins and produce diagnostic message
   checker = { enabled = false },
-  -- detect changes to the configuration and
+  -- Detect changes to the configuration and
   -- attempt to reload but without notifications
   change_detection = {
     enabled = true,
     notify = true,
   },
-  -- disable plugins that are internal to neovim;
+  -- Disable plugins that are internal to neovim;
   -- they are not needed and hamper performance
   performance = {
     rtp = {
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
+        "matchit",
+        "matchparen",
         "netrwPlugin",
         "tarPlugin",
         "tohtml",
