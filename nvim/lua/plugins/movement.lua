@@ -5,7 +5,7 @@ return {
 
   -- Leap and flit
   {
-    "ggandoj/leap.nvim",
+    "ggandor/leap.nvim",
     event = "VeryLazy",
     dependencies = { {"ggandor/flit.nvim", config = {
       multiline = true,
