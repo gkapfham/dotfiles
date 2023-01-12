@@ -44,11 +44,11 @@ return {
         close_other = false,
         pretty = true,
       }
-
     end,
     -- Keys
     keys = {
       -- Toggle
+      { "<Space>qf", "<cmd> lua require'qf'.toggle('c', true) <CR>", desc = "Quick Fix: Toggle quickfix list" },
       { "<leader>qf", "<cmd> lua require'qf'.toggle('c', true) <CR>", desc = "Quick Fix: Toggle quickfix list" },
     }
   },
