@@ -54,6 +54,7 @@ return {
     event = "InsertEnter",
     dependencies = {
       -- Stand-alone cmp plugins
+      "hrsh7th/cmp-cmdline",
       "dmitmel/cmp-cmdline-history",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
@@ -61,7 +62,8 @@ return {
       "quangnguyen30192/cmp-nvim-tags",
       "ray-x/cmp-treesitter",
       "saadparwaiz1/cmp_luasnip",
-      "uga-rosa/cmp-dictionary",
+      -- "uga-rosa/cmp-dictionary",
+      "octaltree/cmp-look",
       -- Fuzzy buffer plugin with dependencies
       {"romgrk/fzy-lua-native", build = "make"},
       "tzachar/cmp-fuzzy-buffer",
@@ -74,11 +76,20 @@ return {
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       -- Configure the dictionary plugin
-      require("cmp_dictionary").setup({
-        dic = {
-          ["*"] = "/usr/share/dict/american-english",
-        },
+      require('cmp').setup({
+          sources = {
+              {
+                  name = 'look',
+                  keyword_length = 2,
+                  option = {
+                      convert_case = true,
+                      loud = true,
+                      dict = '/usr/share/dict/american-english'
+                  }
+              }
+          }
       })
+      -- Configure all aspects of nvim-cmp
       cmp.setup({
         -- Do not preselect items
         preselect = cmp.PreselectMode.None,
@@ -131,7 +142,7 @@ return {
               tags = "笠Tags",
               treesitter = " Tree",
               luasnip = " Snippet",
-              dictionary = " Spell",
+              look = " Spell",
             })[entry.source.name]
             return vim_item
           end
@@ -222,6 +233,7 @@ return {
           {name = 'tags', max_item_count = 5, priority = 5},
           {name = 'luasnip', max_item_count = 5, priority = 10},
           {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
+          {name = 'look', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'nvim_lsp_signature_help'},
         }, {
             -- Define the second-tier of sources; these will only
