@@ -61,14 +61,3 @@ require("configure.settings")
 require("configure.autocmds")
 require("configure.keymaps")
 require("configure.commands")
-
--- Diagnostic that display at startup
-
--- local Util = require("lazy.core.util")
--- Util.walk(vim.env.VIMRUNTIME .. "/plugin", function(path, name, t)
---  print(table.concat({ path, name, t }, " | "))
--- end)
-
--- Util.lsmod("plugins", function(modname, modpath)
---  print(modname .. ": " .. modpath)
--- end)
