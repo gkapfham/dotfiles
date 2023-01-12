@@ -7,7 +7,7 @@ return {
   -- Spellrotate
   {
     "tweekmonster/spellrotate.vim",
-    event = "BufReadPre",
+    event = "VeryLazy",
     config = function()
       vim.cmd([[
       " Configure the spelling files;
