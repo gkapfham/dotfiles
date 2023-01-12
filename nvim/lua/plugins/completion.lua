@@ -274,10 +274,13 @@ return {
         -- Disable all of the prior settings for nvim-cmp
         -- (see previous note for full explanation)
         mapping = cmp.mapping.preset.cmdline(),
+        -- Use both the cmdline source (i.e., all valid
+        -- commands) and the cmdline_history source (i.e.,
+        -- all commands previously used in command prompt)
         sources = cmp.config.sources({
-          {name = 'cmdline'},
-        }, {
+          {name = 'cmdline', max_item_count = 5},
           {name = 'cmdline_history', max_item_count = 5}
+        }, {
         })
       })
     end,
