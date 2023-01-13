@@ -14,7 +14,7 @@ return {
     "echasnovski/mini.surround",
     keys = { "gz" },
     config = function()
-      -- use gz mappings instead of s to prevent conflict with leap
+      -- Use gz mappings instead of s to prevent conflict with leap
       require("mini.surround").setup({
         mappings = {
           add = "gza",
