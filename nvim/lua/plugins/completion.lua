@@ -62,7 +62,6 @@ return {
       "quangnguyen30192/cmp-nvim-tags",
       "ray-x/cmp-treesitter",
       "saadparwaiz1/cmp_luasnip",
-      -- "uga-rosa/cmp-dictionary",
       "octaltree/cmp-look",
       -- Fuzzy buffer plugin with dependencies
       {"romgrk/fzy-lua-native", build = "make"},
