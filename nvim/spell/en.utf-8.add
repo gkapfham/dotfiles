@@ -196,3 +196,11 @@ HOMS
 tt
 se
 intended
+bufs
+tbl
+buf
+api
+ipairs
+bufnrs
+lsp
+treesitter
