@@ -17,6 +17,7 @@ vim.keymap.set("n", "<Space>u", "<cmd>b#<cr>", { desc = "Custom keymap: Previous
 
 -- Command mode
 vim.keymap.set("n", "<leader><leader>", ":", { desc = "Custom keymap: Enter command mode" })
+vim.keymap.set("v", "<leader><leader>", ":", { desc = "Custom keymap: Enter command mode" })
 
 -- Lines
 vim.keymap.set("n", "oo", "O<ESC>", { desc = "Custom keymap: Insert a blank line at end of line" })
