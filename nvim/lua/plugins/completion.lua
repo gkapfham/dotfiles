@@ -216,18 +216,27 @@ return {
           -- Define the first-tier of sources
           {name = 'treesitter', max_item_count = 5, priority = 10},
           {name = 'nvim_lsp', max_item_count = 10, priority = 10},
+          -- {
+          --   name = 'buffer', max_item_count = 10, priority = 20,
+          --   option = {
+          --     get_bufnrs = function()
+          --       local bufs = {}
+          --       for _, win in ipairs(vim.api.nvim_list_wins()) do
+          --         bufs[vim.api.nvim_win_get_buf(win)] = true
+          --       end
+          --       return vim.tbl_keys(bufs)
+          --     end
+          --   },
+          -- },
           {
             name = 'buffer', max_item_count = 10, priority = 20,
             option = {
               get_bufnrs = function()
-                local bufs = {}
-                for _, win in ipairs(vim.api.nvim_list_wins()) do
-                  bufs[vim.api.nvim_win_get_buf(win)] = true
-                end
-                return vim.tbl_keys(bufs)
+                return vim.api.nvim_list_bufs()
               end
-            },
+            }
           },
+
           {name = 'fuzzy_buffer', max_item_count = 5, priority = 1},
           {name = 'tags', max_item_count = 5, priority = 5},
           {name = 'luasnip', max_item_count = 5, priority = 10},
