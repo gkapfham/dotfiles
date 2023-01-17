@@ -29,6 +29,12 @@ return {
     end,
   },
 
+  -- Sentencer
+  {
+    event = "VeryLazy",
+    "whonore/vim-sentencer",
+  },
+
   -- Align
   {
     "echasnovski/mini.align",
