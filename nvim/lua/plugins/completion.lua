@@ -230,6 +230,7 @@ return {
           -- },
           {
             name = 'buffer', max_item_count = 10, priority = 20,
+            -- Look at all of the open buffers
             option = {
               get_bufnrs = function()
                 return vim.api.nvim_list_bufs()
