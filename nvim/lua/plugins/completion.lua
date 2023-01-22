@@ -54,15 +54,15 @@ return {
     event = "InsertEnter",
     dependencies = {
       -- Stand-alone cmp plugins
-      "hrsh7th/cmp-cmdline",
       "dmitmel/cmp-cmdline-history",
       "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-cmdline",
+      "octaltree/cmp-look",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "quangnguyen30192/cmp-nvim-tags",
       "ray-x/cmp-treesitter",
       "saadparwaiz1/cmp_luasnip",
-      "octaltree/cmp-look",
       -- Fuzzy buffer plugin with dependencies
       {"romgrk/fzy-lua-native", build = "make"},
       "tzachar/cmp-fuzzy-buffer",
