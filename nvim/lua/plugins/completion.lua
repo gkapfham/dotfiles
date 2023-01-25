@@ -54,6 +54,7 @@ return {
     event = "InsertEnter",
     dependencies = {
       -- Stand-alone cmp plugins
+      "andersevenrud/cmp-tmux",
       "dmitmel/cmp-cmdline-history",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
@@ -140,6 +141,7 @@ return {
               rg = " Search",
               tags = "笠Tags",
               treesitter = " Tree",
+              tmux = " Tmux",
               luasnip = " Snippet",
               look = " Spell",
             })[entry.source.name]
@@ -241,6 +243,7 @@ return {
           {name = 'fuzzy_buffer', max_item_count = 5, priority = 1},
           {name = 'tags', max_item_count = 5, priority = 5},
           {name = 'luasnip', max_item_count = 5, priority = 10},
+          {name = 'tmux', max_item_count = 5, priority = 1, keyword_length = 2},
           {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'look', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'nvim_lsp_signature_help'},
