@@ -31,6 +31,9 @@ vim.cmd([[set relativenumber]])
 -- Display improved find and replace
 vim.cmd([[set inccommand=split]])
 
+-- Do not display commands in right-hand corner
+vim.cmd([[set noshowcmd]])
+
 -- }}}
 
 -- Indentation settings through the use of vim.cmd and vimscript commands {{{
