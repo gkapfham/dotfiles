@@ -29,11 +29,11 @@ return {
     end,
   },
 
-  -- Sentencer
-  {
-    event = "VeryLazy",
-    "whonore/vim-sentencer",
-  },
+  -- -- Sentencer
+  -- {
+  --   event = "VeryLazy",
+  --   "whonore/vim-sentencer",
+  -- },
 
   -- Align
   {
