@@ -35,6 +35,12 @@ return {
   --   "whonore/vim-sentencer",
   -- },
 
+  -- Sentence-chopper
+  {
+    ft = "tex",
+    "Konfekt/vim-sentence-chopper",
+  },
+
   -- Align
   {
     "echasnovski/mini.align",
