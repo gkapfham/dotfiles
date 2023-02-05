@@ -28,7 +28,7 @@ return {
         opts = {silent = true, noremap = true, documentFormatting = True}
         -- Create all of the keybindings that have the following purposes:
         -- display in a floating window details about symbol under cursor
-        buf_set_keymap('n', 'K', '<cmd> lua vim.lsp.buf.hover()<CR>', opts)
+        buf_set_keymap('n', '<leader>k', '<cmd> lua vim.lsp.buf.hover()<CR>', opts)
         -- display in a floating window details about parameter to called function
         buf_set_keymap('n', '<space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>', opts)
         -- display in a floating window diagnostics for the current line
