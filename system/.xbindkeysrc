@@ -1,12 +1,18 @@
 # For the benefit of emacs users: -*- shell-script -*-
 
 "xdotool key control+Print"
-  b:2
+  b:10
 
 "xdotool key control+alt+l"
-  b:9
+  b:6
 
 "xdotool key control+alt+h"
+  b:7
+
+"xdotool key control+alt+u"
+  b:9
+
+"xdotool key control+alt+b"
   b:8
 
 ###########################
