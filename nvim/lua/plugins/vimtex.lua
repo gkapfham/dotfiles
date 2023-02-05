@@ -14,6 +14,12 @@
 
 return {
 
+  -- Sentence-chopper
+  {
+    ft = "tex",
+    "Konfekt/vim-sentence-chopper",
+  },
+
   -- Vimtex
   {
     "lervag/vimtex",
