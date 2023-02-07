@@ -736,6 +736,34 @@ function chpwd() {
   exa --group-directories-first --grid --long --sort=name
 }
 
+# Create a timer for work/rest sessions
+declare -A focus_options
+focus_options["Work"]="45"
+focus_options["Rest"]="10"
+
+# Define a function that will create the focus
+# status bar and then echo message when finished
+start_focus() {
+  if [ -n "$1" -a -n "${focus_options["$1"]}" ]; then
+  val=$1
+  echo $val
+  timer ${focus_options["$val"]}m
+  notify-send " $val session done!"
+  fi
+}
+
+# Define the function that offers the command that can
+# be invokved in the shell
+focus() {
+  if [ -n "$1" ] && [ -n "$2" ]; then
+    focus_options["$1"]="$2"
+    echo "$1 for $2 minutes"
+    start_focus "$1"
+  else
+    echo "Invalid parameters: focus [Work/Rest] [time_in_minutes]"
+  fi
+}
+
 # }}}
 
 # Color Commands {{{
