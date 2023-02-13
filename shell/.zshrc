@@ -183,7 +183,7 @@ alias ka="exa --group-directories-first --grid --long --sort=name"
 
 # Use the exa command to display a tree,
 # ensuring better color scheme
-alias tree="exa --tree --level=2 --long"
+alias tree="exa --tree --level=2 --long --icons"
 
 # Always run pacman as root
 alias pacman="sudo pacman"
@@ -273,6 +273,9 @@ HIST_STAMPS="mm/dd/yyyy"
 # Plugin: zsh-syntax-highlighting
 # source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# Plugin: modify and query the zsh history
+source $HOME/.zsh/zsh-hist/zsh-hist.plugin.zsh
+
 # Plugin: fast-syntax-highlighting
 source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
@@ -319,7 +322,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Preview directory's content with exa when completing cd,
 # thereby showing a preview window with Fzf to the right
 # of the cd command that shows the contents of current directory
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always --icons $realpath'
 
 # Switch group using `,` and `.` (note that different
 # groups might include different types of branches when
@@ -733,7 +736,7 @@ secure() {
 # Always display directory contents after a change of directory
 function chpwd() {
   emulate -L zsh
-  exa --group-directories-first --grid --long --sort=name
+  exa --group-directories-first --grid --long --sort=name --icons
 }
 
 # Create a timer for work/rest sessions
@@ -843,7 +846,7 @@ alias f="zi"
 # Redefine Aliases {{{
 
 # Already defined in oh-my-zsh, redefine to use exa
-alias ls="exa --color=always"
+alias ls="exa --color=always --icons"
 
 # }}}
 
