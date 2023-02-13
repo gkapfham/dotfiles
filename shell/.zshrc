@@ -324,6 +324,23 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # of the cd command that shows the contents of current directory
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always --icons $realpath'
 
+# Preview of commandline arguments when completing `kill`
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
+  '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87'
+
+# Preview the status of different daemons controlled by systemctl
+zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+
+# Preview the contents of environment variables
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
+	fzf-preview 'echo ${(P)word}'
+
+# Preview the search for commands or use information for commands
+zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
+  ¦ '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
+
 # Switch group using `,` and `.` (note that different
 # groups might include different types of branches when
 # tab completing a git checkout command)
@@ -341,6 +358,11 @@ zstyle ':fzf-tab:*' show-group full
 
 # Do not show a symbol to the left of a file or a directory
 zstyle ':fzf-tab:*' prefix ''
+
+# Enable the continuous completion of using fzf; basic usage
+# is that you pick a current choice from the fzf menu and then
+# you press the '/' key to start a new completion
+zstyle ':fzf-tab:*' continuous-trigger '/'
 
 # Pass commands to the Fzf program that defines the colors. These
 # colors are the same as those used to configure Fzf when it runs
