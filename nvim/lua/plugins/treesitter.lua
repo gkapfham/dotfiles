@@ -39,12 +39,6 @@ return {
     end
   },
 
-  -- -- Textobjects and motions for Python
-  -- {
-  --   "jeetsukumaran/vim-pythonsense",
-  --   event = "VeryLazy"
-  -- },
-
   -- Improve indentation that addresses
   -- the limitation of treesitter for Python
   {
