@@ -160,7 +160,8 @@ return {
           -- from left (far left corner) to right (middle): {a} {b} {c}
           lualine_a = {'mode'},
           lualine_b = {'branch', {'diff', source = diff_source}},
-          lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}, {search_count, type = "lua_expr"}},
+          -- lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}, {search_count, type = "lua_expr"}},
+          lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}},
           -- Bottom right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
           lualine_x = {'lsp_progress', 'progress', 'location'},
