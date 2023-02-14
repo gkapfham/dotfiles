@@ -196,6 +196,10 @@ alias yaysearch="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay 
 # Alias the go-t command to t
 alias t="go-t"
 
+# Alias to correct a mistaken command
+# in the .zsh_history file with hist
+alias fix="hist fix -1"
+
 # }}}
 
 # Git Aliases {{{
@@ -825,9 +829,11 @@ fi
 
 # Zoxide {{{
 
-# NOTE: Use of "cd<Space><Tab>" does not work. After selecting
-# one of the directories with fzf the cd command (which is
-# aliased to "cd" does not actually change to that directory)
+# NOTE: Use of "cd<Space><Tab>" does not work. However,
+# it is possible to type "cd pro<Space><Tab> and after selecting
+# one of the directories with fzf the cd command it will
+# display the original directory partial directory of "pro"
+# and then a "z#" to go to the selected directory.
 
 # NOTE: I also tried to use "--cmd cd" in the following eval
 # command and then this caused two of the "zoxide: no match
@@ -835,9 +841,6 @@ fi
 # a reference to resolve the problem, but it did not work:
 #
 # https://github.com/ajeetdsouza/zoxide/issues/270
-
-# Initialize the zoxide tool
-eval "$(zoxide init zsh)"
 
 # Define the color scheme for FZF, which zoxide uses
 # when allowing the selection of directories; this
@@ -850,11 +853,14 @@ export _ZO_FZF_OPTS="--no-bold --no-separator --cycle
   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
   --color=marker:#d78700,spinner:#875f87,header:#875f87"
 
+# Initialize the zoxide tool
+eval "$(zoxide init zsh)"
+
 # Always use the z command when running a "cd"; this
 # means that you can type "cd <partial-dir>" and it
 # will take you to <actual-dir> which is the highest
 # match in the database based on name and score.
-# alias cd="z"
+alias cd="z"
 
 # Make it easy to quickly search through the entire
 # database of directories in a fuzzy fashion. This
@@ -862,6 +868,7 @@ export _ZO_FZF_OPTS="--no-bold --no-separator --cycle
 # at all, in which case you can fuzzy search with
 # Fzf through everything stored in the database.
 alias f="zi"
+alias ff="zi"
 
 # }}}
 
