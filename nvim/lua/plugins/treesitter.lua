@@ -52,6 +52,12 @@ return {
     build = ":TSUpdate",
     event = "BufReadPost",
     config = function()
+      -- rewrite deprecated function to the new function so
+      -- that all plugins who use the deprecated one do not
+      -- produce the warning message about using wrong one
+      local ts_utils = require("nvim-treesitter.ts_utils")
+      ts_utils.is_in_node_range = vim.treesitter.is_in_node_range
+      -- setup the treesitter and install it for all needed languages
       require("nvim-treesitter.configs").setup({
         sync_install = false,
         ensure_installed = {
