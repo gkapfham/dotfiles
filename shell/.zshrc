@@ -165,6 +165,8 @@ export PIPX_HOME="$HOME/.local/pipx"
 
 # System Aliases {{{
 
+alias kitty="kitty --single-instance"
+
 # MuPDF resolution
 alias mupdf="mupdf -r 288"
 
