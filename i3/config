@@ -80,7 +80,7 @@ set $rofi-windows "rofi -modi 'window' -show window -width 70"
 bindsym Control+$mod+m exec $rofi-windows
 
 # Rofi for combination
-set $rofi-combo "rofi -combi-modi run#drun#ssh#window -show combi -width 70"
+set $rofi-combo "rofi -combi-modi window#run#drun -show combi -width 70"
 bindsym Control+$mod+o exec $rofi-combo
 
 # Rofi for workspaces
