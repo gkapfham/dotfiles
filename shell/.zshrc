@@ -489,7 +489,7 @@ export FZF_DEFAULT_OPTS='
 #   --color=marker:172,spinner:96,header:96'
 
 # Trigger fzf completion using the semi-colon key instead of **
-# export FZF_COMPLETION_TRIGGER=';'
+export FZF_COMPLETION_TRIGGER='**'
 
 # Configure fzf to work with fast-finder called fd
 # export FZF_DEFAULT_COMMAND="fd . $PWD"
