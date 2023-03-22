@@ -517,51 +517,11 @@ function zvm_after_init() {
   ZSH_AUTOSUGGEST_USE_ASYNC=1
   bindkey '^ ' autosuggest-accept
 
-  # Use FZF to filter the output of FASD anywhere it is a command
-  # autoload -U modify-current-argument
-  # fzf-fasd-widget() {
-  #   # divide the commands buffer into words
-  #   local words i beginword start
-  #   i=0
-  #   start=1
-  #   beginword=0
-  #   words=("${(z)BUFFER}")
-  #   while (( beginword <= CURSOR )); do
-  #           (( i++ ))
-  #           (( beginword += ${#words[$i]}+1 ))
-  #   done
-  #   # extract the first and current words
-  #   # extract the first letter as a potential trigger
-  #   FIRSTWORD="$words[$start]"
-  #   CURRENTWORD="$words[$i]"
-  #   TRIGGERLETTER=${CURRENTWORD:0:1}
-  #   # the trigger of "," was used, so start
-  #   # the use of FASD and FZF with this word
-  #   if [ "$TRIGGERLETTER" = "," ]; then
-  #     unset 'words[${#words[@]}]'
-  #     PASTWORDS=${words[@]}
-  #     CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
-  #     LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
-  #       fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
-  #   # the trigger of "," was not used, so
-  #   # search interactively based on user input
-  #   else
-  #     PASTWORDS=${words[@]}
-  #     CURRENTWORD=""
-  #     LBUFFER="${PASTWORDS} $(fasd -d -l -r $CURRENTWORD | \
-  #       fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
-  #   fi
-  #   # update the prompt with the result of using FASD and FZF
-  #   local ret=$?
-  #   zle redisplay
-  #   typeset -f zle-line-init >/dev/null && zle zle-line-init
-  #   return $ret
-  # }
   # Create a binding so that you can type "cd ,pract^B"
   # (as an example) to trigger this integrated widget
   zle     -N   fzf-fasd-widget
   bindkey '^B' fzf-fasd-widget
-  # Use FZF to filter the output of FASD anywhere it is a command
+  # Use FZF to filter the output of z.lua anywhere it is a command
   autoload -U modify-current-argument
   fzf-fasd-widget() {
     # divide the commands buffer into words
@@ -580,12 +540,11 @@ function zvm_after_init() {
     CURRENTWORD="$words[$i]"
     TRIGGERLETTER=${CURRENTWORD:0:1}
     # the trigger of "," was used, so start
-    # the use of FASD and FZF with this word
+    # the use of z.lua and FZF with this word
     if [ "$TRIGGERLETTER" = "," ]; then
       unset 'words[${#words[@]}]'
       PASTWORDS=${words[@]}
       CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
-      # LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
       LBUFFER="${PASTWORDS}$(z -l $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
         fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
     # the trigger of "," was not used, so
@@ -593,17 +552,17 @@ function zvm_after_init() {
     else
       PASTWORDS=${words[@]}
       CURRENTWORD=""
-      # LBUFFER="${PASTWORDS} $(z -l $CURRENTWORD | \
       LBUFFER="${PASTWORDS}$(z -l $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
         fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
     fi
-    # update the prompt with the result of using FASD and FZF
+    # update the prompt with the result of using z.lua and FZF
     echo $BUFFER
     local ret=$?
     zle redisplay
     typeset -f zle-line-init >/dev/null && zle zle-line-init
     return $ret
   }
+
   # Create a binding so that you can type "cd ,pract^B"
   # (as an example) to trigger this integrated widget
   zle     -N   fzf-fasd-widget
@@ -836,56 +795,32 @@ fi
 
 # }}}
 
-# Zoxide {{{
-
-# NOTE: Use of "cd<Space><Tab>" does not work. However,
-# it is possible to type "cd pro<Space><Tab> and after selecting
-# one of the directories with fzf the cd command it will
-# display the original directory partial directory of "pro"
-# and then a "z#" to go to the selected directory.
-
-# NOTE: I also tried to use "--cmd cd" in the following eval
-# command and then this caused two of the "zoxide: no match
-# found" errors to appear at each prompt display. This is
-# a reference to resolve the problem, but it did not work:
-#
-# https://github.com/ajeetdsouza/zoxide/issues/270
+# z.lua {{{
 
 # Define the color scheme for FZF, which zoxide uses
 # when allowing the selection of directories; this
 # color scheme matches (but not exactly, not sure
 # why) the one used with the fzf-tab tool.
 
-export _ZO_FZF_OPTS="--no-bold --no-separator --cycle
-  --bind ctrl-f:page-down,ctrl-b:page-up
-  --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
-  --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
-  --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
-  --color=marker:#d78700,spinner:#875f87,header:#875f87"
+# export _ZO_FZF_OPTS="--no-bold --no-separator --cycle
+#   --bind ctrl-f:page-down,ctrl-b:page-up
+#   --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
+#   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
+#   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
+#   --color=marker:#d78700,spinner:#875f87,header:#875f87"
 
-# Initialize the zoxide tool
-# eval "$(zoxide init zsh)"
+# set configuration for fzf when using z -I
+export _ZL_FZF_FLAG="--no-bold --no-separator --cycle --bind ctrl-f:page-down,ctrl-b:page-up --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700 --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700 --color=info:#87afd7,prompt:#87afd7,pointer:#d78700 --color=marker:#d78700,spinner:#875f87,header:#875f87"
 
+# Source the z.lua plugin
 eval "$(lua /usr/share/z.lua/z.lua --init zsh enhanced once fzf)"
 source $HOME/.zsh/czmod/czmod.zsh
 
-export _ZL_FZF_FLAG="--no-bold --no-separator --cycle --bind ctrl-f:page-down,ctrl-b:page-up --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700 --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700 --color=info:#87afd7,prompt:#87afd7,pointer:#d78700 --color=marker:#d78700,spinner:#875f87,header:#875f87"
-
+# Create a fuzzy search alias for z.lua
 alias zz='z -I .'
 
-# Always use the z command when running a "cd"; this
-# means that you can type "cd <partial-dir>" and it
-# will take you to <actual-dir> which is the highest
-# match in the database based on name and score.
+# Breaks the use of the fzf-tab plugin
 # alias cd="z"
-
-# Make it easy to quickly search through the entire
-# database of directories in a fuzzy fashion. This
-# command can accept a <partial-dir> or no directory
-# at all, in which case you can fuzzy search with
-# Fzf through everything stored in the database.
-# alias f="zi"
-# alias ff="zi"
 
 # }}}
 
