@@ -400,12 +400,13 @@ bindkey '^ ' autosuggest-accept
 
 # create the FASD cache so that the terminal loads quickly
 # but I still get all of the FASD features
-fasd_cache="$HOME/.fasd-init-zsh"
-if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
-fi
-source "$fasd_cache"
-unset fasd_cache
+
+# fasd_cache="$HOME/.fasd-init-zsh"
+# if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+#   fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
+# fi
+# source "$fasd_cache"
+# unset fasd_cache
 
 # Use FZF to filter the output of FASD anywhere it is a command
 autoload -U modify-current-argument
@@ -466,6 +467,8 @@ export FZF_DEFAULT_OPTS='
   --no-bold
   --cycle
   --no-separator
+  --no-scrollbar
+  --bind tab:down,shift-tab:up
   --bind ctrl-f:page-down,ctrl-b:page-up
   --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
@@ -486,10 +489,11 @@ export FZF_DEFAULT_OPTS='
 #   --color=marker:172,spinner:96,header:96'
 
 # Trigger fzf completion using the semi-colon key instead of **
-export FZF_COMPLETION_TRIGGER=';'
+# export FZF_COMPLETION_TRIGGER=';'
 
 # Configure fzf to work with fast-finder called fd
-export FZF_DEFAULT_COMMAND="fd . $HOME"
+# export FZF_DEFAULT_COMMAND="fd . $PWD"
+export FZF_DEFAULT_COMMAND="fd"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # }}}
@@ -848,6 +852,7 @@ fi
 # when allowing the selection of directories; this
 # color scheme matches (but not exactly, not sure
 # why) the one used with the fzf-tab tool.
+
 export _ZO_FZF_OPTS="--no-bold --no-separator --cycle
   --bind ctrl-f:page-down,ctrl-b:page-up
   --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
@@ -856,21 +861,28 @@ export _ZO_FZF_OPTS="--no-bold --no-separator --cycle
   --color=marker:#d78700,spinner:#875f87,header:#875f87"
 
 # Initialize the zoxide tool
-eval "$(zoxide init zsh)"
+# eval "$(zoxide init zsh)"
+
+eval "$(lua /usr/share/z.lua/z.lua --init zsh enhanced once fzf)"
+source $HOME/.zsh/czmod/czmod.zsh
+
+export _ZL_FZF_FLAG="--no-bold --no-separator --cycle --bind ctrl-f:page-down,ctrl-b:page-up --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700 --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700 --color=info:#87afd7,prompt:#87afd7,pointer:#d78700 --color=marker:#d78700,spinner:#875f87,header:#875f87"
+
+alias zz='z -I .'
 
 # Always use the z command when running a "cd"; this
 # means that you can type "cd <partial-dir>" and it
 # will take you to <actual-dir> which is the highest
 # match in the database based on name and score.
-alias cd="z"
+# alias cd="z"
 
 # Make it easy to quickly search through the entire
 # database of directories in a fuzzy fashion. This
 # command can accept a <partial-dir> or no directory
 # at all, in which case you can fuzzy search with
 # Fzf through everything stored in the database.
-alias f="zi"
-alias ff="zi"
+# alias f="zi"
+# alias ff="zi"
 
 # }}}
 
