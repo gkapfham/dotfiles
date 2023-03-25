@@ -90,17 +90,17 @@ set shiftround
 
 -- Display trailing spaces
 vim.cmd([[
-  set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
-  set list
-  match ExtraWhitespace /\s\+$\|\t/
-  let ftToIgnore = ['neotest-output-panel']
-  augroup extra_whitespace
-    autocmd!
-    autocmd BufWinEnter * if index(ftToIgnore, &ft) < 0 | match ExtraWhitespace /\s\+$/
-    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-    autocmd BufWinLeave * call clearmatches()
-  augroup END
+  " set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
+  " set list
+  " match ExtraWhitespace /\s\+$\|\t/
+  " let ftToIgnore = ['neotest-output-panel']
+  " augroup extra_whitespace
+  "   autocmd!
+  "   autocmd BufWinEnter * if index(ftToIgnore, &ft) < 0 | match ExtraWhitespace /\s\+$/
+  "   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+  "   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+  "   autocmd BufWinLeave * call clearmatches()
+  " augroup END
 ]])
 
 -- }}}
