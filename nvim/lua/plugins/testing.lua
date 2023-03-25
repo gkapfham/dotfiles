@@ -21,7 +21,7 @@ return {
         },
       })
       vim.cmd([[
-        au Filetype neotest-output-panel setlocal listchars+=tab:\ \
+        " au Filetype neotest-output-panel setlocal listchars+=tab:\ \
         command! TestSummary lua require("neotest").summary.toggle()
         command! TestFile lua require("neotest").run.run(vim.fn.expand("%"))
         command! Test lua require("neotest").run.run(vim.fn.getcwd())
