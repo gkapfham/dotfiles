@@ -5,6 +5,9 @@
     default = simple
 [core]
     excludesfile = /home/gkapfham/.gitignore_global
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only --features=interactive
 [github]
     user = gkapfham
 [filter "lfs"]
@@ -46,4 +49,34 @@
 [pull]
 	rebase = false
 [init]
-	defaultBranch = master
+    defaultBranch = master
+[delta]
+    features = decorations
+    dark = true
+    line-numbers = true
+    side-by-side = true
+    keep-plus-minus-markers = true
+    commit-style = bold green
+    commit-decoration-style = box
+    file-style = bold italic green
+    file-decoration-style = box
+    hunk-header-style = file line-number green
+    minus-style = yellow
+    plus-style = red
+    zero-style = #8a8a8a
+    file-added-label = "+"
+    file-copied-label = "=="
+    file-modified-label = "~"
+    file-removed-label = "-"
+    file-renamed-label = "->"
+    hunk-header-style = omit
+    line-numbers-left-format = " {nm:>3} │"
+    line-numbers-left-style = #8a8a8a
+    line-numbers-right-format = " {np:>3} │"
+    line-numbers-right-style = #8a8a8a
+    line-numbers-plus-style = red
+    line-numbers-minus-style = yellow
+    plus-emph-style = red underline
+    minus-emph-style = yellow underline
+    true-color = true
+    hyperlinks = true
