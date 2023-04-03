@@ -400,7 +400,7 @@ bindsym $mod+Shift+q kill
 exec --no-startup-id xset dpms 600
 
 # Lock the screen after sixty minutes
-exec --no-startup-id xautolock -time 60 -locker ~/.config/i3/scripts/i3-lock-screen.sh
+# exec --no-startup-id xautolock -time 60 -locker ~/.config/i3/scripts/i3-lock-screen.sh
 
 # Reload the i3 window manager
 bindsym $mod+Shift+c reload
