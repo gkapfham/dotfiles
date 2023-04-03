@@ -3,11 +3,11 @@
 
 return {
 
-  -- MundoToggle
-  {
-    "simnalamburt/vim-mundo",
-    cmd = "MundoToggle",
-  },
+  -- -- MundoToggle
+  -- {
+  --   "simnalamburt/vim-mundo",
+  --   cmd = "MundoToggle",
+  -- },
 
   -- Surround
   {
