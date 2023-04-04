@@ -235,12 +235,21 @@ fzf-git-branch() {
         sed "s/.* //"
 }
 
+# Define a function to support checking out local branches
+fzf-git-branch-simple() {
+  git branch --sort=-committerdate |
+        grep -v HEAD |
+        fzf --height 75% --ansi --no-multi --preview-window right:65% \
+            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
+        sed "s/.* //"
+}
+
 # Run git checkout and call the previous function
 # for display details about the branch
 fzf-git-checkout() {
     git rev-parse HEAD > /dev/null 2>&1 || return
     local branch
-    branch=$(fzf-git-branch)
+    branch=$(fzf-git-branch-simple)
     if [[ "$branch" = "" ]]; then
         echo "No branch selected."
         return
@@ -255,8 +264,14 @@ fzf-git-checkout() {
     fi
 }
 
-# Define an alias that uses fzf to select git branches
-alias gcob='fzf-git-checkout'
+# Quickly checkout a branch based on its diff
+fzf-git-branch-diff() {
+  git branch --sort=-committerdate | fzf --preview "git diff --color=always {1}" | xargs git checkout
+}
+
+# Define aliases that use fzf to select git branches
+alias ffgb='fzf-git-checkout'
+alias ffgbd='fzf-git-branch-diff'
 
 # }}}
 
