@@ -245,7 +245,9 @@ fzf-git-branch-simple() {
 }
 
 # Run git checkout and call the previous function
-# for display details about the branch
+# for display details about the branch; this works
+# for local and remote branches but right now is
+# only using the "simple" function with local branches
 fzf-git-checkout() {
     git rev-parse HEAD > /dev/null 2>&1 || return
     local branch
