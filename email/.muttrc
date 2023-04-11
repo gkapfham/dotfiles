@@ -164,6 +164,18 @@ set timeout=1
 # Check for new mail every 15 seconds
 set mail_check=0
 
+# Do no allow the mutt mua to sleep
+# when displaying information messages
+set sleep_time=0
+
+# Do not require the prompt for all
+# recepient details before composing
+set fast_reply
+
+# Change the scrolling behavior so that
+# it works on a line-by-line basis
+set menu_scroll
+
 # }}}
 
 # Sidebar {{{
