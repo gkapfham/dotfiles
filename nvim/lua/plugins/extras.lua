@@ -9,6 +9,18 @@ return {
   --   cmd = "MundoToggle",
   -- },
 
+  -- Undotree
+  {
+    "mbbill/undotree",
+    cmd = "UndotreeToggle",
+  },
+
+  -- mail?
+  {
+    "https://git.sr.ht/~soywod/himalaya-vim",
+    cmd = "Himalaya",
+  },
+
   -- Surround
   {
     "echasnovski/mini.surround",
