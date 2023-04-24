@@ -562,7 +562,8 @@ function zvm_after_init() {
       unset 'words[${#words[@]}]'
       PASTWORDS=${words[@]}
       CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
-      LBUFFER="${PASTWORDS}$(z -l $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
+      # LBUFFER="${PASTWORDS}$(z -l $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
+      LBUFFER="${PASTWORDS}$(z | grep $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
         fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
     # the trigger of "," was not used, so
     # search interactively based on user input
