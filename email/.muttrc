@@ -367,4 +367,39 @@ macro pager \Cr "<display-toggle-weed> <print-message> <display-toggle-weed>"
 macro index,pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 macro attach,compose \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 
+# color index yellow default '.*'
+# color index_author red default '.*'
+# color index_number blue default
+# color index_subject cyan default '.*'
+
+# # Other colors and aesthetic settings:
+# mono bold bold
+# mono underline underline
+# mono indicator underline
+# mono error bold
+# color normal default default
+# color indicator brightred default
+# color sidebar_highlight red default
+# color sidebar_divider brightblack default
+# color sidebar_flagged red default
+# color sidebar_new green default
+# color error red default
+# color tilde black default
+# color message cyan default
+# color markers red white
+# color attachment white default
+# color search brightmagenta default
+# color status black default
+# color hdrdefault brightgreen default
+# color quoted green default
+# color quoted1 blue default
+# color quoted2 cyan default
+# color quoted3 yellow default
+# color quoted4 red default
+# color quoted5 brightred default
+# color signature brightgreen default
+# color bold black default
+# color underline black default
+
+
 # }}}
