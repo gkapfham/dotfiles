@@ -3,6 +3,15 @@
 
 return {
 
+  -- guess-indent.nvim
+  {
+    "nmac427/guess-indent.nvim",
+    event = "VeryLazy",
+    config = function()
+      require('guess-indent').setup {}
+    end,
+  },
+
   -- treesitter-indent-object.nvim
   {
     "kiyoon/treesitter-indent-object.nvim",
