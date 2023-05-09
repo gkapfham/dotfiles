@@ -39,12 +39,12 @@ return {
     end
   },
 
-  -- Improve indentation that addresses
-  -- the limitation of treesitter for Python
-  {
-    "yioneko/nvim-yati",
-    event = "VeryLazy"
-  },
+  -- -- Improve indentation that addresses
+  -- -- the limitation of treesitter for Python
+  -- {
+  --   "yioneko/nvim-yati",
+  --   event = "VeryLazy"
+  -- },
 
   -- Treesitter
   {
@@ -88,7 +88,7 @@ return {
         -- Highlighting
         highlight = { enable = true, disable = {"latex", "markdown"}, },
         -- Indenting
-        indent = { enable = false, },
+        indent = { enable = true, },
         -- Commenting
         context_commentstring = { enable = true, enable_autocmd = false },
         -- Alternate identing
