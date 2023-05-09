@@ -401,5 +401,4 @@ macro attach,compose \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview
 # color bold black default
 # color underline black default
 
-
 # }}}
