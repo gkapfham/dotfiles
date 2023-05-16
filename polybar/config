@@ -5,6 +5,7 @@ background = #333333
 background-alt = #c6c6c6
 ; foreground = #bcbcbc
 foreground = #a8a8af
+foreground-alt = #a8a8af
 primary = #616161
 secondary = #e60053
 alert = #616161
@@ -62,10 +63,11 @@ modules-right = battery0 backlight pulseaudio date
 ; Enable this tray once the polybar bug is fixed and display works
 ;tray-position = right
 ;tray-padding = 8
-;tray-maxsize = 20
+;tray-maxsize = 40
 ;tray-scale = 1.0
 ;tray-transparent = true
 ;tray-detached = true
+;tray-foreground = ${root.foreground}
 
 ; Allow the mouse to click and scroll
 cursor-click = pointer
