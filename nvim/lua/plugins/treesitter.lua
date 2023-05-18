@@ -67,7 +67,6 @@ return {
           "gitattributes",
           "gitignore",
           "go",
-          "help",
           "html",
           "java",
           "javascript",
