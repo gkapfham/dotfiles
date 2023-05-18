@@ -676,6 +676,10 @@ function workspace {
 # --> Python
 . /opt/asdf-vm/asdf.sh
 
+# Setup rtx as a drop-in replacement for asdf
+eval "$(rtx activate zsh)"
+alias rtt="rtx"
+
 # }}}
 
 # DEPRECATED Pyenv {{{
@@ -855,3 +859,4 @@ alias ls="exa --color=always --icons"
 # zprof
 
 # }}}
+
