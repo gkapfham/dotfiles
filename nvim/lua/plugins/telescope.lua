@@ -95,6 +95,12 @@ return {
       -- note that refactoring requires section of code in visual mode
       require("telescope").load_extension("refactoring")
       require("telescope").load_extension("undo")
+      -- Load and configure the notify plugin so that all
+      -- notifications are viewable through telescope; note
+      -- that this is now required because telescope is loaded
+      -- in a lazy fashion and this plugin will not load
+      -- unless done in an explicit fashion
+      require("telescope").load_extension("notify")
       -- Configure the keymap for refactoring; setting it here because
       -- I do know how to set visual mode keymaps in keys section of spec
       vim.api.nvim_set_keymap(
