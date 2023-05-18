@@ -85,7 +85,7 @@ return {
           "yaml",
         },
         -- Highlighting
-        highlight = { enable = true, disable = {"html", "latex", "markdown"}, },
+        highlight = { enable = true, disable = {"html", "latex", "markdown", "markdown_inline"}, },
         -- Indenting
         indent = { enable = true, },
         -- Commenting
