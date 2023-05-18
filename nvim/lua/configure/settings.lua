@@ -1,5 +1,13 @@
 -- Configure variables that are a part of neovim's global environment
 
+-- Stop running the health checks for the Perl provider {{{
+
+vim.cmd([[
+let g:loaded_perl_provider = 0
+]])
+
+-- }}}
+
 -- Define settings for vim.opt variables {{{
 
 -- Define the signcolumn
@@ -54,8 +62,6 @@ set formatoptions+=r
   set shiftwidth=2
   " " set smartindent
 
-
-
 ]])
 
 -- Display linebreaks and tabs
@@ -87,21 +93,6 @@ set shiftround
 
 -- vim.opt.smartindent = true -- Insert indents automatically
 -- vim.opt.autoindent = true -- Insert indents automatically
-
--- Display trailing spaces
-vim.cmd([[
-  " set listchars=tab:▸▹,trail:•,extends:#,precedes:#,nbsp:⌻
-  " set list
-  " match ExtraWhitespace /\s\+$\|\t/
-  " let ftToIgnore = ['neotest-output-panel']
-  " augroup extra_whitespace
-  "   autocmd!
-  "   autocmd BufWinEnter * if index(ftToIgnore, &ft) < 0 | match ExtraWhitespace /\s\+$/
-  "   autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-  "   autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-  "   autocmd BufWinLeave * call clearmatches()
-  " augroup END
-]])
 
 -- }}}
 
