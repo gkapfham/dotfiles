@@ -83,6 +83,19 @@ return {
       map('n', '<space>rv', '<cmd> lua vim.lsp.buf.rename()<CR>')
       -- reformat entire buffer content with a sync (i.e., reformat in a blocking fashion)
       map('n', '<space>ff', '<cmd> lua vim.lsp.buf.format()<CR>')
+      -- Configure null-ls for diagnostics and formatting
+      local null_ls = require("null-ls")
+      null_ls.setup({
+          sources = {
+            null_ls.builtins.diagnostics.chktex,
+            null_ls.builtins.diagnostics.flake8,
+            null_ls.builtins.diagnostics.pydocstyle,
+            null_ls.builtins.diagnostics.pylint,
+            null_ls.builtins.formatting.black,
+            null_ls.builtins.formatting.isort,
+            null_ls.builtins.formatting.prettierd,
+          },
+      })
     end,
     -- Keys
     keys = {
