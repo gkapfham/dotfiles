@@ -51,6 +51,9 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = "BufReadPost",
+    dependencies = {
+      "nvim-treesitter/playground",
+    },
     config = function()
       -- rewrite deprecated function to the new function so
       -- that all plugins who use the deprecated one do not
@@ -85,16 +88,36 @@ return {
           "yaml",
         },
         -- Highlighting
-        highlight = { enable = true, disable = {"html", "latex", "markdown", "markdown_inline"}, },
+        highlight = { enable = true, disable = {"html", "latex"}, },
         -- Indenting
         indent = { enable = true, },
         -- Commenting
         context_commentstring = { enable = true, enable_autocmd = false },
         -- Alternate identing
-        yati = {
-          enable = true,
-          default_lazy = true,
-          default_fallback = "auto"
+        -- yati = {
+        --   enable = true,
+        --   default_lazy = true,
+        --   default_fallback = "auto"
+        -- },
+        require "nvim-treesitter.configs".setup {
+          playground = {
+            enable = true,
+            disable = {},
+            updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+            persist_queries = false, -- Whether the query persists across vim sessions
+            keybindings = {
+              toggle_query_editor = 'o',
+              toggle_hl_groups = 'i',
+              toggle_injected_languages = 't',
+              toggle_anonymous_nodes = 'a',
+              toggle_language_display = 'I',
+              focus_language = 'f',
+              unfocus_language = 'F',
+              update = 'R',
+              goto_node = '<cr>',
+              show_help = '?',
+            },
+          }
         },
       })
     end,
