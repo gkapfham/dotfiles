@@ -53,6 +53,8 @@ return {
       lspconfig.cssls.setup {
         capabilities = capabilities,
       }
+      -- configure yamlls for YAML LSP
+      lspconfig.yamlls.setup {}
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
       -- to support the display of the diagnostics
       require'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
