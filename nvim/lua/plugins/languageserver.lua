@@ -33,8 +33,9 @@ return {
         ensure_installed = { "lua_ls", "pyright", "cssls" },
       }
       local lspconfig = require('lspconfig')
+      -- configure pyright for Python LSP
       lspconfig.pyright.setup {}
-      -- lspconfig.lua_ls.setup {}
+      -- configure luals (with neovim support) for Lua LSP
       lspconfig.lua_ls.setup({
         settings = {
           Lua = {
@@ -44,13 +45,50 @@ return {
           }
         }
       })
+      -- configure marksman for Markdown LSP
       lspconfig.marksman.setup {}
+      -- configure cssls for CSS LSP
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
       lspconfig.cssls.setup {
         capabilities = capabilities,
       }
-    end
+      -- Use toggle_lsp_diagnostics to disable the virtual_text and then
+      -- to support the display of the diagnostics
+      require'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
+      -- Define customized signs for diagnostics reported by the language server;
+      -- note that this will define the signs displayed in the gutter
+      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
+      end
+      -- opts = {silent = true, noremap = true, documentFormatting = True}
+      -- Create all of the keybindings that have the following purposes:
+      -- display in a floating window details about symbol under cursor
+      local map = function(type, key, value)
+        vim.api.nvim_buf_set_keymap(0,type,key,value,{noremap = true, silent = true});
+      end
+      -- display in a floating window details about symbol under cursor
+      map('n', '<leader>k', '<cmd> lua vim.lsp.buf.hover()<CR>')
+      -- display in a floating window details about parameter to called function
+      map('n', '<space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>')
+      -- display in a floating window diagnostics for the current line
+      map('n', '<space>e', '<cmd> lua vim.diagnostic.open_float(0, {scope="line"})<CR>')
+      -- send all of the diagnostics for the current window to the location list
+      map('n', '<space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>')
+      -- run a code action on the current line of code
+      map('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+      -- rename the variable using a floating menu
+      map('n', '<space>rv', '<cmd> lua vim.lsp.buf.rename()<CR>')
+      -- reformat entire buffer content with a sync (i.e., reformat in a blocking fashion)
+      map('n', '<space>ff', '<cmd> lua vim.lsp.buf.format()<CR>')
+    end,
+    -- Keys
+    keys = {
+      -- Toggle virtual text from the language servers
+      { "<Space>sv", "<Plug>(toggle-lsp-diag-vtext)", desc = "Language Server: Toggle virtual text" },
+    }
   },
 
   {
@@ -61,9 +99,7 @@ return {
     keys = {{
       "<leader>vv", "<cmd>:VenvSelect<cr>",
     }}
-  }
-
-}
+  },
 
   -- -- Language servers with:
   -- -- nvim-lspconfig
@@ -149,3 +185,5 @@ return {
   --     { "<Space>sv", "<Plug>(toggle-lsp-diag-vtext)", desc = "Language Server: Toggle virtual text" },
   --   }
   -- },
+
+}
