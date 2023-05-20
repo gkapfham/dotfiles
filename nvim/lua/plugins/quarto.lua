@@ -24,7 +24,6 @@ return {
                 }
             }
         }
-
         -- Function to open Quarto Preview in a buffer instead of a tab
         vim.cmd [[
             function! QuartoPreview()
@@ -36,7 +35,6 @@ return {
         ]]
         vim.keymap.set('n', '<localleader>P', ':call QuartoPreview() <CR>')
     end
-
   },
 
   -- send code from python/r/qmd documets to a terminal or REPL
