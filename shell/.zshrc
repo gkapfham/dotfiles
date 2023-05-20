@@ -165,6 +165,8 @@ export PIPX_HOME="$HOME/.local/pipx"
 
 # System Aliases {{{
 
+alias kitty="kitty --single-instance"
+
 # MuPDF resolution
 alias mupdf="mupdf -r 288"
 
@@ -183,7 +185,7 @@ alias ka="exa --group-directories-first --grid --long --sort=name"
 
 # Use the exa command to display a tree,
 # ensuring better color scheme
-alias tree="exa --tree --level=2 --long"
+alias tree="exa --tree --level=2 --long --icons"
 
 # Always run pacman as root
 alias pacman="sudo pacman"
@@ -195,6 +197,10 @@ alias yaysearch="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay 
 
 # Alias the go-t command to t
 alias t="go-t"
+
+# Alias to correct a mistaken command
+# in the .zsh_history file with hist
+alias fix="hist fix -1"
 
 # }}}
 
@@ -229,12 +235,23 @@ fzf-git-branch() {
         sed "s/.* //"
 }
 
+# Define a function to support checking out local branches
+fzf-git-branch-simple() {
+  git branch --sort=-committerdate |
+        grep -v HEAD |
+        fzf --height 75% --ansi --no-multi --preview-window right:65% \
+            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
+        sed "s/.* //"
+}
+
 # Run git checkout and call the previous function
-# for display details about the branch
+# for display details about the branch; this works
+# for local and remote branches but right now is
+# only using the "simple" function with local branches
 fzf-git-checkout() {
     git rev-parse HEAD > /dev/null 2>&1 || return
     local branch
-    branch=$(fzf-git-branch)
+    branch=$(fzf-git-branch-simple)
     if [[ "$branch" = "" ]]; then
         echo "No branch selected."
         return
@@ -249,8 +266,14 @@ fzf-git-checkout() {
     fi
 }
 
-# Define an alias that uses fzf to select git branches
-alias gcob='fzf-git-checkout'
+# Quickly checkout a branch based on its diff
+fzf-git-branch-diff() {
+  git branch --sort=-committerdate | fzf --preview "git diff --color=always {1}" | xargs git checkout
+}
+
+# Define aliases that use fzf to select git branches
+alias ffgb='fzf-git-checkout'
+alias ffgbd='fzf-git-branch-diff'
 
 # }}}
 
@@ -272,6 +295,9 @@ HIST_STAMPS="mm/dd/yyyy"
 # NOTE: use this plugin as a backup in case alternate is unavailable
 # Plugin: zsh-syntax-highlighting
 # source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Plugin: modify and query the zsh history
+source $HOME/.zsh/zsh-hist/zsh-hist.plugin.zsh
 
 # Plugin: fast-syntax-highlighting
 source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
@@ -319,7 +345,24 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Preview directory's content with exa when completing cd,
 # thereby showing a preview window with Fzf to the right
 # of the cd command that shows the contents of current directory
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always --icons $realpath'
+
+# Preview of commandline arguments when completing `kill`
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
+  '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87'
+
+# Preview the status of different daemons controlled by systemctl
+zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+
+# Preview the contents of environment variables
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
+	fzf-preview 'echo ${(P)word}'
+
+# Preview the search for commands or use information for commands
+zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
+  ¦ '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
 
 # Switch group using `,` and `.` (note that different
 # groups might include different types of branches when
@@ -338,6 +381,11 @@ zstyle ':fzf-tab:*' show-group full
 
 # Do not show a symbol to the left of a file or a directory
 zstyle ':fzf-tab:*' prefix ''
+
+# Enable the continuous completion of using fzf; basic usage
+# is that you pick a current choice from the fzf menu and then
+# you press the '/' key to start a new completion
+zstyle ':fzf-tab:*' continuous-trigger '/'
 
 # Pass commands to the Fzf program that defines the colors. These
 # colors are the same as those used to configure Fzf when it runs
@@ -369,57 +417,58 @@ bindkey '^ ' autosuggest-accept
 
 # create the FASD cache so that the terminal loads quickly
 # but I still get all of the FASD features
-fasd_cache="$HOME/.fasd-init-zsh"
-if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-  fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
-fi
-source "$fasd_cache"
-unset fasd_cache
+
+# fasd_cache="$HOME/.fasd-init-zsh"
+# if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+#   fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
+# fi
+# source "$fasd_cache"
+# unset fasd_cache
 
 # Use FZF to filter the output of FASD anywhere it is a command
-autoload -U modify-current-argument
-fzf-fasd-widget() {
-  # divide the commands buffer into words
-  local words i beginword start
-  i=0
-  start=1
-  beginword=0
-  words=("${(z)BUFFER}")
-  while (( beginword <= CURSOR )); do
-          (( i++ ))
-          (( beginword += ${#words[$i]}+1 ))
-  done
-  # extract the first and current words
-  # extract the first letter as a potential trigger
-  FIRSTWORD="$words[$start]"
-  CURRENTWORD="$words[$i]"
-  TRIGGERLETTER=${CURRENTWORD:0:1}
-  # the trigger of "," was used, so start
-  # the use of FASD and FZF with this word
-  if [ "$TRIGGERLETTER" = "," ]; then
-    unset 'words[${#words[@]}]'
-    PASTWORDS=${words[@]}
-    CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
-    LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
-      fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
-  # the trigger of "," was not used, so
-  # search interactively based on user input
-  else
-    PASTWORDS=${words[@]}
-    CURRENTWORD=""
-    LBUFFER="${PASTWORDS} $(fasd -d -l -r $CURRENTWORD | \
-      fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
-  fi
-  # update the prompt with the result of using FASD and FZF
-  local ret=$?
-  zle redisplay
-  typeset -f zle-line-init >/dev/null && zle zle-line-init
-  return $ret
-}
+# autoload -U modify-current-argument
+# fzf-fasd-widget() {
+#   # divide the commands buffer into words
+#   local words i beginword start
+#   i=0
+#   start=1
+#   beginword=0
+#   words=("${(z)BUFFER}")
+#   while (( beginword <= CURSOR )); do
+#           (( i++ ))
+#           (( beginword += ${#words[$i]}+1 ))
+#   done
+#   # extract the first and current words
+#   # extract the first letter as a potential trigger
+#   FIRSTWORD="$words[$start]"
+#   CURRENTWORD="$words[$i]"
+#   TRIGGERLETTER=${CURRENTWORD:0:1}
+#   # the trigger of "," was used, so start
+#   # the use of FASD and FZF with this word
+#   if [ "$TRIGGERLETTER" = "," ]; then
+#     unset 'words[${#words[@]}]'
+#     PASTWORDS=${words[@]}
+#     CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
+#     LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
+#       fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
+#   # the trigger of "," was not used, so
+#   # search interactively based on user input
+#   else
+#     PASTWORDS=${words[@]}
+#     CURRENTWORD=""
+#     LBUFFER="${PASTWORDS} $(fasd -d -l -r $CURRENTWORD | \
+#       fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
+#   fi
+#   # update the prompt with the result of using FASD and FZF
+#   local ret=$?
+#   zle redisplay
+#   typeset -f zle-line-init >/dev/null && zle zle-line-init
+#   return $ret
+# }
 # Create a binding so that you can type "cd ,pract^B"
 # (as an example) to trigger this integrated widget
-zle     -N   fzf-fasd-widget
-bindkey '^B' fzf-fasd-widget
+# zle     -N   fzf-fasd-widget
+# bindkey '^B' fzf-fasd-widget
 
 # }}}
 
@@ -435,6 +484,8 @@ export FZF_DEFAULT_OPTS='
   --no-bold
   --cycle
   --no-separator
+  --no-scrollbar
+  --bind tab:down,shift-tab:up
   --bind ctrl-f:page-down,ctrl-b:page-up
   --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
@@ -455,10 +506,11 @@ export FZF_DEFAULT_OPTS='
 #   --color=marker:172,spinner:96,header:96'
 
 # Trigger fzf completion using the semi-colon key instead of **
-export FZF_COMPLETION_TRIGGER=';'
+export FZF_COMPLETION_TRIGGER='**'
 
 # Configure fzf to work with fast-finder called fd
-export FZF_DEFAULT_COMMAND="fd . $HOME"
+# export FZF_DEFAULT_COMMAND="fd . $PWD"
+export FZF_DEFAULT_COMMAND="fd"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # }}}
@@ -482,51 +534,11 @@ function zvm_after_init() {
   ZSH_AUTOSUGGEST_USE_ASYNC=1
   bindkey '^ ' autosuggest-accept
 
-  # Use FZF to filter the output of FASD anywhere it is a command
-  autoload -U modify-current-argument
-  fzf-fasd-widget() {
-    # divide the commands buffer into words
-    local words i beginword start
-    i=0
-    start=1
-    beginword=0
-    words=("${(z)BUFFER}")
-    while (( beginword <= CURSOR )); do
-            (( i++ ))
-            (( beginword += ${#words[$i]}+1 ))
-    done
-    # extract the first and current words
-    # extract the first letter as a potential trigger
-    FIRSTWORD="$words[$start]"
-    CURRENTWORD="$words[$i]"
-    TRIGGERLETTER=${CURRENTWORD:0:1}
-    # the trigger of "," was used, so start
-    # the use of FASD and FZF with this word
-    if [ "$TRIGGERLETTER" = "," ]; then
-      unset 'words[${#words[@]}]'
-      PASTWORDS=${words[@]}
-      CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
-      LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
-        fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
-    # the trigger of "," was not used, so
-    # search interactively based on user input
-    else
-      PASTWORDS=${words[@]}
-      CURRENTWORD=""
-      LBUFFER="${PASTWORDS} $(fasd -d -l -r $CURRENTWORD | \
-        fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
-    fi
-    # update the prompt with the result of using FASD and FZF
-    local ret=$?
-    zle redisplay
-    typeset -f zle-line-init >/dev/null && zle zle-line-init
-    return $ret
-  }
   # Create a binding so that you can type "cd ,pract^B"
   # (as an example) to trigger this integrated widget
   zle     -N   fzf-fasd-widget
   bindkey '^B' fzf-fasd-widget
-  # Use FZF to filter the output of FASD anywhere it is a command
+  # Use FZF to filter the output of z.lua anywhere it is a command
   autoload -U modify-current-argument
   fzf-fasd-widget() {
     # divide the commands buffer into words
@@ -545,27 +557,30 @@ function zvm_after_init() {
     CURRENTWORD="$words[$i]"
     TRIGGERLETTER=${CURRENTWORD:0:1}
     # the trigger of "," was used, so start
-    # the use of FASD and FZF with this word
+    # the use of z.lua and FZF with this word
     if [ "$TRIGGERLETTER" = "," ]; then
       unset 'words[${#words[@]}]'
       PASTWORDS=${words[@]}
       CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
-      LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
+      # LBUFFER="${PASTWORDS}$(z -l $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
+      LBUFFER="${PASTWORDS}$(z | grep $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
         fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
     # the trigger of "," was not used, so
     # search interactively based on user input
     else
       PASTWORDS=${words[@]}
       CURRENTWORD=""
-      LBUFFER="${PASTWORDS} $(fasd -d -l -r $CURRENTWORD | \
+      LBUFFER="${PASTWORDS}$(z -l $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
         fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
     fi
-    # update the prompt with the result of using FASD and FZF
+    # update the prompt with the result of using z.lua and FZF
+    echo $BUFFER
     local ret=$?
     zle redisplay
     typeset -f zle-line-init >/dev/null && zle zle-line-init
     return $ret
   }
+
   # Create a binding so that you can type "cd ,pract^B"
   # (as an example) to trigger this integrated widget
   zle     -N   fzf-fasd-widget
@@ -661,6 +676,10 @@ function workspace {
 # --> Python
 . /opt/asdf-vm/asdf.sh
 
+# Setup rtx as a drop-in replacement for asdf
+eval "$(rtx activate zsh)"
+alias rtt="rtx"
+
 # }}}
 
 # DEPRECATED Pyenv {{{
@@ -733,7 +752,35 @@ secure() {
 # Always display directory contents after a change of directory
 function chpwd() {
   emulate -L zsh
-  exa --group-directories-first --grid --long --sort=name
+  exa --group-directories-first --grid --long --sort=name --icons
+}
+
+# Create a timer for work/rest sessions
+declare -A focus_options
+focus_options["Work"]="45"
+focus_options["Rest"]="10"
+
+# Define a function that will create the focus
+# status bar and then echo message when finished
+start_focus() {
+  if [ -n "$1" -a -n "${focus_options["$1"]}" ]; then
+  val=$1
+  echo $val
+  timer ${focus_options["$val"]}m
+  notify-send " $val session done!"
+  fi
+}
+
+# Define the function that offers the command that can
+# be invokved in the shell
+focus() {
+  if [ -n "$1" ] && [ -n "$2" ]; then
+    focus_options["$1"]="$2"
+    echo "$1 for $2 minutes"
+    start_focus "$1"
+  else
+    echo "Invalid parameters: focus [Work/Rest] [time_in_minutes]"
+  fi
 }
 
 # }}}
@@ -770,52 +817,39 @@ fi
 
 # }}}
 
-# Zoxide {{{
-
-# NOTE: Use of "cd<Space><Tab>" does not work. After selecting
-# one of the directories with fzf the cd command (which is
-# aliased to "cd" does not actually change to that directory)
-
-# NOTE: I also tried to use "--cmd cd" in the following eval
-# command and then this caused two of the "zoxide: no match
-# found" errors to appear at each prompt display. This is
-# a reference to resolve the problem, but it did not work:
-#
-# https://github.com/ajeetdsouza/zoxide/issues/270
-
-# Initialize the zoxide tool
-eval "$(zoxide init zsh)"
+# z.lua {{{
 
 # Define the color scheme for FZF, which zoxide uses
 # when allowing the selection of directories; this
 # color scheme matches (but not exactly, not sure
 # why) the one used with the fzf-tab tool.
-export _ZO_FZF_OPTS="--no-bold --no-separator --cycle
-  --bind ctrl-f:page-down,ctrl-b:page-up
-  --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
-  --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
-  --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
-  --color=marker:#d78700,spinner:#875f87,header:#875f87"
 
-# Always use the z command when running a "cd"; this
-# means that you can type "cd <partial-dir>" and it
-# will take you to <actual-dir> which is the highest
-# match in the database based on name and score.
+# export _ZO_FZF_OPTS="--no-bold --no-separator --cycle
+#   --bind ctrl-f:page-down,ctrl-b:page-up
+#   --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
+#   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
+#   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
+#   --color=marker:#d78700,spinner:#875f87,header:#875f87"
+
+# set configuration for fzf when using z -I
+export _ZL_FZF_FLAG="--no-bold --no-separator --cycle --bind ctrl-f:page-down,ctrl-b:page-up --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700 --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700 --color=info:#87afd7,prompt:#87afd7,pointer:#d78700 --color=marker:#d78700,spinner:#875f87,header:#875f87"
+
+# Source the z.lua plugin
+eval "$(lua /usr/share/z.lua/z.lua --init zsh enhanced once fzf)"
+source $HOME/.zsh/czmod/czmod.zsh
+
+# Create a fuzzy search alias for z.lua
+alias zz='z -I .'
+
+# Breaks the use of the fzf-tab plugin
 # alias cd="z"
-
-# Make it easy to quickly search through the entire
-# database of directories in a fuzzy fashion. This
-# command can accept a <partial-dir> or no directory
-# at all, in which case you can fuzzy search with
-# Fzf through everything stored in the database.
-alias f="zi"
 
 # }}}
 
 # Redefine Aliases {{{
 
 # Already defined in oh-my-zsh, redefine to use exa
-alias ls="exa --color=always"
+alias ls="exa --color=always --icons"
 
 # }}}
 
@@ -825,3 +859,4 @@ alias ls="exa --color=always"
 # zprof
 
 # }}}
+

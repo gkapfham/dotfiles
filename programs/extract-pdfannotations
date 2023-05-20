@@ -11,12 +11,12 @@ def main():
     input_filename = sys.argv[1]
     doc = fitz.open(input_filename)
     annotations = 0
-    for i in range(doc.pageCount):
+    for i in range(doc.page_count):
         page = doc[i]
         for annot in page.annots():
             annotations = annotations + 1
             print("* Page " + str(i+1) + ": " + annot.info["content"] + "\n")
-    print("Extracted " + str(annotations) + " annotations from " + str(doc.pageCount) + " pages")
+    print("Extracted " + str(annotations) + " annotations from " + str(doc.page_count) + " pages")
 
 
 if __name__ == "__main__":

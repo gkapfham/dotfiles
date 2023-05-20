@@ -25,7 +25,8 @@ set edit_headers=yes
 # Editing {{{
 
 # Jump to the first blank link when editing the emails; skip the header
-set editor="nvim +/^$ ++1"
+# set editor="nvim +/^$ ++1"
+set editor="nvim"
 
 # Edit the emails in a local tmp/ directory, saving work from crashes
 set tmpdir="/home/gkapfham/.mutt/tmp"
@@ -162,6 +163,18 @@ set timeout=1
 
 # Check for new mail every 15 seconds
 set mail_check=0
+
+# Do no allow the mutt mua to sleep
+# when displaying information messages
+set sleep_time=0
+
+# Do not require the prompt for all
+# recepient details before composing
+set fast_reply
+
+# Change the scrolling behavior so that
+# it works on a line-by-line basis
+set menu_scroll
 
 # }}}
 
@@ -353,5 +366,39 @@ macro pager \Cr "<display-toggle-weed> <print-message> <display-toggle-weed>"
 # browser that is specified at the start of the script; currently using Firefox
 macro index,pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
 macro attach,compose \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
+
+# color index yellow default '.*'
+# color index_author red default '.*'
+# color index_number blue default
+# color index_subject cyan default '.*'
+
+# # Other colors and aesthetic settings:
+# mono bold bold
+# mono underline underline
+# mono indicator underline
+# mono error bold
+# color normal default default
+# color indicator brightred default
+# color sidebar_highlight red default
+# color sidebar_divider brightblack default
+# color sidebar_flagged red default
+# color sidebar_new green default
+# color error red default
+# color tilde black default
+# color message cyan default
+# color markers red white
+# color attachment white default
+# color search brightmagenta default
+# color status black default
+# color hdrdefault brightgreen default
+# color quoted green default
+# color quoted1 blue default
+# color quoted2 cyan default
+# color quoted3 yellow default
+# color quoted4 red default
+# color quoted5 brightred default
+# color signature brightgreen default
+# color bold black default
+# color underline black default
 
 # }}}

@@ -40,3 +40,5 @@ export QT_QPA_PLATFORMTHEME=gtk2
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
 fi
+
+# kitty -1 --start-as minimized
