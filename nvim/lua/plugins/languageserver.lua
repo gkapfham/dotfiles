@@ -138,7 +138,7 @@ return {
     "linux-cultist/venv-selector.nvim",
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
     config = true,
-    -- event = "BufReadPost",
+    event = "VeryLazy",
     keys = {{
       "<leader>vv", "<cmd>:VenvSelect<cr>",
     }}
