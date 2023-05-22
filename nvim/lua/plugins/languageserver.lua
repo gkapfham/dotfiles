@@ -18,26 +18,6 @@ return {
     end
   },
 
-  -- {
-  --   "jose-elias-alvarez/null-ls.nvim",
-  --   event = "BufReadPost",
-  --   config = function()
-  --     -- Configure null-ls for diagnostics and formatting
-  --     local null_ls = require("null-ls")
-  --     null_ls.setup({
-  --         sources = {
-  --           null_ls.builtins.diagnostics.chktex,
-  --           null_ls.builtins.diagnostics.flake8,
-  --           null_ls.builtins.diagnostics.pydocstyle,
-  --           null_ls.builtins.diagnostics.pylint,
-  --           null_ls.builtins.formatting.black,
-  --           null_ls.builtins.formatting.isort,
-  --           null_ls.builtins.formatting.prettierd,
-  --         },
-  --     })
-  --   end,
-  -- },
-
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPost",
