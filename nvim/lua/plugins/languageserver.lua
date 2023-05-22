@@ -18,6 +18,26 @@ return {
     end
   },
 
+  -- {
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   event = "BufReadPost",
+  --   config = function()
+  --     -- Configure null-ls for diagnostics and formatting
+  --     local null_ls = require("null-ls")
+  --     null_ls.setup({
+  --         sources = {
+  --           null_ls.builtins.diagnostics.chktex,
+  --           null_ls.builtins.diagnostics.flake8,
+  --           null_ls.builtins.diagnostics.pydocstyle,
+  --           null_ls.builtins.diagnostics.pylint,
+  --           null_ls.builtins.formatting.black,
+  --           null_ls.builtins.formatting.isort,
+  --           null_ls.builtins.formatting.prettierd,
+  --         },
+  --     })
+  --   end,
+  -- },
+
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPost",
@@ -46,7 +66,16 @@ return {
         }
       })
       -- configure marksman for Markdown LSP
-      lspconfig.marksman.setup {}
+      lspconfig.marksman.setup {
+        filetypes = { 'markdown', 'quarto' },
+      }
+      -- configure html_ls for HTML
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      lspconfig.html.setup {
+        capabilities = capabilities,
+        filetypes = { 'markdown', 'quarto', 'html' },
+      }
       -- configure cssls for CSS LSP
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -85,24 +114,58 @@ return {
       map('n', '<space>rv', '<cmd> lua vim.lsp.buf.rename()<CR>')
       -- reformat entire buffer content with a sync (i.e., reformat in a blocking fashion)
       map('n', '<space>ff', '<cmd> lua vim.lsp.buf.format()<CR>')
-      -- Configure null-ls for diagnostics and formatting
-      local null_ls = require("null-ls")
-      null_ls.setup({
-          sources = {
-            null_ls.builtins.diagnostics.chktex,
-            null_ls.builtins.diagnostics.flake8,
-            null_ls.builtins.diagnostics.pydocstyle,
-            null_ls.builtins.diagnostics.pylint,
-            null_ls.builtins.formatting.black,
-            null_ls.builtins.formatting.isort,
-            null_ls.builtins.formatting.prettierd,
-          },
-      })
+      -- -- Configure null-ls for diagnostics and formatting
+      -- local null_ls = require("null-ls")
+      -- null_ls.setup({
+      --     sources = {
+      --       null_ls.builtins.diagnostics.chktex,
+      --       null_ls.builtins.diagnostics.flake8,
+      --       null_ls.builtins.diagnostics.pydocstyle,
+      --       null_ls.builtins.diagnostics.pylint,
+      --       null_ls.builtins.formatting.black,
+      --       null_ls.builtins.formatting.isort,
+      --       null_ls.builtins.formatting.prettierd,
+      --     },
+      -- })
     end,
     -- Keys
     keys = {
       -- Toggle virtual text from the language servers
       { "<Space>sv", "<Plug>(toggle-lsp-diag-vtext)", desc = "Language Server: Toggle virtual text" },
+    }
+  },
+
+  {
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+    },
+    config = function()
+      require("mason-null-ls").setup({
+        -- ensure_installed = { "chktex", "flake8", "pydocstyle", "pylint", "black", "isort", "prettierd" },
+        ensure_installed = { "chktex", "pydocstyle", "black", "isort", "prettierd" },
+        automatic_installation = false,
+        handlers = {},
+      })
+      -- Configure null-ls for diagnostics and formatting
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.diagnostics.chktex,
+          -- null_ls.builtins.diagnostics.flake8,
+          null_ls.builtins.diagnostics.pydocstyle,
+          -- null_ls.builtins.diagnostics.pylint,
+          null_ls.builtins.formatting.black,
+          null_ls.builtins.formatting.isort,
+          null_ls.builtins.formatting.prettierd,
+        },
+      })
+    end,
+    keys = {
+      -- Toggle virtual text from the language servers
+      { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
     }
   },
 
