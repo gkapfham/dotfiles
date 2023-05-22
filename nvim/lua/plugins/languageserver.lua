@@ -143,7 +143,6 @@ return {
     },
     config = function()
       require("mason-null-ls").setup({
-        -- ensure_installed = { "chktex", "flake8", "pydocstyle", "pylint", "black", "isort", "prettierd" },
         ensure_installed = { "chktex", "pydocstyle", "black", "isort", "prettierd" },
         automatic_installation = false,
         handlers = {},
