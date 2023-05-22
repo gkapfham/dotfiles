@@ -94,7 +94,6 @@ return {
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
       end
-      -- opts = {silent = true, noremap = true, documentFormatting = True}
       -- Create all of the keybindings that have the following purposes:
       -- display in a floating window details about symbol under cursor
       local map = function(type, key, value)
