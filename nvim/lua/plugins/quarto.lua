@@ -1,4 +1,8 @@
--- Work with Quarto files
+-- File: plugins/quarto.lua
+-- Purpose: Configure the plugins that
+-- enable the editing of a .qmd file
+-- with full support from language servers
+
 return {
 
   {
