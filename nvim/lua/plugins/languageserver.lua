@@ -4,14 +4,14 @@
 
 return {
 
-  -- Mason.nvim
+  -- Mason.nvim for LSP management
   {
     "williamboman/mason.nvim",
     event = "BufReadPost",
     build = ":MasonUpdate"
   },
 
-  -- Neodev.nvim
+  -- Neodev.nvim for LSP enhancement for Lua files
   {
     "folke/neodev.nvim",
     event = "BufReadPost",
@@ -20,7 +20,7 @@ return {
     end
   },
 
-  -- nvim-lspconfig
+  -- nvim-lspconfig for LSP management
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPost",
@@ -36,10 +36,26 @@ return {
         ensure_installed = { "lua_ls", "pyright", "cssls" },
       }
       local lspconfig = require('lspconfig')
-      -- configure pyright for Python LSP
-      lspconfig.pyright.setup {}
-      -- configure ruff for Python LSP
-      lspconfig.ruff_lsp.setup {}
+      -- Setup LSP servers:
+      -- 1) CSS
+      -- 2) HTML
+      -- 3) Lua
+      -- 4) Markdown
+      -- 5) Python
+      -- 6) YAML
+      -- configure cssls for CSS LSP
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      lspconfig.cssls.setup {
+        capabilities = capabilities,
+      }
+      -- configure html_ls for HTML
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      lspconfig.html.setup {
+        capabilities = capabilities,
+        filetypes = { 'markdown', 'quarto', 'html' },
+      }
       -- configure luals (with neovim support) for Lua LSP
       lspconfig.lua_ls.setup({
         settings = {
@@ -54,19 +70,10 @@ return {
       lspconfig.marksman.setup {
         filetypes = { 'markdown', 'quarto' },
       }
-      -- configure html_ls for HTML
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
-      lspconfig.html.setup {
-        capabilities = capabilities,
-        filetypes = { 'markdown', 'quarto', 'html' },
-      }
-      -- configure cssls for CSS LSP
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
-      lspconfig.cssls.setup {
-        capabilities = capabilities,
-      }
+      -- configure pyright for Python LSP
+      lspconfig.pyright.setup {}
+      -- configure ruff for Python LSP
+      lspconfig.ruff_lsp.setup {}
       -- configure yamlls for YAML LSP
       lspconfig.yamlls.setup {}
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
@@ -92,6 +99,7 @@ return {
     }
   },
 
+  -- mason-null-ls.nvim
   {
     "jay-babu/mason-null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -125,6 +133,7 @@ return {
     }
   },
 
+  -- venv-selector.nvim for selecting virtual environments after starting neovim
   {
     "linux-cultist/venv-selector.nvim",
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
