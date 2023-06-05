@@ -74,25 +74,6 @@ return {
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
       end
-      -- Create all of the keybindings that have the following purposes:
-      -- display in a floating window details about symbol under cursor
-      local map = function(type, key, value)
-        vim.api.nvim_buf_set_keymap(0,type,key,value,{noremap = true, silent = true});
-      end
-      -- display in a floating window details about symbol under cursor
-      -- map('n', '<leader>k', '<cmd> lua vim.lsp.buf.hover()<CR>')
-      -- display in a floating window details about parameter to called function
-      -- map('n', '<Space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>')
-      -- display in a floating window diagnostics for the current line
-      -- map('n', '<Space>e', '<cmd> lua vim.diagnostic.open_float(0, {scope="line"})<CR>')
-      -- send all of the diagnostics for the current window to the location list
-      -- map('n', '<Space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>')
-      -- run a code action on the current line of code
-      -- map('n', '<Space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-      -- rename the variable using a floating menu
-      -- map('n', '<Space>rv', '<cmd> lua vim.lsp.buf.rename()<CR>')
-      -- reformat entire buffer content with a sync (i.e., reformat in a blocking fashion)
-      -- map('n', '<Space>ff', '<cmd> lua vim.lsp.buf.format()<CR>')
     end,
     -- Keys
     keys = {
