@@ -35,6 +35,8 @@ return {
       local lspconfig = require('lspconfig')
       -- configure pyright for Python LSP
       lspconfig.pyright.setup {}
+      -- configure ruff for Python LSP
+      lspconfig.ruff_lsp.setup {}
       -- configure luals (with neovim support) for Lua LSP
       lspconfig.lua_ls.setup({
         settings = {
@@ -109,7 +111,7 @@ return {
           null_ls.builtins.diagnostics.pydocstyle,
           -- null_ls.builtins.diagnostics.pylint,
           null_ls.builtins.formatting.black,
-          null_ls.builtins.formatting.isort,
+          -- null_ls.builtins.formatting.isort,
           null_ls.builtins.formatting.prettierd,
         },
       })
