@@ -89,6 +89,11 @@ return {
         },
 
       }
+      -- Load the aerial extension; this provides navigation
+      -- using tags, treesitter, and LSP. It is especially
+      -- useful when Telescope does not correctly read tags
+      -- for certain types of files like Markdown files
+      require('telescope').load_extension('aerial')
       -- Load the luasnip extension for telescope
       require('telescope').load_extension('luasnip')
       -- Load and configure the refactoring telescope extension;
@@ -112,6 +117,8 @@ return {
     end,
     -- Keys
     keys = {
+      -- Aerial
+      { "<Space>ta", "<cmd> Telescope aerial <CR>", desc = "Telescope: Aerial" },
       -- Buffers
       { "<Space>i", "<cmd> Telescope buffers <CR>", desc = "Telescope: Buffers" },
       { "<Space>tf", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Telescope: Fuzzy search buffers" },
