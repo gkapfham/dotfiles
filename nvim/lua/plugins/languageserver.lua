@@ -4,12 +4,14 @@
 
 return {
 
+  -- Mason.nvim
   {
     "williamboman/mason.nvim",
     event = "BufReadPost",
     build = ":MasonUpdate"
   },
 
+  -- Neodev.nvim
   {
     "folke/neodev.nvim",
     event = "BufReadPost",
@@ -18,6 +20,7 @@ return {
     end
   },
 
+  -- nvim-lspconfig
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPost",
