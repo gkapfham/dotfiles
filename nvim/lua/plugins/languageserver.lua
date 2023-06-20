@@ -74,6 +74,32 @@ return {
       lspconfig.pyright.setup {}
       -- configure ruff for Python LSP
       lspconfig.ruff_lsp.setup {}
+      -- configure texlab for LaTeX and BibTeX LSP
+      lspconfig.texlab.setup {
+        texlab = {
+          auxDirectory = ".",
+          bibtexFormatter = "texlab",
+          build = {
+            args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+            executable = "latexmk",
+            forwardSearchAfter = false,
+            onSave = false
+          },
+          chktex = {
+            onEdit = false,
+            onOpenAndSave = false
+          },
+          diagnosticsDelay = 300,
+          formatterLineLength = 0,
+          forwardSearch = {
+            args = {}
+          },
+          latexFormatter = "latexindent",
+          latexindent = {
+            modifyLineBreaks = false
+          }
+        }
+      }
       -- configure yamlls for YAML LSP
       lspconfig.yamlls.setup {}
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
@@ -89,13 +115,21 @@ return {
     end,
     -- Keys
     keys = {
-      { "<Space>sv", "<Plug>(toggle-lsp-diag-vtext)", desc = "Language Server: Toggle virtual text" },
-      { "<Space>e", "<cmd> lua vim.diagnostic.open_float(0, {scope='line'})<CR>", desc = "Language Server: Display diagnostics"},
-      { "<Space>k", "<cmd> lua vim.lsp.buf.hover()<CR>", desc = "Language Server: Symbol details"},
-      { "<Space>c", "<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>", desc = "Language Server: Send to loclist"},
-      { "<Space>c", "<cmd>lua vim.lsp.buf.code_action()<CR>", desc = "Language Server: Send to loclist"},
-      { "<Space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", desc = "Language Server: Perform code action"},
-      { "<Space>rv", "<cmd> lua vim.lsp.buf.rename()<CR>", desc = "Language Server: Rename variable"},
+      { "<Space>sv", "<Plug>(toggle-lsp-diag-vtext)",                              desc =
+      "Language Server: Toggle virtual text" },
+      { "<Space>e",  "<cmd> lua vim.diagnostic.open_float(0, {scope='line'})<CR>",
+                                                                                     desc =
+        "Language Server: Display diagnostics" },
+      { "<Space>k",  "<cmd> lua vim.lsp.buf.hover()<CR>",                          desc =
+      "Language Server: Symbol details" },
+      { "<Space>c",  "<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>",             desc =
+      "Language Server: Send to loclist" },
+      { "<Space>c",  "<cmd>lua vim.lsp.buf.code_action()<CR>",                     desc =
+      "Language Server: Send to loclist" },
+      { "<Space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>",                     desc =
+      "Language Server: Perform code action" },
+      { "<Space>rv", "<cmd> lua vim.lsp.buf.rename()<CR>",                         desc =
+      "Language Server: Rename variable" },
     }
   },
 
@@ -136,9 +170,9 @@ return {
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
     config = true,
     event = "VeryLazy",
-    keys = {{
+    keys = { {
       "<leader>vv", "<cmd>:VenvSelect<cr>",
-    }}
+    } }
   },
 
 }
