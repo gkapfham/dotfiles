@@ -30,20 +30,20 @@ return {
             t({"Thank You,", "", "  Greg"}),
           }),
           -- Greetings at the start of an email message
-          s({trig = "hac", dscr = "Hello Again Colleagues"}, {
+          s({trig = "helloac", dscr = "Hello Again Colleagues"}, {
             t({"Hello Again Colleagues"}),
             t({",", "", ""}),
           }),
-          s({trig = "hc", dscr = "Hello Colleagues"}, {
+          s({trig = "helloc", dscr = "Hello Colleagues"}, {
             t({"Hello Colleagues"}),
             t({",", "", ""}),
           }),
-          s({trig = "h", dscr = "Hello"}, {
+          s({trig = "hello", dscr = "Hello"}, {
             t({"Hello "}),
             i(1, {"Name"}),
             t({",", "", ""}),
           }),
-          s({trig = "ha", dscr = "Hello Again"}, {
+          s({trig = "helloa", dscr = "Hello Again"}, {
             t({"Hello Again "}),
             i(1, {"Name"}),
             t({",", "", ""}),
