@@ -146,21 +146,52 @@ return {
     },
   },
 
-  -- -- Display diagnostic information about different keymaps,
-  -- -- including information about the clipboard and spelling
-  -- {
-  --   "folke/which-key.nvim",
-  --   event = "VeryLazy",
-  --   init = function()
-  --     vim.o.timeout = true
-  --     vim.o.timeoutlen = 300
-  --   end,
-  --   opts = {
-  --     -- your configuration comes here
-  --     -- or leave it empty to use the default settings
-  --     -- refer to the configuration section below
-  --   }
-  -- },
+  -- Display diagnostic information about different keymaps,
+  -- including information about the clipboard and spelling
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    opts = {
+      spelling = {
+        enabled = true,
+        suggestions = 20,
+      },
+      triggers = {"z"},
+      triggers_nowait = {
+        -- spelling
+        "z=",
+      },
+    }
+  },
+
+  -- Bracketed
+  {
+    "echasnovski/mini.bracketed",
+    event = "VeryLazy",
+    config = function()
+      require("mini.bracketed").setup({
+        buffer     = { suffix = 'b', options = {} },
+        comment    = { suffix = 'e', options = {} },
+        conflict   = { suffix = 'x', options = {} },
+        diagnostic = { suffix = 'd', options = {} },
+        file       = { suffix = 'f', options = {} },
+        indent     = { suffix = 'i', options = {} },
+        jump       = { suffix = 'j', options = {} },
+        location   = { suffix = 'l', options = {} },
+        oldfile    = { suffix = 'o', options = {} },
+        quickfix   = { suffix = 'q', options = {} },
+        treesitter = { suffix = 't', options = {} },
+        undo       = { suffix = 'u', options = {} },
+        window     = { suffix = 'w', options = {} },
+        yank       = { suffix = 'y', options = {} },
+      }
+      )
+    end,
+  },
 
   -- Pair movement and highlighting
   -- (note could not get vim-matchup to work;
