@@ -110,6 +110,7 @@ return {
         --   },
         -- },
         -- Define the performance characteristics for nvim-cmp
+        -- Favor the quick delivery of a minimal number of completions
         performance = {
           throttle = 1,
           trigger_debounce_time = 15,
