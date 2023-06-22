@@ -41,7 +41,7 @@ return {
         --   mode = function(str)
         --     return "\\<" .. str
         --   end,
-        mode = "exact",
+        mode = "search",
         -- behave like `incsearch`
         incremental = false,
         filetype_exclude = { "notify", "noice" },
@@ -131,6 +131,8 @@ return {
         },
       },
     },
+    -- currently not configuring treesitter mode as I don't
+    -- understand how it works or how to use it
     keys = {
       {
         "s",
