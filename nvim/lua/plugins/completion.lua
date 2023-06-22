@@ -111,8 +111,9 @@ return {
         -- },
         -- Define the performance characteristics for nvim-cmp
         performance = {
-          throttle = 2,
-          trigger_debounce_time = 50,
+          throttle = 1,
+          trigger_debounce_time = 15,
+          max_view_entries = 15
         },
         -- Specify a snippet engine
         snippet = {
