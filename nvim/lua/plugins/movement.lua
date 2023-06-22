@@ -17,6 +17,7 @@ return {
   --   end,
   -- },
 
+  -- Flash.nvim for improved search and movement
   {
     "folke/flash.nvim",
     event = "VeryLazy",
