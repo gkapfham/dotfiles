@@ -145,6 +145,8 @@ return {
     },
   },
 
+  -- Display diagnostic information about different keymaps,
+  -- including information about the clipboard and spelling
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
