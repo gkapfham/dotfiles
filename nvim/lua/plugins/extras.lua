@@ -3,12 +3,6 @@
 
 return {
 
-  -- -- MundoToggle
-  -- {
-  --   "simnalamburt/vim-mundo",
-  --   cmd = "MundoToggle",
-  -- },
-
   -- Undotree
   {
     "mbbill/undotree",
