@@ -113,8 +113,11 @@ return {
         -- Favor the quick delivery of a minimal number of completions
         performance = {
           throttle = 0,
-          trigger_debounce_time = 10,
-          max_view_entries = 20
+          fetching_timeout = 50,
+          debounce = 10,
+          -- trigger_debounce_time = 10,
+          async_budget = 1,
+          max_view_entries = 40
         },
         -- Specify a snippet engine
         snippet = {
@@ -241,7 +244,7 @@ return {
           {name = 'tmux', max_item_count = 5, priority = 1, keyword_length = 2},
           {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'look', max_item_count = 5, priority = 1, keyword_length = 3},
-          -- {name = 'nvim_lsp_signature_help'},
+          {name = 'nvim_lsp_signature_help'},
         }, {
             -- Define the second-tier of sources; these will only
             -- appear when there is no active source from the first-tier
