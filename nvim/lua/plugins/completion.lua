@@ -115,7 +115,6 @@ return {
           throttle = 0,
           fetching_timeout = 50,
           debounce = 10,
-          -- trigger_debounce_time = 10,
           async_budget = 1,
           max_view_entries = 50
         },
