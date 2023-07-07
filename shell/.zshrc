@@ -764,18 +764,6 @@ fi
 
 # z.lua {{{
 
-# Define the color scheme for FZF, which zoxide uses
-# when allowing the selection of directories; this
-# color scheme matches (but not exactly, not sure
-# why) the one used with the fzf-tab tool.
-
-# export _ZO_FZF_OPTS="--no-bold --no-separator --cycle
-#   --bind ctrl-f:page-down,ctrl-b:page-up
-#   --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
-#   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
-#   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
-#   --color=marker:#d78700,spinner:#875f87,header:#875f87"
-
 # set configuration for fzf when using z -I
 export _ZL_FZF_FLAG="--no-bold --no-separator --cycle --bind ctrl-f:page-down,ctrl-b:page-up --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700 --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700 --color=info:#87afd7,prompt:#87afd7,pointer:#d78700 --color=marker:#d78700,spinner:#875f87,header:#875f87"
 
