@@ -535,7 +535,6 @@ function zvm_after_init() {
       unset 'words[${#words[@]}]'
       PASTWORDS=${words[@]}
       CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
-      # LBUFFER="${PASTWORDS}$(z -l $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
       LBUFFER="${PASTWORDS}$(z | grep $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
         fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
     # the trigger of "," was not used, so
@@ -652,33 +651,6 @@ function workspace {
 # Setup rtx as a drop-in replacement for asdf
 eval "$(rtx activate zsh)"
 alias rtt="rtx"
-
-# }}}
-
-# DEPRECATED Pyenv {{{
-
-# # Local pyenv home
-# export PYENV_ROOT="$HOME/.pyenv"
-
-# # Fast load of pyenv immediately upon shell startup
-# export PATH="$HOME/.pyenv/bin:$PATH"
-# eval "$(command pyenv init - zsh --no-rehash)"
-
-# }}}
-
-# DEPRECATED nvm {{{
-
-# Lazy load nvm to avoid slow shell startup times
-# Note that this requires you to type one of these
-# commands before they will initially work
-
-# if [ -s "$HOME/.nvm/nvm.sh" ]; then
-#   export NVM_DIR="$HOME/.nvm"
-#   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-#   alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
-#   alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
-#   alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
-# fi
 
 # }}}
 
