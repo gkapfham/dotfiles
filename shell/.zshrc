@@ -646,7 +646,7 @@ function workspace {
 # Setup asdf-vm so that shims are available for all installed plugins
 # Currently using asdf-vm to manage:
 # --> Python
-. /opt/asdf-vm/asdf.sh
+# . /opt/asdf-vm/asdf.sh
 
 # Setup rtx as a drop-in replacement for asdf
 eval "$(rtx activate zsh)"
