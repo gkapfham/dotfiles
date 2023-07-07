@@ -523,7 +523,7 @@ search() {
 			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
 				--phony -q "$1" \
 				--bind "change:reload:$RG_PREFIX {q}" \
-				--preview-window="up,80%:wrap"
+				--preview-window="up,40%:wrap"
 	)" &&
 	echo "✨ $file"
 }
@@ -542,7 +542,7 @@ searchnow() {
 	--follow \
 	--glob '!.git/*' "$1" \
 	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2 " " start ":" end}' \
-	| fzf --preview 'bat --wrap character --color always {1} --highlight-line {2} --line-range {3}' --preview-window wrap
+	| fzf --preview 'bat --wrap character --color always {1} --highlight-line {2} --line-range {3}' --preview-window="up,40%:wrap"
 }
 
 # }}}
