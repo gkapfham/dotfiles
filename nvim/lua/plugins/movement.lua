@@ -60,6 +60,7 @@ return {
         nohlsearch = false,
         -- automatically jump when there is only one match
         autojump = false,
+        continue = true,
       },
       highlight = {
         label = {
@@ -130,6 +131,10 @@ return {
             matches = true,
           },
         },
+      },
+      -- disable the prompt when using a flash key like 's'
+      prompt = {
+        enabled = false,
       },
     },
     -- currently not configuring treesitter mode as I don't
