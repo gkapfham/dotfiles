@@ -513,6 +513,38 @@ export FZF_COMPLETION_TRIGGER='**'
 export FZF_DEFAULT_COMMAND="fd"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# Use ripgrep and ripgrep-all in combination with fzf
+# to search all below directories (both text and binary files)
+search() {
+	RG_PREFIX="rga --files-with-matches"
+	local file
+	file="$(
+		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+				--phony -q "$1" \
+				--bind "change:reload:$RG_PREFIX {q}" \
+				--preview-window="up,80%:wrap"
+	)" &&
+	echo "✨ $file"
+}
+
+# Search with ripgrep and get a nice bat preview, but requires
+# that you specifics the name of the pattern immediately
+searchnow() {
+	rg  \
+	--column \
+	--line-number \
+	--no-column \
+	--no-heading \
+	--fixed-strings \
+	--ignore-case \
+	--hidden \
+	--follow \
+	--glob '!.git/*' "$1" \
+	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2 " " start ":" end}' \
+	| fzf --preview 'bat --wrap character --color always {1} --highlight-line {2} --line-range {3}' --preview-window wrap
+}
+
 # }}}
 
 # Zsh-Vi-Mode {{{
@@ -772,7 +804,7 @@ start_focus() {
 }
 
 # Define the function that offers the command that can
-# be invokved in the shell
+# be invoked in the shell
 focus() {
   if [ -n "$1" ] && [ -n "$2" ]; then
     focus_options["$1"]="$2"
