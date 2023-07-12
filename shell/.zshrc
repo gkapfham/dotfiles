@@ -165,7 +165,7 @@ export PIPX_HOME="$HOME/.local/pipx"
 
 # System Aliases {{{
 
-# alias kitty="kitty --single-instance"
+alias kitty="kitty --single-instance"
 
 # MuPDF resolution
 alias mupdf="mupdf -r 288"
@@ -649,7 +649,8 @@ function workspace {
 # . /opt/asdf-vm/asdf.sh
 
 # Setup rtx as a drop-in replacement for asdf
-eval "$(rtx activate zsh)"
+eval "$(/home/gkapfham/.local/share/rtx/bin/rtx activate -s zsh)"
+export RTX_FETCH_REMOTE_VERSIONS_TIMEOUT="0s"
 alias rtt="rtx"
 
 # }}}
@@ -792,3 +793,5 @@ alias ls="exa --color=always --icons"
 # zprof
 
 # }}}
+
+
