@@ -143,7 +143,7 @@ return {
     },
     config = function()
       require("mason-null-ls").setup({
-        ensure_installed = { "chktex", "pydocstyle", "black", "isort", "prettierd" },
+        ensure_installed = { "chktex", "pydocstyle", "black", "prettierd" },
         automatic_installation = false,
         handlers = {},
       })
