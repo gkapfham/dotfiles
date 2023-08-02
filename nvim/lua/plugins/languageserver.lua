@@ -159,7 +159,7 @@ return {
       })
     end,
     keys = {
-      -- Toggle virtual text from the language servers
+      -- Perform a format of the content in the buffer
       { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
     }
   },
