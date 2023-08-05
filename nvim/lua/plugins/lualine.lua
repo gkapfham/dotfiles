@@ -4,6 +4,31 @@
 
 -- Define functions in lua {{{
 
+local aerial = require('aerial')
+local function format_status(symbols, depth, separator, icons_enabled)
+  local parts = {}
+  depth = depth or #symbols
+  if depth > 0 then
+    symbols = { unpack(symbols, 1, depth) }
+  else
+    symbols = { unpack(symbols, #symbols + 1 + depth) }
+  end
+  for _, symbol in ipairs(symbols) do
+    if icons_enabled then
+      table.insert(parts, string.format("%s %s", symbol.icon, symbol.name))
+    else
+      table.insert(parts, symbol.name)
+    end
+  end
+  return table.concat(parts, separator)
+end
+-- The API to output the symbols structure
+function output_symbols_structure(depth, separator, icons_enabled)
+  local symbols = aerial.get_location(true)
+  local symbols_structure = format_status(symbols, depth, separator, icons_enabled)
+  print(symbols_structure)
+end
+
 -- Define a function for displaying the current result number
 -- out of total number of results when searching with / or ?
 vim.o.shortmess = vim.o.shortmess .. "S"
@@ -121,6 +146,13 @@ return ''
 endfunction
 ]])
 
+-- " Display a file tree symbol
+vim.cmd([[
+function! TreeSitterContext()
+return nvim_treesitter#statusline(90)
+endfunction
+]])
+
 --- }}}
 
 return {
@@ -160,7 +192,6 @@ return {
           -- from left (far left corner) to right (middle): {a} {b} {c}
           lualine_a = {'mode'},
           lualine_b = {'branch', {'diff', source = diff_source}},
-          -- lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}, {search_count, type = "lua_expr"}},
           lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}},
           -- Bottom right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
