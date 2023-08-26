@@ -650,7 +650,7 @@ function workspace {
 
 # Setup rtx as a drop-in replacement for asdf
 eval "$(/home/gkapfham/.local/share/rtx/bin/rtx activate -s zsh)"
-export RTX_FETCH_REMOTE_VERSIONS_TIMEOUT="0s"
+export RTX_FETCH_REMOTE_VERSIONS_TIMEOUT="1s"
 alias rtt="rtx"
 
 # }}}
