@@ -109,6 +109,7 @@ return {
     end,
   },
 
+  -- Octo.nvim for integration with GitHub
   {
     "pwntester/octo.nvim",
     cmd = "Octo",
@@ -125,5 +126,17 @@ return {
       { "<leader>o", "<cmd>Octo<cr>", desc = "Octo" },
     },
   },
+
+  {
+    "NeogitOrg/neogit",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "nvim-telescope/telescope.nvim", -- optional
+      "sindrets/diffview.nvim",        -- optional
+      -- "ibhagwan/fzf-lua",              -- optional
+    },
+    config = true
+  }
 
 }
