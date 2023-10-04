@@ -21,10 +21,23 @@ return {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
     opts = {
       -- labels = "abcdefghijklmnopqrstuvwxyz",
       labels = "asdfghjklqwertyuiopzxcvbnm",
+      label = {
+        -- add a label for the first match in the current window.
+        -- you can always jump to the first match with `<CR>`
+        current = true,
+        -- show the label after the match
+        after = true, ---@type boolean|number[]
+        -- show the label before the match
+        before = false, ---@type boolean|number[]
+        -- position of the label extmark
+        style = "overlay", ---@type "eol" | "overlay" | "right_align" | "inline"
+        -- flash tries to re-use labels that were already assigned to a position,
+        -- when typing more characters. By default only lower-case labels are re-used.
+        reuse = "lowercase", ---@type "lowercase" | "all"
+      },
       search = {
         -- search/jump in all windows
         multi_window = true,
