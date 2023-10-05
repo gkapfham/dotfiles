@@ -82,7 +82,7 @@ return {
       handler_options = {
         search_engine = "google",
       },
-      vim.api.nvim_set_keymap('n', '<Space>gb', 'gx', {noremap=false})
+      vim.api.nvim_set_keymap('n', '<Space>wb', 'gx', {noremap=false})
     } end,
   },
 
