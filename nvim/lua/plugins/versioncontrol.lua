@@ -25,14 +25,31 @@ return {
     }
   },
 
-  -- Flog
+  -- Neogit
   {
-    "rbong/vim-flog",
+    "NeogitOrg/neogit",
+    event = "VeryLazy",
     dependencies = {
-      "tpope/vim-fugitive",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "sindrets/diffview.nvim",
     },
-    cmd = {"Flog", "Flogsplit"},
+    keys = {
+      -- Keys: git and telescope
+      { "<Space>nn", ":Neogit <CR>", desc = "Neogit: Open neogit dashboard" },
+      { "<Space>gh", ":Telescope git_commits <CR>", desc = "Neogit: Git commit history" },
+    },
+    config = true
   },
+
+  -- -- Flog
+  -- {
+  --   "rbong/vim-flog",
+  --   dependencies = {
+  --     "tpope/vim-fugitive",
+  --   },
+  --   cmd = {"Flog", "Flogsplit"},
+  -- },
 
   -- Diffview
   {
@@ -127,16 +144,5 @@ return {
     },
   },
 
-  {
-    "NeogitOrg/neogit",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "nvim-telescope/telescope.nvim", -- optional
-      "sindrets/diffview.nvim",        -- optional
-      -- "ibhagwan/fzf-lua",              -- optional
-    },
-    config = true
-  }
 
 }
