@@ -28,7 +28,7 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/null-ls.nvim",
     },
     config = function()
       require("mason").setup()
@@ -166,7 +166,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/null-ls.nvim",
     },
     config = function()
       require("mason-null-ls").setup({
