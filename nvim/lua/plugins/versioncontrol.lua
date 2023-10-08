@@ -32,14 +32,23 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
-      "sindrets/diffview.nvim",
+      -- "sindrets/diffview.nvim",
     },
     keys = {
       -- Keys: git and telescope
       { "<Space>nn", ":Neogit <CR>", desc = "Neogit: Open neogit dashboard" },
       { "<Space>gh", ":Telescope git_commits <CR>", desc = "Neogit: Git commit history" },
     },
-    config = true
+    -- config = true
+    config = function()
+      local neogit = require("neogit")
+      neogit.setup {
+        -- Hides the hints at the top of the status buffer
+        disable_hint = false,
+        -- Disables changing the buffer highlights based on where the cursor is.
+        disable_context_highlighting = true,
+      }
+      end
   },
 
   -- -- Flog
@@ -54,6 +63,7 @@ return {
   -- Diffview
   {
     "sindrets/diffview.nvim",
+    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -143,6 +153,5 @@ return {
       { "<leader>o", "<cmd>Octo<cr>", desc = "Octo" },
     },
   },
-
 
 }
