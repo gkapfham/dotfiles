@@ -51,15 +51,6 @@ return {
       end
   },
 
-  -- -- Flog
-  -- {
-  --   "rbong/vim-flog",
-  --   dependencies = {
-  --     "tpope/vim-fugitive",
-  --   },
-  --   cmd = {"Flog", "Flogsplit"},
-  -- },
-
   -- Diffview
   {
     "sindrets/diffview.nvim",
