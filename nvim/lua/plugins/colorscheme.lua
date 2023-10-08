@@ -15,6 +15,16 @@ return {
     end,
   },
 
+  -- Colorizer for highlighting colors
+  {
+    "NvChad/nvim-colorizer.lua",
+    event = "VeryLazy",
+    config = function()
+      local comment = require("colorizer")
+      comment.setup()
+    end,
+  },
+
   -- Color template creation
   {
     "lifepillar/vim-colortemplate",
