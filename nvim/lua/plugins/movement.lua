@@ -3,20 +3,6 @@
 
 return {
 
-  -- -- Leap and flit
-  -- {
-  --   "ggandor/leap.nvim",
-  --   event = "VeryLazy",
-  --   dependencies = { {"ggandor/flit.nvim", config = {
-  --     multiline = true,
-  --     eager_ops = true,
-  --     keymaps = { f = 'f', F = 'F', t = 't', T = 'T' }
-  --   } } },
-  --   config = function()
-  --     require("leap").add_default_mappings(true)
-  --   end,
-  -- },
-
   {
     "folke/flash.nvim",
     event = "VeryLazy",
