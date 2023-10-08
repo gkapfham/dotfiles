@@ -71,19 +71,21 @@ return {
     "chrishrb/gx.nvim",
     event = "VeryLazy",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function() require("gx").setup {
-      open_browser_app = "xdg-open",
-      handlers = {
-        plugin = true,
-        github = true,
-        package_json = true,
-        search = true,
-      },
-      handler_options = {
-        search_engine = "google",
-      },
-      vim.api.nvim_set_keymap('n', '<Space>wb', 'gx', {noremap=false})
-    } end,
+    config = function()
+      require("gx").setup {
+        open_browser_app = "xdg-open",
+        handlers = {
+          plugin = true,
+          github = true,
+          package_json = true,
+          search = true,
+        },
+        handler_options = {
+          search_engine = "google",
+        },
+        vim.api.nvim_set_keymap('n', '<Space>wb', 'gx', { noremap = false })
+      }
+    end,
   },
 
   -- Icons
