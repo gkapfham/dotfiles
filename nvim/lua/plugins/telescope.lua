@@ -4,6 +4,8 @@
 
 return {
 
+  "aaronhallaert/advanced-git-search.nvim",
+
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -12,6 +14,7 @@ return {
       "benfowler/telescope-luasnip.nvim",
       "ThePrimeagen/refactoring.nvim",
       "debugloop/telescope-undo.nvim",
+      "nvim-telescope/telescope.nvim",
     },
     -- Configure
     config = function()
@@ -72,6 +75,19 @@ return {
           }
         },
         extensions = {
+          advanced_git_search = {
+            -- fugitive or diffview
+            diff_plugin = "fugitive",
+            -- customize git in previewer
+            -- e.g. flags such as { "--no-pager" }, or { "-c", "delta.side-by-side=false" }
+            git_flags = {},
+            -- customize git diff in previewer
+            -- e.g. flags such as { "--raw" }
+            git_diff_flags = {},
+            -- Show builtin git pickers when executing "show_custom_functions" or :AdvancedGitSearch
+            show_builtin_git_pickers = false,
+            entry_default_author_or_date = "author", -- one of "author" or "date"
+          },
           undo = {
             use_delta = false,
             side_by_side = false,
@@ -106,6 +122,8 @@ return {
       -- in a lazy fashion and this plugin will not load
       -- unless done in an explicit fashion
       require("telescope").load_extension("notify")
+      --
+      require("telescope").load_extension("advanced_git_search")
       -- Configure the keymap for refactoring; setting it here because
       -- I do know how to set visual mode keymaps in keys section of spec
       vim.api.nvim_set_keymap(
