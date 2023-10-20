@@ -124,7 +124,7 @@ return {
       -- in a lazy fashion and this plugin will not load
       -- unless done in an explicit fashion
       require("telescope").load_extension("notify")
-      --
+      -- Load and configure the advanced_git_search plugin
       require("telescope").load_extension("advanced_git_search")
       -- Configure the keymap for refactoring; setting it here because
       -- I do know how to set visual mode keymaps in keys section of spec
