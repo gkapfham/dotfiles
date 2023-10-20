@@ -84,17 +84,11 @@ return {
         },
         extensions = {
           advanced_git_search = {
-            -- fugitive or diffview
             diff_plugin = "fugitive",
-            -- customize git in previewer
-            -- e.g. flags such as { "--no-pager" }, or { "-c", "delta.side-by-side=false" }
             git_flags = {},
-            -- customize git diff in previewer
-            -- e.g. flags such as { "--raw" }
             git_diff_flags = {},
-            -- Show builtin git pickers when executing "show_custom_functions" or :AdvancedGitSearch
             show_builtin_git_pickers = true,
-            entry_default_author_or_date = "author", -- one of "author" or "date"
+            entry_default_author_or_date = "author",
           },
           undo = {
             use_delta = false,
