@@ -4,9 +4,14 @@
 
 -- Support functions implemented in lua {{{
 
--- Define symbols for the icons used by nvim-cmp
+-- Define symbols for the icons used by nvim-cmp;
 -- These symbols will appear on the right-hand side
--- of the actual completion suggested by nvim-cmp
+-- of the actual completion suggested by nvim-cmp;
+-- Note that these symbols are the second label from
+-- the right that appears for each completion line;
+-- If there is not a symbol defined for a particular
+-- completion then the symbol will not appear at all
+-- and there will instead be the display of nil
 local kind_icons = {
   Text = "",
   Method = "",
@@ -62,52 +67,14 @@ return {
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
-      require('copilot').setup({
-        panel = {
-          enabled = false,
-          auto_refresh = false,
-          keymap = {
-            jump_prev = "[[",
-            jump_next = "]]",
-            accept = "<CR>",
-            refresh = "gr",
-            open = "<M-CR>"
-          },
-          layout = {
-            position = "bottom", -- | top | left | right
-            ratio = 0.4
-          },
-        },
-        suggestion = {
-          enabled = false,
-          auto_trigger = false,
-          debounce = 75,
-          keymap = {
-            accept = "<M-l>",
-            accept_word = false,
-            accept_line = false,
-            next = "<M-]>",
-            prev = "<M-[>",
-            dismiss = "<C-]>",
-          },
-        },
-        filetypes = {
-          yaml = false,
-          markdown = false,
-          python = true,
-          help = false,
-          gitcommit = true,
-          gitrebase = false,
-          hgcommit = false,
-          svn = false,
-          cvs = false,
-          ["."] = false,
-        },
-        copilot_node_command = 'node', -- Node.js version must be > 16.x
-        server_opts_overrides = {},
+      -- setup the plugin using a default configuration
+      -- that will disable the use of the standard features
+      -- of the copilot plugin because they are going to
+      -- be used through the nvim-cmp completion system
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
       })
-
-
     end,
   },
 
