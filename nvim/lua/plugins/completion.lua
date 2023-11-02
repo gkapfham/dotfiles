@@ -32,21 +32,91 @@ local kind_icons = {
   Struct = "",
   Event = "",
   Operator = "",
-  TypeParameter = ""
+  TypeParameter = "",
+  Copilot = "",
+  Comment = "",
 }
 
 -- Define the has_words_before function used in the
 -- integration between luasnip and nvim-cmp; note
 -- that this function must exist for other code in
 -- this file to work correctly
+
+-- local has_words_before = function()
+--   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+--   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+-- end
+
 local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
 end
 
 -- }}}
 
 return {
+
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require('copilot').setup({
+        panel = {
+          enabled = false,
+          auto_refresh = false,
+          keymap = {
+            jump_prev = "[[",
+            jump_next = "]]",
+            accept = "<CR>",
+            refresh = "gr",
+            open = "<M-CR>"
+          },
+          layout = {
+            position = "bottom", -- | top | left | right
+            ratio = 0.4
+          },
+        },
+        suggestion = {
+          enabled = false,
+          auto_trigger = false,
+          debounce = 75,
+          keymap = {
+            accept = "<M-l>",
+            accept_word = false,
+            accept_line = false,
+            next = "<M-]>",
+            prev = "<M-[>",
+            dismiss = "<C-]>",
+          },
+        },
+        filetypes = {
+          yaml = false,
+          markdown = false,
+          python = true,
+          help = false,
+          gitcommit = true,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
+          ["."] = false,
+        },
+        copilot_node_command = 'node', -- Node.js version must be > 16.x
+        server_opts_overrides = {},
+      })
+
+
+    end,
+  },
+
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  },
 
   -- Auto completion with nvim-cmp
   {
@@ -67,6 +137,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "jmbuhr/otter.nvim",
       "jc-doyle/cmp-pandoc-references",
+      "zbirenbaum/copilot-cmp",
       -- Fuzzy buffer plugin with dependencies
       {"romgrk/fzy-lua-native", build = "make"},
       "tzachar/cmp-fuzzy-buffer",
@@ -153,6 +224,7 @@ return {
               tmux = " Tmux",
               luasnip = " Snippet",
               look = " Spell",
+              copilot = " Copilot",
             })[entry.source.name]
             return vim_item
           end
@@ -173,30 +245,68 @@ return {
           -- This means that you can jump back into the snippet by
           -- using <S-Tab> even after going through every field.
           -- Go forward in the template holes for the snippet
+
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
+            if require("copilot.suggestion").is_visible() then
+              require("copilot.suggestion").accept()
+            elseif cmp.visible() then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+            elseif luasnip.expandable() then
+              luasnip.expand()
             elseif has_words_before() then
               cmp.complete()
             else
               fallback()
             end
-          end, { "i", "s" }),
+          end, {
+              "i",
+              "s",
+            }),
+
+          -- ["<Tab>"] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_next_item()
+          --   elseif luasnip.expand_or_jumpable() then
+          --     luasnip.expand_or_jump()
+          --   elseif has_words_before() then
+          --     cmp.complete()
+          --   else
+          --     fallback()
+          --   end
+          -- end, { "i", "s" }),
+
           -- Define the same <Tab> mapping but also for
           -- <C-n> so that this also advances forward
+
+          -- ["<C-n>"] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_next_item()
+          --   elseif luasnip.expand_or_jumpable() then
+          --     luasnip.expand_or_jump()
+          --   elseif has_words_before() then
+          --     cmp.complete()
+          --   else
+          --     fallback()
+          --   end
+          -- end, { "i", "s" }),
+
           ["<C-n>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
+            if require("copilot.suggestion").is_visible() then
+              require("copilot.suggestion").accept()
+            elseif cmp.visible() then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+            elseif luasnip.expandable() then
+              luasnip.expand()
             elseif has_words_before() then
               cmp.complete()
             else
               fallback()
             end
-          end, { "i", "s" }),
+          end, {
+              "i",
+              "s",
+            }),
+
           -- Go back in the template holes in the snippet
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -227,6 +337,7 @@ return {
           -- Define the first-tier of sources
           {name = 'treesitter', max_item_count = 5, priority = 10},
           {name = 'nvim_lsp', max_item_count = 10, priority = 10},
+          {name = 'copilot', max_item_count = 5, priority = 8},
           -- Look at all of the open buffers
           {
             name = 'buffer', max_item_count = 10, priority = 20,
