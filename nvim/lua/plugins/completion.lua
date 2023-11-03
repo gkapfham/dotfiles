@@ -38,8 +38,9 @@ local kind_icons = {
   Event = "",
   Operator = "",
   TypeParameter = "",
+  String = "",
   Copilot = "",
-  Comment = "",
+  Comment = "",
 }
 
 -- Define the has_words_before function used in the
@@ -212,7 +213,6 @@ return {
           -- This means that you can jump back into the snippet by
           -- using <S-Tab> even after going through every field.
           -- Go forward in the template holes for the snippet
-
           ["<Tab>"] = cmp.mapping(function(fallback)
             if require("copilot.suggestion").is_visible() then
               require("copilot.suggestion").accept()
@@ -229,7 +229,6 @@ return {
               "i",
               "s",
             }),
-
           -- ["<Tab>"] = cmp.mapping(function(fallback)
           --   if cmp.visible() then
           --     cmp.select_next_item()
@@ -273,7 +272,6 @@ return {
               "i",
               "s",
             }),
-
           -- Go back in the template holes in the snippet
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
