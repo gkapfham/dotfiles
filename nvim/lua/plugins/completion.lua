@@ -63,6 +63,7 @@ end
 
 return {
 
+  -- Use the GitHub copilot plugin
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -79,6 +80,7 @@ return {
     end,
   },
 
+  -- Integrate the copilot with nvim-cmp
   {
     "zbirenbaum/copilot-cmp",
     config = function ()
