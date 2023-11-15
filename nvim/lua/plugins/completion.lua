@@ -38,6 +38,7 @@ local kind_icons = {
   Event = "",
   Operator = "",
   TypeParameter = "",
+  Spell = "",
   String = "",
   Copilot = "",
   Comment = "",
