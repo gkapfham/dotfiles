@@ -170,7 +170,7 @@ return {
     },
     config = function()
       require("mason-null-ls").setup({
-        ensure_installed = { "chktex", "pydocstyle", "black", "prettierd" },
+        ensure_installed = { "chktex", "pydocstyle", "ruff", "prettierd" },
         automatic_installation = false,
         handlers = {},
       })
@@ -180,7 +180,7 @@ return {
         sources = {
           null_ls.builtins.diagnostics.chktex,
           null_ls.builtins.diagnostics.pydocstyle,
-          null_ls.builtins.formatting.black,
+          null_ls.builtins.formatting.ruff,
           null_ls.builtins.formatting.prettierd,
         },
       })
