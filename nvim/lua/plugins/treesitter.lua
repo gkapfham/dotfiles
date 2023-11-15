@@ -52,12 +52,6 @@ return {
     }
   },
 
-  -- {
-  --   'gsuuon/tshjkl.nvim',
-  --   event = "VeryLazy",
-  --   config = true
-  -- },
-
   -- -- Tree-climber
   -- {
   --   "drybalka/tree-climber.nvim",
