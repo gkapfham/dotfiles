@@ -22,7 +22,7 @@ return {
       "benfowler/telescope-luasnip.nvim",
       "ThePrimeagen/refactoring.nvim",
       "debugloop/telescope-undo.nvim",
-      "nvim-telescope/telescope.nvim",
+      "Marskey/telescope-sg",
     },
     -- Configure
     config = function()
@@ -83,6 +83,14 @@ return {
           }
         },
         extensions = {
+          ast_grep = {
+            command = {
+              "asg",
+              "--json=stream",
+            },
+            grep_open_files = false,
+            lang = nil,
+          },
           advanced_git_search = {
             diff_plugin = "fugitive",
             git_flags = {},
@@ -126,6 +134,8 @@ return {
       require("telescope").load_extension("notify")
       -- Load and configure the advanced_git_search plugin
       require("telescope").load_extension("advanced_git_search")
+      -- Load and configure the ast_grep
+      require("telescope").load_extension("ast_grep")
       -- Configure the keymap for refactoring; setting it here because
       -- I do know how to set visual mode keymaps in keys section of spec
       vim.api.nvim_set_keymap(
@@ -146,6 +156,8 @@ return {
       { "<C-p>", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>p", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>o", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
+      -- Ast-Grep
+      { "<Space>tg", "<cmd> Telescope ast_grep <CR>", desc = "Telescope: AST grep" },
       -- Help
       { "<Space>th", "<cmd> Telescope help_tags <CR>", desc = "Telescope: Help tags" },
       -- History
