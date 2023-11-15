@@ -195,7 +195,7 @@ return {
   -- symbol-usage.nvim displays symbol usage information in virtual text
   {
     'Wansmer/symbol-usage.nvim',
-    event = "VeryLazy",
+    event = "BufReadPre",
     config = function()
       local function h(name) return vim.api.nvim_get_hl(0, { name = name }) end
       vim.api.nvim_set_hl(0, 'SymbolUsageRounding', { fg = h('CursorLine').bg, italic = true })
