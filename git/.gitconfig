@@ -49,7 +49,7 @@
 [pull]
 	rebase = false
 [init]
-    defaultBranch = master
+	defaultBranch = main
 [delta]
     features = decorations
     dark = true
