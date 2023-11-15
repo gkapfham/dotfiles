@@ -192,6 +192,7 @@ return {
     }
   },
 
+  -- symbol-usage.nvim displays symbol usage information in virtual text
   {
     'Wansmer/symbol-usage.nvim',
     event = "VeryLazy",
