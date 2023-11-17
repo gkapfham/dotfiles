@@ -2,7 +2,6 @@
 -- Purpose: load and configure plugins for installation
 -- and use of language servers protocol implementations
 
-
 return {
 
   -- Mason.nvim for LSP management
