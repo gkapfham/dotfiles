@@ -4,7 +4,7 @@
 
 return {
 
-  -- Aerial plugin
+  -- aerial.nvim plugin
   {
     "stevearc/aerial.nvim",
     cmd = "AerialToggle",
