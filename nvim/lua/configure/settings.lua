@@ -42,6 +42,14 @@ vim.cmd([[set inccommand=split]])
 -- Do not display commands in right-hand corner
 vim.cmd([[set noshowcmd]])
 
+-- Ignorecase search: "J" and "j" are the same
+-- Smartcase search: "J" is different than "j" if capitalized used
+-- Both of these variables are respected by flash.nvim
+vim.cmd([[
+  set ignorecase
+  set smartcase
+]])
+
 -- }}}
 
 -- Indentation settings through the use of vim.cmd and vimscript commands {{{

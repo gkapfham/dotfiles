@@ -4,9 +4,14 @@
 
 -- Support functions implemented in lua {{{
 
--- Define symbols for the icons used by nvim-cmp
+-- Define symbols for the icons used by nvim-cmp;
 -- These symbols will appear on the right-hand side
--- of the actual completion suggested by nvim-cmp
+-- of the actual completion suggested by nvim-cmp;
+-- Note that these symbols are the second label from
+-- the right that appears for each completion line;
+-- If there is not a symbol defined for a particular
+-- completion then the symbol will not appear at all
+-- and there will instead be the display of nil
 local kind_icons = {
   Text = "",
   Method = "",
@@ -32,21 +37,57 @@ local kind_icons = {
   Struct = "",
   Event = "",
   Operator = "",
-  TypeParameter = ""
+  TypeParameter = "",
+  Spell = "",
+  String = "",
+  Copilot = "",
+  Comment = "",
 }
 
 -- Define the has_words_before function used in the
 -- integration between luasnip and nvim-cmp; note
 -- that this function must exist for other code in
 -- this file to work correctly
+
+-- local has_words_before = function()
+--   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+--   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+-- end
+
 local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
 end
 
 -- }}}
 
 return {
+
+  -- Use the GitHub copilot plugin
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      -- setup the plugin using a default configuration
+      -- that will disable the use of the standard features
+      -- of the copilot plugin because they are going to
+      -- be used through the nvim-cmp completion system
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+    end,
+  },
+
+  -- Integrate the copilot with nvim-cmp
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  },
 
   -- Auto completion with nvim-cmp
   {
@@ -61,11 +102,13 @@ return {
       "octaltree/cmp-look",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       "quangnguyen30192/cmp-nvim-tags",
       "ray-x/cmp-treesitter",
       "saadparwaiz1/cmp_luasnip",
       "jmbuhr/otter.nvim",
       "jc-doyle/cmp-pandoc-references",
+      "zbirenbaum/copilot-cmp",
       -- Fuzzy buffer plugin with dependencies
       {"romgrk/fzy-lua-native", build = "make"},
       "tzachar/cmp-fuzzy-buffer",
@@ -110,9 +153,13 @@ return {
         --   },
         -- },
         -- Define the performance characteristics for nvim-cmp
+        -- Favor the quick delivery of a minimal number of completions
         performance = {
-          throttle = 2,
-          trigger_debounce_time = 50,
+          throttle = 0,
+          fetching_timeout = 50,
+          debounce = 10,
+          async_budget = 1,
+          max_view_entries = 50
         },
         -- Specify a snippet engine
         snippet = {
@@ -148,6 +195,7 @@ return {
               tmux = " Tmux",
               luasnip = " Snippet",
               look = " Spell",
+              copilot = " Copilot",
             })[entry.source.name]
             return vim_item
           end
@@ -169,29 +217,64 @@ return {
           -- using <S-Tab> even after going through every field.
           -- Go forward in the template holes for the snippet
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
+            if require("copilot.suggestion").is_visible() then
+              require("copilot.suggestion").accept()
+            elseif cmp.visible() then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+            elseif luasnip.expandable() then
+              luasnip.expand()
             elseif has_words_before() then
               cmp.complete()
             else
               fallback()
             end
-          end, { "i", "s" }),
+          end, {
+              "i",
+              "s",
+            }),
+          -- ["<Tab>"] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_next_item()
+          --   elseif luasnip.expand_or_jumpable() then
+          --     luasnip.expand_or_jump()
+          --   elseif has_words_before() then
+          --     cmp.complete()
+          --   else
+          --     fallback()
+          --   end
+          -- end, { "i", "s" }),
+
           -- Define the same <Tab> mapping but also for
           -- <C-n> so that this also advances forward
+
+          -- ["<C-n>"] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_next_item()
+          --   elseif luasnip.expand_or_jumpable() then
+          --     luasnip.expand_or_jump()
+          --   elseif has_words_before() then
+          --     cmp.complete()
+          --   else
+          --     fallback()
+          --   end
+          -- end, { "i", "s" }),
+
           ["<C-n>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
+            if require("copilot.suggestion").is_visible() then
+              require("copilot.suggestion").accept()
+            elseif cmp.visible() then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+            elseif luasnip.expandable() then
+              luasnip.expand()
             elseif has_words_before() then
               cmp.complete()
             else
               fallback()
             end
-          end, { "i", "s" }),
+          end, {
+              "i",
+              "s",
+            }),
           -- Go back in the template holes in the snippet
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -222,28 +305,16 @@ return {
           -- Define the first-tier of sources
           {name = 'treesitter', max_item_count = 5, priority = 10},
           {name = 'nvim_lsp', max_item_count = 10, priority = 10},
-          -- {
-          --   name = 'buffer', max_item_count = 10, priority = 20,
-          --   option = {
-          --     get_bufnrs = function()
-          --       local bufs = {}
-          --       for _, win in ipairs(vim.api.nvim_list_wins()) do
-          --         bufs[vim.api.nvim_win_get_buf(win)] = true
-          --       end
-          --       return vim.tbl_keys(bufs)
-          --     end
-          --   },
-          -- },
+          {name = 'copilot', max_item_count = 5, priority = 8},
+          -- Look at all of the open buffers
           {
             name = 'buffer', max_item_count = 10, priority = 20,
-            -- Look at all of the open buffers
             option = {
               get_bufnrs = function()
                 return vim.api.nvim_list_bufs()
               end
             }
           },
-
           {name = 'fuzzy_buffer', max_item_count = 5, priority = 1},
           {name = 'tags', max_item_count = 5, priority = 5},
           {name = 'luasnip', max_item_count = 5, priority = 10},

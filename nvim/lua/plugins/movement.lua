@@ -3,17 +3,78 @@
 
 return {
 
-  -- Leap and flit
   {
-    "ggandor/leap.nvim",
+    "folke/flash.nvim",
     event = "VeryLazy",
-    dependencies = { {"ggandor/flit.nvim", config = {
-      multiline = true,
-      eager_ops = true,
-      keymaps = { f = 'f', F = 'F', t = 't', T = 'T' }
-    } } },
+    opts = {
+      highlight = {
+        backdrop = false,
+      },
+      prompt = {
+        enabled = false,
+      },
+      modes = {
+        char = {
+          highlight = {
+            backdrop = false,
+          },
+          jump_labels = false
+        }
+      }
+    },
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
+  },
+
+  -- Display diagnostic information about different keymaps,
+  -- including information about the clipboard and spelling
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    opts = {
+      spelling = {
+        enabled = true,
+        suggestions = 20,
+      },
+      triggers = {"z"},
+      triggers_nowait = {
+        -- spelling
+        "z=",
+      },
+    }
+  },
+
+  -- Bracketed
+  {
+    "echasnovski/mini.bracketed",
+    event = "VeryLazy",
     config = function()
-      require("leap").add_default_mappings(true)
+      require("mini.bracketed").setup({
+        buffer     = { suffix = 'b', options = {} },
+        comment    = { suffix = 'e', options = {} },
+        conflict   = { suffix = 'x', options = {} },
+        diagnostic = { suffix = 'd', options = {} },
+        file       = { suffix = 'f', options = {} },
+        indent     = { suffix = 'i', options = {} },
+        jump       = { suffix = 'j', options = {} },
+        location   = { suffix = 'l', options = {} },
+        oldfile    = { suffix = 'o', options = {} },
+        quickfix   = { suffix = 'q', options = {} },
+        treesitter = { suffix = 't', options = {} },
+        undo       = { suffix = 'u', options = {} },
+        window     = { suffix = 'w', options = {} },
+        yank       = { suffix = 'y', options = {} },
+      }
+      )
     end,
   },
 
@@ -74,5 +135,20 @@ return {
       }
     end,
   },
+
+  -- -- Spider for improved word movement
+  -- {
+  --   "chrisgrieser/nvim-spider",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("spider").setup({
+  --       skipInsignificantPunctuation = true
+  --     })
+  --     vim.keymap.set({"n", "o", "x"}, "w", "<cmd>lua require('spider').motion('w')<CR>", { desc = "Spider-w" })
+  --     vim.keymap.set({"n", "o", "x"}, "e", "<cmd>lua require('spider').motion('e')<CR>", { desc = "Spider-e" })
+  --     vim.keymap.set({"n", "o", "x"}, "b", "<cmd>lua require('spider').motion('b')<CR>", { desc = "Spider-b" })
+  --     vim.keymap.set({"n", "o", "x"}, "ge", "<cmd>lua require('spider').motion('ge')<CR>", { desc = "Spider-ge" })
+  --   end,
+  -- },
 
 }

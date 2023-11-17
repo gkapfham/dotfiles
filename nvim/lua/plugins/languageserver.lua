@@ -4,63 +4,107 @@
 
 return {
 
-  -- Language servers with:
-  -- nvim-lspconfig
-  -- nvim-lsp-installer
-  -- toggle_lsp_diagnostics
+  -- mason.nvim for LSP management
+  {
+    "williamboman/mason.nvim",
+    event = "BufReadPost",
+    build = ":MasonUpdate"
+  },
+
+  -- neodev.nvim for LSP enhancement for Lua files
+  {
+    "folke/neodev.nvim",
+    event = "BufReadPost",
+    config = function()
+      require("neodev").setup()
+    end
+  },
+
+  -- nvim-lspconfig for LSP management
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPost",
     dependencies = {
-      "williamboman/nvim-lsp-installer",
+      "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
     },
-    config = function(plugin)
-      local lsp_installer = require'nvim-lsp-installer'
-      function common_on_attach(client, bufnr)
-        -- Start of the language service and connect to it the
-        -- other programs that use the language server
-        -- print("契Starting Language Server");
-        vim.notify(" Starting Language Server(s)");
-        local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-        opts = {silent = true, noremap = true, documentFormatting = True}
-        -- Create all of the keybindings that have the following purposes:
-        -- display in a floating window details about symbol under cursor
-        buf_set_keymap('n', '<leader>k', '<cmd> lua vim.lsp.buf.hover()<CR>', opts)
-        -- display in a floating window details about parameter to called function
-        buf_set_keymap('n', '<space>k', '<cmd> lua vim.lsp.buf.signature_help()<CR>', opts)
-        -- display in a floating window diagnostics for the current line
-        buf_set_keymap('n', '<space>e', '<cmd> lua vim.diagnostic.open_float(0, {scope="line"})<CR>', opts)
-        -- send all of the diagnostics for the current window to the location list
-        buf_set_keymap('n', '<space>c', '<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-        -- go to the next diagnostic
-        -- buf_set_keymap('n', ']d', '<cmd> lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-        -- go to the previous diagnostic
-        -- buf_set_keymap('n', '[d', '<cmd> lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-        -- run a code action on the current line of code
-        buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-        -- rename the variable using a floating menu
-        buf_set_keymap('n', '<space>rv', '<cmd> lua vim.lsp.buf.rename()<CR>', opts)
-        -- reformat entire buffer content with a sync (i.e., reformat in a blocking fashion)
-        buf_set_keymap('n', '<space>ff', '<cmd> lua vim.lsp.buf.format()<CR>', opts)
-        -- attempt to tell the language server not to highlight semantic tokens
-        -- (note that this approach does not seem to work correctly)
-        client.server_capabilities.semanticTokensProvider = nil
-      end
-      -- Install each of the chosen language servers and then
-      -- run the common_on_attach function for each of them
-      local installed_servers = lsp_installer.get_installed_servers()
-      for _, server in pairs(installed_servers) do
-          opts = {
-              on_attach = common_on_attach,
+    config = function()
+      require("mason").setup()
+      require("mason-lspconfig").setup {
+        ensure_installed = { "lua_ls", "pyright", "ruff_lsp", "cssls" },
+      }
+      local lspconfig = require('lspconfig')
+      -- Setup LSP servers:
+      -- 1) CSS
+      -- 2) HTML
+      -- 3) Lua
+      -- 4) Markdown
+      -- 5) Python
+      -- 6) YAML
+      -- configure cssls for CSS LSP
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      lspconfig.cssls.setup {
+        capabilities = capabilities,
+      }
+      -- configure html_ls for HTML
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+      lspconfig.html.setup {
+        capabilities = capabilities,
+        filetypes = { 'markdown', 'quarto', 'html' },
+      }
+      -- configure luals (with neovim support) for Lua LSP
+      lspconfig.lua_ls.setup({
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = "Replace"
+            }
           }
-          server:setup(opts)
-      end
+        }
+      })
+      -- configure marksman for Markdown LSP
+      lspconfig.marksman.setup {
+        filetypes = { 'markdown', 'quarto' },
+      }
+      -- configure pyright for Python LSP
+      lspconfig.pyright.setup {}
+      -- configure ruff for Python LSP
+      lspconfig.ruff_lsp.setup {}
+      -- configure texlab for LaTeX and BibTeX LSP
+      lspconfig.texlab.setup {
+        texlab = {
+          auxDirectory = ".",
+          bibtexFormatter = "texlab",
+          build = {
+            args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+            executable = "latexmk",
+            forwardSearchAfter = false,
+            onSave = false
+          },
+          chktex = {
+            onEdit = false,
+            onOpenAndSave = false
+          },
+          diagnosticsDelay = 300,
+          formatterLineLength = 0,
+          forwardSearch = {
+            args = {}
+          },
+          latexFormatter = "latexindent",
+          latexindent = {
+            modifyLineBreaks = false
+          }
+        }
+      }
+      -- configure yamlls for YAML LSP
+      lspconfig.yamlls.setup {}
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
       -- to support the display of the diagnostics
-      require'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
+      require 'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
       -- Define customized signs for diagnostics reported by the language server;
       -- note that this will define the signs displayed in the gutter
       local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
@@ -68,25 +112,143 @@ return {
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
       end
-      -- Configure null-ls for diagnostics and formatting
-      local null_ls = require("null-ls")
-      null_ls.setup({
-          sources = {
-            null_ls.builtins.diagnostics.chktex,
-            null_ls.builtins.diagnostics.flake8,
-            null_ls.builtins.diagnostics.pydocstyle,
-            null_ls.builtins.diagnostics.pylint,
-            null_ls.builtins.formatting.black,
-            null_ls.builtins.formatting.isort,
-            null_ls.builtins.formatting.prettierd,
-          },
-      })
     end,
     -- Keys
     keys = {
-      -- Toggle virtual text from the language servers
-      { "<Space>sv", "<Plug>(toggle-lsp-diag-vtext)", desc = "Language Server: Toggle virtual text" },
+      {
+        "<Space>sv",
+        "<Plug>(toggle-lsp-diag-vtext)",
+        desc =
+        "Language Server: Toggle virtual text"
+      },
+      {
+        "<Space>e",
+        "<cmd> lua vim.diagnostic.open_float(0, {scope='line'})<CR>",
+        desc =
+        "Language Server: Display diagnostics"
+      },
+      {
+        "<Space>k",
+        "<cmd> lua vim.lsp.buf.hover()<CR>",
+        desc =
+        "Language Server: Symbol details"
+      },
+      {
+        "<Space>c",
+        "<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>",
+        desc =
+        "Language Server: Send to loclist"
+      },
+      {
+        "<Space>c",
+        "<cmd>lua vim.lsp.buf.code_action()<CR>",
+        desc =
+        "Language Server: Send to loclist"
+      },
+      {
+        "<Space>ca",
+        "<cmd>lua vim.lsp.buf.code_action()<CR>",
+        desc =
+        "Language Server: Perform code action"
+      },
+      {
+        "<Space>rv",
+        "<cmd> lua vim.lsp.buf.rename()<CR>",
+        desc =
+        "Language Server: Rename variable"
+      },
     }
+  },
+
+  -- mason-null-ls.nvim
+  {
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "nvimtools/none-ls.nvim",
+    },
+    config = function()
+      require("mason-null-ls").setup({
+        ensure_installed = { "chktex", "pydocstyle", "ruff", "prettierd" },
+        automatic_installation = false,
+        handlers = {},
+      })
+      -- Configure null-ls for diagnostics and formatting
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.diagnostics.chktex,
+          null_ls.builtins.diagnostics.pydocstyle,
+          null_ls.builtins.formatting.ruff,
+          null_ls.builtins.formatting.prettierd,
+        },
+      })
+    end,
+    keys = {
+      -- Perform a format of the content in the buffer
+      { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
+    }
+  },
+
+  -- symbol-usage.nvim displays symbol usage information in virtual text
+  {
+    'Wansmer/symbol-usage.nvim',
+    event = "BufReadPre",
+    config = function()
+      local function h(name) return vim.api.nvim_get_hl(0, { name = name }) end
+      vim.api.nvim_set_hl(0, 'SymbolUsageRounding', { fg = h('CursorLine').bg, italic = true })
+      vim.api.nvim_set_hl(0, 'SymbolUsageContent', { bg = h('CursorLine').bg, fg = h('Conceal').fg, italic = true })
+      vim.api.nvim_set_hl(0, 'SymbolUsageRef', { fg = h('Conceal').fg, bg = h('CursorLine').bg, italic = true })
+      vim.api.nvim_set_hl(0, 'SymbolUsageDef', { fg = h('Type').fg, bg = h('CursorLine').bg, italic = true })
+      vim.api.nvim_set_hl(0, 'SymbolUsageImpl', { fg = h('@keyword').fg, bg = h('CursorLine').bg, italic = true })
+      local function text_format(symbol)
+        local res = {}
+        local round_start = { '', 'SymbolUsageRounding' }
+        local round_end = { '', 'SymbolUsageRounding' }
+        if symbol.references then
+          local usage = symbol.references <= 1 and 'usage' or 'usages'
+          local num = symbol.references == 0 and 'no' or symbol.references
+          table.insert(res, round_start)
+          table.insert(res, { '󰌹 ', 'SymbolUsageRef' })
+          table.insert(res, { ('%s %s'):format(num, usage), 'SymbolUsageContent' })
+          table.insert(res, round_end)
+        end
+        if symbol.definition then
+          if #res > 0 then
+            table.insert(res, { ' ', 'NonText' })
+          end
+          table.insert(res, round_start)
+          table.insert(res, { '󰳽 ', 'SymbolUsageDef' })
+          table.insert(res, { symbol.definition .. ' defs', 'SymbolUsageContent' })
+          table.insert(res, round_end)
+        end
+        if symbol.implementation then
+          if #res > 0 then
+            table.insert(res, { ' ', 'NonText' })
+          end
+          table.insert(res, round_start)
+          table.insert(res, { '󰡱 ', 'SymbolUsageImpl' })
+          table.insert(res, { symbol.implementation .. ' impls', 'SymbolUsageContent' })
+          table.insert(res, round_end)
+        end
+        return res
+      end
+      require('symbol-usage').setup({
+        text_format = text_format,
+      })
+    end
+  },
+
+  -- venv-selector.nvim for selecting virtual environments after starting neovim
+  {
+    "linux-cultist/venv-selector.nvim",
+    dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
+    config = true,
+    event = "VeryLazy",
+    keys = { {
+      "<leader>vv", "<cmd>:VenvSelect<cr>",
+    } }
   },
 
 }

@@ -25,18 +25,36 @@ return {
     }
   },
 
-  -- Flog
+  -- Neogit
   {
-    "rbong/vim-flog",
+    "NeogitOrg/neogit",
+    event = "VeryLazy",
     dependencies = {
-      "tpope/vim-fugitive",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      -- "sindrets/diffview.nvim",
     },
-    cmd = {"Flog", "Flogsplit"},
+    keys = {
+      -- Keys: git and telescope
+      { "<Space>nn", ":Neogit <CR>", desc = "Neogit: Open neogit dashboard" },
+      { "<Space>gh", ":Telescope git_commits <CR>", desc = "Neogit: Git commit history" },
+    },
+    -- config = true
+    config = function()
+      local neogit = require("neogit")
+      neogit.setup {
+        -- Hides the hints at the top of the status buffer
+        disable_hint = false,
+        -- Disables changing the buffer highlights based on where the cursor is.
+        disable_context_highlighting = true,
+      }
+      end
   },
 
   -- Diffview
   {
     "sindrets/diffview.nvim",
+    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -49,6 +67,42 @@ return {
     event = "BufReadPre",
     config = function()
       require('gitsigns').setup {
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
+          local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+          end
+          -- Navigation
+          map('n', ']c', function()
+            if vim.wo.diff then return ']c' end
+            vim.schedule(function() gs.next_hunk() end)
+            return '<Ignore>'
+          end, {expr=true})
+          map('n', '[c', function()
+            if vim.wo.diff then return '[c' end
+            vim.schedule(function() gs.prev_hunk() end)
+            return '<Ignore>'
+          end, {expr=true})
+          -- Actions
+          map('n', '<leader>hs', gs.stage_hunk)
+          map('n', '<leader>hr', gs.reset_hunk)
+          map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+          map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+          map('n', '<leader>hS', gs.stage_buffer)
+          map('n', '<leader>hu', gs.undo_stage_hunk)
+          map('n', '<leader>hR', gs.reset_buffer)
+          map('n', '<leader>hp', gs.preview_hunk)
+          map('n', '<leader>hb', function() gs.blame_line{full=true} end)
+          map('n', '<leader>tb', gs.toggle_current_line_blame)
+          map('n', '<leader>hd', gs.diffthis)
+          map('n', '<leader>hD', function() gs.diffthis('~') end)
+          map('n', '<leader>td', gs.toggle_deleted)
+          -- Text object
+          map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+        end,
+
         signs = {
           add          = {hl = 'DiffAdd'   , text = '+', numhl='None', linehl='None'},
           change       = {hl = 'DiffChange', text = '~', numhl='None', linehl='None'},
@@ -58,22 +112,6 @@ return {
         },
         numhl = false,
         linehl = false,
-        keymaps = {
-          -- Default keymap options
-          noremap = true,
-          buffer = true,
-          ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},
-          ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'"},
-          ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-          ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-          ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-          ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-          ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-          ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line()<CR>',
-          -- Text objects
-          ['o ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
-          ['x ih'] = ':<C-U>lua require"gitsigns".select_hunk()<CR>'
-        },
         watch_gitdir = {
           interval = 500
         },
@@ -87,6 +125,24 @@ return {
         status_formatter = nil,
       }
     end,
+  },
+
+  -- Octo.nvim for integration with GitHub
+  {
+    "pwntester/octo.nvim",
+    cmd = "Octo",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("octo").setup({ enable_builtin = true })
+      vim.cmd([[hi OctoEditable guibg=none]])
+    end,
+    keys = {
+      { "<leader>o", "<cmd>Octo<cr>", desc = "Octo" },
+    },
   },
 
 }

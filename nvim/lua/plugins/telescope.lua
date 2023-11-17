@@ -4,6 +4,16 @@
 
 return {
 
+  -- AdvancedGitSearch
+  {
+    "aaronhallaert/advanced-git-search.nvim",
+    cmd = "AdvancedGitSearch",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "tpope/vim-fugitive",
+    },
+  },
+
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
@@ -12,6 +22,7 @@ return {
       "benfowler/telescope-luasnip.nvim",
       "ThePrimeagen/refactoring.nvim",
       "debugloop/telescope-undo.nvim",
+      "Marskey/telescope-sg",
     },
     -- Configure
     config = function()
@@ -72,6 +83,21 @@ return {
           }
         },
         extensions = {
+          ast_grep = {
+            command = {
+              "asg",
+              "--json=stream",
+            },
+            grep_open_files = false,
+            lang = nil,
+          },
+          advanced_git_search = {
+            diff_plugin = "fugitive",
+            git_flags = {},
+            git_diff_flags = {},
+            show_builtin_git_pickers = true,
+            entry_default_author_or_date = "author",
+          },
           undo = {
             use_delta = false,
             side_by_side = false,
@@ -89,6 +115,11 @@ return {
         },
 
       }
+      -- Load the aerial extension; this provides navigation
+      -- using tags, treesitter, and LSP. It is especially
+      -- useful when Telescope does not correctly read tags
+      -- for certain types of files like Markdown files
+      require('telescope').load_extension('aerial')
       -- Load the luasnip extension for telescope
       require('telescope').load_extension('luasnip')
       -- Load and configure the refactoring telescope extension;
@@ -101,6 +132,10 @@ return {
       -- in a lazy fashion and this plugin will not load
       -- unless done in an explicit fashion
       require("telescope").load_extension("notify")
+      -- Load and configure the advanced_git_search plugin
+      require("telescope").load_extension("advanced_git_search")
+      -- Load and configure the ast_grep
+      require("telescope").load_extension("ast_grep")
       -- Configure the keymap for refactoring; setting it here because
       -- I do know how to set visual mode keymaps in keys section of spec
       vim.api.nvim_set_keymap(
@@ -112,6 +147,8 @@ return {
     end,
     -- Keys
     keys = {
+      -- Aerial
+      { "<Space>ta", "<cmd> Telescope aerial <CR>", desc = "Telescope: Aerial" },
       -- Buffers
       { "<Space>i", "<cmd> Telescope buffers <CR>", desc = "Telescope: Buffers" },
       { "<Space>tf", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Telescope: Fuzzy search buffers" },
@@ -119,6 +156,8 @@ return {
       { "<C-p>", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>p", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>o", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
+      -- Ast-Grep
+      { "<Space>tg", "<cmd> Telescope ast_grep <CR>", desc = "Telescope: AST grep" },
       -- Help
       { "<Space>th", "<cmd> Telescope help_tags <CR>", desc = "Telescope: Help tags" },
       -- History

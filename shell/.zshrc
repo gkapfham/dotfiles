@@ -72,7 +72,7 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LANGUAGE="en_US.UTF-8"
 
-# NeoVim as editor
+# Neovim as editor
 export EDITOR="nvim"
 
 # Large R history
@@ -413,65 +413,6 @@ bindkey '^ ' autosuggest-accept
 
 # }}}
 
-# FASD {{{
-
-# create the FASD cache so that the terminal loads quickly
-# but I still get all of the FASD features
-
-# fasd_cache="$HOME/.fasd-init-zsh"
-# if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-#   fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install >| "$fasd_cache"
-# fi
-# source "$fasd_cache"
-# unset fasd_cache
-
-# Use FZF to filter the output of FASD anywhere it is a command
-# autoload -U modify-current-argument
-# fzf-fasd-widget() {
-#   # divide the commands buffer into words
-#   local words i beginword start
-#   i=0
-#   start=1
-#   beginword=0
-#   words=("${(z)BUFFER}")
-#   while (( beginword <= CURSOR )); do
-#           (( i++ ))
-#           (( beginword += ${#words[$i]}+1 ))
-#   done
-#   # extract the first and current words
-#   # extract the first letter as a potential trigger
-#   FIRSTWORD="$words[$start]"
-#   CURRENTWORD="$words[$i]"
-#   TRIGGERLETTER=${CURRENTWORD:0:1}
-#   # the trigger of "," was used, so start
-#   # the use of FASD and FZF with this word
-#   if [ "$TRIGGERLETTER" = "," ]; then
-#     unset 'words[${#words[@]}]'
-#     PASTWORDS=${words[@]}
-#     CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
-#     LBUFFER="${PASTWORDS}$(fasd -d -l -r $CURRENTWORD | \
-#       fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
-#   # the trigger of "," was not used, so
-#   # search interactively based on user input
-#   else
-#     PASTWORDS=${words[@]}
-#     CURRENTWORD=""
-#     LBUFFER="${PASTWORDS} $(fasd -d -l -r $CURRENTWORD | \
-#       fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
-#   fi
-#   # update the prompt with the result of using FASD and FZF
-#   local ret=$?
-#   zle redisplay
-#   typeset -f zle-line-init >/dev/null && zle zle-line-init
-#   return $ret
-# }
-# Create a binding so that you can type "cd ,pract^B"
-# (as an example) to trigger this integrated widget
-# zle     -N   fzf-fasd-widget
-# bindkey '^B' fzf-fasd-widget
-
-# }}}
-
 # FZF {{{
 
 # Setup fzf, its auto-completions, and key bindings
@@ -512,6 +453,38 @@ export FZF_COMPLETION_TRIGGER='**'
 # export FZF_DEFAULT_COMMAND="fd . $PWD"
 export FZF_DEFAULT_COMMAND="fd"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# Use ripgrep and ripgrep-all in combination with fzf
+# to search all below directories (both text and binary files)
+search() {
+	RG_PREFIX="rga --files-with-matches"
+	local file
+	file="$(
+		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+				--phony -q "$1" \
+				--bind "change:reload:$RG_PREFIX {q}" \
+				--preview-window="up,40%:wrap"
+	)" &&
+	echo "✨ $file"
+}
+
+# Search with ripgrep and get a nice bat preview, but requires
+# that you specifics the name of the pattern immediately
+searchnow() {
+	rg  \
+	--column \
+	--line-number \
+	--no-column \
+	--no-heading \
+	--fixed-strings \
+	--ignore-case \
+	--hidden \
+	--follow \
+	--glob '!.git/*' "$1" \
+	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2 " " start ":" end}' \
+	| fzf --preview 'bat --wrap character --color always {1} --highlight-line {2} --line-range {3}' --preview-window="up,40%:wrap"
+}
 
 # }}}
 
@@ -562,7 +535,6 @@ function zvm_after_init() {
       unset 'words[${#words[@]}]'
       PASTWORDS=${words[@]}
       CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
-      # LBUFFER="${PASTWORDS}$(z -l $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
       LBUFFER="${PASTWORDS}$(z | grep $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
         fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
     # the trigger of "," was not used, so
@@ -674,38 +646,12 @@ function workspace {
 # Setup asdf-vm so that shims are available for all installed plugins
 # Currently using asdf-vm to manage:
 # --> Python
-. /opt/asdf-vm/asdf.sh
+# . /opt/asdf-vm/asdf.sh
 
 # Setup rtx as a drop-in replacement for asdf
-eval "$(rtx activate zsh)"
+eval "$(/home/gkapfham/.local/share/rtx/bin/rtx activate -s zsh)"
+export RTX_FETCH_REMOTE_VERSIONS_TIMEOUT="1s"
 alias rtt="rtx"
-
-# }}}
-
-# DEPRECATED Pyenv {{{
-
-# # Local pyenv home
-# export PYENV_ROOT="$HOME/.pyenv"
-
-# # Fast load of pyenv immediately upon shell startup
-# export PATH="$HOME/.pyenv/bin:$PATH"
-# eval "$(command pyenv init - zsh --no-rehash)"
-
-# }}}
-
-# DEPRECATED nvm {{{
-
-# Lazy load nvm to avoid slow shell startup times
-# Note that this requires you to type one of these
-# commands before they will initially work
-
-# if [ -s "$HOME/.nvm/nvm.sh" ]; then
-#   export NVM_DIR="$HOME/.nvm"
-#   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-#   alias nvm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && nvm'
-#   alias node='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && node'
-#   alias npm='unalias nvm node npm && . "$NVM_DIR"/nvm.sh && npm'
-# fi
 
 # }}}
 
@@ -772,7 +718,7 @@ start_focus() {
 }
 
 # Define the function that offers the command that can
-# be invokved in the shell
+# be invoked in the shell
 focus() {
   if [ -n "$1" ] && [ -n "$2" ]; then
     focus_options["$1"]="$2"
@@ -819,18 +765,6 @@ fi
 
 # z.lua {{{
 
-# Define the color scheme for FZF, which zoxide uses
-# when allowing the selection of directories; this
-# color scheme matches (but not exactly, not sure
-# why) the one used with the fzf-tab tool.
-
-# export _ZO_FZF_OPTS="--no-bold --no-separator --cycle
-#   --bind ctrl-f:page-down,ctrl-b:page-up
-#   --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
-#   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
-#   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
-#   --color=marker:#d78700,spinner:#875f87,header:#875f87"
-
 # set configuration for fzf when using z -I
 export _ZL_FZF_FLAG="--no-bold --no-separator --cycle --bind ctrl-f:page-down,ctrl-b:page-up --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700 --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700 --color=info:#87afd7,prompt:#87afd7,pointer:#d78700 --color=marker:#d78700,spinner:#875f87,header:#875f87"
 
@@ -859,4 +793,3 @@ alias ls="exa --color=always --icons"
 # zprof
 
 # }}}
-

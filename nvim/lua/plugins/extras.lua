@@ -3,11 +3,29 @@
 
 return {
 
-  -- -- MundoToggle
-  -- {
-  --   "simnalamburt/vim-mundo",
-  --   cmd = "MundoToggle",
-  -- },
+  -- Devdocs
+  {
+    "luckasRanarison/nvim-devdocs",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {
+      previewer_cmd = "rich",
+      cmd_args = { "-", "--markdown", "--force-terminal"}
+    },
+    -- Keys
+    keys = {
+      {
+        "<Leader>dd",
+        "<cmd> DevdocsOpen<CR>",
+        desc =
+          "DevDocs: Open DevDocs in Telescope"
+      },
+    },
+  },
 
   -- Undotree
   {
@@ -15,11 +33,11 @@ return {
     cmd = "UndotreeToggle",
   },
 
-  -- mail?
-  {
-    "https://git.sr.ht/~soywod/himalaya-vim",
-    cmd = "Himalaya",
-  },
+  -- -- mail?
+  -- {
+  --   "https://git.sr.ht/~soywod/himalaya-vim",
+  --   cmd = "Himalaya",
+  -- },
 
   -- Surround
   {
@@ -38,31 +56,6 @@ return {
           update_n_lines = "gzn",
         },
       })
-    end,
-  },
-
-  -- Bracketed
-  {
-    "echasnovski/mini.bracketed",
-    event = "VeryLazy",
-    config = function()
-      require("mini.bracketed").setup({
-        buffer     = { suffix = 'b', options = {} },
-        comment    = { suffix = 'e', options = {} },
-        conflict   = { suffix = 'x', options = {} },
-        diagnostic = { suffix = 'd', options = {} },
-        file       = { suffix = 'f', options = {} },
-        indent     = { suffix = 'i', options = {} },
-        jump       = { suffix = 'j', options = {} },
-        location   = { suffix = 'l', options = {} },
-        oldfile    = { suffix = 'o', options = {} },
-        quickfix   = { suffix = 'q', options = {} },
-        treesitter = { suffix = 't', options = {} },
-        undo       = { suffix = 'u', options = {} },
-        window     = { suffix = 'w', options = {} },
-        yank       = { suffix = 'y', options = {} },
-      }
-      )
     end,
   },
 
