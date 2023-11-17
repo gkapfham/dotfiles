@@ -3,30 +3,30 @@
 
 return {
 
-  -- Devdocs
-  {
-    "luckasRanarison/nvim-devdocs",
-    event = "VeryLazy",
-    enable = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    opts = {
-      previewer_cmd = "rich",
-      cmd_args = { "-", "--markdown", "--force-terminal"}
-    },
-    -- Keys
-    keys = {
-      {
-        "<Leader>dd",
-        "<cmd> DevdocsOpen<CR>",
-        desc =
-          "DevDocs: Open DevDocs in Telescope"
-      },
-    },
-  },
+  -- -- Devdocs
+  -- {
+  --   "luckasRanarison/nvim-devdocs",
+  --   event = "VeryLazy",
+  --   enable = false,
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --   },
+  --   opts = {
+  --     previewer_cmd = "rich",
+  --     cmd_args = { "-", "--markdown", "--force-terminal"}
+  --   },
+  --   -- Keys
+  --   keys = {
+  --     {
+  --       "<Leader>dd",
+  --       "<cmd> DevdocsOpen<CR>",
+  --       desc =
+  --         "DevDocs: Open DevDocs in Telescope"
+  --     },
+  --   },
+  -- },
 
   -- Undotree
   {

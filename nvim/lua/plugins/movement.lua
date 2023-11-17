@@ -31,28 +31,28 @@ return {
     },
   },
 
-  -- which-key.nvim: Display diagnostic information about different keymaps,
-  -- including information about the clipboard and spelling
-  {
-    "folke/which-key.nvim",
-    enable = false,
-    event = "VeryLazy",
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
-    opts = {
-      spelling = {
-        enabled = true,
-        suggestions = 20,
-      },
-      triggers = {"z"},
-      triggers_nowait = {
-        -- spelling
-        "z=",
-      },
-    }
-  },
+  -- -- which-key.nvim: Display diagnostic information about different keymaps,
+  -- -- including information about the clipboard and spelling
+  -- {
+  --   "folke/which-key.nvim",
+  --   enable = false,
+  --   event = "VeryLazy",
+  --   init = function()
+  --     vim.o.timeout = true
+  --     vim.o.timeoutlen = 300
+  --   end,
+  --   opts = {
+  --     spelling = {
+  --       enabled = true,
+  --       suggestions = 20,
+  --     },
+  --     triggers = {"z"},
+  --     triggers_nowait = {
+  --       -- spelling
+  --       "z=",
+  --     },
+  --   }
+  -- },
 
   -- Bracketed
   {
