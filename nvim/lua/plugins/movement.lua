@@ -31,10 +31,11 @@ return {
     },
   },
 
-  -- Display diagnostic information about different keymaps,
+  -- which-key.nvim: Display diagnostic information about different keymaps,
   -- including information about the clipboard and spelling
   {
     "folke/which-key.nvim",
+    enable = false,
     event = "VeryLazy",
     init = function()
       vim.o.timeout = true
