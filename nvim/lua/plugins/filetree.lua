@@ -19,10 +19,10 @@ return {
       nvim_web_devicons.set_icon(new_icons)
       nvim_web_devicons.set_default_icon('', '#a8a8a8')
       require("neo-tree").setup({
-        close_if_last_window = false,
+        close_if_last_window = true,
         popup_border_style = "rounded",
-        enable_git_status = true,
-        enable_diagnostics = true,
+        enable_git_status = false,
+        enable_diagnostics = false,
         sort_case_insensitive = false,
         sort_function = nil,
         default_component_configs = {
