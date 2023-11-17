@@ -34,7 +34,7 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls", "pyright", "cssls" },
+        ensure_installed = { "lua_ls", "pyright", "ruff_lsp", "cssls" },
       }
       local lspconfig = require('lspconfig')
       -- Setup LSP servers:
