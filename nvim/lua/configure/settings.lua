@@ -3,7 +3,7 @@
 -- Stop running the health checks for the Perl provider {{{
 
 vim.cmd([[
-let g:loaded_perl_provider = 0
+  let g:loaded_perl_provider = 0
 ]])
 
 -- }}}
@@ -11,10 +11,10 @@ let g:loaded_perl_provider = 0
 -- Define settings for vim.opt variables {{{
 
 -- Define the signcolumn
-vim.opt.signcolumn="yes:1"
+vim.opt.signcolumn = "yes:1"
 
 -- Disable the welcome message
-vim.opt.shortmess="FIWacto"
+vim.opt.shortmess = "FIWacto"
 
 -- Improve performance
 vim.opt.lazyredraw = false
@@ -56,27 +56,18 @@ vim.cmd([[
 
 -- Improved indentation
 vim.cmd([[
-
-" Automatically identify the filetype
-" Always use syntax highlighting
-" filetype indent plugin on | syn on
-
-" Always continue a comment in code to
-" the next line when pressing "return"
-set formatoptions+=r
-
-  " set autoindent
+  " Always continue a comment in code to
+  " the next line when pressing "return"
+  set formatoptions+=r
+  " Control the indentation of copied lines
   set copyindent
   set shiftwidth=2
-  " " set smartindent
-
 ]])
 
 -- Display linebreaks and tabs
 vim.cmd([[
   set linebreak
   set showbreak=━━
-  " set breakindent
   set tabstop=4
 ]])
 
@@ -89,18 +80,15 @@ vim.cmd([[
 -- Separate linebreaks and tabs for Golang
 vim.cmd([[
   au Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
-  au Filetype go setlocal listchars+=tab:\ \ 
+  au Filetype go setlocal listchars+=tab:\ \
 ]])
 
 -- Insert spaces for a tab
 vim.cmd([[
-set expandtab
-set smarttab
-set shiftround
+  set expandtab
+  set smarttab
+  set shiftround
 ]])
-
--- vim.opt.smartindent = true -- Insert indents automatically
--- vim.opt.autoindent = true -- Insert indents automatically
 
 -- }}}
 
