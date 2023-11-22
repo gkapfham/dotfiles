@@ -3,6 +3,7 @@
 
 return {
 
+  -- nvim-notify
   -- Notifications
   {
     "rcarriga/nvim-notify",
@@ -39,6 +40,7 @@ return {
     end
   },
 
+  -- dressing.nvim
   -- User interface enhancements
   {
     "stevearc/dressing.nvim",
@@ -54,8 +56,11 @@ return {
     end,
   },
 
+  -- auto-hlsearch.nvim
   -- Automatically disable search highlighting when
-  -- it is not needed after performing a search
+  -- it is not needed after performing a search; note
+  -- that this is still needed even if all of the searches
+  -- are run through the use of the flash.nvim plugin
   {
     "asiryk/auto-hlsearch.nvim",
     event = "BufReadPre",
@@ -65,6 +70,7 @@ return {
     end,
   },
 
+  -- gx.nvim
   -- Make it easy to load a web site in a browser after
   -- typing gx inside of Neovim, all without using netrw
   {
@@ -88,9 +94,11 @@ return {
     end,
   },
 
+  -- nvim-web-devicons
   -- Icons
   "nvim-tree/nvim-web-devicons",
 
+  -- nuim.nvim
   -- User interface components
   "MunifTanjim/nui.nvim",
 
