@@ -24,7 +24,6 @@ vim.g.maplocalleader = ","
 require("lazy").setup({
   spec = "plugins",
   -- Always load all of the plugins in lazyily
-  -- defaults = { lazy = true, version = "*" },
   defaults = { lazy = true, },
   install = { colorscheme = { "vitaminonec" } },
   -- Do not automatically perform the check
