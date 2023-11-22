@@ -3,18 +3,19 @@
 
 return {
 
-  -- Undotree
+  -- undotree
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
   },
 
-  -- Surround
+  -- mini.surround
+  -- surround management
   {
     "echasnovski/mini.surround",
     keys = { "gz" },
     config = function()
-      -- Use gz mappings instead of s to prevent conflict with leap
+      -- Use gz mappings instead of s to prevent conflict with flash.nvim
       require("mini.surround").setup({
         mappings = {
           add = "gza",
@@ -29,7 +30,8 @@ return {
     end,
   },
 
-  -- Align
+  -- mini.align
+  -- Align management
   {
     "echasnovski/mini.align",
     keys = { "ga" },
@@ -38,7 +40,8 @@ return {
     end,
   },
 
-  -- Trailspace
+  -- mini.trailspace
+  -- Trailing space management
   {
     "echasnovski/mini.trailspace",
     event = "VeryLazy",
