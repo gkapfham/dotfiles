@@ -232,22 +232,8 @@ return {
           --     fallback()
           --   end
           -- end, { "i", "s" }),
-
           -- Define the same <Tab> mapping but also for
           -- <C-n> so that this also advances forward
-
-          -- ["<C-n>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_next_item()
-          --   elseif luasnip.expand_or_jumpable() then
-          --     luasnip.expand_or_jump()
-          --   elseif has_words_before() then
-          --     cmp.complete()
-          --   else
-          --     fallback()
-          --   end
-          -- end, { "i", "s" }),
-
           ["<C-n>"] = cmp.mapping(function(fallback)
             if require("copilot.suggestion").is_visible() then
               require("copilot.suggestion").accept()
@@ -264,6 +250,17 @@ return {
               "i",
               "s",
             }),
+          -- ["<C-n>"] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_next_item()
+          --   elseif luasnip.expand_or_jumpable() then
+          --     luasnip.expand_or_jump()
+          --   elseif has_words_before() then
+          --     cmp.complete()
+          --   else
+          --     fallback()
+          --   end
+          -- end, { "i", "s" }),
           -- Go back in the template holes in the snippet
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
