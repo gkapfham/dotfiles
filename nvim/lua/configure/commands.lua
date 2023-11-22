@@ -1,4 +1,5 @@
 -- File: Commands
+-- Purpose: Define commands for use in neovim
 
 -- Wrapping
 vim.api.nvim_create_user_command("NoWrap", "set textwidth=0", {})
