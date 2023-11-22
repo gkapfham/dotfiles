@@ -3,7 +3,12 @@
 
 return {
 
-  -- Neo-tree
+  -- neo-tree.nvim
+  -- Neo-tree for a sidebar containing a file tree
+  -- Note that the plugin is setup to support the
+  -- display of diagnostic and Git information but
+  -- these are currently disabled due to the slight
+  -- flashing that occurs when editing files
   {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "NeoTreeShowToggle",
