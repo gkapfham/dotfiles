@@ -3,6 +3,7 @@
 
 return {
 
+  -- LuaSnip
   -- Snippet definition and insertion with luasnip
   {
     "L3MON4D3/LuaSnip",
