@@ -1,8 +1,9 @@
 -- File: plugins/colorscheme.lua
--- Purpose: Configure the colorscheme
+-- Purpose: Configure the colorscheme and plugins that highlight colors
 
 return {
 
+  -- vim-vitamin-onec
   -- Define the color scheme and load it
   -- non-lazyily as it must function immediately
   {
@@ -15,6 +16,7 @@ return {
     end,
   },
 
+  -- nvim-colorizer.lua
   -- Colorizer for highlighting colors
   {
     "NvChad/nvim-colorizer.lua",
@@ -47,6 +49,7 @@ return {
     end,
   },
 
+  -- vim-colortemplate
   -- Color template creation
   {
     "lifepillar/vim-colortemplate",
