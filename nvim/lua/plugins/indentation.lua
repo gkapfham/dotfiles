@@ -4,6 +4,7 @@
 return {
 
   -- guess-indent.nvim
+  -- sets the indentation based on content of a file
   {
     "nmac427/guess-indent.nvim",
     event = "VeryLazy",
@@ -13,6 +14,10 @@ return {
   },
 
   -- treesitter-indent-object.nvim
+  -- Support for visual selection based on
+  -- treesitter indentation; use commands
+  -- like "vii" and "vai" to select contents
+  -- using the intelligence of treesitter
   {
     "kiyoon/treesitter-indent-object.nvim",
     keys = {
