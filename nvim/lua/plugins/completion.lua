@@ -64,6 +64,7 @@ end
 
 return {
 
+  -- copilot.lua
   -- Use the GitHub copilot plugin
   {
     "zbirenbaum/copilot.lua",
@@ -81,6 +82,7 @@ return {
     end,
   },
 
+  -- copilot-cmp
   -- Integrate the copilot with nvim-cmp
   {
     "zbirenbaum/copilot-cmp",
@@ -89,6 +91,7 @@ return {
     end
   },
 
+  -- nvim-cmp
   -- Auto completion with nvim-cmp
   {
     "hrsh7th/nvim-cmp",
@@ -138,20 +141,6 @@ return {
       cmp.setup({
         -- Do not preselect items
         preselect = cmp.PreselectMode.None,
-        -- Define sorting order
-        -- sorting = {
-        --   comparators = {
-        --     cmp.config.compare.kind,
-        --     cmp.config.compare.order,
-        --     cmp.config.compare.score,
-        --     cmp.config.compare.recently_used,
-        --     cmp.config.compare.length,
-        --     cmp.config.compare.locality,
-        --     cmp.config.compare.sort_text,
-        --     cmp.config.compare.offset,
-        --     cmp.config.compare.exact,
-        --   },
-        -- },
         -- Define the performance characteristics for nvim-cmp
         -- Favor the quick delivery of a minimal number of completions
         performance = {
