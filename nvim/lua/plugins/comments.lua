@@ -7,7 +7,6 @@ return {
   -- Comments plugin
   {
     "numToStr/Comment.nvim",
-    -- event = "BufReadPre",
     event = "VeryLazy",
     config = function()
       local comment = require("Comment")
