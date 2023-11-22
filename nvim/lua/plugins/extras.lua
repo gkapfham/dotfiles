@@ -3,42 +3,11 @@
 
 return {
 
-  -- -- Devdocs
-  -- {
-  --   "luckasRanarison/nvim-devdocs",
-  --   event = "VeryLazy",
-  --   enable = false,
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-telescope/telescope.nvim",
-  --     "nvim-treesitter/nvim-treesitter",
-  --   },
-  --   opts = {
-  --     previewer_cmd = "rich",
-  --     cmd_args = { "-", "--markdown", "--force-terminal"}
-  --   },
-  --   -- Keys
-  --   keys = {
-  --     {
-  --       "<Leader>dd",
-  --       "<cmd> DevdocsOpen<CR>",
-  --       desc =
-  --         "DevDocs: Open DevDocs in Telescope"
-  --     },
-  --   },
-  -- },
-
   -- Undotree
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
   },
-
-  -- -- mail?
-  -- {
-  --   "https://git.sr.ht/~soywod/himalaya-vim",
-  --   cmd = "Himalaya",
-  -- },
 
   -- Surround
   {
