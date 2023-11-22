@@ -1,8 +1,9 @@
 -- File: plugins/diagnostics.lua
--- Purpose: load and configure plugins for diagnostic purposes
+-- Purpose: Load and configure plugins for diagnostic purposes
 
 return {
 
+  -- vim-startuptime
   -- Measure the startuptime
   {
     "dstein64/vim-startuptime",
@@ -12,6 +13,7 @@ return {
     end,
   },
 
+  -- plenary.nvim
   -- Provide user interface support
   -- for other neovim plugins
   "nvim-lua/plenary.nvim",
