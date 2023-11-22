@@ -1,4 +1,5 @@
--- Configure variables that are a part of neovim's global environment
+-- File: configure/autocmds.lua
+-- Purpose: Configure variables that are a part of neovim's global environment
 
 -- Stop running the health checks for the Perl provider {{{
 
