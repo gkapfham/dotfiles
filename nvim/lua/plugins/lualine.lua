@@ -157,7 +157,8 @@ endfunction
 
 return {
 
-  -- Lualine
+  -- lualine.nvim
+  -- Lualine for top and bottom bars
   {
     "nvim-lualine/lualine.nvim",
     lazy = false,
@@ -244,7 +245,7 @@ return {
       },
       -- Define the extensions which ensure that lualine
       -- makes better customized menus when they are used
-      extensions = {'quickfix', 'toggleterm', 'aerial'},
+      extensions = {'quickfix', 'aerial'},
     }
   end,
   }
