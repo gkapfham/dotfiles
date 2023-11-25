@@ -3,6 +3,8 @@
 
 return {
 
+  -- flash.nvim
+  -- movements based on marking letters through both motions and search
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -31,30 +33,7 @@ return {
     },
   },
 
-  -- -- which-key.nvim: Display diagnostic information about different keymaps,
-  -- -- including information about the clipboard and spelling
-  -- {
-  --   "folke/which-key.nvim",
-  --   enable = false,
-  --   event = "VeryLazy",
-  --   init = function()
-  --     vim.o.timeout = true
-  --     vim.o.timeoutlen = 300
-  --   end,
-  --   opts = {
-  --     spelling = {
-  --       enabled = true,
-  --       suggestions = 20,
-  --     },
-  --     triggers = {"z"},
-  --     triggers_nowait = {
-  --       -- spelling
-  --       "z=",
-  --     },
-  --   }
-  -- },
-
-  -- Bracketed
+  -- mini.bracketed
   {
     "echasnovski/mini.bracketed",
     event = "VeryLazy",
@@ -79,6 +58,7 @@ return {
     end,
   },
 
+  -- nvim-treesitter-pairs
   -- Pair movement and highlighting
   -- (note could not get vim-matchup to work;
   -- it crashes when using % and gives errors
@@ -109,7 +89,7 @@ return {
     end,
   },
 
-  -- Marks
+  -- marks.nvim
   {
     "chentoast/marks.nvim",
     event = "VeryLazy",
@@ -124,7 +104,7 @@ return {
         mappings = {
           next = "]a",
           prev = "[a",
-          -- Note that "delete" requires next
+          -- note that "delete" requires next
           -- that you give the actual mark;
           -- this means that "dma" would
           -- delete the mark called "a"
