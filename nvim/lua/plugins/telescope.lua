@@ -65,18 +65,18 @@ return {
           selection_strategy = "closest",
           sorting_strategy = "descending",
           layout_strategy = "horizontal",
-          file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+          file_sorter = require 'telescope.sorters'.get_fuzzy_file,
           file_ignore_patterns = {},
-          generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+          generic_sorter = require 'telescope.sorters'.get_generic_fuzzy_sorter,
           winblend = 0,
           border = {},
           borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
           color_devicons = false,
           use_less = true,
           set_env = { ['COLORTERM'] = 'truecolor' },
-          file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-          grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-          qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+          file_previewer = require 'telescope.previewers'.vim_buffer_cat.new,
+          grep_previewer = require 'telescope.previewers'.vim_buffer_vimgrep.new,
+          qflist_previewer = require 'telescope.previewers'.vim_buffer_qflist.new,
         },
         pickers = {
           buffers = {
@@ -134,51 +134,56 @@ return {
     -- Keys
     keys = {
       -- Aerial
-      { "<Space>ta", "<cmd> Telescope aerial <CR>", desc = "Telescope: Aerial" },
+      { "<Space>ta", "<cmd> Telescope aerial <CR>",                    desc = "Telescope: Aerial" },
       -- Ast-Grep
-      { "<Space>tg", "<cmd> Telescope ast_grep <CR>", desc = "Telescope: AST grep" },
+      { "<Space>tg", "<cmd> Telescope ast_grep <CR>",                  desc = "Telescope: AST grep" },
       -- Buffers
-      { "<Space>i", "<cmd> Telescope buffers <CR>", desc = "Telescope: Buffers" },
+      { "<Space>i",  "<cmd> Telescope buffers <CR>",                   desc = "Telescope: Buffers" },
       { "<Space>tf", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Telescope: Fuzzy search buffers" },
       -- Files
-      { "<C-p>", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
-      { "<Space>p", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
-      { "<Space>o", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
+      { "<C-p>",     "<cmd> Telescope find_files hidden=true <CR>",    desc = "Telescope: Find files (Hidden)" },
+      { "<Space>p",  "<cmd> Telescope find_files hidden=true <CR>",    desc = "Telescope: Find files (Hidden)" },
+      { "<Space>o",  "<cmd> Telescope find_files <CR>",                desc = "Find Files" },
       -- Git
-      { "<Space>tg", "<cmd> AdvancedGitSearch <CR>", desc = "Telescope: Advanced_git_search with all options" },
+      {
+        "<Space>tg",
+        "<cmd> AdvancedGitSearch <CR>",
+        desc =
+        "Telescope: Advanced_git_search with all options"
+      },
       -- Help
-      { "<Space>th", "<cmd> Telescope help_tags <CR>", desc = "Telescope: Help tags" },
+      { "<Space>th",  "<cmd> Telescope help_tags <CR>",             desc = "Telescope: Help tags" },
       -- History
-      { "<Space>tc", "<cmd> Telescope command_history <CR>", desc = "Telescope: Command history" },
+      { "<Space>tc",  "<cmd> Telescope command_history <CR>",       desc = "Telescope: Command history" },
       -- Keymaps
-      { "<Space>tk", "<cmd> Telescope keymaps <CR>", desc = "Telescope: Keymaps" },
+      { "<Space>tk",  "<cmd> Telescope keymaps <CR>",               desc = "Telescope: Keymaps" },
       -- Languageserver
-      { "<Space>gd", "<cmd> Telescope lsp_definitions <CR>", desc = "Telescope: Definitions" },
-      { "<Space>gr", "<cmd> Telescope lsp_references <CR>", desc = "Telescope: References" },
-      { "<Space>ds", "<cmd> Telescope lsp_document_symbols <CR>", desc = "Telescope: Document symbols" },
-      { "<Space>ws", "<cmd> Telescope lsp_workspace_symbols <CR>", desc = "Telescope: Workspace symbols" },
-      { "<Space>dd", "<cmd> Telescope diagnostics bufnr=0 <CR>", desc = "Telescope: Document diagnostics" },
-      { "<Space>wd", "<cmd> Telescope diagnostics <CR>", desc = "Telescope: Workspace diagnostics" },
+      { "<Space>gd",  "<cmd> Telescope lsp_definitions <CR>",       desc = "Telescope: Definitions" },
+      { "<Space>gr",  "<cmd> Telescope lsp_references <CR>",        desc = "Telescope: References" },
+      { "<Space>ds",  "<cmd> Telescope lsp_document_symbols <CR>",  desc = "Telescope: Document symbols" },
+      { "<Space>ws",  "<cmd> Telescope lsp_workspace_symbols <CR>", desc = "Telescope: Workspace symbols" },
+      { "<Space>dd",  "<cmd> Telescope diagnostics bufnr=0 <CR>",   desc = "Telescope: Document diagnostics" },
+      { "<Space>wd",  "<cmd> Telescope diagnostics <CR>",           desc = "Telescope: Workspace diagnostics" },
       -- Marks
-      { "<Space>tm", "<cmd> Telescope marks <CR>", desc = "Telescope: Marks" },
+      { "<Space>tm",  "<cmd> Telescope marks <CR>",                 desc = "Telescope: Marks" },
       -- Notifications
-      { "<Space>sn", "<cmd> Telescope notify <CR>", desc = "Telescope: Notifications" },
+      { "<Space>sn",  "<cmd> Telescope notify <CR>",                desc = "Telescope: Notifications" },
       -- Searching
-      { "<Space>gs", "<cmd> Telescope grep_string <CR>", desc = "Telescope: Search for word under cursor" },
-      { "<Leader>gs", "<cmd> Telescope grep_string <CR>", desc = "Telescope: Search for word under cursor" },
-      { "<Space>ga", "<cmd> Telescope live_grep <CR>", desc = "Telescope: Search for input string" },
+      { "<Space>gs",  "<cmd> Telescope grep_string <CR>",           desc = "Telescope: Search for word under cursor" },
+      { "<Leader>gs", "<cmd> Telescope grep_string <CR>",           desc = "Telescope: Search for word under cursor" },
+      { "<Space>ga",  "<cmd> Telescope live_grep <CR>",             desc = "Telescope: Search for input string" },
       -- Snippets
-      { "<Space>ss", "<cmd> Telescope luasnip <CR>", desc = "Telescope: Luasnip" },
+      { "<Space>ss",  "<cmd> Telescope luasnip <CR>",               desc = "Telescope: Luasnip" },
       -- Spelling
-      { "<Space>tz", "<cmd> Telescope spell_suggest <CR>", desc = "Telescope: Spelling suggestion" },
+      { "<Space>tz",  "<cmd> Telescope spell_suggest <CR>",         desc = "Telescope: Spelling suggestion" },
       -- Tags
-      { "<Space>tt", "<cmd> Telescope tags <CR>", desc = "Telescope: Tags" },
-      { "<leader>tt", "<cmd> Telescope tags <CR>", desc = "Telescope: Tags" },
-      { "<Space>tb", "<cmd> Telescope current_buffer_tags <CR>", desc = "Telescope: Buffer tags" },
-      { "<leader>tb", "<cmd> Telescope tags <CR>", desc = "Telescope: Buffer tags" },
+      { "<Space>tt",  "<cmd> Telescope tags <CR>",                  desc = "Telescope: Tags" },
+      { "<leader>tt", "<cmd> Telescope tags <CR>",                  desc = "Telescope: Tags" },
+      { "<Space>tb",  "<cmd> Telescope current_buffer_tags <CR>",   desc = "Telescope: Buffer tags" },
+      { "<leader>tb", "<cmd> Telescope tags <CR>",                  desc = "Telescope: Buffer tags" },
       -- Treesitter
-      { "<Space>ts", "<cmd> Telescope treesitter <CR>", desc = "Telescope: Treesitter " },
-      { "<leader>ts", "<cmd> Telescope treesitter <CR>", desc = "Telescope: Treesitter " },
+      { "<Space>ts",  "<cmd> Telescope treesitter <CR>",            desc = "Telescope: Treesitter " },
+      { "<leader>ts", "<cmd> Telescope treesitter <CR>",            desc = "Telescope: Treesitter " },
     }
   }
 
