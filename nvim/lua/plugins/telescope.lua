@@ -123,7 +123,7 @@ return {
       -- Load and configure the ast_grep
       require("telescope").load_extension("ast_grep")
       -- Configure the keymap for refactoring; setting it here because
-      -- I do know how to set visual mode keymaps in keys section of spec
+      -- I don't know how to set visual mode keymaps in keys section of spec
       vim.api.nvim_set_keymap(
         "v",
         "<space>rr",
@@ -135,6 +135,8 @@ return {
     keys = {
       -- Aerial
       { "<Space>ta", "<cmd> Telescope aerial <CR>", desc = "Telescope: Aerial" },
+      -- Ast-Grep
+      { "<Space>tg", "<cmd> Telescope ast_grep <CR>", desc = "Telescope: AST grep" },
       -- Buffers
       { "<Space>i", "<cmd> Telescope buffers <CR>", desc = "Telescope: Buffers" },
       { "<Space>tf", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Telescope: Fuzzy search buffers" },
@@ -142,8 +144,8 @@ return {
       { "<C-p>", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>p", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
       { "<Space>o", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
-      -- Ast-Grep
-      { "<Space>tg", "<cmd> Telescope ast_grep <CR>", desc = "Telescope: AST grep" },
+      -- Git
+      { "<Space>tg", "<cmd> AdvancedGitSearch <CR>", desc = "Telescope: Advanced_git_search with all options" },
       -- Help
       { "<Space>th", "<cmd> Telescope help_tags <CR>", desc = "Telescope: Help tags" },
       -- History
