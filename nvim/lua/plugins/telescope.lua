@@ -4,7 +4,7 @@
 
 return {
 
-  -- AdvancedGitSearch
+  -- advanced-git-search.nvim
   {
     "aaronhallaert/advanced-git-search.nvim",
     cmd = "AdvancedGitSearch",
@@ -14,17 +14,16 @@ return {
     },
   },
 
-  -- Telescope
+  -- telescope.nvim
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     dependencies = {
       "benfowler/telescope-luasnip.nvim",
       "ThePrimeagen/refactoring.nvim",
-      "debugloop/telescope-undo.nvim",
       "Marskey/telescope-sg",
     },
-    -- Configure
+    -- configure
     config = function()
       local actions = require('telescope.actions')
       require('telescope').setup {
@@ -42,9 +41,11 @@ return {
           mappings = {
             i = {
               ["<esc>"] = actions.close,
+              ["<M-a>"] = actions.select_all,
             },
             n = {
               ["<esc>"] = actions.close,
+              ["<M-a>"] = actions.select_all,
               ["<cr>"] = false,
             },
           },
@@ -72,7 +73,7 @@ return {
           borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
           color_devicons = false,
           use_less = true,
-          set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+          set_env = { ['COLORTERM'] = 'truecolor' },
           file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
           grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
           qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
@@ -98,20 +99,6 @@ return {
             show_builtin_git_pickers = true,
             entry_default_author_or_date = "author",
           },
-          undo = {
-            use_delta = false,
-            side_by_side = false,
-            use_custom_command = nil,
-            diff_context_lines = vim.o.scrolloff,
-            entry_format = "state #$ID, $STAT, $TIME",
-            mappings = {
-              i = {
-                ["<cr>"] = require("telescope-undo.actions").yank_additions,
-                ["<C-cr>"] = require("telescope-undo.actions").yank_deletions,
-                ["<C-r>"] = require("telescope-undo.actions").restore,
-              },
-            },
-          },
         },
 
       }
@@ -125,7 +112,6 @@ return {
       -- Load and configure the refactoring telescope extension;
       -- note that refactoring requires section of code in visual mode
       require("telescope").load_extension("refactoring")
-      require("telescope").load_extension("undo")
       -- Load and configure the notify plugin so that all
       -- notifications are viewable through telescope; note
       -- that this is now required because telescope is loaded
@@ -175,8 +161,6 @@ return {
       { "<Space>tm", "<cmd> Telescope marks <CR>", desc = "Telescope: Marks" },
       -- Notifications
       { "<Space>sn", "<cmd> Telescope notify <CR>", desc = "Telescope: Notifications" },
-      -- Reloader
-      { "<Space>rr", "<cmd> Telescope reloader <CR>", desc = "Telescope: Reloader" },
       -- Searching
       { "<Space>gs", "<cmd> Telescope grep_string <CR>", desc = "Telescope: Search for word under cursor" },
       { "<Leader>gs", "<cmd> Telescope grep_string <CR>", desc = "Telescope: Search for word under cursor" },
