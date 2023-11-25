@@ -4,6 +4,7 @@
 
 return {
 
+  -- vim-textobj-user
   -- Textobjects
   {
     "kana/vim-textobj-user",
@@ -16,14 +17,15 @@ return {
     end
   },
 
+  -- targets.vim
   -- Textobjects like backticks
   {
     "wellle/targets.vim",
     event = "VeryLazy"
   },
 
+  -- tshjkl.nvim
   -- Treesitter movements
-
   {
     'gsuuon/tshjkl.nvim',
     event = "VeryLazy",
@@ -33,25 +35,26 @@ return {
       },
       marks = {
         parent = {
-          virt_text = { {'h', 'ModeMsg'} },
+          virt_text = { { 'h', 'ModeMsg' } },
           virt_text_pos = 'overlay'
         },
         child = {
-          virt_text = { {'l', 'ModeMsg'} },
+          virt_text = { { 'l', 'ModeMsg' } },
           virt_text_pos = 'overlay'
         },
         prev = {
-          virt_text = { {'k', 'ModeMsg'} },
+          virt_text = { { 'k', 'ModeMsg' } },
           virt_text_pos = 'overlay'
         },
         next = {
-          virt_text = { {'j', 'ModeMsg'} },
+          virt_text = { { 'j', 'ModeMsg' } },
           virt_text_pos = 'overlay'
         }
       }
     }
   },
 
+  -- nvim-treesitter
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
@@ -94,23 +97,17 @@ return {
           "yaml",
         },
         -- Highlighting
-        highlight = { enable = true, disable = {"html", "latex"}, },
+        highlight = { enable = true, disable = { "html", "latex" }, },
         -- Indenting
         indent = { enable = true, },
         -- Commenting
         context_commentstring = { enable = true, enable_autocmd = false },
-        -- Alternate identing
-        -- yati = {
-        --   enable = true,
-        --   default_lazy = true,
-        --   default_fallback = "auto"
-        -- },
         require "nvim-treesitter.configs".setup {
           playground = {
             enable = true,
             disable = {},
-            updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-            persist_queries = false, -- Whether the query persists across vim sessions
+            updatetime = 25,
+            persist_queries = false,
             keybindings = {
               toggle_query_editor = 'o',
               toggle_hl_groups = 'i',
