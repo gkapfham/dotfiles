@@ -4,7 +4,7 @@
 
 return {
 
-  -- Fugitive
+  -- vim-fugitive for git integration
   {
     "tpope/vim-fugitive",
     cmd = {"G", "Git", "Gwrite"},
@@ -25,34 +25,7 @@ return {
     }
   },
 
-  -- -- Neogit
-  -- {
-  --   "NeogitOrg/neogit",
-  --   event = "VeryLazy",
-  --   enable = false,
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-telescope/telescope.nvim",
-  --     -- "sindrets/diffview.nvim",
-  --   },
-  --   keys = {
-  --     -- Keys: git and telescope
-  --     { "<Space>nn", ":Neogit <CR>", desc = "Neogit: Open neogit dashboard" },
-  --     { "<Space>gh", ":Telescope git_commits <CR>", desc = "Neogit: Git commit history" },
-  --   },
-  --   -- config = true
-  --   config = function()
-  --     local neogit = require("neogit")
-  --     neogit.setup {
-  --       -- Hides the hints at the top of the status buffer
-  --       disable_hint = false,
-  --       -- Disables changing the buffer highlights based on where the cursor is.
-  --       disable_context_highlighting = true,
-  --     }
-  --     end
-  -- },
-
-  -- Diffview
+  -- diffview.nvim for viewing diffs
   {
     "sindrets/diffview.nvim",
     event = "VeryLazy",
@@ -62,7 +35,7 @@ return {
     cmd = {"DiffviewOpen", "DiffviewLog"},
   },
 
-  -- Gitsigns
+  -- gitsigns.nvim for showing git diffs in the sign column
   {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
@@ -128,7 +101,7 @@ return {
     end,
   },
 
-  -- Octo.nvim for integration with GitHub
+  -- octo.nvim for integration with GitHub
   {
     "pwntester/octo.nvim",
     cmd = "Octo",
