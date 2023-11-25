@@ -3,13 +3,16 @@
 
 return {
 
-  -- Qf
+  -- qf.nvim
+  -- Enhance the quickfix window; especially useful after
+  -- using telescope to populate the quickfix list with all
+  -- of the diagnostics that need to be resolved
   {
     "ten3roberts/qf.nvim",
     event = "BufReadPost",
     config = function()
       require 'qf'.setup {
-        -- Location list configuration
+        -- location list configuration
         l = {
           auto_close = true,
           auto_follow = 'prev',
@@ -25,7 +28,7 @@ return {
           unfocus_close = false,
           focus_open = false,
         },
-        -- Quickfix list configuration
+        -- quickfix list configuration
         c = {
           auto_close = true,
           auto_follow = 'prev',
