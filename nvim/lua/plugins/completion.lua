@@ -81,6 +81,8 @@ return {
       require("copilot").setup({
         suggestion = { enabled = false },
         panel = { enabled = false },
+        -- define the filetypes for which the copilot
+        -- plugin will be enabled or disabled
         filetypes = {
           markdown = true,
           yaml = false,
