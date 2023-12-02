@@ -3,6 +3,14 @@
 
 return {
 
+  -- ultimate-autopairs.nvim
+  {
+    'altermo/ultimate-autopair.nvim',
+    event={'InsertEnter','CmdlineEnter'},
+    opts={
+    },
+  },
+
   -- nvim-ts-autotag
   {
     "windwp/nvim-ts-autotag",
