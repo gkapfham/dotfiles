@@ -42,6 +42,9 @@ local kind_icons = {
   String = "",
   Copilot = "",
   Comment = "",
+  TextTitle1 = "",
+  TextTitle2 = "",
+  TextTitle3 = "",
 }
 
 -- Define the has_words_before function used in the
@@ -78,6 +81,19 @@ return {
       require("copilot").setup({
         suggestion = { enabled = false },
         panel = { enabled = false },
+        -- define the filetypes for which the copilot
+        -- plugin will be enabled or disabled
+        filetypes = {
+          markdown = true,
+          yaml = false,
+          help = false,
+          gitcommit = false,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
+          ["."] = false,
+        },
       })
     end,
   },
