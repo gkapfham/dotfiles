@@ -20,20 +20,48 @@ client.urgent           #2F343A #333333 #bcbcbc #5F8700   #5F8700
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
 # Font for window titles
-font pango:Hack Nerd Font Regular 12
+font pango:Hack Nerd Font 9
 
 # Wallpaper that is a solid grey color
 exec_always --no-startup-id hsetroot -solid "#1C1C1C"
+
+set $bg     #1C1C1C
+set $fg     #404552
+set $hi     #fce94f
+set $ac     #4084d6
+set $tx     #2d323d
+set $ia     #9e9e9e
+set $be     #8faf9f
+set $yw     #f8f893
+set $gn     #81c181
+set $rd     #bf9b76
+set $id     #f9f8ff
+set $ce     #ceecee
+
+bar {
+  position top
+  separator_symbol " "
+    colors {
+        background          $bg
+        statusline          $sl
+        separator           $tx
+        focused_workspace   $ia        $ia        $tx
+        active_workspace    $gn        $ac        $tx
+        inactive_workspace  $bg        $fg        $ia
+        urgent_workspace    $ac        $bg        $ac
+    }
+  status_command i3status
+}
 
 # }}}
 
 # Startup {{{
 
 # Run polybar to display the fully configured status bar
-exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
+# exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
 
 # Run the dynamic workspace renaming program
-exec_always --no-startup-id exec i3wsr --config ~/.config/i3wsr/config.yml
+# exec_always --no-startup-id exec i3wsr --config ~/.config/i3wsr/config.yml
 
 # Run numlockx to turn off numlock by default
 # This prevents numlock from displaying in i3lock-color
