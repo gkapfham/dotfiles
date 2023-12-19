@@ -95,8 +95,24 @@ return {
   },
 
   -- nvim-web-devicons
-  -- Icons
-  "nvim-tree/nvim-web-devicons",
+  -- Icons with overrides for filetypes
+  -- where icons no longer display correctly with nerdfonts
+  {
+    "nvim-tree/nvim-web-devicons",
+    event = "VeryLazy",
+    config = function()
+      require'nvim-web-devicons'.setup {
+        color_icons = false;
+        strict = true;
+        override_by_extension = {
+          ["toml"] = {
+            icon = "",
+            name = "Toml"
+          }
+        };
+      }
+    end,
+  },
 
   -- nuim.nvim
   -- User interface components
