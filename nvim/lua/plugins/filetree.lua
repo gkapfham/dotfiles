@@ -11,7 +11,7 @@ return {
   -- flashing that occurs when editing files
   {
     "nvim-neo-tree/neo-tree.nvim",
-    cmd = "NeoTreeShowToggle",
+    cmd = "Neotree",
     -- Configure
     config = function()
       local nvim_web_devicons = require "nvim-web-devicons"
@@ -140,7 +140,9 @@ return {
             never_show_by_pattern = {
             },
           },
-          follow_current_file = true,
+          follow_current_file = {
+            enabled = true,
+          },
           group_empty_dirs = false,
           hijack_netrw_behavior = "open_default",
           use_libuv_file_watcher = true,
@@ -159,7 +161,9 @@ return {
           }
         },
         buffers = {
-          follow_current_file = true,
+          follow_current_file = {
+            enabled = true,
+          },
           group_empty_dirs = true,
           show_unloaded = true,
           window = {
@@ -188,7 +192,7 @@ return {
     end,
     keys = {
       -- Toggle display
-      { "<Space>0", "<cmd> NeoTreeShowToggle<CR>", desc = "Neo-tree: Toggle" },
+      { "<Space>0", "<cmd> Neotree toggle<CR>", desc = "Neo-tree: Toggle" },
     }
   }
 
