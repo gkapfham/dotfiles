@@ -119,7 +119,7 @@ function! StatuslinePythonEnvironment()
 " directory to the virtual environment that is not suitable
 " for including in a section of a status line.
 let l:venv = $VIRTUAL_ENV
-return l:venv !=# '' ? ' '.split(l:venv, '/')[-1] : ''
+return l:venv !=# '' ? ' '.split(l:venv, '/')[-1] : ''
 endfunction
 ]])
 
@@ -239,7 +239,7 @@ return {
         lualine_c = {},
         -- Top right display
         -- from left (middle) to right (far right corner): {x} {y} {z}
-        lualine_x = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
+        lualine_x = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
         lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
         lualine_z = {}
       },
