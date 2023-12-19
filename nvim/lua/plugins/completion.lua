@@ -13,35 +13,35 @@
 -- completion then the symbol will not appear at all
 -- and there will instead be the display of nil
 local kind_icons = {
-  Text = "",
-  Method = "",
-  Function = "",
+  Text = "󰉿",
+  Method = "󰆧",
+  Function = "󰊕",
   Constructor = "",
-  Field = "",
-  Variable = "",
-  Class = "ﴯ",
+  Field = "󰜢",
+  Variable = "󰀫",
+  Class = "󰠱",
   Interface = "",
   Module = "",
-  Property = "ﰠ",
-  Unit = "",
-  Value = "",
+  Property = "󰜢",
+  Unit = "󰑭",
+  Value = "󰎠",
   Enum = "",
-  Keyword = "",
+  Keyword = "󰌋",
   Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "󰈇",
+  Folder = "󰉋",
   EnumMember = "",
-  Constant = "",
-  Struct = "",
+  Constant = "󰏿",
+  Struct = "󰙅",
   Event = "",
-  Operator = "",
-  TypeParameter = "",
+  Operator = "󰆕",
+  TypeParameter = "",
   Spell = "",
   String = "",
   Copilot = "",
-  Comment = "",
+  Comment = "",
   TextTitle1 = "",
   TextTitle2 = "",
   TextTitle3 = "",
@@ -115,6 +115,7 @@ return {
     dependencies = {
       -- Stand-alone cmp plugins
       "andersevenrud/cmp-tmux",
+      "chrisgrieser/cmp-nerdfont",
       "dmitmel/cmp-cmdline-history",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
@@ -139,6 +140,7 @@ return {
       vim.cmd([[set completeopt=menu,menuone,noselect]])
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+      -- local nerdfont = require("nerdfont")
       -- Configure the dictionary plugin
       require('cmp').setup({
           sources = {
@@ -185,17 +187,18 @@ return {
             -- these will appear to the right of a completion
             -- suggestion in the nvim-cmp menu
             vim_item.menu = ({
-              buffer = " Buffer",
+              buffer = " Buffer",
               cmdline = " Command",
-              cmdline_history = " Command",
+              cmdline_history = " Command",
               fuzzy_buffer = " Fuzzy",
               nvim_lsp = " LSP",
               nvim_lsp_document_symbol = " LSP",
               path = "פּ Path",
+              nerdfont = "Font",
               otter = " Otter",
               pandoc_references = " Pandoc",
               rg = " Search",
-              tags = "笠Tags",
+              tags = " Tags",
               treesitter = " Tree",
               tmux = " Tmux",
               luasnip = " Snippet",
@@ -325,6 +328,7 @@ return {
           {name = 'tmux', max_item_count = 5, priority = 1, keyword_length = 2},
           {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'look', max_item_count = 5, priority = 1, keyword_length = 3},
+          {name = 'nerdfont', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'nvim_lsp_signature_help'},
         }, {
             -- Define the second-tier of sources; these will only
