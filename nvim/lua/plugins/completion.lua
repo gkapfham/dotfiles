@@ -117,9 +117,9 @@ return {
       "andersevenrud/cmp-tmux",
       "chrisgrieser/cmp-nerdfont",
       "dmitmel/cmp-cmdline-history",
+      "f3fora/cmp-spell",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
-      "octaltree/cmp-look",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-nvim-lsp-signature-help",
@@ -142,18 +142,20 @@ return {
       local luasnip = require("luasnip")
       -- local nerdfont = require("nerdfont")
       -- Configure the dictionary plugin
+      vim.opt.spell = true
+      vim.opt.spelllang = { 'en_us' }
       require('cmp').setup({
-          sources = {
-              {
-                  name = 'look',
-                  keyword_length = 2,
-                  option = {
-                      convert_case = true,
-                      loud = true,
-                      dict = '/usr/share/dict/american-english'
-                  }
-              }
-          }
+        sources = {
+          {
+            name = 'spell',
+            option = {
+              keep_all_entries = false,
+              enable_in_context = function()
+                return true
+              end,
+            },
+          },
+        },
       })
       -- Configure all aspects of nvim-cmp
       cmp.setup({
@@ -203,6 +205,7 @@ return {
               tmux = " Tmux",
               luasnip = " Snippet",
               look = " Spell",
+              spell = " Spell",
               copilot = " Copilot",
             })[entry.source.name]
             return vim_item
@@ -327,7 +330,7 @@ return {
           {name = 'pandoc_references', max_item_count = 5, priority = 5, keyword_length = 2},
           {name = 'tmux', max_item_count = 5, priority = 1, keyword_length = 2},
           {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
-          {name = 'look', max_item_count = 5, priority = 1, keyword_length = 3},
+          {name = 'spell', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'nerdfont', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'nvim_lsp_signature_help'},
         }, {
