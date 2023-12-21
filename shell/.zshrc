@@ -144,6 +144,8 @@ export PIPX_HOME="$HOME/.local/pipx"
 
 # System Aliases {{{
 
+# Run kitty in a single instance;
+# may reduce startup time
 alias kitty="kitty --single-instance"
 
 # MuPDF resolution
@@ -165,6 +167,9 @@ alias ka="eza --group-directories-first --grid --long --sort=name"
 # Use the eza command to display a tree,
 # ensuring better color scheme
 alias tree="eza --tree --level=2 --long --icons"
+
+# Use nix switch with a configuration in user account
+alias kix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
 
 # }}}
 
@@ -512,7 +517,7 @@ tms() {
 # Display all of the possible tmuxinators with fzf
 tmm() {
   # NOTE: Use the /usr/sbin/ls command since "ls" is now aliased to use "eza" command
-  session=$( /usr/sbin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
+  session=$( /run/current-system/sw/bin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
     fzf --query="$1" --select-1 --exit-0 --cycle --no-separator) &&
     tmuxinator "$session"
 }
@@ -571,7 +576,7 @@ benchmark() {
 
 # Store the ssh passphrase for easy git use
 secure() {
-    /usr/bin/ssh-add -t 432000
+    ssh-add -t 432000
 }
 
 # Always display directory contents after a change of directory
@@ -642,10 +647,9 @@ fi
 
 # }}}
 
-# zoxide {{{
+# Fancy Directory Movement with Zoxide {{{
 
 # Initialize zoxide
-# eval "$(zoxide init zsh)"
 znap eval zoxide "zoxide init zsh"
 
 # Create a fuzzy search alias for zoxide
@@ -660,32 +664,66 @@ alias ls="eza --color=always --icons"
 
 # }}}
 
-# Prompt with Starship and History with Atuin {{{
+# Prompt with Starship {{{
 
-# Prompt
+# Prompt source; see the starship.toml file
+# in the ~/.config/ directory for details
 znap eval starship 'starship init zsh'
 znap prompt
-# eval "$(starship init zsh)"
 
-# History
+# }}}
+
+# History with Atuin {{{
+
+# History source and keybindings;
+# note using znap is not possible and
+# a standard source is also not possible.
 zvm_after_init_commands+=(eval "$(atuin init zsh)")
 bindkey '^p' _atuin_search_widget
-# znap eval atuin 'atuin init zsh'
 
 # }}}
 
 # Znap Plugins {{{
-
-# Use znap source to start plugins
-znap source zsh-users/zsh-completions
-znap source jeffreytse/zsh-vi-mode
-znap source Aloxaf/fzf-tab
 
 # Use znap source to start plugins from oh-my-zsh
 znap source ohmyzsh/ohmyzsh \
   plugins/git \
   plugins/tmux \
   plugins/tmuxinator
+
+# Use znap source to start plugins
+znap source zsh-users/zsh-completions
+znap source zsh-users/zsh-autosuggestions
+znap source jeffreytse/zsh-vi-mode
+znap source Aloxaf/fzf-tab
+
+# Configure the zsh-autosuggestions plugin
+bindkey '^ ' autosuggest-accept
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585858"
+
+# }}}
+
+# Ssh Agent {{{
+
+# ssh-agent setup
+if [ -f ~/.ssh/agent.env ] ; then
+  . ~/.ssh/agent.env > /dev/null
+  if ! kill -0 $SSH_AGENT_PID > /dev/null 2>&1; then
+    # stale agent, start a new one
+    eval `ssh-agent | tee ~/.ssh/agent.env` > /dev/null 2>&1
+  fi
+else
+  # start an agent
+  eval `ssh-agent | tee ~/.ssh/agent.env` > /dev/null 2>&1
+fi
+
+# add all private keys found in ~/.ssh
+for filename in ~/.ssh/*; do
+  type=`file "$filename" | awk -F ": " '{print $2}'`
+  if [[ $type == "PEM RSA private key" ]]; then
+    ssh-add $filename >/dev/null 2>&1
+  fi
+done
 
 # }}}
 
