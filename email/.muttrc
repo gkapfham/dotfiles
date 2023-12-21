@@ -121,7 +121,7 @@ set implicit_autoview
 set beep=no
 
 # Create a display_filter that captures all email headers for aliases
-set display_filter = '$HOME/.mutt/aliases.sh'
+# set display_filter = '$HOME/.mutt/aliases.sh'
 
 # }}}
 
@@ -237,7 +237,7 @@ set ssl_verify_dates=yes
 set ssl_verify_host=yes
 
 # Configure the logins with GPG decryption for the password
-source "gpg -dq $HOME/.mutt/password.gpg |"
+# source "gpg -dq $HOME/.mutt/password.gpg |"
 set imap_user="gkapfham@allegheny.edu"
 set imap_pass=$my_pass
 set smtp_pass=$my_pass
@@ -272,8 +272,8 @@ set message_cachedir=~/.mutt/cache/bodies
 # Keyboard Bindings {{{
 
 # Use an aliases file to automatically save all of email addresses of emails that I read
-set alias_file = '~/.mutt/aliases.txt'
-source $alias_file
+# set alias_file = '~/.mutt/aliases.txt'
+# source $alias_file
 
 # Make it easy to switch to common Gmail folders
 bind index g noop
