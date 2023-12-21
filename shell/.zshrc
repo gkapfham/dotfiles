@@ -106,7 +106,7 @@ export PROMPT_EOL_MARK=' 󰜎   '
 
 # Define the TERMINAL variable for i3 window manager,
 # which consults this for running the i3-sensible-terminal
-export TERMINAL='alacritty'
+export TERMINAL='kitty'
 
 # Define the pager used for manual pages to be Neovim,
 # making it possible to then use "gO" to populate and load the
