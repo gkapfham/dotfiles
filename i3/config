@@ -92,8 +92,12 @@ exec --no-startup-id xbindkeys -f ~/.xbindkeysrc
 exec --no-startup-id clipmenud
 
 # Run picom to provide compositing, which especially
-# seems to reduce screen artifacts for Zathura windows
-# Do not use by default because it slows down screen redraws
+# seems to reduce screen artifacts for Zathura windows;
+# Do not use by default because it seems to work less
+# well if an external monitor was not already connected.
+# This is evidenced by degradation in the animations.
+# Finally, see the separate picom configuration file
+# for more details about how this program works.
 # exec --no-startup-id picom
 
 # }}}
