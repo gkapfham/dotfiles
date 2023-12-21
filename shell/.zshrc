@@ -115,7 +115,10 @@ export TERMINAL='kitty'
 # to view sections again by using <Leader>c instead of "gO".
 export MANPAGER='nvim +Man!'
 
-# Configure bat to use a matching theme
+# Configure bat to use a matching theme;
+# note that there are times when this theme
+# may need to be reintroduced to bat by
+# using the command "bat cache --build"
 export BAT_THEME='Vitamin-Onec'
 
 # Configure less to use lesspipe.sh so that it is possible
