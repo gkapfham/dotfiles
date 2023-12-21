@@ -75,13 +75,8 @@ export BROWSER=brave
 # --> JavaScript npm
 # --> Rust with cargo
 # --> Go with .gocode
+# --> User paths before Nix paths
 export PATH="$HOME/.local/pipx/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin::$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/run/wrappers/bin:/home/gkapfham/.nix-profile/bin:/nix/profile/bin:/home/gkapfham/.local/state/nix/profile/bin:/etc/profiles/per-user/gkapfham/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
-
-# Add the bin directory for Ruby gems to the Path
-# --> Ruby gems as managed by Ruby installed by operating system
-# export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
-# --> Ruby gems as managed by Ruby installed by asdf-vm
-# export PATH="$HOME/.gem/bin:$PATH"
 
 # Local Poetry home
 export POETRY_HOME=$HOME/.poetry
