@@ -110,9 +110,15 @@ exec --no-startup-id clipmenud
 set $rofi-program "rofi -modi 'run' -show run"
 bindsym Control+$mod+p exec $rofi-program
 
-# set $rofi-rename "rofi -dmenu -lines 0 -p 'New name'"
+# Rofi for renaming a specific workspace; note that workspace
+# names are organized in the i3 bar listing in an alpha-numerical
+# fashion. This means that workspaces with only a number will
+# come before workspaces with a number and a letter. For example,
+# the workspaces will be listed as follows:
+# --> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10a, 10b, 10c, 11, 12, 13, 14, 15.
+# Finally, workspaces that are only words are going to appear after any
+# of those that start with a number like the ones listed previously.
 bindsym Control+$mod+w exec i3-msg rename workspace to $(rofi -dmenu -lines 0)
-# i3-msg rename workspace to $(rofi -dmenu -lines 0 -p 'New name')
 
 # Rofi for .desktop files
 set $rofi-desktop "j4-dmenu-desktop --dmenu='rofi -p 'dmenu' -dmenu -i'"
