@@ -18,16 +18,11 @@ return {
     "neovim/nvim-lspconfig",
     event = "BufReadPost",
     dependencies = {
-      -- "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
       "nvimtools/none-ls.nvim",
     },
     config = function()
-      -- require("mason").setup()
-      -- require("mason-lspconfig").setup {
-      --   -- ensure_installed = { "lua_ls", "pyright", "cssls" },
-      -- }
       local lspconfig = require('lspconfig')
       -- Setup LSP servers:
       -- 1) CSS
@@ -35,7 +30,8 @@ return {
       -- 3) Lua
       -- 4) Markdown
       -- 5) Python
-      -- 6) YAML
+      -- 6) LaTeX and BibTeX
+      -- 7) YAML
       -- configure cssls for CSS LSP
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -178,41 +174,6 @@ return {
       { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
     }
   },
-
-
-  -- -- mason-null-ls.nvim
-  -- {
-  --   "jay-babu/mason-null-ls.nvim",
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   dependencies = {
-  --     "williamboman/mason.nvim",
-  --     "nvimtools/none-ls.nvim",
-  --   },
-  --   config = function()
-  --     require("mason-null-ls").setup({
-  --       ensure_installed = { "chktex", "pydocstyle", "ruff", "prettierd" },
-  --       automatic_installation = false,
-  --       handlers = {},
-  --     })
-  --     -- Configure null-ls for diagnostics and formatting
-  --     local null_ls = require("null-ls")
-  --     null_ls.setup({
-  --       sources = {
-  --         null_ls.builtins.diagnostics.chktex,
-  --         null_ls.builtins.diagnostics.pydocstyle,
-  --         -- null_ls.builtins.formatting.ruff,
-  --         null_ls.builtins.formatting.prettierd,
-  --         null_ls.builtins.formatting.ruff.with({
-  --           command = "/etc/profiles/per-user/gkapfham/bin/ruff",
-  --         }),
-  --       },
-  --     })
-  --   end,
-  --   keys = {
-  --     -- Perform a format of the content in the buffer
-  --     { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
-  --   }
-  -- },
 
   -- symbol-usage.nvim displays symbol usage information in virtual text
   {
