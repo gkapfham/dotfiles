@@ -515,7 +515,7 @@ bindsym $mod+Shift+b exec "light -S 100"
 # Screenshots {{{
 
 # Perform a full screen capture of the active window and save to a file
-bindsym Print exec "maim -i $(xdotool getactivewindow) ~/working/media/screenshots/`date +%Y-%m-%d_%H:%M:%S`.png"
+bindsym Print exec "maim -i $(xdotool getactivewindow) ~/media/screenshots/`date +%Y-%m-%d_%H:%M:%S`.png"
 
 # Perform a full screen capture of the active window and copy to the clipboard
 bindsym Control+Print exec "exec maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png"
