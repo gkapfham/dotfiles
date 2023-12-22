@@ -13,7 +13,7 @@ return {
     },
     event = "VeryLazy",
     config = function()
-      vim.g.python3_host_prog = '/home/gkapfham/.asdf/shims/python'
+      vim.g.python3_host_prog = 'python'
     end
   },
 
