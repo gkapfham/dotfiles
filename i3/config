@@ -456,9 +456,6 @@ bindsym $mod+Shift+c reload
 # Restart i3 inplace
 bindsym $mod+Shift+r restart
 
-# Exit i3 without any prompt
-# bindsym $mod+Shift+e exec i3-msg exit
-
 # }}}
 
 # Resize {{{
