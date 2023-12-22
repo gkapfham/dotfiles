@@ -66,7 +66,6 @@ return {
       vim.g.gutentags_generate_on_write = true
       vim.g.gutentags_generate_on_empty_buffer = true
       vim.g.gutentags_file_list_command = "rg --files"
-      -- vim.g.gutentags_ctags_extra_args = {'--tag-relative=yes', '--fields=+ailmnS', }
     end,
   },
 
