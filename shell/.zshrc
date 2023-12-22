@@ -237,23 +237,21 @@ alias ffgb='fzf-git-checkout'
 alias ffgbd='fzf-git-branch-diff'
 
 # }}}
-#
-# Znap {{{
 
-# Download Znap, if it's not there yet.
-# [[ -r ~/.zsh/zsh-snap/znap.zsh ]] ||
-#     git clone --depth 1 -- \
-#         https://github.com/marlonrichert/zsh-snap.git ~/Repos/znap
-source ~/.zsh/zsh-snap/znap.zsh  # Start Znap
+# Znap Setup {{{
 
-# Oh-My-Zsh and Zsh Plugins/Scripts {{{
+# Download znap, if it's not there yet
+[[ -r ~/.zsh/zsh-snap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/Repos/znap
+# Start znap so that it can later install plugins
+source ~/.zsh/zsh-snap/znap.zsh
+
+# Oh-My-Zsh and Zsh Configuration {{{
 
 # # Save startup time by disabling
-# DISABLE_UPDATE_PROMPT=true
-# DISABLE_AUTO_UPDATE=true
-
-# Configuration path
-#ZSH=$HOME/.oh-my-zsh
+DISABLE_UPDATE_PROMPT=true
+DISABLE_AUTO_UPDATE=true
 
 # Default theme
 ZSH_THEME="vitamin-onec"
@@ -261,42 +259,14 @@ ZSH_THEME="vitamin-onec"
 # Timestamps
 HIST_STAMPS="mm/dd/yyyy"
 
-# Plugin: Request all plugins from oh-my-zsh
-#
-# NOTE: these are all loaded in the .oh-my-zsh.sh script
-# and some of these could be loaded through zsh-defer.
-#
-# However, not all of them work with zsh-defer and some
-# benchmarking suggests that there is not any/much improvement
-# in performance. As such, they are all being included here!
-# plugins=(git git-extras shrink-path tmux tmuxinator virtualenv)
-
-# Reload all of the completion modules before
-# sourcing the specialized Oh-My-Zsh script
-# NOTE: this is needed to avoid errors
-# shell startup and after typing each command
-# autoload -Uz compinit && compinit
-
-# Load customized oh-my-zsh script
-# source $HOME/.oh-my-zsh.sh
-
-# Plugin: Fast, git-stacular prompt with gitstatus
-# Note: local modifications to this plugin
-# source $HOME/.zsh/gitstatus/gitstatus.prompt.zsh
-
-# Plugin: fzf-tab
-# Note: must be sourced after all other plugins to ensure
-# that tab-completion binds to it and not to oh-my-zsh method
-# source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
-
 # Disable sort when completing `git checkout`
-# zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:git-checkout:*' sort false
 
 # Set descriptions format to enable group support
-# zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*:descriptions' format '[%d]'
 
 # Set list-colors to enable filename colorizing
-# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Preview directory's content with eza when completing cd,
 # thereby showing a preview window with Fzf to the right
@@ -313,9 +283,9 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=do
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
 	fzf-preview 'echo ${(P)word}'
 
-# # Preview the search for commands or use information for commands
-# zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
-#   ¦ '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
+# Preview the search for commands or use information for commands
+zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
+  ¦ '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
 
 # Switch group using `,` and `.` (note that different
 # groups might include different types of branches when
@@ -344,25 +314,6 @@ zstyle ':fzf-tab:*' continuous-trigger '/'
 # colors are the same as those used to configure Fzf when it runs
 # otherwise in the terminal window or in a text editor like Vim or Neovim
 zstyle ":fzf-tab:*" fzf-flags --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87'
-
-# Plugin: zsh-autosuggestions
-# source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# Set a light grey color as the foreground color for the suggestion
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
-#
-# # Disable autosuggestions for buffers longer than the specified length
-# ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-#
-# # Perform autosuggestions in an async fashion
-# ZSH_AUTOSUGGEST_USE_ASYNC=1
-#
-# # First type to find a suggestion from the history and, if
-# # a match is not found, suggest one from the zsh completion engine
-# ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-#
-# # Use CTRL-<Space> to accept a specific auto suggestion
-# bindkey '^ ' autosuggest-accept
 
 # }}}
 
