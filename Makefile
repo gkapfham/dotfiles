@@ -43,7 +43,7 @@ purge:
 
 ## Create all required directories for dotfiles {{{
 
-## Create the .config/ directory to store subdirectories
+## Create the .config/ directory to store sub-directories
 create-config:
 	mkdir -p ~/.config
 
@@ -51,9 +51,13 @@ create-config:
 purge-mime:
 	rm -f ~/.config/mimeapps.list
 
-## Remove the Trolltech.conf file from the .config directory
+## Remove the Trolltech.conf file from the .config/ directory
 purge-trolltech:
 	rm -f ~/.config/Trolltech.conf
+
+## Remove the starship.toml file from the .config/ directory
+purge-starship:
+	rm -f ~/.config/starship.toml
 
 ## Create the needed alacritty/ directory in .config/
 create-alacritty:
@@ -381,9 +385,17 @@ stow-mime: purge-mime
 stow-trolltech:
 	stow -t ~/.config/ trolltech
 
-## Running stow on the mime directory depends on the trolltech file
+## Running stow on the trolltech directory depends on the trolltech file
 ## not being currently in existence, so purge it first
 stow-trolltech: purge-trolltech
+
+## Run stow on starship
+stow-starship:
+	stow -t ~/.config/ starship
+
+## Running stow on the starship directory depends on the starship file
+## not being currently in existence, so purge it first
+stow-starship: purge-starship
 
 ## Run stow on nvim
 stow-nvim:
@@ -554,7 +566,7 @@ stow-applications:
 create: create-config create-alacritty create-kitty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-kitty stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-i3 stow-i3wsr stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-kitty stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-i3 stow-i3wsr stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zsh-git-prompt stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
