@@ -373,7 +373,7 @@ search() {
 				--bind "change:reload:$RG_PREFIX {q}" \
 				--preview-window="up,40%:wrap"
 	)" &&
-	echo "✨ $file"
+	echo " $file"
 }
 
 # Search with ripgrep and get a nice bat preview, but requires
