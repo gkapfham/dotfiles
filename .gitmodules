@@ -1,6 +1,3 @@
-[submodule "zshgitprompt"]
-	path = zshgitprompt
-	url = https://github.com/gkapfham/zsh-git-prompt.git
 [submodule "fzftab"]
 	path = fzftab
 	url = https://github.com/Aloxaf/fzf-tab.git
