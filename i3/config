@@ -450,9 +450,6 @@ exec --no-startup-id xset dpms 600
 # Reload the i3 window manager
 bindsym $mod+Shift+c reload
 
-# Reload the polybar
-# bindsym $mod+Shift+p exec ~/.config/polybar/scripts/polybar-launch.sh
-
 # Restart i3 inplace
 bindsym $mod+Shift+r restart
 
