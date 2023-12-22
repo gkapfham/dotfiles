@@ -495,13 +495,13 @@ bindsym $mod+r mode "Resize a Window"
 # Media {{{
 
 # Decrease the volume
-bindsym XF86AudioLowerVolume exec "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-5%'"
+bindsym XF86AudioLowerVolume exec "pactl set-sink-volume @DEFAULT_SINK@ '-5%'"
 
 # Increase the volume
-bindsym XF86AudioRaiseVolume exec "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '+5%'"
+bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume @DEFAULT_SINK@ '+5%'"
 
 # Mute the audio
-bindsym XF86AudioMute exec "/usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle"
+bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 
 # Increase the brightness of the screen
 bindsym XF86MonBrightnessUp exec "light -A 5"
