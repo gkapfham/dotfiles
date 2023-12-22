@@ -4,12 +4,12 @@
 
 return {
 
-  -- mason.nvim for LSP management
-  {
-    "williamboman/mason.nvim",
-    event = "BufReadPost",
-    build = ":MasonUpdate"
-  },
+  -- -- mason.nvim for LSP management
+  -- {
+  --   "williamboman/mason.nvim",
+  --   event = "BufReadPost",
+  --   build = ":MasonUpdate"
+  -- },
 
   -- neodev.nvim for LSP enhancement for Lua files
   {
@@ -25,16 +25,16 @@ return {
     "neovim/nvim-lspconfig",
     event = "BufReadPost",
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
+      -- "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
       "nvimtools/none-ls.nvim",
     },
     config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls", "pyright", "ruff_lsp", "cssls" },
-      }
+      -- require("mason").setup()
+      -- require("mason-lspconfig").setup {
+      --   -- ensure_installed = { "lua_ls", "pyright", "cssls" },
+      -- }
       local lspconfig = require('lspconfig')
       -- Setup LSP servers:
       -- 1) CSS
@@ -107,7 +107,7 @@ return {
       require 'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
       -- Define customized signs for diagnostics reported by the language server;
       -- note that this will define the signs displayed in the gutter
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
@@ -157,30 +157,25 @@ return {
         desc =
         "Language Server: Rename variable"
       },
+      { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
     }
   },
 
-  -- mason-null-ls.nvim
+  -- none-ls.nvim for LSP enhancement
+  -- through the use of tools that are not
+  -- language servers themselves but can
+  -- be made to look like one with the
+  -- support of this plugin
   {
-    "jay-babu/mason-null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "nvimtools/none-ls.nvim",
-    },
     config = function()
-      require("mason-null-ls").setup({
-        ensure_installed = { "chktex", "pydocstyle", "ruff", "prettierd" },
-        automatic_installation = false,
-        handlers = {},
-      })
       -- Configure null-ls for diagnostics and formatting
       local null_ls = require("null-ls")
       null_ls.setup({
         sources = {
           null_ls.builtins.diagnostics.chktex,
           null_ls.builtins.diagnostics.pydocstyle,
-          null_ls.builtins.formatting.ruff,
           null_ls.builtins.formatting.prettierd,
         },
       })
@@ -190,6 +185,41 @@ return {
       { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
     }
   },
+
+
+  -- -- mason-null-ls.nvim
+  -- {
+  --   "jay-babu/mason-null-ls.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   dependencies = {
+  --     "williamboman/mason.nvim",
+  --     "nvimtools/none-ls.nvim",
+  --   },
+  --   config = function()
+  --     require("mason-null-ls").setup({
+  --       ensure_installed = { "chktex", "pydocstyle", "ruff", "prettierd" },
+  --       automatic_installation = false,
+  --       handlers = {},
+  --     })
+  --     -- Configure null-ls for diagnostics and formatting
+  --     local null_ls = require("null-ls")
+  --     null_ls.setup({
+  --       sources = {
+  --         null_ls.builtins.diagnostics.chktex,
+  --         null_ls.builtins.diagnostics.pydocstyle,
+  --         -- null_ls.builtins.formatting.ruff,
+  --         null_ls.builtins.formatting.prettierd,
+  --         null_ls.builtins.formatting.ruff.with({
+  --           command = "/etc/profiles/per-user/gkapfham/bin/ruff",
+  --         }),
+  --       },
+  --     })
+  --   end,
+  --   keys = {
+  --     -- Perform a format of the content in the buffer
+  --     { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
+  --   }
+  -- },
 
   -- symbol-usage.nvim displays symbol usage information in virtual text
   {
