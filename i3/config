@@ -103,10 +103,13 @@ exec --no-startup-id clipmenud
 
 # Rofi {{{
 
-# Rofi for programs
+# Rofi for programs and windows and more;
 # Note that this can access the programs installed
-# in the ~/.local/bin directory
-set $rofi-program "rofi -modi 'run' -show run"
+# in the ~/.local/bin directory while also running
+# installed programs and switching between both
+# windows and workspaces
+# set $rofi-program "rofi -modi 'run' -show run"
+set $rofi-program "rofi -show combi -modes combi -combi-modes 'run,window,drun'"
 bindsym Control+$mod+p exec $rofi-program
 
 # Rofi for renaming a specific workspace; note that workspace
