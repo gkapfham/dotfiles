@@ -2397,3 +2397,6 @@ zshtheme
 trolltech
 vimrc
 rc
+pydocstyle
+python311Packages
+gitmodules
