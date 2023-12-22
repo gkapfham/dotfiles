@@ -4,13 +4,6 @@
 
 return {
 
-  -- -- mason.nvim for LSP management
-  -- {
-  --   "williamboman/mason.nvim",
-  --   event = "BufReadPost",
-  --   build = ":MasonUpdate"
-  -- },
-
   -- neodev.nvim for LSP enhancement for Lua files
   {
     "folke/neodev.nvim",
