@@ -49,11 +49,11 @@ create-config:
 
 ## Remove the mimeapps.list file from the .config directory
 purge-mime:
-	rm ~/.config/mimeapps.list
+	rm -f ~/.config/mimeapps.list
 
 ## Remove the Trolltech.conf file from the .config directory
 purge-trolltech:
-	rm ~/.config/Trolltech.conf
+	rm -f ~/.config/Trolltech.conf
 
 ## Create the needed alacritty/ directory in .config/
 create-alacritty:
@@ -62,6 +62,14 @@ create-alacritty:
 
 ## Depends on the creation of the .config directory
 create-alacritty: create-config
+
+## Create the needed kitty/ directory in .config/
+create-kitty:
+	rm -rf ~/.config/kitty
+	mkdir -p ~/.config/kitty
+
+## Depends on the creation of the .config directory
+create-kitty: create-config
 
 ## Create the needed bat/ directory in .config/
 create-bat:
@@ -181,6 +189,8 @@ create-nvim:
 	@# Delete the init.lua file as it will later be stowed
 	rm -rf ~/.config/nvim/init.lua
 	mkdir -p ~/.config/nvim
+	@# Delete the cache directory for nvim ctags
+	mkdir -p ~/.cache/nvim/ctags/
 
 ## Create the ~/.vim/rc directory that contains .vim files
 ## that contain components of the .vimrc file
@@ -298,6 +308,13 @@ stow-alacritty:
 ## Running stow depends on the creation of the directory
 stow-alacritty: create-alacritty
 
+## Run stow on kitty
+stow-kitty:
+	stow -t ~/.config/kitty kitty
+
+## Running stow depends on the creation of the directory
+stow-kitty: create-kitty
+
 ## Run stow on bat
 stow-bat:
 	stow -t ~/.config/bat bat
@@ -305,9 +322,9 @@ stow-bat:
 ## Running stow on bat depends on creating bat directory
 stow-bat: create-bat
 
-## Run stow on code
-stow-code:
-	stow -t ~/ code
+# ## Run stow on code
+# stow-code:
+# 	stow -t ~/ code
 
 ## Run stow on dunst
 stow-dunst:
@@ -435,7 +452,7 @@ stow-wezterm:
 	stow -t ~/.config/wezterm wezterm
 
 ## Running stow depends on the creation of the directory
-stow-wezterm: create-alacritty
+stow-wezterm: create-wezterm
 
 ## Run stow on zathura
 stow-zathura:
@@ -533,36 +550,37 @@ stow-applications:
 
 ## Create the Z-shell word code files {{{
 
-## Run the zcompile command on zsh scripts to
-## potentially increase the speed of source-ing the script
-zcompile-shell-scripts:
-	zcompile ~/.zshrc
-	zcompile ~/.oh-my-zsh.sh
-	zcompile ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-	zcompile ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
-	zcompile ~/.zsh/gitstatus/gitstatus.prompt.sh
-	zcompile ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-	zcompile ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
+# ## Run the zcompile command on zsh scripts to
+# ## potentially increase the speed of source-ing the script
+# zcompile-shell-scripts:
+# 	zcompile ~/.zshrc
+# 	zcompile ~/.oh-my-zsh.sh
+# 	zcompile ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+# 	zcompile ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
+# 	zcompile ~/.zsh/gitstatus/gitstatus.prompt.sh
+# 	zcompile ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+# 	zcompile ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
 
-## Running the zcompile command depends on creating those
-## directories and the installation of the scripts in advance
-zcompile-shell-scripts: stow-external
+# ## Running the zcompile command depends on creating those
+# ## directories and the installation of the scripts in advance
+# zcompile-shell-scripts: stow-external
 
 # }}}
 
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-alacritty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-alacritty create-kitty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-bat stow-code stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-i3 stow-i3wsr stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tmux stow-tpm stow-bin stow-shell stow-system stow-tool stow-vim stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-kitty stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-i3 stow-i3wsr stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zsh-git-prompt stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
 
 ## Create directories and stow all of the dotfiles in correct directories
-dotfiles: create stow stow-external zcompile-shell-scripts
+# dotfiles: create stow stow-external zcompile-shell-scripts
+dotfiles: create stow stow-external
 
 # }}}
 
