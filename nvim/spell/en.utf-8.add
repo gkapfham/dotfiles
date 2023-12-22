@@ -2400,3 +2400,5 @@ rc
 pydocstyle
 python311Packages
 gitmodules
+starship
+zshgitprompt
