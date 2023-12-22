@@ -108,9 +108,8 @@ exec --no-startup-id clipmenud
 # in the ~/.local/bin directory while also running
 # installed programs and switching between both
 # windows and workspaces
-# set $rofi-program "rofi -modi 'run' -show run"
-set $rofi-program "rofi -show combi -modes combi -combi-modes 'run,window,drun'"
-bindsym Control+$mod+p exec $rofi-program
+set $rofi-full-program "~/.config/i3/scripts/i3-run-rofi-full-path.sh"
+bindsym Control+$mod+p exec $rofi-full-program
 
 # Rofi for renaming a specific workspace; note that workspace
 # names are organized in the i3 bar listing in an alpha-numerical
@@ -127,7 +126,6 @@ set $rofi-desktop "j4-dmenu-desktop --dmenu='rofi -p 'dmenu' -dmenu -i'"
 bindsym Control+$mod+n exec $rofi-desktop
 
 # Rofi for windows
-set $rofi-windows "rofi -modi 'window' -show window -width 70"
 bindsym Control+$mod+m exec $rofi-windows
 
 # Rofi for combination
