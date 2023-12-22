@@ -448,15 +448,6 @@ function workspace {
 
 # }}}
 
-# Rtx (drop-in replacement for asdf) {{{
-
-# # Setup rtx as a drop-in replacement for asdf
-# eval "$(rtx activate -s zsh)"
-# export RTX_FETCH_REMOTE_VERSIONS_TIMEOUT="1s"
-# alias rtt="rtx"
-
-# }}}
-
 # Pipenv {{{
 
 # Ensure that Pipenv can find the version of Python
