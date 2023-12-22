@@ -26,16 +26,15 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 # Font for window titles
 font pango:Hack Nerd Font 9
 
-# Wallpaper that is a solid grey color
-# exec_always --no-startup-id hsetroot -solid "#1C1C1C"
-exec always feh --bg-fill ~/.background-image
+# Wallpaper that is a solid purple color
+exec_always --no-startup-id hsetroot -solid "#6E466E"
 
 # Define the color scheme for the i3bar
 set $bg     #1C1C1C
 set $fg     #3A3A3A
 set $hi     #FCE94F
 set $ac     #D78700
-set $tx     #875f87
+set $tx     #5f8700
 set $ia     #9E9E9E
 set $be     #8FAF9F
 set $yw     #F8F893
@@ -315,7 +314,7 @@ bindsym Control+$mod+0 move container to workspace number 10
 
 # Move to a specified (extended) workspace
 # --> 11 through 20
-set $mode_move_workspace " Workspace Move 11-20"
+set $mode_move_workspace " Workspace Move 11-20"
 mode $mode_move_workspace {
     bindsym Control+$mod+1 move container to workspace number 11; mode "default"
     bindsym Control+$mod+2 move container to workspace number 12; mode "default"
@@ -335,7 +334,7 @@ bindsym $mod+e mode $mode_move_workspace
 
 # Move to a specified (super-extended) workspace
 # --> 21 through 30
-set $mode_move_workspace_super_extended " Workspace Move 21-30"
+set $mode_move_workspace_super_extended " Workspace Move 21-30"
 mode $mode_move_workspace_super_extended {
     bindsym Control+$mod+1 move container to workspace number 21; mode "default"
     bindsym Control+$mod+2 move container to workspace number 22; mode "default"
@@ -431,7 +430,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # Toggle fullscreen mode for focused container
-# This removes the polybar at the screen's top
+# This removes the i3bar at the screen's top
 bindsym $mod+f fullscreen toggle
 
 # Split in horizontal orientation
@@ -479,7 +478,7 @@ exec --no-startup-id xset dpms 600
 bindsym $mod+Shift+c reload
 
 # Reload the polybar
-bindsym $mod+Shift+p exec ~/.config/polybar/scripts/polybar-launch.sh
+# bindsym $mod+Shift+p exec ~/.config/polybar/scripts/polybar-launch.sh
 
 # Restart i3 inplace
 bindsym $mod+Shift+r restart
@@ -544,7 +543,7 @@ bindsym XF86MonBrightnessUp exec "light -A 5"
 bindsym XF86MonBrightnessDown exec "light -U 5"
 
 # Set to maximum brightness
-bindsym $mod+Shift+b exec "xbacklight -set 100"
+bindsym $mod+Shift+b exec "light -S 100"
 
 # }}}
 
