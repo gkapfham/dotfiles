@@ -419,37 +419,6 @@ ZVM_KEYTIMEOUT=0.2
 # change depending on the mode for Neovim
 ZVM_CURSOR_STYLE_ENABLED=false
 
-# Run this function every time that the
-# zsh-vi-mode plugin detects that the
-# mode changes, ultimately giving the
-# opportunity to define the right-side
-# prompt to give an indicator of the mode
-
-# function zvm_after_select_vi_mode() {
-#   case $ZVM_MODE in
-#     $ZVM_MODE_NORMAL)
-#      RPROMPT="%{$fg_bold[red]%} %{$reset_color%}"
-#      zle reset-prompt
-#     ;;
-#     $ZVM_MODE_INSERT)
-#      RPROMPT=""
-#      zle reset-prompt
-#     ;;
-#     $ZVM_MODE_VISUAL)
-#      RPROMPT="%{$fg_bold[red]%} %{$reset_color%}"
-#      zle reset-prompt
-#     ;;
-#     $ZVM_MODE_VISUAL_LINE)
-#      RPROMPT="%{$fg_bold[red]%} %{$reset_color%}"
-#      zle reset-prompt
-#     ;;
-#     $ZVM_MODE_REPLACE)
-#      RPROMPT="%{$fg_bold[red]%}󰄈 %{$reset_color%}"
-#      zle reset-prompt
-#     ;;
-#   esac
-# }
-
 # }}}
 
 # Tmux {{{
