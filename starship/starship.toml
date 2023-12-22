@@ -1,0 +1,26 @@
+# ~/.config/starship.toml
+
+[directory]
+format = '[ $path](bold green)[$read_only]($read_only_style) '
+read_only = " "
+
+[git_branch]
+truncation_length = 30
+symbol = ' '
+truncation_symbol = ' '
+
+[lua]
+format = '[ $version  ](bold blue)'
+
+[nix_shell]
+disabled = false
+impure_msg = '[impure shell](bold red)'
+pure_msg = '[pure shell](bold green)'
+unknown_msg = '[unknown shell](bold yellow)'
+format = 'via [󰜗 $state( \($name\))  ](bold blue) '
+
+[python]
+format = '[ $version (\($virtualenv\))](bold blue)'
+
+[package]
+format = '[ $version ](bold red)'
