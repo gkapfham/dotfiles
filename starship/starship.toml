@@ -2,6 +2,9 @@
 
 [directory]
 format = '[ $path](bold green)[$read_only]($read_only_style) '
+truncation_length = 5
+truncation_symbol = " "
+home_symbol = "~"
 read_only = " "
 
 [git_branch]
