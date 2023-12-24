@@ -2407,3 +2407,9 @@ Timo
 Grubbs
 vim
 irb2023
+systemd
+networkd
+useDHCP
+wlp1s0
+mkDefault
+PipelineDepth
