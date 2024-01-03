@@ -1,7 +1,7 @@
 -- File: plugins/tagmanagement.lua
 -- Purpose: generate, save, and use tags;
 -- note that other plugins like telescope
--- use these tags automatically generated
+-- use these automatically generated tags
 
 return {
 
@@ -12,11 +12,11 @@ return {
     config = function()
       vim.cmd([[
       " Specify where the tags are stored
-      set tags=./tags;/,tags;/
+      " set tags=./tags;/,tags;/
       ]])
       vim.g.gutentags_ctags_exclude = {
         '*.git', '*.svg', '*.hg',
-        '*/tests/*',
+        -- '*/tests/*',
         'build',
         'dist',
         '*sites/*/files/*',
@@ -29,7 +29,6 @@ return {
         'example',
         'bundle',
         'vendor',
-        '*.md',
         '*-lock.json',
         '*.lock',
         '*bundle*.js',
