@@ -176,28 +176,28 @@ bindsym $mod+Return exec kitty
 # Workspaces {{{
 
 # 1 through 10
-set $ws1 1
-set $ws2 2
-set $ws3 3
-set $ws4 4
-set $ws5 5
-set $ws6 6
-set $ws7 7
-set $ws8 8
-set $ws9 9
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
 
 # 10 through 20
-set $ws10 10
-set $ws11 11
-set $ws12 12
-set $ws13 13
-set $ws14 14
-set $ws15 15
-set $ws16 16
-set $ws17 17
-set $ws18 18
-set $ws19 19
-set $ws20 20
+set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
 
 # Go to the left workspace on the same monitor
 bindsym Control+$mod+h workspace prev_on_output
@@ -213,6 +213,10 @@ bindsym Control+Shift+l move to workspace next
 
 # Move to the previously focused workspace
 bindsym Control+$mod+b workspace back_and_forth
+
+# Switch between workspaces
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 
 # Move window to the scratchpad
 bindsym Control+Shift+s move scratchpad
@@ -276,31 +280,31 @@ bindsym $mod+Shift+w mode $mode_switch_workspace_super_extended
 
 # Move focused container to workspace
 # --> 1 through 10
-bindsym Control+$mod+1 move container to workspace number 1
-bindsym Control+$mod+2 move container to workspace number 2
-bindsym Control+$mod+3 move container to workspace number 3
-bindsym Control+$mod+4 move container to workspace number 4
-bindsym Control+$mod+5 move container to workspace number 5
-bindsym Control+$mod+6 move container to workspace number 6
-bindsym Control+$mod+7 move container to workspace number 7
-bindsym Control+$mod+8 move container to workspace number 8
-bindsym Control+$mod+9 move container to workspace number 9
-bindsym Control+$mod+0 move container to workspace number 10
+bindsym Control+$mod+1 move container to workspace number $ws1
+bindsym Control+$mod+2 move container to workspace number $ws2
+bindsym Control+$mod+3 move container to workspace number $ws3
+bindsym Control+$mod+4 move container to workspace number $ws4
+bindsym Control+$mod+5 move container to workspace number $ws5
+bindsym Control+$mod+6 move container to workspace number $ws6
+bindsym Control+$mod+7 move container to workspace number $ws7
+bindsym Control+$mod+8 move container to workspace number $ws8
+bindsym Control+$mod+9 move container to workspace number $ws9
+bindsym Control+$mod+0 move container to workspace number $ws10
 
 # Move to a specified (extended) workspace
 # --> 11 through 20
 set $mode_move_workspace " Workspace Move 11-20"
 mode $mode_move_workspace {
-    bindsym Control+$mod+1 move container to workspace number 11; mode "default"
-    bindsym Control+$mod+2 move container to workspace number 12; mode "default"
-    bindsym Control+$mod+3 move container to workspace number 13; mode "default"
-    bindsym Control+$mod+4 move container to workspace number 14; mode "default"
-    bindsym Control+$mod+5 move container to workspace number 15; mode "default"
-    bindsym Control+$mod+6 move container to workspace number 16; mode "default"
-    bindsym Control+$mod+7 move container to workspace number 17; mode "default"
-    bindsym Control+$mod+8 move container to workspace number 18; mode "default"
-    bindsym Control+$mod+9 move container to workspace number 19; mode "default"
-    bindsym Control+$mod+0 move container to workspace number 20; mode "default"
+    bindsym Control+$mod+1 move container to workspace number $ws11; mode "default"
+    bindsym Control+$mod+2 move container to workspace number $ws12; mode "default"
+    bindsym Control+$mod+3 move container to workspace number $ws13; mode "default"
+    bindsym Control+$mod+4 move container to workspace number $ws14; mode "default"
+    bindsym Control+$mod+5 move container to workspace number $ws15; mode "default"
+    bindsym Control+$mod+6 move container to workspace number $ws16; mode "default"
+    bindsym Control+$mod+7 move container to workspace number $ws17; mode "default"
+    bindsym Control+$mod+8 move container to workspace number $ws18; mode "default"
+    bindsym Control+$mod+9 move container to workspace number $ws19; mode "default"
+    bindsym Control+$mod+0 move container to workspace number $ws20; mode "default"
     bindsym Escape mode "default"
 }
 
@@ -311,16 +315,16 @@ bindsym $mod+e mode $mode_move_workspace
 # --> 21 through 30
 set $mode_move_workspace_super_extended " Workspace Move 21-30"
 mode $mode_move_workspace_super_extended {
-    bindsym Control+$mod+1 move container to workspace number 21; mode "default"
-    bindsym Control+$mod+2 move container to workspace number 22; mode "default"
-    bindsym Control+$mod+3 move container to workspace number 23; mode "default"
-    bindsym Control+$mod+4 move container to workspace number 24; mode "default"
-    bindsym Control+$mod+5 move container to workspace number 25; mode "default"
-    bindsym Control+$mod+6 move container to workspace number 26; mode "default"
-    bindsym Control+$mod+7 move container to workspace number 27; mode "default"
-    bindsym Control+$mod+8 move container to workspace number 28; mode "default"
-    bindsym Control+$mod+9 move container to workspace number 29; mode "default"
-    bindsym Control+$mod+0 move container to workspace number 30; mode "default"
+    bindsym Control+$mod+1 move container to workspace number $ws21; mode "default"
+    bindsym Control+$mod+2 move container to workspace number $ws22; mode "default"
+    bindsym Control+$mod+3 move container to workspace number $ws23; mode "default"
+    bindsym Control+$mod+4 move container to workspace number $ws24; mode "default"
+    bindsym Control+$mod+5 move container to workspace number $ws25; mode "default"
+    bindsym Control+$mod+6 move container to workspace number $ws26; mode "default"
+    bindsym Control+$mod+7 move container to workspace number $ws27; mode "default"
+    bindsym Control+$mod+8 move container to workspace number $ws28; mode "default"
+    bindsym Control+$mod+9 move container to workspace number $ws29; mode "default"
+    bindsym Control+$mod+0 move container to workspace number $ws30; mode "default"
     bindsym Escape mode "default"
 }
 
