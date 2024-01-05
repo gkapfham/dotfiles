@@ -91,13 +91,22 @@ exec --no-startup-id xbindkeys -f ~/.xbindkeysrc
 exec --no-startup-id clipmenud
 
 # Run picom to provide compositing, which especially
-# seems to reduce screen artifacts for Zathura windows;
-# Do not use by default because it seems to work less
-# well if an external monitor was not already connected.
-# This is evidenced by degradation in the animations.
+# seems to reduce screen artifacts for Zathura windows.
 # Finally, see the separate picom configuration file
 # for more details about how this program works.
-# exec --no-startup-id picom
+exec --no-startup-id picom
+
+# Make Caps Lock behave like Ctrl:
+exec --no-startup-id setxkbmap -option ctrl:nocaps
+
+# Make short-pressed Ctrl behave like Escape:
+exec --no-startup-id xcape -e 'Control_L=Escape'
+
+# Use the gesture capabilities of the touchpad
+exec --no-startup-id libinput-gestures
+
+# Control the temperature of the screen(s)
+exec --no-startup-id sct 6800
 
 # }}}
 
