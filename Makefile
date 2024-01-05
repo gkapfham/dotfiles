@@ -264,14 +264,6 @@ create-zsh-auto-suggestions:
 ## Depends on the creation of the .zsh directory
 create-zsh-auto-suggestions: create-zsh
 
-## Create the needed zsh-git-prompt/ directory in .zsh/
-create-zsh-git-prompt:
-	rm -rf ~/.zsh/zsh-git-prompt
-	mkdir -p ~/.zsh/zsh-git-prompt
-
-## Depends on the creation of the .zsh directory
-create-zsh-git-prompt: create-zsh
-
 ## Create the needed zsh-defer/ directory in .zsh/
 create-zshdefer:
 	rm -rf ~/.zsh/zsh-defer
@@ -512,10 +504,6 @@ stow-zsh-auto-suggestions:
 ## Running stow depends on the creation of associated directory
 stow-zsh-autosuggestions: create-zsh-autosuggestions
 
-## Run stow on zsh-git-prompt
-stow-zsh-git-prompt:
-	stow -t ~/.zsh/zsh-git-prompt zshgitprompt
-
 ## Running stow depends on the creation of associated directory
 stow-zsh-autosuggestions: create-zsh-autosuggestions
 
@@ -563,13 +551,13 @@ stow-applications:
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-alacritty create-kitty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-zsh-git-prompt create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-alacritty create-kitty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
 stow: stow-alacritty stow-kitty stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-i3 stow-i3wsr stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
-stow-external: stow-fzf-tab stow-zsh-git-prompt stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
+stow-external: stow-fzf-tab stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
 
 ## Create directories and stow all of the dotfiles in correct directories
 dotfiles: create stow stow-external
