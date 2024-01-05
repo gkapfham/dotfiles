@@ -140,7 +140,6 @@ return {
       vim.cmd([[set completeopt=menu,menuone,noselect]])
       local cmp = require("cmp")
       local luasnip = require("luasnip")
-      -- local nerdfont = require("nerdfont")
       -- Configure the dictionary plugin
       vim.opt.spell = true
       vim.opt.spelllang = { 'en_us' }
