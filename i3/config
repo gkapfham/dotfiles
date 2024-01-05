@@ -73,9 +73,6 @@ bar {
 # # This prevents numlock from displaying in i3lock-color
 exec_always --no-startup-id numlockx off
 
-# # Do not use Ubuntu's standard notification
-# exec --no-startup-id killall -q notify-osd
-
 # Run dunst to display the notifications
 exec_always --no-startup-id ~/.config/dunst/scripts/dunst-launch.sh
 
@@ -90,12 +87,6 @@ exec --no-startup-id xbindkeys -f ~/.xbindkeysrc
 # Run clipmenud to support capturing of the clipboard
 exec --no-startup-id clipmenud
 
-# Run picom to provide compositing, which especially
-# seems to reduce screen artifacts for Zathura windows.
-# Finally, see the separate picom configuration file
-# for more details about how this program works.
-exec --no-startup-id picom
-
 # Make Caps Lock behave like Ctrl:
 exec --no-startup-id setxkbmap -option ctrl:nocaps
 
@@ -107,6 +98,12 @@ exec --no-startup-id libinput-gestures
 
 # Control the temperature of the screen(s)
 exec --no-startup-id sct 6800
+
+# Run picom to provide compositing, which especially
+# seems to reduce screen artifacts for Zathura windows.
+# Finally, see the separate picom configuration file
+# for more details about how this program works.
+exec --no-startup-id picom
 
 # }}}
 
