@@ -143,19 +143,6 @@ return {
       -- Configure the dictionary plugin
       vim.opt.spell = true
       vim.opt.spelllang = { 'en_us' }
-      require('cmp').setup({
-        sources = {
-          {
-            name = 'spell',
-            option = {
-              keep_all_entries = false,
-              enable_in_context = function()
-                return true
-              end,
-            },
-          },
-        },
-      })
       -- Configure all aspects of nvim-cmp
       cmp.setup({
         -- Do not preselect items
