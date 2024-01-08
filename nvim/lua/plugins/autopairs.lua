@@ -3,15 +3,16 @@
 
 return {
 
-  -- ultimate-autopairs.nvim
-  {
-    'altermo/ultimate-autopair.nvim',
-    event={'InsertEnter','CmdlineEnter'},
-    opts={
-    },
-  },
+  -- -- ultimate-autopairs.nvim
+  -- {
+  --   'altermo/ultimate-autopair.nvim',
+  --   event={'InsertEnter','CmdlineEnter'},
+  --   opts={
+  --   },
+  -- },
 
-  -- nvim-ts-autotag
+  -- nvim-ts-autotag: automatically generate tags
+  -- for html/xml paired tags, like <div></div>
   {
     "windwp/nvim-ts-autotag",
     event = "VeryLazy",
