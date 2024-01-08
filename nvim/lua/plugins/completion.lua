@@ -329,7 +329,15 @@ return {
           {name = 'pandoc_references', max_item_count = 5, priority = 5, keyword_length = 2},
           {name = 'tmux', max_item_count = 5, priority = 1, keyword_length = 2},
           {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
-          {name = 'spell', max_item_count = 5, priority = 1, keyword_length = 3},
+          {name = 'spell',
+            option = {
+              keep_all_entries = false,
+              enable_in_context = function()
+                return true
+              end,
+            },
+            max_item_count = 5, priority = 1, keyword_length = 3
+          },
           {name = 'nerdfont', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'nvim_lsp_signature_help'},
         }, {
