@@ -199,9 +199,9 @@ return {
           -- from left (middle) to right (far right corner): {x} {y} {z}
           lualine_x = {'lsp_progress', 'progress', 'location'},
           lualine_y = {{encoding_prefix, type="lua_expr"}, 'encoding', {'fileformat', symbols = {
-            unix = 'Unix - LF',
-            dos = 'Win - CRLF',
-            mac = 'Mac - CR',
+            unix = '  LF',
+            dos = '  CRLF',
+            mac = '  CR',
           }}},
           lualine_z = {'filesize', {'filetype', colored=false}}
         },
