@@ -17,13 +17,13 @@ format = '[ $version  ](bold blue)'
 
 [nix_shell]
 disabled = false
-impure_msg = '[impure shell](bold red)'
-pure_msg = '[pure shell](bold green)'
-unknown_msg = '[unknown shell](bold yellow)'
-format = 'via [󰜗 $state( \($name\))  ](bold blue) '
+impure_msg = '[󰄶 shell](bold blue) '
+pure_msg = '[󰄸 shell](bold blue) '
+unknown_msg = '[ shell](bold blue) '
+format = '[󰜗 nix $state(\($name\)) ](bold blue) '
 
 [python]
-format = '[ $version (\($virtualenv\))](bold blue)'
+format = '[ $version (\($virtualenv\))](bold yellow) '
 
 [package]
 format = '[ $version ](bold red)'
