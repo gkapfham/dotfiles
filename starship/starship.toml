@@ -23,7 +23,7 @@ unknown_msg = '[ shell](bold blue) '
 format = '[󰜗 nix $state(\($name\)) ](bold blue) '
 
 [python]
-format = '[ $version (\($virtualenv\))](bold yellow) '
+format = '[ $version (\($virtualenv\) )](bold yellow)'
 
 [package]
 format = '[ $version ](bold red)'
