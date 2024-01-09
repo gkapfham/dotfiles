@@ -22,6 +22,7 @@ local function format_status(symbols, depth, separator, icons_enabled)
   end
   return table.concat(parts, separator)
 end
+
 -- The API to output the symbols structure
 function output_symbols_structure(depth, separator, icons_enabled)
   local symbols = aerial.get_location(true)
