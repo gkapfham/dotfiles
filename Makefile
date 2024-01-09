@@ -60,7 +60,7 @@ purge-starship:
 	rm -f ~/.config/starship.toml
 
 ## Remove the libinput-gestures.conf file from the .config/ directory
-purge-starship:
+purge-libinput-gestures:
 	rm -f ~/.config/libinput-gestures.conf
 
 ## Create the needed alacritty/ directory in .config/
@@ -581,7 +581,7 @@ stow-applications:
 create: create-config create-alacritty create-kitty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3status create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-kitty stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-libinput-gesture stow-i3 stow-i3status stow-i3wsr stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-kitty stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
