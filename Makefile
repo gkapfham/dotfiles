@@ -115,6 +115,14 @@ create-i3:
 ## Depends on the creation of the .config directory
 create-i3: create-config
 
+## Create the needed i3status/ directory in .config/
+create-i3status:
+	rm -rf ~/.config/i3status
+	mkdir -p ~/.config/i3status
+
+## Depends on the creation of the .config directory
+create-i3status: create-config
+
 ## Create the needed i3wsr/ directory in .config/
 create-i3wsr:
 	rm -rf ~/.config/i3wsr
@@ -344,6 +352,13 @@ stow-i3:
 ## Running stow on i3 depends on creating i3 directory
 stow-i3: create-i3
 
+## Run stow on i3status
+stow-i3status:
+	stow -t ~/.config/i3status i3status
+
+## Running stow on i3status depends on creating i3status directory
+stow-i3status: create-i3status
+
 ## Run stow on i3wsr
 stow-i3wsr:
 	stow -t ~/.config/i3wsr i3wsr
@@ -551,10 +566,10 @@ stow-applications:
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-alacritty create-kitty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-alacritty create-kitty create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3status create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-kitty stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-i3 stow-i3wsr stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-kitty stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-i3 stow-i3status stow-i3wsr stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
