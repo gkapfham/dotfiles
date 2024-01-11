@@ -20,10 +20,14 @@ disabled = false
 impure_msg = '[󰄶 shell](bold blue) '
 pure_msg = '[󰄸 shell](bold blue) '
 unknown_msg = '[ shell](bold blue) '
-format = '[󰜗 nix $state(\($name\)) ](bold blue) '
+format = '[󰜗 nix $state(\($name\))](bold blue) '
 
 [python]
-format = '[ $version (\($virtualenv\) )](bold yellow)'
+format = '[ $version (\($virtualenv\))](bold yellow)'
 
 [package]
 format = '[ $version ](bold red)'
+
+[custom.devbox]
+format = '[󱓞 devbox](bold cyan)'
+when = """ test "$DEVBOX_SHELL_ENABLED" "==" "1" """
