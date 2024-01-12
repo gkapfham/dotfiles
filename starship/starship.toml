@@ -28,6 +28,14 @@ format = '[ $version ](bold red)'
 [python]
 format = '[ $version (\($virtualenv\) )](bold yellow)'
 
+[shell]
+zsh_indicator = '󱓞 '
+fish_indicator = '󰈺 '
+powershell_indicator = '_'
+unknown_indicator = ' '
+style = 'bold green'
+disabled = true
+
 # [custom.devbox]
 # format = '[󱓞 devbox](bold cyan)'
 # when = """ test "$DEVBOX_SHELL_ENABLED" "==" "1" """
