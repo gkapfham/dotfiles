@@ -169,6 +169,10 @@ alias tree="eza --tree --level=2 --long --icons"
 # Use nix switch with a configuration in user account
 alias kix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
 
+# Search nix packages from the command-line; use this
+# alias by typing a command line "nix-search ripgrep"
+alias nix-search="nix --extra-experimental-features 'nix-command flakes' search nixpkgs"
+
 # }}}
 
 # Git Aliases {{{
