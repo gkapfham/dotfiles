@@ -22,11 +22,11 @@ pure_msg = '[󰄸 shell](bold blue) '
 unknown_msg = '[ shell](bold blue) '
 format = '[󰜗 nix $state(\($name\))](bold blue) '
 
-[python]
-format = '[ $version (\($virtualenv\) )](bold yellow)'
-
 [package]
 format = '[ $version ](bold red)'
+
+[python]
+format = '[ $version (\($virtualenv\) )](bold yellow)'
 
 # [custom.devbox]
 # format = '[󱓞 devbox](bold cyan)'
