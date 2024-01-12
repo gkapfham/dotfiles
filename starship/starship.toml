@@ -28,6 +28,6 @@ format = '[ $version (\($virtualenv\) )](bold yellow)'
 [package]
 format = '[ $version ](bold red)'
 
-[custom.devbox]
-format = '[󱓞 devbox](bold cyan)'
-when = """ test "$DEVBOX_SHELL_ENABLED" "==" "1" """
+# [custom.devbox]
+# format = '[󱓞 devbox](bold cyan)'
+# when = """ test "$DEVBOX_SHELL_ENABLED" "==" "1" """
