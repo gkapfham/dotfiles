@@ -13,7 +13,7 @@ symbol = ' '
 truncation_symbol = ' '
 
 [lua]
-format = '[ $version  ](bold blue)'
+format = '[ $version ](bold blue)'
 
 [nix_shell]
 disabled = false
