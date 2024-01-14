@@ -12,18 +12,25 @@ SHELL=zsh
 
 ## Purge all of the existing dotfiles {{{
 
-# NOTE: This is not updated for all directories
+# NOTE: This is not updated for all files
 # that may need to be purged. With that said, it
 # is likely that this rule is no longer needed
-# since the create rules also delete directories.
+# since the create rules also delete files.
+#
+# The "dotfiles" rule does not run this purge
+# command, suggesting that it is not needed
 
 ## Purge all of the existing symlinks
 ## that were manually created, setting the
-## stage for the use of Stow with other rules
+## stage for the use of Stow with other rules.
+## Note that this is only needed for those
+## symlinks that exist in the root of the
+## user's home directory
 purge:
 	rm -f ~/.Rprofile
 	rm -f ~/.mailcap
 	rm -f ~/.msmtprc
+	rm -f ~/.mbsyncrc
 	rm -f ~/.muttprintrc
 	rm -f ~/.muttrc
 	rm -f ~/.signature
