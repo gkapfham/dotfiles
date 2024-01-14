@@ -1,4 +1,4 @@
-# Start profile
+# Start profile {{{
 
 # User login details
 IMAPStore gkapfham@allegheny.edu-remote
@@ -21,11 +21,10 @@ Channel gkapfham@allegheny.edu
 Expunge Both
 Far :gkapfham@allegheny.edu-remote:
 Near :gkapfham@allegheny.edu-local:
-# Patterns * !"[Gmail]/All Mail"
-Patterns "INBOX" "Trash" "advise2023" "cs101S2023" "cs102S2023" "dept2022" "dept2023" "fitter" "framework" "friends" "friends2023" "github" "gradingforgrowth" "irb2023" "issta2023" "jsep2023" "knockout" "podcast" "research2023" "reviews2023" "seradio" "ssbse2023" "tab" "tab2023"
+Patterns "INBOX" "Trash" "advise2023" "advise2024" "dept2023" "dept2024" "fitter" "framework" "friends" "friends2023" "github" "gradingforgrowth" "irb2023" "irb2024" "issta2023" "jsep2023" "knockout" "podcast" "research2023" "reviews2023" "reviews2024" "seradio" "tab" "tab2023"
 Create Both
 SyncState *
 MaxMessages 1000
 ExpireUnread no
 
-# End profile
+# }}}
