@@ -129,6 +129,10 @@ return {
           ["toml"] = {
             icon = "",
             name = "Toml"
+          },
+          [""] = {
+            icon = "",
+            name = "None"
           }
         },
       }
