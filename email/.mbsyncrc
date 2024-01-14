@@ -1,4 +1,6 @@
 # Start profile
+
+# User login details
 IMAPStore gkapfham@allegheny.edu-remote
 Host imap.gmail.com
 Port 993
@@ -8,11 +10,13 @@ AuthMechs LOGIN
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
+# Mail storage location
 MaildirStore gkapfham@allegheny.edu-local
 Subfolders Verbatim
 Path /home/gkapfham/.local/share/mail/gkapfham@allegheny.edu/
 Inbox /home/gkapfham/.local/share/mail/gkapfham@allegheny.edu/INBOX
 
+# Remote folders to download to the local machine
 Channel gkapfham@allegheny.edu
 Expunge Both
 Far :gkapfham@allegheny.edu-remote:
@@ -23,4 +27,5 @@ Create Both
 SyncState *
 MaxMessages 1000
 ExpireUnread no
+
 # End profile
