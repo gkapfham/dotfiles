@@ -8,7 +8,7 @@ SHELL=zsh
 # their specific region, group according to the type of
 # program that they manage or in alphabetical order. This
 # is due to the fact that I quickly added a new rule
-# after one for a program that configured similiarly.
+# after one for a program that configured similarly.
 
 ## Purge all of the existing dotfiles {{{
 
@@ -91,6 +91,14 @@ create-kitty:
 
 ## Depends on the creation of the .config directory
 create-kitty: create-config
+
+## Create the needed mutt/ directory in .config/
+create-mutt:
+	rm -rf ~/.config/mutt
+	mkdir -p ~/.config/mutt
+
+## Depends on the creation of the .config directory
+create-mutt: create-config
 
 ## Create the needed atuin/ directory in .config/
 create-atuin:
@@ -351,6 +359,13 @@ stow-kitty:
 
 ## Running stow depends on the creation of the directory
 stow-kitty: create-kitty
+
+## Run stow on mutt
+stow-mutt:
+	stow -t ~/.config/mutt mutt
+
+## Running stow depends on the creation of the directory
+stow-mutt: create-mutt
 
 ## Run stow on atuin
 stow-atuin:
@@ -621,10 +636,10 @@ stow-applications:
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-alacritty create-kitty create-atuin create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3status create-picom create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-alacritty create-kitty create-mutt create-atuin create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3status create-picom create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-kitty stow-atuin stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-picom stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-kitty stow-mutt stow-atuin stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-picom stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
