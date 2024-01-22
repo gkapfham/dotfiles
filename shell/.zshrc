@@ -605,6 +605,7 @@ znap source zsh-users/zsh-completions
 znap source zsh-users/zsh-autosuggestions
 znap source jeffreytse/zsh-vi-mode
 znap source Aloxaf/fzf-tab
+znap source chisui/zsh-nix-shell
 
 # Configure the zsh-autosuggestions plugin
 bindkey '^ ' autosuggest-accept
