@@ -88,7 +88,7 @@ return {
           markdown = true,
           yaml = false,
           help = false,
-          gitcommit = false,
+          gitcommit = true,
           gitrebase = false,
           hgcommit = false,
           svn = false,
