@@ -2578,3 +2578,7 @@ jni
 linkerd
 Uber
 podcasting
+xft
+antialias
+hintstyle
+hintfull
