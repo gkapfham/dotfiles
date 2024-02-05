@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 
-# Reminder: use the command 'xrandr' to see what
-# monitors are available.
+# Reminder: use the command 'xrandr' to see what monitors are available.
 
-# Dell XPS 13 laptop
-# xrandr --output DP1 --above eDP1 --auto
+# Use fzf to select from one of the connected displays
+CONNECTED_DISPLAYS=$(xrandr | grep connected | fzf)
+DISPLAY_PORT=$(echo "$CONNECTED_DISPLAYS" | awk '{print $1}')
 
-# Framework 13 laptop; note that this is more
-# complicated because the resolutions of the two
-# displays are different. Also note that it is possible
-# that the output designator for the 4K monitor
-# will change from the current label like DP-7
-xrandr --output eDP-1 --primary --mode 2256x1504 --pos 792x2160 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output DP-7 --mode 3840x2160 --pos 0x0 --rotate normal --output DP-7 --off
+# Connected the Framework 13 laptop:
+# note that this is complicated because
+# the resolutions of the two displays are different.
+xrandr --output eDP-1 --primary --mode 2256x1504 --pos 792x2160 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal --output ${DISPLAY_PORT} --off
