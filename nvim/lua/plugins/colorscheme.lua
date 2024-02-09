@@ -51,6 +51,7 @@ return {
           DiffText = { fg = "${green}" },
           IncSearch = { fg = "NONE", bg = "NONE", bold = true, undercurl = true },
           FlashLabel = { fg = "${bg}", bg = "${orange}", bold = true, reverse = true },
+          LineNr = { fg = "${gray}", bg = "${bg}" },
           Pmenu = { fg = "${fg}", bg = "${menu}" },
           PmenuSbar = { fg = "${black}", bg = "${black}" },
           PmenuSel = { fg = "${fg}", bg = "${highlight}" },
@@ -66,19 +67,6 @@ return {
           ["@variable"] = { fg = "${blue}" },
           ["@variable.member"] = { fg = "${blue}" },
           ["@property"] = { fg = "${blue}" },
-
-
-          -- TelescopeBorder white none
-          -- TelescopePromptBorder white none
-          -- TelescopeResultsBorder white none
-          -- TelescopePreviewBorder white none
-          -- TelescopeMatching blue none
-          -- TelescopeSelectionCaret blue none
-          -- TelescopeSelection yellow none
-          -- TelescopeMultiSelection brightyellow none bold
-
-
-
         }
       })
       vim.cmd([[colorscheme onedark_dark]])
