@@ -300,7 +300,7 @@ return {
           -- Define the first-tier of sources
           {name = 'treesitter', max_item_count = 5, priority = 10},
           {name = 'nvim_lsp', max_item_count = 10, priority = 10},
-          {name = 'copilot', max_item_count = 5, priority = 8},
+          {name = 'copilot', max_item_count = 5, priority = 5},
           -- Look at all of the open buffers
           {
             name = 'buffer', max_item_count = 10, priority = 20,
@@ -312,11 +312,11 @@ return {
           },
           {name = 'fuzzy_buffer', max_item_count = 5, priority = 1},
           {name = 'tags', max_item_count = 5, priority = 5},
-          {name = 'luasnip', max_item_count = 5, priority = 10},
+          {name = 'luasnip', max_item_count = 5, priority = 5},
           {name = 'otter', max_item_count = 5, priority = 5, keyword_length = 2},
           {name = 'pandoc_references', max_item_count = 5, priority = 5, keyword_length = 2},
           {name = 'tmux', max_item_count = 5, priority = 1, keyword_length = 2},
-          {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
+          -- {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'spell',
             option = {
               keep_all_entries = false,
@@ -324,7 +324,7 @@ return {
                 return true
               end,
             },
-            max_item_count = 5, priority = 1, keyword_length = 3
+            max_item_count = 5, priority = 10, keyword_length = 3
           },
           {name = 'nerdfont', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'nvim_lsp_signature_help'},
