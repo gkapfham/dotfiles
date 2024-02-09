@@ -13,7 +13,7 @@ return {
     },
     event = "VeryLazy",
     config = function()
-      vim.g.python3_host_prog = 'python'
+      vim.g.python3_host_prog = '/run/current-system/sw/bin/python'
     end
   },
 
@@ -76,7 +76,10 @@ return {
           "bash",
           "bibtex",
           "c",
+          "comment",
           "gitattributes",
+          "git_config",
+          "gitcommit",
           "gitignore",
           "go",
           "html",
@@ -88,16 +91,19 @@ return {
           "make",
           "markdown",
           "markdown_inline",
+          "nix",
           "python",
           "query",
           "regex",
           "tsx",
           "typescript",
           "vim",
+          "vimdoc",
           "yaml",
         },
         -- Highlighting
-        highlight = { enable = true, disable = { "html", "latex" }, },
+        -- highlight = { enable = true, disable = { "html", "latex" }, },
+        highlight = { enable = true, },
         -- Indenting
         indent = { enable = true, },
         -- Commenting
@@ -123,6 +129,9 @@ return {
           }
         },
       })
+      vim.cmd [[
+        autocmd VimEnter * TSEnable highlight
+      ]]
     end,
   },
 
