@@ -180,11 +180,6 @@ return {
     event = "BufReadPre",
     config = function()
       local function h(name) return vim.api.nvim_get_hl(0, { name = name }) end
-      -- vim.api.nvim_set_hl(0, 'SymbolUsageRounding', { fg = h('CursorLine').bg, italic = true })
-      -- vim.api.nvim_set_hl(0, 'SymbolUsageContent', { bg = h('CursorLine').bg, fg = h('Conceal').fg, italic = true })
-      -- vim.api.nvim_set_hl(0, 'SymbolUsageRef', { fg = h('Conceal').fg, bg = h('CursorLine').bg, italic = true })
-      -- vim.api.nvim_set_hl(0, 'SymbolUsageDef', { fg = h('Type').fg, bg = h('CursorLine').bg, italic = true })
-      -- vim.api.nvim_set_hl(0, 'SymbolUsageImpl', { fg = h('@keyword').fg, bg = h('CursorLine').bg, italic = true })
       local function text_format(symbol)
         local res = {}
         local round_start = { '', 'SymbolUsageRounding' }
