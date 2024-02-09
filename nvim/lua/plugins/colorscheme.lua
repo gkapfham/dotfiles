@@ -25,6 +25,7 @@ return {
           fg = "#a8a8a8",
           red = "#d75f5f",
           orange = "#d78700",
+          deeporange = "#af5f00",
           yellow = "#afaf5f",
           green = "#5f8700",
           cyan = "#00afaf",
@@ -63,10 +64,20 @@ return {
           PmenuThumb = { fg = "${fg}", bg = "${menu}" },
           NormalFloat = { fg = "${fg}", bg = "${menu}" },
           Search = { fg = "NONE", bg = "NONE", undercurl = true, bold = true },
-          Type = { fg = "${orange}", bg = "${bg}"  },
+          SymbolUsageRounding = { fg = "${menu}", bg = "${bg}" },
+          SymbolUsageContent = { fg = "${deeporange}", bg = "${menu}", italic = true },
+          SymbolUsageRef = { fg = "${deeporange}", bg = "${menu}", italic = true },
+          SymbolUsageDef = { fg = "${deeporange}", bg = "${menu}", italic = true },
+          SymbolUsageImpl = { fg = "${deeporange}", bg = "${menu}", italic = true },
+          Type = { fg = "${orange}", bg = "${bg}" },
           TelescopeSelectionCaret = { fg = "${blue}", bg = "NONE" },
           TelescopeMatching = { fg = "${blue}", bg = "NONE" },
           TelescopeSelection = { fg = "${yellow}", bg = "NONE" },
+          ["@comment.error"] = { fg = "${red}", bg = "${bg}", bold = true, undercurl = true },
+          ["@comment.fix"] = { fg = "${yellow}", bg = "${bg}", bold = true, undercurl = true },
+          ["@comment.note"] = { fg = "${cyan}", bg = "${bg}", bold = true, undercurl = true },
+          ["@comment.todo"] = { fg = "${blue}", bg = "${bg}", bold = true, undercurl = true },
+          ["@comment.warning"] = { fg = "${orange}", bg = "${bg}", bold = true, undercurl = true },
           ["@function"] = { fg = "${green}", bg = "${bg}", italic = true },
           ["@string"] = { fg = "${yellow}", bg = "${bg}", italic = false },
           ["@variable"] = { fg = "${blue}" },
@@ -111,12 +122,5 @@ return {
       )
     end,
   },
-
-  -- -- vim-colortemplate
-  -- -- Color template creation
-  -- {
-  --   "lifepillar/vim-colortemplate",
-  --   ft = "colortemplate",
-  -- }
 
 }
