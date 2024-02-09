@@ -3,18 +3,92 @@
 
 return {
 
+  -- mini.trailspace
+  -- Trailing space management
+  {
+    "rktjmp/lush.nvim",
+    lazy = false,
+    priority = 1000,
+  },
+
   -- vim-vitamin-onec
   -- Define the color scheme and load it
   -- non-lazyily as it must function immediately
   {
-    "gkapfham/vim-vitamin-onec",
+    -- "gkapfham/vim-vitamin-onec",
+    "olimorris/onedarkpro.nvim",
+    -- dir = "/home/gkapfham/working/source/lush-vitamin-onec",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme vitaminonec]])
+      require("onedarkpro").setup({
+        colors = {
+          dark = { bg = "#1C1C1C" },
+          bg = "#000000",
+          fg = "#abb2bf",
+          red = "#ef596f",
+          orange = "#d19a66",
+          yellow = "#e5c07b",
+          green = "#89ca78",
+          cyan = "#2bbac5",
+          blue = "#61afef",
+          purple = "#d55fde",
+          white = "#abb2bf",
+          black = "#000000",
+          gray = "#434852",
+          highlight = "#e2be7d",
+          comment = "#7f848e",
+          none = "NONE",
+        }
+      })
+      -- vim.cmd([[colorscheme vitaminonec]])
+      -- vim.cmd([[colorscheme lush-vitamin-onec]])
+
+
+      vim.cmd([[colorscheme onedark_dark]])
       vim.cmd([[set termguicolors]])
+
+
     end,
   },
+
+  -- -- vim-vitamin-onec
+  -- -- Define the color scheme and load it
+  -- -- non-lazyily as it must function immediately
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require("tokyonight").setup({
+  --       style = "night",
+  --       transparent = false,
+  --       terminal_colors = true,
+  --       styles = {
+  --         comments = { italic = true },
+  --         keywords = { italic = true },
+  --         functions = {},
+  --         variables = {},
+  --         sidebars = "dark",
+  --         floats = "normal",
+  --       },
+  --       sidebars = { "qf", "help" },
+  --       hide_inactive_statusline = true,
+  --       dim_inactive = false,
+  --       lualine_bold = true,
+  --       -- on_colors = function(colors)
+  --       -- end,
+  --       on_highlights = function(highlights, colors)
+  --         colors.bg = "#1c1c1c"
+  --         colors.fg = "#8a8a8a"
+  --         colors.orange = "#d78700"
+  --         highlights.String = { fg = "#afaf5f", }
+  --       end,
+  --     })
+  --     vim.cmd([[colorscheme tokyonight]])
+  --     vim.cmd([[set termguicolors]])
+  --   end,
+  -- },
 
   -- nvim-colorizer.lua
   -- Colorizer for highlighting colors
@@ -49,11 +123,11 @@ return {
     end,
   },
 
-  -- vim-colortemplate
-  -- Color template creation
-  {
-    "lifepillar/vim-colortemplate",
-    ft = "colortemplate",
-  }
+  -- -- vim-colortemplate
+  -- -- Color template creation
+  -- {
+  --   "lifepillar/vim-colortemplate",
+  --   ft = "colortemplate",
+  -- }
 
 }
