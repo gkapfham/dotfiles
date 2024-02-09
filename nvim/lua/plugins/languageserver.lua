@@ -193,7 +193,7 @@ return {
           local usage = symbol.references <= 1 and 'usage' or 'usages'
           local num = symbol.references == 0 and 'no' or symbol.references
           table.insert(res, round_start)
-          table.insert(res, { '󰌹 ', 'SymbolUsageRef' })
+          table.insert(res, { ' ', 'SymbolUsageRef' })
           table.insert(res, { ('%s %s'):format(num, usage), 'SymbolUsageContent' })
           table.insert(res, round_end)
         end
