@@ -35,6 +35,7 @@ return {
           gray = "#6c6c6c",
           highlight = "#585858",
           comment = "#808080",
+          float_bg = "#1c1c1c",
           menu = "#303030",
           none = "NONE",
         },
@@ -57,11 +58,27 @@ return {
           NormalFloat = { fg = "${fg}", bg = "${menu}" },
           Search = { fg = "NONE", bg = "NONE", undercurl = true, bold = true },
           Type = { fg = "${orange}", bg = "${bg}"  },
+          TelescopeSelectionCaret = { fg = "${blue}", bg = "NONE" },
+          TelescopeMatching = { fg = "${blue}", bg = "NONE" },
+          TelescopeSelection = { fg = "${yellow}", bg = "NONE" },
           ["@function"] = { fg = "${green}", bg = "${bg}", italic = true },
           ["@string"] = { fg = "${yellow}", bg = "${bg}", italic = false },
           ["@variable"] = { fg = "${blue}" },
           ["@variable.member"] = { fg = "${blue}" },
           ["@property"] = { fg = "${blue}" },
+
+
+          -- TelescopeBorder white none
+          -- TelescopePromptBorder white none
+          -- TelescopeResultsBorder white none
+          -- TelescopePreviewBorder white none
+          -- TelescopeMatching blue none
+          -- TelescopeSelectionCaret blue none
+          -- TelescopeSelection yellow none
+          -- TelescopeMultiSelection brightyellow none bold
+
+
+
         }
       })
       vim.cmd([[colorscheme onedark_dark]])
