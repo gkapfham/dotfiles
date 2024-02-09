@@ -15,9 +15,7 @@ return {
   -- Define the color scheme and load it
   -- non-lazyily as it must function immediately
   {
-    -- "gkapfham/vim-vitamin-onec",
     "olimorris/onedarkpro.nvim",
-    -- dir = "/home/gkapfham/working/source/lush-vitamin-onec",
     lazy = false,
     priority = 1000,
     config = function()
@@ -29,7 +27,6 @@ return {
           orange = "#d78700",
           yellow = "#afaf5f",
           green = "#5f8700",
-          -- cyan = "#00af87",
           cyan = "#00afaf",
           blue = "#87afd7",
           purple = "#875f87",
@@ -60,6 +57,8 @@ return {
           ["@function"] = { fg = "${green}", bg = "${bg}", italic = true },
           ["@string"] = { fg = "${yellow}", bg = "${bg}", italic = false },
           ["@variable"] = { fg = "${blue}" },
+          ["@variable.member"] = { fg = "${blue}" },
+          ["@property"] = { fg = "${blue}" },
         }
       })
       vim.cmd([[colorscheme onedark_dark]])
