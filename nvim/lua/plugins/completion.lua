@@ -214,62 +214,69 @@ return {
           -- This means that you can jump back into the snippet by
           -- using <S-Tab> even after going through every field.
           -- Go forward in the template holes for the snippet
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if require("copilot.suggestion").is_visible() then
-              require("copilot.suggestion").accept()
-            elseif cmp.visible() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-            elseif luasnip.expandable() then
-              luasnip.expand()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, {
-              "i",
-              "s",
-            }),
+
           -- ["<Tab>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
+          --   if require("copilot.suggestion").is_visible() then
+          --     require("copilot.suggestion").accept()
+          --   elseif cmp.visible() then
+          --     -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
           --     cmp.select_next_item()
-          --   elseif luasnip.expand_or_jumpable() then
-          --     luasnip.expand_or_jump()
+          --   elseif luasnip.expandable() then
+          --     luasnip.expand()
           --   elseif has_words_before() then
           --     cmp.complete()
           --   else
           --     fallback()
           --   end
-          -- end, { "i", "s" }),
+          -- end, {
+          --     "i",
+          --     "s",
+          --   }),
+
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+
           -- Define the same <Tab> mapping but also for
           -- <C-n> so that this also advances forward
-          ["<C-n>"] = cmp.mapping(function(fallback)
-            if require("copilot.suggestion").is_visible() then
-              require("copilot.suggestion").accept()
-            elseif cmp.visible() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-            elseif luasnip.expandable() then
-              luasnip.expand()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, {
-              "i",
-              "s",
-            }),
+
           -- ["<C-n>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_next_item()
-          --   elseif luasnip.expand_or_jumpable() then
-          --     luasnip.expand_or_jump()
+          --   if require("copilot.suggestion").is_visible() then
+          --     require("copilot.suggestion").accept()
+          --   elseif cmp.visible() then
+          --     cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+          --   elseif luasnip.expandable() then
+          --     luasnip.expand()
           --   elseif has_words_before() then
           --     cmp.complete()
           --   else
           --     fallback()
           --   end
-          -- end, { "i", "s" }),
+          -- end, {
+          --     "i",
+          --     "s",
+          --   }),
+
+          ["<C-n>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+
           -- Go back in the template holes in the snippet
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
