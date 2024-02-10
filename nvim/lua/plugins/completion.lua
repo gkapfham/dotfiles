@@ -110,6 +110,12 @@ return {
 
   -- nvim-cmp
   -- Auto completion with nvim-cmp
+  -- Note that you can cancel the 
+  -- current completion with <C-e>;
+  -- this is useful when Copilot immediately
+  -- makes a suggestion and this will
+  -- prevent the use of <Tab> for indenting
+  -- as it will be setup for accepting
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -117,7 +123,7 @@ return {
       -- Stand-alone cmp plugins
       "andersevenrud/cmp-tmux",
       "chrisgrieser/cmp-nerdfont",
-      "dmitmel/cmp-cmdline-history",
+      -- "dmitmel/cmp-cmdline-history",
       "f3fora/cmp-spell",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
@@ -345,12 +351,12 @@ return {
         -- Disable all of the prior settings for nvim-cmp
         -- (see previous note for full explanation)
         mapping = cmp.mapping.preset.cmdline(),
-        -- Use both the cmdline source (i.e., all valid
-        -- commands) and the cmdline_history source (i.e.,
+        -- Use the cmdline source (i.e., all valid
+        -- commands); disable the cmdline_history source (i.e.,
         -- all commands previously used in command prompt)
+        -- because it might break the tab completion
         sources = cmp.config.sources({
           {name = 'cmdline', max_item_count = 10},
-          -- {name = 'cmdline_history', max_item_count = 3}
         }, {
         })
       })
