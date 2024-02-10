@@ -50,6 +50,9 @@ return {
                     default_method = "molten",
                 },
             }
+            -- set keymaps for running code cells; this
+            -- relies on the existence and configuration
+            -- of molten as the quarto runner
             local runner = require("quarto.runner")
             vim.keymap.set("n", "<localleader>rc", runner.run_cell, { desc = "run cell", silent = true })
             vim.keymap.set("n", "<localleader>ra", runner.run_above, { desc = "run cell and above", silent = true })
