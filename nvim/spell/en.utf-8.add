@@ -2653,3 +2653,5 @@ xz
 sha256
 modDirVersion
 follow
+cmdline
+popupmenu
