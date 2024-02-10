@@ -1,6 +1,6 @@
 -- File: plugins/languageserver.lua
 -- Purpose: load and configure plugins for installation
--- and use of language servers protocol implementations
+-- and use of language servers protocol (LSP) implementations
 
 return {
 
