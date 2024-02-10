@@ -24,6 +24,7 @@ return {
     priority = 1000,
     config = function()
       require("onedarkpro").setup({
+        -- override the default colors
         colors = {
           bg = "#1c1c1c",
           fg = "#a8a8a8",
@@ -44,8 +45,12 @@ return {
           menu = "#303030",
           none = "NONE",
         },
+        -- override the default highlights
         highlights = {
+          -- standard highlights
           Comment = { fg = "${comment}", bg = "${bg}", italic = true },
+          CmpItemKindCopilot = { fg = "${yellow}" },
+          CmpItemMenu = { fg = "${fg}", undercurl = false },
           DiagnosticUnderlineError = { fg = "${red}", undercurl = false },
           DiagnosticUnderlineWarn = { fg = "${orange}", undercurl = false },
           DiagnosticUnderlineInfo = { fg = "${yellow}", undercurl = false },
@@ -77,6 +82,7 @@ return {
           TelescopeSelectionCaret = { fg = "${blue}", bg = "NONE" },
           TelescopeMatching = { fg = "${blue}", bg = "NONE" },
           TelescopeSelection = { fg = "${yellow}", bg = "NONE" },
+          -- treesitter highlights
           ["@comment.error"] = { fg = "${red}", bg = "${bg}", bold = true, undercurl = true },
           ["@comment.fix"] = { fg = "${yellow}", bg = "${bg}", bold = true, undercurl = true },
           ["@comment.note"] = { fg = "${cyan}", bg = "${bg}", bold = true, undercurl = true },
