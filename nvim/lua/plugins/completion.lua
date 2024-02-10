@@ -123,7 +123,6 @@ return {
       -- Stand-alone cmp plugins
       "andersevenrud/cmp-tmux",
       "chrisgrieser/cmp-nerdfont",
-      -- "dmitmel/cmp-cmdline-history",
       "f3fora/cmp-spell",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
