@@ -214,69 +214,66 @@ return {
           -- This means that you can jump back into the snippet by
           -- using <S-Tab> even after going through every field.
           -- Go forward in the template holes for the snippet
-
-          -- ["<Tab>"] = cmp.mapping(function(fallback)
-          --   if require("copilot.suggestion").is_visible() then
-          --     require("copilot.suggestion").accept()
-          --   elseif cmp.visible() then
-          --     -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-          --     cmp.select_next_item()
-          --   elseif luasnip.expandable() then
-          --     luasnip.expand()
-          --   elseif has_words_before() then
-          --     cmp.complete()
-          --   else
-          --     fallback()
-          --   end
-          -- end, {
-          --     "i",
-          --     "s",
-          --   }),
-
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
+            if require("copilot.suggestion").is_visible() then
+              require("copilot.suggestion").accept()
+            elseif cmp.visible() then
+              -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
               cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
+            elseif luasnip.expandable() then
+              luasnip.expand()
             elseif has_words_before() then
               cmp.complete()
             else
               fallback()
             end
-          end, { "i", "s" }),
+          end, {
+              "i",
+              "s",
+            }),
+
+          -- ["<Tab>"] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_next_item()
+          --   elseif luasnip.expand_or_jumpable() then
+          --     luasnip.expand_or_jump()
+          --   elseif has_words_before() then
+          --     cmp.complete()
+          --   else
+          --     fallback()
+          --   end
+          -- end, { "i", "s" }),
 
           -- Define the same <Tab> mapping but also for
           -- <C-n> so that this also advances forward
 
-          -- ["<C-n>"] = cmp.mapping(function(fallback)
-          --   if require("copilot.suggestion").is_visible() then
-          --     require("copilot.suggestion").accept()
-          --   elseif cmp.visible() then
-          --     cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-          --   elseif luasnip.expandable() then
-          --     luasnip.expand()
-          --   elseif has_words_before() then
-          --     cmp.complete()
-          --   else
-          --     fallback()
-          --   end
-          -- end, {
-          --     "i",
-          --     "s",
-          --   }),
-
           ["<C-n>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
+            if require("copilot.suggestion").is_visible() then
+              require("copilot.suggestion").accept()
+            elseif cmp.visible() then
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+            elseif luasnip.expandable() then
+              luasnip.expand()
             elseif has_words_before() then
               cmp.complete()
             else
               fallback()
             end
-          end, { "i", "s" }),
-
+          end, {
+              "i",
+              "s",
+            }),
+          -- ["<C-n>"] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_next_item()
+          --   elseif luasnip.expand_or_jumpable() then
+          --     luasnip.expand_or_jump()
+          --   elseif has_words_before() then
+          --     cmp.complete()
+          --   else
+          --     fallback()
+          --   end
+          -- end, { "i", "s" }),
           -- Go back in the template holes in the snippet
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -307,7 +304,7 @@ return {
           -- Define the first-tier of sources
           {name = 'treesitter', max_item_count = 5, priority = 10},
           {name = 'nvim_lsp', max_item_count = 10, priority = 10},
-          {name = 'copilot', max_item_count = 5, priority = 5},
+          {name = 'copilot', max_item_count = 5, priority = 8},
           -- Look at all of the open buffers
           {
             name = 'buffer', max_item_count = 10, priority = 20,
@@ -317,7 +314,7 @@ return {
               end
             }
           },
-          {name = 'fuzzy_buffer', max_item_count = 5, priority = 1},
+          {name = 'fuzzy_buffer', max_item_count = 5, priority = 3},
           {name = 'tags', max_item_count = 5, priority = 5},
           {name = 'luasnip', max_item_count = 5, priority = 5},
           {name = 'otter', max_item_count = 5, priority = 5, keyword_length = 2},
@@ -378,8 +375,8 @@ return {
         -- commands) and the cmdline_history source (i.e.,
         -- all commands previously used in command prompt)
         sources = cmp.config.sources({
-          {name = 'cmdline', max_item_count = 5},
-          {name = 'cmdline_history', max_item_count = 5}
+          {name = 'cmdline', max_item_count = 3},
+          -- {name = 'cmdline_history', max_item_count = 3}
         }, {
         })
       })
