@@ -11,7 +11,11 @@ return {
     priority = 1000,
   },
 
-  -- vim-vitamin-onec
+  -- customize the onedark_dark scheme
+  -- so that it looks like vim-vitamin-onec;
+  -- note that vim-vitamin-onec is not used
+  -- because of the fact that it does not
+  -- integrate well with new versions of treesitter.
   -- Define the color scheme and load it
   -- non-lazyily as it must function immediately
   {
