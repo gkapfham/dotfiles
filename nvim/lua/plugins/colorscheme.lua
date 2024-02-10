@@ -79,9 +79,10 @@ return {
           SymbolUsageDef = { fg = "${deeporange}", bg = "${menu}", italic = true },
           SymbolUsageImpl = { fg = "${deeporange}", bg = "${menu}", italic = true },
           Type = { fg = "${orange}", bg = "${bg}" },
-          TelescopeSelectionCaret = { fg = "${blue}", bg = "NONE" },
           TelescopeMatching = { fg = "${blue}", bg = "NONE" },
+          TelescopePromptPrefix = { fg = "${blue}", bg = "NONE" },
           TelescopeSelection = { fg = "${yellow}", bg = "NONE" },
+          TelescopeSelectionCaret = { fg = "${blue}", bg = "NONE" },
           -- treesitter highlights
           ["@comment.error"] = { fg = "${red}", bg = "${bg}", bold = true, undercurl = true },
           ["@comment.fix"] = { fg = "${yellow}", bg = "${bg}", bold = true, undercurl = true },
@@ -95,6 +96,7 @@ return {
           ["@property"] = { fg = "${blue}" },
         }
       })
+      -- select the color scheme and set the termguicolors
       vim.cmd([[colorscheme onedark_dark]])
       vim.cmd([[set termguicolors]])
     end,
