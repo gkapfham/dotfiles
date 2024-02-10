@@ -3,14 +3,6 @@
 
 return {
 
-  -- mini.trailspace
-  -- Trailing space management
-  {
-    "rktjmp/lush.nvim",
-    lazy = false,
-    priority = 1000,
-  },
-
   -- customize the onedark_dark scheme
   -- so that it looks like vim-vitamin-onec;
   -- note that vim-vitamin-onec is not used
