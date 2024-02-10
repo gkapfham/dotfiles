@@ -58,6 +58,8 @@ return {
           IncSearch = { fg = "NONE", bg = "NONE", bold = true, undercurl = true },
           FlashCurrent = { fg = "${bg}", bg = "${purple}", bold = true, reverse = true },
           FlashLabel = { fg = "${bg}", bg = "${orange}", bold = true, reverse = true },
+          LazyButton = { fg = "${fg}", bg = "${menu}", bold = true },
+          LazyButtonActive = { fg = "${orange}", bg = "${menu}", bold = true },
           LineNr = { fg = "${gray}", bg = "${bg}" },
           Pmenu = { fg = "${fg}", bg = "${menu}" },
           PmenuSbar = { fg = "${black}", bg = "${black}" },
