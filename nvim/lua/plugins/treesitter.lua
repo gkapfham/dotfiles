@@ -101,12 +101,11 @@ return {
           "vimdoc",
           "yaml",
         },
-        -- Highlighting
-        -- highlight = { enable = true, disable = { "html", "latex" }, },
+        -- highlighting
         highlight = { enable = true, },
-        -- Indenting
+        -- indenting
         indent = { enable = true, },
-        -- Commenting
+        -- commenting
         context_commentstring = { enable = true, enable_autocmd = false },
         require "nvim-treesitter.configs".setup {
           playground = {
@@ -132,6 +131,32 @@ return {
       vim.cmd [[
         autocmd VimEnter * TSEnable highlight
       ]]
+    end,
+  },
+
+  -- nvim-treesitter-textobjects
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    event = "VeryLazy",
+    config = function()
+      require'nvim-treesitter.configs'.setup {
+        textobjects = {
+          select = {
+            enable = true,
+            keymaps = {
+              -- define operators based on
+              -- treesitter nodes; note that
+              -- block is useful for fenced code
+              -- blocks. Use :Inspect or :InspectTree
+              -- to identify which nodes to use
+              ["ab"] = "@block.outer",
+              ["ib"] = "@block.inner",
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+            },
+          },
+        },
+      }
     end,
   },
 
