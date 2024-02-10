@@ -231,22 +231,8 @@ return {
               "i",
               "s",
             }),
-
-          -- ["<Tab>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_next_item()
-          --   elseif luasnip.expand_or_jumpable() then
-          --     luasnip.expand_or_jump()
-          --   elseif has_words_before() then
-          --     cmp.complete()
-          --   else
-          --     fallback()
-          --   end
-          -- end, { "i", "s" }),
-
           -- Define the same <Tab> mapping but also for
           -- <C-n> so that this also advances forward
-
           ["<C-n>"] = cmp.mapping(function(fallback)
             if require("copilot.suggestion").is_visible() then
               require("copilot.suggestion").accept()
@@ -263,17 +249,6 @@ return {
               "i",
               "s",
             }),
-          -- ["<C-n>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_next_item()
-          --   elseif luasnip.expand_or_jumpable() then
-          --     luasnip.expand_or_jump()
-          --   elseif has_words_before() then
-          --     cmp.complete()
-          --   else
-          --     fallback()
-          --   end
-          -- end, { "i", "s" }),
           -- Go back in the template holes in the snippet
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -320,7 +295,6 @@ return {
           {name = 'otter', max_item_count = 5, priority = 5, keyword_length = 2},
           {name = 'pandoc_references', max_item_count = 5, priority = 5, keyword_length = 2},
           {name = 'tmux', max_item_count = 5, priority = 1, keyword_length = 2},
-          -- {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'spell',
             option = {
               keep_all_entries = false,
@@ -375,7 +349,7 @@ return {
         -- commands) and the cmdline_history source (i.e.,
         -- all commands previously used in command prompt)
         sources = cmp.config.sources({
-          {name = 'cmdline', max_item_count = 3},
+          {name = 'cmdline', max_item_count = 10},
           -- {name = 'cmdline_history', max_item_count = 3}
         }, {
         })
@@ -384,3 +358,30 @@ return {
   },
 
 }
+
+-- old completion settings:
+
+-- ["<Tab>"] = cmp.mapping(function(fallback)
+--   if cmp.visible() then
+--     cmp.select_next_item()
+--   elseif luasnip.expand_or_jumpable() then
+--     luasnip.expand_or_jump()
+--   elseif has_words_before() then
+--     cmp.complete()
+--   else
+--     fallback()
+--   end
+-- end, { "i", "s" }),
+--
+
+-- ["<C-n>"] = cmp.mapping(function(fallback)
+--   if cmp.visible() then
+--     cmp.select_next_item()
+--   elseif luasnip.expand_or_jumpable() then
+--     luasnip.expand_or_jump()
+--   elseif has_words_before() then
+--     cmp.complete()
+--   else
+--     fallback()
+--   end
+-- end, { "i", "s" }),
