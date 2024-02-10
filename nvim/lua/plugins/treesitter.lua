@@ -138,6 +138,9 @@ return {
   },
 
   -- nvim-treesitter-textobjects
+  -- supports definition of custom
+  -- objects and motions defined
+  -- on what is available in treesitter
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     event = "VeryLazy",
