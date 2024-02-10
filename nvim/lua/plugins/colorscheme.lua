@@ -48,7 +48,7 @@ return {
         -- override the default highlights
         highlights = {
           -- standard highlights
-          Comment = { fg = "${comment}", bg = "${bg}", italic = true },
+          Comment = { fg = "${comment}", bg = "NONE", italic = true },
           CmpItemKindCopilot = { fg = "${yellow}" },
           CmpItemMenu = { fg = "${fg}", undercurl = false },
           DiagnosticUnderlineError = { fg = "${red}", undercurl = false },
