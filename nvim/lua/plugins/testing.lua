@@ -45,10 +45,9 @@ return {
         term = "toggleterm",
         termOpts = {
           direction = "float",
-          -- height = 10,         -- terminal's height (for horizontal|float)
-          go_back = false,     -- return focus to original window after executing
-          -- stopinsert = "auto", -- exit from insert mode (true|false|"auto")
-          keep_one = true,     -- keep only one terminal for testing
+          go_back = false,
+          stopinsert = "auto",
+          keep_one = true,
         },
       })
     end
