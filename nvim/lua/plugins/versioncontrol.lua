@@ -76,7 +76,6 @@ return {
           -- Text object
           map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
         end,
-
         signs = {
           add          = {hl = 'DiffAdd'   , text = '+', numhl='None', linehl='None'},
           change       = {hl = 'DiffChange', text = '~', numhl='None', linehl='None'},
