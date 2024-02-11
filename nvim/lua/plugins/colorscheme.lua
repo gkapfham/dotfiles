@@ -73,6 +73,7 @@ return {
           SymbolUsageDef = { fg = "${deeporange}", bg = "${menu}", italic = true },
           SymbolUsageImpl = { fg = "${deeporange}", bg = "${menu}", italic = true },
           Substitute = { fg = "NONE", bg = "NONE", bold = true, undercurl = true },
+          ToggleTerm = { fg = "NONE", bg = "${bg}" },
           Type = { fg = "${orange}", bg = "NONE" },
           TelescopeMatching = { fg = "${blue}", bg = "NONE" },
           TelescopePromptPrefix = { fg = "${blue}", bg = "NONE" },
