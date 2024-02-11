@@ -84,14 +84,14 @@ return {
           }
         },
         extensions = {
-          ast_grep = {
-            command = {
-              "asg",
-              "--json=stream",
-            },
-            grep_open_files = false,
-            lang = nil,
-          },
+          -- ast_grep = {
+          --   command = {
+          --     "asg",
+          --     "--json=stream",
+          --   },
+          --   grep_open_files = false,
+          --   lang = nil,
+          -- },
           advanced_git_search = {
             diff_plugin = "fugitive",
             git_flags = {},
