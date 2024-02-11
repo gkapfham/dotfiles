@@ -20,12 +20,12 @@ return {
     end
   },
 
-  -- targets.vim
-  -- Textobjects like backticks
-  {
-    "wellle/targets.vim",
-    event = "VeryLazy"
-  },
+  -- -- targets.vim
+  -- -- Textobjects like backticks
+  -- {
+  --   "wellle/targets.vim",
+  --   event = "VeryLazy"
+  -- },
 
   -- tshjkl.nvim
   -- Treesitter movements
