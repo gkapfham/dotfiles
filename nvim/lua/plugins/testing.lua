@@ -4,7 +4,7 @@
 return {
 
   -- ToggleTerm
-  -- quick and customizable terminal window
+  -- Quick and customizable terminal window
   -- that can also be used for testing running
   {
     "akinsho/toggleterm.nvim",
