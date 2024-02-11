@@ -5,7 +5,10 @@
 
 return {
 
-  -- Gutentags
+  -- Gutentags;
+  -- This works correctly for most files;
+  -- yet, it does not work for Quarto markdown
+  -- files and other "non-standard file types"
   {
     "ludovicchabant/vim-gutentags",
     event = "BufReadPre",

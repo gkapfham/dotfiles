@@ -84,14 +84,14 @@ return {
           }
         },
         extensions = {
-          ast_grep = {
-            command = {
-              "asg",
-              "--json=stream",
-            },
-            grep_open_files = false,
-            lang = nil,
-          },
+          -- ast_grep = {
+          --   command = {
+          --     "asg",
+          --     "--json=stream",
+          --   },
+          --   grep_open_files = false,
+          --   lang = nil,
+          -- },
           advanced_git_search = {
             diff_plugin = "fugitive",
             git_flags = {},
@@ -177,7 +177,7 @@ return {
       -- Spelling
       { "<Space>tz",  "<cmd> Telescope spell_suggest <CR>",         desc = "Telescope: Spelling suggestion" },
       -- Tags
-      { "<Space>tt",  "<cmd> Telescope tags <CR>",                  desc = "Telescope: Tags" },
+      -- { "<Space>tt",  "<cmd> Telescope tags <CR>",                  desc = "Telescope: Tags" },
       { "<leader>tt", "<cmd> Telescope tags <CR>",                  desc = "Telescope: Tags" },
       { "<Space>tb",  "<cmd> Telescope current_buffer_tags <CR>",   desc = "Telescope: Buffer tags" },
       { "<leader>tb", "<cmd> Telescope tags <CR>",                  desc = "Telescope: Buffer tags" },

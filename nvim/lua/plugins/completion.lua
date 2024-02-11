@@ -110,6 +110,12 @@ return {
 
   -- nvim-cmp
   -- Auto completion with nvim-cmp
+  -- Note that you can cancel the 
+  -- current completion with <C-e>;
+  -- this is useful when Copilot immediately
+  -- makes a suggestion and this will
+  -- prevent the use of <Tab> for indenting
+  -- as it will be setup for accepting
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -117,7 +123,6 @@ return {
       -- Stand-alone cmp plugins
       "andersevenrud/cmp-tmux",
       "chrisgrieser/cmp-nerdfont",
-      "dmitmel/cmp-cmdline-history",
       "f3fora/cmp-spell",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
@@ -218,7 +223,8 @@ return {
             if require("copilot.suggestion").is_visible() then
               require("copilot.suggestion").accept()
             elseif cmp.visible() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+              -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+              cmp.select_next_item()
             elseif luasnip.expandable() then
               luasnip.expand()
             elseif has_words_before() then
@@ -230,17 +236,6 @@ return {
               "i",
               "s",
             }),
-          -- ["<Tab>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_next_item()
-          --   elseif luasnip.expand_or_jumpable() then
-          --     luasnip.expand_or_jump()
-          --   elseif has_words_before() then
-          --     cmp.complete()
-          --   else
-          --     fallback()
-          --   end
-          -- end, { "i", "s" }),
           -- Define the same <Tab> mapping but also for
           -- <C-n> so that this also advances forward
           ["<C-n>"] = cmp.mapping(function(fallback)
@@ -259,17 +254,6 @@ return {
               "i",
               "s",
             }),
-          -- ["<C-n>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_next_item()
-          --   elseif luasnip.expand_or_jumpable() then
-          --     luasnip.expand_or_jump()
-          --   elseif has_words_before() then
-          --     cmp.complete()
-          --   else
-          --     fallback()
-          --   end
-          -- end, { "i", "s" }),
           -- Go back in the template holes in the snippet
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -310,13 +294,12 @@ return {
               end
             }
           },
-          {name = 'fuzzy_buffer', max_item_count = 5, priority = 1},
+          {name = 'fuzzy_buffer', max_item_count = 5, priority = 3},
           {name = 'tags', max_item_count = 5, priority = 5},
-          {name = 'luasnip', max_item_count = 5, priority = 10},
+          {name = 'luasnip', max_item_count = 5, priority = 5},
           {name = 'otter', max_item_count = 5, priority = 5, keyword_length = 2},
           {name = 'pandoc_references', max_item_count = 5, priority = 5, keyword_length = 2},
           {name = 'tmux', max_item_count = 5, priority = 1, keyword_length = 2},
-          {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'spell',
             option = {
               keep_all_entries = false,
@@ -324,7 +307,7 @@ return {
                 return true
               end,
             },
-            max_item_count = 5, priority = 1, keyword_length = 3
+            max_item_count = 5, priority = 10, keyword_length = 3
           },
           {name = 'nerdfont', max_item_count = 5, priority = 1, keyword_length = 3},
           {name = 'nvim_lsp_signature_help'},
@@ -367,12 +350,12 @@ return {
         -- Disable all of the prior settings for nvim-cmp
         -- (see previous note for full explanation)
         mapping = cmp.mapping.preset.cmdline(),
-        -- Use both the cmdline source (i.e., all valid
-        -- commands) and the cmdline_history source (i.e.,
+        -- Use the cmdline source (i.e., all valid
+        -- commands); disable the cmdline_history source (i.e.,
         -- all commands previously used in command prompt)
+        -- because it might break the tab completion
         sources = cmp.config.sources({
-          {name = 'cmdline', max_item_count = 5},
-          {name = 'cmdline_history', max_item_count = 5}
+          {name = 'cmdline', max_item_count = 10},
         }, {
         })
       })
@@ -380,3 +363,30 @@ return {
   },
 
 }
+
+-- old completion settings:
+
+-- ["<Tab>"] = cmp.mapping(function(fallback)
+--   if cmp.visible() then
+--     cmp.select_next_item()
+--   elseif luasnip.expand_or_jumpable() then
+--     luasnip.expand_or_jump()
+--   elseif has_words_before() then
+--     cmp.complete()
+--   else
+--     fallback()
+--   end
+-- end, { "i", "s" }),
+--
+
+-- ["<C-n>"] = cmp.mapping(function(fallback)
+--   if cmp.visible() then
+--     cmp.select_next_item()
+--   elseif luasnip.expand_or_jumpable() then
+--     luasnip.expand_or_jump()
+--   elseif has_words_before() then
+--     cmp.complete()
+--   else
+--     fallback()
+--   end
+-- end, { "i", "s" }),

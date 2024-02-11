@@ -6,6 +6,8 @@
 return {
 
   -- aerial.nvim plugin
+  -- A navigation sidebar
+  -- that integrates with Telescope
   {
     "stevearc/aerial.nvim",
     cmd = "AerialToggle",

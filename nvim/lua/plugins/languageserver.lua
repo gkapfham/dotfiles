@@ -1,6 +1,6 @@
 -- File: plugins/languageserver.lua
 -- Purpose: load and configure plugins for installation
--- and use of language servers protocol implementations
+-- and use of language servers protocol (LSP) implementations
 
 return {
 
@@ -180,11 +180,6 @@ return {
     event = "BufReadPre",
     config = function()
       local function h(name) return vim.api.nvim_get_hl(0, { name = name }) end
-      vim.api.nvim_set_hl(0, 'SymbolUsageRounding', { fg = h('CursorLine').bg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageContent', { bg = h('CursorLine').bg, fg = h('Conceal').fg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageRef', { fg = h('Conceal').fg, bg = h('CursorLine').bg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageDef', { fg = h('Type').fg, bg = h('CursorLine').bg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageImpl', { fg = h('@keyword').fg, bg = h('CursorLine').bg, italic = true })
       local function text_format(symbol)
         local res = {}
         local round_start = { '', 'SymbolUsageRounding' }
@@ -193,7 +188,7 @@ return {
           local usage = symbol.references <= 1 and 'usage' or 'usages'
           local num = symbol.references == 0 and 'no' or symbol.references
           table.insert(res, round_start)
-          table.insert(res, { '󰌹 ', 'SymbolUsageRef' })
+          table.insert(res, { ' ', 'SymbolUsageRef' })
           table.insert(res, { ('%s %s'):format(num, usage), 'SymbolUsageContent' })
           table.insert(res, round_end)
         end
@@ -228,10 +223,10 @@ return {
     "linux-cultist/venv-selector.nvim",
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
     config = true,
-    event = "VeryLazy",
-    keys = { {
-      "<leader>vv", "<cmd>:VenvSelect<cr>",
-    } }
+    cmd = "VenvSelect",
+    keys = {
+      { "<Space>vv", "<cmd>:VenvSelect<cr>" },
+    }
   },
 
 }

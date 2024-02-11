@@ -46,9 +46,7 @@ return {
     "echasnovski/mini.trailspace",
     event = "VeryLazy",
     config = function()
-      require("mini.trailspace").setup({
-      }
-      )
+      require("mini.trailspace").setup({})
     end,
   },
 

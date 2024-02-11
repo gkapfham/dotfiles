@@ -3,92 +3,100 @@
 
 return {
 
-  -- mini.trailspace
-  -- Trailing space management
-  {
-    "rktjmp/lush.nvim",
-    lazy = false,
-    priority = 1000,
-  },
-
-  -- vim-vitamin-onec
+  -- customize the onedark_dark scheme
+  -- so that it looks like vim-vitamin-onec;
+  -- note that vim-vitamin-onec is not used
+  -- because of the fact that it does not
+  -- integrate well with new versions of treesitter.
   -- Define the color scheme and load it
   -- non-lazyily as it must function immediately
   {
-    -- "gkapfham/vim-vitamin-onec",
     "olimorris/onedarkpro.nvim",
-    -- dir = "/home/gkapfham/working/source/lush-vitamin-onec",
     lazy = false,
     priority = 1000,
     config = function()
       require("onedarkpro").setup({
+        -- override the default colors
         colors = {
-          dark = { bg = "#1C1C1C" },
-          bg = "#000000",
-          fg = "#abb2bf",
-          red = "#ef596f",
-          orange = "#d19a66",
-          yellow = "#e5c07b",
-          green = "#89ca78",
-          cyan = "#2bbac5",
-          blue = "#61afef",
-          purple = "#d55fde",
-          white = "#abb2bf",
-          black = "#000000",
-          gray = "#434852",
-          highlight = "#e2be7d",
-          comment = "#7f848e",
+          bg = "#1c1c1c",
+          fg = "#a8a8a8",
+          red = "#d75f5f",
+          orange = "#d78700",
+          deeporange = "#af5f00",
+          yellow = "#afaf5f",
+          green = "#5f8700",
+          cyan = "#00afaf",
+          blue = "#87afd7",
+          purple = "#875f87",
+          white = "#a8a8a8",
+          black = "#767676",
+          gray = "#6c6c6c",
+          highlight = "#585858",
+          comment = "#808080",
+          float_bg = "#1c1c1c",
+          menu = "#303030",
           none = "NONE",
+        },
+        -- override the default highlights
+        highlights = {
+          -- standard highlights
+          Comment = { fg = "${comment}", bg = "NONE", italic = true },
+          CmpItemKindCopilot = { fg = "${yellow}" },
+          CmpItemMenu = { fg = "${fg}", undercurl = false },
+          DiagnosticUnderlineError = { fg = "${red}", undercurl = false },
+          DiagnosticUnderlineWarn = { fg = "${orange}", undercurl = false },
+          DiagnosticUnderlineInfo = { fg = "${yellow}", undercurl = false },
+          DiagnosticUnderlineHint = { fg = "${cyan}", undercurl = false },
+          DiffAdd = { fg = "${green}" },
+          DiffChange = { fg = "${blue}" },
+          DiffDelete = { fg = "${red}" },
+          DiffText = { fg = "${green}" },
+          GitSignsAdd = { fg = "${green}" },
+          GitSignsChange = { fg = "${blue}" },
+          GitSignsDelete = { fg = "${red}" },
+          GitSignsUntracked = { fg = "${orange}" },
+          IncSearch = { fg = "NONE", bg = "NONE", bold = true, undercurl = true },
+          FlashCurrent = { fg = "${bg}", bg = "${purple}", bold = true, reverse = true },
+          FlashLabel = { fg = "${bg}", bg = "${orange}", bold = true, reverse = true },
+          LazyButton = { fg = "${fg}", bg = "${menu}", bold = true },
+          LazyButtonActive = { fg = "${orange}", bg = "${menu}", bold = true },
+          LineNr = { fg = "${gray}", bg = "${bg}" },
+          Pmenu = { fg = "${fg}", bg = "${menu}" },
+          PmenuSbar = { fg = "${black}", bg = "${black}" },
+          PmenuSel = { fg = "${fg}", bg = "${highlight}" },
+          PmenuThumb = { fg = "${fg}", bg = "${menu}" },
+          NormalFloat = { fg = "${fg}", bg = "${menu}" },
+          Search = { fg = "NONE", bg = "NONE", undercurl = true, bold = true },
+          SymbolUsageRounding = { fg = "${menu}", bg = "${bg}" },
+          SymbolUsageContent = { fg = "${deeporange}", bg = "${menu}", italic = true },
+          SymbolUsageRef = { fg = "${deeporange}", bg = "${menu}", italic = true },
+          SymbolUsageDef = { fg = "${deeporange}", bg = "${menu}", italic = true },
+          SymbolUsageImpl = { fg = "${deeporange}", bg = "${menu}", italic = true },
+          Substitute = { fg = "NONE", bg = "NONE", bold = true, undercurl = true },
+          ToggleTerm = { fg = "NONE", bg = "${bg}" },
+          Type = { fg = "${orange}", bg = "NONE" },
+          TelescopeMatching = { fg = "${blue}", bg = "NONE" },
+          TelescopePromptPrefix = { fg = "${blue}", bg = "NONE" },
+          TelescopeSelection = { fg = "${yellow}", bg = "NONE" },
+          TelescopeSelectionCaret = { fg = "${blue}", bg = "NONE" },
+          -- treesitter highlights
+          ["@comment.error"] = { fg = "${red}", bg = "${bg}", bold = true, undercurl = true },
+          ["@comment.fix"] = { fg = "${yellow}", bg = "${bg}", bold = true, undercurl = true },
+          ["@comment.note"] = { fg = "${cyan}", bg = "${bg}", bold = true, undercurl = true },
+          ["@comment.todo"] = { fg = "${blue}", bg = "${bg}", bold = true, undercurl = true },
+          ["@comment.warning"] = { fg = "${orange}", bg = "${bg}", bold = true, undercurl = true },
+          ["@function"] = { fg = "${green}", bg = "${bg}", italic = true },
+          ["@string"] = { fg = "${yellow}", bg = "${bg}", italic = false },
+          ["@variable"] = { fg = "${blue}" },
+          ["@variable.member"] = { fg = "${blue}" },
+          ["@property"] = { fg = "${blue}" },
         }
       })
-      -- vim.cmd([[colorscheme vitaminonec]])
-      -- vim.cmd([[colorscheme lush-vitamin-onec]])
-
-
+      -- select the color scheme and set the termguicolors
       vim.cmd([[colorscheme onedark_dark]])
       vim.cmd([[set termguicolors]])
-
-
     end,
   },
-
-  -- -- vim-vitamin-onec
-  -- -- Define the color scheme and load it
-  -- -- non-lazyily as it must function immediately
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require("tokyonight").setup({
-  --       style = "night",
-  --       transparent = false,
-  --       terminal_colors = true,
-  --       styles = {
-  --         comments = { italic = true },
-  --         keywords = { italic = true },
-  --         functions = {},
-  --         variables = {},
-  --         sidebars = "dark",
-  --         floats = "normal",
-  --       },
-  --       sidebars = { "qf", "help" },
-  --       hide_inactive_statusline = true,
-  --       dim_inactive = false,
-  --       lualine_bold = true,
-  --       -- on_colors = function(colors)
-  --       -- end,
-  --       on_highlights = function(highlights, colors)
-  --         colors.bg = "#1c1c1c"
-  --         colors.fg = "#8a8a8a"
-  --         colors.orange = "#d78700"
-  --         highlights.String = { fg = "#afaf5f", }
-  --       end,
-  --     })
-  --     vim.cmd([[colorscheme tokyonight]])
-  --     vim.cmd([[set termguicolors]])
-  --   end,
-  -- },
 
   -- nvim-colorizer.lua
   -- Colorizer for highlighting colors
@@ -122,12 +130,5 @@ return {
       )
     end,
   },
-
-  -- -- vim-colortemplate
-  -- -- Color template creation
-  -- {
-  --   "lifepillar/vim-colortemplate",
-  --   ft = "colortemplate",
-  -- }
 
 }
