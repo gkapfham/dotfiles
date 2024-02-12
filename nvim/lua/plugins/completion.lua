@@ -39,6 +39,7 @@ local kind_icons = {
   Operator = "󰆕",
   TypeParameter = "",
   Spell = "",
+  StringSpecialUrl = "󰌷",
   String = "",
   Copilot = "",
   Comment = "",
