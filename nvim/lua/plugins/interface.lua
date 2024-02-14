@@ -132,7 +132,7 @@ return {
           },
           ["qmd"] = {
             icon = "󰐴",
-            name = "Toml"
+            name = "Quarto"
           },
           [""] = {
             icon = "",
