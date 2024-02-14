@@ -130,6 +130,10 @@ return {
             icon = "",
             name = "Toml"
           },
+          ["qmd"] = {
+            icon = "󰐴",
+            name = "Toml"
+          },
           [""] = {
             icon = "",
             name = "None"
