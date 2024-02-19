@@ -46,6 +46,9 @@ local kind_icons = {
   TextTitle1 = "",
   TextTitle2 = "",
   TextTitle3 = "",
+  MarkupHeading1 = "",
+  MarkupHeading2 = "",
+  MarkupHeading3 = "",
 }
 
 -- Define the has_words_before function used in the
