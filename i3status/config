@@ -9,6 +9,7 @@ order += "memory"
 order += "cpu_usage"
 order += "cpu_temperature 0"
 order += "load"
+order += "disk /"
 order += "volume master"
 order += "tztime local"
 
@@ -85,5 +86,5 @@ volume master {
 }
 
 disk "/" {
-        format = " FF %avail"
+        format = "󰋊 %avail"
 }
