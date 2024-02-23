@@ -65,7 +65,7 @@ local kind_icons = {
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
 
 -- }}}
@@ -100,6 +100,15 @@ return {
           ["."] = false,
         },
       })
+      -- Set the filetype to markdown when entering the
+      -- copilot-chat buffer; note that this is set correctly
+      -- the first time but the plugin itself. However, later
+      -- the syntax highlighting is removed and this makes
+      -- it difficult to read the output from GitHub copilot.
+      -- this fix ensures that highlighting is always enabled
+      vim.cmd([[
+         autocmd FileType copilot-chat set filetype=markdown
+      ]])
     end,
   },
 
@@ -107,14 +116,64 @@ return {
   -- Integrate the copilot with nvim-cmp
   {
     "zbirenbaum/copilot-cmp",
-    config = function ()
+    config = function()
       require("copilot_cmp").setup()
+      vim.cmd([[
+         autocmd BufEnter copilot-chat set filetype=markdown
+      ]])
     end
+  },
+
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    opts = {
+      show_help = "yes",
+      debug = false,
+      disable_extra_info = "no",
+      language = "English"
+    },
+    build = function()
+      vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
+    end,
+    event = "VeryLazy",
+    keys = {
+      {
+        "<Space>ccm",
+        "<cmd>CopilotChatVsplitToggle<cr><cmd>set filetype=markdown<cr>",
+        desc = "CopilotChat - Toggle vertical split and set filetype to markdown",
+      },
+      {
+        "<Space>cch",
+        "<cmd>set filetype=markdown<cr>",
+        desc = "CopilotChat - Toggle vertical split",
+      },
+      {
+        "<Space>cct",
+        "<cmd>CopilotChatVsplitToggle<cr>",
+        desc = "CopilotChat - Toggle vertical split",
+      },
+      {
+        "<Space>ccy",
+        ":CopilotChat",
+        desc = "CopilotChat - Open in vertical split based on contents of register y",
+      },
+      {
+        "<Space>ccv",
+        ":CopilotChatVisual",
+        mode = "x",
+        desc = "CopilotChat - Open in vertical split based on visual highlight",
+      },
+      {
+        "<Space>ccr",
+        "<cmd>CopilotChatReset<cr>",
+        desc = "CopilotChat - Reset chat history and clear buffer",
+      }
+    },
   },
 
   -- nvim-cmp
   -- Auto completion with nvim-cmp
-  -- Note that you can cancel the 
+  -- Note that you can cancel the
   -- current completion with <C-e>;
   -- this is useful when Copilot immediately
   -- makes a suggestion and this will
@@ -140,7 +199,7 @@ return {
       "jc-doyle/cmp-pandoc-references",
       "zbirenbaum/copilot-cmp",
       -- Fuzzy buffer plugin with dependencies
-      {"romgrk/fzy-lua-native", build = "make"},
+      { "romgrk/fzy-lua-native", build = "make" },
       "tzachar/cmp-fuzzy-buffer",
       "tzachar/fuzzy.nvim",
     },
@@ -169,7 +228,7 @@ return {
         -- Specify a snippet engine
         snippet = {
           expand = function(args)
-            require'luasnip'.lsp_expand(args.body)
+            require 'luasnip'.lsp_expand(args.body)
           end
         },
         -- Use the custom view packaged by nvim-cmp
@@ -237,9 +296,9 @@ return {
               fallback()
             end
           end, {
-              "i",
-              "s",
-            }),
+            "i",
+            "s",
+          }),
           -- Define the same <Tab> mapping but also for
           -- <C-n> so that this also advances forward
           ["<C-n>"] = cmp.mapping(function(fallback)
@@ -255,9 +314,9 @@ return {
               fallback()
             end
           end, {
-              "i",
-              "s",
-            }),
+            "i",
+            "s",
+          }),
           -- Go back in the template holes in the snippet
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -286,40 +345,45 @@ return {
         -- with a higher priority have higher weighting on priority.
         sources = cmp.config.sources({
           -- Define the first-tier of sources
-          {name = 'treesitter', max_item_count = 5, priority = 10},
-          {name = 'nvim_lsp', max_item_count = 10, priority = 10},
-          {name = 'copilot', max_item_count = 5, priority = 8},
+          { name = 'treesitter', max_item_count = 5,  priority = 10 },
+          { name = 'nvim_lsp',   max_item_count = 10, priority = 10 },
+          { name = 'copilot',    max_item_count = 5,  priority = 8 },
           -- Look at all of the open buffers
           {
-            name = 'buffer', max_item_count = 10, priority = 20,
+            name = 'buffer',
+            max_item_count = 10,
+            priority = 20,
             option = {
               get_bufnrs = function()
                 return vim.api.nvim_list_bufs()
               end
             }
           },
-          {name = 'fuzzy_buffer', max_item_count = 5, priority = 3},
-          {name = 'tags', max_item_count = 5, priority = 5},
-          {name = 'luasnip', max_item_count = 5, priority = 5},
-          {name = 'otter', max_item_count = 5, priority = 5, keyword_length = 2},
-          {name = 'pandoc_references', max_item_count = 5, priority = 5, keyword_length = 2},
-          {name = 'tmux', max_item_count = 5, priority = 1, keyword_length = 2},
-          {name = 'spell',
+          { name = 'fuzzy_buffer',      max_item_count = 5, priority = 3 },
+          { name = 'tags',              max_item_count = 5, priority = 5 },
+          { name = 'luasnip',           max_item_count = 5, priority = 5 },
+          { name = 'otter',             max_item_count = 5, priority = 5, keyword_length = 2 },
+          { name = 'pandoc_references', max_item_count = 5, priority = 5, keyword_length = 2 },
+          { name = 'tmux',              max_item_count = 5, priority = 1, keyword_length = 2 },
+          {
+            name = 'spell',
             option = {
               keep_all_entries = false,
               enable_in_context = function()
                 return true
               end,
             },
-            max_item_count = 5, priority = 10, keyword_length = 3
+            max_item_count = 5,
+            priority = 10,
+            keyword_length = 3
           },
-          {name = 'nerdfont', max_item_count = 5, priority = 1, keyword_length = 3},
-          {name = 'nvim_lsp_signature_help'},
+          { name = 'nerdfont',               max_item_count = 5, priority = 1, keyword_length = 3 },
+          { name = 'nvim_lsp_signature_help' },
         }, {
-            -- Define the second-tier of sources; these will only
-            -- appear when there is no active source from the first-tier
-            {name = 'path'},
-          })
+          -- Define the second-tier of sources; these will only
+          -- appear when there is no active source from the first-tier
+          { name = 'path' },
+        })
       })
       -- Use completion sources when forward-searching with "/"
       cmp.setup.cmdline('/', {
@@ -329,12 +393,12 @@ return {
         -- tab completion does not work for this mode
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          {name = 'path'},
-          {name = 'buffer', max_item_count = 5, priority = 10},
-          {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
+          { name = 'path' },
+          { name = 'buffer',       max_item_count = 5, priority = 10 },
+          { name = 'fuzzy_buffer', max_item_count = 5, priority = 5 },
         }, {
-            {name = 'cmdline'},
-          })
+          { name = 'cmdline' },
+        })
       })
       -- Use completion sources when backward-searching with "?"
       cmp.setup.cmdline('?', {
@@ -342,15 +406,15 @@ return {
         -- (see previous note for full explanation)
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          {name = 'path'},
-          {name = 'buffer', max_item_count = 5},
-          {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
+          { name = 'path' },
+          { name = 'buffer',       max_item_count = 5 },
+          { name = 'fuzzy_buffer', max_item_count = 5, priority = 5 },
         }, {
-            {name = 'cmdline'},
-          })
+          { name = 'cmdline' },
+        })
       })
       -- Use completion sources when running commands with ":"
-      require'cmp'.setup.cmdline(':', {
+      require 'cmp'.setup.cmdline(':', {
         -- Disable all of the prior settings for nvim-cmp
         -- (see previous note for full explanation)
         mapping = cmp.mapping.preset.cmdline(),
@@ -359,7 +423,7 @@ return {
         -- all commands previously used in command prompt)
         -- because it might break the tab completion
         sources = cmp.config.sources({
-          {name = 'cmdline', max_item_count = 10},
+          { name = 'cmdline', max_item_count = 10 },
         }, {
         })
       })
