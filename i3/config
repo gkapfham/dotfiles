@@ -30,7 +30,8 @@ font pango:Hack Nerd Font 9
 exec_always --no-startup-id hsetroot -solid "#6E466E"
 
 # Define the color scheme for the i3bar
-set $bg     #1C1C1C
+# set $bg     #1C1C1C
+set $bg     #262626
 set $fg     #3A3A3A
 set $hi     #FCE94F
 set $ac     #D78700
