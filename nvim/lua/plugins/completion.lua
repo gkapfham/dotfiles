@@ -124,6 +124,10 @@ return {
     end
   },
 
+  -- CopilotChat.nvim
+  -- Chat with GitHub copilot; note that
+  -- while the user interface and experience
+  -- is not yet polished this tool works well
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     opts = {
