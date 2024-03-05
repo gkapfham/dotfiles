@@ -166,6 +166,9 @@ alias ka="eza --group-directories-first --grid --long --sort=name"
 # ensuring better color scheme
 alias tree="eza --tree --level=2 --long --icons"
 
+# Show the files in a specific directory
+alias search-show="rga-fzf"
+
 # Use nix switch with a configuration in user account
 alias kix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
 
@@ -363,7 +366,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Use ripgrep and ripgrep-all in combination with fzf
 # to search all below directories (both text and binary files)
-search() {
+search-echo() {
 	RG_PREFIX="rga --files-with-matches"
 	local file
 	file="$(
@@ -371,8 +374,11 @@ search() {
 			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
 				--phony -q "$1" \
 				--bind "change:reload:$RG_PREFIX {q}" \
-				--preview-window="up,40%:wrap"
+				--preview-window="right,60%:wrap"
 	)" &&
+  # place the name of the file inside of the clipboard
+  echo $file | xclip -selection clipboard
+  # show the name of the file in the command-line
 	echo " $file"
 }
 
