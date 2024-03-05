@@ -376,23 +376,6 @@ search() {
 	echo " $file"
 }
 
-# Search with ripgrep and get a nice bat preview, but requires
-# that you specifics the name of the pattern immediately
-searchnow() {
-	rg  \
-	--column \
-	--line-number \
-	--no-column \
-	--no-heading \
-	--fixed-strings \
-	--ignore-case \
-	--hidden \
-	--follow \
-	--glob '!.git/*' "$1" \
-	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2 " " start ":" end}' \
-	| fzf --preview 'bat --wrap character --color always {1} --highlight-line {2} --line-range {3}' --preview-window="up,40%:wrap"
-}
-
 # }}}
 
 # Zsh-Vi-Mode {{{
