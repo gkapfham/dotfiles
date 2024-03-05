@@ -343,19 +343,6 @@ export FZF_DEFAULT_OPTS='
   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
   --color=marker:#d78700,spinner:#875f87,header:#875f87'
 
-# Same colorscheme but in 256 colors,
-# note that this does not use the HTML color
-# codes and instead uses those available at:
-# https://jonasjacek.github.io/colors/
-#   export FZF_DEFAULT_OPTS='
-#   --no-bold
-#   --cycle
-#   --bind ctrl-f:page-down,ctrl-b:page-up
-#   --color=fg:243,bg:234,hl:64
-#   --color=fg+:143,bg+:234,hl+:172
-#   --color=info:110,prompt:110,pointer:172
-#   --color=marker:172,spinner:96,header:96'
-
 # Trigger fzf completion using the semi-colon key instead of **
 export FZF_COMPLETION_TRIGGER='**'
 
