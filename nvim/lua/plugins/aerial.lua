@@ -92,7 +92,7 @@ return {
     -- Keys
     keys = {
       -- Toggle display of aerial
-      { "<Space>-", "<cmd> AerialToggle <CR>", desc = "Aerial: Toggle visibility" },
+      { "<Space>a", "<cmd> AerialToggle <CR>", desc = "Aerial: Toggle visibility" },
     }
   },
 
