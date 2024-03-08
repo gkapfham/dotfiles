@@ -315,9 +315,6 @@ return {
       })
     vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
     end,
-    keys = {
-      { "<Space>9", "<cmd> Oil <CR>", desc = "Oil: Oil-based File Management" },
-    }
   },
 
 }
