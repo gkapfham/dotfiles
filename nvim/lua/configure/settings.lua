@@ -91,6 +91,14 @@ vim.cmd([[
   set shiftround
 ]])
 
+-- Disable linewrapping in gitcommit buffer when using fugitive
+vim.cmd([[
+  " Disable line wrapping when entering a gitcommit buffer
+  autocmd BufEnter * if &filetype == 'gitcommit' | setlocal formatoptions-=t | endif
+  " Re-enable line wrapping when leaving a gitcommit buffer
+  autocmd BufLeave * if &filetype == 'gitcommit' | setlocal formatoptions+=t | endif
+]])
+
 -- }}}
 
 -- Movement settings through the use of vim.cmd and vimscript commands {{{
