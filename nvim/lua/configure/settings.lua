@@ -45,7 +45,8 @@ vim.cmd([[set noshowcmd]])
 
 -- Ignorecase search: "J" and "j" are the same
 -- Smartcase search: "J" is different than "j" if capitalized used
--- Both of these variables are respected by flash.nvim
+-- Both of these variables are respected by flash.nvim; see the
+-- plugins/movement.lua file for more information about flash.nvim
 vim.cmd([[
   set ignorecase
   set smartcase
