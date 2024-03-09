@@ -73,12 +73,6 @@ vim.cmd([[
   set tabstop=4
 ]])
 
--- -- Separate linebreaks and tabs for Python
--- vim.cmd([[
---   autocmd Filetype python setlocal softtabstop=4
---   autocmd Filetype python setlocal shiftwidth=4
--- ]])
-
 -- Separate linebreaks and tabs for Golang
 vim.cmd([[
   au Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
