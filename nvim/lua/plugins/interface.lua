@@ -95,8 +95,53 @@ return {
   },
 
   -- nvim-web-devicons
-  -- Icons
-  "nvim-tree/nvim-web-devicons",
+  -- Icons with overrides for filetypes
+  -- where icons no longer display correctly with nerdfonts
+  {
+    "nvim-tree/nvim-web-devicons",
+    event = "VeryLazy",
+    config = function()
+      -- set the filetype for configuration files
+      -- without an extension; enables better highlighting
+      -- for files that are named config
+      vim.cmd([[
+        autocmd BufNewFile,BufRead config set filetype=config
+        ]])
+      -- add overrides for filenames/filetypes that are not detected
+      require 'nvim-web-devicons'.setup {
+        color_icons = false,
+        strict = true,
+        override_by_filename = {
+          ["config"] = {
+            icon = "",
+            name = "Config"
+          },
+          ["Makefile"] = {
+            icon = "",
+            name = "Makefile"
+          },
+          [".zshrc"] = {
+            icon = "󰿘",
+            name = "Zsh"
+          }
+        },
+        override_by_extension = {
+          ["toml"] = {
+            icon = "",
+            name = "Toml"
+          },
+          ["qmd"] = {
+            icon = "󰐴",
+            name = "Quarto"
+          },
+          [""] = {
+            icon = "",
+            name = "None"
+          }
+        },
+      }
+    end,
+  },
 
   -- nuim.nvim
   -- User interface components

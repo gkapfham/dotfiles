@@ -84,14 +84,14 @@ return {
           }
         },
         extensions = {
-          ast_grep = {
-            command = {
-              "asg",
-              "--json=stream",
-            },
-            grep_open_files = false,
-            lang = nil,
-          },
+          -- ast_grep = {
+          --   command = {
+          --     "asg",
+          --     "--json=stream",
+          --   },
+          --   grep_open_files = false,
+          --   lang = nil,
+          -- },
           advanced_git_search = {
             diff_plugin = "fugitive",
             git_flags = {},
@@ -121,7 +121,7 @@ return {
       -- Load and configure the advanced_git_search plugin
       require("telescope").load_extension("advanced_git_search")
       -- Load and configure the ast_grep
-      require("telescope").load_extension("ast_grep")
+      -- require("telescope").load_extension("ast_grep")
       -- Configure the keymap for refactoring; setting it here because
       -- I don't know how to set visual mode keymaps in keys section of spec
       vim.api.nvim_set_keymap(
@@ -136,7 +136,7 @@ return {
       -- Aerial
       { "<Space>ta", "<cmd> Telescope aerial <CR>",                    desc = "Telescope: Aerial" },
       -- Ast-Grep
-      { "<Space>tg", "<cmd> Telescope ast_grep <CR>",                  desc = "Telescope: AST grep" },
+      -- { "<Space>tg", "<cmd> Telescope ast_grep <CR>",                  desc = "Telescope: AST grep" },
       -- Buffers
       { "<Space>i",  "<cmd> Telescope buffers <CR>",                   desc = "Telescope: Buffers" },
       { "<Space>tf", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Telescope: Fuzzy search buffers" },
@@ -177,7 +177,7 @@ return {
       -- Spelling
       { "<Space>tz",  "<cmd> Telescope spell_suggest <CR>",         desc = "Telescope: Spelling suggestion" },
       -- Tags
-      { "<Space>tt",  "<cmd> Telescope tags <CR>",                  desc = "Telescope: Tags" },
+      -- { "<Space>tt",  "<cmd> Telescope tags <CR>",                  desc = "Telescope: Tags" },
       { "<leader>tt", "<cmd> Telescope tags <CR>",                  desc = "Telescope: Tags" },
       { "<Space>tb",  "<cmd> Telescope current_buffer_tags <CR>",   desc = "Telescope: Buffer tags" },
       { "<leader>tb", "<cmd> Telescope tags <CR>",                  desc = "Telescope: Buffer tags" },

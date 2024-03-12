@@ -1,5 +1,8 @@
 set font "Hack Nerd Font 12"
 
+# copy selection to system clipboard
+set selection-clipboard clipboard
+
 set default-bg "#1C1C1C"
 
 set highlight-active-color "#949494"

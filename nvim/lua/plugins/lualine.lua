@@ -22,6 +22,7 @@ local function format_status(symbols, depth, separator, icons_enabled)
   end
   return table.concat(parts, separator)
 end
+
 -- The API to output the symbols structure
 function output_symbols_structure(depth, separator, icons_enabled)
   local symbols = aerial.get_location(true)
@@ -75,7 +76,7 @@ local colors = {
   color6   = "#626262",
   color3   = "#875f87",
   color1   = "#262626",
-  color0   = "#A8A8AF",
+  color0   = "#a8a8af",
 }
 local vitaminonec = {
   normal = {
@@ -119,7 +120,7 @@ function! StatuslinePythonEnvironment()
 " directory to the virtual environment that is not suitable
 " for including in a section of a status line.
 let l:venv = $VIRTUAL_ENV
-return l:venv !=# '' ? ' '.split(l:venv, '/')[-1] : ''
+return l:venv !=# '' ? ' '.split(l:venv, '/')[-1] : ''
 endfunction
 ]])
 
@@ -161,8 +162,9 @@ return {
   -- Lualine for top and bottom bars
   {
     "nvim-lualine/lualine.nvim",
-    lazy = false,
-    priority = 1000,
+    event = "VeryLazy",
+    -- lazy = true,
+    -- priority = 1000,
     dependencies = {
       "arkav/lualine-lsp-progress",
       "ludovicchabant/vim-gutentags",
@@ -198,9 +200,9 @@ return {
           -- from left (middle) to right (far right corner): {x} {y} {z}
           lualine_x = {'lsp_progress', 'progress', 'location'},
           lualine_y = {{encoding_prefix, type="lua_expr"}, 'encoding', {'fileformat', symbols = {
-            unix = 'Unix - LF',
-            dos = 'Win - CRLF',
-            mac = 'Mac - CR',
+            unix = '  LF',
+            dos = '  CRLF',
+            mac = '  CR',
           }}},
           lualine_z = {'filesize', {'filetype', colored=false}}
         },
@@ -239,7 +241,7 @@ return {
         lualine_c = {},
         -- Top right display
         -- from left (middle) to right (far right corner): {x} {y} {z}
-        lualine_x = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
+        lualine_x = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
         lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
         lualine_z = {}
       },

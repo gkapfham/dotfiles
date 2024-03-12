@@ -6,6 +6,7 @@
 [core]
     excludesfile = /home/gkapfham/.gitignore_global
     pager = delta
+	pager = less
 [interactive]
     diffFilter = delta --color-only --features=interactive --navigate --hyperlinks
 [github]

@@ -1,22 +1,25 @@
 -- File: plugins/tagmanagement.lua
 -- Purpose: generate, save, and use tags;
 -- note that other plugins like telescope
--- use these tags automatically generated
+-- use these automatically generated tags
 
 return {
 
-  -- Gutentags
+  -- Gutentags;
+  -- This works correctly for most files;
+  -- yet, it does not work for Quarto markdown
+  -- files and other "non-standard file types"
   {
     "ludovicchabant/vim-gutentags",
     event = "BufReadPre",
     config = function()
       vim.cmd([[
       " Specify where the tags are stored
-      set tags=./tags;/,tags;/
+      " set tags=./tags;/,tags;/
       ]])
       vim.g.gutentags_ctags_exclude = {
         '*.git', '*.svg', '*.hg',
-        '*/tests/*',
+        -- '*/tests/*',
         'build',
         'dist',
         '*sites/*/files/*',
@@ -29,7 +32,6 @@ return {
         'example',
         'bundle',
         'vendor',
-        '*.md',
         '*-lock.json',
         '*.lock',
         '*bundle*.js',
@@ -66,7 +68,6 @@ return {
       vim.g.gutentags_generate_on_write = true
       vim.g.gutentags_generate_on_empty_buffer = true
       vim.g.gutentags_file_list_command = "rg --files"
-      -- vim.g.gutentags_ctags_extra_args = {'--tag-relative=yes', '--fields=+ailmnS', }
     end,
   },
 

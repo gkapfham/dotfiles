@@ -1,15 +1,8 @@
 -- File: plugins/languageserver.lua
 -- Purpose: load and configure plugins for installation
--- and use of language servers protocol implementations
+-- and use of language servers protocol (LSP) implementations
 
 return {
-
-  -- mason.nvim for LSP management
-  {
-    "williamboman/mason.nvim",
-    event = "BufReadPost",
-    build = ":MasonUpdate"
-  },
 
   -- neodev.nvim for LSP enhancement for Lua files
   {
@@ -25,16 +18,11 @@ return {
     "neovim/nvim-lspconfig",
     event = "BufReadPost",
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
       "nvimtools/none-ls.nvim",
     },
     config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls", "pyright", "ruff_lsp", "cssls" },
-      }
       local lspconfig = require('lspconfig')
       -- Setup LSP servers:
       -- 1) CSS
@@ -42,7 +30,8 @@ return {
       -- 3) Lua
       -- 4) Markdown
       -- 5) Python
-      -- 6) YAML
+      -- 6) LaTeX and BibTeX
+      -- 7) YAML
       -- configure cssls for CSS LSP
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -107,7 +96,7 @@ return {
       require 'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
       -- Define customized signs for diagnostics reported by the language server;
       -- note that this will define the signs displayed in the gutter
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
@@ -157,30 +146,23 @@ return {
         desc =
         "Language Server: Rename variable"
       },
+      { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
     }
   },
 
-  -- mason-null-ls.nvim
+  -- none-ls.nvim for LSP enhancement
+  -- through the use of tools that are not
+  -- language servers themselves but can
+  -- be made to look like one with the
+  -- support of this plugin
   {
-    "jay-babu/mason-null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "nvimtools/none-ls.nvim",
-    },
     config = function()
-      require("mason-null-ls").setup({
-        ensure_installed = { "chktex", "pydocstyle", "ruff", "prettierd" },
-        automatic_installation = false,
-        handlers = {},
-      })
       -- Configure null-ls for diagnostics and formatting
       local null_ls = require("null-ls")
       null_ls.setup({
         sources = {
-          null_ls.builtins.diagnostics.chktex,
-          null_ls.builtins.diagnostics.pydocstyle,
-          null_ls.builtins.formatting.ruff,
           null_ls.builtins.formatting.prettierd,
         },
       })
@@ -197,11 +179,6 @@ return {
     event = "BufReadPre",
     config = function()
       local function h(name) return vim.api.nvim_get_hl(0, { name = name }) end
-      vim.api.nvim_set_hl(0, 'SymbolUsageRounding', { fg = h('CursorLine').bg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageContent', { bg = h('CursorLine').bg, fg = h('Conceal').fg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageRef', { fg = h('Conceal').fg, bg = h('CursorLine').bg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageDef', { fg = h('Type').fg, bg = h('CursorLine').bg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageImpl', { fg = h('@keyword').fg, bg = h('CursorLine').bg, italic = true })
       local function text_format(symbol)
         local res = {}
         local round_start = { '', 'SymbolUsageRounding' }
@@ -210,7 +187,7 @@ return {
           local usage = symbol.references <= 1 and 'usage' or 'usages'
           local num = symbol.references == 0 and 'no' or symbol.references
           table.insert(res, round_start)
-          table.insert(res, { '󰌹 ', 'SymbolUsageRef' })
+          table.insert(res, { ' ', 'SymbolUsageRef' })
           table.insert(res, { ('%s %s'):format(num, usage), 'SymbolUsageContent' })
           table.insert(res, round_end)
         end
@@ -245,10 +222,10 @@ return {
     "linux-cultist/venv-selector.nvim",
     dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
     config = true,
-    event = "VeryLazy",
-    keys = { {
-      "<leader>vv", "<cmd>:VenvSelect<cr>",
-    } }
+    cmd = "VenvSelect",
+    keys = {
+      { "<Space>vv", "<cmd>:VenvSelect<cr>" },
+    }
   },
 
 }

@@ -11,19 +11,20 @@ return {
   -- command for running a test suite. It is
   -- specifically useful with the quarto.nvim
   -- plugin for running Python code.
-  {
-    "jgdavey/tslime.vim",
-    event = "VeryLazy",
-    config = function()
-      local comment = require("Comment")
-      comment.setup()
-      vim.cmd([[
-      vmap <C-c><C-c> <Plug>SendSelectionToTmux
-      nmap <C-c><C-c> <Plug>NormalModeSendToTmux
-      nmap <C-c>r <Plug>SetTmuxVars
-      let g:tslime_always_current_session = 1
-      ]])
-    end,
-  },
+
+  -- {
+  --   "jgdavey/tslime.vim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     local comment = require("Comment")
+  --     comment.setup()
+  --     vim.cmd([[
+  --     vmap <C-c><C-c> <Plug>SendSelectionToTmux
+  --     nmap <C-c><C-c> <Plug>NormalModeSendToTmux
+  --     nmap <C-c>r <Plug>SetTmuxVars
+  --     let g:tslime_always_current_session = 1
+  --     ]])
+  --   end,
+  -- },
 
 }

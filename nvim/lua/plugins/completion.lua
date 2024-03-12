@@ -13,38 +13,42 @@
 -- completion then the symbol will not appear at all
 -- and there will instead be the display of nil
 local kind_icons = {
-  Text = "",
-  Method = "",
-  Function = "",
+  Text = "󰉿",
+  Method = "󰆧",
+  Function = "󰊕",
   Constructor = "",
-  Field = "",
-  Variable = "",
-  Class = "ﴯ",
+  Field = "󰜢",
+  Variable = "󰀫",
+  Class = "󰠱",
   Interface = "",
   Module = "",
-  Property = "ﰠ",
-  Unit = "",
-  Value = "",
+  Property = "󰜢",
+  Unit = "󰑭",
+  Value = "󰎠",
   Enum = "",
-  Keyword = "",
+  Keyword = "󰌋",
   Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "󰈇",
+  Folder = "󰉋",
   EnumMember = "",
-  Constant = "",
-  Struct = "",
+  Constant = "󰏿",
+  Struct = "󰙅",
   Event = "",
-  Operator = "",
-  TypeParameter = "",
+  Operator = "󰆕",
+  TypeParameter = "",
   Spell = "",
+  StringSpecialUrl = "󰌷",
   String = "",
   Copilot = "",
-  Comment = "",
+  Comment = "",
   TextTitle1 = "",
   TextTitle2 = "",
   TextTitle3 = "",
+  MarkupHeading1 = "",
+  MarkupHeading2 = "",
+  MarkupHeading3 = "",
 }
 
 -- Define the has_words_before function used in the
@@ -52,6 +56,7 @@ local kind_icons = {
 -- that this function must exist for other code in
 -- this file to work correctly
 
+-- Old version of the function before using GitHub copilot
 -- local has_words_before = function()
 --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 --   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -60,7 +65,7 @@ local kind_icons = {
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
 
 -- }}}
@@ -95,6 +100,15 @@ return {
           ["."] = false,
         },
       })
+      -- Set the filetype to markdown when entering the
+      -- copilot-chat buffer; note that this is set correctly
+      -- the first time but the plugin itself. However, later
+      -- the syntax highlighting is removed and this makes
+      -- it difficult to read the output from GitHub copilot.
+      -- this fix ensures that highlighting is always enabled
+      vim.cmd([[
+         autocmd FileType copilot-chat set filetype=markdown
+      ]])
     end,
   },
 
@@ -102,23 +116,83 @@ return {
   -- Integrate the copilot with nvim-cmp
   {
     "zbirenbaum/copilot-cmp",
-    config = function ()
+    config = function()
       require("copilot_cmp").setup()
+      vim.cmd([[
+         autocmd BufEnter copilot-chat set filetype=markdown
+      ]])
     end
+  },
+
+  -- CopilotChat.nvim
+  -- Chat with GitHub copilot; note that
+  -- while the user interface and experience
+  -- is not yet polished this tool works well
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    opts = {
+      show_help = "yes",
+      debug = false,
+      disable_extra_info = "no",
+      language = "English"
+    },
+    build = function()
+      vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
+    end,
+    event = "VeryLazy",
+    keys = {
+      {
+        "<Space>ccm",
+        "<cmd>CopilotChatVsplitToggle<cr><cmd>set filetype=markdown<cr>",
+        desc = "CopilotChat - Toggle vertical split and set filetype to markdown",
+      },
+      {
+        "<Space>cch",
+        "<cmd>set filetype=markdown<cr>",
+        desc = "CopilotChat - Toggle vertical split",
+      },
+      {
+        "<Space>cct",
+        "<cmd>CopilotChatVsplitToggle<cr>",
+        desc = "CopilotChat - Toggle vertical split",
+      },
+      {
+        "<Space>ccy",
+        ":CopilotChat",
+        desc = "CopilotChat - Open in vertical split based on contents of register y",
+      },
+      {
+        "<Space>ccv",
+        ":CopilotChatVisual",
+        mode = "x",
+        desc = "CopilotChat - Open in vertical split based on visual highlight",
+      },
+      {
+        "<Space>ccr",
+        "<cmd>CopilotChatReset<cr>",
+        desc = "CopilotChat - Reset chat history and clear buffer",
+      }
+    },
   },
 
   -- nvim-cmp
   -- Auto completion with nvim-cmp
+  -- Note that you can cancel the
+  -- current completion with <C-e>;
+  -- this is useful when Copilot immediately
+  -- makes a suggestion and this will
+  -- prevent the use of <Tab> for indenting
+  -- as it will be setup for accepting
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
       -- Stand-alone cmp plugins
       "andersevenrud/cmp-tmux",
-      "dmitmel/cmp-cmdline-history",
+      "chrisgrieser/cmp-nerdfont",
+      "f3fora/cmp-spell",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
-      "octaltree/cmp-look",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-nvim-lsp-signature-help",
@@ -129,7 +203,7 @@ return {
       "jc-doyle/cmp-pandoc-references",
       "zbirenbaum/copilot-cmp",
       -- Fuzzy buffer plugin with dependencies
-      {"romgrk/fzy-lua-native", build = "make"},
+      { "romgrk/fzy-lua-native", build = "make" },
       "tzachar/cmp-fuzzy-buffer",
       "tzachar/fuzzy.nvim",
     },
@@ -140,19 +214,8 @@ return {
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       -- Configure the dictionary plugin
-      require('cmp').setup({
-          sources = {
-              {
-                  name = 'look',
-                  keyword_length = 2,
-                  option = {
-                      convert_case = true,
-                      loud = true,
-                      dict = '/usr/share/dict/american-english'
-                  }
-              }
-          }
-      })
+      vim.opt.spell = true
+      vim.opt.spelllang = { 'en_us' }
       -- Configure all aspects of nvim-cmp
       cmp.setup({
         -- Do not preselect items
@@ -169,7 +232,7 @@ return {
         -- Specify a snippet engine
         snippet = {
           expand = function(args)
-            require'luasnip'.lsp_expand(args.body)
+            require 'luasnip'.lsp_expand(args.body)
           end
         },
         -- Use the custom view packaged by nvim-cmp
@@ -185,21 +248,23 @@ return {
             -- these will appear to the right of a completion
             -- suggestion in the nvim-cmp menu
             vim_item.menu = ({
-              buffer = " Buffer",
+              buffer = " Buffer",
               cmdline = " Command",
-              cmdline_history = " Command",
+              cmdline_history = " Command",
               fuzzy_buffer = " Fuzzy",
               nvim_lsp = " LSP",
               nvim_lsp_document_symbol = " LSP",
               path = "פּ Path",
+              nerdfont = "Font",
               otter = " Otter",
               pandoc_references = " Pandoc",
               rg = " Search",
-              tags = "笠Tags",
+              tags = " Tags",
               treesitter = " Tree",
               tmux = " Tmux",
               luasnip = " Snippet",
               look = " Spell",
+              spell = " Spell",
               copilot = " Copilot",
             })[entry.source.name]
             return vim_item
@@ -225,7 +290,8 @@ return {
             if require("copilot.suggestion").is_visible() then
               require("copilot.suggestion").accept()
             elseif cmp.visible() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+              -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+              cmp.select_next_item()
             elseif luasnip.expandable() then
               luasnip.expand()
             elseif has_words_before() then
@@ -234,20 +300,9 @@ return {
               fallback()
             end
           end, {
-              "i",
-              "s",
-            }),
-          -- ["<Tab>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_next_item()
-          --   elseif luasnip.expand_or_jumpable() then
-          --     luasnip.expand_or_jump()
-          --   elseif has_words_before() then
-          --     cmp.complete()
-          --   else
-          --     fallback()
-          --   end
-          -- end, { "i", "s" }),
+            "i",
+            "s",
+          }),
           -- Define the same <Tab> mapping but also for
           -- <C-n> so that this also advances forward
           ["<C-n>"] = cmp.mapping(function(fallback)
@@ -263,20 +318,9 @@ return {
               fallback()
             end
           end, {
-              "i",
-              "s",
-            }),
-          -- ["<C-n>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_next_item()
-          --   elseif luasnip.expand_or_jumpable() then
-          --     luasnip.expand_or_jump()
-          --   elseif has_words_before() then
-          --     cmp.complete()
-          --   else
-          --     fallback()
-          --   end
-          -- end, { "i", "s" }),
+            "i",
+            "s",
+          }),
           -- Go back in the template holes in the snippet
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -305,32 +349,45 @@ return {
         -- with a higher priority have higher weighting on priority.
         sources = cmp.config.sources({
           -- Define the first-tier of sources
-          {name = 'treesitter', max_item_count = 5, priority = 10},
-          {name = 'nvim_lsp', max_item_count = 10, priority = 10},
-          {name = 'copilot', max_item_count = 5, priority = 8},
+          { name = 'treesitter', max_item_count = 5,  priority = 10 },
+          { name = 'nvim_lsp',   max_item_count = 10, priority = 10 },
+          { name = 'copilot',    max_item_count = 5,  priority = 8 },
           -- Look at all of the open buffers
           {
-            name = 'buffer', max_item_count = 10, priority = 20,
+            name = 'buffer',
+            max_item_count = 10,
+            priority = 20,
             option = {
               get_bufnrs = function()
                 return vim.api.nvim_list_bufs()
               end
             }
           },
-          {name = 'fuzzy_buffer', max_item_count = 5, priority = 1},
-          {name = 'tags', max_item_count = 5, priority = 5},
-          {name = 'luasnip', max_item_count = 5, priority = 10},
-          {name = 'otter', max_item_count = 5, priority = 5, keyword_length = 2},
-          {name = 'pandoc_references', max_item_count = 5, priority = 5, keyword_length = 2},
-          {name = 'tmux', max_item_count = 5, priority = 1, keyword_length = 2},
-          {name = 'dictionary', max_item_count = 5, priority = 1, keyword_length = 3},
-          {name = 'look', max_item_count = 5, priority = 1, keyword_length = 3},
-          {name = 'nvim_lsp_signature_help'},
+          { name = 'fuzzy_buffer',      max_item_count = 5, priority = 3 },
+          { name = 'tags',              max_item_count = 5, priority = 5 },
+          { name = 'luasnip',           max_item_count = 5, priority = 5 },
+          { name = 'otter',             max_item_count = 5, priority = 5, keyword_length = 2 },
+          { name = 'pandoc_references', max_item_count = 5, priority = 5, keyword_length = 2 },
+          { name = 'tmux',              max_item_count = 5, priority = 1, keyword_length = 2 },
+          {
+            name = 'spell',
+            option = {
+              keep_all_entries = false,
+              enable_in_context = function()
+                return true
+              end,
+            },
+            max_item_count = 5,
+            priority = 10,
+            keyword_length = 3
+          },
+          { name = 'nerdfont',               max_item_count = 5, priority = 1, keyword_length = 3 },
+          { name = 'nvim_lsp_signature_help' },
         }, {
-            -- Define the second-tier of sources; these will only
-            -- appear when there is no active source from the first-tier
-            {name = 'path'},
-          })
+          -- Define the second-tier of sources; these will only
+          -- appear when there is no active source from the first-tier
+          { name = 'path' },
+        })
       })
       -- Use completion sources when forward-searching with "/"
       cmp.setup.cmdline('/', {
@@ -340,12 +397,12 @@ return {
         -- tab completion does not work for this mode
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          {name = 'path'},
-          {name = 'buffer', max_item_count = 5, priority = 10},
-          {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
+          { name = 'path' },
+          { name = 'buffer',       max_item_count = 5, priority = 10 },
+          { name = 'fuzzy_buffer', max_item_count = 5, priority = 5 },
         }, {
-            {name = 'cmdline'},
-          })
+          { name = 'cmdline' },
+        })
       })
       -- Use completion sources when backward-searching with "?"
       cmp.setup.cmdline('?', {
@@ -353,24 +410,24 @@ return {
         -- (see previous note for full explanation)
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          {name = 'path'},
-          {name = 'buffer', max_item_count = 5},
-          {name = 'fuzzy_buffer', max_item_count = 5, priority = 5},
+          { name = 'path' },
+          { name = 'buffer',       max_item_count = 5 },
+          { name = 'fuzzy_buffer', max_item_count = 5, priority = 5 },
         }, {
-            {name = 'cmdline'},
-          })
+          { name = 'cmdline' },
+        })
       })
       -- Use completion sources when running commands with ":"
-      require'cmp'.setup.cmdline(':', {
+      require 'cmp'.setup.cmdline(':', {
         -- Disable all of the prior settings for nvim-cmp
         -- (see previous note for full explanation)
         mapping = cmp.mapping.preset.cmdline(),
-        -- Use both the cmdline source (i.e., all valid
-        -- commands) and the cmdline_history source (i.e.,
+        -- Use the cmdline source (i.e., all valid
+        -- commands); disable the cmdline_history source (i.e.,
         -- all commands previously used in command prompt)
+        -- because it might break the tab completion
         sources = cmp.config.sources({
-          {name = 'cmdline', max_item_count = 5},
-          {name = 'cmdline_history', max_item_count = 5}
+          { name = 'cmdline', max_item_count = 10 },
         }, {
         })
       })
@@ -378,3 +435,29 @@ return {
   },
 
 }
+
+-- old completion settings:
+
+-- ["<Tab>"] = cmp.mapping(function(fallback)
+--   if cmp.visible() then
+--     cmp.select_next_item()
+--   elseif luasnip.expand_or_jumpable() then
+--     luasnip.expand_or_jump()
+--   elseif has_words_before() then
+--     cmp.complete()
+--   else
+--     fallback()
+--   end
+-- end, { "i", "s" }),
+
+-- ["<C-n>"] = cmp.mapping(function(fallback)
+--   if cmp.visible() then
+--     cmp.select_next_item()
+--   elseif luasnip.expand_or_jumpable() then
+--     luasnip.expand_or_jump()
+--   elseif has_words_before() then
+--     cmp.complete()
+--   else
+--     fallback()
+--   end
+-- end, { "i", "s" }),

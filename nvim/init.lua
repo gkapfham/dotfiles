@@ -25,7 +25,7 @@ require("lazy").setup({
   spec = "plugins",
   -- Always load all of the plugins in lazyily
   defaults = { lazy = true, },
-  install = { colorscheme = { "vitaminonec" } },
+  install = { colorscheme = { "onedark_dark" } },
   -- Do not automatically perform the check
   -- for plugins and produce diagnostic message
   checker = { enabled = false },

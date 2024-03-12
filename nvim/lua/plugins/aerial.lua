@@ -6,6 +6,8 @@
 return {
 
   -- aerial.nvim plugin
+  -- A navigation sidebar
+  -- that integrates with Telescope
   {
     "stevearc/aerial.nvim",
     cmd = "AerialToggle",
@@ -90,7 +92,8 @@ return {
     -- Keys
     keys = {
       -- Toggle display of aerial
-      { "<Space>-", "<cmd> AerialToggle <CR>", desc = "Aerial: Toggle visibility" },
+      { "<Space>a", "<cmd> AerialToggle <CR>", desc = "Aerial: Toggle visibility" },
+      { "<Space>9", "<cmd> AerialToggle <CR>", desc = "Aerial: Toggle visibility" },
     }
   },
 

@@ -1,13 +1,16 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# Reminder: use the command 'xrandr' to see what
-# monitors are available.
+# Reminder: use the command 'xrandr' to see what monitors are available.
 
-xrandr --output DP1 --above eDP1 --auto
+# Use fzf to select from one of the connected displays
+CONNECTED_DISPLAYS=$(xrandr | grep connected | fzf)
+DISPLAY_PORT=$(echo "$CONNECTED_DISPLAYS" | awk '{print $1}')
 
-# Either command leads to connecting the
-# two displays together so that the external display
-# (display name like DP1) is above the laptop display
-# (display name: eDP1). This means that you can move
-# the cursor off the top of the laptop and onto
-# the external display.
+# Connected the Framework 13 laptop:
+# note that this is complicated because
+# the resolutions of the two displays are different.
+xrandr --output eDP-1 --primary --mode 2256x1504 --pos 792x2160 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal --output ${DISPLAY_PORT} --off
+
+# Set the root color of the desktop;
+# this tends to reset on the Framework 13 laptop.
+hsetroot -solid "#6E466E"
