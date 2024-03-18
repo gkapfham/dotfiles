@@ -43,7 +43,9 @@ cpu_temperature 3 {
 }
 
 memory {
-        format = "󰍛 %used / %free"
+        # format = "󰍛 %used / %free"
+        # format = "󰍛 %used / %total 󰒘 %free 󱇴 %shared"
+        format = "󰍛 %used / %total -  %free"
 }
 
 ethernet _first_ {
@@ -65,7 +67,8 @@ battery 1 {
 }
 
 tztime local {
-        format = " %A %b %d %H:%M %Z "
+        # format = " %A %b %d %H:%M %Z "
+        format = " %A %b %d %H:%M "
         timezone = "US/Eastern"
 }
 
