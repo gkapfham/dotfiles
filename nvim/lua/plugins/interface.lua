@@ -56,6 +56,62 @@ return {
     end,
   },
 
+  -- edgy.nvim for controlling sidebars
+  {
+    "folke/edgy.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.opt.laststatus = 3
+      vim.opt.splitkeep = "screen"
+    end,
+    opts = {
+      options = {
+        left = { size = 25 },
+        bottom = { size = 10 },
+        right = { size = 25 },
+        top = { size = 10 },
+      },
+      right = {
+        -- Neotree filesystem
+        {
+          title = "Neotree",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "filesystem"
+          end,
+          size = { height = 0.5 },
+        },
+        -- Neotree Git
+        {
+          title = "Neotree Git",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "git_status"
+          end,
+          pinned = true,
+          open = "Neotree position=right git_status",
+        },
+        -- Neotree Buffers
+        {
+          title = "Neotree Buffers",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "buffers"
+          end,
+          pinned = true,
+          open = "Neotree position=top buffers",
+        },
+        -- Other neo-tree windows
+        "neo-tree",
+        -- Aerial symbols
+        {
+          title = "Aerial",
+          ft = "aerial"
+        },
+      },
+    },
+  },
+
   -- auto-hlsearch.nvim
   -- Automatically disable search highlighting when
   -- it is not needed after performing a search; note
