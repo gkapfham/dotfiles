@@ -2,6 +2,26 @@
 -- Purpose: Configure the nvim-cmp plugin
 -- and all of the plugins that enhance it
 
+
+local prompts = {
+  -- Code related prompts
+  Explain = "Please explain how the following code works.",
+  Review = "Please review the following code and provide suggestions for improvement.",
+  Tests = "Please explain how the selected code works, then generate unit tests for it.",
+  Refactor = "Please refactor the following code to improve its clarity and readability.",
+  FixCode = "Please fix the following code to make it work as intended.",
+  FixError = "Please explain the error in the following text and provide a solution.",
+  BetterNamings = "Please provide better names for the following variables and functions.",
+  Documentation = "Please provide documentation for the following code.",
+  SwaggerApiDocs = "Please provide documentation for the following API using Swagger.",
+  SwaggerJsDocs = "Please write JSDoc for the following API using Swagger.",
+  -- Text related prompts
+  Summarize = "Please summarize the following text.",
+  Spelling = "Please correct any grammar and spelling errors in the following text.",
+  Wording = "Please improve the grammar and wording of the following text.",
+  Concise = "Please rewrite the following text to make it more concise.",
+}
+
 -- Support functions implemented in lua {{{
 
 -- Define symbols for the icons used by nvim-cmp;
@@ -130,48 +150,124 @@ return {
   -- is not yet polished this tool works well
   {
     "CopilotC-Nvim/CopilotChat.nvim",
+    version = "v2.1.0",
+    dependencies = {
+      { "nvim-telescope/telescope.nvim" },
+      { "nvim-lua/plenary.nvim" },
+    },
     opts = {
+      prompts = prompts,
       show_help = "yes",
       debug = false,
       disable_extra_info = "no",
-      language = "English"
+      language = "English",
+      -- default window options
+      window = {
+        layout = 'float',  -- 'vertical', 'horizontal', 'float'
+        -- Options below only apply to floating windows
+        relative = 'editor',    -- 'editor', 'win', 'cursor', 'mouse'
+        border = 'single',      -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+        width = 0.8,            -- fractional width of parent
+        height = 0.6,           -- fractional height of parent
+        row = nil,              -- row position of the window, default is centered
+        col = nil,              -- column position of the window, default is centered
+        title = 'Copilot', -- title of chat window
+        footer = nil,           -- footer of chat window
+        zindex = 1,             -- determines if window is on top or below other floating windows
+      },
     },
     build = function()
       vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
     end,
+    config = function(_, opts)
+      local chat = require("CopilotChat")
+      local select = require("CopilotChat.select")
+      -- Use unnamed register for the selection
+      opts.selection = select.unnamed
+      -- Override the git prompts message
+      opts.prompts.Commit = {
+        prompt = "Write commit message for the change with commitizen convention",
+        selection = select.gitdiff,
+      }
+      opts.prompts.CommitStaged = {
+        prompt = "Write commit message for the change with commitizen convention",
+        selection = function(source)
+          return select.gitdiff(source, true)
+        end,
+      }
+      chat.setup(opts)
+      vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
+        chat.ask(args.args, { selection = select.visual })
+      end, { nargs = "*", range = true })
+      -- Inline chat with Copilot
+      vim.api.nvim_create_user_command("CopilotChatInline", function(args)
+        chat.ask(args.args, {
+          selection = select.visual,
+          window = {
+            layout = "float",
+            relative = "cursor",
+            width = 1,
+            height = 0.4,
+            row = 1,
+          },
+        })
+      end, { nargs = "*", range = true })
+      -- Restore CopilotChatBuffer
+      vim.api.nvim_create_user_command("CopilotChatBuffer", function(args)
+        chat.ask(args.args, { selection = select.buffer })
+      end, { nargs = "*", range = true })
+      -- Custom buffer for CopilotChat
+      vim.api.nvim_create_autocmd("BufEnter", {
+        pattern = "copilot-*",
+        callback = function()
+          vim.opt_local.relativenumber = true
+          vim.opt_local.number = true
+        end,
+      })
+    end,
     event = "VeryLazy",
     keys = {
+      -- {
+      --   "<Space>ccm",
+      --   "<cmd>CopilotChatVsplitToggle<cr><cmd>set filetype=markdown<cr>",
+      --   desc = "CopilotChat - Toggle vertical split and set filetype to markdown",
+      -- },
+      -- {
+      --   "<Space>cch",
+      --   "<cmd>set filetype=markdown<cr>",
+      --   desc = "CopilotChat - Toggle vertical split",
+      -- },
       {
-        "<Space>ccm",
-        "<cmd>CopilotChatVsplitToggle<cr><cmd>set filetype=markdown<cr>",
-        desc = "CopilotChat - Toggle vertical split and set filetype to markdown",
-      },
-      {
-        "<Space>cch",
-        "<cmd>set filetype=markdown<cr>",
-        desc = "CopilotChat - Toggle vertical split",
+        "<Space>cco",
+        "<cmd>CopilotChatOpen<cr>",
+        desc = "CopilotChat - Open",
       },
       {
         "<Space>cct",
-        "<cmd>CopilotChatVsplitToggle<cr>",
-        desc = "CopilotChat - Toggle vertical split",
+        "<cmd>CopilotChatToggle<cr>",
+        desc = "CopilotChat - Toggle",
       },
       {
         "<Space>ccy",
         ":CopilotChat",
-        desc = "CopilotChat - Open in vertical split based on contents of register y",
+        desc = "CopilotChat - Open chat based on contents of register y",
+      },
+      {
+        "<Space>cco",
+        "<cmd>CopilotChatInline<cr>",
+        desc = "CopilotChat - Open inline chat",
       },
       {
         "<Space>ccv",
         ":CopilotChatVisual",
         mode = "x",
-        desc = "CopilotChat - Open in vertical split based on visual highlight",
+        desc = "CopilotChat - Open chat based on visual highlight",
       },
       {
         "<Space>ccr",
         "<cmd>CopilotChatReset<cr>",
         desc = "CopilotChat - Reset chat history and clear buffer",
-      }
+      },
     },
   },
 
