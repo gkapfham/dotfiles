@@ -193,6 +193,10 @@ return {
     keys = {
       -- Toggle display
       { "<Space>0", "<cmd> Neotree toggle<CR>", desc = "Neo-tree: Toggle" },
+      -- Show buffers
+      { "<Space>nb", "<cmd> Neotree buffers<CR>", desc = "Neo-tree: Buffers" },
+      -- Show git status
+      { "<Space>ng", "<cmd> Neotree git_status<CR>", desc = "Neo-tree: Buffers" },
     }
   },
 
