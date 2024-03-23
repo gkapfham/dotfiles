@@ -67,7 +67,7 @@ return {
           PmenuSbar = { fg = "${black}", bg = "${black}" },
           PmenuSel = { fg = "${fg}", bg = "${highlight}" },
           PmenuThumb = { fg = "${fg}", bg = "${menu}" },
-          NormalFloat = { fg = "${fg}", bg = "${menu}" },
+          NormalFloat = { fg = "${fg}", bg = "${bg}" },
           Search = { fg = "NONE", bg = "NONE", undercurl = true, bold = true },
           SymbolUsageRounding = { fg = "${menu}", bg = "${bg}" },
           SymbolUsageContent = { fg = "${cyan}", bg = "${menu}", italic = true },
