@@ -56,7 +56,9 @@ return {
     end,
   },
 
-  -- edgy.nvim for controlling sidebars
+  -- edgy.nvim for controlling sidebars:
+  -- supports the display of multiple sidebars
+  -- in the same consistently sized region
   {
     "folke/edgy.nvim",
     event = "VeryLazy",
