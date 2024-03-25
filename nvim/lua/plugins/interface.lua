@@ -81,9 +81,9 @@ return {
           filter = function(buf)
             return vim.b[buf].neo_tree_source == "filesystem"
           end,
-          size = { height = 0.5 },
+          pinned = true,
         },
-        -- Neotree Buffers
+        -- Neotree buffers
         {
           title = "Neotree Buffers",
           ft = "neo-tree",
@@ -98,7 +98,7 @@ return {
         -- Aerial symbols
         {
           title = "Aerial",
-          ft = "aerial"
+          ft = "aerial",
         },
       },
     },
