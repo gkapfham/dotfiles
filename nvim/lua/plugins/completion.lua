@@ -328,7 +328,7 @@ return {
         window = {
           documentation = {
             winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder',
-          } 
+          }
         },
         -- Define the performance characteristics for nvim-cmp
         -- Favor the quick delivery of a minimal number of completions
