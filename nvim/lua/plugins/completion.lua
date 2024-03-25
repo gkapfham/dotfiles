@@ -316,6 +316,20 @@ return {
       cmp.setup({
         -- Do not preselect items
         preselect = cmp.PreselectMode.None,
+        -- Configure the completion menu that appears
+        -- to show a preview of the documentation (i.e.,
+        -- this is the color scheme for the menu that
+        -- appears when you select a completion suggestion
+        -- and it has additional context information).
+        -- Note that this needs to be changed because the
+        -- default color scheme uses NormalFloat with a
+        -- background that works better for GitHub
+        -- Copilot chat and that does not match PMenu.
+        window = {
+          documentation = {
+            winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder',
+          } 
+        },
         -- Define the performance characteristics for nvim-cmp
         -- Favor the quick delivery of a minimal number of completions
         performance = {
