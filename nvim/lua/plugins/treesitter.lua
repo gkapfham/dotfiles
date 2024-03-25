@@ -80,6 +80,7 @@ return {
           "bibtex",
           "c",
           "comment",
+          "diff",
           "gitattributes",
           "git_config",
           "gitcommit",
