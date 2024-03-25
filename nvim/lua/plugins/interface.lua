@@ -81,7 +81,6 @@ return {
           filter = function(buf)
             return vim.b[buf].neo_tree_source == "filesystem"
           end,
-          pinned = true,
         },
         -- Neotree buffers
         {
@@ -90,7 +89,6 @@ return {
           filter = function(buf)
             return vim.b[buf].neo_tree_source == "buffers"
           end,
-          pinned = true,
           open = "Neotree position=top buffers",
         },
         -- Other neo-tree windows
