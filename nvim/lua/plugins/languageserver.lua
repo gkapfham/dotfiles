@@ -24,6 +24,12 @@ return {
     },
     config = function()
       local lspconfig = require('lspconfig')
+      -- draw the border for the LSP floating window; since the
+      -- window used for commands like :LSPInfo is driven by the
+      -- NormalFloat which is now set to dark to make the GitHub
+      -- Copilot chat look as nice as possible there is a need
+      -- to make the border visible so that these menus are okay
+      require('lspconfig.ui.windows').default_options.border = 'single'
       -- Setup LSP servers:
       -- 1) CSS
       -- 2) HTML
