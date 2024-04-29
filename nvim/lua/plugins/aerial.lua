@@ -16,6 +16,9 @@ return {
       { "<Space>9", "<cmd>Outline<CR>", desc = "Outline: Toggle visibility" },
     },
     opts = {
+      outline_items = {
+        show_symbol_details = false,
+      },
       symbol_folding = {
         autofold_depth = false,
         auto_unfold = {
