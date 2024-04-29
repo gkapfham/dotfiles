@@ -5,6 +5,28 @@
 
 return {
 
+  -- outline.nvim plugin
+  -- A navigation sidebar
+  -- for document symbols
+  {
+    "hedyhli/outline.nvim",
+    lazy = true,
+    cmd = { "Outline", "OutlineOpen" },
+    keys = {
+      { "<Space>9", "<cmd>Outline<CR>", desc = "Outline: Toggle visibility" },
+    },
+    opts = {
+      symbol_folding = {
+        autofold_depth = false,
+        auto_unfold = {
+          hovered = true,
+          only = true,
+        },
+        markers = { '', '' },
+      },
+    },
+  },
+
   -- aerial.nvim plugin
   -- A navigation sidebar
   -- that integrates with Telescope
@@ -93,7 +115,6 @@ return {
     keys = {
       -- Toggle display of aerial
       { "<Space>a", "<cmd> AerialToggle <CR>", desc = "Aerial: Toggle visibility" },
-      { "<Space>9", "<cmd> AerialToggle <CR>", desc = "Aerial: Toggle visibility" },
     }
   },
 
