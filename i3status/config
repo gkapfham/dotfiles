@@ -20,25 +20,7 @@ wireless _first_ {
 
 cpu_temperature 0 {
 	format = " %degrees°"
-	path = "/sys/class/thermal/thermal_zone0/temp"
-	max_threshold = 95
-}
-
-cpu_temperature 1 {
-	format = "%degrees°"
-	path = "/sys/class/thermal/thermal_zone1/temp"
-	max_threshold = 95
-}
-
-cpu_temperature 2 {
-	format = "%degrees°"
-	path = "/sys/class/thermal/thermal_zone2/temp"
-	max_threshold = 95
-}
-
-cpu_temperature 3 {
-	format = "%degrees°"
-	path = "/sys/class/thermal/thermal_zone3/temp"
+	path = "/sys/class/hwmon/hwmon0/temp1_input"
 	max_threshold = 95
 }
 
