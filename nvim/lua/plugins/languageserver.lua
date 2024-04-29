@@ -118,7 +118,7 @@ return {
       },
       {
         "<Space>e",
-        "<cmd> lua vim.diagnostic.open_float(0, {scope='line'})<CR>",
+        "<cmd> lua vim.diagnostic.open_float(0, {scope='line', border='rounded'})<CR>",
         desc =
         "Language Server: Display diagnostics"
       },
@@ -127,18 +127,6 @@ return {
         "<cmd> lua vim.lsp.buf.hover()<CR>",
         desc =
         "Language Server: Symbol details"
-      },
-      {
-        "<Space>c",
-        "<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>",
-        desc =
-        "Language Server: Send to loclist"
-      },
-      {
-        "<Space>c",
-        "<cmd>lua vim.lsp.buf.code_action()<CR>",
-        desc =
-        "Language Server: Send to loclist"
       },
       {
         "<Space>ca",
