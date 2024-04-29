@@ -98,6 +98,11 @@ return {
           title = "Aerial",
           ft = "aerial",
         },
+        -- Outline.nvim symbols
+        {
+          title = "Outline",
+          ft = "Outline",
+        },
       },
     },
   },
