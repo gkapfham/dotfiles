@@ -1,6 +1,7 @@
 -- File: plugins/aerial.lua
 -- Purpose: Configure the aerial plugin
--- for creation of a navigation sidebar
+-- (and similiar types of plugsin)
+-- for creation of various sidebars
 -- Note: this plugin also has a telescope integration
 
 return {
