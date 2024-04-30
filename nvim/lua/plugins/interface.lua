@@ -76,32 +76,37 @@ return {
       right = {
         -- Neotree filesystem
         {
-          title = "Neotree",
+          title = "Filesystem",
           ft = "neo-tree",
           filter = function(buf)
             return vim.b[buf].neo_tree_source == "filesystem"
           end,
+          size = { height = 0.5 },
         },
         -- Neotree buffers
         {
-          title = "Neotree Buffers",
+          title = "Buffers",
           ft = "neo-tree",
           filter = function(buf)
             return vim.b[buf].neo_tree_source == "buffers"
           end,
+          size = { height = 0.15 },
+          pinned = true,
           open = "Neotree position=top buffers",
         },
-        -- Other neo-tree windows
-        "neo-tree",
         -- Aerial symbols
         {
           title = "Aerial",
+          open = "AerialOpen",
+          pinned = false,
           ft = "aerial",
         },
         -- Outline.nvim symbols
         {
           title = "Outline",
           ft = "Outline",
+          pinned = true,
+          open = "OutlineOpen"
         },
       },
     },
