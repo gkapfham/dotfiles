@@ -83,6 +83,14 @@ return {
           end,
           size = { height = 0.5 },
         },
+        -- Outline.nvim symbols
+        {
+          title = "Outline",
+          ft = "Outline",
+          pinned = true,
+          size = { height = 0.30 },
+          open = "OutlineOpen"
+        },
         -- Neotree buffers
         {
           title = "Buffers",
@@ -90,7 +98,7 @@ return {
           filter = function(buf)
             return vim.b[buf].neo_tree_source == "buffers"
           end,
-          size = { height = 0.15 },
+          size = { height = 0.20 },
           pinned = true,
           open = "Neotree position=top buffers",
         },
@@ -99,14 +107,8 @@ return {
           title = "Aerial",
           open = "AerialOpen",
           pinned = false,
+          size = { height = 0.30 },
           ft = "aerial",
-        },
-        -- Outline.nvim symbols
-        {
-          title = "Outline",
-          ft = "Outline",
-          pinned = true,
-          open = "OutlineOpen"
         },
       },
     },
