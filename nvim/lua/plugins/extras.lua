@@ -11,7 +11,7 @@ return {
   },
 
   -- mini.surround
-  -- surround management
+  -- Surround management
   {
     "echasnovski/mini.surround",
     keys = { "gz" },
