@@ -202,7 +202,8 @@ return {
   },
 
   -- oil.nvim
-  -- file system management through neovim
+  -- File system navigation and management
+  -- (e.g., allows for file renaming and deletion)
   {
     "stevearc/oil.nvim",
     event = "VeryLazy",
