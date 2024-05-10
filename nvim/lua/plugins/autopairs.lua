@@ -3,7 +3,7 @@
 
 return {
 
-  -- nvim-autpairs: automatically create pairs
+  -- nvim-autopairs: automatically create pairs
   -- configuration ensures that when you have
   -- variable = |value
   -- and you press ( it does not add ()
