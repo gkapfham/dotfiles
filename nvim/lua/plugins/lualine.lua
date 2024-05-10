@@ -163,8 +163,6 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    -- lazy = true,
-    -- priority = 1000,
     dependencies = {
       "arkav/lualine-lsp-progress",
       "ludovicchabant/vim-gutentags",
