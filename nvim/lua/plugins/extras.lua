@@ -4,6 +4,7 @@
 return {
 
   -- undotree
+  -- Create a tree of undo branches
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
