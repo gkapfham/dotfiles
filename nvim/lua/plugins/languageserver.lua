@@ -30,6 +30,15 @@ return {
       -- Copilot chat look as nice as possible there is a need
       -- to make the border visible so that these menus are okay
       require('lspconfig.ui.windows').default_options.border = 'single'
+      -- draw the border for the LSP floating window that displays
+      -- when requesting the documentation for source code; note
+      -- that by default when you use <space>k it will display information
+      -- about the source code under the cursor but do so without the box
+      -- and this makes it difficult to see the information since the background
+      -- is the same color and the diagnostic information
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = "rounded",
+      })
       -- Setup LSP servers:
       -- 1) CSS
       -- 2) HTML
