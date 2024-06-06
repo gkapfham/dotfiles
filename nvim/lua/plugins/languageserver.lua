@@ -80,28 +80,32 @@ return {
       lspconfig.ruff_lsp.setup {}
       -- configure texlab for LaTeX and BibTeX LSP
       lspconfig.texlab.setup {
-        texlab = {
-          auxDirectory = ".",
-          bibtexFormatter = "texlab",
-          build = {
-            args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-            executable = "latexmk",
-            forwardSearchAfter = false,
-            onSave = false
+        settings = {
+          texlab = {
+            auxDirectory = ".",
+            bibtexFormatter = "texlab",
+            build = {
+              args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+              executable = "latexmk",
+              forwardSearchAfter = false,
+              onSave = false
+            },
+            chktex = {
+              onEdit = false,
+              onOpenAndSave = false
+            },
+            diagnosticsDelay = 300,
+            formatterLineLength = 0,
+            forwardSearch = {
+              executable = "zathura",
+              args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+              onSave = false;
+            },
+            latexFormatter = "latexindent",
+            latexindent = {
+              modifyLineBreaks = false
+            }
           },
-          chktex = {
-            onEdit = false,
-            onOpenAndSave = false
-          },
-          diagnosticsDelay = 300,
-          formatterLineLength = 0,
-          forwardSearch = {
-            args = {}
-          },
-          latexFormatter = "latexindent",
-          latexindent = {
-            modifyLineBreaks = false
-          }
         }
       }
       -- configure yamlls for YAML LSP
@@ -123,31 +127,31 @@ return {
         "<Space>sv",
         "<Plug>(toggle-lsp-diag-vtext)",
         desc =
-        "Language Server: Toggle virtual text"
+          "Language Server: Toggle virtual text"
       },
       {
         "<Space>e",
         "<cmd> lua vim.diagnostic.open_float(0, {scope='line', border='rounded'})<CR>",
         desc =
-        "Language Server: Display diagnostics"
+          "Language Server: Display diagnostics"
       },
       {
         "<Space>k",
         "<cmd> lua vim.lsp.buf.hover()<CR>",
         desc =
-        "Language Server: Symbol details"
+          "Language Server: Symbol details"
       },
       {
         "<Space>ca",
         "<cmd>lua vim.lsp.buf.code_action()<CR>",
         desc =
-        "Language Server: Perform code action"
+          "Language Server: Perform code action"
       },
       {
         "<Space>rv",
         "<cmd> lua vim.lsp.buf.rename()<CR>",
         desc =
-        "Language Server: Rename variable"
+          "Language Server: Rename variable"
       },
       { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
     }
