@@ -23,6 +23,7 @@ return {
   -- vimtex
   {
     "lervag/vimtex",
+    event = "InsertEnter",
     ft = "tex",
     config = function()
       vim.cmd([[
