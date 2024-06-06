@@ -76,6 +76,7 @@ return {
           PmenuThumb = { fg = "${fg}", bg = "${menu}" },
           NormalFloat = { fg = "${fg}", bg = "NONE" },
           Search = { fg = "NONE", bg = "NONE", undercurl = true, bold = true },
+          CurSearch = { fg = "${orange}", bg = "NONE", undercurl = true, bold = true },
           SymbolUsageRounding = { fg = "${menu}", bg = "${bg}" },
           SymbolUsageContent = { fg = "${cyan}", bg = "${menu}", italic = true },
           SymbolUsageRef = { fg = "${cyan}", bg = "${menu}", italic = true },
