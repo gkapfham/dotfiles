@@ -29,6 +29,7 @@ return {
       vim.cmd([[
         autocmd BufNewFile,BufRead *.tex set filetype=tex
         " Configure vimtex
+        let g:vimtex_syntax_enabled = 0
         " --> Do not fold
         let g:vimtex_fold_enabled = 0
         " --> Do not open quickfix for warnings
