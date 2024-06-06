@@ -102,6 +102,10 @@ return {
     event = "InsertEnter",
     config = function()
       require("supermaven-nvim").setup({
+        -- disable the default keymaps and settings
+        -- that would normally make virtual text appear;
+        -- not using those since Supermaven integrates
+        -- with nvim-cmp and that is primary approach
         disable_inline_completion = true,
         disable_keymaps = true
       })
