@@ -52,7 +52,7 @@ local kind_icons = {
   File = "󰈙",
   Reference = "󰈇",
   Folder = "󰉋",
-  EnumMember = "",
+  EnumMember = "",
   Constant = "󰏿",
   Struct = "󰙅",
   Event = "",
@@ -62,10 +62,13 @@ local kind_icons = {
   StringSpecialUrl = "󰌷",
   String = "",
   Copilot = "",
+  Supermaven = "",
   Comment = "",
   TextTitle1 = "",
   TextTitle2 = "",
   TextTitle3 = "",
+  Tree = "",
+  Treesitter = "",
   MarkupHeading1 = "",
   MarkupHeading2 = "",
   MarkupHeading3 = "",
@@ -91,6 +94,19 @@ end
 -- }}}
 
 return {
+
+  -- Supermaven-nvim
+  -- Use the supermaven completion engine
+  {
+    "supermaven-inc/supermaven-nvim",
+    event = "InsertEnter",
+    config = function()
+      require("supermaven-nvim").setup({
+        disable_inline_completion = true,
+        disable_keymaps = true
+      })
+    end,
+  },
 
   -- copilot.lua
   -- Use the GitHub copilot plugin
@@ -364,8 +380,8 @@ return {
               fuzzy_buffer = " Fuzzy",
               nvim_lsp = " LSP",
               nvim_lsp_document_symbol = " LSP",
-              path = "פּ Path",
-              nerdfont = "Font",
+              path = " Path",
+              nerdfont = " Font",
               otter = " Otter",
               pandoc_references = " Pandoc",
               rg = " Search",
@@ -375,7 +391,8 @@ return {
               luasnip = " Snippet",
               look = " Spell",
               spell = " Spell",
-              copilot = " Copilot",
+              copilot = " Copilot",
+              supermaven = " Supermaven",
             })[entry.source.name]
             return vim_item
           end
@@ -462,6 +479,7 @@ return {
           { name = 'treesitter', max_item_count = 5,  priority = 10 },
           { name = 'nvim_lsp',   max_item_count = 10, priority = 10 },
           { name = 'copilot',    max_item_count = 5,  priority = 8 },
+          { name = 'supermaven', max_item_count = 5,  priority = 8 },
           -- Look at all of the open buffers
           {
             name = 'buffer',
