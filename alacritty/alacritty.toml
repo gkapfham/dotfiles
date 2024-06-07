@@ -1,5 +1,4 @@
 live_config_reload = true
-# "window.dynamic_title" = true
 
 [window]
 startup_mode = "Maximized"
