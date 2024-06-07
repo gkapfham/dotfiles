@@ -2988,9 +2988,9 @@ Harman's
 mutmut
 Gradebooks
 ExecExam
-man
+#an
 stateful
-man
+#an
 keyring
 CONI
 JDBC
@@ -3043,3 +3043,11 @@ VPython
 Languageserver
 Supermaven
 supermaven
+#an
+#an
+#an
+#an
+man
+man
+pinentryFlavor
+gnome3
