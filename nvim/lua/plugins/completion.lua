@@ -247,16 +247,6 @@ return {
     end,
     event = "VeryLazy",
     keys = {
-      -- {
-      --   "<Space>ccm",
-      --   "<cmd>CopilotChatVsplitToggle<cr><cmd>set filetype=markdown<cr>",
-      --   desc = "CopilotChat - Toggle vertical split and set filetype to markdown",
-      -- },
-      -- {
-      --   "<Space>cch",
-      --   "<cmd>set filetype=markdown<cr>",
-      --   desc = "CopilotChat - Toggle vertical split",
-      -- },
       {
         "<Space>cco",
         "<cmd>CopilotChatOpen<cr>",
