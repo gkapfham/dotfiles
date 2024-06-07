@@ -22,6 +22,7 @@ return {
       "benfowler/telescope-luasnip.nvim",
       "ThePrimeagen/refactoring.nvim",
       "Marskey/telescope-sg",
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
     },
     -- configure
     config = function()
@@ -51,8 +52,8 @@ return {
           },
           layout_config = {
             horizontal = {
-              height = 0.8,
-              width = 0.9
+              height = 0.925,
+              width = 0.925
             }
           },
           path_display = {
@@ -99,9 +100,17 @@ return {
             show_builtin_git_pickers = true,
             entry_default_author_or_date = "author",
           },
+          fzf = {
+            fuzzy = true,                    -- false will only do exact matching
+            override_generic_sorter = true,  -- override the generic sorter
+            override_file_sorter = true,     -- override the file sorter
+            case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+          }
         },
 
       }
+      --
+      require('telescope').load_extension('fzf')
       -- Load the aerial extension; this provides navigation
       -- using tags, treesitter, and LSP. It is especially
       -- useful when Telescope does not correctly read tags
@@ -133,6 +142,8 @@ return {
     end,
     -- Keys
     keys = {
+      -- Telescope
+      { "<Space>te", "<cmd> Telescope <CR>",                           desc = "Telescope: Aerial" },
       -- Aerial
       { "<Space>ta", "<cmd> Telescope aerial <CR>",                    desc = "Telescope: Aerial" },
       -- Ast-Grep
