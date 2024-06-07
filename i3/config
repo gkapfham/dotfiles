@@ -110,7 +110,7 @@ exec --no-startup-id sct 6800
 # seems to reduce screen artifacts for Zathura windows.
 # Finally, see the separate picom configuration file
 # for more details about how this program works.
-exec --no-startup-id picom
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # }}}
 
