@@ -15,11 +15,14 @@ gaps outer 1
 
 # Create and preview colors:
 # https://thomashunter.name/i3-configurator/
+# Note that the focused window is lighter than
+# the unfocused and inactive windows
 
 # Class                 border  bground text    indicator child_border
 client.focused          #333333 #333333 #bcbcbc #333333   #333333
-client.focused_inactive #404040 #404040 #dfdfdf #484E50   #5F676A
-client.unfocused        #404040 #404040 #888888 #292D2E   #222222
+# client.focused_inactive #404040 #404040 #dfdfdf #484E50   #5F676A
+client.focused_inactive #1c1c1c #1c1c1c #888888 #292D2E   #1C1C1C
+client.unfocused        #1c1c1c #1c1c1c #888888 #292D2E   #1C1C1C
 client.urgent           #2F343A #333333 #bcbcbc #5F8700   #5F8700
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
