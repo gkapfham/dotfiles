@@ -1,7 +1,6 @@
 live_config_reload = true
 
 [window]
-decorations = "none"
 startup_mode = "Maximized"
 dynamic_title = true
 dynamic_padding = false
