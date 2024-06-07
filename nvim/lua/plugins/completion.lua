@@ -96,7 +96,7 @@ end
 return {
 
   -- Supermaven-nvim
-  -- Use the supermaven completion engine
+  -- Use the Supermaven completion engine
   {
     "supermaven-inc/supermaven-nvim",
     event = "InsertEnter",
