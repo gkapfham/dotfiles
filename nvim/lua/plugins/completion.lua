@@ -381,7 +381,7 @@ return {
               buffer = " Buffer",
               cmdline = " Command",
               cmdline_history = " Command",
-              fuzzy_buffer = " Fuzzy",
+              fuzzy_buffer = "󰓐 Fuzzy",
               nvim_lsp = " LSP",
               nvim_lsp_document_symbol = " LSP",
               path = " Path",
