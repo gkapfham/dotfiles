@@ -45,8 +45,9 @@ return {
       -- 3) Lua
       -- 4) Markdown
       -- 5) Python
-      -- 6) LaTeX and BibTeX
-      -- 7) YAML
+      -- 7) Go
+      -- 7) LaTeX and BibTeX
+      -- 8) YAML
       -- configure cssls for CSS LSP
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -60,6 +61,8 @@ return {
         capabilities = capabilities,
         filetypes = { 'markdown', 'quarto', 'html' },
       }
+      -- configure gopls for Go LSP
+      lspconfig.gopls.setup{}
       -- configure luals (with neovim support) for Lua LSP
       lspconfig.lua_ls.setup({
         settings = {
