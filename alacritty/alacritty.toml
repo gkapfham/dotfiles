@@ -1,0 +1,53 @@
+live_config_reload = true
+# "window.dynamic_title" = true
+
+[window]
+startup_mode = "Maximized"
+dynamic_title = true
+
+[bell]
+# decorations = "none"
+duration = 0
+# dynamic_padding = "true"
+# startup_mode = "Maximized"
+
+[colors.bright]
+black = "0x767676"
+blue = "0x87afd7"
+cyan = "0xd75f5f"
+green = "0x5f8700"
+magenta = "0x875f87"
+red = "0xd78700"
+white = "0xb2b2b2"
+yellow = "0xafaf5f"
+
+[colors.normal]
+black = "0x767676"
+blue = "0x87afd7"
+cyan = "0xd75f5f"
+green = "0x5f8700"
+magenta = "0x875f87"
+red = "0xd78700"
+white = "0xb2b2b2"
+yellow = "0xafaf5f"
+
+[colors.primary]
+background = "0x1c1c1c"
+foreground = "0xa8a8a8"
+
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "Hack Nerd Font"
+style = "Regular"
+
+[scrolling]
+history = 100000
