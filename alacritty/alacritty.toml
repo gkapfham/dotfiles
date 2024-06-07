@@ -1,14 +1,10 @@
 live_config_reload = true
 
 [window]
+decorations = "none"
 startup_mode = "Maximized"
 dynamic_title = true
-
-[bell]
-# decorations = "none"
-duration = 0
-# dynamic_padding = "true"
-# startup_mode = "Maximized"
+dynamic_padding = false
 
 [colors.bright]
 black = "0x767676"
@@ -42,7 +38,7 @@ unfocused_hollow = true
 TERM = "xterm-256color"
 
 [font]
-size = 12.0
+size = 11.0
 
 [font.normal]
 family = "Hack Nerd Font"
