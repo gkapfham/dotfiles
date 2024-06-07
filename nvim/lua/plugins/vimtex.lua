@@ -15,12 +15,17 @@
 return {
 
   -- vim-sentence-chopper
+  -- Break up paragraphs in LaTeX
   {
     ft = "tex",
     "Konfekt/vim-sentence-chopper",
   },
 
   -- vimtex
+  -- Support compilation and forward search
+  -- using Zathura (which I cannot get to
+  -- work through the exclusive use of the
+  -- texlab language server)
   {
     "lervag/vimtex",
     event = "InsertEnter",
