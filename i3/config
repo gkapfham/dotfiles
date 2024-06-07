@@ -182,7 +182,7 @@ floating_modifier $mod
 # Programs {{{
 
 # Terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 
 # }}}
 
