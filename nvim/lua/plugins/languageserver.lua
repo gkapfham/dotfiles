@@ -47,7 +47,8 @@ return {
       -- 5) Python
       -- 7) Go
       -- 7) LaTeX and BibTeX
-      -- 8) YAML
+      -- 8) Writing (Harper-ls)
+      -- 9) YAML
       -- configure cssls for CSS LSP
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -110,6 +111,29 @@ return {
             }
           },
         }
+      }
+      -- configure harper_ls for writing
+      lspconfig.harper_ls.setup {
+        filetypes = { "mail", "markdown", "quarto", "text", },
+        settings = {
+          ["harper-ls"] = {
+            userDictPath = "~/.config/nvim/spell/en.utf-8.add",
+            linters = {
+              spell_check = true,
+              spelled_numbers = false,
+              an_a = true,
+              sentence_capitalization = true,
+              unclosed_quotes = true,
+              wrong_quotes = false,
+              long_sentences = true,
+              repeated_words = true,
+              spaces = true,
+              matcher = true,
+              correct_number_suffix = true,
+              number_suffix_capitalization = true,
+            }
+          }
+        },
       }
       -- configure yamlls for YAML LSP
       lspconfig.yamlls.setup {}
