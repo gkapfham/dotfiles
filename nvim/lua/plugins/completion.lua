@@ -536,7 +536,7 @@ return {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
           { name = 'path' },
-          { name = 'buffer',       max_item_count = 5 },
+          { name = 'buffer',       max_item_count = 5, priority = 10 },
           { name = 'fuzzy_buffer', max_item_count = 5, priority = 5 },
         }, {
           { name = 'cmdline' },
