@@ -96,7 +96,10 @@ end
 return {
 
   -- Supermaven-nvim
-  -- Use the Supermaven completion engine
+  -- Use the Supermaven completion engine;
+  -- note that it provides built-int support
+  -- for nvim-cmp and thus it is easy to integrate
+  -- into this setup. Using free tier for now.
   {
     "supermaven-inc/supermaven-nvim",
     event = "InsertEnter",
