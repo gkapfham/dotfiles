@@ -3,6 +3,8 @@
 -- (and similar types of plugins)
 -- for creation of various sidebars
 -- Note: this plugin also has a telescope integration
+-- Note: none of these plugins work reliably for
+-- every type of filetype (especially for Markdown)
 
 return {
 
