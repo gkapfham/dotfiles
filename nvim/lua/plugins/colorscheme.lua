@@ -97,6 +97,7 @@ return {
           ["@comment.todo"] = { fg = "${blue}", bg = "${bg}", bold = true, undercurl = true },
           ["@comment.warning"] = { fg = "${orange}", bg = "${bg}", bold = true, undercurl = true },
           ["@function"] = { fg = "${green}", bg = "${bg}", italic = true },
+          ["@markup.heading"] = { fg = "${orange}" },
           ["@string"] = { fg = "${yellow}", italic = false },
           ["@variable"] = { fg = "${blue}" },
           ["@variable.member"] = { fg = "${blue}" },
