@@ -49,7 +49,6 @@ battery 1 {
 }
 
 tztime local {
-        # format = " %A %b %d %H:%M %Z "
         format = " %A %b %d %H:%M "
         timezone = "US/Eastern"
 }
