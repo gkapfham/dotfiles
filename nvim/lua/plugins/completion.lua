@@ -506,7 +506,7 @@ return {
             priority = 10,
             keyword_length = 3
           },
-          { name = 'nerdfont',               max_item_count = 5, priority = 1, keyword_length = 3 },
+          { name = 'nerdfont',               max_item_count = 10, priority = 1, keyword_length = 3 },
           { name = 'nvim_lsp_signature_help' },
         }, {
           -- Define the second-tier of sources; these will only
