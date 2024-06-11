@@ -3,7 +3,8 @@
 
 return {
 
-  -- customize the onedark_dark scheme
+  -- onedarkpro.nvim: onedark theme
+  -- Customize the onedark_dark scheme
   -- so that it looks like vim-vitamin-onec;
   -- note that vim-vitamin-onec is not used
   -- because of the fact that it does not
