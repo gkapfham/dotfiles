@@ -14,7 +14,7 @@ order += "volume master"
 order += "tztime local"
 
 wireless _first_ {
-  format_up = "  %essid  %quality"
+  format_up = "  %essid  %quality   %frequency"
   format_down = "󰖪 disconnected"
 }
 
@@ -25,7 +25,8 @@ cpu_temperature 0 {
 }
 
 memory {
-        format = "󰍛 %used / %total -  %free"
+        format = "󱙋 %used 󰆼 %total 󰮆 %free 󱥭 %shared"
+        decimals = 0
 }
 
 ethernet _first_ {
@@ -36,9 +37,11 @@ ethernet _first_ {
 
 battery 1 {
         status_chr = " "
+        status_full = " 󰁹"
         status_bat = " 󰁹"
         format_down = " 󰶯"
         status_unk = " 󰂑"
+        integer_battery_capacity = true
         last_full_capacity = false
         hide_seconds = true
         format = "%status %percentage"
@@ -53,7 +56,8 @@ tztime local {
 
 load {
 
-format = " %1min %5min %15min"
+# format = " %1min %5min %15min"
+format = " %1min"
 
 }
 
