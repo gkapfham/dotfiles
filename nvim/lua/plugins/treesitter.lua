@@ -9,16 +9,17 @@ return {
   -- Note that the configuration of this
   -- plugin also configures the python3_host_prog
   -- that is used by other plugins as well
-  {
-    "kana/vim-textobj-user",
-    dependencies = {
-      "ColinKennedy/vim-textobj-block-party",
-    },
-    event = "VeryLazy",
-    config = function()
-      vim.g.python3_host_prog = '/run/current-system/sw/bin/python'
-    end
-  },
+
+  -- {
+  --   "kana/vim-textobj-user",
+  --   dependencies = {
+  --     "ColinKennedy/vim-textobj-block-party",
+  --   },
+  --   event = "VeryLazy",
+  --   config = function()
+  --     vim.g.python3_host_prog = '/run/current-system/sw/bin/python'
+  --   end
+  -- },
 
   -- tshjkl.nvim
   -- Treesitter movements
