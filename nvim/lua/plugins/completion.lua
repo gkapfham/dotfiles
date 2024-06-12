@@ -22,7 +22,7 @@ local prompts = {
   Concise = "Please rewrite the following text to make it more concise.",
 }
 
--- Support functions implemented in lua {{{
+-- Supporting variables and functions implemented in lua {{{
 
 -- Define symbols for the icons used by nvim-cmp;
 -- These symbols will appear on the right-hand side
