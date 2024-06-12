@@ -186,7 +186,7 @@ return {
       language = "English",
       -- default window options
       window = {
-        layout = 'float',  -- 'vertical', 'horizontal', 'float'
+        layout = 'float',       -- 'vertical', 'horizontal', 'float'
         -- Options below only apply to floating windows
         relative = 'editor',    -- 'editor', 'win', 'cursor', 'mouse'
         border = 'single',      -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
@@ -194,7 +194,7 @@ return {
         height = 0.6,           -- fractional height of parent
         row = nil,              -- row position of the window, default is centered
         col = nil,              -- column position of the window, default is centered
-        title = 'Copilot', -- title of chat window
+        title = 'Copilot',      -- title of chat window
         footer = nil,           -- footer of chat window
         zindex = 1,             -- determines if window is on top or below other floating windows
       },
