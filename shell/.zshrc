@@ -169,6 +169,9 @@ alias tree="eza --tree --level=2 --long --icons"
 # Show the files in a specific directory
 alias search-show="rga-fzf"
 
+# Preview a markdown in stand-alone viewer
+alias mdsee="litemdview"
+
 # Use nix switch with a configuration in user account
 alias kix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
 
