@@ -42,7 +42,7 @@ battery 1 {
         format_down = " 󰶯"
         status_unk = " 󰂑"
         integer_battery_capacity = true
-        last_full_capacity = false
+        last_full_capacity = true 
         hide_seconds = true
         format = "%status %percentage"
         path = "/sys/class/power_supply/BAT1/uevent"
