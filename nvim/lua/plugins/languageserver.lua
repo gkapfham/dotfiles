@@ -119,13 +119,13 @@ return {
           ["harper-ls"] = {
             userDictPath = "~/.config/nvim/spell/en.utf-8.add",
             linters = {
-              spell_check = true,
+              spell_check = false,
               spelled_numbers = false,
               an_a = true,
               sentence_capitalization = true,
               unclosed_quotes = true,
               wrong_quotes = false,
-              long_sentences = true,
+              long_sentences = false,
               repeated_words = true,
               spaces = true,
               matcher = true,
