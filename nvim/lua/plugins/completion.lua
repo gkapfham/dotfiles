@@ -2,7 +2,6 @@
 -- Purpose: Configure the nvim-cmp plugin
 -- and all of the plugins that enhance it
 
-
 local prompts = {
   -- Code related prompts
   Explain = "Please explain how the following code works.",
