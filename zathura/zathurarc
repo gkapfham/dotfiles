@@ -1,5 +1,7 @@
 set font "Hack Nerd Font 12"
 
+set database "sqlite"
+
 # copy selection to system clipboard
 set selection-clipboard clipboard
 
