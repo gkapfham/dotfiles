@@ -72,6 +72,10 @@ purge-trolltech:
 purge-starship:
 	rm -f ~/.config/starship.toml
 
+## Remove the trippy.toml file from the .config/ directory
+purge-trippy:
+	rm -f ~/.config/trippy.toml
+
 ## Remove the libinput-gestures.conf file from the .config/ directory
 purge-libinput-gestures:
 	rm -f ~/.config/libinput-gestures.conf
@@ -466,6 +470,14 @@ stow-starship:
 ## not being currently in existence, so purge it first
 stow-starship: purge-starship
 
+## Run stow on trippy
+stow-trippy:
+	stow -t ~/.config/ trippy
+
+## Running stow on the trippy directory depends on the trippy file
+## not being currently in existence, so purge it first
+stow-trippy: purge-trippy
+
 ## Run stow on libinput-gestures
 stow-libinput-gestures:
 	stow -t ~/.config/ libinput-gestures
@@ -639,7 +651,7 @@ stow-applications:
 create: create-config create-alacritty create-kitty create-mutt create-atuin create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3status create-picom create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-kitty stow-mutt stow-atuin stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-picom stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-kitty stow-mutt stow-atuin stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-trippy stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-picom stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
