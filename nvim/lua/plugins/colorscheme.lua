@@ -99,7 +99,7 @@ return {
           ["@diff.plus"] = { fg = "${green}" },
           ["@diff.minus"] = { fg = "${red}" },
           ["@diff.change"] = { fg = "${blue}" },
-          ["@function"] = { fg = "${green}", bg = "${bg}", italic = true },
+          ["@function"] = { fg = "${green}", italic = true },
           ["@markup.heading"] = { fg = "${orange}" },
           ["@string"] = { fg = "${yellow}", italic = false },
           ["@variable"] = { fg = "${blue}" },
