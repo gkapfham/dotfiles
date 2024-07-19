@@ -76,13 +76,15 @@ return {
           -- Text object
           map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
         end,
-        -- signs = {
-        --   add          = { hl = 'DiffAdd', text = '+', numhl = 'None', linehl = 'None' },
-        --   change       = { hl = 'DiffChange', text = '~', numhl = 'None', linehl = 'None' },
-        --   delete       = { hl = 'DiffDelete', text = '-', numhl = 'None', linehl = 'None' },
-        --   topdelete    = { hl = 'DiffDelete', text = '^', numhl = 'None', linehl = 'None' },
-        --   changedelete = { hl = 'DiffChange', text = '~', numhl = 'None', linehl = 'None' },
-        -- },
+        -- Define the signs; note that the color scheme is
+        -- now defined in the colorscheme file
+        signs = {
+          add          = { text = '+', },
+          change       = { text = '~', },
+          delete       = { text = '-', },
+          topdelete    = { text = '^', },
+          changedelete = { text = '~', },
+        },
         numhl = false,
         linehl = false,
         watch_gitdir = {
