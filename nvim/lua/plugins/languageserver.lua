@@ -251,15 +251,15 @@ return {
     end
   },
 
-  -- venv-selector.nvim for selecting virtual environments after starting neovim
-  {
-    "linux-cultist/venv-selector.nvim",
-    dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
-    config = true,
-    cmd = "VenvSelect",
-    keys = {
-      { "<Space>vv", "<cmd>:VenvSelect<cr>" },
-    }
-  },
+  -- -- venv-selector.nvim for selecting virtual environments after starting neovim
+  -- {
+  --   "linux-cultist/venv-selector.nvim",
+  --   dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
+  --   config = true,
+  --   -- cmd = "VenvSelect",
+  --   keys = {
+  --     { "<Space>vv", "<cmd>:VenvSelect<cr>" },
+  --   }
+  -- },
 
 }
