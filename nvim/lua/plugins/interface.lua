@@ -4,7 +4,7 @@
 return {
 
   -- which-key.nvim
-  -- Discover key mappings
+  -- Interactively and incrementally discover key mappings
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -20,9 +20,9 @@ return {
         },
       },
       layout = {
-        width = { min = 25 }, -- min and max width of the columns
-        spacing = 3, -- spacing between columns
-        align = "left", -- align columns left, center or right
+        width = { min = 25 },
+        spacing = 3,
+        align = "left",
       },
       modes = {
         n = true, -- Normal mode
@@ -34,22 +34,20 @@ return {
         c = true, -- Command mode
       },
       plugins = {
-        marks = false,     -- shows a list of your marks on ' and `
-        registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-        -- the presets plugin, adds help for a bunch of default keybindings in Neovim
-        -- No actual key bindings are created
+        marks = false,
+        registers = false,
         spelling = {
-          enabled = false,  -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-          suggestions = 20, -- how many suggestions should be shown in the list?
+          enabled = false,
+          suggestions = 20,
         },
         presets = {
-          operators = true,    -- adds help for operators like d, y, ...
-          motions = true,      -- adds help for motions
-          text_objects = true, -- help for text objects triggered after entering an operator
-          windows = true,      -- default bindings on <c-w>
-          nav = true,          -- misc bindings to work with windows
-          z = true,            -- bindings for folds, spelling and others prefixed with z
-          g = true,            -- bindings for prefixed with g
+          operators = true,
+          motions = true,
+          text_objects = true,
+          windows = true,
+          nav = true,
+          z = true,
+          g = true,
         },
       },
     },
@@ -59,7 +57,7 @@ return {
         function()
           require("which-key").show({ global = false })
         end,
-        desc = "Buffer Local Keymaps (which-key)",
+        desc = "Which-key: Buffer-local keymaps",
       },
     },
   },
