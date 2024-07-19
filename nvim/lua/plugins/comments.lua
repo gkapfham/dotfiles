@@ -11,7 +11,6 @@ return {
     config = function()
       local comment = require("Comment")
       comment.setup()
-      vim.cmd([[nmap <Space>cc :execute "normal! i" . split(&commentstring, '%s')[0]<CR>]])
     end,
   },
 
