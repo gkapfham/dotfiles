@@ -10,7 +10,7 @@ return {
     event = "VeryLazy",
     opts = {
       delay = 200,
-      triggers = true,
+      notify = true,
       preset = "helix",
       win = {
         border = "rounded",
@@ -24,14 +24,8 @@ return {
         spacing = 3,
         align = "left",
       },
-      modes = {
-        n = true, -- Normal mode
-        i = true, -- Insert mode
-        x = true, -- Visual mode
-        s = true, -- Select mode
-        o = true, -- Operator pending mode
-        t = true, -- Terminal mode
-        c = true, -- Command mode
+      triggers = {
+        { "<auto>", mode = "nixsotc" },
       },
       plugins = {
         marks = false,
@@ -161,12 +155,23 @@ return {
           pinned = true,
           open = "Neotree position=top buffers",
         },
+        -- Neotree Git status
+        {
+          title = "Git",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "git_status"
+          end,
+          size = { height = 0.20 },
+          pinned = true,
+          open = "Neotree position=bottom git_status",
+        },
         -- Aerial symbols
         {
           title = "Aerial",
           open = "AerialOpen",
           pinned = false,
-          size = { height = 0.30 },
+          size = { height = 0.20 },
           ft = "aerial",
         },
       },
