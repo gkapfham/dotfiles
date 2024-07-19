@@ -3,6 +3,67 @@
 
 return {
 
+  -- which-key.nvim
+  -- Discover key mappings
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      delay = 200,
+      triggers = true,
+      preset = "helix",
+      win = {
+        border = "rounded",
+        padding = { 1, 1 },
+        wo = {
+          winblend = 0,
+        },
+      },
+      layout = {
+        width = { min = 25 }, -- min and max width of the columns
+        spacing = 3, -- spacing between columns
+        align = "left", -- align columns left, center or right
+      },
+      modes = {
+        n = true, -- Normal mode
+        i = true, -- Insert mode
+        x = true, -- Visual mode
+        s = true, -- Select mode
+        o = true, -- Operator pending mode
+        t = true, -- Terminal mode
+        c = true, -- Command mode
+      },
+      plugins = {
+        marks = false,     -- shows a list of your marks on ' and `
+        registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+        -- the presets plugin, adds help for a bunch of default keybindings in Neovim
+        -- No actual key bindings are created
+        spelling = {
+          enabled = false,  -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+          suggestions = 20, -- how many suggestions should be shown in the list?
+        },
+        presets = {
+          operators = true,    -- adds help for operators like d, y, ...
+          motions = true,      -- adds help for motions
+          text_objects = true, -- help for text objects triggered after entering an operator
+          windows = true,      -- default bindings on <c-w>
+          nav = true,          -- misc bindings to work with windows
+          z = true,            -- bindings for folds, spelling and others prefixed with z
+          g = true,            -- bindings for prefixed with g
+        },
+      },
+    },
+    keys = {
+      {
+        "<Space>wk",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
+  },
+
   -- nvim-notify
   -- Notifications
   {
@@ -128,29 +189,29 @@ return {
     end,
   },
 
-  -- gx.nvim
-  -- Make it easy to load a web site in a browser after
-  -- typing gx inside of Neovim, all without using netrw
-  {
-    "chrishrb/gx.nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("gx").setup {
-        open_browser_app = "xdg-open",
-        handlers = {
-          plugin = true,
-          github = true,
-          package_json = true,
-          search = true,
-        },
-        handler_options = {
-          search_engine = "google",
-        },
-        vim.api.nvim_set_keymap('n', '<Space>wb', 'gx', { noremap = false })
-      }
-    end,
-  },
+  -- -- gx.nvim
+  -- -- Make it easy to load a web site in a browser after
+  -- -- typing gx inside of Neovim, all without using netrw
+  -- {
+  --   "chrishrb/gx.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   config = function()
+  --     require("gx").setup {
+  --       open_browser_app = "xdg-open",
+  --       handlers = {
+  --         plugin = true,
+  --         github = true,
+  --         package_json = true,
+  --         search = true,
+  --       },
+  --       handler_options = {
+  --         search_engine = "google",
+  --       },
+  --       vim.api.nvim_set_keymap('n', '<Space>wb', 'gx', { noremap = false })
+  --     }
+  --   end,
+  -- },
 
   -- nvim-web-devicons
   -- Icons with overrides for filetypes
