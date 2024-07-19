@@ -1,5 +1,6 @@
 -- File: plugins/colorscheme.lua
 -- Purpose: Configure the colorscheme and plugins that highlight colors
+-- Note: The vitamin-onec colorscheme is re-created by using onedarkpro as a base
 
 return {
 
@@ -62,6 +63,7 @@ return {
           FloatBorder = { fg = "${highlight}", bg = "${bg}" },
           GitSignsAdd = { fg = "${green}" },
           GitSignsChange = { fg = "${blue}" },
+          GitSignsChangeDelete = { fg = "${yellow}" },
           GitSignsDelete = { fg = "${red}" },
           GitSignsUntracked = { fg = "${orange}" },
           IncSearch = { fg = "NONE", bg = "NONE", bold = true, undercurl = true },
@@ -100,6 +102,7 @@ return {
           ["@diff.minus"] = { fg = "${red}" },
           ["@diff.change"] = { fg = "${blue}" },
           ["@function"] = { fg = "${green}", italic = true },
+          ["@punctuation.special"] = { fg = "${orange}", italic = true },
           ["@markup.heading"] = { fg = "${orange}" },
           ["@string"] = { fg = "${yellow}", italic = false },
           ["@variable"] = { fg = "${blue}" },
