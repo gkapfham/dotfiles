@@ -144,7 +144,7 @@ return {
     -- Keys
     keys = {
       -- Telescope
-      { "<Space>te", "<cmd> Telescope <CR>",                           desc = "Telescope: Aerial" },
+      { "<Space>te", "<cmd> Telescope <CR>",                           desc = "Telescope: All" },
       -- Aerial
       { "<Space>ta", "<cmd> Telescope aerial <CR>",                    desc = "Telescope: Aerial" },
       -- Ast-Grep
