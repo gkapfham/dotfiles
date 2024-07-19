@@ -84,6 +84,7 @@ return {
           delete       = { text = '-', },
           topdelete    = { text = '^', },
           changedelete = { text = '~', },
+          untracked    = { text = '?', },
         },
         numhl = false,
         linehl = false,
@@ -116,7 +117,7 @@ return {
       vim.cmd([[hi OctoEditable guibg=none]])
     end,
     keys = {
-      { "<leader>o", "<cmd>Octo<cr>", desc = "Octo" },
+      { "<leader>oc", "<cmd>Octo<cr>", desc = "Octo" },
     },
   },
 
