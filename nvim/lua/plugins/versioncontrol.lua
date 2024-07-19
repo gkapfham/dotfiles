@@ -76,13 +76,13 @@ return {
           -- Text object
           map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
         end,
-        signs = {
-          add          = { hl = 'DiffAdd', text = '+', numhl = 'None', linehl = 'None' },
-          change       = { hl = 'DiffChange', text = '~', numhl = 'None', linehl = 'None' },
-          delete       = { hl = 'DiffDelete', text = '-', numhl = 'None', linehl = 'None' },
-          topdelete    = { hl = 'DiffDelete', text = '^', numhl = 'None', linehl = 'None' },
-          changedelete = { hl = 'DiffChange', text = '~', numhl = 'None', linehl = 'None' },
-        },
+        -- signs = {
+        --   add          = { hl = 'DiffAdd', text = '+', numhl = 'None', linehl = 'None' },
+        --   change       = { hl = 'DiffChange', text = '~', numhl = 'None', linehl = 'None' },
+        --   delete       = { hl = 'DiffDelete', text = '-', numhl = 'None', linehl = 'None' },
+        --   topdelete    = { hl = 'DiffDelete', text = '^', numhl = 'None', linehl = 'None' },
+        --   changedelete = { hl = 'DiffChange', text = '~', numhl = 'None', linehl = 'None' },
+        -- },
         numhl = false,
         linehl = false,
         watch_gitdir = {
