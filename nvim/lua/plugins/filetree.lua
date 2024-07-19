@@ -197,7 +197,7 @@ return {
       -- Show buffers
       { "<Space>nb", "<cmd> Neotree toggle position=top buffers<CR>", desc = "Neo-tree: Buffers" },
       -- Show git status
-      { "<Space>ng", "<cmd> Neotree toggle position=right git_status<CR>", desc = "Neo-tree: Buffers" },
+      { "<Space>ng", "<cmd> Neotree toggle position=right git_status<CR>", desc = "Neo-tree: Git status" },
     }
   },
 
