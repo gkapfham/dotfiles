@@ -76,7 +76,8 @@ return {
           map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
         end,
         -- Define the signs; note that the color scheme is
-        -- now defined in the colorscheme file
+        -- now defined in the colorscheme file called
+        -- colorscheme.lua in the same directory as this file
         signs = {
           add          = { text = '+', },
           change       = { text = '~', },
