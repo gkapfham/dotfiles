@@ -60,6 +60,7 @@ local kind_icons = {
   TypeParameter = "𝙏",
   Nospell = "",
   Spell = "",
+  StringSpecialPath = "",
   StringSpecialSymbol = "󱔁",
   StringSpecialUrl = "󰌷",
   String = "",
