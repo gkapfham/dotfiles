@@ -138,6 +138,10 @@ export PIPX_BIN_DIR="$HOME/.local/pipx/bin"
 # that setting this variable makes the default explicit.
 export PIPX_HOME="$HOME/.local/pipx"
 
+# Set the environment variable that ensure that Rust will
+# display backtraces when an error occurs
+export RUST_BACKTRACE=1
+
 # }}}
 
 # System Aliases {{{
