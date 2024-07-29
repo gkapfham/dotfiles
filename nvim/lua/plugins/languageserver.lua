@@ -49,6 +49,8 @@ return {
       -- 7) LaTeX and BibTeX
       -- 8) Writing (Harper-ls)
       -- 9) YAML
+      -- 10) Nix
+      -- 11) Rust
       -- configure cssls for CSS LSP
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -63,7 +65,7 @@ return {
         filetypes = { 'markdown', 'quarto', 'html' },
       }
       -- configure gopls for Go LSP
-      lspconfig.gopls.setup{}
+      lspconfig.gopls.setup {}
       -- configure luals (with neovim support) for Lua LSP
       lspconfig.lua_ls.setup({
         settings = {
@@ -103,7 +105,7 @@ return {
             forwardSearch = {
               executable = "zathura",
               args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-              onSave = false;
+              onSave = false,
             },
             latexFormatter = "latexindent",
             latexindent = {
@@ -137,6 +139,35 @@ return {
       }
       -- configure yamlls for YAML LSP
       lspconfig.yamlls.setup {}
+      -- configure nil_ls for Nix LSP
+      lspconfig.nil_ls.setup {}
+      -- configure rust_analzer for Rust LSP
+      lspconfig.rust_analyzer.setup {
+        settings = {
+          ['rust-analyzer'] = {
+            assist = {
+              importGranularity = 'module',
+              importPrefix = 'self',
+            },
+            diagnostics = {
+              enable = true,
+              enableExperimental = true,
+            },
+            cargo = {
+              loadOutDirsFromCheck = true,
+            },
+            procMacro = {
+              enable = true,
+            },
+            inlayHints = {
+              chainingHints = true,
+              parameterHints = true,
+              typeHints = true,
+            },
+          }
+        }
+      }
+      -- Configure other aspects of the language servers
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
       -- to support the display of the diagnostics
       require 'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
@@ -154,31 +185,31 @@ return {
         "<Space>sv",
         "<Plug>(toggle-lsp-diag-vtext)",
         desc =
-          "Language Server: Toggle virtual text"
+        "Language Server: Toggle virtual text"
       },
       {
         "<Space>e",
         "<cmd> lua vim.diagnostic.open_float(0, {scope='line', border='rounded'})<CR>",
         desc =
-          "Language Server: Display diagnostics"
+        "Language Server: Display diagnostics"
       },
       {
         "<Space>k",
         "<cmd> lua vim.lsp.buf.hover()<CR>",
         desc =
-          "Language Server: Symbol details"
+        "Language Server: Symbol details"
       },
       {
         "<Space>ca",
         "<cmd>lua vim.lsp.buf.code_action()<CR>",
         desc =
-          "Language Server: Perform code action"
+        "Language Server: Perform code action"
       },
       {
         "<Space>rv",
         "<cmd> lua vim.lsp.buf.rename()<CR>",
         desc =
-          "Language Server: Rename variable"
+        "Language Server: Rename variable"
       },
       { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
     }
