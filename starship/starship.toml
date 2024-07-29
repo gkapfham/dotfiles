@@ -12,6 +12,9 @@ truncation_length = 30
 symbol = ' '
 truncation_symbol = ' '
 
+[golang]
+format = '[ $version ](bold blue)'
+
 [lua]
 format = '[ $version ](bold blue)'
 
@@ -27,6 +30,9 @@ format = '[ $version ](bold red)'
 
 [python]
 format = '[ $version (\($virtualenv\) )](bold yellow)'
+
+[rust]
+format = '[ $version ](bold blue)'
 
 [shell]
 zsh_indicator = '󱓞 '
