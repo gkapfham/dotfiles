@@ -3294,3 +3294,16 @@ other
 customRC
 luafile
 Rustacean
+neovimUtils
+makeNeovimConfig
+extraLuaPackages
+magick
+extraPython3Packages
+cairosvg
+ipython
+extraPackages
+imageMagick
+withNodeJs
+withRuby
+withPython3
+minify
