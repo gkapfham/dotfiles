@@ -107,7 +107,6 @@ return {
             case_mode = "smart_case", -- or "ignore_case" or "respect_case"
           }
         },
-
       }
       -- Load the fzf extension; this provides fuzzy search
       -- that is faster than the default telescope search
