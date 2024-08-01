@@ -162,7 +162,9 @@ return {
   -- Lualine for top and bottom bars
   {
     "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    lazy = false,
+    priority = 1000,
     dependencies = {
       "arkav/lualine-lsp-progress",
       "ludovicchabant/vim-gutentags",
