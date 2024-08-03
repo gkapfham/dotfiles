@@ -63,6 +63,12 @@ local function encoding_prefix()
   return ""
 end
 
+-- Define a function that will display a symbol
+-- after the location for the current file
+local function location_prefix()
+  return "󱀉"
+end
+
 --- }}}
 
 -- Define the color scheme for the lualine;
@@ -198,7 +204,7 @@ return {
           lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}},
           -- Bottom right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
-          lualine_x = {'lsp_progress', 'progress', 'location'},
+          lualine_x = {'lsp_progress', {location_prefix, type="lua_expr"}, 'progress', 'location'},
           lualine_y = {{encoding_prefix, type="lua_expr"}, 'encoding', {'fileformat', symbols = {
             unix = '  LF',
             dos = '  CRLF',
