@@ -209,7 +209,7 @@ return {
           -- from left (far left corner) to right (middle): {a} {b} {c}
           lualine_a = { { 'mode' } },
           lualine_b = { {'branch', icon = "󰘬"}, { 'diff', source = diff_source, icon = "" } },
-          lualine_c = { 'StatuslineReadonly', { 'filename', icon = "󰝹", path = 0, file_status = false, symbols = {unnamed = "", newfile = ""}}, {'selectioncount', icon = "󰉄"}},
+          lualine_c = { 'StatuslineReadonly', { 'filename', icon = "󰓈 ", path = 0, file_status = false, symbols = {unnamed = "", newfile = ""}}, {'selectioncount', icon = "󰉄"}},
           -- Bottom right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
           lualine_x = {{ 'lsp_progress', icon = "" }},
