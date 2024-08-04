@@ -69,6 +69,12 @@ local function location_prefix()
   return "󱀉"
 end
 
+-- Define a function that will display a symbol
+-- after the size of the current file
+local function filesize_prefix()
+  return "󰖡"
+end
+
 --- }}}
 
 -- Define the color scheme for the lualine;
@@ -76,36 +82,36 @@ end
 -- vitaminonec; see the lua/plugins/colorscheme.lua
 -- for more details about the specific colorscheme
 local colors = {
-  color2   = "#87afd7",
-  color7   = "#e06c75",
-  color10  = "#afaf5f",
-  color6   = "#626262",
-  color3   = "#875f87",
-  color1   = "#262626",
-  color0   = "#a8a8af",
+  color2  = "#87afd7",
+  color7  = "#e06c75",
+  color10 = "#afaf5f",
+  color6  = "#626262",
+  color3  = "#875f87",
+  color1  = "#262626",
+  color0  = "#a8a8af",
 }
 local vitaminonec = {
   normal = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color2 , gui = "bold", },
+    a = { fg = colors.color1, bg = colors.color2, gui = "bold", },
     c = { fg = colors.color0, bg = colors.color1 },
   },
   visual = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color3 , gui = "bold", },
+    a = { fg = colors.color1, bg = colors.color3, gui = "bold", },
   },
   inactive = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color0, bg = colors.color1 , gui = "none", },
+    a = { fg = colors.color0, bg = colors.color1, gui = "none", },
     c = { fg = colors.color6, bg = colors.color1 },
   },
   replace = {
     jb = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color7 , gui = "bold", },
+    a = { fg = colors.color1, bg = colors.color7, gui = "bold", },
   },
   insert = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color10 , gui = "bold", },
+    a = { fg = colors.color1, bg = colors.color10, gui = "bold", },
   },
 }
 
@@ -183,9 +189,11 @@ return {
         options = {
           icons_enabled = true,
           theme = vitaminonec,
-          component_separators = {left = '', right = ''},
-          section_separators = {left = '', right = ''},
-          disabled_filetypes = {},
+          component_separators = { left = '', right = '' },
+          section_separators = { left = '', right = '' },
+          disabled_filetypes = {
+            winbar = {'neo-tree', 'Outline', 'aerial'},
+          },
           always_divide_middle = true,
           globalstatus = true,
         },
@@ -199,18 +207,18 @@ return {
         sections = {
           -- Bottom left display
           -- from left (far left corner) to right (middle): {a} {b} {c}
-          lualine_a = {'mode'},
-          lualine_b = {'branch', {'diff', source = diff_source}},
-          lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}},
+          lualine_a = { { 'mode' } },
+          lualine_b = { {'branch', icon = "󰘬"}, { 'diff', source = diff_source, icon = "" } },
+          lualine_c = { 'StatuslineReadonly', { 'filename', icon = "󰝹", path = 0, file_status = false, symbols = {unnamed = "", newfile = ""}}, {'selectioncount', icon = "󰉄"}},
           -- Bottom right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
-          lualine_x = {'lsp_progress', {location_prefix, type="lua_expr"}, 'progress', 'location'},
-          lualine_y = {{encoding_prefix, type="lua_expr"}, 'encoding', {'fileformat', symbols = {
+          lualine_x = {{ 'lsp_progress', icon = "" }},
+          lualine_y = { { 'encoding', icon = "" }, { 'fileformat', symbols = {
             unix = '  LF',
             dos = '  CRLF',
             mac = '  CR',
-          }}},
-          lualine_z = {'filesize', {'filetype', colored=false}}
+          } }, { 'filesize', icon = '󰖡' }, },
+          lualine_z = { { 'filetype', colored = false } }
         },
         inactive_sections = {
           lualine_a = {},
@@ -220,42 +228,45 @@ return {
           lualine_y = {},
           lualine_z = {}
         },
+        winbar = {
+          lualine_b = { {'filename', path = 3, file_status = false, icon = "󰉋", shorting_target = 80, symbols = {unnamed = "", newfile = ""}}, { 'progress', icon = "󰮴" }, { 'location', icon = "" }, { "aerial", colored = false },  }
+        },
         tabline = {
           -- Top left display
           -- from left (far left corner) to right (middle): {a} {b} {c}
           -- Note that {b} and {c} are currently disabled because there
           -- are normally a significant number of buffers on display in {a}
           lualine_a = {
-            {'buffers',
-            show_modified_status = true,
-            -- Define a custom label for the Aerial buffer;
-            -- note that other plugins seem to do this automatically
-            -- but unless it is done for Aerial it will show a "No Name"
-            -- label whenever you change into the Aerial buffer
-            filetype_names = {
-              aerial="Aerial",
-            },
-            -- Define symbols attached to each file in the tabline
-            symbols = {
-              modified = ' ●',
-              alternate_file = ' ',
-              directory =  '',
-            },
-          }
+            { 'buffers',
+              show_modified_status = true,
+              -- Define a custom label for the Aerial buffer;
+              -- note that other plugins seem to do this automatically
+              -- but unless it is done for Aerial it will show a "No Name"
+              -- label whenever you change into the Aerial buffer
+              filetype_names = {
+                aerial = "Aerial",
+              },
+              -- Define symbols attached to each file in the tabline
+              symbols = {
+                modified = ' ●',
+                alternate_file = ' ',
+                directory = '',
+              },
+            }
+          },
+          lualine_b = {},
+          lualine_c = {},
+          -- Top right display
+          -- from left (middle) to right (far right corner): {x} {y} {z}
+          lualine_x = { { 'diagnostics', symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' } } },
+          lualine_y = { 'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell' },
+          lualine_z = {}
         },
-        lualine_b = {},
-        lualine_c = {},
-        -- Top right display
-        -- from left (middle) to right (far right corner): {x} {y} {z}
-        lualine_x = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
-        lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
-        lualine_z = {}
-      },
-      -- Define the extensions which ensure that lualine
-      -- makes better customized menus when they are used
-      extensions = {'quickfix', 'aerial'},
-    }
-  end,
+        -- Define the extensions which ensure that lualine
+        -- makes better customized menus when they are used
+        extensions = { 'quickfix', 'aerial', 'oil' },
+      }
+    end,
   }
 
 }
