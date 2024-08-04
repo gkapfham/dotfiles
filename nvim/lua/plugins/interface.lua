@@ -140,7 +140,7 @@ return {
         {
           title = "Outline",
           ft = "Outline",
-          pinned = true,
+          pinned = false,
           size = { height = 0.30 },
           open = "OutlineOpen"
         },
@@ -152,7 +152,7 @@ return {
             return vim.b[buf].neo_tree_source == "buffers"
           end,
           size = { height = 0.20 },
-          pinned = true,
+          pinned = false,
           open = "Neotree position=top buffers",
         },
         -- Neotree Git status
@@ -163,14 +163,14 @@ return {
             return vim.b[buf].neo_tree_source == "git_status"
           end,
           size = { height = 0.20 },
-          pinned = true,
+          pinned = false,
           open = "Neotree position=bottom git_status",
         },
         -- Aerial symbols
         {
           title = "Aerial",
           open = "AerialOpen",
-          pinned = false,
+          pinned = true,
           size = { height = 0.20 },
           ft = "aerial",
         },
