@@ -25,6 +25,10 @@ return {
       nvim_web_devicons.set_icon(new_icons)
       nvim_web_devicons.set_default_icon('', '#a8a8a8')
       require("neo-tree").setup({
+        source_selector = {
+            winbar = false,
+            statusline = false
+        },
         close_if_last_window = true,
         popup_border_style = "rounded",
         enable_git_status = false,
@@ -193,9 +197,9 @@ return {
     end,
     keys = {
       -- Toggle display
-      { "<Space>0", "<cmd> Neotree toggle<CR>", desc = "Neo-tree: Toggle" },
+      { "<Space>0",  "<cmd> Neotree toggle<CR>",                           desc = "Neo-tree: Toggle" },
       -- Show buffers
-      { "<Space>nb", "<cmd> Neotree toggle position=top buffers<CR>", desc = "Neo-tree: Buffers" },
+      { "<Space>nb", "<cmd> Neotree toggle position=top buffers<CR>",      desc = "Neo-tree: Buffers" },
       -- Show git status
       { "<Space>ng", "<cmd> Neotree toggle position=right git_status<CR>", desc = "Neo-tree: Git status" },
     }
@@ -319,7 +323,7 @@ return {
           border = "rounded",
         },
       })
-    vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
     end,
   },
 
