@@ -121,4 +121,16 @@ return {
     },
   },
 
+  -- messenger.nvim for viewing commit messages
+  {
+    "lsig/messenger.nvim",
+    event = "VeryLazy",
+    opts = {
+      border = "rounded",
+    },
+    keys = {
+      { "<space>gm", "<cmd>MessengerShow<cr>", desc = "Git Messenger" },
+    },
+  },
+
 }
