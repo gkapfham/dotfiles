@@ -41,7 +41,3 @@ powershell_indicator = '_'
 unknown_indicator = ' '
 style = 'bold green'
 disabled = true
-
-# [custom.devbox]
-# format = '[󱓞 devbox](bold cyan)'
-# when = """ test "$DEVBOX_SHELL_ENABLED" "==" "1" """
