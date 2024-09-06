@@ -77,6 +77,7 @@ return {
           LazyButtonActive = { fg = "${orange}", bg = "${menu}", bold = true },
           LazyNormal = { fg = "${fg}", bg = "${menu}" },
           LineNr = { fg = "${gray}", bg = "${bg}" },
+          LspLens = { fg = "${cyan}", italic = true },
           Pmenu = { fg = "${fg}", bg = "${menu}" },
           PmenuSbar = { fg = "${black}", bg = "${black}" },
           PmenuSel = { fg = "${fg}", bg = "${highlight}" },
