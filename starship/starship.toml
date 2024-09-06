@@ -15,6 +15,9 @@ truncation_symbol = ' '
 [golang]
 format = '[ $version ](bold blue)'
 
+[java]
+format = '[󰅶 $version ](bold blue)'
+
 [lua]
 format = '[ $version ](bold blue)'
 
