@@ -243,7 +243,6 @@ return {
     "VidocqH/lsp-lens.nvim",
     event = "BufReadPre",
     config = function()
-      local SymbolKind = vim.lsp.protocol.SymbolKind
       require 'lsp-lens'.setup({
         enable = true,
         include_declaration = true,
