@@ -131,6 +131,9 @@ return {
       require("telescope").load_extension("advanced_git_search")
       -- Load and configure the ast_grep
       require("telescope").load_extension("ast_grep")
+      -- Load and configure the yank_history plugin
+      -- provided by the yanky.nvim plugin (see completion)
+      require("telescope").load_extension("yank_history")
       -- Configure the keymap for refactoring; setting it here because
       -- I don't know how to set visual mode keymaps in keys section of spec
       vim.api.nvim_set_keymap(
@@ -193,6 +196,8 @@ return {
       -- Treesitter
       { "<Space>ts",  "<cmd> Telescope treesitter <CR>",            desc = "Telescope: Treesitter " },
       { "<leader>ts", "<cmd> Telescope treesitter <CR>",            desc = "Telescope: Treesitter " },
+      -- Yank History (i.e., clipboard)
+      { "<Space>ty",  "<cmd> Telescope yank_history <CR>",          desc = "Telescope: Yank history" },
     }
   }
 
