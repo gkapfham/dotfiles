@@ -107,7 +107,10 @@ end
 
 return {
 
-  -- yanky.nvim for clipboard management
+  -- yanky.nvim
+  -- Use the yanky plugin for clipboard management
+  -- including highlighting, text objects, integration
+  -- with the completion engine, and telescope integration
   {
     "gbprod/yanky.nvim",
     event = "VeryLazy",
