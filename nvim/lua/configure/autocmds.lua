@@ -4,12 +4,12 @@
 -- Check if a file should be reloaded when it is changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, { command = "checktime" })
 
--- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank({higroup="Visual", timeout=150})
-  end,
-})
+-- -- Highlight on yank
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+--   callback = function()
+--     vim.highlight.on_yank({higroup="Visual", timeout=150})
+--   end,
+-- })
 
 -- Close some filetypes with <q>
 vim.api.nvim_create_autocmd({ "FileType" }, {
