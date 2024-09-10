@@ -107,6 +107,57 @@ end
 
 return {
 
+  -- yanky.nvim for clipboard management
+  {
+    "gbprod/yanky.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("yanky").setup({
+        ring = {
+          history_length = 100,
+          storage = "shada",
+          storage_path = vim.fn.stdpath("data") .. "/databases/yanky.db", -- Only for sqlite storage
+          sync_with_numbered_registers = true,
+          cancel_event = "update",
+          ignore_registers = { "_" },
+          update_register_on_cycle = false,
+        },
+        picker = {
+          select = {
+            action = nil,
+          },
+          telescope = {
+            use_default_mappings = true,
+            mappings = nil,
+          },
+        },
+        system_clipboard = {
+          sync_with_ring = true,
+          clipboard_register = nil,
+        },
+        highlight = {
+          on_put = false,
+          on_yank = true,
+          timer = 100,
+        },
+        preserve_cursor_position = {
+          enabled = true,
+        },
+        textobj = {
+          enabled = true,
+        },
+
+      })
+      vim.keymap.set({"n","x"}, "y", "<Plug>(YankyYank)")
+      vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+      vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+      vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
+      vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
+      vim.keymap.set("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
+      vim.keymap.set("n", "<c-n>", "<Plug>(YankyNextEntry)")
+    end,
+  },
+
   -- Supermaven-nvim
   -- Use the Supermaven completion engine;
   -- note that it provides built-int support
@@ -198,17 +249,17 @@ return {
       language = "English",
       -- default window options
       window = {
-        layout = 'float',       -- 'vertical', 'horizontal', 'float'
+        layout = 'float',    -- 'vertical', 'horizontal', 'float'
         -- Options below only apply to floating windows
-        relative = 'editor',    -- 'editor', 'win', 'cursor', 'mouse'
-        border = 'single',      -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-        width = 0.8,            -- fractional width of parent
-        height = 0.6,           -- fractional height of parent
-        row = nil,              -- row position of the window, default is centered
-        col = nil,              -- column position of the window, default is centered
-        title = 'Copilot',      -- title of chat window
-        footer = nil,           -- footer of chat window
-        zindex = 1,             -- determines if window is on top or below other floating windows
+        relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
+        border = 'single',   -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+        width = 0.8,         -- fractional width of parent
+        height = 0.6,        -- fractional height of parent
+        row = nil,           -- row position of the window, default is centered
+        col = nil,           -- column position of the window, default is centered
+        title = 'Copilot',   -- title of chat window
+        footer = nil,        -- footer of chat window
+        zindex = 1,          -- determines if window is on top or below other floating windows
       },
     },
     build = function()
@@ -311,6 +362,7 @@ return {
       -- Stand-alone cmp plugins
       "andersevenrud/cmp-tmux",
       "chrisgrieser/cmp-nerdfont",
+      "chrisgrieser/cmp_yanky",
       "f3fora/cmp-spell",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
@@ -384,8 +436,8 @@ return {
             -- suggestion in the nvim-cmp menu
             vim_item.menu = ({
               buffer = " Buffer",
-              cmdline = " Command",
-              cmdline_history = " Command",
+              cmdline = " Command",
+              cmp_yanky = " Clipboard",
               fuzzy_buffer = "󰓐 Fuzzy",
               nvim_lsp = " LSP",
               nvim_lsp_document_symbol = " LSP",
@@ -485,10 +537,10 @@ return {
         -- with a higher priority have higher weighting on priority.
         sources = cmp.config.sources({
           -- Define the first-tier of sources
-          { name = 'treesitter', max_item_count = 5,  priority = 10 },
-          { name = 'nvim_lsp',   max_item_count = 10, priority = 10 },
-          { name = 'copilot',    max_item_count = 5,  priority = 8 },
-          { name = 'supermaven', max_item_count = 5,  priority = 8 },
+          { name = 'treesitter',   max_item_count = 5,  priority = 10 },
+          { name = 'nvim_lsp',     max_item_count = 10, priority = 10 },
+          { name = 'copilot',      max_item_count = 5,  priority = 8 },
+          { name = 'supermaven',   max_item_count = 5,  priority = 8 },
           -- Look at all of the open buffers
           {
             name = 'buffer',
@@ -500,7 +552,8 @@ return {
               end
             }
           },
-          { name = 'fuzzy_buffer',      max_item_count = 5, priority = 3 },
+          { name = 'cmp_yanky',         max_item_count = 5,  priority = 6 },
+          { name = 'fuzzy_buffer',      max_item_count = 5,  priority = 6 },
           { name = 'tags',              max_item_count = 5, priority = 5 },
           { name = 'luasnip',           max_item_count = 5, priority = 5 },
           { name = 'otter',             max_item_count = 5, priority = 5, keyword_length = 2 },
