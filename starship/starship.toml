@@ -12,6 +12,23 @@ truncation_length = 30
 symbol = ' '
 truncation_symbol = ' '
 
+[git_status]
+ahead = "󰁝${count}"
+behind = "󰁅${count}"
+conflicted = "󰃸${count}"
+deleted = "-${count}"
+diverged = "󰁁 󰁝${ahead_count}󰁅${behind_count}"
+modified = "󰦒${count}"
+renamed = "${count}"
+staged = "󰐕${count}"
+stashed = "󱗿${count}"
+untracked = "󰏢${count}"
+up_to_date = '󰩐'
+
+[git_commit]
+tag_disabled = false
+tag_symbol = ''
+
 [golang]
 format = '[ $version ](bold blue)'
 
