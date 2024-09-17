@@ -23,7 +23,6 @@ renamed = "${count}"
 staged = "󰐕${count}"
 stashed = "󱗿${count}"
 untracked = "󰏢${count}"
-# up_to_date = '󰩐'
 
 [git_commit]
 tag_disabled = false
