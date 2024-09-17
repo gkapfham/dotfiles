@@ -18,12 +18,12 @@ behind = "󰁅${count}"
 conflicted = "󰃸${count}"
 deleted = "-${count}"
 diverged = "󰁁 󰁝${ahead_count}󰁅${behind_count}"
-modified = "󰦒${count}"
+modified = "${count}"
 renamed = "${count}"
 staged = "󰐕${count}"
 stashed = "󱗿${count}"
 untracked = "󰏢${count}"
-up_to_date = '󰩐'
+# up_to_date = '󰩐'
 
 [git_commit]
 tag_disabled = false
