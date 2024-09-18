@@ -176,8 +176,12 @@ alias search-show="rga-fzf"
 # Preview a markdown in stand-alone viewer
 alias mdsee="litemdview"
 
-# Use nix switch with a configuration in user account
+# Use nix-rebuild switch with a configuration in user account
 alias kix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
+
+# Use nix-rebuild switch with a configuration in user account
+# and also perform an upgrade of the system
+alias ukix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix --upgrade"
 
 # }}}
 
