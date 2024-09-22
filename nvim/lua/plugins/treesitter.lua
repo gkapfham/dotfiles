@@ -75,6 +75,7 @@ return {
           "make",
           "markdown",
           "markdown_inline",
+          "mermaid",
           "nix",
           "python",
           "query",
