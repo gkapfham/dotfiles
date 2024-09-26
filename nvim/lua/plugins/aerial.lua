@@ -1,11 +1,80 @@
 -- File: plugins/aerial.lua
 -- Purpose: Configure the aerial plugin
--- for creation of a navigation sidebar
+-- (and similar types of plugins)
+-- for creation of various sidebars
 -- Note: this plugin also has a telescope integration
+-- Note: none of these plugins work reliably for
+-- every type of filetype (especially for Markdown)
 
 return {
 
+  -- outline.nvim plugin
+  -- A navigation sidebar
+  -- for document symbols
+  {
+    "hedyhli/outline.nvim",
+    lazy = true,
+    cmd = { "Outline", "OutlineOpen" },
+    keys = {
+      { "<Space>9", "<cmd>Outline<CR>", desc = "Outline: Toggle visibility" },
+    },
+    opts = {
+      outline_items = {
+        show_symbol_details = false,
+      },
+      symbol_folding = {
+        autofold_depth = false,
+        auto_unfold = {
+          hovered = true,
+          only = true,
+        },
+        markers = { '', '' },
+      },
+      symbols = {
+        filter = nil,
+        icon_fetcher = nil,
+        icon_source = nil,
+        icons = {
+          File = { icon = '󰈙"', hl = 'Identifier' },
+          Module = { icon = '󰆧', hl = 'Include' },
+          Namespace = { icon = '󰅪', hl = 'Include' },
+          Package = { icon = '󰏗', hl = 'Include' },
+          Class = { icon = '󰠱', hl = 'Type' },
+          Method = { icon = 'ƒ', hl = 'Function' },
+          Property = { icon = '󰜢', hl = 'Identifier' },
+          Field = { icon = '󰆨', hl = 'Identifier' },
+          Constructor = { icon = '', hl = 'Special' },
+          Enum = { icon = '', hl = 'Type' },
+          Interface = { icon = '"', hl = 'Type' },
+          Function = { icon = '󰊕', hl = 'Function' },
+          Variable = { icon = '󰀫', hl = 'Constant' },
+          Constant = { icon = '', hl = 'Constant' },
+          String = { icon = '', hl = 'String' },
+          Number = { icon = '#', hl = 'Number' },
+          Boolean = { icon = '', hl = 'Boolean' },
+          Array = { icon = '󰅪', hl = 'Constant' },
+          Object = { icon = '⦿', hl = 'Type' },
+          Key = { icon = '󰌋', hl = 'Type' },
+          Null = { icon = '', hl = 'Type' },
+          EnumMember = { icon = '', hl = 'Identifier' },
+          Struct = { icon = '󰌋', hl = 'Structure' },
+          Event = { icon = '󰚰', hl = 'Type' },
+          Operator = { icon = '󰆕', hl = 'Identifier' },
+          TypeParameter = { icon = '𝙏', hl = 'Identifier' },
+          Component = { icon = '󰅴', hl = 'Function' },
+          Fragment = { icon = '󰅴', hl = 'Constant' },
+          TypeAlias = { icon = ' ', hl = 'Type' },
+          Parameter = { icon = ' ', hl = 'Identifier' },
+          StaticMethod = { icon = ' ', hl = 'Function' },
+          Macro = { icon = '󰍍', hl = 'Function' },
+        },
+      },
+    },
+  },
+
   -- aerial.nvim plugin
+  -- A navigation sidebar
+  -- that integrates with Telescope
   {
     "stevearc/aerial.nvim",
     cmd = "AerialToggle",
@@ -90,7 +159,7 @@ return {
     -- Keys
     keys = {
       -- Toggle display of aerial
-      { "<Space>-", "<cmd> AerialToggle <CR>", desc = "Aerial: Toggle visibility" },
+      { "<Space>a", "<cmd> AerialToggle <CR>", desc = "Aerial: Toggle visibility" },
     }
   },
 

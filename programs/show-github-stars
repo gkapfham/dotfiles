@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Reference:
 # https://gist.github.com/sebble/e5af3d03700bfd31c62054488bfe8d4f

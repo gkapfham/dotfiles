@@ -12,6 +12,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Define the leader key and localleader key
+-- to be the same key. It is also worth noting
+-- that several of my mappings use the space
+-- bar as the main trigger along with or
+-- instead of using one of these leader keys
+
 -- Define the leader key
 vim.g.mapleader = ","
 
@@ -25,7 +31,7 @@ require("lazy").setup({
   spec = "plugins",
   -- Always load all of the plugins in lazyily
   defaults = { lazy = true, },
-  install = { colorscheme = { "vitaminonec" } },
+  install = { colorscheme = { "onedark_dark" } },
   -- Do not automatically perform the check
   -- for plugins and produce diagnostic message
   checker = { enabled = false },

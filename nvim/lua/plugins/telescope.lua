@@ -22,6 +22,7 @@ return {
       "benfowler/telescope-luasnip.nvim",
       "ThePrimeagen/refactoring.nvim",
       "Marskey/telescope-sg",
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
     },
     -- configure
     config = function()
@@ -51,8 +52,8 @@ return {
           },
           layout_config = {
             horizontal = {
-              height = 0.8,
-              width = 0.9
+              height = 0.925,
+              width = 0.925
             }
           },
           path_display = {
@@ -86,7 +87,7 @@ return {
         extensions = {
           ast_grep = {
             command = {
-              "asg",
+              "ast-grep",
               "--json=stream",
             },
             grep_open_files = false,
@@ -99,9 +100,17 @@ return {
             show_builtin_git_pickers = true,
             entry_default_author_or_date = "author",
           },
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+          }
         },
-
       }
+      -- Load the fzf extension; this provides fuzzy search
+      -- that is faster than the default telescope search
+      require('telescope').load_extension('fzf')
       -- Load the aerial extension; this provides navigation
       -- using tags, treesitter, and LSP. It is especially
       -- useful when Telescope does not correctly read tags
@@ -122,6 +131,9 @@ return {
       require("telescope").load_extension("advanced_git_search")
       -- Load and configure the ast_grep
       require("telescope").load_extension("ast_grep")
+      -- Load and configure the yank_history plugin
+      -- provided by the yanky.nvim plugin (see completion)
+      require("telescope").load_extension("yank_history")
       -- Configure the keymap for refactoring; setting it here because
       -- I don't know how to set visual mode keymaps in keys section of spec
       vim.api.nvim_set_keymap(
@@ -133,10 +145,12 @@ return {
     end,
     -- Keys
     keys = {
+      -- Telescope
+      { "<Space>te", "<cmd> Telescope <CR>",                           desc = "Telescope: All" },
       -- Aerial
       { "<Space>ta", "<cmd> Telescope aerial <CR>",                    desc = "Telescope: Aerial" },
       -- Ast-Grep
-      { "<Space>tg", "<cmd> Telescope ast_grep <CR>",                  desc = "Telescope: AST grep" },
+      { "<Space>tw", "<cmd> Telescope ast_grep <CR>",                  desc = "Telescope: AST grep" },
       -- Buffers
       { "<Space>i",  "<cmd> Telescope buffers <CR>",                   desc = "Telescope: Buffers" },
       { "<Space>tf", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Telescope: Fuzzy search buffers" },
@@ -177,13 +191,13 @@ return {
       -- Spelling
       { "<Space>tz",  "<cmd> Telescope spell_suggest <CR>",         desc = "Telescope: Spelling suggestion" },
       -- Tags
-      { "<Space>tt",  "<cmd> Telescope tags <CR>",                  desc = "Telescope: Tags" },
-      { "<leader>tt", "<cmd> Telescope tags <CR>",                  desc = "Telescope: Tags" },
       { "<Space>tb",  "<cmd> Telescope current_buffer_tags <CR>",   desc = "Telescope: Buffer tags" },
       { "<leader>tb", "<cmd> Telescope tags <CR>",                  desc = "Telescope: Buffer tags" },
       -- Treesitter
       { "<Space>ts",  "<cmd> Telescope treesitter <CR>",            desc = "Telescope: Treesitter " },
       { "<leader>ts", "<cmd> Telescope treesitter <CR>",            desc = "Telescope: Treesitter " },
+      -- Yank History (i.e., clipboard)
+      { "<Space>ty",  "<cmd> Telescope yank_history <CR>",          desc = "Telescope: Yank history" },
     }
   }
 

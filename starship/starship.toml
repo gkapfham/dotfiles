@@ -1,0 +1,62 @@
+# ~/.config/starship.toml
+
+[directory]
+format = '[ $path](bold green)[$read_only]($read_only_style) '
+truncation_length = 5
+truncation_symbol = " "
+home_symbol = "~"
+read_only = " "
+
+[git_branch]
+truncation_length = 30
+symbol = ' '
+truncation_symbol = ' '
+
+[git_status]
+ahead = "󰁝${count}"
+behind = "󰁅${count}"
+conflicted = "󰃸${count}"
+deleted = "-${count}"
+diverged = "󰁁 󰁝${ahead_count}󰁅${behind_count}"
+modified = "${count}"
+renamed = "${count}"
+staged = "󰐕${count}"
+stashed = "󱗿${count}"
+untracked = "󰏢${count}"
+
+[git_commit]
+tag_disabled = false
+tag_symbol = ''
+
+[golang]
+format = '[ $version ](bold blue)'
+
+[java]
+format = '[󰅶 $version ](bold blue)'
+
+[lua]
+format = '[ $version ](bold blue)'
+
+[nix_shell]
+disabled = false
+impure_msg = '[󰄶 shell](bold blue) '
+pure_msg = '[󰄸 shell](bold blue) '
+unknown_msg = '[ shell](bold blue) '
+format = '[󰜗 nix $state(\($name\))](bold blue) '
+
+[package]
+format = '[ $version ](bold red)'
+
+[python]
+format = '[ $version (\($virtualenv\) )](bold yellow)'
+
+[rust]
+format = '[ $version ](bold blue)'
+
+[shell]
+zsh_indicator = '󱓞 '
+fish_indicator = '󰈺 '
+powershell_indicator = '_'
+unknown_indicator = ' '
+style = 'bold green'
+disabled = true

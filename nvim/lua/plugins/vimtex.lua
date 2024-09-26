@@ -15,19 +15,26 @@
 return {
 
   -- vim-sentence-chopper
+  -- Break up paragraphs in LaTeX
   {
     ft = "tex",
     "Konfekt/vim-sentence-chopper",
   },
 
   -- vimtex
+  -- Support compilation and forward search
+  -- using Zathura (which I cannot get to
+  -- work through the exclusive use of the
+  -- texlab language server)
   {
     "lervag/vimtex",
+    event = "InsertEnter",
     ft = "tex",
     config = function()
       vim.cmd([[
         autocmd BufNewFile,BufRead *.tex set filetype=tex
         " Configure vimtex
+        let g:vimtex_syntax_enabled = 0
         " --> Do not fold
         let g:vimtex_fold_enabled = 0
         " --> Do not open quickfix for warnings
@@ -46,26 +53,26 @@ return {
         " generate error messages when compiling
         " and using the zathura program.
         let g:vimtex_compiler_latexmk = {
-            \ 'build_dir' : '',
-            \ 'callback' : 0,
-            \ 'continuous' : 1,
-            \ 'executable' : 'latexmk',
-            \ 'hooks' : [],
-            \ 'options' : [
-            \   '-verbose',
-            \   '-file-line-error',
-            \   '-synctex=1',
-            \   '-interaction=nonstopmode',
-            \ ],
-            \}
+        \ 'build_dir' : '',
+        \ 'callback' : 0,
+        \ 'continuous' : 1,
+        \ 'executable' : 'latexmk',
+        \ 'hooks' : [],
+        \ 'options' : [
+        \   '-verbose',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
         " Define mapping to generate and view the table of contents
-        nnoremap <leader>lt :VimtexTocToggle<cr>
+        " nnoremap <leader>lt :VimtexTocToggle<cr>
         " Define mapping to run a "single-shot" compilation
         " Note that this is especially useful when the LaTeX
         " document requires a long background compilation
         " that is so expensive to always run that if limits
         " the ability to use the text editor interactively
-        nnoremap <Space>ll :VimtexCompileSS<cr>
+        " nnoremap <Space>ll :VimtexCompileSS<cr>
         " Disable syntax highlighting provided by vimtex plugin
         let g:vimtex_syntax_enabled = 0
         " Conceal option
@@ -86,11 +93,14 @@ return {
         " let g:latexindent_options = '-m -r'
         " Do not use a space after the comment string symbol in LaTeX
         augroup latexcomments
-          autocmd!
-          autocmd FileType tex setlocal commentstring=%%s
+        autocmd!
+        autocmd FileType tex setlocal commentstring=%%s
         augroup END
-      ]])
-    end
-  }
+        ]])
+    end,
+    keys = {
+      { "<Space>ll", "<cmd> VimtexCompileSS <CR>", desc = "Vimtex: Single-shot Compile" },
+    },
+  },
 
 }

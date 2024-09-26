@@ -3,6 +3,59 @@
 
 return {
 
+  -- which-key.nvim
+  -- Interactively and incrementally discover key mappings
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      delay = 200,
+      notify = true,
+      preset = "helix",
+      win = {
+        border = "rounded",
+        padding = { 1, 1 },
+        wo = {
+          winblend = 0,
+        },
+      },
+      layout = {
+        width = { min = 25 },
+        spacing = 3,
+        align = "left",
+      },
+      triggers = {
+        { "<auto>", mode = "nixsotc" },
+      },
+      plugins = {
+        marks = false,
+        registers = false,
+        spelling = {
+          enabled = false,
+          suggestions = 20,
+        },
+        presets = {
+          operators = true,
+          motions = true,
+          text_objects = true,
+          windows = true,
+          nav = true,
+          z = true,
+          g = true,
+        },
+      },
+    },
+    keys = {
+      {
+        "<Space>wk",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Which-key: Buffer-local keymaps",
+      },
+    },
+  },
+
   -- nvim-notify
   -- Notifications
   {
@@ -56,6 +109,75 @@ return {
     end,
   },
 
+  -- edgy.nvim for controlling sidebars:
+  -- supports the display of multiple sidebars
+  -- in the same consistently sized region
+  {
+    "folke/edgy.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.opt.laststatus = 3
+      vim.opt.splitkeep = "screen"
+    end,
+    opts = {
+      options = {
+        left = { size = 25 },
+        bottom = { size = 10 },
+        right = { size = 25 },
+        top = { size = 10 },
+      },
+      right = {
+        -- Neotree filesystem
+        {
+          title = "Filesystem",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "filesystem"
+          end,
+          size = { height = 0.5 },
+        },
+        -- Outline.nvim symbols
+        {
+          title = "Outline",
+          ft = "Outline",
+          pinned = false,
+          size = { height = 0.30 },
+          open = "OutlineOpen"
+        },
+        -- Neotree buffers
+        {
+          title = "Buffers",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "buffers"
+          end,
+          size = { height = 0.20 },
+          pinned = false,
+          open = "Neotree position=top buffers",
+        },
+        -- Neotree Git status
+        {
+          title = "Git",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "git_status"
+          end,
+          size = { height = 0.20 },
+          pinned = false,
+          open = "Neotree position=bottom git_status",
+        },
+        -- Aerial symbols
+        {
+          title = "Aerial",
+          open = "AerialOpen",
+          pinned = true,
+          size = { height = 0.20 },
+          ft = "aerial",
+        },
+      },
+    },
+  },
+
   -- auto-hlsearch.nvim
   -- Automatically disable search highlighting when
   -- it is not needed after performing a search; note
@@ -70,33 +192,54 @@ return {
     end,
   },
 
-  -- gx.nvim
-  -- Make it easy to load a web site in a browser after
-  -- typing gx inside of Neovim, all without using netrw
+  -- nvim-web-devicons
+  -- Icons with overrides for filetypes
+  -- where icons no longer display correctly with nerdfonts
   {
-    "chrishrb/gx.nvim",
+    "nvim-tree/nvim-web-devicons",
     event = "VeryLazy",
-    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require("gx").setup {
-        open_browser_app = "xdg-open",
-        handlers = {
-          plugin = true,
-          github = true,
-          package_json = true,
-          search = true,
+      -- set the filetype for configuration files
+      -- without an extension; enables better highlighting
+      -- for files that are named config
+      vim.cmd([[
+        autocmd BufNewFile,BufRead config set filetype=config
+        ]])
+      -- add overrides for filenames/filetypes that are not detected
+      require 'nvim-web-devicons'.setup {
+        color_icons = false,
+        strict = true,
+        override_by_filename = {
+          ["config"] = {
+            icon = "",
+            name = "Config"
+          },
+          ["Makefile"] = {
+            icon = "",
+            name = "Makefile"
+          },
+          [".zshrc"] = {
+            icon = "󰿘",
+            name = "Zsh"
+          }
         },
-        handler_options = {
-          search_engine = "google",
+        override_by_extension = {
+          ["toml"] = {
+            icon = "",
+            name = "Toml"
+          },
+          ["qmd"] = {
+            icon = "󰐴",
+            name = "Quarto"
+          },
+          [""] = {
+            icon = "",
+            name = "None"
+          }
         },
-        vim.api.nvim_set_keymap('n', '<Space>wb', 'gx', { noremap = false })
       }
     end,
   },
-
-  -- nvim-web-devicons
-  -- Icons
-  "nvim-tree/nvim-web-devicons",
 
   -- nuim.nvim
   -- User interface components

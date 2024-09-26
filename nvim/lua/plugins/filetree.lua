@@ -1,5 +1,6 @@
 -- File: plugins/filetree.lua
 -- Purpose: load and configure the neo-tree plugin
+-- and the oil.nvim plugin that also manages files
 
 return {
 
@@ -11,7 +12,7 @@ return {
   -- flashing that occurs when editing files
   {
     "nvim-neo-tree/neo-tree.nvim",
-    cmd = "NeoTreeShowToggle",
+    cmd = "Neotree",
     -- Configure
     config = function()
       local nvim_web_devicons = require "nvim-web-devicons"
@@ -24,6 +25,10 @@ return {
       nvim_web_devicons.set_icon(new_icons)
       nvim_web_devicons.set_default_icon('', '#a8a8a8')
       require("neo-tree").setup({
+        source_selector = {
+            winbar = false,
+            statusline = false
+        },
         close_if_last_window = true,
         popup_border_style = "rounded",
         enable_git_status = false,
@@ -140,7 +145,9 @@ return {
             never_show_by_pattern = {
             },
           },
-          follow_current_file = true,
+          follow_current_file = {
+            enabled = true,
+          },
           group_empty_dirs = false,
           hijack_netrw_behavior = "open_default",
           use_libuv_file_watcher = true,
@@ -159,7 +166,9 @@ return {
           }
         },
         buffers = {
-          follow_current_file = true,
+          follow_current_file = {
+            enabled = true,
+          },
           group_empty_dirs = true,
           show_unloaded = true,
           window = {
@@ -188,8 +197,134 @@ return {
     end,
     keys = {
       -- Toggle display
-      { "<Space>0", "<cmd> NeoTreeShowToggle<CR>", desc = "Neo-tree: Toggle" },
+      { "<Space>0",  "<cmd> Neotree toggle<CR>",                           desc = "Neo-tree: Toggle" },
+      -- Show buffers
+      { "<Space>nb", "<cmd> Neotree toggle position=top buffers<CR>",      desc = "Neo-tree: Buffers" },
+      -- Show git status
+      { "<Space>ng", "<cmd> Neotree toggle position=right git_status<CR>", desc = "Neo-tree: Git status" },
     }
-  }
+  },
+
+  -- oil.nvim
+  -- File system navigation and management
+  -- (e.g., allows for file renaming and deletion)
+  {
+    "stevearc/oil.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("oil").setup({
+        default_file_explorer = true,
+        columns = {
+          "icon",
+          "permissions",
+          "size",
+          "mtime",
+        },
+        buf_options = {
+          buflisted = false,
+          bufhidden = "hide",
+        },
+        win_options = {
+          wrap = false,
+          signcolumn = "no",
+          cursorcolumn = false,
+          foldcolumn = "0",
+          spell = false,
+          list = false,
+          conceallevel = 3,
+          concealcursor = "nvic",
+        },
+        delete_to_trash = false,
+        skip_confirm_for_simple_edits = true,
+        prompt_save_on_select_new_entry = false,
+        cleanup_delay_ms = 2000,
+        lsp_file_methods = {
+          timeout_ms = 1000,
+          autosave_changes = false,
+        },
+        -- Constrain the cursor to the editable parts of the oil buffer
+        -- Set to `false` to disable, or "name" to keep it on the file names
+        constrain_cursor = "name",
+        experimental_watch_for_changes = false,
+        keymaps = {
+          ["g?"] = "actions.show_help",
+          ["<CR>"] = "actions.select",
+          ["<C-s>"] = "actions.select_vsplit",
+          ["<C-h>"] = "actions.select_split",
+          ["<C-t>"] = "actions.select_tab",
+          ["<C-p>"] = "actions.preview",
+          ["<C-c>"] = "actions.close",
+          ["<C-l>"] = "actions.refresh",
+          ["-"] = "actions.parent",
+          ["_"] = "actions.open_cwd",
+          ["`"] = "actions.cd",
+          ["~"] = "actions.tcd",
+          ["gs"] = "actions.change_sort",
+          ["gx"] = "actions.open_external",
+          ["g."] = "actions.toggle_hidden",
+          ["g\\"] = "actions.toggle_trash",
+        },
+        keymaps_help = {
+          border = "rounded",
+        },
+        use_default_keymaps = true,
+        view_options = {
+          show_hidden = true,
+          is_hidden_file = function(name, bufnr)
+            return vim.startswith(name, ".")
+          end,
+          is_always_hidden = function(name, bufnr)
+            return false
+          end,
+          sort = {
+            { "type", "asc" },
+            { "name", "asc" },
+          },
+        },
+        float = {
+          padding = 2,
+          max_width = 0,
+          max_height = 0,
+          border = "rounded",
+          win_options = {
+            winblend = 0,
+          },
+          override = function(conf)
+            return conf
+          end,
+        },
+        preview = {
+          max_width = 0.9,
+          min_width = { 40, 0.4 },
+          width = nil,
+          max_height = 0.9,
+          min_height = { 5, 0.1 },
+          height = nil,
+          border = "rounded",
+          win_options = {
+            winblend = 0,
+          },
+          update_on_cursor_moved = true,
+        },
+        progress = {
+          max_width = 0.9,
+          min_width = { 40, 0.4 },
+          width = nil,
+          max_height = { 10, 0.9 },
+          min_height = { 5, 0.1 },
+          height = nil,
+          border = "rounded",
+          minimized_border = "none",
+          win_options = {
+            winblend = 0,
+          },
+        },
+        ssh = {
+          border = "rounded",
+        },
+      })
+      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+    end,
+  },
 
 }

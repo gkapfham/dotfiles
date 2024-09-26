@@ -7,20 +7,20 @@ return {
   -- vim-fugitive for git integration
   {
     "tpope/vim-fugitive",
-    cmd = {"G", "Git", "Gwrite"},
+    cmd = { "G", "Git", "Gwrite" },
     keys = {
       -- Keys: git status
-      { "<Space>gg", ":Git <CR>", desc = "Fugitive: Git status" },
-      { "<leader>gg", ":Git <CR>", desc = "Fugitive: Git status" },
+      { "<Space>gg",   ":Git <CR>",          desc = "Fugitive: Git status" },
+      { "<leader>gg",  ":Git <CR>",          desc = "Fugitive: Git status" },
       -- Keys: git write
-      { "<Space>gw", ":Gwrite <CR>", desc = "Fugitive: Git write to add file" },
-      { "<leader>gw", ":Gwrite <CR>", desc = "Fugitive: Git write to add file" },
+      { "<Space>gw",   ":Gwrite <CR>",       desc = "Fugitive: Git write to add file" },
+      { "<leader>gw",  ":Gwrite <CR>",       desc = "Fugitive: Git write to add file" },
       -- Keys: git commit
-      { "<Space>gcc", ":Git commit <CR>", desc = "Fugitive: Commit current hunk" },
-      { "<leader>gcc", ":Git commit <CR>", desc = "Fugitive: Commit current hunk" },
-      { "<Space>gcf", ":Git commit %<CR>", desc = "Fugitive: Commit current file" },
-      { "<leader>gcf", ":Git commit %<CR>", desc = "Fugitive: Commit current file" },
-      { "<Space>gca", ":Git commit -a<CR>", desc = "Fugitive: Commit all files" },
+      { "<Space>gcc",  ":Git commit <CR>",   desc = "Fugitive: Commit current hunk" },
+      { "<leader>gcc", ":Git commit <CR>",   desc = "Fugitive: Commit current hunk" },
+      { "<Space>gcf",  ":Git commit %<CR>",  desc = "Fugitive: Commit current file" },
+      { "<leader>gcf", ":Git commit %<CR>",  desc = "Fugitive: Commit current file" },
+      { "<Space>gca",  ":Git commit -a<CR>", desc = "Fugitive: Commit all files" },
       { "<leader>gca", ":Git commit -a<CR>", desc = "Fugitive: Commit all files" },
     }
   },
@@ -28,11 +28,10 @@ return {
   -- diffview.nvim for viewing diffs
   {
     "sindrets/diffview.nvim",
-    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    cmd = {"DiffviewOpen", "DiffviewLog"},
+    cmd = { "DiffviewOpen", "DiffviewLog" },
   },
 
   -- gitsigns.nvim for showing git diffs in the sign column
@@ -53,36 +52,39 @@ return {
             if vim.wo.diff then return ']c' end
             vim.schedule(function() gs.next_hunk() end)
             return '<Ignore>'
-          end, {expr=true})
+          end, { expr = true })
           map('n', '[c', function()
             if vim.wo.diff then return '[c' end
             vim.schedule(function() gs.prev_hunk() end)
             return '<Ignore>'
-          end, {expr=true})
+          end, { expr = true })
           -- Actions
           map('n', '<leader>hs', gs.stage_hunk)
           map('n', '<leader>hr', gs.reset_hunk)
-          map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
-          map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+          map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
+          map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
           map('n', '<leader>hS', gs.stage_buffer)
           map('n', '<leader>hu', gs.undo_stage_hunk)
           map('n', '<leader>hR', gs.reset_buffer)
           map('n', '<leader>hp', gs.preview_hunk)
-          map('n', '<leader>hb', function() gs.blame_line{full=true} end)
+          map('n', '<leader>hb', function() gs.blame_line { full = true } end)
           map('n', '<leader>tb', gs.toggle_current_line_blame)
           map('n', '<leader>hd', gs.diffthis)
           map('n', '<leader>hD', function() gs.diffthis('~') end)
           map('n', '<leader>td', gs.toggle_deleted)
           -- Text object
-          map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+          map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
         end,
-
+        -- Define the signs; note that the color scheme is
+        -- now defined in the colorscheme file called
+        -- colorscheme.lua in the same directory as this file
         signs = {
-          add          = {hl = 'DiffAdd'   , text = '+', numhl='None', linehl='None'},
-          change       = {hl = 'DiffChange', text = '~', numhl='None', linehl='None'},
-          delete       = {hl = 'DiffDelete', text = '-', numhl='None', linehl='None'},
-          topdelete    = {hl = 'DiffDelete', text = '^', numhl='None', linehl='None'},
-          changedelete = {hl = 'DiffChange', text = '~', numhl='None', linehl='None'},
+          add          = { text = '+', },
+          change       = { text = '~', },
+          delete       = { text = '-', },
+          topdelete    = { text = '^', },
+          changedelete = { text = '~', },
+          untracked    = { text = '?', },
         },
         numhl = false,
         linehl = false,
@@ -115,7 +117,19 @@ return {
       vim.cmd([[hi OctoEditable guibg=none]])
     end,
     keys = {
-      { "<leader>o", "<cmd>Octo<cr>", desc = "Octo" },
+      { "<leader>oc", "<cmd>Octo<cr>", desc = "Octo" },
+    },
+  },
+
+  -- messenger.nvim for viewing commit messages
+  {
+    "lsig/messenger.nvim",
+    event = "VeryLazy",
+    opts = {
+      border = "rounded",
+    },
+    keys = {
+      { "<space>gm", "<cmd>MessengerShow<cr>", desc = "Git Messenger" },
     },
   },
 

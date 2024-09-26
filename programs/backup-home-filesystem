@@ -1,20 +1,19 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # This script performs a backup using rsync
 
+# Display the amount of free space on the disk(s)(s)(s)(s)
 echo "Free space on all of the file systems:"
-
 df -h
-
 echo ""
 
+# Perform the backup using rsync
 echo "Starting backup to vatomauro using rsync:"
-
 rsync -avP --delete --exclude=.cache --exclude=.dockagator --exclude=docker /home/gkapfham gkapfham@vatomauro:/home/gkapfham/backup/
 diagnostic=$?
-
 echo ""
 
+# Display whether or not the backup was successful
 if [ "$diagnostic" -eq 0 ]; then
     echo "Hooray, the backup worked correctly!"
 else
@@ -22,4 +21,5 @@ else
     echo "Make sure that you run 'sudo mount /dev/sda1 /mnt/usb/' on vatomauro"
 fi
 
+# Display a trailing blank line
 echo ""

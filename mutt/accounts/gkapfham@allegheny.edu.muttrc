@@ -1,0 +1,22 @@
+# vim: filetype=neomuttrc
+
+# muttrc file for account gkapfham@allegheny.edu
+set realname = "Gregory M. Kapfhammer"
+set from = "gkapfham@allegheny.edu"
+set sendmail = "msmtp -a gkapfham@allegheny.edu"
+alias me Gregory M. Kapfhammer <gkapfham@allegheny.edu>
+set folder = "/home/gkapfham/.local/share/mail/gkapfham@allegheny.edu"
+set header_cache = "/home/gkapfham/.cache/mutt-wizard/gkapfham_allegheny.edu/headers"
+set message_cachedir = "/home/gkapfham/.cache/mutt-wizard/gkapfham_allegheny.edu/bodies"
+set mbox_type = Maildir
+set hostname = "allegheny.edu"
+source ~/.config/mutt/mutt-wizard/switch.muttrc
+set spoolfile = "+INBOX"
+set postponed = "+Drafts"
+set trash = "+Trash"
+set record = "+Sent"
+
+macro index o "<shell-escape>mailsync gkapfham@allegheny.edu<enter>" "sync gkapfham@allegheny.edu"
+
+# Maiboxes to display in the sidebar
+mailboxes "=INBOX" "=Trash" "=advise2023" "=advise2024" "=dept2023" "=dept2024" "=fitter" "=framework" "=friends" "=github" "=gradingforgrowth" "=irb2023" "=irb2024" "=jsep2023" "=knockout" "=podcast" "=research2023" "=research2024" "=reviews2023" "=reviews2024" "=seradio" "=ssbse2023" "=tab" "=tab2023" "=teaching2024"

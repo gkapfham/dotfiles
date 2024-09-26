@@ -4,55 +4,35 @@
 
 return {
 
-  -- vim-textobj-user
-  -- Textobjects
-  {
-    "kana/vim-textobj-user",
-    dependencies = {
-      "ColinKennedy/vim-textobj-block-party",
-    },
-    event = "VeryLazy",
-    config = function()
-      vim.g.python3_host_prog = '/home/gkapfham/.asdf/shims/python'
-    end
-  },
-
-  -- targets.vim
-  -- Textobjects like backticks
-  {
-    "wellle/targets.vim",
-    event = "VeryLazy"
-  },
-
-  -- tshjkl.nvim
-  -- Treesitter movements
-  {
-    'gsuuon/tshjkl.nvim',
-    event = "VeryLazy",
-    opts = {
-      keymaps = {
-        toggle = '<Space>tn',
-      },
-      marks = {
-        parent = {
-          virt_text = { { 'h', 'ModeMsg' } },
-          virt_text_pos = 'overlay'
-        },
-        child = {
-          virt_text = { { 'l', 'ModeMsg' } },
-          virt_text_pos = 'overlay'
-        },
-        prev = {
-          virt_text = { { 'k', 'ModeMsg' } },
-          virt_text_pos = 'overlay'
-        },
-        next = {
-          virt_text = { { 'j', 'ModeMsg' } },
-          virt_text_pos = 'overlay'
-        }
-      }
-    }
-  },
+  -- -- tshjkl.nvim
+  -- -- Treesitter movements
+  -- {
+  --   'gsuuon/tshjkl.nvim',
+  --   event = "VeryLazy",
+  --   opts = {
+  --     keymaps = {
+  --       toggle = '<Space>tn',
+  --     },
+  --     marks = {
+  --       parent = {
+  --         virt_text = { { 'h', 'ModeMsg' } },
+  --         virt_text_pos = 'overlay'
+  --       },
+  --       child = {
+  --         virt_text = { { 'l', 'ModeMsg' } },
+  --         virt_text_pos = 'overlay'
+  --       },
+  --       prev = {
+  --         virt_text = { { 'k', 'ModeMsg' } },
+  --         virt_text_pos = 'overlay'
+  --       },
+  --       next = {
+  --         virt_text = { { 'j', 'ModeMsg' } },
+  --         virt_text_pos = 'overlay'
+  --       }
+  --     }
+  --   }
+  -- },
 
   -- nvim-treesitter
   -- Treesitter
@@ -76,31 +56,44 @@ return {
           "bash",
           "bibtex",
           "c",
+          "comment",
+          "css",
+          "csv",
+          "diff",
           "gitattributes",
+          "git_config",
+          "gitcommit",
           "gitignore",
           "go",
           "html",
           "java",
           "javascript",
           "json",
+          "json5",
           "latex",
           "lua",
           "make",
           "markdown",
           "markdown_inline",
+          "mermaid",
+          "nix",
           "python",
           "query",
           "regex",
+          "rust",
+          "scss",
+          "tmux",
           "tsx",
           "typescript",
           "vim",
+          "vimdoc",
           "yaml",
         },
-        -- Highlighting
-        highlight = { enable = true, disable = { "html", "latex" }, },
-        -- Indenting
+        -- highlighting
+        highlight = { enable = true, },
+        -- indenting
         indent = { enable = true, },
-        -- Commenting
+        -- commenting
         context_commentstring = { enable = true, enable_autocmd = false },
         require "nvim-treesitter.configs".setup {
           playground = {
@@ -123,6 +116,38 @@ return {
           }
         },
       })
+      vim.cmd [[
+        autocmd VimEnter * TSEnable highlight
+      ]]
+    end,
+  },
+
+  -- nvim-treesitter-textobjects
+  -- supports definition of custom
+  -- objects and motions defined
+  -- on what is available in treesitter
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    event = "VeryLazy",
+    config = function()
+      require'nvim-treesitter.configs'.setup {
+        textobjects = {
+          select = {
+            enable = true,
+            keymaps = {
+              -- define operators based on
+              -- treesitter nodes; note that
+              -- block is useful for fenced code
+              -- blocks. Use :Inspect or :InspectTree
+              -- to identify which nodes to use
+              ["ab"] = "@block.outer",
+              ["ib"] = "@block.inner",
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+            },
+          },
+        },
+      }
     end,
   },
 

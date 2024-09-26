@@ -4,13 +4,14 @@
 return {
 
   -- undotree
+  -- Create a tree of undo branches
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
   },
 
   -- mini.surround
-  -- surround management
+  -- Surround management
   {
     "echasnovski/mini.surround",
     keys = { "gz" },
@@ -46,9 +47,7 @@ return {
     "echasnovski/mini.trailspace",
     event = "VeryLazy",
     config = function()
-      require("mini.trailspace").setup({
-      }
-      )
+      require("mini.trailspace").setup({})
     end,
   },
 

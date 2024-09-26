@@ -1,5 +1,5 @@
 [Default Applications]
-x-scheme-handler/webcal=chromium.desktop
+x-scheme-handler/webcal=brave-browser.desktop
 x-scheme-handler/http=brave.desktop
 x-scheme-handler/https=brave.desktop
 x-scheme-handler/ftp=brave.desktop

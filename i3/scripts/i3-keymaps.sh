@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# show keybindings set in the i3 config file
 I3_CONFIG=$HOME/.config/i3/config
 mod_key=$(sed -nre 's/^set \$mod (.*)/\1/p' ${I3_CONFIG})
 grep "^bindsym" ${I3_CONFIG} \

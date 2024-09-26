@@ -1,15 +1,8 @@
 -- File: plugins/languageserver.lua
 -- Purpose: load and configure plugins for installation
--- and use of language servers protocol implementations
+-- and use of language servers protocol (LSP) implementations
 
 return {
-
-  -- mason.nvim for LSP management
-  {
-    "williamboman/mason.nvim",
-    event = "BufReadPost",
-    build = ":MasonUpdate"
-  },
 
   -- neodev.nvim for LSP enhancement for Lua files
   {
@@ -25,24 +18,39 @@ return {
     "neovim/nvim-lspconfig",
     event = "BufReadPost",
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
       "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
       "nvimtools/none-ls.nvim",
     },
     config = function()
-      require("mason").setup()
-      require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls", "pyright", "ruff_lsp", "cssls" },
-      }
       local lspconfig = require('lspconfig')
+      -- draw the border for the LSP floating window; since the
+      -- window used for commands like :LSPInfo is driven by the
+      -- NormalFloat which is now set to dark to make the GitHub
+      -- Copilot chat look as nice as possible there is a need
+      -- to make the border visible so that these menus are okay
+      require('lspconfig.ui.windows').default_options.border = 'single'
+      -- draw the border for the LSP floating window that displays
+      -- when requesting the documentation for source code; note
+      -- that by default when you use <space>k it will display information
+      -- about the source code under the cursor but do so without the box
+      -- and this makes it difficult to see the information since the background
+      -- is the same color and the diagnostic information
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+        border = "rounded",
+      })
       -- Setup LSP servers:
       -- 1) CSS
       -- 2) HTML
       -- 3) Lua
       -- 4) Markdown
       -- 5) Python
-      -- 6) YAML
+      -- 7) Go
+      -- 7) LaTeX and BibTeX
+      -- 8) Writing (Harper-ls)
+      -- 9) YAML
+      -- 10) Nix
+      -- 11) Rust
       -- configure cssls for CSS LSP
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -56,6 +64,8 @@ return {
         capabilities = capabilities,
         filetypes = { 'markdown', 'quarto', 'html' },
       }
+      -- configure gopls for Go LSP
+      lspconfig.gopls.setup {}
       -- configure luals (with neovim support) for Lua LSP
       lspconfig.lua_ls.setup({
         settings = {
@@ -76,38 +86,94 @@ return {
       lspconfig.ruff_lsp.setup {}
       -- configure texlab for LaTeX and BibTeX LSP
       lspconfig.texlab.setup {
-        texlab = {
-          auxDirectory = ".",
-          bibtexFormatter = "texlab",
-          build = {
-            args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
-            executable = "latexmk",
-            forwardSearchAfter = false,
-            onSave = false
+        settings = {
+          texlab = {
+            auxDirectory = ".",
+            bibtexFormatter = "texlab",
+            build = {
+              args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+              executable = "latexmk",
+              forwardSearchAfter = false,
+              onSave = false
+            },
+            chktex = {
+              onEdit = false,
+              onOpenAndSave = false
+            },
+            diagnosticsDelay = 300,
+            formatterLineLength = 0,
+            forwardSearch = {
+              executable = "zathura",
+              args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
+              onSave = false,
+            },
+            latexFormatter = "latexindent",
+            latexindent = {
+              modifyLineBreaks = false
+            }
           },
-          chktex = {
-            onEdit = false,
-            onOpenAndSave = false
-          },
-          diagnosticsDelay = 300,
-          formatterLineLength = 0,
-          forwardSearch = {
-            args = {}
-          },
-          latexFormatter = "latexindent",
-          latexindent = {
-            modifyLineBreaks = false
-          }
         }
+      }
+      -- configure harper_ls for writing
+      lspconfig.harper_ls.setup {
+        filetypes = { "mail", "markdown", "quarto", "text", },
+        settings = {
+          ["harper-ls"] = {
+            userDictPath = "~/.config/nvim/spell/en.utf-8.add",
+            linters = {
+              spell_check = false,
+              spelled_numbers = false,
+              an_a = true,
+              sentence_capitalization = true,
+              unclosed_quotes = true,
+              wrong_quotes = false,
+              long_sentences = false,
+              repeated_words = true,
+              spaces = true,
+              matcher = true,
+              correct_number_suffix = true,
+              number_suffix_capitalization = true,
+            }
+          }
+        },
       }
       -- configure yamlls for YAML LSP
       lspconfig.yamlls.setup {}
+      -- configure nil_ls for Nix LSP
+      lspconfig.nil_ls.setup {}
+      -- configure rust_analzer for Rust LSP
+      lspconfig.rust_analyzer.setup {
+        settings = {
+          ['rust-analyzer'] = {
+            assist = {
+              importGranularity = 'module',
+              importPrefix = 'self',
+            },
+            diagnostics = {
+              enable = true,
+              enableExperimental = true,
+            },
+            cargo = {
+              loadOutDirsFromCheck = true,
+            },
+            procMacro = {
+              enable = true,
+            },
+            inlayHints = {
+              chainingHints = true,
+              parameterHints = true,
+              typeHints = true,
+            },
+          }
+        }
+      }
+      -- Configure other aspects of the language servers
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
       -- to support the display of the diagnostics
       require 'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
       -- Define customized signs for diagnostics reported by the language server;
       -- note that this will define the signs displayed in the gutter
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
@@ -123,7 +189,7 @@ return {
       },
       {
         "<Space>e",
-        "<cmd> lua vim.diagnostic.open_float(0, {scope='line'})<CR>",
+        "<cmd> lua vim.diagnostic.open_float(0, {scope='line', border='rounded'})<CR>",
         desc =
         "Language Server: Display diagnostics"
       },
@@ -132,18 +198,6 @@ return {
         "<cmd> lua vim.lsp.buf.hover()<CR>",
         desc =
         "Language Server: Symbol details"
-      },
-      {
-        "<Space>c",
-        "<cmd> lua vim.lsp.diagnostic.set_loclist()<CR>",
-        desc =
-        "Language Server: Send to loclist"
-      },
-      {
-        "<Space>c",
-        "<cmd>lua vim.lsp.buf.code_action()<CR>",
-        desc =
-        "Language Server: Send to loclist"
       },
       {
         "<Space>ca",
@@ -157,30 +211,23 @@ return {
         desc =
         "Language Server: Rename variable"
       },
+      { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
     }
   },
 
-  -- mason-null-ls.nvim
+  -- none-ls.nvim for LSP enhancement
+  -- through the use of tools that are not
+  -- language servers themselves but can
+  -- be made to look like one with the
+  -- support of this plugin
   {
-    "jay-babu/mason-null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "nvimtools/none-ls.nvim",
-    },
     config = function()
-      require("mason-null-ls").setup({
-        ensure_installed = { "chktex", "pydocstyle", "ruff", "prettierd" },
-        automatic_installation = false,
-        handlers = {},
-      })
       -- Configure null-ls for diagnostics and formatting
       local null_ls = require("null-ls")
       null_ls.setup({
         sources = {
-          null_ls.builtins.diagnostics.chktex,
-          null_ls.builtins.diagnostics.pydocstyle,
-          null_ls.builtins.formatting.ruff,
           null_ls.builtins.formatting.prettierd,
         },
       })
@@ -191,64 +238,75 @@ return {
     }
   },
 
-  -- symbol-usage.nvim displays symbol usage information in virtual text
+  -- lsp-lens.nvim for symbol usage information in virtual text
   {
-    'Wansmer/symbol-usage.nvim',
+    "VidocqH/lsp-lens.nvim",
     event = "BufReadPre",
     config = function()
-      local function h(name) return vim.api.nvim_get_hl(0, { name = name }) end
-      vim.api.nvim_set_hl(0, 'SymbolUsageRounding', { fg = h('CursorLine').bg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageContent', { bg = h('CursorLine').bg, fg = h('Conceal').fg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageRef', { fg = h('Conceal').fg, bg = h('CursorLine').bg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageDef', { fg = h('Type').fg, bg = h('CursorLine').bg, italic = true })
-      vim.api.nvim_set_hl(0, 'SymbolUsageImpl', { fg = h('@keyword').fg, bg = h('CursorLine').bg, italic = true })
-      local function text_format(symbol)
-        local res = {}
-        local round_start = { '', 'SymbolUsageRounding' }
-        local round_end = { '', 'SymbolUsageRounding' }
-        if symbol.references then
-          local usage = symbol.references <= 1 and 'usage' or 'usages'
-          local num = symbol.references == 0 and 'no' or symbol.references
-          table.insert(res, round_start)
-          table.insert(res, { '󰌹 ', 'SymbolUsageRef' })
-          table.insert(res, { ('%s %s'):format(num, usage), 'SymbolUsageContent' })
-          table.insert(res, round_end)
-        end
-        if symbol.definition then
-          if #res > 0 then
-            table.insert(res, { ' ', 'NonText' })
-          end
-          table.insert(res, round_start)
-          table.insert(res, { '󰳽 ', 'SymbolUsageDef' })
-          table.insert(res, { symbol.definition .. ' defs', 'SymbolUsageContent' })
-          table.insert(res, round_end)
-        end
-        if symbol.implementation then
-          if #res > 0 then
-            table.insert(res, { ' ', 'NonText' })
-          end
-          table.insert(res, round_start)
-          table.insert(res, { '󰡱 ', 'SymbolUsageImpl' })
-          table.insert(res, { symbol.implementation .. ' impls', 'SymbolUsageContent' })
-          table.insert(res, round_end)
-        end
-        return res
-      end
-      require('symbol-usage').setup({
-        text_format = text_format,
+      require 'lsp-lens'.setup({
+        enable = true,
+        include_declaration = true,
+        separator = ", ",
+        sections = {
+          definition = function(count)
+            return "󰐖 Definitions " .. count
+          end,
+          references = function(count)
+            return " References " .. count - 1
+          end,
+          implements = function(count)
+            return " Implements " .. count
+          end,
+          git_authors = function(latest_author, count)
+            return " " .. latest_author .. (count - 1 == 0 and "" or (" + " .. count - 1))
+          end,
+        },
       })
     end
   },
 
-  -- venv-selector.nvim for selecting virtual environments after starting neovim
-  {
-    "linux-cultist/venv-selector.nvim",
-    dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
-    config = true,
-    event = "VeryLazy",
-    keys = { {
-      "<leader>vv", "<cmd>:VenvSelect<cr>",
-    } }
-  },
+  -- -- symbol-usage.nvim displays symbol usage information in virtual text
+  -- {
+  --   'Wansmer/symbol-usage.nvim',
+  --   event = "BufReadPre",
+  --   config = function()
+  --     local function h(name) return vim.api.nvim_get_hl(0, { name = name }) end
+  --     local function text_format(symbol)
+  --       local res = {}
+  --       local round_start = { '', 'SymbolUsageRounding' }
+  --       local round_end = { '', 'SymbolUsageRounding' }
+  --       if symbol.references then
+  --         local usage = symbol.references <= 1 and 'usage' or 'usages'
+  --         local num = symbol.references == 0 and 'no' or symbol.references
+  --         table.insert(res, round_start)
+  --         table.insert(res, { ' ', 'SymbolUsageRef' })
+  --         table.insert(res, { ('%s %s'):format(num, usage), 'SymbolUsageContent' })
+  --         table.insert(res, round_end)
+  --       end
+  --       if symbol.definition then
+  --         if #res > 0 then
+  --           table.insert(res, { ' ', 'NonText' })
+  --         end
+  --         table.insert(res, round_start)
+  --         table.insert(res, { '󰳽 ', 'SymbolUsageDef' })
+  --         table.insert(res, { symbol.definition .. ' defs', 'SymbolUsageContent' })
+  --         table.insert(res, round_end)
+  --       end
+  --       if symbol.implementation then
+  --         if #res > 0 then
+  --           table.insert(res, { ' ', 'NonText' })
+  --         end
+  --         table.insert(res, round_start)
+  --         table.insert(res, { '󰡱 ', 'SymbolUsageImpl' })
+  --         table.insert(res, { symbol.implementation .. ' impls', 'SymbolUsageContent' })
+  --         table.insert(res, round_end)
+  --       end
+  --       return res
+  --     end
+  --     require('symbol-usage').setup({
+  --       text_format = text_format,
+  --     })
+  --   end
+  -- },
 
 }

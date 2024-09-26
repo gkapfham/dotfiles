@@ -45,7 +45,8 @@ vim.cmd([[set noshowcmd]])
 
 -- Ignorecase search: "J" and "j" are the same
 -- Smartcase search: "J" is different than "j" if capitalized used
--- Both of these variables are respected by flash.nvim
+-- Both of these variables are respected by flash.nvim; see the
+-- plugins/movement.lua file for more information about flash.nvim
 vim.cmd([[
   set ignorecase
   set smartcase
@@ -72,12 +73,6 @@ vim.cmd([[
   set tabstop=4
 ]])
 
--- -- Separate linebreaks and tabs for Python
--- vim.cmd([[
---   autocmd Filetype python setlocal softtabstop=4
---   autocmd Filetype python setlocal shiftwidth=4
--- ]])
-
 -- Separate linebreaks and tabs for Golang
 vim.cmd([[
   au Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
@@ -89,6 +84,14 @@ vim.cmd([[
   set expandtab
   set smarttab
   set shiftround
+]])
+
+-- Disable linewrapping in gitcommit buffer when using fugitive
+vim.cmd([[
+  " Disable line wrapping when entering a gitcommit buffer
+  autocmd BufEnter * if &filetype == 'gitcommit' | setlocal formatoptions-=t | endif
+  " Re-enable line wrapping when leaving a gitcommit buffer
+  autocmd BufLeave * if &filetype == 'gitcommit' | setlocal formatoptions+=t | endif
 ]])
 
 -- }}}
