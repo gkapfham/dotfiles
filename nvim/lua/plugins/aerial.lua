@@ -19,6 +19,12 @@ return {
       { "<Space>9", "<cmd>Outline<CR>", desc = "Outline: Toggle visibility" },
     },
     opts = {
+      providers = {
+        priority = { "markdown", "lsp", "coc", "norg" },
+        markdown = {
+          filetypes = { "markdown", "quarto" },
+        },
+      },
       outline_items = {
         show_symbol_details = false,
       },
@@ -45,7 +51,7 @@ return {
           Field = { icon = '󰆨', hl = 'Identifier' },
           Constructor = { icon = '', hl = 'Special' },
           Enum = { icon = '', hl = 'Type' },
-          Interface = { icon = '"', hl = 'Type' },
+          Interface = { icon = '', hl = 'Type' },
           Function = { icon = '󰊕', hl = 'Function' },
           Variable = { icon = '󰀫', hl = 'Constant' },
           Constant = { icon = '', hl = 'Constant' },
