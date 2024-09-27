@@ -21,7 +21,9 @@ return {
         -- override the default colors
         colors = {
           bg = "#1c1c1c",
-          fg = "#a8a8a8",
+          -- fg = "#a8a8a8",
+          -- fg = "#bcbcbc",
+          fg = "#b2b2b2",
           red = "#d75f5f",
           deepred = "#813939",
           orange = "#d78700",
@@ -32,7 +34,9 @@ return {
           cyan = "#00afaf",
           blue = "#87afd7",
           purple = "#875f87",
-          white = "#a8a8a8",
+          -- white = "#a8a8a8",
+          -- white = "#bcbcbc",
+          white = "#b2b2b2",
           black = "#767676",
           gray = "#6c6c6c",
           highlight = "#585858",
