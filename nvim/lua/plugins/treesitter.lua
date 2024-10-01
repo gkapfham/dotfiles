@@ -4,36 +4,6 @@
 
 return {
 
-  -- -- tshjkl.nvim
-  -- -- Treesitter movements
-  -- {
-  --   'gsuuon/tshjkl.nvim',
-  --   event = "VeryLazy",
-  --   opts = {
-  --     keymaps = {
-  --       toggle = '<Space>tn',
-  --     },
-  --     marks = {
-  --       parent = {
-  --         virt_text = { { 'h', 'ModeMsg' } },
-  --         virt_text_pos = 'overlay'
-  --       },
-  --       child = {
-  --         virt_text = { { 'l', 'ModeMsg' } },
-  --         virt_text_pos = 'overlay'
-  --       },
-  --       prev = {
-  --         virt_text = { { 'k', 'ModeMsg' } },
-  --         virt_text_pos = 'overlay'
-  --       },
-  --       next = {
-  --         virt_text = { { 'j', 'ModeMsg' } },
-  --         virt_text_pos = 'overlay'
-  --       }
-  --     }
-  --   }
-  -- },
-
   -- nvim-treesitter
   -- Treesitter
   {
