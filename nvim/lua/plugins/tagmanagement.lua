@@ -13,13 +13,8 @@ return {
     "ludovicchabant/vim-gutentags",
     event = "BufReadPre",
     config = function()
-      vim.cmd([[
-      " Specify where the tags are stored
-      " set tags=./tags;/,tags;/
-      ]])
       vim.g.gutentags_ctags_exclude = {
         '*.git', '*.svg', '*.hg',
-        -- '*/tests/*',
         'build',
         'dist',
         '*sites/*/files/*',
@@ -61,7 +56,7 @@ return {
         '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
       }
       vim.g.gutentags_add_default_project_roots = false
-      vim.g.gutentags_project_root = {'package.json', '.git'}
+      vim.g.gutentags_project_root = { 'package.json', '.git' }
       vim.g.gutentags_cache_dir = vim.fn.expand('~/.cache/nvim/ctags/')
       vim.g.gutentags_generate_on_new = true
       vim.g.gutentags_generate_on_missing = true
