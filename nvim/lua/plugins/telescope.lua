@@ -190,9 +190,6 @@ return {
       { "<Space>ss",  "<cmd> Telescope luasnip <CR>",               desc = "Telescope: Luasnip" },
       -- Spelling
       { "<Space>tz",  "<cmd> Telescope spell_suggest <CR>",         desc = "Telescope: Spelling suggestion" },
-      -- Tags
-      -- { "<Space>tb",  "<cmd> Telescope current_buffer_tags <CR>",   desc = "Telescope: Buffer tags" },
-      -- { "<leader>tb", "<cmd> Telescope tags <CR>",                  desc = "Telescope: Buffer tags" },
       -- Treesitter
       { "<Space>ts",  "<cmd> Telescope treesitter <CR>",            desc = "Telescope: Treesitter " },
       { "<leader>ts", "<cmd> Telescope treesitter <CR>",            desc = "Telescope: Treesitter " },
