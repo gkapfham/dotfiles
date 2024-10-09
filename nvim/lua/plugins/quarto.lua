@@ -74,6 +74,7 @@ return {
             vim.keymap.set('n', '<localleader>P', ':call QuartoPreview() <CR>')
             -- make pyodide use the treesitter parser for python
             vim.treesitter.language.register("python", "pyodide")
+            vim.treesitter.language.register("markdown", "quarto")
         end
     },
 
