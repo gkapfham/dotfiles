@@ -29,12 +29,12 @@ return {
       au BufNewFile,BufRead,BufEnter *.cpp    set nospell
       au BufNewFile,BufRead,BufEnter *.hpp    set nospell
       au BufNewFile,BufRead,BufEnter *.java   set nospell
-      au BufNewFile,BufRead,BufEnter *.py     set nospell
+      " au BufNewFile,BufRead,BufEnter *.py     set nospell
       au BufNewFile,BufRead,BufEnter *.sh     set nospell
       au BufNewFile,BufRead,BufEnter *.xml    set nospell
       au BufNewFile,BufRead,BufEnter *.sql    set nospell
       au BufNewFile,BufRead,BufEnter *.bib    set nospell
-      au BufNewFile,BufRead,BufEnter *.lua    set nospell
+      " au BufNewFile,BufRead,BufEnter *.lua    set nospell
       " Disable spell checking in quickfix
       augroup quickfixnospell
         autocmd!
