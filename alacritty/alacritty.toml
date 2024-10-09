@@ -12,7 +12,8 @@ cyan = "0xd75f5f"
 green = "0x5f8700"
 magenta = "0x875f87"
 red = "0xd78700"
-white = "0xb2b2b2"
+# white = "0xb2b2b2"
+white = "0xbcbcbc"
 yellow = "0xafaf5f"
 
 [colors.normal]
@@ -22,12 +23,15 @@ cyan = "0xd75f5f"
 green = "0x5f8700"
 magenta = "0x875f87"
 red = "0xd78700"
-white = "0xb2b2b2"
+# white = "0xb2b2b2"
+white = "0xbcbcbc"
 yellow = "0xafaf5f"
 
 [colors.primary]
 background = "0x1c1c1c"
-foreground = "0xa8a8a8"
+# foreground = "0xa8a8a8"
+# foreground = "0xbcbcbc"
+foreground = "0xb2b2b2"
 
 [cursor]
 style = "Block"
