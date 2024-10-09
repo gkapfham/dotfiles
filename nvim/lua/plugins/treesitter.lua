@@ -92,6 +92,23 @@ return {
     end,
   },
 
+  -- sentiment.nvim
+  {
+    "utilyre/sentiment.nvim",
+    event = "VeryLazy",
+    opts = {
+      pairs = {
+        { "(", ")" },
+        { "{", "}" },
+        { "[", "]" },
+      },
+    },
+    init = function()
+      -- `matchparen.vim` needs to be disabled manually in case of lazy loading
+      vim.g.loaded_matchparen = 1
+    end,
+  },
+
   -- nvim-treesitter-textobjects
   -- supports definition of custom
   -- objects and motions defined
@@ -100,7 +117,7 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     event = "VeryLazy",
     config = function()
-      require'nvim-treesitter.configs'.setup {
+      require 'nvim-treesitter.configs'.setup {
         textobjects = {
           select = {
             enable = true,
