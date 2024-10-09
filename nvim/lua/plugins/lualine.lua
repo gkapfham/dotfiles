@@ -174,12 +174,12 @@ return {
   -- Lualine for top and bottom bars
   {
     "nvim-lualine/lualine.nvim",
-    -- event = "VeryLazy",
     lazy = false,
     priority = 1000,
     dependencies = {
       "arkav/lualine-lsp-progress",
-      "ludovicchabant/vim-gutentags",
+      "dokwork/lualine-ex",
+      "nvim-lua/plenary.nvim"
     },
     -- Configure
     config = function()
@@ -259,8 +259,25 @@ return {
           -- Top right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
           lualine_x = { { 'diagnostics', symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' } } },
-          lualine_y = { 'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell' },
-          lualine_z = {}
+          -- lualine_y = { 'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell' },
+          lualine_y = { 'StatuslinePythonEnvironment'},
+          lualine_z = { {'ex.spellcheck', icon = "󰓆", 
+                          disabled_color = {fg = "black"}, disabled_icon_color = {fg = "black"} },
+                        {'ex.lsp.all', icons = { lsp_is_off = "󱥑 LSP",
+                         ['copilot'] = { '󰊤', color = {fg = "black"} },
+                         ['html'] = { '', color = {fg = "black"} },
+                         ['harper_ls'] = { '󰈙', color = {fg = "black"} },
+                         ['lua_ls'] = { '󰢱', color = {fg = "black"} },
+                         ['nil_ls'] = { '󱄅', color = {fg = "black"} },
+                         ['marksman'] = { '', color = {fg = "black"} },
+                         ['null-ls'] = { '󰁨', color = {fg = "black"} },
+                         ['pyright'] = { '', color = {fg = "black"} },
+                         ['ruff_lsp'] = { '', color = {fg = "black"} },
+                         ['yamlls'] = { '', color = {fg = "black"} },
+                        },
+                        icons_only = true,
+                        disabled_color = {fg = "black"}, disabled_icon_color = {fg = "black"} }
+                      }
         },
         -- Define the extensions which ensure that lualine
         -- makes better customized menus when they are used
