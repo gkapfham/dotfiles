@@ -80,6 +80,7 @@ return {
           LazyButton = { fg = "${fg}", bg = "${menu}", bold = true },
           LazyButtonActive = { fg = "${orange}", bg = "${menu}", bold = true },
           LazyNormal = { fg = "${fg}", bg = "${menu}" },
+          LualineDiagnostics = { fg = "${orange}", bold = true },
           LineNr = { fg = "${gray}", bg = "${bg}" },
           LspLens = { fg = "${cyan}", italic = true },
           Pmenu = { fg = "${fg}", bg = "${menu}" },
@@ -118,6 +119,7 @@ return {
           ["@variable"] = { fg = "${blue}" },
           ["@variable.member"] = { fg = "${blue}" },
           ["@property"] = { fg = "${blue}" },
+          ["@label.markdown"] = { fg = "${cyan}", italic = true },
         }
       })
       -- select the color scheme and set the termguicolors
