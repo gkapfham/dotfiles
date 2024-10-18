@@ -164,7 +164,8 @@ alias more="bat"
 alias cat="bat"
 
 # Directory listing with a simple command
-alias ka="eza --group-directories-first --grid --long --sort=name"
+# alias ka="eza --group-directories-first --grid --long --sort=name"
+alias ka="ls -al --git"
 
 # Use the eza command to display a tree,
 # ensuring better color scheme
