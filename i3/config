@@ -33,7 +33,8 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 font pango:Hack Nerd Font 9
 
 # Wallpaper that is a solid purple color
-exec_always --no-startup-id hsetroot -solid "#6E466E"
+# exec_always --no-startup-id hsetroot -solid "#6E466E"
+exec_always --no-startup-id hsetroot -solid "#875f87"
 
 # Define the color scheme for the i3bar
 # set $bg     #1C1C1C
