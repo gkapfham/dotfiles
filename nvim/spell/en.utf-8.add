@@ -3828,3 +3828,14 @@ UnicodeDecodeError
 grey
 toolchain
 #tererate
+ARP
+WEP
+WPA
+WPA2
+WPA3
+DNS
+ICMP
+IPv6
+IPv4
+VPNs
+IPSec
