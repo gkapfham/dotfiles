@@ -52,6 +52,13 @@ vim.cmd([[
   set smartcase
 ]])
 
+-- Do not display the message that shows which
+-- match is the currently highlighted one as
+-- the lualine will display this information
+vim.cmd([[
+set shortmess +=S
+]])
+
 -- }}}
 
 -- Indentation settings through the use of vim.cmd and vimscript commands {{{
