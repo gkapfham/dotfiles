@@ -9,7 +9,7 @@ local function lsp_clients()
   local lsp_abbreviations = {
     copilot = "󰊤",
     harper_ls = "󰈙",
-    html = "" ,
+    html = "",
     lua_ls = "󰢱",
     marksman = "",
     null_ls = "󰁨",
@@ -40,6 +40,16 @@ local function lsp_clients()
   end
   -- Return the client icons as a string with spaces
   return "" .. table.concat(client_names, " ")
+end
+
+local function spell_status()
+  -- Use a different configuration to show whether
+  -- or not spell checking is currently running
+  if vim.o.spell then
+    return '󰓆 󰔡' .. ' ' .. vim.o.spelllang
+  else
+    return '󰓆 󰔢' .. ' ' .. vim.o.spelllang
+  end
 end
 
 local aerial = require('aerial')
@@ -75,7 +85,7 @@ local function search_count()
   if vim.api.nvim_get_vvar("hlsearch") == 1 then
     local res = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
     if res.total > 0 then
-      return string.format(" %d/%d %s", res.current, res.total, vim.fn.getreg('/'))
+      return string.format(" %d/%d %s", res.current, res.total, vim.fn.getreg('/'))
     end
   end
   return ""
@@ -216,7 +226,6 @@ return {
     priority = 1000,
     dependencies = {
       "arkav/lualine-lsp-progress",
-      "dokwork/lualine-ex",
       "nvim-lua/plenary.nvim",
     },
     -- Configure
@@ -230,7 +239,7 @@ return {
           component_separators = { left = '', right = '' },
           section_separators = { left = '', right = '' },
           disabled_filetypes = {
-            winbar = {'neo-tree', 'Outline', 'aerial'},
+            winbar = { 'neo-tree', 'Outline', 'aerial' },
           },
           always_divide_middle = true,
           globalstatus = true,
@@ -246,17 +255,16 @@ return {
           -- Bottom left display
           -- from left (far left corner) to right (middle): {a} {b} {c}
           lualine_a = { { 'mode' } },
-          lualine_b = { {'branch', icon = "󰘬"}, { 'diff', source = diff_source, icon = "" } },
-          lualine_c = { 'StatuslineReadonly', { 'filename', icon = "󰓈 ", path = 0, file_status = false, symbols = {unnamed = "", newfile = ""}}, {'selectioncount', icon = "󰉄"}},
+          lualine_b = { { 'branch', icon = "󰘬" }, { 'diff', source = diff_source, icon = "" } },
+          lualine_c = { 'StatuslineReadonly', { 'filename', icon = "󰓈 ", path = 0, file_status = false, symbols = { unnamed = "", newfile = "" } }, { 'selectioncount', icon = "󰉄" } },
           -- Bottom right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
-          lualine_x = {{ 'lsp_progress', icon = "" }},
+          lualine_x = { { 'lsp_progress', icon = "" } },
           lualine_y = { search_count, { 'encoding', icon = "" }, { 'fileformat', symbols = {
             unix = '  LF',
             dos = '  CRLF',
             mac = '  CR',
           } }, { 'filesize', icon = '󰖡' }, },
-          -- lualine_z = { { 'filetype', colored = false } }
         },
         inactive_sections = {
           lualine_a = {},
@@ -267,7 +275,7 @@ return {
           lualine_z = {}
         },
         winbar = {
-          lualine_b = { {'filename', path = 3, file_status = false, icon = "󰉋", shorting_target = 80, symbols = {unnamed = "", newfile = ""}}, { 'progress', icon = "󰮴" }, { 'location', icon = "" }, { "aerial", colored = false },  }
+          lualine_b = { { 'filename', path = 3, file_status = false, icon = "󰉋", shorting_target = 80, symbols = { unnamed = "", newfile = "" } }, { 'progress', icon = "󰮴" }, { 'location', icon = "" }, { "aerial", colored = false }, }
         },
         tabline = {
           -- Top left display
@@ -297,28 +305,12 @@ return {
           -- Top right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
           lualine_x = { { 'diagnostics', symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' } } },
-          -- lualine_y = { 'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell' },
           lualine_y = { 'StatuslinePythonEnvironment' },
-          lualine_z = { {'ex.spellcheck', icon = "󰓆",
-                          disabled_color = {fg = "black"}, disabled_icon_color = {fg = "black"} },
-                          lsp_clients,
-                      --   {'ex.lsp.all', icons = { lsp_is_off = "󱥑 LSP",
-                      --    ['copilot'] = { '󰊤', color = {fg = "black"} },
-                      --    ['html'] = { '', color = {fg = "black"} },
-                      --    ['harper_ls'] = { '󰈙', color = {fg = "black"} },
-                      --    ['lua_ls'] = { '󰢱', color = {fg = "black"} },
-                      --    ['nil_ls'] = { '󱄅', color = {fg = "black"} },
-                      --    ['marksman'] = { '', color = {fg = "black"} },
-                      --    ['null-ls'] = { '󰁨', color = {fg = "black"} },
-                      --    ['otter-ls'] = { '', color = {fg = "black"} },
-                      --    ['pyright'] = { '', color = {fg = "black"} },
-                      --    ['ruff_lsp'] = { '', color = {fg = "black"} },
-                      --    ['yamlls'] = { '', color = {fg = "black"} },
-                      --   },
-                      --   icons_only = true,
-                      --   disabled_color = {fg = "black"}, disabled_icon_color = {fg = "black"}
-                      -- }
-                      }
+          lualine_z = {
+            function()
+              return spell_status() .. " " .. lsp_clients()
+            end,
+          }
         },
         -- Define the extensions which ensure that lualine
         -- makes better customized menus when they are used
