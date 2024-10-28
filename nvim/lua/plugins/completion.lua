@@ -446,7 +446,7 @@ return {
               nvim_lsp_document_symbol = " LSP",
               path = " Path",
               nerdfont = " Font",
-              otter = " Otter",
+              otter = "󰌨 Otter",
               pandoc_references = " Pandoc",
               rg = " Search",
               tags = " Tags",
