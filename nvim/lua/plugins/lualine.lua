@@ -4,6 +4,43 @@
 
 -- Define functions in lua {{{
 
+local function lsp_clients()
+  -- Define a lookup table for LSP client abbreviations
+  local lsp_abbreviations = {
+    copilot = "󰊤",
+    html = "" ,
+    lua_ls = "󰢱",
+    marksman = "",
+    null_ls = "󰁨",
+    otter_ls = "󰌨",
+    pyright = "󰌠",
+    ruff_lsp = "󱝁",
+  }
+  -- Get the active LSP clients
+  -- and return the client names
+  local clients = vim.lsp.get_active_clients()
+  if next(clients) == nil then
+    return "󱥑 LSP"
+  end
+  local client_names = {}
+  for _, client in ipairs(clients) do
+    -- Get the base name of the client
+    -- and replace any dashes with underscores
+    local base_name = client.name:match("^[^%[]+")
+    base_name = base_name:gsub("-", "_")
+    -- Get the abbreviation for the client
+    -- and append it to the list of client names;
+    -- note that the abbreviation is an icon
+    -- defined in the lsp_abbreviations table;
+    -- note that the abbreviation is an icon
+    -- defined in the lsp_abbreviations table
+    local abbreviation = lsp_abbreviations[base_name] or base_name
+    table.insert(client_names, abbreviation)
+  end
+  -- Return the client icons as a string with spaces
+  return "" .. table.concat(client_names, " ")
+end
+
 local aerial = require('aerial')
 local function format_status(symbols, depth, separator, icons_enabled)
   local parts = {}
@@ -32,7 +69,7 @@ end
 
 -- Define a function for displaying the current result number
 -- out of total number of results when searching with / or ?
-vim.o.shortmess = vim.o.shortmess .. "S"
+-- vim.o.shortmess = vim.o.shortmess .. "S"
 local function search_count()
   if vim.api.nvim_get_vvar("hlsearch") == 1 then
     local res = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
@@ -179,7 +216,7 @@ return {
     dependencies = {
       "arkav/lualine-lsp-progress",
       "dokwork/lualine-ex",
-      "nvim-lua/plenary.nvim"
+      "nvim-lua/plenary.nvim",
     },
     -- Configure
     config = function()
@@ -213,12 +250,12 @@ return {
           -- Bottom right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
           lualine_x = {{ 'lsp_progress', icon = "" }},
-          lualine_y = { { 'encoding', icon = "" }, { 'fileformat', symbols = {
+          lualine_y = { search_count, { 'encoding', icon = "" }, { 'fileformat', symbols = {
             unix = '  LF',
             dos = '  CRLF',
             mac = '  CR',
           } }, { 'filesize', icon = '󰖡' }, },
-          lualine_z = { { 'filetype', colored = false } }
+          -- lualine_z = { { 'filetype', colored = false } }
         },
         inactive_sections = {
           lualine_a = {},
@@ -260,23 +297,26 @@ return {
           -- from left (middle) to right (far right corner): {x} {y} {z}
           lualine_x = { { 'diagnostics', symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' } } },
           -- lualine_y = { 'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell' },
-          lualine_y = { 'StatuslinePythonEnvironment'},
-          lualine_z = { {'ex.spellcheck', icon = "󰓆", 
+          lualine_y = { 'StatuslinePythonEnvironment' },
+          lualine_z = { {'ex.spellcheck', icon = "󰓆",
                           disabled_color = {fg = "black"}, disabled_icon_color = {fg = "black"} },
-                        {'ex.lsp.all', icons = { lsp_is_off = "󱥑 LSP",
-                         ['copilot'] = { '󰊤', color = {fg = "black"} },
-                         ['html'] = { '', color = {fg = "black"} },
-                         ['harper_ls'] = { '󰈙', color = {fg = "black"} },
-                         ['lua_ls'] = { '󰢱', color = {fg = "black"} },
-                         ['nil_ls'] = { '󱄅', color = {fg = "black"} },
-                         ['marksman'] = { '', color = {fg = "black"} },
-                         ['null-ls'] = { '󰁨', color = {fg = "black"} },
-                         ['pyright'] = { '', color = {fg = "black"} },
-                         ['ruff_lsp'] = { '', color = {fg = "black"} },
-                         ['yamlls'] = { '', color = {fg = "black"} },
-                        },
-                        icons_only = true,
-                        disabled_color = {fg = "black"}, disabled_icon_color = {fg = "black"} }
+                          lsp_clients,
+                      --   {'ex.lsp.all', icons = { lsp_is_off = "󱥑 LSP",
+                      --    ['copilot'] = { '󰊤', color = {fg = "black"} },
+                      --    ['html'] = { '', color = {fg = "black"} },
+                      --    ['harper_ls'] = { '󰈙', color = {fg = "black"} },
+                      --    ['lua_ls'] = { '󰢱', color = {fg = "black"} },
+                      --    ['nil_ls'] = { '󱄅', color = {fg = "black"} },
+                      --    ['marksman'] = { '', color = {fg = "black"} },
+                      --    ['null-ls'] = { '󰁨', color = {fg = "black"} },
+                      --    ['otter-ls'] = { '', color = {fg = "black"} },
+                      --    ['pyright'] = { '', color = {fg = "black"} },
+                      --    ['ruff_lsp'] = { '', color = {fg = "black"} },
+                      --    ['yamlls'] = { '', color = {fg = "black"} },
+                      --   },
+                      --   icons_only = true,
+                      --   disabled_color = {fg = "black"}, disabled_icon_color = {fg = "black"}
+                      -- }
                       }
         },
         -- Define the extensions which ensure that lualine
