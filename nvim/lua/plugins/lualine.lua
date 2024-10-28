@@ -8,6 +8,7 @@ local function lsp_clients()
   -- Define a lookup table for LSP client abbreviations
   local lsp_abbreviations = {
     copilot = "󰊤",
+    harper_ls = "󰈙",
     html = "" ,
     lua_ls = "󰢱",
     marksman = "",
