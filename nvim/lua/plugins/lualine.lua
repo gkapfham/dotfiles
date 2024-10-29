@@ -99,8 +99,9 @@ function output_symbols_structure(depth, separator, icons_enabled)
 end
 
 -- Define a function for displaying the current result number
--- out of total number of results when searching with / or ?
--- vim.o.shortmess = vim.o.shortmess .. "S"
+-- out of total number of results when searching with / or ?.
+-- Note that this assumes that the shortmess parameter has
+-- already been set to include the S flag in configure/settings.lua.
 local function search_count()
   if vim.api.nvim_get_vvar("hlsearch") == 1 then
     local res = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
