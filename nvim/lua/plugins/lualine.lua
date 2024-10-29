@@ -35,13 +35,32 @@ local function lsp_clients()
     -- note that the abbreviation is an icon
     -- defined in the lsp_abbreviations table;
     -- note that the abbreviation is an icon
-    -- defined in the lsp_abbreviations table
+    -- defined in the lsp_abbreviations table;
+    -- Make sure that the abbreviation is not
+    -- already in the list of client names
+    -- (this can take place because of the fact
+    -- that, for instance, the Otter-ls client
+    -- has numbers in its name inside of brackets.
+    -- But, there should only be a single icon
+    -- to indicate that the client is active)
     local abbreviation = lsp_abbreviations[base_name] or base_name
-    table.insert(client_names, abbreviation)
+    local exists = false
+    for _, name in ipairs(client_names) do
+        if name == abbreviation then
+            exists = true
+            break
+        end
+    end
+    if not exists then
+        table.insert(client_names, abbreviation)
+    end
   end
   -- Return the client icons as a string with spaces
   return "" .. table.concat(client_names, " ")
 end
+
+-- local abbreviation = lsp_abbreviations[base_name] or base_name
+-- table.insert(client_names, abbreviation)
 
 local function spell_status()
   -- Use a different configuration to show whether
