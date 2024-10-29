@@ -16,6 +16,7 @@ local function lsp_clients()
     otter_ls = "󰌨",
     pyright = "󰌠",
     ruff_lsp = "󱝁",
+    yamlls = "",
   }
   -- Get the active LSP clients
   -- and return the client names
