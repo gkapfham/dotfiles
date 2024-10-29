@@ -50,6 +50,9 @@ format = '[ $version ](bold red)'
 [python]
 format = '[ $version (\($virtualenv\) )](bold yellow)'
 
+[quarto]
+format = '[󰐴 $version ](bold blue)'
+
 [rust]
 format = '[ $version ](bold blue)'
 
