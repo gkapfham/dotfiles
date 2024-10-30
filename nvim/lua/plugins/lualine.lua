@@ -52,6 +52,9 @@ local function lsp_clients()
             break
         end
     end
+    -- Only add the abbreviation if it does not already exist
+    -- in the list of client names (this prevents an icon
+    -- from being added and displayed in lualine twice)
     if not exists then
         table.insert(client_names, abbreviation)
     end
