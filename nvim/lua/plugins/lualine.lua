@@ -12,6 +12,7 @@ local function lsp_clients()
     html = "",
     lua_ls = "󰢱",
     marksman = "",
+    nil_ls = "",
     null_ls = "󰁨",
     otter_ls = "󰌨",
     pyright = "󰌠",
