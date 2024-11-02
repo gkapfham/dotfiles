@@ -142,6 +142,13 @@ export PIPX_HOME="$HOME/.local/pipx"
 # display backtraces when an error occurs
 export RUST_BACKTRACE=1
 
+# Set the environment variable that ensure that the
+# zk command can be used to interact with the default
+# zettelkasten notebook in the specified directory
+# (note that this works even when zk is used through
+# the neovim plugin zk.nvim)
+export ZK_NOTEBOOK_DIR="/home/gkapfham/working/zk"
+
 # }}}
 
 # System Aliases {{{
