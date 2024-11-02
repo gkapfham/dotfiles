@@ -14,7 +14,7 @@ return {
        ]])
     end,
     keys = {
-      -- Define key mappins
+      -- Define key mappings
       { "<Space>we", "<cmd> WikiEnable<CR>", desc = "Wiki: Enable" },
       { "<Space>ww", "<cmd> WikiPages<CR>", desc = "Wiki: Display all pages" },
       { "<Space>wt", "<cmd> WikiTags<CR>", desc = "Wiki: Display all tags" },
