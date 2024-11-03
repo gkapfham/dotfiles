@@ -32,7 +32,9 @@ return {
       -- Open notes by tags
       { "<Space>zt", "<Cmd>ZkTags <CR>", desc = "Zk: Open Notes by Tags" },
       -- Open backlinks to a note
-      { "<Space>zt", "<Cmd>ZkBacklinks <CR>", desc = "Zk: Open Backlinks to a Note" },
+      { "<Space>zb", "<Cmd>ZkBacklinks <CR>", desc = "Zk: Open Backlinks to a Note" },
+      -- Open links in a note
+      { "<Space>zl", "<Cmd>ZkLinks <CR>", desc = "Zk: Open Links in a Note" },
       -- Find notes
       { "<Space>zf", "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } } <CR>",
         desc = "Zk: Find Matching Notes" },
