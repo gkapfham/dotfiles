@@ -11,6 +11,7 @@ local function lsp_clients()
     harper_ls = "󰈙",
     html = "",
     lua_ls = "󰢱",
+    gopls = "",
     marksman = "",
     nil_ls = "",
     null_ls = "󰁨",
