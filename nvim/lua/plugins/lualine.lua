@@ -18,6 +18,7 @@ local function lsp_clients()
     otter_ls = "󰌨",
     pyright = "󰌠",
     ruff_lsp = "󱝁",
+    texlab = "",
     yamlls = "",
     zk = "",
   }
