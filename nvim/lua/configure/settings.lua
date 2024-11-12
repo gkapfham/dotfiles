@@ -27,7 +27,8 @@ vim.opt.lazyredraw = false
 -- Display screen redraws faster
 vim.cmd([[
   set nocursorcolumn
-  set nocursorline
+  " set nocursorline
+  set cursorline
   set ttyfast
 ]])
 
