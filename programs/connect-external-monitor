@@ -3,7 +3,7 @@
 # Reminder: use the command 'xrandr' to see what monitors are available.
 
 # Use fzf to select from one of the connected displays
-CONNECTED_DISPLAYS=$(xrandr | grep connected | fzf)
+CONNECTED_DISPLAYS=$(xrandr | grep connected | fzf --prompt " ")
 DISPLAY_PORT=$(echo "$CONNECTED_DISPLAYS" | awk '{print $1}')
 
 # Connected the Framework 13 laptop:
