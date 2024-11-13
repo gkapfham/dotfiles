@@ -432,7 +432,7 @@ tms() {
 tm() {
   # NOTE: Use the absolute Nix-based ls command since "ls" is now aliased to use "eza" command
   session=$( /run/current-system/sw/bin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
-    fzf --query="$1" --select-1 --exit-0 --cycle --no-separator) &&
+    fzf --query="$1" --select-1 --exit-0 --cycle --no-separator --prompt " ") &&
     tmuxinator "$session"
 }
 alias tmm="tm"
@@ -446,7 +446,13 @@ function workspace {
 # Use fzf and sesh to connect to existing tmux session
 # or start tmux in a commonly used directory
 tt() {
-  sesh connect $(sesh list --tmux --zoxide --icons | fzf --no-sort --select-1 --exit-0 --cycle --no-separator --ansi | awk '{print substr($0, 2)}')
+  sesh connect $(sesh list --tmux --zoxide --icons | fzf --no-sort --select-1 --exit-0 --cycle --no-separator --ansi --prompt " " | awk '{print substr($0, 2)}')
+}
+
+# Use fzf and fd to create a tmux session based
+# on the directory that is selected through using fd
+td() {
+  sesh connect $(fd -H -d 2 -t d -E .Trash . ~ | fzf --no-sort --select-1 --exit-0 --cycle --no-separator --ansi --prompt " ")
 }
 
 # }}}
