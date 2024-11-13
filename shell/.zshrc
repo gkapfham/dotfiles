@@ -429,17 +429,24 @@ tms() {
 }
 
 # Display all of the possible tmuxinators with fzf
-tmm() {
+tm() {
   # NOTE: Use the absolute Nix-based ls command since "ls" is now aliased to use "eza" command
   session=$( /run/current-system/sw/bin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
     fzf --query="$1" --select-1 --exit-0 --cycle --no-separator) &&
     tmuxinator "$session"
 }
+alias tmm="tm"
 
 # Define the name of a tmux pane, display in the status-right
 function workspace {
   readonly name=${1:?"Specify the name of the workspace."}
   tmux select-pane -T $name
+}
+
+# Use fzf and sesh to connect to existing tmux session
+# or start tmux in a commonly used directory
+tt() {
+  sesh connect $(sesh list --tmux --zoxide --icons | fzf --no-sort --select-1 --exit-0 --cycle --no-separator --ansi | awk '{print substr($0, 2)}')
 }
 
 # }}}
