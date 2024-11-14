@@ -437,10 +437,37 @@ tm() {
 }
 alias tmm="tm"
 
-# Define the name of a tmux pane, display in the status-right
+# # Define the name of a tmux pane, display in the status-right
+# function workspace {
+#   readonly name=${1:?"Specify the name of the workspace."}
+#   tmux select-pane -T $name
+# }
+
 function workspace {
+  local -A prefix_map=(
+    ["Code"]=""
+    ["Command"]=""
+    ["File"]=""
+    ["GitHub"]=""
+    ["Preview"]="󰒋"
+    ["Server"]="󰒋"
+    ["Solution"]="󰄲"
+    ["Starter"]="󰋮"
+  )
   readonly name=${1:?"Specify the name of the workspace."}
-  tmux select-pane -T $name
+  local prefix=""
+  for key in "${(@k)prefix_map}"; do
+    if [[ $name == *"$key"* ]]; then
+      prefix=${prefix_map[$key]}
+      break
+    fi
+  done
+  tmux select-pane -T "${prefix} ${name}"
+}
+
+function window {
+  readonly name=${1:?"Specify the name of the window."}
+  tmux rename-window "${prefix} ${name}"
 }
 
 # Use fzf and sesh to connect to existing tmux session
