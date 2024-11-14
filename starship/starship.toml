@@ -51,7 +51,7 @@ format = '[ $version ](bold red)'
 format = '[ $version (\($virtualenv\) )](bold yellow)'
 
 [quarto]
-format = '[󰐴 $version ](bold blue)'
+format = '[󱨇 $version ](bold blue)'
 
 [rust]
 format = '[ $version ](bold blue)'
