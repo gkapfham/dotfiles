@@ -229,7 +229,7 @@ return {
             name = "Toml"
           },
           ["qmd"] = {
-            icon = "󰐴",
+            icon = "󱨇",
             name = "Quarto"
           },
           [""] = {
