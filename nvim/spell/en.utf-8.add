@@ -4097,3 +4097,13 @@ shoulds
 presubmit
 backtick
 Pearce
+CVEs
+YYYY
+NNNN
+MITRE
+CVSS
+GitGuardian
+TruffleSecurity
+Snyk
+SonarQube
+Veracode
