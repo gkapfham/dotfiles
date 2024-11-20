@@ -447,8 +447,10 @@ function workspace {
   local -A prefix_map=(
     ["Code"]=""
     ["Command"]=""
+    ["Develop"]=""
     ["File"]=""
     ["GitHub"]=""
+    ["Program"]=""
     ["Preview"]="󰒋"
     ["Server"]="󰒋"
     ["Solution"]="󰄲"
