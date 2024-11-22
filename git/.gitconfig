@@ -85,3 +85,14 @@
     navigate = true
     true-color = true
     hyperlinks = true
+[maintenance]
+	repo = /home/gkapfham/.zsh/zsh-snap
+	repo = /home/gkapfham/.zsh/Aloxaf/fzf-tab
+	repo = /home/gkapfham/.zsh/babarot/enhancd
+	repo = /home/gkapfham/.zsh/chisui/zsh-nix-shell
+	repo = /home/gkapfham/.zsh/jeffreytse/zsh-vi-mode
+	repo = /home/gkapfham/.zsh/jnooree/zoxide-zsh-completion
+	repo = /home/gkapfham/.zsh/marlonrichert/zsh-autocomplete
+	repo = /home/gkapfham/.zsh/ohmyzsh/ohmyzsh
+	repo = /home/gkapfham/.zsh/zsh-users/zsh-autosuggestions
+	repo = /home/gkapfham/.zsh/zsh-users/zsh-completions
