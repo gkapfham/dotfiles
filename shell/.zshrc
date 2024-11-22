@@ -295,6 +295,9 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # of the cd command that shows the contents of current directory
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons $realpath'
 
+# force zsh not to show completion menu, allow fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+
 # Preview of commandline arguments when completing `kill`
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
@@ -630,7 +633,7 @@ bindkey '^p' _atuin_search_widget
 
 # }}}
 
-# Znap Plugins {{{
+# Multiple Znap Plugins {{{
 
 # Use znap source to start plugins from oh-my-zsh
 znap source ohmyzsh/ohmyzsh \
@@ -639,14 +642,19 @@ znap source ohmyzsh/ohmyzsh \
   plugins/tmuxinator
 
 # Use znap source to start plugins
+znap source chisui/zsh-nix-shell
 znap source zsh-users/zsh-completions
-znap source zsh-users/zsh-autosuggestions
 znap source jeffreytse/zsh-vi-mode
 znap source Aloxaf/fzf-tab
-znap source chisui/zsh-nix-shell
+
+# }}}
+
+# Zsh-Autosuggestions {{{
 
 # Configure the zsh-autosuggestions plugin
-bindkey '^ ' autosuggest-accept
+ZSH_AUTOSUGGEST_STRATEGY=( history completion match_prev_cmd )
+znap source zsh-users/zsh-autosuggestions
+zvm_after_init_commands+=(eval "bindkey '^ ' autosuggest-accept")
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585858"
 
 # }}}
