@@ -350,7 +350,7 @@ return {
     },
   },
 
-  -- nvim-cmp
+  -- nvim-cmp (alternatively magazine.nvim is faster)
   -- Auto completion with nvim-cmp
   -- Note that you can cancel the
   -- current completion with <C-e>;
@@ -359,7 +359,8 @@ return {
   -- prevent the use of <Tab> for indenting
   -- as it will be setup for accepting
   {
-    "hrsh7th/nvim-cmp",
+    -- "hrsh7th/nvim-cmp",
+    "hrsh7th/nvim-cmp", url = "https://github.com/iguanacucumber/magazine.nvim",
     event = "InsertEnter",
     dependencies = {
       -- Stand-alone cmp plugins
@@ -417,7 +418,10 @@ return {
           fetching_timeout = 50,
           debounce = 10,
           async_budget = 1,
-          max_view_entries = 50
+          filtering_context_budget = 1,
+          confirm_resolve_timeout = 50,
+          -- max_view_entries = 50
+          max_view_entries = 100
         },
         -- Specify a snippet engine
         snippet = {
@@ -591,8 +595,8 @@ return {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
           { name = 'path' },
-          { name = 'buffer',       max_item_count = 5, priority = 10 },
-          { name = 'fuzzy_buffer', max_item_count = 5, priority = 5 },
+          { name = 'buffer', max_item_count = 25, priority = 10 },
+          { name = 'fuzzy_buffer', max_item_count = 25, priority = 5 },
         }, {
           { name = 'cmdline' },
         })
@@ -604,8 +608,8 @@ return {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
           { name = 'path' },
-          { name = 'buffer',       max_item_count = 5, priority = 10 },
-          { name = 'fuzzy_buffer', max_item_count = 5, priority = 5 },
+          { name = 'buffer', max_item_count = 25, priority = 10 },
+          { name = 'fuzzy_buffer', max_item_count = 25, priority = 5 },
         }, {
           { name = 'cmdline' },
         })
