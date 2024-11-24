@@ -33,7 +33,7 @@ return {
           label = { before = true, after = true, style = "eol" },
         },
         search = {
-          enabled = true,
+          enabled = false,
         },
         char = {
           highlight = {
