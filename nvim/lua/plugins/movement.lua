@@ -5,7 +5,9 @@ return {
 
   -- flash.nvim
   -- movements based on marking letters through both motions and search
-  -- supports textual content and treesitter nodes
+  -- supports textual content and treesitter nodes; do not use the
+  -- provided search functionality because you can trigger one of
+  -- the labels as you continue to search, causing problems
   {
     "folke/flash.nvim",
     event = "VeryLazy",
