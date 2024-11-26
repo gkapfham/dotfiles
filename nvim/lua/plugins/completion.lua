@@ -544,10 +544,10 @@ return {
         -- with a higher priority have higher weighting on priority.
         sources = cmp.config.sources({
           -- Define the first-tier of sources
-          { name = 'treesitter',   max_item_count = 5,  priority = 10 },
+          { name = 'treesitter',   max_item_count = 10, priority = 10 },
           { name = 'nvim_lsp',     max_item_count = 10, priority = 10 },
-          { name = 'copilot',      max_item_count = 5,  priority = 8 },
-          { name = 'supermaven',   max_item_count = 5,  priority = 8 },
+          { name = 'copilot',      max_item_count = 10,  priority = 8 },
+          { name = 'supermaven',   max_item_count = 10,  priority = 8 },
           -- Look at all of the open buffers
           {
             name = 'buffer',
@@ -559,8 +559,8 @@ return {
               end
             }
           },
+          { name = 'fuzzy_buffer',      max_item_count = 10, priority = 6 },
           { name = 'cmp_yanky',         max_item_count = 5, priority = 6 },
-          { name = 'fuzzy_buffer',      max_item_count = 5, priority = 6 },
           { name = 'tags',              max_item_count = 5, priority = 5 },
           { name = 'luasnip',           max_item_count = 5, priority = 5 },
           { name = 'otter',             max_item_count = 5, priority = 5, keyword_length = 2 },
@@ -578,7 +578,7 @@ return {
             priority = 10,
             keyword_length = 3
           },
-          { name = 'nerdfont',               max_item_count = 10, priority = 1, keyword_length = 3 },
+          { name = 'nerdfont', max_item_count = 10, priority = 1, keyword_length = 3 },
           { name = 'nvim_lsp_signature_help' },
         }, {
           -- Define the second-tier of sources; these will only
