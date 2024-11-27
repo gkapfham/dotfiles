@@ -39,8 +39,8 @@ battery 1 {
         status_chr = " 󰁹"
         status_idle = "󰁹"
         status_bat = " 󰁹"
-        format_down = " 󱟩"
-        status_unk = " 󱉞"
+        format_down = " 󰁹󰡅"
+        status_unk = " 󰁹"
         integer_battery_capacity = true
         last_full_capacity = true
         hide_seconds = true
