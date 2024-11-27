@@ -36,7 +36,6 @@ ethernet _first_ {
 }
 
 battery 1 {
-        # status_chr = " "
         status_chr = " 󰁹"
         status_idle = "󰁹"
         status_bat = " 󰁹"
