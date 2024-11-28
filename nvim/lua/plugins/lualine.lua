@@ -18,6 +18,7 @@ local function lsp_clients()
     null_ls = "󰁨",
     otter_ls = "󰌨",
     pyright = "󰌠",
+    ruff = "󱝁",
     ruff_lsp = "󱝁",
     texlab = "",
     yamlls = "",
