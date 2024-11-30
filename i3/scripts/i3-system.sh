@@ -6,8 +6,9 @@
 # 2016 Oliver Kraitschy - http://okraits.de
 # Script customized with special messages and icons
 
-# Configure the options with icons and a label
-OPTIONS=" Lock System\n Restart System\n Shutdown System\n󰒲 Suspend System"
+# Configure the options with icons and a label;
+# note that the Hibernate System is not reliable
+OPTIONS=" Lock System\n Restart System\n Shutdown System\n󰒲 Suspend System\n󰒲 Hibernate System"
 
 # Configure rofi's launcher commands
 LAUNCHER="rofi -dmenu -i -p system"
