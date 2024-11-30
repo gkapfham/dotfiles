@@ -32,7 +32,7 @@ vim.keymap.set("n", "<Space>qq", "<cmd>qa!<cr>", { desc = "Custom keymap: Quit a
 -- Use vim.cmd
 
 vim.cmd([[
-" Remove trailing whitespace
+" Remove trailing blank spaces
 nnoremap <leader>rtw :%s/\s\+$//e<CR>
 " Fix a misspelling with next-best word
 nmap <silent> zn <Plug>(SpellRotateForward)
