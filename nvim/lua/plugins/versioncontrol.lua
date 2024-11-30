@@ -2,6 +2,21 @@
 -- Purpose: load and configure all plugins that
 -- integrate with the Git version control system
 
+-- Make it easy to toggle the git status
+-- window provided by vim-fugitive, ensuring
+-- that the sidebar in the edgy does not close
+vim.cmd([[
+function! ToggleGstatus() abort
+  for l:winnr in range(1, winnr('$'))
+    if !empty(getwinvar(l:winnr, 'fugitive_status'))
+      exe l:winnr 'close'
+      return
+    endif
+  endfor
+  keepalt Git
+endfunction
+]])
+
 return {
 
   -- vim-fugitive for git integration
@@ -10,8 +25,8 @@ return {
     cmd = { "G", "Git", "Gwrite" },
     keys = {
       -- Keys: git status
-      { "<Space>gg",   ":Git <CR>",          desc = "Fugitive: Git status" },
-      { "<leader>gg",  ":Git <CR>",          desc = "Fugitive: Git status" },
+      { "<Space>gg",   ":call ToggleGstatus() <CR>", desc = "Fugitive: Git status toggle" },
+      { "<leader>gg",   ":call ToggleGstatus() <CR>", desc = "Fugitive: Git status toggle" },
       -- Keys: git write
       { "<Space>gw",   ":Gwrite <CR>",       desc = "Fugitive: Git write to add file" },
       { "<leader>gw",  ":Gwrite <CR>",       desc = "Fugitive: Git write to add file" },
