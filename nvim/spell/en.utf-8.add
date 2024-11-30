@@ -4205,3 +4205,8 @@ ReadWritePaths
 borgmatic
 diffview
 octo
+PTAL
+presubmits
+Refactorings
+LSC
+s2idle
