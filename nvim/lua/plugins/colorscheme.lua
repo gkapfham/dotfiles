@@ -99,6 +99,7 @@ return {
           NormalFloat = { fg = "${fg}", bg = "NONE" },
           Search = { fg = "NONE", bg = "NONE", undercurl = true, bold = true },
           CurSearch = { fg = "${orange}", bg = "NONE", undercurl = true, bold = true },
+          RenderMarkdownCode = { bg = "${bg}" },
           SymbolUsageRounding = { fg = "${menu}" },
           SymbolUsageContent = { fg = "${cyan}", italic = true },
           SymbolUsageRef = { fg = "${cyan}", italic = true },
