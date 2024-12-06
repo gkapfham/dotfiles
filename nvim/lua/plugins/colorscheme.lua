@@ -43,6 +43,11 @@ return {
           none = "NONE",
         },
         -- override the default highlights
+        -- defined by the standard version
+        -- of this colorscheme; define first
+        -- those that are standard and/or
+        -- defined by a plugin and then 
+        -- define those for treesitter
         highlights = {
           -- standard highlights
           AvanteTitle = { fg = "${fg}", bg = "NONE" },
