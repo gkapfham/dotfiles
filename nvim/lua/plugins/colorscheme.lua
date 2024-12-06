@@ -45,6 +45,14 @@ return {
         -- override the default highlights
         highlights = {
           -- standard highlights
+          AvanteTitle = { fg = "${fg}", bg = "NONE" },
+          AvanteThirdTitle = { fg = "${fg}", bg = "NONE" },
+          AvanteReversedTitle = { fg = "${bg}", bg = "NONE" },
+          AvanteReversedThirdTitle = { fg = "${bg}", bg = "NONE" },
+          AvanteConflictCurrent = { bg = "${bg}" },
+          AvanteConflictCurrentLabel = { fg = "${cyan}", bg = "${bg}" },
+          AvanteConflictIncoming = { bg = "${bg}" },
+          AvanteConflictIncomingLabel = { fg = "${orange}", bg = "${bg}" },
           Comment = { fg = "${comment}", bg = "NONE", italic = true },
           CmpItemKindCopilot = { fg = "${yellow}" },
           CmpItemKindEnum = { fg = "${orange}" },
@@ -114,6 +122,7 @@ return {
           ["@markup.heading.1.markdown"] = { fg = "${orange}" },
           ["@markup.heading.2.markdown"] = { fg = "${green}" },
           ["@markup.heading.3.markdown"] = { fg = "${purple}" },
+          ["@markup.raw"] = { bg = "${bg}" },
           ["@string"] = { fg = "${yellow}", italic = false },
           ["@variable"] = { fg = "${blue}" },
           ["@variable.member"] = { fg = "${blue}" },
