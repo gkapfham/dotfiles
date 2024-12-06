@@ -631,4 +631,25 @@ return {
     end,
   },
 
+  -- avante.nvim
+  -- Use the Avante plugin for a better
+  -- interaction with the GitHub Copilot
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = { file_types = { "Avante" } },
+        ft = { "markdown", "Avante" },
+      },
+    },
+    build = "make",
+    opts = { provider = "copilot" },
+  },
+
 }
