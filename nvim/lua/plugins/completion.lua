@@ -642,17 +642,17 @@ return {
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
-      -- {
-      --   "MeanderingProgrammer/render-markdown.nvim",
-      --   opts = { file_types = { "Avante" } },
-      --   ft = { "markdown", "Avante" },
-      -- },
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = { file_types = { "Avante" } },
+        ft = { "Avante" },
+      },
     },
     build = "make",
     opts = {
       provider = "copilot",
       behaviour = {
-        auto_suggestions = false, -- Experimental stage
+        auto_suggestions = false,
         auto_set_highlight_group = true,
         auto_set_keymaps = true,
         auto_apply_diff_after_generation = false,
@@ -661,6 +661,8 @@ return {
       },
       windows = {
         position = "bottom",
+        wrap = true,
+        min_height = 30,
         width = 30,
         sidebar_header = {
           enabled = false,
@@ -669,7 +671,8 @@ return {
         },
         input = {
           prefix = " ",
-          height = 20,
+          width = 30,
+          height = 300,
         },
         edit = {
           border = "rounded",
