@@ -43,6 +43,7 @@ return {
             i = {
               ["<esc>"] = actions.close,
               ["<M-a>"] = actions.select_all,
+              ["<C-q>"] = actions.smart_send_to_qflist,
             },
             n = {
               ["<esc>"] = actions.close,
