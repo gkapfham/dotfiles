@@ -8,7 +8,9 @@ return {
   -- the quickfix and locations lists
   {
     "folke/trouble.nvim",
-    opts = {},
+    opts = {
+      auto_preview = false,
+    },
     cmd = "Trouble",
     keys = {
       {
