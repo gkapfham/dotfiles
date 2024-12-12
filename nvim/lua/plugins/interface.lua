@@ -126,13 +126,17 @@ return {
         right = { size = 25 },
         top = { size = 10 },
       },
+       -- Configure the bottom panel
       bottom = {
+        -- Trouble.nvim with diagnostics
+        -- and symbols and quickfix and more
         {
           title = "Analysis",
           ft = "trouble"
         },
         { ft = "qf", title = "QuickFix" },
       },
+      -- Configure the right panel
       right = {
         -- Neotree filesystem
         {
