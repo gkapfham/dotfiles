@@ -186,6 +186,7 @@ return {
   },
 
   -- snacks.nvim
+  -- small improvements to the user interface
   {
     "folke/snacks.nvim",
     priority = 1000,
