@@ -2,8 +2,8 @@
 -- Purpose: Configure the nvim-cmp plugin
 -- and all of the plugins that enhance it
 
+-- Define reusable prompts for CopilotChat
 local prompts = {
-  -- Code related prompts
   PytestMultipleAssert = "Please write a Pytest test case for the provided source code. The test case should have multiple assertions and each assertion should have a message attached to it that will appear if the assertion fails. The test case should test both the common and the exceptional inputs for the provided source code. Make sure that the test has a descriptive docstring and comments for the lines in it. Please do not use blank lines or spaces to separate any of the blocks in the test case, including between the docstring, comments, and code.",
 }
 
@@ -225,7 +225,8 @@ return {
   -- is not yet polished this tool works well
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    version = "v2.1.0",
+    -- branch = "main",
+    -- version = "v2.1.0",
     dependencies = {
       { "nvim-telescope/telescope.nvim" },
       { "nvim-lua/plenary.nvim" },
@@ -308,11 +309,15 @@ return {
       opts.selection = select.unnamed
       -- Override the git prompts message
       opts.prompts.Commit = {
-        prompt = "Write commit message for the change with commitizen convention",
+        prompt = "Write commit message for the change using the convential commits standard.",
+        selection = select.gitdiff,
+      }
+      opts.prompts.Commit = {
+        prompt = "Write commit message for the change using the convential commits standard.",
         selection = select.gitdiff,
       }
       opts.prompts.CommitStaged = {
-        prompt = "Write commit message for the change with commitizen convention",
+        prompt = "Write commit message for the change using the convential commits standard.",
         selection = function(source)
           return select.gitdiff(source, true)
         end,
