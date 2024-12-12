@@ -4,21 +4,7 @@
 
 local prompts = {
   -- Code related prompts
-  Explain = "Please explain how the following code works.",
-  Review = "Please review the following code and provide suggestions for improvement.",
-  Tests = "Please explain how the selected code works, then generate unit tests for it.",
-  Refactor = "Please refactor the following code to improve its clarity and readability.",
-  FixCode = "Please fix the following code to make it work as intended.",
-  FixError = "Please explain the error in the following text and provide a solution.",
-  BetterNamings = "Please provide better names for the following variables and functions.",
-  Documentation = "Please provide documentation for the following code.",
-  SwaggerApiDocs = "Please provide documentation for the following API using Swagger.",
-  SwaggerJsDocs = "Please write JSDoc for the following API using Swagger.",
-  -- Text related prompts
-  Summarize = "Please summarize the following text.",
-  Spelling = "Please correct any grammar and spelling errors in the following text.",
-  Wording = "Please improve the grammar and wording of the following text.",
-  Concise = "Please rewrite the following text to make it more concise.",
+  PytestMultipleAssert = "Please write a Pytest test case for the provided source code. The test case should have multiple assertions and each assertion should have a message attached to it that will appear if the assertion fails. The test case should test both the common and the exceptional inputs for the provided source code. Make sure that the test has a descriptive docstring and comments for the lines in it. Please do not use blank lines or spaces to separate any of the blocks in the test case, including between the docstring, comments, and code.",
 }
 
 -- Supporting variables and functions implemented in lua {{{
@@ -250,6 +236,53 @@ return {
       debug = false,
       disable_extra_info = "no",
       language = "English",
+      mappings = {
+        complete = {
+          insert = '<Tab>',
+        },
+        close = {
+          normal = 'q',
+          insert = '<C-c>',
+        },
+        reset = {
+          normal = '<C-l>',
+          insert = '<C-l>',
+        },
+        submit_prompt = {
+          normal = '<CR>',
+          insert = '<C-s>',
+        },
+        toggle_sticky = {
+          detail = 'Makes line under cursor sticky or deletes sticky line.',
+          normal = 'gr',
+        },
+        accept_diff = {
+          normal = '<C-y>',
+          insert = '<C-y>',
+        },
+        jump_to_diff = {
+          normal = 'gj',
+        },
+        quickfix_diffs = {
+          normal = 'gq',
+        },
+        yank_diff = {
+          normal = 'gy',
+          register = '"',
+        },
+        show_diff = {
+          normal = 'gd',
+        },
+        show_info = {
+          normal = 'gi',
+        },
+        show_context = {
+          normal = 'gc',
+        },
+        show_help = {
+          normal = 'gh',
+        },
+      },
       -- default window options
       window = {
         layout = 'float',    -- 'vertical', 'horizontal', 'float'
@@ -257,7 +290,7 @@ return {
         relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
         border = 'single',   -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
         width = 0.8,         -- fractional width of parent
-        height = 0.75,       -- fractional height of parent
+        height = 0.8,        -- fractional height of parent
         row = nil,           -- row position of the window, default is centered
         col = nil,           -- column position of the window, default is centered
         title = 'Copilot',   -- title of chat window
@@ -347,6 +380,14 @@ return {
         "<cmd>CopilotChatReset<cr>",
         desc = "CopilotChat: Reset chat history and clear buffer",
       },
+      {
+        "<Space>ccp",
+        function()
+          local actions = require("CopilotChat.actions")
+          require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+        end,
+        desc = "CopilotChat: Prompts from Telescope",
+      },
     },
   },
 
@@ -360,7 +401,8 @@ return {
   -- as it will be setup for accepting
   {
     -- "hrsh7th/nvim-cmp",
-    "hrsh7th/nvim-cmp", url = "https://github.com/iguanacucumber/magazine.nvim",
+    "hrsh7th/nvim-cmp",
+    url = "https://github.com/iguanacucumber/magazine.nvim",
     event = "InsertEnter",
     dependencies = {
       -- Stand-alone cmp plugins
