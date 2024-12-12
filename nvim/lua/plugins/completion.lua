@@ -151,7 +151,7 @@ return {
         },
 
       })
-      vim.keymap.set({"n","x"}, "y", "<Plug>(YankyYank)")
+      vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)")
       vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
       vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
       vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
@@ -257,7 +257,7 @@ return {
         relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
         border = 'single',   -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
         width = 0.8,         -- fractional width of parent
-        height = 0.6,        -- fractional height of parent
+        height = 0.75,       -- fractional height of parent
         row = nil,           -- row position of the window, default is centered
         col = nil,           -- column position of the window, default is centered
         title = 'Copilot',   -- title of chat window
@@ -407,9 +407,11 @@ return {
         -- background that works better for GitHub
         -- Copilot chat and that does not match PMenu.
         window = {
-          documentation = {
-            winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder',
-          }
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+          -- documentation = {
+          --   winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder',
+          -- }
         },
         -- Define the performance characteristics for nvim-cmp
         -- Favor the quick delivery of a minimal number of completions
@@ -544,10 +546,10 @@ return {
         -- with a higher priority have higher weighting on priority.
         sources = cmp.config.sources({
           -- Define the first-tier of sources
-          { name = 'treesitter',   max_item_count = 10, priority = 10 },
-          { name = 'nvim_lsp',     max_item_count = 10, priority = 10 },
-          { name = 'copilot',      max_item_count = 10,  priority = 8 },
-          { name = 'supermaven',   max_item_count = 10,  priority = 8 },
+          { name = 'treesitter', max_item_count = 10, priority = 10 },
+          { name = 'nvim_lsp',   max_item_count = 10, priority = 10 },
+          { name = 'copilot',    max_item_count = 10, priority = 8 },
+          { name = 'supermaven', max_item_count = 10, priority = 8 },
           -- Look at all of the open buffers
           {
             name = 'buffer',
@@ -560,12 +562,12 @@ return {
             }
           },
           { name = 'fuzzy_buffer',      max_item_count = 10, priority = 6 },
-          { name = 'cmp_yanky',         max_item_count = 5, priority = 6 },
-          { name = 'tags',              max_item_count = 5, priority = 5 },
-          { name = 'luasnip',           max_item_count = 5, priority = 5 },
-          { name = 'otter',             max_item_count = 5, priority = 5, keyword_length = 2 },
-          { name = 'pandoc_references', max_item_count = 5, priority = 5, keyword_length = 2 },
-          { name = 'tmux',              max_item_count = 5, priority = 1, keyword_length = 2 },
+          { name = 'cmp_yanky',         max_item_count = 5,  priority = 6 },
+          { name = 'tags',              max_item_count = 5,  priority = 5 },
+          { name = 'luasnip',           max_item_count = 5,  priority = 5 },
+          { name = 'otter',             max_item_count = 5,  priority = 5, keyword_length = 2 },
+          { name = 'pandoc_references', max_item_count = 5,  priority = 5, keyword_length = 2 },
+          { name = 'tmux',              max_item_count = 5,  priority = 1, keyword_length = 2 },
           {
             name = 'spell',
             option = {
@@ -578,7 +580,7 @@ return {
             priority = 10,
             keyword_length = 3
           },
-          { name = 'nerdfont', max_item_count = 10, priority = 1, keyword_length = 3 },
+          { name = 'nerdfont',               max_item_count = 10, priority = 1, keyword_length = 3 },
           { name = 'nvim_lsp_signature_help' },
         }, {
           -- Define the second-tier of sources; these will only
@@ -595,7 +597,7 @@ return {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
           { name = 'path' },
-          { name = 'buffer', max_item_count = 25, priority = 10 },
+          { name = 'buffer',       max_item_count = 25, priority = 10 },
           { name = 'fuzzy_buffer', max_item_count = 25, priority = 5 },
         }, {
           { name = 'cmdline' },
@@ -608,7 +610,7 @@ return {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
           { name = 'path' },
-          { name = 'buffer', max_item_count = 25, priority = 10 },
+          { name = 'buffer',       max_item_count = 25, priority = 10 },
           { name = 'fuzzy_buffer', max_item_count = 25, priority = 5 },
         }, {
           { name = 'cmdline' },
