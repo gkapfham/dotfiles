@@ -636,7 +636,8 @@ return {
   -- interaction with the GitHub Copilot
   {
     "yetone/avante.nvim",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    cmd = "AvanteAsk",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "stevearc/dressing.nvim",
