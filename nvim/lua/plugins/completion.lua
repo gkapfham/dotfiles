@@ -312,10 +312,6 @@ return {
         prompt = "Write commit message for the change using the convential commits standard.",
         selection = select.gitdiff,
       }
-      opts.prompts.Commit = {
-        prompt = "Write commit message for the change using the convential commits standard.",
-        selection = select.gitdiff,
-      }
       opts.prompts.CommitStaged = {
         prompt = "Write commit message for the change using the convential commits standard.",
         selection = function(source)
