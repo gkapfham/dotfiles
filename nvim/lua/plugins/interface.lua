@@ -196,17 +196,12 @@ return {
       git = { enabled = false },
       lazygit = { enabled = false },
       indent = {
-        enabled = true,
+        enabled = false,
+        animate = {
+            enabled = false,
+          },
         scope = {
-          enabled = true,
-          animated = {
-            enabled = true,
-            easing = "inCubic",
-            duration = {
-              step = 10,
-              total = 50,
-            }
-          }
+          enabled = false,
         }
       },
       input = { enabled = false },
