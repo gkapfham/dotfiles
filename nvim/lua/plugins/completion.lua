@@ -291,8 +291,8 @@ return {
         relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
         border = 'single',   -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
         width = 0.8,         -- fractional width of parent
-        height = 0.8,        -- fractional height of parent
-        row = nil,           -- row position of the window, default is centered
+        height = 0.7,        -- fractional height of parent
+        row = 5,             -- row position of the window, default is centered
         col = nil,           -- column position of the window, default is centered
         title = 'Copilot',   -- title of chat window
         footer = nil,        -- footer of chat window
