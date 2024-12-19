@@ -14,10 +14,22 @@ return {
     },
   },
 
+  {
+    "danielfalk/smart-open.nvim",
+    config = function()
+      require("telescope").load_extension("smart_open")
+    end,
+    dependencies = {
+      "kkharji/sqlite.lua",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
+  },
+
   -- telescope.nvim
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
+    -- event = "VeryLazy",
     dependencies = {
       "benfowler/telescope-luasnip.nvim",
       "ThePrimeagen/refactoring.nvim",
@@ -26,6 +38,20 @@ return {
     },
     -- configure
     config = function()
+      -- make all of the icons the same uniform
+      -- color since not all of the telescope
+      -- plugins take into account the fact that
+      -- telescope is configured to use no icon color
+      local nvim_web_devicons = require "nvim-web-devicons"
+      local current_icons = nvim_web_devicons.get_icons()
+      local new_icons = {}
+      for key, icon in pairs(current_icons) do
+        icon.color = "#a8a8a8"
+        new_icons[key] = icon
+      end
+      nvim_web_devicons.set_icon(new_icons)
+      nvim_web_devicons.set_default_icon('', '#a8a8a8')
+      -- configure all aspects of the telescope plugin
       local actions = require('telescope.actions')
       require('telescope').setup {
         defaults = {
@@ -60,8 +86,8 @@ return {
           path_display = {
             "absolute",
           },
-          prompt_prefix = "> ",
-          selection_caret = "> ",
+          prompt_prefix = " ",
+          selection_caret = " ",
           entry_prefix = "  ",
           initial_mode = "insert",
           selection_strategy = "closest",
@@ -106,7 +132,7 @@ return {
             override_generic_sorter = true,
             override_file_sorter = true,
             case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-          }
+          },
         },
       }
       -- Load the fzf extension; this provides fuzzy search
@@ -159,6 +185,8 @@ return {
       { "<C-p>",     "<cmd> Telescope find_files hidden=true <CR>",    desc = "Telescope: Find files (Hidden)" },
       { "<Space>p",  "<cmd> Telescope find_files hidden=true <CR>",    desc = "Telescope: Find files (Hidden)" },
       { "<Space>o",  "<cmd> Telescope find_files <CR>",                desc = "Find Files" },
+      -- Smart open
+{ "<Space>so",  "<cmd>lua require('telescope').extensions.smart_open.smart_open({ open_buffer_indicators = { previous = '󰒮', others = '' } })<CR>", desc = "Telescope: Smart Open" },
       -- Git
       {
         "<Space>tg",
