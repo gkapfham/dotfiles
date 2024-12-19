@@ -122,7 +122,7 @@ return {
     opts = {
       options = {
         left = { size = 25 },
-        bottom = { size = 10 },
+        bottom = { size = 8 },
         right = { size = 25 },
         top = { size = 10 },
       },
@@ -274,7 +274,8 @@ return {
   -- where icons no longer display correctly with nerdfonts
   {
     "nvim-tree/nvim-web-devicons",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
+    lazy = false,
     config = function()
       -- set the filetype for configuration files
       -- without an extension; enables better highlighting
@@ -290,6 +291,11 @@ return {
           ["config"] = {
             icon = "",
             name = "Config"
+          },
+          ["python"] = {
+            icon = "K",
+            name = "Python",
+            color = "#a8a8a8"
           },
           ["Makefile"] = {
             icon = "",
