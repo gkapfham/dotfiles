@@ -292,11 +292,6 @@ return {
             icon = "",
             name = "Config"
           },
-          ["python"] = {
-            icon = "K",
-            name = "Python",
-            color = "#a8a8a8"
-          },
           ["Makefile"] = {
             icon = "",
             name = "Makefile"
@@ -307,6 +302,10 @@ return {
           }
         },
         override_by_extension = {
+          ["tex"] = {
+            icon = "󰙩",
+            name = "TeX"
+          },
           ["toml"] = {
             icon = "",
             name = "Toml"
