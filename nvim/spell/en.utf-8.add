@@ -4344,3 +4344,5 @@ HttpRequest
 HttpRequestTest
 deleteWithVarargsQueryParams
 deleteWithMappedQueryParams
+RSEs
+Speedgrader
