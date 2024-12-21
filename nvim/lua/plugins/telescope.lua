@@ -186,7 +186,7 @@ return {
       { "<Space>p",  "<cmd> Telescope find_files hidden=true <CR>",    desc = "Telescope: Find files (Hidden)" },
       { "<Space>o",  "<cmd> Telescope find_files <CR>",                desc = "Find Files" },
       -- Smart open
-{ "<Space>so",  "<cmd>lua require('telescope').extensions.smart_open.smart_open({ open_buffer_indicators = { previous = '󰓕', others = '󰮊' } })<CR>", desc = "Telescope: Smart Open" },
+{ "<Space>so",  "<cmd>lua require('telescope').extensions.smart_open.smart_open({ open_buffer_indicators = { previous = '󰓕', others = '' } })<CR>", desc = "Telescope: Smart Open" },
       -- Git
       {
         "<Space>tg",
