@@ -44,7 +44,8 @@ return {
         disable_filetype = { "TelescopePrompt" },
         check_ts = true,
       })
-      getRule("`")[1].not_filetypes = { "markdown", "quarto" }
+      getRule("`")[1].not_filetypes = { "markdown", "quarto", "tex"}
+      getRule("'")[1].not_filetypes = { "tex" }
     end
 
     -- opts = {
