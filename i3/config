@@ -30,7 +30,7 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 # client.focused_inactive #404040 #404040 #dfdfdf #484E50   #5F676A
 
 # Font for window titles
-font pango:Hack Nerd Font 9
+font pango:Hack Nerd Font 10
 
 # Wallpaper that is a solid purple color
 # exec_always --no-startup-id hsetroot -solid "#6E466E"
@@ -51,34 +51,44 @@ set $rd     #BF9B76
 set $id     #F9F8FF
 set $ce     #CEECEE
 
-# Define the bar configuration;
-# note that this runs i3status
-# and that program has a separate configuration
-bar {
-  position top
-  font pango:Hack Nerd Font Bold 8
-  strip_workspace_numbers no
-  separator_symbol " "
-    colors {
-        background          $bg
-        statusline          $sl
-        separator           $ce
-        focused_workspace   $ia        $ia        $bg
-        active_workspace    $tx        $tx        $bg
-        inactive_workspace  $bg        $fg        $ia
-        urgent_workspace    $ac        $ac        $bg
-    }
-  # run the i3status command that is configured
-  # through a separate file stored in ~/.config/i3status/config
-  status_command i3status
-}
+# # Define the bar configuration;
+# # note that this runs i3status
+# # and that program has a separate configuration
+# bar {
+#   position bottom
+#   font pango:Hack Nerd Font Bold 9
+#   strip_workspace_numbers yes
+#   workspace_buttons yes
+#   workspace_min_width 20
+#   separator_symbol " "
+#     colors {
+#         background          $bg
+#         statusline          $sl
+#         separator           $ce
+#         focused_workspace   $ia        $ia        $bg
+#         active_workspace    $tx        $tx        $bg
+#         inactive_workspace  $bg        $fg        $ia
+#         urgent_workspace    $ac        $ac        $bg
+#     }
+#   # run the i3status command that is configured
+#   # through a separate file stored in ~/.config/i3status/config
+#   # workspace_command ~/.local/bin/i3status.sh
+#   status_command i3status
+# }
 
-# }}}
+}}}
 
 # Startup {{{
 
-# # Run numlockx to turn off numlock by default
-# # This prevents numlock from displaying in i3lock-color
+# Run polybar to display the bar at the top of the screen;
+# note that this option is not better than using i3bar and i3status
+# because i3status does not allow the movement of the workspace
+# buttons to be slightly to the right, allowing for the curved
+# border at the top of the framework laptop screen to be visible
+exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
+
+# Run numlockx to turn off numlock by default
+# This prevents numlock from displaying in i3lock-color
 exec_always --no-startup-id numlockx off
 
 # Run dunst to display the notifications
