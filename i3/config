@@ -76,7 +76,7 @@ set $ce     #CEECEE
 #   status_command i3status
 # }
 
-}}}
+# }}}
 
 # Startup {{{
 
