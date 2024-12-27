@@ -6,11 +6,25 @@
 CONNECTED_DISPLAYS=$(xrandr | grep connected | fzf --prompt " ")
 DISPLAY_PORT=$(echo "$CONNECTED_DISPLAYS" | awk '{print $1}')
 
-# Connected the Framework 13 laptop:
-# note that this is complicated because
+# --> Option for default resolution laptop panel:
+
+# Connect external display to the Framework 13 laptop:
+# - Note that this is complicated because
 # the resolutions of the two displays are different.
+# - Commented out as it is not needed unless I revert
+# back to the stock panel.
+
 # xrandr --output eDP-1 --primary --mode 2256x1504 --pos 792x2160 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal --output ${DISPLAY_PORT} --off
 
+# --> Option for the higher resolution laptop panel:
+
+# Connected external display to the Framework 13 laptop:
+# - Note that this is complicated because
+# the resolutions of the two displays are different
+# - Note also that this is different than the prior
+# example because the Framework 13 laptop has a
+# new panel that is of a higher resolution than the
+# stock panel that was available at laptop purchase.
 xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal --output ${DISPLAY_PORT} --off
 
 # Set the root color of the desktop;
