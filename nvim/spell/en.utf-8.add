@@ -4397,3 +4397,14 @@ eDP
 pos
 x2160
 x1504
+ramp
+dcdebugmask
+resumeDevice
+uuid
+d00
+b88c
+b91f7518e
+powerManagement
+autopair
+configuration
+bg0
