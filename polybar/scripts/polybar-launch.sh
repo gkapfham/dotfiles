@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Note: the commented out source code is the old
+# version of the script used for prior laptops before
+# I started using the Framework 13 laptop and NixOS.
+# This is the new version that works correctly for the
+# Framework laptop and the NixOS operating system.
+
 # # kill any running instances
 # killall -q polybar
 #
