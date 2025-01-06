@@ -21,7 +21,7 @@ Channel gkapfham@allegheny.edu
 Expunge Both
 Far :gkapfham@allegheny.edu-remote:
 Near :gkapfham@allegheny.edu-local:
-Patterns "INBOX" "Trash" "advise2023" "advise2024" "dept2023" "dept2024" "fitter" "framework" "friends" "friends2023" "github" "gradingforgrowth" "irb2023" "irb2024" "issta2023" "jsep2023" "knockout" "podcast" "research2023" "research2024" "reviews2023" "reviews2024" "seradio" "tab" "tab2023" "teaching2024"
+Patterns "INBOX" "Trash" "advise2024" "dept2024" "dept" "fitter" "framework" "friends" "github" "gradingforgrowth" "irb2024" "jsep2023" "research2024" "research" "reviews2023" "reviews2024" "reviews" "seradio" "tab" "teaching2024" "teaching"
 Create Both
 SyncState *
 MaxMessages 1000
