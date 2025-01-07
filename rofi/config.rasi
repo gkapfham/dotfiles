@@ -1,0 +1,19 @@
+configuration {
+	width: 150;
+	lines: 15;
+	font: "Hack Nerd Font Regular 24";
+	bw: 5;
+    combi-hide-mode-prefix: true;
+	location: 0;
+	yoffset: 0;
+	xoffset: 0;
+	matching: "fuzzy";
+	line-margin: 10;
+	separator-style: "none";
+	hide-scrollbar: true;
+	color-normal: "#121212, #767676, #121212, #767676, #121212";
+	color-urgent: "#121212, #5f8700, #121212, #5f8700, #121212";
+	color-active: "#121212, #767676, #121212, #767676, #121212";
+	color-window: "#121212, #767676, #767676";
+}
+@theme "/home/gkapfham/.config/rofi/themes/Minimal.rasi"
