@@ -274,7 +274,6 @@ return {
   -- where icons no longer display correctly with nerdfonts
   {
     "nvim-tree/nvim-web-devicons",
-    -- event = "VeryLazy",
     lazy = false,
     config = function()
       -- set the filetype for configuration files
