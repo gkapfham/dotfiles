@@ -4418,3 +4418,14 @@ xrender
 unredir
 opengl
 driSupport
+trippy
+configuration
+bg0
+E7E7E80
+DEDEDE80
+
+sioyek
+autocommands
+autocmd
+TextYankPost
+higroup
