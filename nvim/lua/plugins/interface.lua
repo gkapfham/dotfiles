@@ -280,8 +280,12 @@ return {
       -- set the filetype for configuration files
       -- without an extension; enables better highlighting
       -- for files that are named config
+      -- set the filetype for rasi files (used for rofi)
+      -- to also be configuration files; enables better
+      -- highlighting for these files
       vim.cmd([[
         autocmd BufNewFile,BufRead config set filetype=config
+        autocmd BufNewFile,BufRead *.rasi set filetype=config
         ]])
       -- add overrides for filenames/filetypes that are not detected
       require 'nvim-web-devicons'.setup {
