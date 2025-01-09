@@ -4,11 +4,11 @@
 "xdotool key control+alt+l"
   b:9
 
+"xdotool key control+alt+l"
+  b:2
+
 "xdotool key control+alt+h"
   b:8
 
 "xdotool key alt+h"
   b:6
-
-"xdotool key control+Print"
-  b:2
