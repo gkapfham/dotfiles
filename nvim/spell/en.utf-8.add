@@ -4430,3 +4430,9 @@ autocmd
 TextYankPost
 higroup
 Logfire
+Hyperlint
+OpenTelemetry
+Colvin
+Loguru
+Petrović
+b7b757
