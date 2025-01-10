@@ -19,4 +19,4 @@ set record = "+Sent"
 macro index o "<shell-escape>mailsync gkapfham@allegheny.edu<enter>" "sync gkapfham@allegheny.edu"
 
 # Mailboxes to display in the sidebar
-mailboxes "=INBOX" "=Trash" "=advise2024" "=dept2024" "=dept" "=fitter" "=framework" "=friends" "=github" "=irb2024" "=knockout" "=research2024" "=research" "=reviews2024" "=reviews" "=seradio" "=tab" "=teaching" 
+mailboxes "=INBOX" "=Trash" "=advise" "=advise2024" "=dept" "=dept2024"  "=fitter" "=framework" "=friends" "=github" "=irb2024" "=knockout" "=research" "=research2024" "=reviews" "=reviews2024" "=seradio" "=tab" "=teaching" 
