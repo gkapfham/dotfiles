@@ -543,11 +543,18 @@ bindsym $mod+Shift+b exec "light -S 100"
 
 # Screenshots {{{
 
+# Notes:
+# 1. Saving to a screenshot file is the safest approach
+# 2. Saving to the clipboard is the easiest approach
+# 3. However, using the clipboard can cause the program
+#    in which I press CTRL-v to lock, especially when
+#    the image that was screenshotted is a large one
+
 # Perform a full screen capture of the active window and save to a file
-# bindsym Print exec "maim -i $(xdotool getactivewindow) ~/media/screenshots/`date +%Y-%m-%d_%H:%M:%S`.png"
+bindsym Print exec "exec maim -s ~/media/screenshots/`date +%Y-%m-%d_%H:%M:%S`.png"
 
 # Perform a full screen capture of the active window and copy to the clipboard
-# bindsym Control+Print exec "exec maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png"
+bindsym Control+Print exec "exec maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png"
 
 # Perform a selection caption and copy to the clipboard
 bindsym Shift+Print exec "exec maim -s | xclip -selection clipboard -t image/png"
