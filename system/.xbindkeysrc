@@ -2,13 +2,10 @@
   b:10
 
 "xdotool key control+alt+l"
-  b:9
-
-"xdotool key control+alt+l"
   b:2
 
 "xdotool key control+alt+h"
-  b:8
+  Control + b:2
 
 "xdotool key alt+h"
   b:6
