@@ -305,7 +305,11 @@ return {
         vt_position = "end_of_line",
         text_format = text_format,
       })
-    end
+    end,
+    keys = {
+      -- Toggle symbols usage
+      { "<Space>sd", "<cmd> lua require('symbol-usage').toggle() <CR>", desc = "Language Server: Disable symbols usage" },
+    }
   },
 
 }
