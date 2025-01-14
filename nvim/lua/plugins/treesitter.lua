@@ -144,6 +144,7 @@ return {
               ["im"] = "@comment.inner",
               ["al"] = "@loop.outer",
               ["il"] = "@loop.inner",
+              ["as"] = "@statement.outer",
             },
           },
         },
