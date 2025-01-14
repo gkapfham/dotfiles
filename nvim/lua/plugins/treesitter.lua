@@ -92,7 +92,10 @@ return {
     end,
   },
 
-  -- sentiment.nvim
+  -- sentiment.nvim; note that this plugin
+  -- has now been archived and thus there
+  -- is the possibility that I will need
+  -- to replace it with another plugin
   {
     "utilyre/sentiment.nvim",
     event = "VeryLazy",
