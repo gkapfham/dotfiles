@@ -126,16 +126,36 @@ return {
               -- treesitter nodes; note that
               -- block is useful for fenced code
               -- blocks. Use :Inspect or :InspectTree
-              -- to identify which nodes to use
+              -- to identify which nodes to use.
+              -- Note that this only works for the
+              -- treesitter objects already supported
+              -- by this package; otherwise, you must
+              -- define new treesitter queries
               ["ab"] = "@block.outer",
               ["ib"] = "@block.inner",
               ["af"] = "@function.outer",
               ["if"] = "@function.inner",
+              ["ac"] = "@conditional.outer",
+              ["ic"] = "@conditional.inner",
+              ["am"] = "@comment.outer",
+              ["im"] = "@comment.inner",
+              ["al"] = "@loop.outer",
+              ["il"] = "@loop.inner",
             },
           },
         },
       }
     end,
+  },
+
+  -- targets.vim
+  -- provides additional text objects
+  -- not already supported by the capture
+  -- groups for nvim-treesitter-textobjects
+  -- (e.g., * and ** in Quarto or Markdown)
+  {
+    "wellle/targets.vim",
+    event = "VeryLazy",
   },
 
 }
