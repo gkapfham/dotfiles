@@ -217,6 +217,7 @@ return {
       scroll = { enabled = false },
       statuscolumn = { enabled = false },
       words = { enabled = false },
+      picker = { enabled = false },
       styles = {
         notification = {
         }
@@ -225,7 +226,6 @@ return {
     keys = {
       { "<leader>bd", function() Snacks.bufdelete() end,          desc = "Delete Buffer" },
       { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
-      { "<leader>un", function() Snacks.notifier.hide() end,      desc = "Dismiss All Notifications" },
     },
     init = function()
       vim.api.nvim_create_autocmd("User", {
