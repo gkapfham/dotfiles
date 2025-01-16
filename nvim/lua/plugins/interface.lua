@@ -213,11 +213,11 @@ return {
       notifier = {
         enabled = false,
       },
+      picker = { enabled = false },
       quickfile = { enabled = true },
       scroll = { enabled = false },
       statuscolumn = { enabled = false },
       words = { enabled = false },
-      picker = { enabled = false },
       styles = {
         notification = {
         }
