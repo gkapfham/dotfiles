@@ -49,6 +49,14 @@ return {
     cmd = { "DiffviewOpen", "DiffviewLog" },
   },
 
+  -- diffview.nvim for viewing diffs
+  {
+    "akinsho/git-conflict.nvim",
+    event = "VeryLazy",
+    tag = 'v2.1.0',
+    config = true,
+  },
+
   -- gitsigns.nvim for showing git diffs in the sign column
   {
     "lewis6991/gitsigns.nvim",
