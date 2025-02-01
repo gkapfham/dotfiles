@@ -12,7 +12,7 @@ return {
     config = function()
       require("toggleterm").setup({
         shade_terminals = false,
-        direction = "float",
+        -- direction = "float",
         float_opts = {
           width = 100,
           height = 20,
