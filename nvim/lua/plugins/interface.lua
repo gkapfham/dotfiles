@@ -134,8 +134,8 @@ return {
         mouse_delay = 1000
       }
       -- keymaps
-      vim.keymap.set("n", "K", require("hover").hover, {desc = "Hover: Default view"})
-      vim.keymap.set("n", "gK", require("hover").hover_select, {desc = "Hover: Select from providers"})
+      vim.keymap.set("n", "K", require("hover").hover, { desc = "Hover: Default view" })
+      vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "Hover: Select from providers" })
     end,
   },
 
@@ -152,7 +152,7 @@ return {
     opts = {
       options = {
         left = { size = 25 },
-        bottom = { size = 8 },
+        bottom = { size = 9 },
         right = { size = 25 },
         top = { size = 10 },
       },
@@ -164,6 +164,12 @@ return {
           title = "Analysis",
           ft = "trouble"
         },
+        -- ToggleTerm.nvim
+        {
+          title = "Terminal",
+          ft = "toggleterm",
+        },
+        -- Standard quickfix window
         { ft = "qf", title = "QuickFix" },
       },
       -- Configure the right panel
