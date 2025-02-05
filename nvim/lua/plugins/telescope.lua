@@ -14,6 +14,17 @@ return {
     },
   },
 
+  -- file-browser.nvim
+  {
+    "aaronhallaert/advanced-git-search.nvim",
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    }
+  },
+
+  -- smart-open.nvim
   {
     "danielfalk/smart-open.nvim",
     config = function()
@@ -161,6 +172,7 @@ return {
       -- Load and configure the yank_history plugin
       -- provided by the yanky.nvim plugin (see completion)
       require("telescope").load_extension("yank_history")
+      require("telescope").load_extension("file_browser")
       -- Configure the keymap for refactoring; setting it here because
       -- I don't know how to set visual mode keymaps in keys section of spec
       vim.api.nvim_set_keymap(
@@ -173,20 +185,22 @@ return {
     -- Keys
     keys = {
       -- Telescope
-      { "<Space>te", "<cmd> Telescope <CR>",                           desc = "Telescope: All" },
+      { "<Space>te", "<cmd> Telescope <CR>", desc = "Telescope: All" },
       -- Aerial
-      { "<Space>ta", "<cmd> Telescope aerial <CR>",                    desc = "Telescope: Aerial" },
+      { "<Space>ta", "<cmd> Telescope aerial <CR>", desc = "Telescope: Aerial" },
+      -- Aerial
+      { "<Space>tf", "<cmd> Telescope file_browser <CR>", desc = "Telescope: File browser" },
       -- Ast-Grep
-      { "<Space>tw", "<cmd> Telescope ast_grep <CR>",                  desc = "Telescope: AST grep" },
+      { "<Space>tw", "<cmd> Telescope ast_grep <CR>", desc = "Telescope: AST grep" },
       -- Buffers
-      { "<Space>i",  "<cmd> Telescope buffers <CR>",                   desc = "Telescope: Buffers" },
+      { "<Space>i", "<cmd> Telescope buffers <CR>", desc = "Telescope: Buffers" },
       { "<Space>tb", "<cmd> Telescope current_buffer_fuzzy_find <CR>", desc = "Telescope: Fuzzy search buffers" },
       -- Files
-      { "<C-p>",     "<cmd> Telescope find_files hidden=true <CR>",    desc = "Telescope: Find files (Hidden)" },
-      { "<Space>p",  "<cmd> Telescope find_files hidden=true <CR>",    desc = "Telescope: Find files (Hidden)" },
-      { "<Space>o",  "<cmd> Telescope find_files <CR>",                desc = "Find Files" },
+      { "<C-p>", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
+      { "<Space>p", "<cmd> Telescope find_files hidden=true <CR>", desc = "Telescope: Find files (Hidden)" },
+      { "<Space>o", "<cmd> Telescope find_files <CR>", desc = "Find Files" },
       -- Smart open
-{ "<Space>so",  "<cmd>lua require('telescope').extensions.smart_open.smart_open({ open_buffer_indicators = { previous = '󰓕', others = '' } })<CR>", desc = "Telescope: Smart Open" },
+      { "<Space>so", "<cmd>lua require('telescope').extensions.smart_open.smart_open({ open_buffer_indicators = { previous = '󰓕', others = '' } })<CR>", desc = "Telescope: Smart Open" },
       -- Git
       {
         "<Space>tg",
