@@ -179,6 +179,21 @@ return {
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
       end
+      -- Configure the display of diagnostics, especially to confirm
+      -- that there is a rounded border around the diagnostic box
+      -- that appears when you go to a line with a diagnostic
+      vim.diagnostic.config {
+        signs = true,
+        underline = true,
+        virtual_text = false,
+        virtual_lines = false,
+        update_in_insert = true,
+        float = {
+          header = false,
+          border = 'rounded',
+          focusable = true,
+        },
+      }
     end,
     -- Keys
     keys = {
