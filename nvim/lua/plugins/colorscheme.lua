@@ -21,16 +21,11 @@ return {
         -- override the default colors
         colors = {
           bg = "#1c1c1c",
-          -- fg = "#b2b2b2",
-          -- fg = "#bcbcbc",
-          -- fg = "#c6c6c6",
           fg = "#c1c1c1",
           red = "#d75f5f",
           deepred = "#813939",
           orange = "#d78700",
           deeporange = "#af5f00",
-          -- yellow = "#afaf5f",
-          -- yellow = "#bfbf4f",
           yellow = "#b7b757",
           green = "#5f8700",
           deepgreen = "#4c6c00",
@@ -44,15 +39,14 @@ return {
           comment = "#808080",
           float_bg = "#1c1c1c",
           darkmenu = "#303030",
-          -- menu = "#303030",
           menu = "#262626",
           none = "NONE",
+          magenta = "#af5faf",
         },
-        -- override the default highlights
         -- defined by the standard version
         -- of this colorscheme; define first
         -- those that are standard and/or
-        -- defined by a plugin and then 
+        -- defined by a plugin and then
         -- define those for treesitter
         highlights = {
           -- standard highlights
@@ -85,11 +79,11 @@ return {
           GitConflictCurrentLabel = { fg = "${fg}", bg = "${darkmenu}", bold = true },
           GitConflictIncomingLabel = { fg = "${fg}", bg = "${darkmenu}", bold = true },
           GitSignsAdd = { fg = "${green}" },
-          GitSignsAddPreview = { fg = "${fg}" , bg = "${deepgreen}" },
+          GitSignsAddPreview = { fg = "${fg}", bg = "${deepgreen}" },
           GitSignsChange = { fg = "${blue}" },
           GitSignsChangeDelete = { fg = "${yellow}" },
           GitSignsDelete = { fg = "${red}" },
-          GitSignsDeletePreview = { fg = "${fg}" , bg = "${deepred}" },
+          GitSignsDeletePreview = { fg = "${fg}", bg = "${deepred}" },
           GitSignsUntracked = { fg = "${orange}" },
           IncSearch = { fg = "NONE", bg = "NONE", bold = true, undercurl = true },
           FlashCurrent = { fg = "${bg}", bg = "${purple}", bold = true, reverse = true },
@@ -122,7 +116,7 @@ return {
           TelescopePromptPrefix = { fg = "${blue}", bg = "NONE" },
           TelescopeSelection = { fg = "${yellow}", bg = "NONE" },
           TelescopeSelectionCaret = { fg = "${blue}", bg = "NONE" },
-          -- treesitter highlights 
+          -- treesitter highlights
           ["@comment.error"] = { fg = "${red}", bg = "${bg}", bold = true, undercurl = true },
           ["@comment.fix"] = { fg = "${yellow}", bg = "${bg}", bold = true, undercurl = true },
           ["@comment.note"] = { fg = "${cyan}", bg = "${bg}", bold = true, undercurl = true },
@@ -131,7 +125,7 @@ return {
           ["@diff.plus"] = { fg = "${green}" },
           ["@diff.minus"] = { fg = "${red}" },
           ["@diff.change"] = { fg = "${blue}" },
-          ["@function"] = { fg = "${green}", italic = true },
+          ["@function"] = { fg = "${cyan}", italic = true },
           ["@punctuation.special"] = { fg = "${orange}", italic = true },
           ["@markup.heading"] = { fg = "${orange}" },
           ["@markup.heading.1.markdown"] = { fg = "${orange}" },
@@ -142,6 +136,10 @@ return {
           ["@string"] = { fg = "${yellow}", italic = false },
           ["@variable"] = { fg = "${blue}" },
           ["@variable.member"] = { fg = "${blue}" },
+          ["@variable.parameter"] = { fg = "${green}" },
+          ["@odp.interpolation.python"] = { fg = "${green}" },
+          ["@odp.punctuation.special.python"] = { fg = "${orange}" },
+          ["@number.python"] = { fg = "${red}" },
           ["@property"] = { fg = "${blue}" },
           ["@label.markdown"] = { fg = "${cyan}", italic = true },
         }
