@@ -12,6 +12,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- temporary workaround to ensure that
+-- the :Inspect and :InspectTree functions
+-- work correctly. Reference:
+-- https://github.com/neovim/neovim/issues/31675
+vim.hl = vim.highlight
+
 -- Define the leader key and localleader key
 -- to be the same key. It is also worth noting
 -- that several of my mappings use the space
