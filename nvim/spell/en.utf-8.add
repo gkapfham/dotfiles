@@ -4542,3 +4542,8 @@ furnishing/!
 needsimprovement
 Enum
 StatusCode
+amdgpu
+kernelModules
+initrd
+videoDrivers
+deskcreen
