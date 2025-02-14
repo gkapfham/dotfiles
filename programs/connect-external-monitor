@@ -16,6 +16,11 @@ DISPLAY_PORT=$(echo "$CONNECTED_DISPLAYS" | awk '{print $1}')
 
 # xrandr --output eDP-1 --primary --mode 2256x1504 --pos 792x2160 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal --output ${DISPLAY_PORT} --off
 
+# Add a mode that will support the connection
+# of a tablet as a secondary display using
+# a program like weylus or deskcreen.
+xrandr --addmode DP-1 1920x1200
+
 # --> Option for the higher resolution laptop panel:
 
 # Connected external display to the Framework 13 laptop:
@@ -29,5 +34,4 @@ xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal 
 
 # Set the root color of the desktop;
 # this tends to reset on the Framework 13 laptop.
-# hsetroot -solid "#6E466E"
 hsetroot -solid "#875f87"
