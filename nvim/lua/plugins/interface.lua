@@ -85,8 +85,8 @@ return {
         },
         level = 2,
         minimum_width = 50,
-        render = "default",
-        stages = "fade_in_slide_out",
+        render = "wrapped-compact",
+        stages = "static",
         timeout = 1000,
         top_down = true
       })
