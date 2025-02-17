@@ -90,8 +90,8 @@ return {
           },
           layout_config = {
             horizontal = {
-              height = 0.925,
-              width = 0.925
+              height = 0.9,
+              width = 0.9
             }
           },
           path_display = {
