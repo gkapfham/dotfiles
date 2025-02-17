@@ -2,24 +2,26 @@
 
 # Reminder: use the command 'xrandr' to see what monitors are available.
 
+# Check if the --mobile-monitor flag is set
+MOBILE_MONITOR=false
+for arg in "$@"; do
+  if [ "$arg" == "--mobile-monitor" ]; then
+    MOBILE_MONITOR=true
+    break
+  fi
+done
+
 # Use fzf to select from one of the connected displays
 CONNECTED_DISPLAYS=$(xrandr | grep connected | fzf --prompt " ")
 DISPLAY_PORT=$(echo "$CONNECTED_DISPLAYS" | awk '{print $1}')
 
-# --> Option for default resolution laptop panel:
-
-# Connect external display to the Framework 13 laptop:
-# - Note that this is complicated because
-# the resolutions of the two displays are different.
-# - Commented out as it is not needed unless I revert
-# back to the stock panel.
-
-# xrandr --output eDP-1 --primary --mode 2256x1504 --pos 792x2160 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal --output ${DISPLAY_PORT} --off
-
 # Add a mode that will support the connection
 # of a tablet as a secondary display using
 # a program like weylus or deskcreen.
-xrandr --addmode DP-1 1920x1200
+
+if [ "$MOBILE_MONITOR" == true ]; then
+  xrandr --addmode DP-1 1920x1200
+fi
 
 # --> Option for the higher resolution laptop panel:
 
@@ -30,8 +32,15 @@ xrandr --addmode DP-1 1920x1200
 # example because the Framework 13 laptop has a
 # new panel that is of a higher resolution than the
 # stock panel that was available at laptop purchase.
-xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal --output DP-1 --mode 1920x1200 --left-of eDP-1 --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal --output ${DISPLAY_PORT} --off
+
+# xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal --output DP-1 --mode 1920x1200 --left-of eDP-1 --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal --output ${DISPLAY_PORT} --off
+
+if [ "$MOBILE_MONITOR" == true ]; then
+  xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal --output DP-1 --mode 1920x1200 --left-of eDP-1 --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal --output ${DISPLAY_PORT} --off
+else
+xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal --output ${DISPLAY_PORT} --off
+fi
 
 # Set the root color of the desktop;
-# this tends to reset on the Framework 13 laptop.
+# this tends to reset on the Framework 13 laptop
 hsetroot -solid "#875f87"
