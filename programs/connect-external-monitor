@@ -1,10 +1,38 @@
 #!/usr/bin/env bash
 
-# Reminder: use the command 'xrandr' to see what monitors are available.
-# Reminder: use the command 'xrandr -s 0' to reset the monitors.
+# Set the default values for the flags
+MOBILE_MONITOR=false
+RESET_MONITORS=false
+LIST_MONITORS=false
+
+# Check for flags
+for arg in "$@"; do
+  case $arg in
+    --mobile-monitor)
+      MOBILE_MONITOR=true
+      ;;
+    --reset-monitors)
+      RESET_MONITORS=true
+      ;;
+    --list-monitors)
+      LIST_MONITORS=true
+      ;;
+  esac
+done
+
+# Run the reset command if the --reset-monitors flag is set
+if [ "$RESET_MONITORS" == true ]; then
+  xrandr -s 0
+  exit 0
+fi
+
+# Run the listing command if the --list-monitors flag is set
+if [ "$LIST_MONITORS" == true ]; then
+  xrandr
+  exit 0
+fi
 
 # Check if the --mobile-monitor flag is set
-MOBILE_MONITOR=false
 for arg in "$@"; do
   if [ "$arg" == "--mobile-monitor" ]; then
     MOBILE_MONITOR=true
