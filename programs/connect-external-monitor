@@ -4,6 +4,7 @@
 MOBILE_MONITOR=false
 RESET_MONITORS=false
 LIST_MONITORS=false
+DISPLAY_HELP=false
 
 # Check for flags
 for arg in "$@"; do
@@ -17,8 +18,25 @@ for arg in "$@"; do
     --list-monitors)
       LIST_MONITORS=true
       ;;
+    --help)
+      DISPLAY_HELP=true
+      ;;
   esac
 done
+
+# Display the main help message if the --help flag is set
+if [ "$DISPLAY_HELP" == true ]; then
+  echo ""
+  echo " Usage: connect-external-monitor [options]"
+  echo "󰇀 Default use connects an external monitor to the main screen"
+  echo ""
+  echo " Options:"
+  echo "  --mobile-monitor  Connect an external monitor along with a mobile one (i.e., a tablet)"
+  echo "  --reset-monitors  Reset the monitors to the default configuration using main screen"
+  echo "  --list-monitors   List the connected monitors and their modes"
+  echo "  --help            Display this help message"
+  exit 0
+fi
 
 # Run the reset command if the --reset-monitors flag is set
 if [ "$RESET_MONITORS" == true ]; then
