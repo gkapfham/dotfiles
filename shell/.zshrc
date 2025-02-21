@@ -355,6 +355,8 @@ fi
 # 256 Color reference: https://jonasjacek.github.io/colors/
 # --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
 export FZF_DEFAULT_OPTS='
+  --prompt " "
+  --style full
   --no-bold
   --cycle
   --no-separator
@@ -372,7 +374,8 @@ export FZF_COMPLETION_TRIGGER='**'
 # Configure fzf to work with fast-finder called fd
 # export FZF_DEFAULT_COMMAND="fd . $PWD"
 export FZF_DEFAULT_COMMAND="fd"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_COMMAND="zoxide query -l"
 
 # Use ripgrep and ripgrep-all in combination with fzf
 # to search all below directories (both text and binary files)
