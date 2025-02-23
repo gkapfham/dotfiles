@@ -319,7 +319,6 @@ zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
 # Set the default color to be the color 245 out of
-# the 256 colors available in the terminal window the color 245 out of
 # the 256 colors available in the terminal window
 zstyle ':fzf-tab:*' default-color $'\033[38;5;245m'
 
