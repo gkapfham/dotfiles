@@ -294,6 +294,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # thereby showing a preview window with Fzf to the right
 # of the cd command that shows the contents of current directory
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons $realpath'
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --level=2 --color=always --icons {}'
 
 # force zsh not to show completion menu, allow fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
@@ -338,7 +339,7 @@ zstyle ':fzf-tab:*' continuous-trigger '/'
 # Pass commands to the Fzf program that defines the colors. These
 # colors are the same as those used to configure Fzf when it runs
 # otherwise in the terminal window or in a text editor like Vim or Neovim
-zstyle ":fzf-tab:*" fzf-flags --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87'
+zstyle ":fzf-tab:*" fzf-flags --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87,border:#c1c1c1'
 
 # }}}
 
@@ -350,12 +351,26 @@ if [ -n "${commands[fzf-share]}" ]; then
   source "$(fzf-share)/completion.zsh"
 fi
 
-# Match the vim-vitamin-onec colorscheme
-# Color scheme: https://github.com/gkapfham/vim-vitamin-onec
-# 256 Color reference: https://jonasjacek.github.io/colors/
-# --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
+# # Match the vim-vitamin-onec colorscheme
+# # Color scheme: https://github.com/gkapfham/vim-vitamin-onec
+# # 256 Color reference: https://jonasjacek.github.io/colors/
+# # --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
+# export FZF_DEFAULT_OPTS='
+#   --prompt " "
+#   --style full
+#   --no-bold
+#   --cycle
+#   --no-separator
+#   --no-scrollbar
+#   --bind tab:down,shift-tab:up
+#   --bind ctrl-f:page-down,ctrl-b:page-up
+#   --color=fg:#b2b2b2,bg:#1c1c1c,hl:#5f8700
+#   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
+#   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
+#   --color=marker:#d78700,spinner:#875f87,header:#875f87'
+
 export FZF_DEFAULT_OPTS='
-  --prompt " "
+  --prompt " "
   --style full
   --no-bold
   --cycle
@@ -366,16 +381,29 @@ export FZF_DEFAULT_OPTS='
   --color=fg:#b2b2b2,bg:#1c1c1c,hl:#5f8700
   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
-  --color=marker:#d78700,spinner:#875f87,header:#875f87'
+  --color=marker:#d78700,spinner:#875f87,header:#875f87,border:#c1c1c1'
 
 # Trigger fzf completion using the semi-colon key instead of **
 export FZF_COMPLETION_TRIGGER='**'
 
 # Configure fzf to work with fast-finder called fd
 export FZF_DEFAULT_COMMAND="fd . $PWD"
-# export FZF_DEFAULT_COMMAND="fd"
-# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_COMMAND="zoxide query -l"
+
+# Use zoxide for CTRL-T command with the current query
+export FZF_CTRL_T_COMMAND='zoxide query -l'
+
+# Directory and file preview for CTRL-T
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview '(test -d {} && eza --tree --level=3 --color=always --icons {}) || (bat -n --color=always {})'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+# Directory and file preview for cd completion
+# when using the **<TAB> approach
+export FZF_COMPLETION_DIR_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview '(test -d {} && eza --tree --level=3 --color=always --icons {}) || (bat -n --color=always {})'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # Use ripgrep and ripgrep-all in combination with fzf
 # to search all below directories (both text and binary files)
