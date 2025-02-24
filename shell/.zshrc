@@ -341,7 +341,7 @@ zstyle ':fzf-tab:*' fzf-min-height '10'
 # Pass commands to the Fzf program that defines the colors. These
 # colors are the same as those used to configure Fzf when it runs
 # otherwise in the terminal window or in a text editor like Vim or Neovim
-zstyle ":fzf-tab:*" fzf-flags --no-scrollbar --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87,border:#c1c1c1' --style full --prompt ' ' 
+zstyle ":fzf-tab:*" fzf-flags --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87,border:#c1c1c1' --style full --prompt ' ' --no-scrollbar 
 
 # }}}
 
