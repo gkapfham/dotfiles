@@ -448,21 +448,19 @@ tms() {
     tmux attach-session -t "$session" || tmux new-session -s $newsession
 }
 
-# Display all of the possible tmuxinators with fzf
+# Display all of the possible tmuxinators with fzf and preview with bat;
+# make sure that when no tmux session has yet been selected that there
+# is a message that indicates that the user should select a session
 tm() {
   # NOTE: Use the absolute Nix-based ls command since "ls" is now aliased to use "eza" command
   session=$( /run/current-system/sw/bin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
-    fzf --query="$1" --select-1 --exit-0 --cycle --no-separator --prompt " ") &&
+    fzf --query="$1" --select-1 --exit-0 --cycle --no-separator --prompt " " \
+    --preview '[[ -n {} ]] && bat --style=numbers --color=always ~/.tmuxinator/{}.yml || echo "󰮊 Select a Tmux Session"') &&
     tmuxinator "$session"
 }
 alias tmm="tm"
 
-# # Define the name of a tmux pane, display in the status-right
-# function workspace {
-#   readonly name=${1:?"Specify the name of the workspace."}
-#   tmux select-pane -T $name
-# }
-
+# Define the name of a tmux workspace, helping with many splits
 function workspace {
   local -A prefix_map=(
     ["Code"]=""
@@ -487,6 +485,7 @@ function workspace {
   tmux select-pane -T "${prefix} ${name}"
 }
 
+# Define the name of a tmux window, helping with many splits
 function window {
   readonly name=${1:?"Specify the name of the window."}
   tmux rename-window "${prefix} ${name}"
