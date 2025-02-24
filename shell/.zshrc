@@ -293,8 +293,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Preview directory's content with eza when completing cd,
 # thereby showing a preview window with Fzf to the right
 # of the cd command that shows the contents of current directory
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --icons $realpath'
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --level=2 --color=always --icons {}'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --level=3 --color=always --icons $realpath'
 
 # force zsh not to show completion menu, allow fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
@@ -335,10 +334,14 @@ zstyle ':fzf-tab:*' prefix ''
 # you press the '/' key to start a new completion
 zstyle ':fzf-tab:*' continuous-trigger '/'
 
+# Make sure that there is enough space to display content
+# when using fzf-tab by setting the minimum height
+zstyle ':fzf-tab:*' fzf-min-height '10'
+
 # Pass commands to the Fzf program that defines the colors. These
 # colors are the same as those used to configure Fzf when it runs
 # otherwise in the terminal window or in a text editor like Vim or Neovim
-zstyle ":fzf-tab:*" fzf-flags --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87,border:#c1c1c1'
+zstyle ":fzf-tab:*" fzf-flags --no-scrollbar --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87,border:#c1c1c1' --style full --prompt ' ' 
 
 # }}}
 
@@ -351,7 +354,7 @@ if [ -n "${commands[fzf-share]}" ]; then
 fi
 
 export FZF_DEFAULT_OPTS='
-  --prompt " "
+  --prompt " "
   --style full
   --no-bold
   --cycle
@@ -370,7 +373,9 @@ export FZF_COMPLETION_TRIGGER='**'
 # Configure fzf to work with fast-finder called fd
 export FZF_DEFAULT_COMMAND="fd . $PWD"
 
-# Use zoxide for CTRL-T command with the current query
+# Use zoxide for CTRL-T command with the current query;
+# this will ensure that you are only running a cd to
+# one of the frequently used directories
 export FZF_CTRL_T_COMMAND='zoxide query -l'
 
 # Directory and file preview for CTRL-T
