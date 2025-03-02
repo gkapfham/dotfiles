@@ -464,7 +464,7 @@ alias tmm="tm"
 function workspace {
   local -A prefix_map=(
     ["Code"]=""
-    ["Command"]=""
+    ["Command"]="󰘳"
     ["Develop"]=""
     ["File"]=""
     ["GitHub"]=""
@@ -473,6 +473,8 @@ function workspace {
     ["Server"]="󰒋"
     ["Solution"]="󰄲"
     ["Starter"]="󰋮"
+    ["Testing"]="󰇉"
+    ["Trying"]=""
   )
   readonly name=${1:?"Specify the name of the workspace."}
   local prefix=""
