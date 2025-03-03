@@ -4,7 +4,8 @@
 
 -- Define reusable prompts for CopilotChat
 local prompts = {
-  PytestMultipleAssert = "Please write a Pytest test case for the provided source code. The test case should have multiple assertions and each assertion should have a message attached to it that will appear if the assertion fails. The test case should test both the common and the exceptional inputs for the provided source code. Make sure that the test has a descriptive docstring and comments for the lines in it. Please do not use blank lines or spaces to separate any of the blocks in the test case, including between the docstring, comments, and code.",
+  PytestMultipleAssert =
+  "Please write a Pytest test case for the provided source code. The test case should have multiple assertions and each assertion should have a message attached to it that will appear if the assertion fails. The test case should test both the common and the exceptional inputs for the provided source code. Make sure that the test has a descriptive docstring and comments for the lines in it. Please do not use blank lines or spaces to separate any of the blocks in the test case, including between the docstring, comments, and code.",
 }
 
 -- Supporting variables and functions implemented in lua {{{
@@ -222,6 +223,7 @@ return {
     -- branch = "main",
     -- version = "v2.1.0",
     dependencies = {
+      { "MeanderingProgrammer/render-markdown.nvim" },
       { "nvim-telescope/telescope.nvim" },
       { "nvim-lua/plenary.nvim" },
     },
@@ -340,6 +342,20 @@ return {
           vim.opt_local.relativenumber = true
           vim.opt_local.number = true
         end,
+      })
+      -- CopilotChat - Prompt actions display with telescope
+      vim.keymap.set('n', '<leader>ccp', function()
+        local actions = require("CopilotChat.actions")
+        require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+      end, { desc = "CopilotChat - Prompt actions" })
+      -- Improved display of markdown files;
+      -- note that this influences Quarto and
+      -- Markdown files and has custom color scheme
+      require('render-markdown').setup({
+        file_types = { 'markdown', 'copilot-chat', 'quarto' },
+        heading = {
+          width = "block",
+        }
       })
     end,
     event = "VeryLazy",
