@@ -4650,3 +4650,7 @@ readme
 redistributable
 mkForce
 ghostscript
+fastfetch
+mutation
+coverage
+test
