@@ -140,6 +140,8 @@ return {
       }
       -- configure yamlls for YAML LSP
       lspconfig.yamlls.setup {}
+      -- configure jsonls for YAML LSP
+      lspconfig.jsonls.setup{} 
       -- configure nil_ls for Nix LSP
       lspconfig.nil_ls.setup {}
       -- configure rust_analzer for Rust LSP
