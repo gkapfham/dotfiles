@@ -355,7 +355,10 @@ return {
         file_types = { 'markdown', 'copilot-chat', 'quarto' },
         heading = {
           width = "block",
-        }
+        },
+        code = {
+          enabled = true,
+        },
       })
     end,
     event = "VeryLazy",
