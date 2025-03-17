@@ -52,6 +52,24 @@ return {
     },
   },
 
+  -- nvim-spider enhances the default word motions
+  -- by supporting, for instance, subword movement
+  {
+    "chrisgrieser/nvim-spider",
+    event = "VeryLazy",
+    config = function()
+      require("spider").setup {
+        skipInsignificantPunctuation = true,
+        consistentOperatorPending = false,
+        subwordMovement = true,
+        customPatterns = {},
+      }
+      vim.keymap.set({ "n", "o", "x" }, "w", "<cmd>lua require('spider').motion('w')<CR>")
+      vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>")
+      vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>")
+    end
+  },
+
   -- mini.bracketed
   {
     "echasnovski/mini.bracketed",
