@@ -229,9 +229,12 @@ return {
     },
     opts = {
       prompts = prompts,
-      show_help = "yes",
+      model = "claude-3.7-sonnet",
+      show_help = true,
       debug = false,
       disable_extra_info = "no",
+      question_header = "##  Gregory ",
+      answer_header = "## 󰛨 Copilot ",
       language = "English",
       mappings = {
         complete = {
