@@ -55,14 +55,6 @@ if [ "$LIST_MONITORS" == true ]; then
   exit 0
 fi
 
-# # Check if the --external-monitor flag is set
-# for arg in "$@"; do
-#   if [ "$arg" == "--mobile-monitor" ]; then
-#     MOBILE_MONITOR=true
-#     break
-#   fi
-# done
-
 # Use fzf to select from one of the connected displays
 CONNECTED_DISPLAYS=$(xrandr | grep connected | fzf --prompt " ")
 DISPLAY_PORT=$(echo "$CONNECTED_DISPLAYS" | awk '{print $1}')
