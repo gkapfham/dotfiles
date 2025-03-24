@@ -220,8 +220,6 @@ return {
   -- is not yet polished this tool works well
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    -- branch = "main",
-    -- version = "v2.1.0",
     dependencies = {
       { "MeanderingProgrammer/render-markdown.nvim" },
       { "nvim-telescope/telescope.nvim" },
@@ -229,7 +227,7 @@ return {
     },
     opts = {
       prompts = prompts,
-      model = "claude-3.7-sonnet",
+      model = "gpt-3.5-turbo",
       show_help = true,
       debug = false,
       disable_extra_info = "no",
