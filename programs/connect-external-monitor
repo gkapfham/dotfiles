@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Set the default values for the flags
+EXTERNAL_MONITOR=false
 MOBILE_MONITOR=false
 RESET_MONITORS=false
 LIST_MONITORS=false
@@ -9,6 +10,9 @@ DISPLAY_HELP=false
 # Check for flags
 for arg in "$@"; do
   case $arg in
+    --external-monitor)
+      EXTERNAL_MONITOR=true
+      ;;
     --mobile-monitor)
       MOBILE_MONITOR=true
       ;;
@@ -31,10 +35,11 @@ if [ "$DISPLAY_HELP" == true ]; then
   echo "󰇀 Default use connects an external monitor to the main screen"
   echo ""
   echo " Options:"
-  echo "  --mobile-monitor  Connect an external monitor along with a mobile one (i.e., a tablet)"
-  echo "  --reset-monitors  Reset the monitors to the default configuration using main screen"
-  echo "  --list-monitors   List the connected monitors and their modes"
-  echo "  --help            Display this help message"
+  echo "  --external-monitor Connect an external monitor (i.e., a 27 inch 4K screen) above the main screen"
+  echo "  --mobile-monitor   Connect a mobile monitor (i.e., a tablet) to the left of the main screen"
+  echo "  --reset-monitors   Reset the monitors to the default configuration using main screen"
+  echo "  --list-monitors    List the connected monitors and their modes"
+  echo "  --help             Display this help message"
   exit 0
 fi
 
@@ -50,13 +55,13 @@ if [ "$LIST_MONITORS" == true ]; then
   exit 0
 fi
 
-# Check if the --mobile-monitor flag is set
-for arg in "$@"; do
-  if [ "$arg" == "--mobile-monitor" ]; then
-    MOBILE_MONITOR=true
-    break
-  fi
-done
+# # Check if the --external-monitor flag is set
+# for arg in "$@"; do
+#   if [ "$arg" == "--mobile-monitor" ]; then
+#     MOBILE_MONITOR=true
+#     break
+#   fi
+# done
 
 # Use fzf to select from one of the connected displays
 CONNECTED_DISPLAYS=$(xrandr | grep connected | fzf --prompt " ")
@@ -80,10 +85,15 @@ fi
 # new panel that is of a higher resolution than the
 # stock panel that was available at laptop purchase.
 
-if [ "$MOBILE_MONITOR" == true ]; then
-  xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal --output DP-1 --mode 1920x1200 --left-of eDP-1 --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal --output ${DISPLAY_PORT} --off
-else
-xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal --output ${DISPLAY_PORT} --off
+# Case 1: Set both mobile and external monitors
+if [ "$MOBILE_MONITOR" == true ] && [ "$EXTERNAL_MONITOR" == true ]; then
+  xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal --output DP-1 --mode 1920x1200 --left-of eDP-1 --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal
+# Case 2: Set only the mobile monitor
+elif [ "$MOBILE_MONITOR" == true ] && [ "$EXTERNAL_MONITOR" != true ]; then
+  xrandr --output eDP-1 --primary --mode 2880x1920 --rotate normal --output DP-1 --mode 1920x1200 --left-of eDP-1 --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --off
+# Case 3: Set only the external monitor
+elif [ "$MOBILE_MONITOR" != true ] && [ "$EXTERNAL_MONITOR" == true ]; then
+  xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal
 fi
 
 # Set the root color of the desktop;
