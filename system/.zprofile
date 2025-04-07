@@ -34,7 +34,7 @@ export GDK_DPI_SCALE=0.5
 
 # Ensure that QT applications take on the same these
 # as was selected through lxappearance for a GTK theme
-export QT_QPA_PLATFORMTHEME=gtk2
+export QT_QPA_PLATFORMTHEME=gtk3
 
 # Start the i3 window manager using the startx command
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
