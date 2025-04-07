@@ -227,7 +227,7 @@ return {
     },
     opts = {
       prompts = prompts,
-      model = "gpt-3.5-turbo",
+      model = "claude-3.7-sonnet",
       show_help = true,
       debug = false,
       disable_extra_info = "no",
