@@ -33,7 +33,6 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 font pango:Hack Nerd Font 10
 
 # Wallpaper that is a solid purple color
-# exec_always --no-startup-id hsetroot -solid "#6E466E"
 exec_always --no-startup-id hsetroot -solid "#875f87"
 
 # Define the color scheme for the i3bar
@@ -122,6 +121,10 @@ exec --no-startup-id sct 6800
 # Finally, see the separate picom configuration file
 # for more details about how this program works.
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
+
+# Pointer highlighting that can be toggled
+set $highlight-pointer "highlight-pointer -c '#4c6c00' -p '#af5f00' -o 10 -r 100 --auto-hide-highlight --hide-highlight --show-cursor --key-toggle-highlight 'M-m'"
+exec --no-startup-id $highlight-pointer
 
 # }}}
 
