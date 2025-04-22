@@ -27,7 +27,8 @@ local function lsp_clients()
   }
   -- Get the active LSP clients
   -- and return the client names
-  local clients = vim.lsp.get_active_clients()
+  -- local clients = vim.lsp.get_active_clients()
+  local clients = vim.lsp.get_clients()
   if next(clients) == nil then
     return "󱥑 LSP"
   end
