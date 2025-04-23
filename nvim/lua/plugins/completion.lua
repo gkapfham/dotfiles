@@ -223,7 +223,7 @@ return {
     "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
       { "MeanderingProgrammer/render-markdown.nvim" },
-      { "nvim-telescope/telescope.nvim" },
+      -- { "nvim-telescope/telescope.nvim" },
       { "nvim-lua/plenary.nvim" },
     },
     opts = {
