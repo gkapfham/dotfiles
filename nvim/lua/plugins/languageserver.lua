@@ -141,7 +141,7 @@ return {
       -- configure yamlls for YAML LSP
       lspconfig.yamlls.setup {}
       -- configure jsonls for YAML LSP
-      lspconfig.jsonls.setup{} 
+      lspconfig.jsonls.setup {}
       -- configure nil_ls for Nix LSP
       lspconfig.nil_ls.setup {}
       -- configure rust_analzer for Rust LSP
@@ -176,17 +176,17 @@ return {
       require 'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
       -- Define customized signs for diagnostics reported by the language server;
       -- note that this will define the signs displayed in the gutter
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+      local internal_signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
       -- Note that this approach for defining the size is deprecated after 0.12.0
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
-      end
+      -- for type, icon in pairs(signs) do
+      --   local hl = "DiagnosticSign" .. type
+      --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
+      -- end
       -- Configure the display of diagnostics, especially to confirm
       -- that there is a rounded border around the diagnostic box
       -- that appears when you go to a line with a diagnostic
       vim.diagnostic.config {
-        signs = true,
+        -- signs = true,
         underline = true,
         virtual_text = false,
         virtual_lines = false,
@@ -195,6 +195,14 @@ return {
           header = false,
           border = 'rounded',
           focusable = true,
+        },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = internal_signs.Error,
+            [vim.diagnostic.severity.WARN] = internal_signs.Warn,
+            [vim.diagnostic.severity.INFO] = internal_signs.Info,
+            [vim.diagnostic.severity.HINT] = internal_signs.Hint,
+          },
         },
       }
     end,
