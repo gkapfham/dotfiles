@@ -32,7 +32,6 @@ return {
         layout = {
           layout = {
             backdrop = false,
-            border = "rounded",
           }
         },
         sources = {
@@ -45,7 +44,7 @@ return {
           },
           explorer = {
             layout = {
-              layout = { position = "right", width = 0.25, height = 0.95 },
+              layout = { position = "right", width = 0.225, height = 1 },
             },
           },
           files = {
@@ -102,6 +101,7 @@ return {
       { "<Space>p",   function() Snacks.picker.files() end,                  desc = "Find Files: Non-hidden" },
       { "<Space>n",   function() Snacks.picker.notifications() end,          desc = "Notification History" },
       { "<Space>ch",  function() Snacks.picker.command_history() end,        desc = "Command History" },
+      { "<Space>dd",  function() Snacks.picker.diagnostics_buffer() end,     desc = "Document Diagnostics" },
       { "<Space>ga",  function() Snacks.picker.grep() end,                   desc = "Grep All" },
       { "<Space>gr",  function() Snacks.picker.lsp_references() end,         desc = "LSP: Goto References" },
       { "<Space>gd",  function() Snacks.picker.lsp_definitions() end,        desc = "LSP: Goto Definitions" },
@@ -109,12 +109,21 @@ return {
       { "<Space>ls",  function() Snacks.picker.lsp_symbols() end,            desc = "LSP: Symbols" },
       { "<Space>so",  function() Snacks.picker.smart() end,                  desc = "Find Files: Smart" },
       { "<Space>ts",  function() Snacks.picker.treesitter() end,             desc = "Treesitter: Symbols" },
-      { "<Space>wd",  function() Snacks.picker.diagnostics() end,            desc = "Workspace Diagnostics" },
-      { "<Space>dd",  function() Snacks.picker.diagnostics_buffer() end,     desc = "Document Diagnostics" },
-      { "<Space>wd",  function() Snacks.picker.diagnostics() end,            desc = "Workspace Diagnostics" },
+      { "<Space>wd",  function() Snacks.picker.diagnostics() end,            desc = "LSP: Workspace Diagnostics" },
+      { "<Space>ls",  function() Snacks.picker.lsp_symbols() end,            desc = "LSP: Symbols" },
+      { "<Space>ws",  function() Snacks.picker.lsp_workspace_symbols() end,  desc = "LSP: Workspace Symbols" },
       { "<Space>zz",  function() Snacks.picker.spelling() end,               desc = "Spelling Suggestions" },
     },
     init = function()
+      local nvim_web_devicons = require "nvim-web-devicons"
+      local current_icons = nvim_web_devicons.get_icons()
+      local new_icons = {}
+      for key, icon in pairs(current_icons) do
+        icon.color = "#a8a8a8"
+        new_icons[key] = icon
+      end
+      nvim_web_devicons.set_icon(new_icons)
+      nvim_web_devicons.set_default_icon('', '#a8a8a8')
       vim.api.nvim_create_autocmd("User", {
         pattern = "VeryLazy",
         callback = function()
