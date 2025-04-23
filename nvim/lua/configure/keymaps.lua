@@ -40,5 +40,5 @@ nmap <silent> zp <Plug>(SpellRotateBackward)
 vmap <silent> zn <Plug>(SpellRotateForwardV)
 vmap <silent> zp <Plug>(SpellRotateBackwardV)
 " Toggle the display of spelling mistakes
-nmap <leader>s :set spell!<CR>
+nmap <leader>ss :set spell!<CR>
 ]])
