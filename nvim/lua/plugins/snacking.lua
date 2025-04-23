@@ -45,7 +45,7 @@ return {
           },
           explorer = {
             layout = {
-              layout = { position = "right", width = 0.25 },
+              layout = { position = "right", width = 0.25, height = 0.95 },
             },
           },
           files = {
