@@ -32,6 +32,7 @@ return {
         layout = {
           layout = {
             backdrop = false,
+            border = "rounded",
           }
         },
         sources = {
@@ -99,7 +100,8 @@ return {
       { "<Space>i",   function() Snacks.picker.buffers() end,                desc = "Switch Buffers" },
       { "<Space>o",   function() Snacks.picker.files({ hidden = true }) end, desc = "Find Files: Hidden" },
       { "<Space>p",   function() Snacks.picker.files() end,                  desc = "Find Files: Non-hidden" },
-      { "<Space>ch",   function() Snacks.picker.command_history() end,        desc = "Command History" },
+      { "<Space>n",   function() Snacks.picker.notifications() end,          desc = "Notification History" },
+      { "<Space>ch",  function() Snacks.picker.command_history() end,        desc = "Command History" },
       { "<Space>ga",  function() Snacks.picker.grep() end,                   desc = "Grep All" },
       { "<Space>gr",  function() Snacks.picker.lsp_references() end,         desc = "LSP: Goto References" },
       { "<Space>gd",  function() Snacks.picker.lsp_definitions() end,        desc = "LSP: Goto Definitions" },
@@ -110,7 +112,7 @@ return {
       { "<Space>wd",  function() Snacks.picker.diagnostics() end,            desc = "Workspace Diagnostics" },
       { "<Space>dd",  function() Snacks.picker.diagnostics_buffer() end,     desc = "Document Diagnostics" },
       { "<Space>wd",  function() Snacks.picker.diagnostics() end,            desc = "Workspace Diagnostics" },
-      { "<Space>n",   function() Snacks.picker.notifications() end,          desc = "Notification History" },
+      { "<Space>zz",  function() Snacks.picker.spelling() end,               desc = "Spelling Suggestions" },
     },
     init = function()
       vim.api.nvim_create_autocmd("User", {
