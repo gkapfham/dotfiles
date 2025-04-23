@@ -249,7 +249,28 @@ return {
       notifier = {
         enabled = false,
       },
-      picker = { enabled = false },
+      picker = {
+        enabled = true,
+        layout = {
+          layout = {
+            backdrop = false,
+          }
+        },
+        sources = {
+          files = {
+            layout = {
+              layout = {
+                backdrop = false,
+              }
+            },
+          },
+          explorer = {
+            layout = {
+              layout = { position = "right", width = 0.25 },
+            },
+          },
+        },
+      },
       quickfile = { enabled = true },
       scroll = { enabled = false },
       statuscolumn = { enabled = false },
