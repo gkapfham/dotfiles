@@ -29,12 +29,35 @@ return {
       },
       picker = {
         enabled = true,
+        ui_select = true,
+        icons = {
+          diagnostics = {
+            Error = " ",
+            Warn = " ",
+            Hint = " ",
+            Info = "  "
+          },
+        },
         layout = {
           layout = {
             backdrop = false,
           }
         },
         sources = {
+          spelling = {
+            layout = {
+              layout = {
+                border = "rounded",
+              }
+            },
+          },
+          icons = {
+            layout = {
+              layout = {
+                border = "rounded",
+              }
+            },
+          },
           command_history = {
             layout = {
               layout = {
@@ -44,7 +67,7 @@ return {
           },
           explorer = {
             layout = {
-              layout = { position = "right", width = 0.225, height = 1 },
+              layout = { position = "right", width = 0.225 },
             },
           },
           files = {
@@ -105,9 +128,10 @@ return {
       { "<Space>ga",  function() Snacks.picker.grep() end,                   desc = "Grep All" },
       { "<Space>gr",  function() Snacks.picker.lsp_references() end,         desc = "LSP: Goto References" },
       { "<Space>gd",  function() Snacks.picker.lsp_definitions() end,        desc = "LSP: Goto Definitions" },
-      { "<Space>gs",  function() Snacks.picker.grep_word() end,              desc = "Grep All: Highlighted Word" },
+      { "<Space>gs",  function() Snacks.picker.grep_word() end,              desc = "Grep Highlighted Word" },
       { "<Space>ls",  function() Snacks.picker.lsp_symbols() end,            desc = "LSP: Symbols" },
       { "<Space>so",  function() Snacks.picker.smart() end,                  desc = "Find Files: Smart" },
+      { "<Space>ta",  function() require("aerial").snacks_picker() end,      desc = "Aerial: Symbols" },
       { "<Space>ts",  function() Snacks.picker.treesitter() end,             desc = "Treesitter: Symbols" },
       { "<Space>wd",  function() Snacks.picker.diagnostics() end,            desc = "LSP: Workspace Diagnostics" },
       { "<Space>ls",  function() Snacks.picker.lsp_symbols() end,            desc = "LSP: Symbols" },
