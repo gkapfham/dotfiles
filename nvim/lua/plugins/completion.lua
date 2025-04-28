@@ -282,19 +282,22 @@ return {
           normal = 'gh',
         },
       },
-      -- default window options
+      highlight_selection = false,      
+      -- default window options; note that the floating
+      -- window does not display over all sidebars and
+      -- thus the horizontal approach is elected for now
       window = {
-        layout = 'float',    -- 'vertical', 'horizontal', 'float'
+        layout = 'horizontal',
+        relative = 'editor',
+        height = 0.65,
+        -- width = 0.8,
         -- Options below only apply to floating windows
-        relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
-        border = 'single',   -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-        width = 0.8,         -- fractional width of parent
-        height = 0.7,        -- fractional height of parent
-        row = 5,             -- row position of the window, default is centered
-        col = nil,           -- column position of the window, default is centered
-        title = 'Copilot',   -- title of chat window
-        footer = nil,        -- footer of chat window
-        zindex = 1,          -- determines if window is on top or below other floating windows
+        -- border = 'single',   -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+        -- row = 5,             -- row position of the window, default is centered
+        -- col = nil,           -- column position of the window, default is centered
+        -- title = 'Copilot',   -- title of chat window
+        -- footer = nil,        -- footer of chat window
+        -- zindex = 1,          -- determines if window is on top or below other floating windows
       },
     },
     build = function()
@@ -371,6 +374,11 @@ return {
         desc = "CopilotChat: Open",
       },
       {
+        "<Space>ccm",
+        "<cmd>CopilotChatModels<cr>",
+        desc = "CopilotChat: Models",
+      },
+      {
         "<Space>cct",
         "<cmd>CopilotChatToggle<cr>",
         desc = "CopilotChat: Toggle",
@@ -400,7 +408,7 @@ return {
         "<Space>ccp",
         function()
           local actions = require("CopilotChat.actions")
-          require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+          require("CopilotChat.integrations.snacks").pick(actions.prompt_actions())
         end,
         desc = "CopilotChat: Prompts from Telescope",
       },
