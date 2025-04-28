@@ -324,8 +324,13 @@ return {
               -- note that other plugins seem to do this automatically
               -- but unless it is done for Aerial it will show a "No Name"
               -- label whenever you change into the Aerial buffer
+              -- Also define a custom label for the snacks picker
+              -- and for any other components that do not feature a
+              -- default display inside of the tabline of lualine
               filetype_names = {
                 aerial = "Aerial",
+                snacks_picker_input = "Snacks",
+                snacks_picker_list = "Snacks",
               },
               -- Define symbols attached to each file in the tabline
               symbols = {
