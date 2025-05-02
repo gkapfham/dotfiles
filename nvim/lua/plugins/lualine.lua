@@ -273,7 +273,7 @@ return {
           component_separators = { left = '', right = '' },
           section_separators = { left = '', right = '' },
           disabled_filetypes = {
-            winbar = { 'neo-tree', 'Outline', 'aerial', "trouble", "toggleterm" },
+            winbar = { 'aerial', 'neo-tree', "snacks_terminal", "trouble", "toggleterm", "Outline", },
           },
           always_divide_middle = true,
           globalstatus = true,
