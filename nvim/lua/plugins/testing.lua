@@ -35,22 +35,22 @@ return {
   --   },
   -- },
 
-  -- nvim-test
-  -- Run tests with nvim and display in toggleterm
-  {
-    "klen/nvim-test",
-    event = "VeryLazy",
-    config = function()
-      require('nvim-test').setup({
-        term = "toggleterm",
-        termOpts = {
-          direction = "float",
-          go_back = false,
-          stopinsert = "auto",
-          keep_one = true,
-        },
-      })
-    end
-  },
+  -- -- nvim-test
+  -- -- Run tests with nvim and display in toggleterm
+  -- {
+  --   "klen/nvim-test",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require('nvim-test').setup({
+  --       term = "toggleterm",
+  --       termOpts = {
+  --         direction = "float",
+  --         go_back = false,
+  --         stopinsert = "auto",
+  --         keep_one = true,
+  --       },
+  --     })
+  --   end
+  -- },
 
 }
