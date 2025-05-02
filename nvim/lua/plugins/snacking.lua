@@ -135,6 +135,7 @@ return {
       { "<Space>wd",  function() Snacks.picker.diagnostics() end,            desc = "LSP: Workspace Diagnostics" },
       { "<Space>ls",  function() Snacks.picker.lsp_symbols() end,            desc = "LSP: Symbols" },
       { "<Space>ws",  function() Snacks.picker.lsp_workspace_symbols() end,  desc = "LSP: Workspace Symbols" },
+      { "<Space>tt",  function() Snacks.terminal() end,                      desc = "Terminal" },
       { "<Space>zz",  function() Snacks.picker.spelling() end,               desc = "Spelling Suggestions" },
     },
     init = function()
@@ -147,6 +148,17 @@ return {
       end
       nvim_web_devicons.set_icon(new_icons)
       nvim_web_devicons.set_default_icon('', '#a8a8a8')
+      function _G.set_terminal_keymaps()
+        local opts = { buffer = 0 }
+        vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+        vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+        vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+        vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+        vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+        vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+        vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+      end
+      vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
       vim.api.nvim_create_autocmd("User", {
         pattern = "VeryLazy",
         callback = function()
