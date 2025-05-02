@@ -28,6 +28,10 @@ return {
       outline_items = {
         show_symbol_details = false,
       },
+      outline_window = {
+        width = 22,
+        relative_width = true,
+      },
       symbol_folding = {
         autofold_depth = false,
         auto_unfold = {
