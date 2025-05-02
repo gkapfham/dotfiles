@@ -15,12 +15,12 @@ return {
     keys = {
       {
         "<Space>td",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        "<cmd>Trouble diagnostics toggle filter.buf=0 focus=false pinned=true win.relative=win win.position=bottom<cr>",
         desc = "Trouble: Buffer Diagnostics",
       },
       {
         "<Space>tD",
-        "<cmd>Trouble diagnostics toggle<cr>",
+        "<cmd>Trouble diagnostics toggle focus=false pinned=true win.relative=win win.position=bottom<cr>",
         desc = "Trouble: Diagnostics",
       },
       {
