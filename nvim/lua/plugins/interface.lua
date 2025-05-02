@@ -139,91 +139,91 @@ return {
     end,
   },
 
-  -- edgy.nvim for controlling sidebars:
-  -- supports the display of multiple sidebars
-  -- in the same consistently sized region
-  {
-    "folke/edgy.nvim",
-    event = "VeryLazy",
-    init = function()
-      vim.opt.laststatus = 3
-      vim.opt.splitkeep = "screen"
-    end,
-    opts = {
-      options = {
-        left = { size = 25 },
-        bottom = { size = 10 },
-        right = { size = 25 },
-        top = { size = 10 },
-      },
-      -- Configure the bottom panel
-      bottom = {
-        -- Trouble.nvim with diagnostics
-        -- and symbols and quickfix and more
-        {
-          title = "Analysis",
-          ft = "trouble"
-        },
-        -- ToggleTerm.nvim
-        {
-          title = "Terminal",
-          ft = "snacks_terminal",
-        },
-        -- Standard quickfix window
-        { ft = "qf", title = "QuickFix" },
-      },
-      -- -- Configure the right panel
-      -- right = {
-      --   -- Neotree filesystem
-      --   {
-      --     title = "Filesystem",
-      --     ft = "neo-tree",
-      --     filter = function(buf)
-      --       return vim.b[buf].neo_tree_source == "filesystem"
-      --     end,
-      --     size = { height = 0.5 },
-      --   },
-      --   -- Outline.nvim symbols
-      --   {
-      --     title = "Outline",
-      --     ft = "Outline",
-      --     pinned = false,
-      --     size = { height = 0.30 },
-      --     open = "OutlineOpen"
-      --   },
-      --   -- Neotree buffers
-      --   {
-      --     title = "Buffers",
-      --     ft = "neo-tree",
-      --     filter = function(buf)
-      --       return vim.b[buf].neo_tree_source == "buffers"
-      --     end,
-      --     size = { height = 0.20 },
-      --     pinned = false,
-      --     open = "Neotree position=top buffers",
-      --   },
-      --   -- Neotree Git status
-      --   {
-      --     title = "Git",
-      --     ft = "neo-tree",
-      --     filter = function(buf)
-      --       return vim.b[buf].neo_tree_source == "git_status"
-      --     end,
-      --     size = { height = 0.20 },
-      --     pinned = false,
-      --     open = "Neotree position=bottom git_status",
-      --   },
-      --   -- Aerial symbols
-      --   {
-      --     title = "Aerial",
-      --     open = "AerialOpen",
-      --     pinned = true,
-      --     size = { height = 0.20 },
-      --     ft = "aerial",
-      --   },
-      -- },
-    },
-  },
+  -- -- edgy.nvim for controlling sidebars:
+  -- -- supports the display of multiple sidebars
+  -- -- in the same consistently sized region
+  -- {
+  --   "folke/edgy.nvim",
+  --   event = "VeryLazy",
+  --   init = function()
+  --     vim.opt.laststatus = 3
+  --     vim.opt.splitkeep = "screen"
+  --   end,
+  --   opts = {
+  --     options = {
+  --       left = { size = 25 },
+  --       bottom = { size = 10 },
+  --       right = { size = 25 },
+  --       top = { size = 10 },
+  --     },
+  --     -- Configure the bottom panel
+  --     bottom = {
+  --       -- Trouble.nvim with diagnostics
+  --       -- and symbols and quickfix and more
+  --       {
+  --         title = "Analysis",
+  --         ft = "trouble"
+  --       },
+  --       -- ToggleTerm.nvim
+  --       {
+  --         title = "Terminal",
+  --         ft = "snacks_terminal",
+  --       },
+  --       -- Standard quickfix window
+  --       { ft = "qf", title = "QuickFix" },
+  --     },
+  --     -- -- Configure the right panel
+  --     -- right = {
+  --     --   -- Neotree filesystem
+  --     --   {
+  --     --     title = "Filesystem",
+  --     --     ft = "neo-tree",
+  --     --     filter = function(buf)
+  --     --       return vim.b[buf].neo_tree_source == "filesystem"
+  --     --     end,
+  --     --     size = { height = 0.5 },
+  --     --   },
+  --     --   -- Outline.nvim symbols
+  --     --   {
+  --     --     title = "Outline",
+  --     --     ft = "Outline",
+  --     --     pinned = false,
+  --     --     size = { height = 0.30 },
+  --     --     open = "OutlineOpen"
+  --     --   },
+  --     --   -- Neotree buffers
+  --     --   {
+  --     --     title = "Buffers",
+  --     --     ft = "neo-tree",
+  --     --     filter = function(buf)
+  --     --       return vim.b[buf].neo_tree_source == "buffers"
+  --     --     end,
+  --     --     size = { height = 0.20 },
+  --     --     pinned = false,
+  --     --     open = "Neotree position=top buffers",
+  --     --   },
+  --     --   -- Neotree Git status
+  --     --   {
+  --     --     title = "Git",
+  --     --     ft = "neo-tree",
+  --     --     filter = function(buf)
+  --     --       return vim.b[buf].neo_tree_source == "git_status"
+  --     --     end,
+  --     --     size = { height = 0.20 },
+  --     --     pinned = false,
+  --     --     open = "Neotree position=bottom git_status",
+  --     --   },
+  --     --   -- Aerial symbols
+  --     --   {
+  --     --     title = "Aerial",
+  --     --     open = "AerialOpen",
+  --     --     pinned = true,
+  --     --     size = { height = 0.20 },
+  --     --     ft = "aerial",
+  --     --   },
+  --     -- },
+  --   },
+  -- },
 
   -- auto-hlsearch.nvim
   -- Automatically disable search highlighting when
