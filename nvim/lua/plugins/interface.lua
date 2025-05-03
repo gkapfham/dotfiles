@@ -109,6 +109,10 @@ return {
     end,
   },
 
+  -- hover.nvim
+  -- Hover information for LSP
+  -- and other sources for documentation
+  -- like the built-in dictionary
   {
     "lewis6991/hover.nvim",
     event = "VeryLazy",
