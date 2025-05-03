@@ -346,11 +346,6 @@ return {
           vim.opt_local.number = true
         end,
       })
-      -- CopilotChat - Prompt actions display with snacks picker
-      -- vim.keymap.set('n', '<leader>ccp', function()
-      --   local actions = require("CopilotChat.actions")
-      --   require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-      -- end, { desc = "CopilotChat - Prompt actions" })
       -- Improved display of markdown files;
       -- note that this influences Quarto and
       -- Markdown files and has custom color scheme
