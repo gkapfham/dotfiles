@@ -306,8 +306,9 @@ return {
               -- default display inside of the tabline of lualine
               filetype_names = {
                 aerial = "Aerial",
-                snacks_picker_input = "Snacks",
-                snacks_picker_list = "Snacks",
+                snacks_picker_input = "Picker",
+                snacks_picker_list = "Explorer",
+                snacks_terminal = "Terminal",
               },
               -- Define symbols attached to each file in the tabline
               symbols = {
