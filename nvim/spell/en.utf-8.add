@@ -4988,3 +4988,11 @@ luarc
 filemanagement
 vai
 LuaSnip
+lv
+latexindent
+chopsentences
+indentconfig
+gwip
+VimtexCompileSS
+nnoremap
+VimtexTocToggle
