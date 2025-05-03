@@ -134,24 +134,6 @@ local function diff_source()
   end
 end
 
--- Define a function that will display a symbol
--- after the encoding for the current file
-local function encoding_prefix()
-  return ""
-end
-
--- Define a function that will display a symbol
--- after the location for the current file
-local function location_prefix()
-  return "󱀉"
-end
-
--- Define a function that will display a symbol
--- after the size of the current file
-local function filesize_prefix()
-  return "󰖡"
-end
-
 --- }}}
 
 -- Define the color scheme for the lualine;
