@@ -285,7 +285,6 @@ return {
           lualine_c = {},
           lualine_x = {},
           lualine_y = {},
-          -- lualine_z = {}
         },
         winbar = {
           lualine_b = { { 'filename', path = 3, file_status = false, icon = "󰉋", shorting_target = 80, symbols = { unnamed = "", newfile = "" } }, { 'progress', icon = "󰮴" }, { 'location', icon = "" }, { "aerial", colored = false }, }
