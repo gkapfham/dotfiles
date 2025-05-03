@@ -100,7 +100,7 @@ return {
         ring = {
           history_length = 100,
           storage = "shada",
-          storage_path = vim.fn.stdpath("data") .. "/databases/yanky.db", -- Only for sqlite storage
+          storage_path = vim.fn.stdpath("data") .. "/databases/yanky.db",
           sync_with_numbered_registers = true,
           cancel_event = "update",
           ignore_registers = { "_" },
@@ -130,7 +130,6 @@ return {
         textobj = {
           enabled = true,
         },
-
       })
       vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)")
       vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
@@ -223,7 +222,6 @@ return {
     "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
       { "MeanderingProgrammer/render-markdown.nvim" },
-      -- { "nvim-telescope/telescope.nvim" },
       { "nvim-lua/plenary.nvim" },
     },
     opts = {
@@ -646,7 +644,7 @@ return {
             priority = 10,
             keyword_length = 3
           },
-          { name = 'nerdfont',               max_item_count = 10, priority = 1, keyword_length = 3 },
+          { name = 'nerdfont',          max_item_count = 10, priority = 1, keyword_length = 3 },
           { name = 'nvim_lsp_signature_help' },
         }, {
           -- Define the second-tier of sources; these will only
