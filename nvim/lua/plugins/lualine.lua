@@ -143,8 +143,6 @@ end
 local colors = {
   color2  = "#87afd7",
   color7  = "#e06c75",
-  -- color10 = "#afaf5f",
-  -- color10 = "#bfbf4f",
   color10 = "#b7b757",
   color6  = "#626262",
   color3  = "#875f87",
