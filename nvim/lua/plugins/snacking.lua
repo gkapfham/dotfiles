@@ -5,7 +5,8 @@ return {
 
   -- snacks.nvim
   -- small improvements to the user interface,
-  -- including pickers for numerous elements
+  -- including pickers for numerous elements,
+  -- a terminal window, and a file explorer
   {
     "folke/snacks.nvim",
     priority = 1000,
