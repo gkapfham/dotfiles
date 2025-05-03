@@ -69,9 +69,11 @@ return {
         use_default_keymaps = true,
         view_options = {
           show_hidden = true,
+          ---@diagnostic disable-next-line: unused-local
           is_hidden_file = function(name, bufnr)
             return vim.startswith(name, ".")
           end,
+          ---@diagnostic disable-next-line: unused-local
           is_always_hidden = function(name, bufnr)
             return false
           end,
