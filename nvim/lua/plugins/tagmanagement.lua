@@ -8,7 +8,10 @@ return {
   -- Gutentags;
   -- This works correctly for most files;
   -- yet, it does not work for Quarto markdown
-  -- files and other "non-standard file types"
+  -- files and other "non-standard file types";
+  -- note that it does not store the tag files
+  -- inside of a project but rather in a
+  -- system-wide directory for "cache files"
   {
     "ludovicchabant/vim-gutentags",
     event = "BufReadPre",
