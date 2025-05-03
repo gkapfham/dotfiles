@@ -4,7 +4,9 @@
 
 return {
 
-  -- Comments plugin
+  -- Comment.nvim
+  -- Comment source code and other
+  -- files in an automatic way
   {
     "numToStr/Comment.nvim",
     event = "VeryLazy",
