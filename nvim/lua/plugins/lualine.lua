@@ -70,9 +70,6 @@ local function lsp_clients()
   return "" .. table.concat(client_names, " ")
 end
 
--- local abbreviation = lsp_abbreviations[base_name] or base_name
--- table.insert(client_names, abbreviation)
-
 local function spell_status()
   -- Use a different configuration to show whether
   -- or not spell checking is currently running
