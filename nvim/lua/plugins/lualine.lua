@@ -231,6 +231,7 @@ return {
 
   -- lualine.nvim
   -- Lualine for top and bottom bars
+  -- and for the winbar
   {
     "nvim-lualine/lualine.nvim",
     lazy = false,
