@@ -100,6 +100,7 @@ local function format_status(symbols, depth, separator, icons_enabled)
 end
 
 -- The API to output the symbols structure
+---@diagnostic disable-next-line: lowercase-global
 function output_symbols_structure(depth, separator, icons_enabled)
   local symbols = aerial.get_location(true)
   local symbols_structure = format_status(symbols, depth, separator, icons_enabled)
@@ -306,6 +307,7 @@ return {
               -- default display inside of the tabline of lualine
               filetype_names = {
                 aerial = "Aerial",
+                fugitive = "Fugitive",
                 snacks_picker_input = "Picker",
                 snacks_picker_list = "Explorer",
                 snacks_terminal = "Terminal",
