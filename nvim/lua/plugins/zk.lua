@@ -5,6 +5,8 @@
 
 return {
 
+  -- zk-nvim
+  -- Zettelkasten note-taking
   {
     "zk-org/zk-nvim",
     event = "VeryLazy",
