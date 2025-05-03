@@ -20,12 +20,6 @@ return {
       getRule("`")[1].not_filetypes = { "markdown", "quarto", "tex"}
       getRule("'")[1].not_filetypes = { "tex" }
     end
-    -- opts = {
-    --   check_ts = true,
-    -- }
-    -- config = true
-    -- use opts = {} for passing setup options
-    -- this is equivalent to setup({}) function
   },
 
   -- nvim-ts-autotag: automatically generate tags
