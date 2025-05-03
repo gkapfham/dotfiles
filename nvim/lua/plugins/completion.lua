@@ -346,7 +346,7 @@ return {
           vim.opt_local.number = true
         end,
       })
-      -- CopilotChat - Prompt actions display with telescope
+      -- CopilotChat - Prompt actions display with snacks picker
       vim.keymap.set('n', '<leader>ccp', function()
         local actions = require("CopilotChat.actions")
         require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
