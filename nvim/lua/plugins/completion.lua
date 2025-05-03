@@ -281,7 +281,7 @@ return {
           normal = 'gh',
         },
       },
-      highlight_selection = false,      
+      highlight_selection = false,
       -- default window options; note that the floating
       -- window does not display over all sidebars and
       -- thus the horizontal approach is elected for now
