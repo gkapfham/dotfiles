@@ -49,7 +49,7 @@ return {
     cmd = { "DiffviewOpen", "DiffviewLog" },
   },
 
-  -- diffview.nvim for viewing diffs
+  -- git-conflict.nvim for resolving merge conflicts
   {
     "akinsho/git-conflict.nvim",
     event = "VeryLazy",
