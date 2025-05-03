@@ -220,6 +220,7 @@ return {
   -- is not yet polished this tool works well
   {
     "CopilotC-Nvim/CopilotChat.nvim",
+    event = "VeryLazy",
     dependencies = {
       { "MeanderingProgrammer/render-markdown.nvim" },
       { "nvim-lua/plenary.nvim" },
@@ -359,7 +360,6 @@ return {
         },
       })
     end,
-    event = "VeryLazy",
     keys = {
       {
         "<Space>cco",
