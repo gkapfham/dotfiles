@@ -310,11 +310,11 @@ return {
       opts.selection = select.unnamed
       -- Override the git prompts message
       opts.prompts.Commit = {
-        prompt = "Write commit message for the change using the convential commits standard.",
+        prompt = "Write commit message for the change using the conventional commits standard.",
         selection = select.gitdiff,
       }
       opts.prompts.CommitStaged = {
-        prompt = "Write commit message for the change using the convential commits standard.",
+        prompt = "Write commit message for the change using the conventional commits standard.",
         selection = function(source)
           return select.gitdiff(source, true)
         end,
