@@ -2,7 +2,6 @@
 -- Purpose: Configure the aerial plugin
 -- (and similar types of plugins)
 -- for creation of various sidebars
--- Note: this plugin also has a telescope integration
 -- Note: none of these plugins work reliably for
 -- every type of filetype (especially for Markdown)
 
@@ -84,7 +83,8 @@ return {
 
   -- aerial.nvim plugin
   -- A navigation sidebar
-  -- that integrates with Telescope
+  -- that integrates with one of
+  -- the pickers provided by snacks.nvim
   {
     "stevearc/aerial.nvim",
     cmd = "AerialToggle",
