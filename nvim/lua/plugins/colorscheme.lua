@@ -115,6 +115,7 @@ return {
           RenderMarkdownH6Bg = { bg = "${bg}" },
           SnacksIndentScope = { fg = "${cyan}" },
           SnacksPicker = { bg = "${bg}" },
+          SnacksPickerTree = { fg = "${gray}" },
           SymbolUsageRounding = { fg = "${menu}" },
           SymbolUsageContent = { fg = "${cyan}", italic = true },
           SymbolUsageRef = { fg = "${cyan}", italic = true },
