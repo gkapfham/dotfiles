@@ -227,13 +227,14 @@ return {
     },
     opts = {
       prompts = prompts,
-      model = "claude-3.5-sonnet",
+      model = "claude-sonnet-4",
       show_help = true,
       debug = false,
       disable_extra_info = "no",
       question_header = "##  Gregory ",
       answer_header = "## 󰛨 Copilot ",
       language = "English",
+      chat_autocomplete = false,
       mappings = {
         complete = {
           insert = '<Tab>',
@@ -283,20 +284,20 @@ return {
       },
       highlight_selection = false,
       -- default window options; note that the floating
-      -- window does not display over all sidebars and
-      -- thus the horizontal approach is elected for now
+      -- window does not display over all sidebars unless
+      -- the zindex is set to a higher value
       window = {
-        layout = 'horizontal',
+        layout = 'float',
         relative = 'editor',
-        height = 0.65,
-        -- width = 0.8,
+        height = 0.75,
+        width = 0.8,
         -- Options below only apply to floating windows
-        -- border = 'single',   -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-        -- row = 5,             -- row position of the window, default is centered
-        -- col = nil,           -- column position of the window, default is centered
-        -- title = 'Copilot',   -- title of chat window
-        -- footer = nil,        -- footer of chat window
-        -- zindex = 1,          -- determines if window is on top or below other floating windows
+        border = 'rounded', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+        row = 4, -- row position of the window, default is centered
+        col = nil, -- column position of the window, default is centered
+        title = ' Copilot', -- title of chat window
+        footer = nil, -- footer of chat window
+        zindex = 1000, -- determines if window is on top or below other floating windows, higher is on top
       },
     },
     build = function()
@@ -446,7 +447,7 @@ return {
     -- Configure the nvim-cmp plugin
     config = function()
       -- Configure standard completion for menus
-      vim.cmd([[set completeopt=menu,menuone,noselect]])
+      vim.cmd([[set completeopt=menu,menuone,noselect,popup]])
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       -- Configure the dictionary plugin
@@ -639,12 +640,12 @@ return {
             priority = 10,
             keyword_length = 3
           },
-          { name = 'nerdfont',          max_item_count = 10, priority = 1, keyword_length = 3 },
+          { name = 'path',                   max_item_count = 10, priority = 5, keyword_length = 2 },
+          { name = 'nerdfont',               max_item_count = 10, priority = 1, keyword_length = 3 },
           { name = 'nvim_lsp_signature_help' },
         }, {
           -- Define the second-tier of sources; these will only
           -- appear when there is no active source from the first-tier
-          { name = 'path' },
         })
       })
       -- Use completion sources when forward-searching with "/"
