@@ -47,6 +47,7 @@ local kind_icons = {
   Operator = "󰆕",
   TypeParameter = "𝙏",
   Nospell = "",
+  None = "󰋶",
   Spell = "",
   StringSpecialPath = "",
   StringSpecialSymbol = "󱔁",
@@ -467,7 +468,7 @@ return {
         -- background that works better for GitHub
         -- Copilot chat and that does not match PMenu.
         window = {
-          completion = cmp.config.window.bordered(),
+          completion = cmp.config.window.bordered({max_height = 50}),
           documentation = cmp.config.window.bordered(),
           -- documentation = {
           --   winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder',
