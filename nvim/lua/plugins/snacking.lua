@@ -71,6 +71,9 @@ return {
             layout = {
               layout = { position = "right", width = 0.225 },
             },
+            styles = {
+               zindex = 1,
+            },
           },
           files = {
             layout = {
