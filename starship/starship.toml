@@ -44,6 +44,9 @@ pure_msg = '[󰄸 shell](bold blue) '
 unknown_msg = '[ shell](bold blue) '
 format = '[󰜗 nix $state(\($name\))](bold blue) '
 
+[perl]
+format = '[ $version ](bold blue)'
+
 [package]
 format = '[ $version ](bold red)'
 
