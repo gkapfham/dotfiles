@@ -83,8 +83,12 @@ return {
       -- configure pyright for Python LSP
       lspconfig.pyright.setup {}
       -- configure ruff for Python LSP
-      -- lspconfig.ruff_lsp.setup {}
       lspconfig.ruff.setup {}
+      -- configure ty for Python LSP;
+      -- use the new approach for
+      -- configuration since lspconfig
+      -- resulted in errors on startup
+      vim.lsp.enable('ty')
       -- configure texlab for LaTeX and BibTeX LSP
       lspconfig.texlab.setup {
         settings = {
