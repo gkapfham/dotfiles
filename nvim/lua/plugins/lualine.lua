@@ -22,6 +22,7 @@ local function lsp_clients()
     ruff = "󱝁",
     ruff_lsp = "󱝁",
     texlab = "",
+    ty = "󱋿",
     yamlls = "",
     zk = "",
   }
