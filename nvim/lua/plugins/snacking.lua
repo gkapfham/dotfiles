@@ -24,7 +24,7 @@ return {
           easing = "linear",
           duration = {
             step = 10,
-            total = 150,
+            total = 100,
           },
         },
         scope = {
