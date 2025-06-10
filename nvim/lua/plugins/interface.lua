@@ -279,6 +279,10 @@ return {
           }
         },
         override_by_extension = {
+          ["css"] = {
+            icon = "",
+            name = "CSS"
+          },
           ["tex"] = {
             icon = "󰙩",
             name = "TeX"
