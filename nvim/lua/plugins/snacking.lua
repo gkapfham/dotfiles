@@ -76,7 +76,7 @@ return {
           },
           explorer = {
             layout = {
-              layout = { position = "right", width = 0.225 },
+              layout = { position = "right", width = 0.21 },
             },
             styles = {
               zindex = 1,
