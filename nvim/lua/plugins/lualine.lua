@@ -72,12 +72,18 @@ local function lsp_clients()
 end
 
 local function spell_status()
-  -- Use a different configuration to show whether
-  -- or not spell checking is currently running
+  -- Use Nerd Font icons for languages
+  local lang_icons = {
+    ["en_us"] = "",
+    ["en_gb"] = "",
+  }
+  -- Assign the icon based on the spelling language
+  local lang = vim.o.spelllang
+  local icon = lang_icons[lang] or ""
   if vim.o.spell then
-    return '󰓆 󰔡' .. ' ' .. vim.o.spelllang
+    return '󰓆 󰔡 ' .. icon
   else
-    return '󰓆 󰔢' .. ' ' .. vim.o.spelllang
+    return '󰓆 󰔢 ' .. icon
   end
 end
 
