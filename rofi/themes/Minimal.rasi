@@ -22,7 +22,7 @@ window {
     location:       center;
     width:          1600;
     height:         900;
-    border-radius:  10;
+    border-radius:  20;
 }
 
 inputbar {
