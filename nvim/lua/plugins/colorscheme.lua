@@ -156,6 +156,7 @@ return {
           ["@markup.raw.markdown_inline"] = { fg = "${fg}", bold = true, undercurl = true },
           ["@string.yaml"] = { bg = "${bg}" },
           ["@string"] = { fg = "${yellow}", italic = false },
+          ["@string.documentation.python"] = { fg = "${yellow}", italic = true },
           ["@variable"] = { fg = "${blue}" },
           ["@variable.member"] = { fg = "${blue}" },
           ["@variable.parameter"] = { fg = "${green}" },
