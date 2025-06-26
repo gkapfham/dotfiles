@@ -1,6 +1,8 @@
 -- File: plugins/colorscheme.lua
 -- Purpose: Configure the colorscheme and plugins that highlight colors
--- Note: The vitamin-onec colorscheme is re-created by using onedarkpro as a base
+-- Note: A variant of the vitamin-onec colorscheme is re-created
+-- by using onedarkpro as a base. Note that this color scheme is now
+-- more vibrant than the original vitamin-onec colorscheme.
 
 return {
 
@@ -22,16 +24,18 @@ return {
         colors = {
           bg = "#1c1c1c",
           fg = "#c1c1c1",
-          red = "#d75f5f",
+          -- red = "#d75f5f",
+          red = "#d74f47",
           deepred = "#813939",
           orange = "#d78700",
           deeporange = "#af5f00",
           yellow = "#b7b757",
-          green = "#5f8700",
+          green = "#6f9500",
           deepgreen = "#4c6c00",
           cyan = "#00afaf",
           blue = "#87afd7",
-          purple = "#875f87",
+          -- purple = "#875f87",
+          purple = "#a569a5",
           white = "#b2b2b2",
           black = "#767676",
           gray = "#6c6c6c",
@@ -41,7 +45,7 @@ return {
           darkmenu = "#303030",
           menu = "#262626",
           none = "NONE",
-          magenta = "#af5faf",
+          magenta = "#d75f87",
         },
         -- defined by the standard version
         -- of this colorscheme; define first
@@ -59,6 +63,7 @@ return {
           AvanteConflictIncoming = { bg = "${bg}" },
           AvanteConflictIncomingLabel = { fg = "${orange}", bg = "${bg}" },
           Comment = { fg = "${comment}", bg = "NONE", italic = true },
+          CursorLineNr = { fg = "${magenta}" },
           CmpItemKindCopilot = { fg = "${yellow}" },
           CmpItemKindEnum = { fg = "${orange}" },
           CmpItemKindLook = { fg = "${red}" },
@@ -142,8 +147,9 @@ return {
           ["@diff.minus"] = { fg = "${red}" },
           ["@diff.change"] = { fg = "${blue}" },
           ["@keyword.conditional"] = { fg = "${cyan}" },
-          ["@keyword.return.python"] = { fg = "${cyan}" },
+          ["@keyword.gitcommit"] = { fg = "${magenta}", bold = true, italic = true },
           ["@keyword.function.python"] = { fg = "${cyan}" },
+          ["@keyword.return.python"] = { fg = "${cyan}" },
           ["@constructor"] = { fg = "${orange}" },
           ["@function"] = { fg = "${purple}", italic = true },
           ["@punctuation.special"] = { fg = "${orange}", italic = true },
