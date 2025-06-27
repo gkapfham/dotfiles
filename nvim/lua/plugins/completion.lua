@@ -231,7 +231,8 @@ return {
     },
     opts = {
       prompts = prompts,
-      model = "claude-sonnet-4",
+      -- model = "claude-sonnet-4",
+      model = "gpt-4.1",
       show_help = true,
       debug = false,
       disable_extra_info = "no",
