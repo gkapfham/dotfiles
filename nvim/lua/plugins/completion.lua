@@ -205,7 +205,6 @@ return {
     end,
   },
 
-
   -- copilot-cmp
   -- Integrate the copilot with nvim-cmp
   {
@@ -472,7 +471,7 @@ return {
         -- background that works better for GitHub
         -- Copilot chat and that does not match PMenu.
         window = {
-          completion = cmp.config.window.bordered({max_height = 50}),
+          completion = cmp.config.window.bordered({ max_height = 50 }),
           documentation = cmp.config.window.bordered(),
           -- documentation = {
           --   winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder',
