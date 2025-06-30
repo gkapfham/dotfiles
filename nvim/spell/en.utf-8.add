@@ -5196,3 +5196,14 @@ a569a5
 KeywordOperator
 keymap
 gpt
+qdrant
+tqdm
+find
+fastembed
+qmodels
+VectorParams
+QdrantClient
+L6
+MiniLM
+SentenceTransformer
+AsyncFunctionDef
