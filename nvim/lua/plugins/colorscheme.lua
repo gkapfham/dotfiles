@@ -149,7 +149,7 @@ return {
           ["@diff.minus"] = { fg = "${red}" },
           ["@diff.change"] = { fg = "${blue}" },
           ["@keyword.conditional"] = { fg = "${cyan}" },
-          ["@keyword.gitcommit"] = { fg = "${teal}", italic = true },
+          ["@keyword.gitcommit"] = { fg = "${yellow}", italic = true },
           ["@keyword.function.python"] = { fg = "${cyan}" },
           ["@keyword.return.python"] = { fg = "${cyan}" },
           ["@constructor"] = { fg = "${orange}" },
