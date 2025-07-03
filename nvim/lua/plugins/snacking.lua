@@ -177,7 +177,6 @@ return {
         vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
         vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
       end
-
       vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
       vim.api.nvim_create_autocmd("User", {
         pattern = "VeryLazy",
