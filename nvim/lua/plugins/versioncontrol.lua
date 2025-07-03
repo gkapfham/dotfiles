@@ -117,6 +117,9 @@ return {
         diff_opts = {
           internal = true
         },
+        preview_config = {
+          border = "rounded"
+        },
         attach_to_untracked = false,
         current_line_blame = false,
         sign_priority = 100,
