@@ -13,6 +13,7 @@ symbol = ' '
 truncation_symbol = ' '
 
 [git_status]
+style = "bold #d78700"
 ahead = "󰁝${count}"
 behind = "󰁅${count}"
 conflicted = "󰃸${count}"
