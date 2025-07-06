@@ -47,6 +47,14 @@ require("lazy").setup({
     enabled = true,
     notify = true,
   },
+  -- Configure the user interface to have a rounded
+  -- border and to specify other cosmetic features
+  -- as needed; make sure to see the color scheme
+  -- in the colorscheme.lua file for more details
+  -- concerning the themeing of Lazy's interface
+  ui = {
+    border = "rounded",
+  },
   -- Disable plugins that are internal to neovim;
   -- they are not needed and hamper performance
   performance = {
