@@ -447,10 +447,16 @@ return {
       "jmbuhr/otter.nvim",
       "jc-doyle/cmp-pandoc-references",
       "zbirenbaum/copilot-cmp",
-      -- Fuzzy buffer plugin with dependencies
-      { "romgrk/fzy-lua-native", build = "make" },
+      "lukas-reineke/cmp-rg",
+      -- Fuzzy buffer plugin with dependencies; note
+      -- that the fzy-lua plugin seems to have stopped
+      -- working but the fzf-native one works well;
+      -- Even though I am no longer using telescope
+      -- the fzf-native plugin makes fuzzy work
+      -- { "romgrk/fzy-lua-native", build = "make" },
       "tzachar/cmp-fuzzy-buffer",
       "tzachar/fuzzy.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     -- Configure the nvim-cmp plugin
     config = function()
@@ -522,7 +528,7 @@ return {
               nerdfont = " Font",
               otter = "󰌨 Otter",
               pandoc_references = " Pandoc",
-              rg = " Search",
+              rg = " Filter",
               tags = " Tags",
               treesitter = " Tree",
               tmux = " Tmux",
@@ -630,6 +636,7 @@ return {
             }
           },
           { name = 'fuzzy_buffer',      max_item_count = 10, priority = 6 },
+          { name = 'rg',                max_item_count = 5,  priority = 6, keyword_length = 5 },
           { name = 'cmp_yanky',         max_item_count = 5,  priority = 6 },
           { name = 'tags',              max_item_count = 5,  priority = 5 },
           { name = 'luasnip',           max_item_count = 5,  priority = 5 },
@@ -665,8 +672,8 @@ return {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
           { name = 'path' },
-          { name = 'buffer',       max_item_count = 25, priority = 10 },
-          { name = 'fuzzy_buffer', max_item_count = 25, priority = 5 },
+          { name = 'buffer',       max_item_count = 15, priority = 10 },
+          { name = 'fuzzy_buffer', max_item_count = 15, priority = 5  },
         }, {
           { name = 'cmdline' },
         })
@@ -678,8 +685,8 @@ return {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
           { name = 'path' },
-          { name = 'buffer',       max_item_count = 25, priority = 10 },
-          { name = 'fuzzy_buffer', max_item_count = 25, priority = 5 },
+          { name = 'buffer',       max_item_count = 15, priority = 10 },
+          { name = 'fuzzy_buffer', max_item_count = 15, priority = 5 },
         }, {
           { name = 'cmdline' },
         })
@@ -694,7 +701,7 @@ return {
         -- all commands previously used in command prompt)
         -- because it might break the tab completion
         sources = cmp.config.sources({
-          { name = 'cmdline', max_item_count = 10 },
+          { name = 'cmdline', max_item_count = 25 },
         }, {
         })
       })
