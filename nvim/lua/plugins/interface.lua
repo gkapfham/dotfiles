@@ -198,7 +198,7 @@ return {
         },
         -- Aerial symbols
         {
-          title = "Aerial",
+          title = "Aerializer",
           open = "AerialOpen",
           pinned = false,
           ft = "aerial",
