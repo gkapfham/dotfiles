@@ -230,6 +230,10 @@ return {
     },
     opts = {
       prompts = prompts,
+      -- deprecated use of this model because
+      -- GitHub Copilot Pro now considers it
+      -- to be premium and thus restricted
+      -- on a monthly basis to set max uses
       -- model = "claude-sonnet-4",
       model = "gpt-4.1",
       show_help = true,
