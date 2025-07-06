@@ -41,7 +41,7 @@ enter_accept = true
 ## address of the sync server
 # sync_address = "https://api.atuin.sh"
 
-## how often to sync history. note that this is only triggered when a command
+## how often to sync history. Note that this is only triggered when a command
 ## is ran, so sync intervals may well be longer
 ## set it to 0 to sync after every command
 # sync_frequency = "10m"
@@ -55,7 +55,7 @@ enter_accept = true
 # filter_mode = "global"
 
 ## With workspace filtering enabled, Atuin will filter for commands executed
-## in any directory within a git repositiry tree (default: false)
+## in any directory within a git repository tree (default: false)
 # workspaces = false
 
 ## which filter mode to use when atuin is invoked from a shell up-key binding
