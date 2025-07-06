@@ -150,10 +150,12 @@ end
 -- for more details about the specific colorscheme
 local colors = {
   color2  = "#87afd7",
-  color7  = "#e06c75",
+  -- color7  = "#e06c75",
+  color7  = "#d75f5f",
   color10 = "#b7b757",
   color6  = "#626262",
-  color3  = "#875f87",
+  -- color3  = "#875f87",
+  color3  = "#a569a5",
   color1  = "#262626",
   color0  = "#a8a8af",
 }
