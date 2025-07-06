@@ -24,8 +24,8 @@ return {
         colors = {
           bg = "#1c1c1c",
           fg = "#c1c1c1",
-          -- red = "#d75f5f",
           red = "#d75347",
+          subduedred = "#d75f5f",
           coral = "#d7636b",
           deepred = "#813939",
           orange = "#d78700",
