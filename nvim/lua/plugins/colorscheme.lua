@@ -108,6 +108,7 @@ return {
           PmenuSbar = { fg = "${black}", bg = "${black}" },
           PmenuSel = { fg = "${fg}", bg = "${highlight}" },
           PmenuThumb = { fg = "${fg}", bg = "${menu}" },
+          NoiceCmdlinePopupBorder = { fg = "${highlight}", bg = "${bg}" },
           NonText = { fg = "${fg}" },
           NormalFloat = { fg = "${fg}", bg = "NONE" },
           Number = { fg = "${magenta}" },
