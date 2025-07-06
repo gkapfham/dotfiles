@@ -493,7 +493,6 @@ return {
           async_budget = 1,
           filtering_context_budget = 1,
           confirm_resolve_timeout = 50,
-          -- max_view_entries = 50
           max_view_entries = 100
         },
         -- Specify a snippet engine
