@@ -483,9 +483,6 @@ return {
         window = {
           completion = cmp.config.window.bordered({ max_height = 50 }),
           documentation = cmp.config.window.bordered(),
-          -- documentation = {
-          --   winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder',
-          -- }
         },
         -- Define the performance characteristics for nvim-cmp
         -- Favor the quick delivery of a minimal number of completions
