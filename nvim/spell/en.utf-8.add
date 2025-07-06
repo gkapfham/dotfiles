@@ -5247,3 +5247,6 @@ ReordererOfTests
 sessionfinish
 truecolor
 COLORTERM
+isoformat
+codecompanion
+

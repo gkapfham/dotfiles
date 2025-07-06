@@ -15,17 +15,17 @@ return {
     keys = {
       {
         "<Space>td",
-        "<cmd>Trouble diagnostics toggle filter.buf=0 focus=false pinned=true win.relative=win win.position=bottom<cr>",
+        "<cmd>Trouble diagnostics toggle filter.buf=0 focus=false pinned=true win.relative=win win.position=right<cr>",
         desc = "Trouble: Buffer Diagnostics",
       },
       {
         "<Space>tD",
-        "<cmd>Trouble diagnostics toggle focus=false pinned=true win.relative=win win.position=bottom<cr>",
+        "<cmd>Trouble diagnostics toggle focus=false pinned=true win.relative=win win.position=right<cr>",
         desc = "Trouble: Diagnostics",
       },
       {
         "<Space>to",
-        "<cmd>Trouble symbols toggle focus=false pinned=true win.relative=win win.position=bottom<cr>",
+        "<cmd>Trouble symbols toggle focus=false pinned=true win.relative=win win.position=right<cr>",
         desc = "Trouble: Symbols",
       },
       {
