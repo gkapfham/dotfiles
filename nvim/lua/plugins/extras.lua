@@ -17,6 +17,9 @@ return {
     keys = { "gz" },
     config = function()
       -- Use gz mappings instead of s to prevent conflict with flash.nvim
+      -- A full example of a command to type when the cursor is on a
+      -- word would be: gzaiw". This intuitively means "surround the inner
+      -- word by adding double quotes using the mini.surround plugin"
       require("mini.surround").setup({
         mappings = {
           add = "gza",
