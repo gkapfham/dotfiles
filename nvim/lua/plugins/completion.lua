@@ -33,6 +33,7 @@ local kind_icons = {
   Value = "󰎠",
   Enum = "",
   Keyword = "󰌋",
+  KeywordConditional = "󰌋",
   KeywordDirective = "󰌋",
   KeywordException = "󰌋",
   KeywordImport = "󰌋",
