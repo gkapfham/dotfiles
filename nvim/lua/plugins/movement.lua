@@ -79,7 +79,10 @@ return {
         buffer     = { suffix = 'b', options = {} },
         comment    = { suffix = 'e', options = {} },
         conflict   = { suffix = 'x', options = {} },
-        diagnostic = { suffix = 'd', options = {} },
+        -- this default now creates lua errors every
+        -- time I try to use it; instead, making the
+        -- mappings inside of this config function
+        -- diagnostic = { suffix = 'd', options = {} },
         file       = { suffix = 'f', options = {} },
         indent     = { suffix = 'i', options = {} },
         jump       = { suffix = 'j', options = {} },
@@ -92,6 +95,9 @@ return {
         yank       = { suffix = 'y', options = {} },
       }
       )
+      -- redefine the mappings for diagnostics to avoid lua errors
+      vim.keymap.set({ "n", }, "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
+      vim.keymap.set({ "n", }, "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
     end,
   },
 
