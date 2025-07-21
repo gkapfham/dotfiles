@@ -156,7 +156,7 @@ return {
     event = "InsertEnter",
     config = function()
       require("supermaven-nvim").setup({
-        -- disable the default keymaps and settings
+        -- Disable the default keymaps and settings
         -- that would normally make virtual text appear;
         -- not using those since Supermaven integrates
         -- with nvim-cmp and that is primary approach
@@ -173,14 +173,14 @@ return {
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
-      -- setup the plugin using a default configuration
+      -- Setup the plugin using a default configuration
       -- that will disable the use of the standard features
       -- of the copilot plugin because they are going to
       -- be used through the nvim-cmp completion system
       require("copilot").setup({
         suggestion = { enabled = false },
         panel = { enabled = false },
-        -- define the filetypes for which the copilot
+        -- Define the filetypes for which the copilot
         -- plugin will be enabled or disabled
         filetypes = {
           markdown = true,
@@ -194,7 +194,7 @@ return {
           ["."] = false,
         },
       })
-      -- set the filetype to markdown when entering the
+      -- Set the filetype to markdown when entering the
       -- copilot-chat buffer; note that this is set correctly
       -- the first time but the plugin itself. However, later
       -- the syntax highlighting is removed and this makes
@@ -231,7 +231,7 @@ return {
     },
     opts = {
       prompts = prompts,
-      -- deprecated use of this model because
+      -- Deprecated use of this model because
       -- GitHub Copilot Pro now considers it
       -- to be premium and thus restricted
       -- on a monthly basis to set max uses
