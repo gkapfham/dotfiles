@@ -194,7 +194,7 @@ return {
           ["."] = false,
         },
       })
-      -- Set the filetype to markdown when entering the
+      -- set the filetype to markdown when entering the
       -- copilot-chat buffer; note that this is set correctly
       -- the first time but the plugin itself. However, later
       -- the syntax highlighting is removed and this makes
@@ -448,13 +448,6 @@ return {
       "jmbuhr/otter.nvim",
       "jc-doyle/cmp-pandoc-references",
       "zbirenbaum/copilot-cmp",
-      -- "lukas-reineke/cmp-rg",
-      -- Fuzzy buffer plugin with dependencies; note
-      -- that the fzy-lua plugin seems to have stopped
-      -- working but the fzf-native one works well;
-      -- Even though I am no longer using telescope
-      -- the fzf-native plugin makes fuzzy work
-      -- { "romgrk/fzy-lua-native", build = "make" },
       "tzachar/cmp-fuzzy-buffer",
       "tzachar/fuzzy.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
