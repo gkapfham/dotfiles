@@ -1,6 +1,9 @@
 -- File: plugins/filetree.lua
--- Purpose: load and configure the neo-tree plugin
--- and the oil.nvim plugin that also manages files
+-- Purpose: load and configure the oil.nvim plugin
+-- that also manages files through a full buffer
+-- (note that all other file trees are now managed
+-- by the snacks.nvim plugin and aligned to the
+-- right side of the screen using edge.nvim)
 
 return {
 
