@@ -129,24 +129,6 @@ return {
     end,
   },
 
-  -- -- octo.nvim for integration with GitHub
-  -- {
-  --   "pwntester/octo.nvim",
-  --   cmd = "Octo",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     -- "nvim-telescope/telescope.nvim",
-  --     "nvim-tree/nvim-web-devicons",
-  --   },
-  --   config = function()
-  --     require("octo").setup({ enable_builtin = true })
-  --     vim.cmd([[hi OctoEditable guibg=none]])
-  --   end,
-  --   keys = {
-  --     { "<leader>oc", "<cmd>Octo<cr>", desc = "Octo" },
-  --   },
-  -- },
-
   -- messenger.nvim for viewing commit messages
   {
     "lsig/messenger.nvim",
