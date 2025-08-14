@@ -76,6 +76,7 @@ local kind_icons = {
   MarkupLink = "󰌷",
   MarkupRawBlock = "󰒔",
   MarkupStrong = "",
+  VariableMember = "󰫧",
 }
 
 -- Define the has_words_before function used in the
