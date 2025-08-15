@@ -393,11 +393,6 @@ return {
         desc = "CopilotChat: Open chat based on contents of register y",
       },
       {
-        "<Space>cco",
-        "<cmd>CopilotChatInline<cr>",
-        desc = "CopilotChat: Open inline chat",
-      },
-      {
         "<Space>ccv",
         ":CopilotChatVisual",
         mode = "x",
