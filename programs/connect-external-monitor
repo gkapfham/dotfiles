@@ -90,4 +90,5 @@ fi
 
 # Set the root color of the desktop;
 # this tends to reset on the Framework 13 laptop
-hsetroot -solid "#875f87"
+# hsetroot -solid "#875f87"
+hsetroot -solid "#a569a5"
