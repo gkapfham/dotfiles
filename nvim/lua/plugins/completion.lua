@@ -622,7 +622,6 @@ return {
             }
           },
           { name = 'fuzzy_buffer',      max_item_count = 5, priority = 6 },
-          -- { name = 'rg',                max_item_count = 5,  priority = 6, keyword_length = 5 },
           { name = 'cmp_yanky',         max_item_count = 5,  priority = 6 },
           { name = 'tags',              max_item_count = 5,  priority = 5 },
           { name = 'luasnip',           max_item_count = 5,  priority = 5 },
