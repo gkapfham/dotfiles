@@ -12,7 +12,7 @@ return {
     event = "VeryLazy",
     config = function()
       require("zk").setup({
-        picker = "telescope",
+        picker = "snacks_picker",
         lsp = {
           config = {
             cmd = { "zk", "lsp" },
