@@ -403,14 +403,6 @@ return {
         "<cmd>CopilotChatReset<cr>",
         desc = "CopilotChat: Reset chat history and clear buffer",
       },
-      {
-        "<Space>ccp",
-        function()
-          local actions = require("CopilotChat.actions")
-          require("CopilotChat.integrations.snacks").pick(actions.prompt_actions())
-        end,
-        desc = "CopilotChat: Prompts from Telescope",
-      },
     },
   },
 
