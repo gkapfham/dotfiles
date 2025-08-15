@@ -51,6 +51,10 @@ set $rd     #BF9B76
 set $id     #F9F8FF
 set $ce     #CEECEE
 
+# Deprecated: No longer use i3status and i3bar
+# in favor of using polybar (see polybar/config.ini
+# and the scripts in ~/.config/polybar/scripts)
+
 # # Define the bar configuration;
 # # note that this runs i3status
 # # and that program has a separate configuration
