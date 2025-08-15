@@ -197,7 +197,7 @@ return {
     opts = {
       options = {
         left = { size = 25 },
-        bottom = { size = 10 },
+        bottom = { size = 15 },
         right = { size = 25 },
         top = { size = 10 },
       },
