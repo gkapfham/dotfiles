@@ -112,7 +112,7 @@ return {
         numhl = false,
         linehl = false,
         watch_gitdir = {
-          interval = 500
+          interval = 100
         },
         diff_opts = {
           internal = true
