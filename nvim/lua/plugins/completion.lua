@@ -237,6 +237,7 @@ return {
       -- to be premium and thus restricted
       -- on a monthly basis to set max uses
       -- model = "claude-sonnet-4",
+      -- model = "gpt-5-mini",
       model = "gpt-4.1",
       show_help = true,
       debug = false,
