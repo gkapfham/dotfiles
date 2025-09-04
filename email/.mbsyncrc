@@ -7,7 +7,7 @@ Port 993
 User gkapfham@allegheny.edu
 PassCmd "pass gkapfham@allegheny.edu"
 AuthMechs LOGIN
-SSLType IMAPS
+TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 # Mail storage location
