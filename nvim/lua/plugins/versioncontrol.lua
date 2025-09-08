@@ -23,20 +23,28 @@ return {
   {
     "tpope/vim-fugitive",
     cmd = { "G", "Git", "Gwrite" },
+    config = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "gitcommit",
+        callback = function()
+          vim.cmd("startinsert")
+        end,
+      })
+    end,
     keys = {
       -- Keys: git status
       { "<Space>gg",   ":call ToggleGstatus() <CR>", desc = "Fugitive: Git status toggle" },
-      { "<leader>gg",   ":call ToggleGstatus() <CR>", desc = "Fugitive: Git status toggle" },
+      { "<leader>gg",  ":call ToggleGstatus() <CR>", desc = "Fugitive: Git status toggle" },
       -- Keys: git write
-      { "<Space>gw",   ":Gwrite <CR>",       desc = "Fugitive: Git write to add file" },
-      { "<leader>gw",  ":Gwrite <CR>",       desc = "Fugitive: Git write to add file" },
+      { "<Space>gw",   ":Gwrite <CR>",               desc = "Fugitive: Git write to add file" },
+      { "<leader>gw",  ":Gwrite <CR>",               desc = "Fugitive: Git write to add file" },
       -- Keys: git commit
-      { "<Space>gcc",  ":Git commit <CR>",   desc = "Fugitive: Commit current hunk" },
-      { "<leader>gcc", ":Git commit <CR>",   desc = "Fugitive: Commit current hunk" },
-      { "<Space>gcf",  ":Git commit %<CR>",  desc = "Fugitive: Commit current file" },
-      { "<leader>gcf", ":Git commit %<CR>",  desc = "Fugitive: Commit current file" },
-      { "<Space>gca",  ":Git commit -a<CR>", desc = "Fugitive: Commit all files" },
-      { "<leader>gca", ":Git commit -a<CR>", desc = "Fugitive: Commit all files" },
+      { "<Space>gcc",  ":Git commit <CR>",           desc = "Fugitive: Commit current hunk" },
+      { "<leader>gcc", ":Git commit <CR>",           desc = "Fugitive: Commit current hunk" },
+      { "<Space>gcf",  ":Git commit %<CR>",          desc = "Fugitive: Commit current file" },
+      { "<leader>gcf", ":Git commit %<CR>",          desc = "Fugitive: Commit current file" },
+      { "<Space>gca",  ":Git commit -a<CR>",         desc = "Fugitive: Commit all files" },
+      { "<leader>gca", ":Git commit -a<CR>",         desc = "Fugitive: Commit all files" },
     }
   },
 
@@ -112,7 +120,8 @@ return {
         numhl = false,
         linehl = false,
         watch_gitdir = {
-          interval = 100
+          follow_files = true,
+          -- interval = 100
         },
         diff_opts = {
           internal = true
@@ -122,7 +131,7 @@ return {
         },
         attach_to_untracked = false,
         current_line_blame = false,
-        sign_priority = 100,
+        sign_priority = 6,
         update_debounce = 50,
         status_formatter = nil,
       }
