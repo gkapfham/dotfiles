@@ -75,6 +75,17 @@ require("lazy").setup({
 -- Define the keymap for loading lazy dashboard
 vim.keymap.set("n", "<Space>sl", "<cmd>:Lazy<cr>")
 
+-- Always enter insert mode when editing git commit messages
+local setupcommit = function()
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "gitcommit",
+    callback = function()
+      vim.cmd("startinsert")
+    end,
+  })
+end
+setupcommit()
+
 -- Load the files in the configure module
 require("configure.settings")
 require("configure.autocmds")
