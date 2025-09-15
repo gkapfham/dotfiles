@@ -245,7 +245,7 @@ return {
       disable_extra_info = "no",
       headers = {
         user = " Gregory ",
-        assistant = "## 󰛨 Copilot ",
+        assistant = "󰛨 Copilot ",
         tool = "󱁤 Tool"
       },
       language = "English",
@@ -449,8 +449,9 @@ return {
     },
     -- Configure the nvim-cmp plugin
     config = function()
-      -- Configure standard completion for menus
-      vim.cmd([[set completeopt=menu,menuone,noselect,popup]])
+      -- Configure standard completion for menus so that it supports
+      -- completion for multiple tools and configurations
+      vim.cmd([[set completeopt=menu,menuone,noselect,noinsert,popup]])
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       -- Configure the dictionary plugin
