@@ -18,11 +18,12 @@ local function lsp_clients()
     nil_ls = "",
     null_ls = "󰁨",
     otter_ls = "󰌨",
+    pyrefly = "",
     pyright = "󰌠",
     ruff = "󱝁",
     ruff_lsp = "󱝁",
     texlab = "",
-    ty = "󱋿",
+    ty = "󱙨",
     yamlls = "",
     zk = "",
   }
@@ -314,6 +315,7 @@ return {
               -- default display inside of the tabline of lualine
               filetype_names = {
                 aerial = "Aerial",
+                codecompanion = "CodeCompanion",
                 fugitive = "Fugitive",
                 snacks_picker_input = "Picker",
                 snacks_picker_list = "Explorer",
