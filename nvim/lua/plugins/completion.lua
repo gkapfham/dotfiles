@@ -226,12 +226,30 @@ return {
     event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "MeanderingProgrammer/render-markdown.nvim",
     },
     config = function()
       require("codecompanion").setup({
+        memory = {
+          agents = {
+            description = "Memory files for autonomous agents",
+            files = {
+              "AGENTS.md",
+            },
+          },
+        },
         strategies = {
           chat = {
             adapter = "copilot",
+            roles = {
+              llm = function(adapter)
+                return " CodeCompanion (" .. adapter.formatted_name .. ")"
+              end,
+              user = " Gregory Kapfhammer",
+            },
+            opts = {
+              completion_provider = "cmp",
+            }
           },
           inline = {
             adapter = "copilot",
@@ -241,7 +259,13 @@ return {
           }
         },
         display = {
+          -- diff = {
+          --   enabled = true,
+          --   provider = "mini_diff",
+          -- },
           chat = {
+            -- Show the settings
+            show_settings = true,
             -- Change the default icons
             icons = {
               buffer_pin = " ",
@@ -277,15 +301,22 @@ return {
                 wrap = true,
               },
             },
-            ---Customize how tokens are displayed
-            ---@param tokens number
-            ---@param adapter CodeCompanion.Adapter
-            ---@return string
+            -- customize how tokens are displayed
             token_count = function(tokens, adapter)
-              return "󰣁 "  .. tokens .. " tokens"
+              return "󰣁 " .. tokens .. " tokens"
             end,
           },
         },
+        require('render-markdown').setup({
+          -- file_types = { 'markdown', 'codecompanion', 'quarto' },
+          file_types = { 'markdown', 'quarto' },
+          heading = {
+            width = "block",
+          },
+          code = {
+            enabled = true,
+          },
+        })
       })
     end,
     keys = {
