@@ -2,11 +2,11 @@
 -- Purpose: Configure the nvim-cmp plugin
 -- and all of the plugins that enhance it
 
--- Define reusable prompts for CopilotChat
-local prompts = {
-  PytestMultipleAssert =
-  "Please write a Pytest test case for the provided source code. The test case should have multiple assertions and each assertion should have a message attached to it that will appear if the assertion fails. The test case should test both the common and the exceptional inputs for the provided source code. Make sure that the test has a descriptive docstring and comments for the lines in it. Please do not use blank lines or spaces to separate any of the blocks in the test case, including between the docstring, comments, and code.",
-}
+-- -- Define reusable prompts for CopilotChat
+-- local prompts = {
+--   PytestMultipleAssert =
+--   "Please write a Pytest test case for the provided source code. The test case should have multiple assertions and each assertion should have a message attached to it that will appear if the assertion fails. The test case should test both the common and the exceptional inputs for the provided source code. Make sure that the test has a descriptive docstring and comments for the lines in it. Please do not use blank lines or spaces to separate any of the blocks in the test case, including between the docstring, comments, and code.",
+-- }
 
 -- Supporting variables and functions implemented in lua {{{
 
@@ -221,198 +221,273 @@ return {
     end
   },
 
-  -- CopilotChat.nvim
-  -- Chat with GitHub copilot; note that
-  -- while the user interface and experience
-  -- is not yet polished this tool works well
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
+    "olimorris/codecompanion.nvim",
     event = "VeryLazy",
     dependencies = {
-      { "MeanderingProgrammer/render-markdown.nvim" },
-      { "nvim-lua/plenary.nvim" },
+      "nvim-lua/plenary.nvim",
     },
-    opts = {
-      prompts = prompts,
-      -- Deprecated use of this model because
-      -- GitHub Copilot Pro now considers it
-      -- to be premium and thus restricted
-      -- on a monthly basis to set max uses
-      -- model = "claude-sonnet-4",
-      -- model = "gpt-5-mini",
-      model = "gpt-4.1",
-      show_help = true,
-      debug = false,
-      disable_extra_info = "no",
-      headers = {
-        user = " Gregory ",
-        assistant = "󰛨 Copilot ",
-        tool = "󱁤 Tool"
-      },
-      language = "English",
-      separator = '━━',
-      auto_fold = true,
-      chat_autocomplete = false,
-      mappings = {
-        complete = {
-          insert = '<Tab>',
-        },
-        close = {
-          normal = 'q',
-          insert = '<C-c>',
-        },
-        reset = {
-          normal = '<C-l>',
-          insert = '<C-l>',
-        },
-        submit_prompt = {
-          normal = '<CR>',
-          insert = '<C-s>',
-        },
-        toggle_sticky = {
-          detail = 'Makes line under cursor sticky or deletes sticky line.',
-          normal = 'gr',
-        },
-        accept_diff = {
-          normal = '<C-y>',
-          insert = '<C-y>',
-        },
-        jump_to_diff = {
-          normal = 'gj',
-        },
-        quickfix_diffs = {
-          normal = 'gq',
-        },
-        yank_diff = {
-          normal = 'gy',
-          register = '"',
-        },
-        show_diff = {
-          normal = 'gd',
-        },
-        show_info = {
-          normal = 'gi',
-        },
-        show_context = {
-          normal = 'gc',
-        },
-        show_help = {
-          normal = 'gh',
-        },
-      },
-      highlight_selection = false,
-      -- default window options; note that the floating
-      -- window does not display over all sidebars unless
-      -- the zindex is set to a higher value
-      window = {
-        layout = 'float',
-        relative = 'editor',
-        height = 0.75,
-        width = 0.8,
-        -- Options below only apply to floating windows
-        border = 'rounded', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-        row = 4, -- row position of the window, default is centered
-        col = nil, -- column position of the window, default is centered
-        title = ' Copilot', -- title of chat window
-        footer = nil, -- footer of chat window
-        zindex = 1000, -- determines if window is on top or below other floating windows, higher is on top
-      },
-    },
-    build = function()
-      vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
-    end,
-    config = function(_, opts)
-      local chat = require("CopilotChat")
-      local select = require("CopilotChat.select")
-      -- Use unnamed register for the selection
-      opts.selection = select.unnamed
-      -- Override the git prompts message
-      opts.prompts.Commit = {
-        prompt = "Write commit message for the change using the conventional commits standard.",
-        selection = select.gitdiff,
-      }
-      opts.prompts.CommitStaged = {
-        prompt = "Write commit message for the change using the conventional commits standard.",
-        selection = function(source)
-          return select.gitdiff(source, true)
-        end,
-      }
-      chat.setup(opts)
-      vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
-        chat.ask(args.args, { selection = select.visual })
-      end, { nargs = "*", range = true })
-      -- Inline chat with Copilot
-      vim.api.nvim_create_user_command("CopilotChatInline", function(args)
-        chat.ask(args.args, {
-          selection = select.visual,
-          window = {
-            layout = "float",
-            relative = "cursor",
-            width = 1,
-            height = 0.4,
-            row = 1,
+    config = function()
+      require("codecompanion").setup({
+        strategies = {
+          chat = {
+            adapter = "copilot",
           },
-        })
-      end, { nargs = "*", range = true })
-      -- Restore CopilotChatBuffer
-      vim.api.nvim_create_user_command("CopilotChatBuffer", function(args)
-        chat.ask(args.args, { selection = select.buffer })
-      end, { nargs = "*", range = true })
-      -- Custom buffer for CopilotChat
-      vim.api.nvim_create_autocmd("BufEnter", {
-        pattern = "copilot-*",
-        callback = function()
-          vim.opt_local.relativenumber = true
-          vim.opt_local.number = true
-        end,
-      })
-      -- Improved display of markdown files;
-      -- note that this influences Quarto and
-      -- Markdown files and has custom color scheme
-      require('render-markdown').setup({
-        file_types = { 'markdown', 'copilot-chat', 'quarto' },
-        heading = {
-          width = "block",
+          inline = {
+            adapter = "copilot",
+          },
+          cmd = {
+            adapter = "copilot",
+          }
         },
-        code = {
-          enabled = true,
+        display = {
+          chat = {
+            -- Change the default icons
+            icons = {
+              buffer_pin = " ",
+              buffer_watch = "󰡫 ",
+            },
+            -- Alter the sizing of the debug window
+            debug_window = {
+              ---@return number|fun(): number
+              width = vim.o.columns - 5,
+              ---@return number|fun(): number
+              height = vim.o.lines - 2,
+            },
+            -- Options to customize the UI of the chat buffer
+            window = {
+              layout = "float",
+              position = nil,
+              border = "rounded",
+              height = 0.75,
+              width = 0.8,
+              relative = "editor",
+              full_height = true,
+              sticky = false,
+              opts = {
+                breakindent = true,
+                cursorcolumn = false,
+                cursorline = false,
+                foldcolumn = "0",
+                linebreak = true,
+                list = false,
+                numberwidth = 1,
+                signcolumn = "no",
+                spell = false,
+                wrap = true,
+              },
+            },
+            ---Customize how tokens are displayed
+            ---@param tokens number
+            ---@param adapter CodeCompanion.Adapter
+            ---@return string
+            token_count = function(tokens, adapter)
+              return "󰣁 "  .. tokens .. " tokens"
+            end,
+          },
         },
       })
     end,
     keys = {
       {
         "<Space>cco",
-        "<cmd>CopilotChatOpen<cr>",
-        desc = "CopilotChat: Open",
-      },
-      {
-        "<Space>ccm",
-        "<cmd>CopilotChatModels<cr>",
-        desc = "CopilotChat: Models",
-      },
-      {
-        "<Space>cct",
-        "<cmd>CopilotChatToggle<cr>",
-        desc = "CopilotChat: Toggle",
-      },
-      {
-        "<Space>ccy",
-        ":CopilotChat",
-        desc = "CopilotChat: Open chat based on contents of register y",
-      },
-      {
-        "<Space>ccv",
-        ":CopilotChatVisual",
-        mode = "x",
-        desc = "CopilotChat: Open chat based on visual highlight",
-      },
-      {
-        "<Space>ccr",
-        "<cmd>CopilotChatReset<cr>",
-        desc = "CopilotChat: Reset chat history and clear buffer",
+        "<cmd>CodeCompanionChat Toggle<cr>",
+        desc = "CodeCompanionChat: Toggle",
       },
     },
+
   },
+
+  -- -- CopilotChat.nvim
+  -- -- Chat with GitHub copilot; note that
+  -- -- while the user interface and experience
+  -- -- is not yet polished this tool works well
+  -- {
+  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     { "MeanderingProgrammer/render-markdown.nvim" },
+  --     { "nvim-lua/plenary.nvim" },
+  --   },
+  --   opts = {
+  --     prompts = prompts,
+  --     -- Deprecated use of this model because
+  --     -- GitHub Copilot Pro now considers it
+  --     -- to be premium and thus restricted
+  --     -- on a monthly basis to set max uses
+  --     model = "gpt-4.1",
+  --     show_help = true,
+  --     debug = false,
+  --     disable_extra_info = "no",
+  --     headers = {
+  --       user = " Gregory ",
+  --       assistant = "󰛨 Copilot ",
+  --       tool = "󱁤 Tool"
+  --     },
+  --     language = "English",
+  --     separator = '━━',
+  --     auto_fold = false,
+  --     chat_autocomplete = true,
+  --     mappings = {
+  --       complete = {
+  --         insert = '<Tab>',
+  --       },
+  --       close = {
+  --         normal = 'q',
+  --         insert = '<C-c>',
+  --       },
+  --       reset = {
+  --         normal = '<C-l>',
+  --         insert = '<C-l>',
+  --       },
+  --       submit_prompt = {
+  --         normal = '<CR>',
+  --         insert = '<C-s>',
+  --       },
+  --       toggle_sticky = {
+  --         detail = 'Makes line under cursor sticky or deletes sticky line.',
+  --         normal = 'gr',
+  --       },
+  --       accept_diff = {
+  --         normal = '<C-y>',
+  --         insert = '<C-y>',
+  --       },
+  --       jump_to_diff = {
+  --         normal = 'gj',
+  --       },
+  --       quickfix_diffs = {
+  --         normal = 'gq',
+  --       },
+  --       yank_diff = {
+  --         normal = 'gy',
+  --         register = '"',
+  --       },
+  --       show_diff = {
+  --         normal = 'gd',
+  --       },
+  --       show_info = {
+  --         normal = 'gi',
+  --       },
+  --       show_context = {
+  --         normal = 'gc',
+  --       },
+  --       show_help = {
+  --         normal = 'gh',
+  --       },
+  --     },
+  --     highlight_selection = false,
+  --     -- default window options; note that the floating
+  --     -- window does not display over all sidebars unless
+  --     -- the zindex is set to a higher value
+  --     window = {
+  --       layout = 'float',
+  --       relative = 'editor',
+  --       height = 0.75,
+  --       width = 0.8,
+  --       -- Options below only apply to floating windows
+  --       border = 'rounded', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+  --       row = 4, -- row position of the window, default is centered
+  --       col = nil, -- column position of the window, default is centered
+  --       title = ' Copilot', -- title of chat window
+  --       footer = nil, -- footer of chat window
+  --       zindex = 1000, -- determines if window is on top or below other floating windows, higher is on top
+  --     },
+  --   },
+  --   build = function()
+  --     vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
+  --   end,
+  --   config = function(_, opts)
+  --     local chat = require("CopilotChat")
+  --     local select = require("CopilotChat.select")
+  --     -- Use unnamed register for the selection
+  --     opts.selection = select.unnamed
+  --     -- Override the git prompts message
+  --     opts.prompts.Commit = {
+  --       prompt = "Write commit message for the change using the conventional commits standard.",
+  --       selection = select.gitdiff,
+  --     }
+  --     opts.prompts.CommitStaged = {
+  --       prompt = "Write commit message for the change using the conventional commits standard.",
+  --       selection = function(source)
+  --         return select.gitdiff(source, true)
+  --       end,
+  --     }
+  --     chat.setup(opts)
+  --     vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
+  --       chat.ask(args.args, { selection = select.visual })
+  --     end, { nargs = "*", range = true })
+  --     -- Inline chat with Copilot
+  --     vim.api.nvim_create_user_command("CopilotChatInline", function(args)
+  --       chat.ask(args.args, {
+  --         selection = select.visual,
+  --         window = {
+  --           layout = "float",
+  --           relative = "cursor",
+  --           width = 1,
+  --           height = 0.4,
+  --           row = 1,
+  --         },
+  --       })
+  --     end, { nargs = "*", range = true })
+  --     -- Restore CopilotChatBuffer
+  --     vim.api.nvim_create_user_command("CopilotChatBuffer", function(args)
+  --       chat.ask(args.args, { selection = select.buffer })
+  --     end, { nargs = "*", range = true })
+  --     -- Custom buffer for CopilotChat
+  --     vim.api.nvim_create_autocmd("BufEnter", {
+  --       pattern = "copilot-*",
+  --       callback = function()
+  --         vim.opt_local.relativenumber = true
+  --         vim.opt_local.number = true
+  --       end,
+  --     })
+  --     -- Improved display of markdown files;
+  --     -- note that this influences Quarto and
+  --     -- Markdown files and has custom color scheme
+  --     require('render-markdown').setup({
+  --       file_types = { 'markdown', 'copilot-chat', 'quarto' },
+  --       heading = {
+  --         width = "block",
+  --       },
+  --       code = {
+  --         enabled = true,
+  --       },
+  --     })
+  --   end,
+  --   keys = {
+  --     {
+  --       "<Space>cco",
+  --       "<cmd>CopilotChatOpen<cr>",
+  --       desc = "CopilotChat: Open",
+  --     },
+  --     {
+  --       "<Space>ccm",
+  --       "<cmd>CopilotChatModels<cr>",
+  --       desc = "CopilotChat: Models",
+  --     },
+  --     {
+  --       "<Space>cct",
+  --       "<cmd>CopilotChatToggle<cr>",
+  --       desc = "CopilotChat: Toggle",
+  --     },
+  --     {
+  --       "<Space>ccy",
+  --       ":CopilotChat",
+  --       desc = "CopilotChat: Open chat based on contents of register y",
+  --     },
+  --     {
+  --       "<Space>ccv",
+  --       ":CopilotChatVisual",
+  --       mode = "x",
+  --       desc = "CopilotChat: Open chat based on visual highlight",
+  --     },
+  --     {
+  --       "<Space>ccr",
+  --       "<cmd>CopilotChatReset<cr>",
+  --       desc = "CopilotChat: Reset chat history and clear buffer",
+  --     },
+  --   },
+  -- },
 
   -- nvim-cmp (alternatively magazine.nvim is faster)
   -- Auto completion with nvim-cmp
@@ -425,7 +500,7 @@ return {
   {
     -- "hrsh7th/nvim-cmp",
     "hrsh7th/nvim-cmp",
-    url = "https://github.com/iguanacucumber/magazine.nvim",
+    -- url = "https://github.com/iguanacucumber/magazine.nvim",
     event = "InsertEnter",
     dependencies = {
       -- Stand-alone cmp plugins
@@ -623,12 +698,12 @@ return {
             }
           },
           { name = 'fuzzy_buffer',      max_item_count = 5, priority = 6 },
-          { name = 'cmp_yanky',         max_item_count = 5,  priority = 6 },
-          { name = 'tags',              max_item_count = 5,  priority = 5 },
-          { name = 'luasnip',           max_item_count = 5,  priority = 5 },
-          { name = 'otter',             max_item_count = 5,  priority = 5, keyword_length = 2 },
-          { name = 'pandoc_references', max_item_count = 5,  priority = 5, keyword_length = 2 },
-          { name = 'tmux',              max_item_count = 5,  priority = 1, keyword_length = 2 },
+          { name = 'cmp_yanky',         max_item_count = 5, priority = 6 },
+          { name = 'tags',              max_item_count = 5, priority = 5 },
+          { name = 'luasnip',           max_item_count = 5, priority = 5 },
+          { name = 'otter',             max_item_count = 5, priority = 5, keyword_length = 2 },
+          { name = 'pandoc_references', max_item_count = 5, priority = 5, keyword_length = 2 },
+          { name = 'tmux',              max_item_count = 5, priority = 1, keyword_length = 2 },
           {
             name = 'spell',
             option = {
@@ -659,7 +734,7 @@ return {
         sources = cmp.config.sources({
           { name = 'path' },
           { name = 'buffer',       max_item_count = 15, priority = 10 },
-          { name = 'fuzzy_buffer', max_item_count = 15, priority = 5  },
+          { name = 'fuzzy_buffer', max_item_count = 15, priority = 5 },
         }, {
           { name = 'cmdline' },
         })
