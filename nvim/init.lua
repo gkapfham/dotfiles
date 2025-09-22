@@ -30,6 +30,9 @@ vim.g.mapleader = ","
 -- Define the localleader key
 vim.g.maplocalleader = ","
 
+-- Filetype detection and settings
+vim.cmd('filetype plugin indent on')
+
 -- Setup the lazy.nvim to search for lua files
 -- in the plugins/ directory, load the color
 -- scheme, and make additional default settings
@@ -87,13 +90,13 @@ end
 setupcommit()
 
 -- Always set the filetype to markdown for .md and .qmd files
-local setupmarkdown = function()
-  vim.cmd([[
-    autocmd BufNewFile,BufRead *.md set filetype=markdown
-    autocmd BufNewFile,BufRead *.qmd set filetype=markdown
-    ]])
-end
-setupmarkdown()
+-- local setupmarkdown = function()
+--   vim.cmd([[
+--     autocmd BufNewFile,BufRead *.md set filetype=markdown
+--     autocmd BufNewFile,BufRead *.qmd set filetype=markdown
+--     ]])
+-- end
+-- setupmarkdown()
 
 -- Load the files in the configure module
 require("configure.settings")
