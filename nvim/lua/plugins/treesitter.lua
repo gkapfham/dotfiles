@@ -92,27 +92,6 @@ return {
     end,
   },
 
-  -- sentiment.nvim; note that this plugin
-  -- has now been archived and thus there
-  -- is the possibility that I will need
-  -- to replace it with another plugin
-
-  -- {
-  --   "utilyre/sentiment.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     pairs = {
-  --       { "(", ")" },
-  --       { "{", "}" },
-  --       { "[", "]" },
-  --     },
-  --   },
-  --   init = function()
-  --     -- `matchparen.vim` needs to be disabled manually in case of lazy loading
-  --     vim.g.loaded_matchparen = 1
-  --   end,
-  -- },
-
   -- nvim-treesitter-textobjects
   -- supports definition of custom
   -- objects and motions defined
@@ -151,6 +130,26 @@ return {
         },
       }
     end,
+  },
+
+
+  {
+    "monkoose/matchparen.nvim",
+    event = "VeryLazy",
+    config = function()
+      require('matchparen').setup({
+          -- Set to `false` to disable at matchpren at startup
+          -- Enable matchparen manually with `:MatchParenEnable`
+          enabled = true,
+          -- Highlight group of the matched brackets
+          -- Change it to any other or adjust colors of "MathParen" highlight group
+          -- in your colorscheme to your liking
+          hl_group = 'MatchParen',
+          -- Debounce time in milliseconds for rehighlighting brackets
+          -- Set to 0 to disable debouncing
+          debounce_time = 60,
+      })
+    end
   },
 
   -- targets.vim
