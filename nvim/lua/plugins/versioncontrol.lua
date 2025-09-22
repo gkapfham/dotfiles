@@ -138,6 +138,19 @@ return {
     end,
   },
 
+  -- mini.diff for showing diffs in the buffer,
+  -- used especially for the codecompanion plugin
+  {
+    "echasnovski/mini.diff",
+    config = function()
+      local diff = require("mini.diff")
+      diff.setup({
+        -- Disabled by default
+        source = diff.gen_source.none(),
+      })
+    end,
+  },
+
   -- messenger.nvim for viewing commit messages
   {
     "lsig/messenger.nvim",
