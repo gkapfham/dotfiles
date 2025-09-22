@@ -221,6 +221,8 @@ return {
     end
   },
 
+  -- codecompanion.nvim for chatting with
+  -- LLMs through GitHub Copilot models
   {
     "olimorris/codecompanion.nvim",
     event = "VeryLazy",
@@ -260,7 +262,6 @@ return {
         },
         display = {
           -- diff = {
-          --   enabled = true,
           --   provider = "mini_diff",
           -- },
           chat = {
