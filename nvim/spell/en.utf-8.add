@@ -3147,3 +3147,13 @@ type
 pyrefly
 callSnippet
 type
+setupmarkdown
+BufRead
+BufNewFile
+matchpren
+MatchParenEnable
+MathParen
+rehighlighting
+Debounce
+debouncing
+parens
