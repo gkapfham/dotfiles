@@ -23,7 +23,7 @@ return {
       "nvimtools/none-ls.nvim",
     },
     config = function()
-      local lspconfig = require('lspconfig')
+      -- local lspconfig = require('lspconfig')
       -- draw the border for the LSP floating window; since the
       -- window used for commands like :LSPInfo is driven by the
       -- NormalFloat which is now set to dark to make the GitHub
@@ -54,20 +54,38 @@ return {
       -- configure cssls for CSS LSP
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
-      lspconfig.cssls.setup {
+      -- lspconfig.cssls.setup {
+      --   capabilities = capabilities,
+      -- }
+      vim.lsp.config('cssls', {
         capabilities = capabilities,
-      }
+      })
+      vim.lsp.enable('cssls')
       -- configure html_ls for HTML
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true
-      lspconfig.html.setup {
+      -- lspconfig.html.setup {
+      --   capabilities = capabilities,
+      --   filetypes = { 'markdown', 'quarto', 'html' },
+      -- }
+      vim.lsp.config('html', {
         capabilities = capabilities,
         filetypes = { 'markdown', 'quarto', 'html' },
-      }
+      })
       -- configure gopls for Go LSP
-      lspconfig.gopls.setup {}
+      -- lspconfig.gopls.setup {}
+      vim.lsp.enable('gopls')
       -- configure luals (with neovim support) for Lua LSP
-      lspconfig.lua_ls.setup({
+      -- lspconfig.lua_ls.setup({
+      --   settings = {
+      --     Lua = {
+      --       completion = {
+      --         callSnippet = "Replace"
+      --       }
+      --     }
+      --   }
+      -- })
+    vim.lsp.config('lua_ls', {
         settings = {
           Lua = {
             completion = {
@@ -76,21 +94,29 @@ return {
           }
         }
       })
+      vim.lsp.enable('lua_ls')
       -- configure marksman for Markdown LSP
-      lspconfig.marksman.setup {
+      -- lspconfig.marksman.setup {
+      --   filetypes = { 'markdown', 'quarto' },
+      -- }
+      vim.lsp.config('marksman', {
         filetypes = { 'markdown', 'quarto' },
-      }
+      })
+      vim.lsp.enable('marksman')
       -- configure pyright for Python LSP
-      lspconfig.pyright.setup {}
+      -- lspconfig.pyright.setup {}
+      vim.lsp.enable('pyright')
       -- configure ruff for Python LSP
-      lspconfig.ruff.setup {}
+      -- lspconfig.ruff.setup {}
+      vim.lsp.enable('ruff')
       -- configure ty for Python LSP;
       -- use the new approach for
       -- configuration since lspconfig
       -- resulted in errors on startup
       vim.lsp.enable('ty')
       -- configure texlab for LaTeX and BibTeX LSP
-      lspconfig.texlab.setup {
+      -- lspconfig.texlab.setup {
+      vim.lsp.config('texlab', {
         settings = {
           texlab = {
             auxDirectory = ".",
@@ -118,9 +144,11 @@ return {
             }
           },
         }
-      }
+      })
+      vim.lsp.enable('texlab')
       -- configure harper_ls for writing
-      lspconfig.harper_ls.setup {
+      vim.lsp.config('harper_ls', {
+      -- lspconfig.harper_ls.setup {
         filetypes = { "mail", "markdown", "quarto", "text", },
         settings = {
           ["harper-ls"] = {
@@ -141,15 +169,20 @@ return {
             }
           }
         },
-      }
+      })
+      vim.lsp.enable('harper_ls')
       -- configure yamlls for YAML LSP
-      lspconfig.yamlls.setup {}
+      -- lspconfig.yamlls.setup {}
+      vim.lsp.enable('yamlls')
       -- configure jsonls for YAML LSP
-      lspconfig.jsonls.setup {}
+      -- lspconfig.jsonls.setup {}
+      vim.lsp.enable('jsonls')
       -- configure nil_ls for Nix LSP
-      lspconfig.nil_ls.setup {}
+      -- lspconfig.nil_ls.setup {}
+      vim.lsp.enable('nil_ls')
       -- configure rust_analzer for Rust LSP
-      lspconfig.rust_analyzer.setup {
+      -- lspconfig.rust_analyzer.setup {
+      vim.lsp.config('harper_ls', {
         settings = {
           ['rust-analyzer'] = {
             assist = {
@@ -173,7 +206,7 @@ return {
             },
           }
         }
-      }
+      })
       -- Configure other aspects of the language servers
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
       -- to support the display of the diagnostics
@@ -181,11 +214,6 @@ return {
       -- Define customized signs for diagnostics reported by the language server;
       -- note that this will define the signs displayed in the gutter
       local internal_signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-      -- Note that this approach for defining the size is deprecated after 0.12.0
-      -- for type, icon in pairs(signs) do
-      --   local hl = "DiagnosticSign" .. type
-      --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = normal })
-      -- end
       -- Configure the display of diagnostics, especially to confirm
       -- that there is a rounded border around the diagnostic box
       -- that appears when you go to a line with a diagnostic
