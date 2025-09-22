@@ -103,9 +103,10 @@ return {
         filetypes = { 'markdown', 'quarto' },
       })
       vim.lsp.enable('marksman')
-      -- configure pyright for Python LSP
+      -- configure pyright for Python LSPs
       -- lspconfig.pyright.setup {}
       vim.lsp.enable('pyright')
+      vim.lsp.enable('pyrefly') 
       -- configure ruff for Python LSP
       -- lspconfig.ruff.setup {}
       vim.lsp.enable('ruff')
