@@ -96,21 +96,22 @@ return {
   -- has now been archived and thus there
   -- is the possibility that I will need
   -- to replace it with another plugin
-  {
-    "utilyre/sentiment.nvim",
-    event = "VeryLazy",
-    opts = {
-      pairs = {
-        { "(", ")" },
-        { "{", "}" },
-        { "[", "]" },
-      },
-    },
-    init = function()
-      -- `matchparen.vim` needs to be disabled manually in case of lazy loading
-      vim.g.loaded_matchparen = 1
-    end,
-  },
+
+  -- {
+  --   "utilyre/sentiment.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     pairs = {
+  --       { "(", ")" },
+  --       { "{", "}" },
+  --       { "[", "]" },
+  --     },
+  --   },
+  --   init = function()
+  --     -- `matchparen.vim` needs to be disabled manually in case of lazy loading
+  --     vim.g.loaded_matchparen = 1
+  --   end,
+  -- },
 
   -- nvim-treesitter-textobjects
   -- supports definition of custom
