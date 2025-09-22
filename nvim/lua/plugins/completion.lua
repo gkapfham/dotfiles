@@ -83,11 +83,12 @@ local kind_icons = {
 -- integration between luasnip and nvim-cmp; note
 -- that this function must exist for other code in
 -- this file to work correctly
-
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
   -- local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+  -- local line, col = (table.unpack or unpack)(vim.api.nvim_win_get_cursor(0))
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  local line, col = cursor[1], cursor[2]
   return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
 
