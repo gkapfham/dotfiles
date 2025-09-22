@@ -86,6 +86,15 @@ local setupcommit = function()
 end
 setupcommit()
 
+-- Always set the filetype to markdown for .md and .qmd files
+local setupmarkdown = function()
+  vim.cmd([[
+    autocmd BufNewFile,BufRead *.md set filetype=markdown
+    autocmd BufNewFile,BufRead *.qmd set filetype=markdown
+    ]])
+end
+setupmarkdown()
+
 -- Load the files in the configure module
 require("configure.settings")
 require("configure.autocmds")
