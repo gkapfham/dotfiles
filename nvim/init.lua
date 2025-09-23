@@ -89,7 +89,7 @@ local setupcommit = function()
 end
 setupcommit()
 
--- Always set the filetype to markdown for .md and .qmd files
+-- -- Always set the filetype to markdown for .md and .qmd files
 -- local setupmarkdown = function()
 --   vim.cmd([[
 --     autocmd BufNewFile,BufRead *.md set filetype=markdown
