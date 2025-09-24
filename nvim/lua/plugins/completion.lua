@@ -221,6 +221,27 @@ return {
     end
   },
 
+  -- render-markdown.nvim
+  -- Better rendering of markdown files
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    event = "VeryLazy",
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('render-markdown').setup({
+        enabled = true,
+        completions = { lsp = { enabled = true } },
+        file_types = { 'markdown', 'quarto', },
+        heading = {
+          width = "block",
+        },
+        code = {
+          enabled = true,
+        },
+      })
+    end
+  },
+
   -- codecompanion.nvim for chatting with
   -- LLMs through GitHub Copilot models
   {
@@ -266,7 +287,7 @@ return {
           -- },
           chat = {
             -- Show the settings
-            show_settings = true,
+            show_settings = false,
             -- Change the default icons
             icons = {
               buffer_pin = " ",
@@ -308,16 +329,16 @@ return {
             end,
           },
         },
-        require('render-markdown').setup({
-          -- file_types = { 'markdown', 'codecompanion', 'quarto' },
-          file_types = { 'markdown', 'quarto' },
-          heading = {
-            width = "block",
-          },
-          code = {
-            enabled = true,
-          },
-        })
+        -- require('render-markdown').setup({
+        --   -- file_types = { 'markdown', 'codecompanion', 'quarto' },
+        --   file_types = { 'markdown', 'quarto' },
+        --   heading = {
+        --     width = "block",
+        --   },
+        --   code = {
+        --     enabled = true,
+        --   },
+        -- })
       })
     end,
     keys = {
