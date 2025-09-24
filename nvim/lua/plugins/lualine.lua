@@ -20,6 +20,7 @@ local function lsp_clients()
     otter_ls = "󰌨",
     pyrefly = "",
     pyright = "󰌠",
+    render_markdown = "󰍕",
     ruff = "󱝁",
     ruff_lsp = "󱝁",
     texlab = "",
