@@ -47,15 +47,19 @@ return {
           "markdown_inline",
           "mermaid",
           "nix",
+          "norg",
           "python",
           "query",
           "regex",
           "rust",
+          "svelte",
           "scss",
           "tmux",
           "tsx",
           "typescript",
+          "typst",
           "vim",
+          "vue",
           "vimdoc",
           "yaml",
         },
@@ -89,6 +93,9 @@ return {
       vim.cmd [[
         autocmd VimEnter * TSEnable highlight
       ]]
+      -- make sure that quarto files use the markdown
+      -- parser for treesitter (there is no parser for quarto)
+      vim.treesitter.language.register('markdown', 'quarto')
     end,
   },
 
