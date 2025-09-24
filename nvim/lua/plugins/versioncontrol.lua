@@ -123,15 +123,15 @@ return {
           follow_files = true,
           -- interval = 100
         },
-        diff_opts = {
-          internal = true
-        },
+        -- diff_opts = {
+        --   internal = true
+        -- },
         preview_config = {
           border = "rounded"
         },
         attach_to_untracked = false,
         current_line_blame = false,
-        sign_priority = 6,
+        sign_priority = 1,
         update_debounce = 50,
         status_formatter = nil,
       }
