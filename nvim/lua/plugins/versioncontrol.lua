@@ -23,14 +23,6 @@ return {
   {
     "tpope/vim-fugitive",
     cmd = { "G", "Git", "Gwrite" },
-    -- config = function()
-    --   vim.api.nvim_create_autocmd("FileType", {
-    --     pattern = "gitcommit",
-    --     callback = function()
-    --       vim.cmd("startinsert")
-    --     end,
-    --   })
-    -- end,
     keys = {
       -- Keys: git status
       { "<Space>gg",   ":call ToggleGstatus() <CR>", desc = "Fugitive: Git status toggle" },
