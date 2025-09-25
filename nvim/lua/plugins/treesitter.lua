@@ -142,7 +142,8 @@ return {
     end,
   },
 
-
+  -- matchparen.nvim
+  -- highlight matching parentheses
   {
     "monkoose/matchparen.nvim",
     event = "VeryLazy",
