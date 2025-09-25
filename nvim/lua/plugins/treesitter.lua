@@ -94,7 +94,10 @@ return {
         autocmd VimEnter * TSEnable highlight
       ]]
       -- make sure that quarto files use the markdown
-      -- parser for treesitter (there is no parser for quarto)
+      -- parser for treesitter (there is no parser for quarto);
+      -- note that this is important to set because, without
+      -- it, the preview feature in Snacks.nvim's pickers for
+      -- .qmd files will not display syntax highlighting correctly
       vim.treesitter.language.register('markdown', 'quarto')
     end,
   },
