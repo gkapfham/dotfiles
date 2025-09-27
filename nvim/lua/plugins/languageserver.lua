@@ -110,10 +110,7 @@ return {
       -- configure ruff for Python LSP
       -- lspconfig.ruff.setup {}
       vim.lsp.enable('ruff')
-      -- configure ty for Python LSP;
-      -- use the new approach for
-      -- configuration since lspconfig
-      -- resulted in errors on startup
+      -- configure ty for Python LSP
       vim.lsp.enable('ty')
       -- configure texlab for LaTeX and BibTeX LSP
       -- lspconfig.texlab.setup {
