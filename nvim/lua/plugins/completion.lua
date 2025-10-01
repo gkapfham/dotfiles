@@ -231,7 +231,7 @@ return {
       require('render-markdown').setup({
         enabled = true,
         completions = { lsp = { enabled = true } },
-        file_types = { 'markdown', 'quarto', },
+        file_types = { 'codecompanion', 'markdown', 'quarto', },
         heading = {
           width = "block",
         },
@@ -282,9 +282,42 @@ return {
           }
         },
         display = {
-          -- diff = {
-          --   provider = "mini_diff",
-          -- },
+          diff = {
+            enabled = true,
+            provider = "inline",
+            provider_opts = {
+              inline = {
+                layout = "float",
+                diff_signs = {
+                  signs = {
+                    text = "▌",
+                    reject = "",
+                    highlight_groups = {
+                      addition = "DiagnosticOk",
+                      deletion = "DiagnosticError",
+                      modification = "DiagnosticWarn",
+                    },
+                  },
+                  -- Super Diff options
+                  icons = {
+                    accepted = " ",
+                    rejected = " ",
+                  },
+                  colors = {
+                    accepted = "DiagnosticOk",
+                    rejected = "DiagnosticError",
+                  },
+                },
+                opts = {
+                  context_lines = 5,
+                  dim = 0,
+                  full_width_removed = true,
+                  show_keymap_hints = true,
+                  show_removed = true,
+                },
+              },
+            },
+          },
           chat = {
             -- Show the settings
             show_settings = false,
