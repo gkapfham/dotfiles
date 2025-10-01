@@ -51,40 +51,24 @@ return {
       -- 9) YAML
       -- 10) Nix
       -- 11) Rust
+      -- 12) Copilot
       -- configure cssls for CSS LSP
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
-      -- lspconfig.cssls.setup {
-      --   capabilities = capabilities,
-      -- }
+      local css_capabilities = vim.lsp.protocol.make_client_capabilities()
+      css_capabilities.textDocument.completion.completionItem.snippetSupport = true
       vim.lsp.config('cssls', {
-        capabilities = capabilities,
+        capabilities = css_capabilities,
       })
       vim.lsp.enable('cssls')
       -- configure html_ls for HTML
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
-      -- lspconfig.html.setup {
-      --   capabilities = capabilities,
-      --   filetypes = { 'markdown', 'quarto', 'html' },
-      -- }
+      local html_capabilities = vim.lsp.protocol.make_client_capabilities()
+      html_capabilities.textDocument.completion.completionItem.snippetSupport = true
       vim.lsp.config('html', {
-        capabilities = capabilities,
+        capabilities = html_capabilities,
         filetypes = { 'markdown', 'quarto', 'html' },
       })
       -- configure gopls for Go LSP
-      -- lspconfig.gopls.setup {}
       vim.lsp.enable('gopls')
       -- configure luals (with neovim support) for Lua LSP
-      -- lspconfig.lua_ls.setup({
-      --   settings = {
-      --     Lua = {
-      --       completion = {
-      --         callSnippet = "Replace"
-      --       }
-      --     }
-      --   }
-      -- })
     vim.lsp.config('lua_ls', {
         settings = {
           Lua = {
@@ -96,24 +80,19 @@ return {
       })
       vim.lsp.enable('lua_ls')
       -- configure marksman for Markdown LSP
-      -- lspconfig.marksman.setup {
-      --   filetypes = { 'markdown', 'quarto' },
-      -- }
       vim.lsp.config('marksman', {
         filetypes = { 'markdown', 'quarto' },
       })
       vim.lsp.enable('marksman')
       -- configure pyright for Python LSPs
-      -- lspconfig.pyright.setup {}
       vim.lsp.enable('pyright')
-      vim.lsp.enable('pyrefly') 
+      -- configure pyrefly for Python LSP
+      vim.lsp.enable('pyrefly')
       -- configure ruff for Python LSP
-      -- lspconfig.ruff.setup {}
       vim.lsp.enable('ruff')
       -- configure ty for Python LSP
       vim.lsp.enable('ty')
       -- configure texlab for LaTeX and BibTeX LSP
-      -- lspconfig.texlab.setup {
       vim.lsp.config('texlab', {
         settings = {
           texlab = {
@@ -146,7 +125,6 @@ return {
       vim.lsp.enable('texlab')
       -- configure harper_ls for writing
       vim.lsp.config('harper_ls', {
-      -- lspconfig.harper_ls.setup {
         filetypes = { "mail", "markdown", "quarto", "text", },
         settings = {
           ["harper-ls"] = {
@@ -170,17 +148,14 @@ return {
       })
       vim.lsp.enable('harper_ls')
       -- configure yamlls for YAML LSP
-      -- lspconfig.yamlls.setup {}
       vim.lsp.enable('yamlls')
       -- configure jsonls for YAML LSP
-      -- lspconfig.jsonls.setup {}
       vim.lsp.enable('jsonls')
       -- configure nil_ls for Nix LSP
-      -- lspconfig.nil_ls.setup {}
       vim.lsp.enable('nil_ls')
       -- configure rust_analzer for Rust LSP
       -- lspconfig.rust_analyzer.setup {
-      vim.lsp.config('harper_ls', {
+      vim.lsp.config('rust_analyzer', {
         settings = {
           ['rust-analyzer'] = {
             assist = {
@@ -304,9 +279,9 @@ return {
     event = "LspAttach",
     config = function()
       local SymbolKind = vim.lsp.protocol.SymbolKind
-      local function h(name)
-        return vim.api.nvim_get_hl(0, { name = name })
-      end
+      -- local function h(name)
+      --   return vim.api.nvim_get_hl(0, { name = name })
+      -- end
       local function text_format(symbol)
         local res = {}
         -- Indicator that shows if there are any other symbols in the same line
