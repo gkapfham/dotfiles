@@ -2,12 +2,6 @@
 -- Purpose: Configure the nvim-cmp plugin
 -- and all of the plugins that enhance it
 
--- -- Define reusable prompts for CopilotChat
--- local prompts = {
---   PytestMultipleAssert =
---   "Please write a Pytest test case for the provided source code. The test case should have multiple assertions and each assertion should have a message attached to it that will appear if the assertion fails. The test case should test both the common and the exceptional inputs for the provided source code. Make sure that the test has a descriptive docstring and comments for the lines in it. Please do not use blank lines or spaces to separate any of the blocks in the test case, including between the docstring, comments, and code.",
--- }
-
 -- Supporting variables and functions implemented in lua {{{
 
 -- Define symbols for the icons used by nvim-cmp;
