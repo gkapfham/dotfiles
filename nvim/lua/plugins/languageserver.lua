@@ -154,7 +154,6 @@ return {
       -- configure nil_ls for Nix LSP
       vim.lsp.enable('nil_ls')
       -- configure rust_analzer for Rust LSP
-      -- lspconfig.rust_analyzer.setup {
       vim.lsp.config('rust_analyzer', {
         settings = {
           ['rust-analyzer'] = {
