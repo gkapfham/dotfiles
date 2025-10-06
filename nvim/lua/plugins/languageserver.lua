@@ -181,6 +181,7 @@ return {
       })
       -- configure copilot for Copilot LSP
       -- vim.lsp.enable('copilot')
+      -- vim.lsp.enable("copilot_ls")
       -- Configure other aspects of the language servers
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
       -- to support the display of the diagnostics
