@@ -321,6 +321,7 @@ return {
                 snacks_picker_input = "Picker",
                 snacks_picker_list = "Explorer",
                 snacks_terminal = "Terminal",
+                sidekick_terminal = "Sidekick",
               },
               -- Define symbols attached to each file in the tabline
               symbols = {
