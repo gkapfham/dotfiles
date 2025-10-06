@@ -75,6 +75,9 @@ require("lazy").setup({
   },
 })
 
+-- Always use rounded borders for floating windows
+vim.o.winborder = 'rounded'
+
 -- Define the keymap for loading lazy dashboard
 vim.keymap.set("n", "<Space>sl", "<cmd>:Lazy<cr>")
 
