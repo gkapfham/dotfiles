@@ -222,7 +222,7 @@ return {
   {
     "folke/sidekick.nvim",
     opts = {
-      nes = { enabled = true },
+      nes = { enabled = false },
       signs = {
         enabled = true,
         icon = " ",
