@@ -148,7 +148,7 @@ return {
       { "<Space>gd",  function() Snacks.picker.lsp_definitions() end,        desc = "LSP: Goto Definitions" },
       { "<Space>gs",  function() Snacks.picker.grep_word() end,              desc = "Grep Highlighted Word" },
       { "<Space>ls",  function() Snacks.picker.lsp_symbols() end,            desc = "LSP: Symbols" },
-      { "<Space>so",  function() Snacks.picker.smart() end,                  desc = "Find Files: Smart" },
+      { "<Space>sf",  function() Snacks.picker.smart() end,                  desc = "Find Files: Smart" },
       { "<Space>ta",  function() require("aerial").snacks_picker() end,      desc = "Aerial: Symbols" },
       { "<Space>ts",  function() Snacks.picker.treesitter() end,             desc = "Treesitter: Symbols" },
       { "<Space>wd",  function() Snacks.picker.diagnostics() end,            desc = "LSP: Workspace Diagnostics" },
