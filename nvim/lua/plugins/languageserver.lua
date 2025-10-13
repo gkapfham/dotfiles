@@ -87,7 +87,7 @@ return {
       -- configure pyright for Python LSPs
       vim.lsp.enable('pyright')
       -- configure pyrefly for Python LSP
-      vim.lsp.enable('pyrefly')
+      -- vim.lsp.enable('pyrefly')
       -- configure ruff for Python LSP
       vim.lsp.enable('ruff')
       -- configure ty for Python LSP
