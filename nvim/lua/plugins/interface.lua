@@ -56,42 +56,42 @@ return {
     },
   },
 
-  -- nvim-notify
-  -- Notifications
-  {
-    "rcarriga/nvim-notify",
-    event = "BufReadPre",
-    keys = {
-      {
-        "<Space>dn",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Delete all Notifications",
-      },
-    },
-    config = function()
-      local customized_notify = require("notify")
-      vim.notify = customized_notify
-      customized_notify.setup({
-        background_colour = "#1c1c1c",
-        fps = 30,
-        icons = {
-          DEBUG = "",
-          ERROR = "",
-          INFO = "",
-          TRACE = "✎",
-          WARN = ""
-        },
-        level = 2,
-        minimum_width = 50,
-        render = "wrapped-compact",
-        stages = "static",
-        timeout = 1000,
-        top_down = true
-      })
-    end
-  },
+  -- -- nvim-notify
+  -- -- Notifications
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   event = "BufReadPre",
+  --   keys = {
+  --     {
+  --       "<Space>dn",
+  --       function()
+  --         require("notify").dismiss({ silent = true, pending = true })
+  --       end,
+  --       desc = "Delete all Notifications",
+  --     },
+  --   },
+  --   config = function()
+  --     local customized_notify = require("notify")
+  --     vim.notify = customized_notify
+  --     customized_notify.setup({
+  --       background_colour = "#1c1c1c",
+  --       fps = 30,
+  --       icons = {
+  --         DEBUG = "",
+  --         ERROR = "",
+  --         INFO = "",
+  --         TRACE = "✎",
+  --         WARN = ""
+  --       },
+  --       level = 2,
+  --       minimum_width = 50,
+  --       render = "wrapped-compact",
+  --       stages = "static",
+  --       timeout = 1000,
+  --       top_down = true
+  --     })
+  --   end
+  -- },
 
   -- dressing.nvim
   -- User interface enhancements
@@ -156,7 +156,7 @@ return {
     },
     dependencies = {
       "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
+      -- "rcarriga/nvim-notify",
     },
     config = function()
       require("noice").setup({
