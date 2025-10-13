@@ -34,7 +34,8 @@ return {
       },
       input = { enabled = false },
       notifier = {
-        enabled = false,
+        enabled = true,
+        style = "fancy",
       },
       picker = {
         enabled = true,
@@ -105,6 +106,7 @@ return {
       words = { enabled = false },
       styles = {
         notification = {
+          wo = { wrap = true },
         }
       }
     },
@@ -177,6 +179,7 @@ return {
         vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
         vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
       end
+
       vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
       vim.api.nvim_create_autocmd("User", {
         pattern = "VeryLazy",
