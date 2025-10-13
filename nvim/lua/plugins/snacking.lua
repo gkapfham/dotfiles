@@ -35,6 +35,7 @@ return {
       input = { enabled = false },
       notifier = {
         enabled = true,
+        margin = { top = 1, right = 1, bottom = 0 },
         style = "fancy",
       },
       picker = {
