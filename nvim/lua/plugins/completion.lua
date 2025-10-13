@@ -242,6 +242,18 @@ return {
           enabled = true,
         },
       },
+      ui = {
+        icons = {
+          attached          = " ",
+          started           = " ",
+          installed         = " ",
+          missing           = " ",
+          external_attached = "󰖩 ",
+          external_started  = "󰖪 ",
+          terminal_attached = " ",
+          terminal_started  = " ",
+        }
+      },
     },
     keys = {
       {
