@@ -704,6 +704,69 @@ done
 
 # }}}
 
+# fun: fuzzy command runner {{{
+
+fun() {
+  if ! command -v fzf >/dev/null 2>&1; then
+    echo "fun: requires fzf (https://github.com/junegunn/fzf)."
+    return 1
+  fi
+  emulate -L zsh
+  typeset -A seen
+  typeset -a candidates
+  local name dir file selected ttype
+  # collect aliases
+  for name in ${(k)aliases}; do
+    [[ -z $name ]] && continue
+    [[ $name = [-_]* ]] && continue
+    [[ $name = .* ]] && continue
+    seen[$name]=1
+    candidates+=("$name")
+  done
+  # collect shell functions (skip already seen and internal names)
+  for name in ${(k)functions}; do
+    [[ -z $name || -n ${seen[$name]} ]] && continue
+    [[ $name = [-_]* ]] && continue
+    [[ $name = .* ]] && continue
+    seen[$name]=1
+    candidates+=("$name")
+  done
+  # collect executables from PATH (skip duplicates and internal-looking names)
+  for dir in ${(s/:/)PATH}; do
+    [[ -d $dir ]] || continue
+    for file in "$dir"/*(N); do
+      [[ -x $file && ! -d $file ]] || continue
+      name=${file:t}
+      [[ -z $name || -n ${seen[$name]} ]] && continue
+      [[ "$name" = *[[:space:]]* ]] && continue
+      [[ $name = [-_]* ]] && continue
+      [[ $name = .* ]] && continue
+      candidates+=("$name")
+      seen[$name]=1
+    done
+  done
+  if (( ${#candidates[@]} == 0 )); then
+    echo "fun: no commands found."
+    return 1
+  fi
+  # filter out builtins/keywords via type -t, then present with fzf using lightning prompt
+  selected=$(printf '%s\n' "${candidates[@]}" | LC_ALL=C sort -u | while read -r c; do
+    ttype=$(type -t -- $c 2>/dev/null) || ttype=
+    if [[ -n $ttype && ( $ttype = builtin || $ttype = keyword ) ]]; then
+      continue
+    fi
+    printf '%s\n' "$c"
+  done | fzf --ansi --prompt=' ' --preview 'type -a {} 2>/dev/null' --height=20 --layout=reverse --border --preview-window=right:60%:wrap) || return 1
+  [[ -n $selected ]] || return 1
+  if [[ -o interactive ]]; then
+    print -z -- "$selected "
+  else
+    printf '%s\n' "$selected"
+  fi
+}
+
+# }}}
+
 # Benchmarking {{{
 
 # Uncomment to enable
