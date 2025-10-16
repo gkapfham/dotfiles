@@ -712,58 +712,112 @@ fun() {
     return 1
   fi
   emulate -L zsh
-  typeset -A seen
-  typeset -a candidates
-  local name dir file selected ttype
-  # collect aliases
-  for name in ${(k)aliases}; do
-    [[ -z $name ]] && continue
-    [[ $name = [-_]* ]] && continue
-    [[ $name = .* ]] && continue
-    seen[$name]=1
-    candidates+=("$name")
-  done
-  # collect shell functions (skip already seen and internal names)
-  for name in ${(k)functions}; do
-    [[ -z $name || -n ${seen[$name]} ]] && continue
-    [[ $name = [-_]* ]] && continue
-    [[ $name = .* ]] && continue
-    seen[$name]=1
-    candidates+=("$name")
-  done
-  # collect executables from PATH (skip duplicates and internal-looking names)
-  for dir in ${(s/:/)PATH}; do
-    [[ -d $dir ]] || continue
-    for file in "$dir"/*(N); do
-      [[ -x $file && ! -d $file ]] || continue
-      name=${file:t}
-      [[ -z $name || -n ${seen[$name]} ]] && continue
-      [[ "$name" = *[[:space:]]* ]] && continue
-      [[ $name = [-_]* ]] && continue
-      [[ $name = .* ]] && continue
-      candidates+=("$name")
-      seen[$name]=1
-    done
-  done
-  if (( ${#candidates[@]} == 0 )); then
-    echo "fun: no commands found."
-    return 1
-  fi
-  # filter out builtins/keywords via type -t, then present with fzf using lightning prompt
-  selected=$(printf '%s\n' "${candidates[@]}" | LC_ALL=C sort -u | while read -r c; do
-    ttype=$(type -t -- $c 2>/dev/null) || ttype=
-    if [[ -n $ttype && ( $ttype = builtin || $ttype = keyword ) ]]; then
-      continue
-    fi
-    printf '%s\n' "$c"
-  done | fzf --ansi --prompt=' ' --preview 'type -a {} 2>/dev/null' --height=20 --layout=reverse --border --preview-window=right:60%:wrap) || return 1
+  local selected
+  selected=$(
+    {
+      printf '%s\n' ${(k)aliases} ${(k)functions} ${(k)commands}
+      
+      for dir in ${(s/:/)PATH}; do
+        [[ -d "$dir" ]] && find "$dir" -maxdepth 1 \( -type f -o -type l \) -executable -printf "%f\n" 2>/dev/null
+      done
+    } | \
+    rg -v '^[-_\.]' | \
+    rg -v '[[:space:]]' | \
+    sort -u | \
+    while IFS= read -r cmd; do
+      if command -v "$cmd" >/dev/null 2>&1; then
+        case "$(type -t -- "$cmd" 2>/dev/null)" in
+          builtin|keyword) continue ;;
+          *) printf '%s\n' "$cmd" ;;
+        esac
+      fi
+    done | \
+    fzf --ansi --prompt=' ' --preview 'type -a {} 2>/dev/null' --height=20 --layout=reverse --border --preview-window=right:60%:wrap
+  ) || return 1
+  
   [[ -n $selected ]] || return 1
-  if [[ -o interactive ]]; then
-    print -z -- "$selected "
-  else
-    printf '%s\n' "$selected"
-  fi
+  printf '%s\n' "$selected"
 }
+
+# Create a widget for the fun function
+_fun_widget() {
+  local selected
+  selected=$(fun)
+  if [[ -n "$selected" ]]; then
+    BUFFER="$selected "
+    CURSOR=$#BUFFER
+  fi
+  zle reset-prompt
+}
+
+# Register the widget
+zle -N _fun_widget
+
+# Bind CTRL-ALT-g to the fun widget (multiple approaches for reliability)
+# bindkey '^[\C-f' _fun_widget
+# zvm_after_init_commands+=('bindkey "^[\C-f" _fun_widget')
+bindkey '\eg' _fun_widget
+zvm_after_init_commands+=('bindkey "^\eg" _fun_widget')
+
+
+# fun() {
+#   if ! command -v fzf >/dev/null 2>&1; then
+#     echo "fun: requires fzf (https://github.com/junegunn/fzf)."
+#     return 1
+#   fi
+#   emulate -L zsh
+#   typeset -A seen
+#   typeset -a candidates
+#   local name dir file selected ttype
+#   # collect aliases
+#   for name in ${(k)aliases}; do
+#     [[ -z $name ]] && continue
+#     [[ $name = [-_]* ]] && continue
+#     [[ $name = .* ]] && continue
+#     seen[$name]=1
+#     candidates+=("$name")
+#   done
+#   # collect shell functions (skip already seen and internal names)
+#   for name in ${(k)functions}; do
+#     [[ -z $name || -n ${seen[$name]} ]] && continue
+#     [[ $name = [-_]* ]] && continue
+#     [[ $name = .* ]] && continue
+#     seen[$name]=1
+#     candidates+=("$name")
+#   done
+#   # collect executables from PATH (skip duplicates and internal-looking names)
+#   for dir in ${(s/:/)PATH}; do
+#     [[ -d $dir ]] || continue
+#     for file in "$dir"/*(N); do
+#       [[ -x $file && ! -d $file ]] || continue
+#       name=${file:t}
+#       [[ -z $name || -n ${seen[$name]} ]] && continue
+#       [[ "$name" = *[[:space:]]* ]] && continue
+#       [[ $name = [-_]* ]] && continue
+#       [[ $name = .* ]] && continue
+#       candidates+=("$name")
+#       seen[$name]=1
+#     done
+#   done
+#   if (( ${#candidates[@]} == 0 )); then
+#     echo "fun: no commands found."
+#     return 1
+#   fi
+#   # filter out builtins/keywords via type -t, then present with fzf using lightning prompt
+#   selected=$(printf '%s\n' "${candidates[@]}" | LC_ALL=C sort -u | while read -r c; do
+#     ttype=$(type -t -- $c 2>/dev/null) || ttype=
+#     if [[ -n $ttype && ( $ttype = builtin || $ttype = keyword ) ]]; then
+#       continue
+#     fi
+#     printf '%s\n' "$c"
+#   done | fzf --ansi --prompt=' ' --preview 'type -a {} 2>/dev/null' --height=20 --layout=reverse --border --preview-window=right:60%:wrap) || return 1
+#   [[ -n $selected ]] || return 1
+#   if [[ -o interactive ]]; then
+#     print -z -- "$selected "
+#   else
+#     printf '%s\n' "$selected"
+#   fi
+# }
 
 # }}}
 
