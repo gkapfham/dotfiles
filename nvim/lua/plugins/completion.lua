@@ -244,14 +244,14 @@ return {
       },
       ui = {
         icons = {
-          attached          = " ",
-          started           = " ",
-          installed         = " ",
-          missing           = " ",
-          external_attached = "󰖩 ",
-          external_started  = "󰖪 ",
-          terminal_attached = " ",
-          terminal_started  = " ",
+          attached           = " ",
+          started            = " ",
+          installed          = " ",
+          missing            = " ",
+          external_attached  = "󱫄 ",
+          exexternal_started = "󱫁 ",
+          terminal_attached  = " ",
+          terminal_started   = " ",
         }
       },
     },
