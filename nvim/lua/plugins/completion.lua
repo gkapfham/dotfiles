@@ -249,7 +249,7 @@ return {
           installed          = " ",
           missing            = " ",
           external_attached  = "󱫄 ",
-          exexternal_started = "󱫁 ",
+          external_started   = "󱫁 ",
           terminal_attached  = " ",
           terminal_started   = " ",
         }
