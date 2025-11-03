@@ -650,7 +650,6 @@ znap prompt
 # note using znap is not possible and
 # a standard source is also not possible.
 zvm_after_init_commands+=(eval "$(atuin init zsh)")
-bindkey '^p' _atuin_search_widget
 
 # }}}
 
