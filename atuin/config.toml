@@ -140,7 +140,8 @@ style = "auto"
 ## 3. Slack oauth tokens (bot, user)
 ## 4. Slack webhooks
 ## 5. Stripe live/test keys
-# secrets_filter = true
+# Disable secrets filter to save commands that might match secret patterns but aren't actually secrets
+secrets_filter = false
 
 # Consider using the daemon mode as it may be faster,
 # but disable it for now as not proving absolutely needed.
