@@ -13,6 +13,9 @@
 -- completion then the symbol will not appear at all
 -- and there will instead be the display of nil
 local kind_icons = {
+  gemini = "󱙨",
+  codestral = "󱙨",
+  Boolean = "",
   Text = "󰉿",
   Method = "󰆧",
   Function = "󰊕",
@@ -68,8 +71,10 @@ local kind_icons = {
   MarkupHeading4 = "",
   MarkupHeading5 = "",
   MarkupLink = "󰌷",
+  MarkupList = "",
   MarkupRawBlock = "󰒔",
   MarkupStrong = "",
+  PunctuationSpecial = "",
   VariableMember = "󰫧",
 }
 
@@ -143,22 +148,43 @@ return {
     end,
   },
 
-  -- supermaven-nvim
-  -- Use the Supermaven completion engine;
-  -- note that it provides built-int support
-  -- for nvim-cmp and thus it is easy to integrate
-  -- into this setup. Using free tier for now.
+  -- -- supermaven-nvim
+  -- -- Use the Supermaven completion engine;
+  -- -- note that it provides built-int support
+  -- -- for nvim-cmp and thus it is easy to integrate
+  -- -- into this setup. Using free tier for now.
+  -- {
+  --   "supermaven-inc/supermaven-nvim",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("supermaven-nvim").setup({
+  --       -- Disable the default keymaps and settings
+  --       -- that would normally make virtual text appear;
+  --       -- not using those since Supermaven integrates
+  --       -- with nvim-cmp and that is primary approach
+  --       disable_inline_completion = true,
+  --       disable_keymaps = true
+  --     })
+  --   end,
+  -- },
+
+-- minuet-ai.nvim
+-- Enable interaction with code completion
+-- models like Codestral and Gemini
   {
-    "supermaven-inc/supermaven-nvim",
+    "milanglacier/minuet-ai.nvim",
     event = "InsertEnter",
     config = function()
-      require("supermaven-nvim").setup({
-        -- Disable the default keymaps and settings
-        -- that would normally make virtual text appear;
-        -- not using those since Supermaven integrates
-        -- with nvim-cmp and that is primary approach
-        disable_inline_completion = true,
-        disable_keymaps = true
+      require("minuet").setup({
+        provider = "codestral",
+        provider_options = {
+          codestral = {
+            optional = {
+              max_tokens = 256,
+              stop = { '\n\n' },
+            },
+          },
+        }
       })
     end,
   },
@@ -183,8 +209,8 @@ return {
           markdown = true,
           yaml = false,
           help = false,
-          gitcommit = false,
-          gitrebase = false,
+          gitcommit = true,
+          gitrebase = true,
           hgcommit = false,
           svn = false,
           cvs = false,
@@ -244,14 +270,14 @@ return {
       },
       ui = {
         icons = {
-          attached           = " ",
-          started            = " ",
-          installed          = " ",
-          missing            = " ",
-          external_attached  = "󱫄 ",
-          external_started   = "󱫁 ",
-          terminal_attached  = " ",
-          terminal_started   = " ",
+          attached          = " ",
+          started           = " ",
+          installed         = " ",
+          missing           = " ",
+          external_attached = "󱫄 ",
+          external_started  = "󱫁 ",
+          terminal_attached = " ",
+          terminal_started  = " ",
         }
       },
     },
@@ -504,7 +530,7 @@ return {
         -- background that works better for GitHub
         -- Copilot chat and that does not match PMenu.
         window = {
-          completion = cmp.config.window.bordered({ max_height = 50 }),
+          completion = cmp.config.window.bordered({ max_height = 100 }),
           documentation = cmp.config.window.bordered(),
         },
         -- Define the performance characteristics for nvim-cmp
@@ -555,6 +581,7 @@ return {
               look = " Spell",
               spell = " Spell",
               copilot = " Copilot",
+              minuet = " Minuet",
               supermaven = " Supermaven",
             })[entry.source.name]
             return vim_item
@@ -641,8 +668,9 @@ return {
           -- Define the first-tier of sources
           { name = 'treesitter', max_item_count = 10, priority = 10 },
           { name = 'nvim_lsp',   max_item_count = 10, priority = 10 },
-          { name = 'copilot',    max_item_count = 10, priority = 8 },
-          { name = 'supermaven', max_item_count = 10, priority = 8 },
+          { name = 'copilot',    max_item_count = 10, priority = 10 },
+          { name = 'minuet',     max_item_count = 10, priority = 10 },
+          -- { name = 'supermaven', max_item_count = 10, priority = 8 },
           -- Look at all of the open buffers
           {
             name = 'buffer',
