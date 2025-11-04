@@ -95,6 +95,8 @@ return {
       vim.lsp.enable('ruff')
       -- configure ty for Python LSP
       vim.lsp.enable('ty')
+      -- configure zuban for Python LSP
+      vim.lsp.enable('zuban')
       -- configure texlab for LaTeX and BibTeX LSP
       vim.lsp.config('texlab', {
         settings = {
