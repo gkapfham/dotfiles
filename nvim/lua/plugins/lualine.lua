@@ -11,6 +11,7 @@ local function lsp_clients()
     copilot = "󰊤",
     harper_ls = "󰈙",
     html = "",
+    htmx = "",
     jsonls = "",
     lua_ls = "󰢱",
     gopls = "",
