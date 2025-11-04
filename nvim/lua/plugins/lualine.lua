@@ -28,6 +28,7 @@ local function lsp_clients()
     ty = "󱙨",
     yamlls = "",
     zk = "",
+    zuban = "",
   }
   -- Get the active LSP clients
   -- and return the client names
