@@ -168,9 +168,9 @@ return {
   --   end,
   -- },
 
--- minuet-ai.nvim
--- Enable interaction with code completion
--- models like Codestral and Gemini
+  -- minuet-ai.nvim
+  -- Enable interaction with code completion
+  -- models like Codestral and Gemini
   {
     "milanglacier/minuet-ai.nvim",
     event = "InsertEnter",
@@ -181,7 +181,7 @@ return {
           codestral = {
             optional = {
               max_tokens = 256,
-              stop = { '\n\n' },
+              -- stop = { '\n\n' },
             },
           },
         }
@@ -266,6 +266,11 @@ return {
         mux = {
           backend = "tmux",
           enabled = true,
+        },
+        tools = {
+          amp = {
+            cmd = { "amp" },
+          }
         },
       },
       ui = {
