@@ -171,7 +171,6 @@ alias more="bat"
 alias cat="bat"
 
 # Directory listing with a simple command
-# alias ka="eza --group-directories-first --grid --long --sort=name"
 alias ka="ls -al --git"
 
 # Use the eza command to display a tree,
@@ -190,6 +189,18 @@ alias kix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/ni
 # Use nix-rebuild switch with a configuration in user account
 # and also perform an upgrade of the system
 alias ukix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix --upgrade"
+
+# }}}
+
+# Environment variables {{{
+
+# Source environment variables that
+# are stored in the ~/.env file
+if [ -f "$HOME/.env" ]; then
+  set -a
+  source "$HOME/.env"
+  set +a
+fi
 
 # }}}
 
