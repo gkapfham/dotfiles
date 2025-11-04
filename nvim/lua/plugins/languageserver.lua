@@ -66,10 +66,13 @@ return {
         capabilities = html_capabilities,
         filetypes = { 'markdown', 'quarto', 'html' },
       })
+      vim.lsp.enable('html')
+      -- configure htmx for HTML LSP
+      vim.lsp.enable('htmx')
       -- configure gopls for Go LSP
       vim.lsp.enable('gopls')
       -- configure luals (with neovim support) for Lua LSP
-    vim.lsp.config('lua_ls', {
+      vim.lsp.config('lua_ls', {
         settings = {
           Lua = {
             completion = {
@@ -180,7 +183,12 @@ return {
         }
       })
       -- configure copilot for Copilot LSP
+      -- vim.lsp.config('copilot', {
+      --   cmd = { 'copilot-language-server', '--stdio', },
+      --   root_markers = { '.git' },
+      -- })
       -- vim.lsp.enable('copilot')
+      -- vim.lsp.inline_completion.enable()
       -- vim.lsp.enable("copilot_ls")
       -- Configure other aspects of the language servers
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
