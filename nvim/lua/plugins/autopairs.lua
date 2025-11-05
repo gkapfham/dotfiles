@@ -11,13 +11,15 @@ return {
     config = function()
       local getRule = require("nvim-autopairs").get_rules
       require('nvim-autopairs').setup({
-        disable_filetype = { "TelescopePrompt" },
         check_ts = true,
+        enable_check_bracket_line = false,
+        map_c_h = true,
+        map_c_w = true,
       })
       -- do not perform autopair matching when dealing with
       -- certain types of surrounding symbols that often need
       -- to have three of them displayed (e.g., backtick in markdown)
-      getRule("`")[1].not_filetypes = { "markdown", "quarto", "tex"}
+      getRule("`")[1].not_filetypes = { "markdown", "quarto", "tex" }
       getRule("'")[1].not_filetypes = { "tex" }
     end
   },
