@@ -113,7 +113,7 @@ return {
         linehl = false,
         watch_gitdir = {
           follow_files = true,
-          -- interval = 100
+          interval = 10
         },
         -- diff_opts = {
         --   internal = true
