@@ -7,7 +7,7 @@
 # Configure whether or not to show the help row, which includes the current
 # Atuin version (and whether an update is available), a keymap hint, and the
 # total amount of commands in your history.
-show_help = true
+show_help = false
 
 # If enabled, upon hitting enter Atuin will immediately execute the command.
 # Press tab to return to the shell and edit. This applies for new installs. Old
