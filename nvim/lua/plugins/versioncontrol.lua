@@ -58,6 +58,8 @@ return {
   },
 
   -- gitsigns.nvim for showing git diffs in the sign column
+  -- note that this plugin is prone to not having the signs
+  -- disappear immediately after the commit happens in nvim
   {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
