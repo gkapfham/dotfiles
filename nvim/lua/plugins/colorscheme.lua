@@ -23,7 +23,10 @@ return {
         -- override the default colors
         colors = {
           bg = "#1c1c1c",
-          fg = "#c1c1c1",
+          -- fg = "#c1c1c1",
+          -- fg = "#dadada",
+          -- fg = "#d5d5d5",
+          fg = "#d2d2d2",
           red = "#d75347",
           subduedred = "#d75f5f",
           coral = "#d7636b",
