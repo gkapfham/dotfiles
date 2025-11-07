@@ -359,3 +359,6 @@ site
 
 # Spelling files for nvim
 en.utf-8.add.spl
+
+# Agents
+agent.jsonl
