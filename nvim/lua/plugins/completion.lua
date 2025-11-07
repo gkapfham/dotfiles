@@ -255,6 +255,9 @@ return {
       },
       cli = {
         win = {
+          keys = {
+            prompt = { "<Space>sp", "prompt", mode = "n", desc = "insert prompt or context" },
+          },
           wo = {},
           bo = {},
           layout = "float",
@@ -270,6 +273,10 @@ return {
         tools = {
           amp = {
             cmd = { "amp" },
+          },
+          toad = {
+            cmd = { "toad", "acp", "npx opencode-ai@latest acp", "--project-dir", "." },
+            -- cmd = { "toad acp 'npx opencode-ai@latest acp'" },
           }
         },
       },
