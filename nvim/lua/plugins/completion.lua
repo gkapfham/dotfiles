@@ -276,7 +276,9 @@ return {
           },
           toad = {
             cmd = { "toad", "acp", "npx opencode-ai@latest acp", "--project-dir", "." },
-            -- cmd = { "toad acp 'npx opencode-ai@latest acp'" },
+          },
+          code = {
+            cmd = { "npx", "opencode-ai@0.15.30" },
           }
         },
       },
