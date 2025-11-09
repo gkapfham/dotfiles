@@ -41,6 +41,11 @@ keybinds clear-defaults=true {
     }
     shared_except "locked" {
         bind "Ctrl g" { SwitchToMode "locked"; }
+        bind "Alt p" {
+            LaunchOrFocusPlugin "zellij-pane-picker" {
+                floating true; move_to_focused_tab true;
+            }
+        }
     }
     shared_among "scroll" "search" {
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
@@ -239,7 +244,12 @@ plugins {
     strider location="zellij:strider"
     tab-bar location="zellij:tab-bar"
     welcome-screen location="zellij:session-manager" {
-        welcome_screen true
+        welcome_screen false 
+    }
+    zellij-pane-picker location="https://github.com/shihanng/zellij-pane-picker/releases/download/v0.6.0/zellij-pane-picker.wasm" {
+        list_panes ""
+        plugin_select_down "Ctrl n"
+        plugin_select_up "Ctrl p"
     }
 }
 
@@ -250,6 +260,7 @@ load_plugins {
 }
 web_client {
     font "monospace"
+    zellij-pane-picker
 }
  
 // Use a simplified UI without special fonts (arrow glyphs)
