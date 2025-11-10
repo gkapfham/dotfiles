@@ -190,6 +190,10 @@ alias kix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/ni
 # and also perform an upgrade of the system
 alias ukix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix --upgrade"
 
+# Run the welcome session for zellij,
+# helps to interactively pick content
+alias zp="zellij -l welcome"
+
 # }}}
 
 # Environment variables {{{
