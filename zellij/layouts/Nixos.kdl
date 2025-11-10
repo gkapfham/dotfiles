@@ -1,28 +1,30 @@
-// Nixos layout - equivalent to ~/.tmuxinator/Nixos.yml
-// Root directory: ~/configure/nixos
-
 layout {
-
-    cwd "~/configure/nixos"
-    
-    // Use compact bar at the BOTTOM (matches your config)
-    default_tab_template {
-        children
+    cwd "/home/gkapfham/configure/nixos"
+    tab name="Edit" {
+        pane name="Code" focus=true
         pane size=1 borderless=true {
             plugin location="zellij:compact-bar"
         }
     }
-
-    // Tab 1: Edit
-    tab name="Edit" {
-        pane name=" Code" focus=true
+    tab name="Process" hide_floating_panes=true {
+        pane size="50%" split_direction="vertical" {
+            pane command="lazygit" name="GitHub" size="50%" {
+                start_suspended false
+            }
+            pane name="Files" size="50%"
+        }
+        pane size="50%" split_direction="vertical" {
+            pane name="Commands" size="50%"
+            pane name="Explore" size="50%"
+        }
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
     }
-
-    // Tab 2: Control
-    // Split vertically with GitHub (lazygit) on top, Commands on bottom
-    tab name="Control" split_direction="vertical" {
-        pane name=" GitHub" command="lazygit" size="50%"
-        pane name="󰘳 Commands" size="50%"
+    new_tab_template {
+        pane cwd="/home/gkapfham/configure/dotfiles"
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
     }
-
 }
