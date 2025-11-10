@@ -8,9 +8,7 @@ layout {
     }
     tab name="Process" hide_floating_panes=true {
         pane size="50%" split_direction="vertical" {
-            pane command="lazygit" name="GitHub" size="50%" {
-                start_suspended false
-            }
+            pane name="GitHub" size="50%"
             pane name="Files" size="50%"
         }
         pane size="50%" split_direction="vertical" {
