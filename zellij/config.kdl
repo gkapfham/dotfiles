@@ -43,7 +43,8 @@ keybinds clear-defaults=true {
         bind "Ctrl g" { SwitchToMode "locked"; }
         bind "Alt p" {
             LaunchOrFocusPlugin "zellij-pane-picker" {
-                floating true; move_to_focused_tab true;
+                floating true
+                move_to_focused_tab true
             }
         }
     }
@@ -59,17 +60,18 @@ keybinds clear-defaults=true {
         bind "enter" { SwitchToMode "search"; }
     }
     renametab {
-        bind "enter" { SwitchToMode "normal"; }
         bind "esc" { UndoRenameTab; SwitchToMode "normal"; }
     }
-    renamepane {
+    shared_among "renametab" "renamepane" {
         bind "enter" { SwitchToMode "normal"; }
+    }
+    renamepane {
         bind "esc" { UndoRenamePane; SwitchToMode "normal"; }
     }
     tmux {
         bind "," { SwitchToMode "renametab"; TabNameInput 0; }
-        bind "." { SwitchToMode "renamepane"; PaneNameInput 0; }
         bind "-" { NewPane "down"; SwitchToMode "normal"; }
+        bind "." { SwitchToMode "renamepane"; PaneNameInput 0; }
         bind "1" { GoToTab 1; SwitchToMode "normal"; }
         bind "2" { GoToTab 2; SwitchToMode "normal"; }
         bind "3" { GoToTab 3; SwitchToMode "normal"; }
@@ -101,6 +103,10 @@ keybinds clear-defaults=true {
                 name "reload_config"
                 floating false
             }
+            SwitchToMode "normal"
+        }
+        bind "w" {
+            WriteChars "zellij action dump-layout > ~/.config/zellij/layouts/"
             SwitchToMode "normal"
         }
         bind "x" { CloseFocus; SwitchToMode "normal"; }
@@ -144,43 +150,43 @@ themes {
         }
         table_title {
             base 111 149 0
-            background 0
+            background 28 28 28
             emphasis_0 215 135 0
             emphasis_1 215 95 95
             emphasis_2 111 149 0
             emphasis_3 165 105 165
         }
         table_cell_selected {
-            base 178 178 178
+            base 215 135 0
             background 28 28 28
             emphasis_0 215 135 0
-            emphasis_1 215 95 95
-            emphasis_2 111 149 0
-            emphasis_3 165 105 165
+            emphasis_1 215 135 0
+            emphasis_2 215 135 0
+            emphasis_3 215 135 0
         }
         table_cell_unselected {
             base 178 178 178
             background 28 28 28
-            emphasis_0 28 28 28
-            emphasis_1 28 28 28
-            emphasis_2 28 28 28
-            emphasis_3 28 28 28
+            emphasis_0 210 210 210
+            emphasis_1 210 210 210
+            emphasis_2 210 210 210
+            emphasis_3 210 210 210
         }
         list_selected {
-            base 178 178 178
+            base 215 135 0
             background 28 28 28
-            emphasis_0 28 28 28
-            emphasis_1 28 28 28
-            emphasis_2 28 28 28
-            emphasis_3 28 28 28
+            emphasis_0 215 135 0
+            emphasis_1 215 135 0
+            emphasis_2 215 135 0
+            emphasis_3 215 135 0
         }
         list_unselected {
-            base 178 178 178
+            base 210 210 210
             background 28 28 28
-            emphasis_0 28 28 28
-            emphasis_1 28 28 28
-            emphasis_2 28 28 28
-            emphasis_3 28 28 28
+            emphasis_0 210 210 210
+            emphasis_1 210 210 210
+            emphasis_2 210 210 210
+            emphasis_3 210 210 210
         }
         frame_selected {
             base 111 149 0
@@ -235,16 +241,13 @@ plugins {
     about location="zellij:about"
     compact-bar location="zellij:compact-bar"
     configuration location="zellij:configuration"
-    filepicker location="zellij:strider" {
-        cwd "/"
-    }
     plugin-manager location="zellij:plugin-manager"
     session-manager location="zellij:session-manager"
     status-bar location="zellij:status-bar"
     strider location="zellij:strider"
     tab-bar location="zellij:tab-bar"
     welcome-screen location="zellij:session-manager" {
-        welcome_screen false 
+        welcome_screen false
     }
     zellij-pane-picker location="https://github.com/shihanng/zellij-pane-picker/releases/download/v0.6.0/zellij-pane-picker.wasm" {
         list_panes ""
@@ -257,10 +260,10 @@ plugins {
 // eg. "file:/path/to/my-plugin.wasm"
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
+    zellij-pane-picker
 }
 web_client {
     font "monospace"
-    zellij-pane-picker
 }
  
 // Use a simplified UI without special fonts (arrow glyphs)
@@ -297,7 +300,7 @@ default_layout "compact"
 // The folder in which Zellij will look for layouts
 // (Requires restart)
 // 
-// layout_dir "/tmp"
+layout_dir "/home/gkapfham/.config/zellij/layouts"
  
 // The folder in which Zellij will look for themes
 // (Requires restart)
