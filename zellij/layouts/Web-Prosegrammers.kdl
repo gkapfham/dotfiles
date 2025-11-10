@@ -23,7 +23,7 @@ layout {
         }
     }
     new_tab_template {
-        pane cwd="/home/gkapfham/configure/dotfiles"
+        pane cwd="/home/gkapfham/working/web/www.prosegrammers.com"
         pane size=1 borderless=true {
             plugin location="zellij:compact-bar"
         }
