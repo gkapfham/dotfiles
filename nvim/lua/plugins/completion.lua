@@ -267,17 +267,20 @@ return {
           },
         },
         mux = {
-          backend = "tmux",
+          backend = "zellij",
           enabled = true,
         },
         tools = {
+          opencode = {
+            cmd = { "npx", "opencode-ai@latest" },
+          },
           amp = {
             cmd = { "amp" },
           },
           toad = {
             cmd = { "toad", "acp", "npx opencode-ai@latest acp", "--project-dir", "." },
           },
-          code = {
+          priorcode = {
             cmd = { "npx", "opencode-ai@0.15.30" },
           }
         },
