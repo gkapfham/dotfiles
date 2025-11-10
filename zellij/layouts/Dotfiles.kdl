@@ -2,8 +2,11 @@ layout {
     cwd "/home/gkapfham/configure/dotfiles"
     tab name="Edit" {
         pane name="Code" focus=true
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
     }
-    tab name="Commands" hide_floating_panes=true {
+    tab name="Process" hide_floating_panes=true {
         pane size="50%" split_direction="vertical" {
             pane command="lazygit" name="GitHub" size="50%" {
                 start_suspended false
@@ -12,7 +15,7 @@ layout {
         }
         pane size="50%" split_direction="vertical" {
             pane name="Commands" size="50%"
-            pane name="Files" size="50%"
+            pane name="Explore" size="50%"
         }
         pane size=1 borderless=true {
             plugin location="zellij:compact-bar"
@@ -25,4 +28,3 @@ layout {
         }
     }
 }
-
