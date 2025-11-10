@@ -47,6 +47,11 @@ keybinds clear-defaults=true {
                 move_to_focused_tab true
             }
         }
+        // bind "Alt y" {
+        //     LaunchOrFocusPlugin "zellij-pane-picker" {
+        //         floating true; move_to_focused_tab true;
+        //     }
+        // }
     }
     shared_among "scroll" "search" {
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
@@ -242,7 +247,8 @@ plugins {
     compact-bar location="zellij:compact-bar"
     configuration location="zellij:configuration"
     plugin-manager location="zellij:plugin-manager"
-    session-manager location="zellij:session-manager"
+    session-manager location="zellij:session-manager" {
+    }
     status-bar location="zellij:status-bar"
     strider location="zellij:strider"
     tab-bar location="zellij:tab-bar"
@@ -252,6 +258,11 @@ plugins {
     room location="https://github.com/rvcas/room/releases/download/v1.2.0/room.wasm" {
     }
     zjpane location="https://github.com/FuriouZz/zjpane/releases/download/v0.2.0/zjpane.wasm" {
+    }
+    zellij-pane-picker location="https://github.com/shihanng/zellij-pane-picker/releases/download/v0.6.0/zellij-pane-picker.wasm" {
+        list_panes ""
+        plugin_select_down "Ctrl n"
+        plugin_select_up "Ctrl p"
     }
 }
 
