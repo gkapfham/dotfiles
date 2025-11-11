@@ -198,7 +198,7 @@ return {
       options = {
         left = { size = 25 },
         bottom = { size = 15 },
-        right = { size = 25 },
+        right = { size = 35 },
         top = { size = 10 },
       },
       -- Configure the bottom panel
