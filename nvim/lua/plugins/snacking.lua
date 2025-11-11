@@ -98,7 +98,8 @@ return {
           },
           explorer = {
             layout = {
-              layout = { position = "right", width = 0.25 },
+              layout = { position = "right", width = 35 },
+              -- layout = { position = "right" },
             },
             styles = {
               zindex = 1,
