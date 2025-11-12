@@ -258,7 +258,11 @@ themes {
 // changing these requires a restart to take effect
 plugins {
     about location="zellij:about"
-    compact-bar location="zellij:compact-bar"
+    // compact-bar location="zellij:compact-bar"
+    compact-bar location="zellij:compact-bar" { // replace it with these lines
+        tooltip "Ctrl h"
+    }
+    default_layout "compact"
     configuration location="zellij:configuration"
     plugin-manager location="zellij:plugin-manager"
     session-manager location="zellij:session-manager"
