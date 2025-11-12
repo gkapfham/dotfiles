@@ -189,6 +189,10 @@ bindsym Control+$mod+t exec $rofi-copy-to-clipboard
 set $rofi-insert-from-clipboard "~/.config/i3/scripts/i3-insert-from-clipboard.sh"
 bindsym Control+$mod+g exec $rofi-insert-from-clipboard
 
+# Rofi for fuzzy searching and inserting Nerd Font icons
+set $rofi-nerd-font-picker "~/.config/i3/scripts/i3-nerd-font-picker.sh"
+bindsym Control+$mod+e exec $rofi-nerd-font-picker
+
 # }}}
 
 # Float {{{
@@ -230,6 +234,18 @@ set $ws17 "17"
 set $ws18 "18"
 set $ws19 "19"
 set $ws20 "20"
+
+# 21 through 30
+set $ws21 "21"
+set $ws22 "22"
+set $ws23 "23"
+set $ws24 "24"
+set $ws25 "25"
+set $ws26 "26"
+set $ws27 "27"
+set $ws28 "28"
+set $ws29 "29"
+set $ws30 "30"
 
 # Go to the left workspace on the same monitor
 bindsym Control+$mod+h workspace prev_on_output
