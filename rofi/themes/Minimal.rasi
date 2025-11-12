@@ -13,7 +13,7 @@
     text-color:         @fg0;
 
     margin:     0;
-    padding:    0;
+    padding:    0 0 -1px 0;
     spacing:    0;
 }
 
@@ -62,7 +62,7 @@ listview {
     lines:      10;
     columns:    1;
 
-    fixed-height:   true;
+    fixed-height:   false;
     border:         1px 0 0;
     border-color:   @bg1;
 }
