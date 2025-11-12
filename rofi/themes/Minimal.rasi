@@ -5,9 +5,9 @@
     bg1:    #7E7E7E80;
     bg2:    #444444;
 
-    fg0:    #8a8a8a;
-    fg1:    #c6c6c6;
-    fg2:    #DEDEDE80;
+    fg0:    #c1c1c1;
+    fg1:    #c1c1c1;
+    fg2:    #8a8a8a;
 
     background-color:   transparent;
     text-color:         @fg0;
@@ -74,7 +74,7 @@ element {
 }
 
 element normal active {
-    text-color: @bg2;
+    text-color: @fg2;
 }
 
 element selected normal, element selected active {
