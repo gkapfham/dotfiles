@@ -125,12 +125,7 @@ keybinds clear-defaults=true {
         bind "x" { CloseFocus; SwitchToMode "normal"; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "normal"; }
         bind "|" { NewPane "right"; SwitchToMode "normal"; }
-        // bind "P" {
-        //     LaunchOrFocusPlugin "plugin-manager" {
-        //         floating true
-        //         move_to_focused_tab true
-        //     }
-        // }
+        bind "Ctrl Shift v" { WriteChars "\u001b]52;c;?\u0007"; SwitchToMode "normal"; }
     }
 }
 themes {
