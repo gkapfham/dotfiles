@@ -55,13 +55,6 @@ keybinds clear-defaults=true {
                 move_to_focused_tab true
             }
         }
-        // bind "Alt y" {
-        //     LaunchOrFocusPlugin "room" {
-        //         floating true
-        //         ignore_case true
-        //         quick_jump true
-        //     }
-        // }
     }
     shared_among "scroll" "search" {
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
