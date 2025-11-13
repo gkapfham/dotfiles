@@ -30,6 +30,8 @@ keybinds clear-defaults=true {
         bind "u" { HalfPageScrollUp; }
         bind "Ctrl u" { HalfPageScrollUp; }
         bind "y" { Copy; }
+        bind "Ctrl n" { PageScrollDown; }
+        bind "Ctrl p" { PageScrollUp; }
     }
     search {
         bind "N" { Search "up"; }
@@ -98,7 +100,8 @@ keybinds clear-defaults=true {
         bind "T" { Resize "Increase up"; }
         bind "[" { SwitchToMode "scroll"; }
         bind "Ctrl a" { Write 1; SwitchToMode "normal"; }
-        bind "b" { GoToPreviousTab; SwitchToMode "normal"; }
+        // bind "b" { GoToPreviousTab; SwitchToMode "normal"; }
+        bind "b" { WriteChars "]52;c;?"; SwitchToMode "normal"; }
         bind "c" { NewTab; SwitchToMode "normal"; }
         bind "d" { Detach; }
         bind "f" { Resize "Increase left"; }
@@ -125,7 +128,6 @@ keybinds clear-defaults=true {
         bind "x" { CloseFocus; SwitchToMode "normal"; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "normal"; }
         bind "|" { NewPane "right"; SwitchToMode "normal"; }
-        bind "Ctrl Shift v" { WriteChars "\u001b]52;c;?\u0007"; SwitchToMode "normal"; }
     }
 }
 themes {
