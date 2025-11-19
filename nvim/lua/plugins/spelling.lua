@@ -21,18 +21,18 @@ return {
       " https://stackoverflow.com/questions/5312235/how-do-i-correct-vim-spelling-mistakes-quicker
       " Note that this mapping does not seem to work for all filetypes
       inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
-      " Enable spell checking with two dictionaries
-      set spell spelllang=en_us,en_gb
-      " Disable spell checking in source code
-      au BufNewFile,BufRead,BufEnter *.c      set nospell
-      au BufNewFile,BufRead,BufEnter *.h      set nospell
-      au BufNewFile,BufRead,BufEnter *.cpp    set nospell
-      au BufNewFile,BufRead,BufEnter *.hpp    set nospell
-      au BufNewFile,BufRead,BufEnter *.java   set nospell
-      au BufNewFile,BufRead,BufEnter *.sh     set nospell
-      au BufNewFile,BufRead,BufEnter *.xml    set nospell
-      au BufNewFile,BufRead,BufEnter *.sql    set nospell
-      au BufNewFile,BufRead,BufEnter *.bib    set nospell
+      " Disable spell checking by default
+      set nospell
+      " Set the spell languages for when it is enabled
+      set spelllang=en_us,en_gb
+      " Enable spell checking for specific filetypes
+      augroup enablespell
+        autocmd!
+        autocmd FileType markdown setlocal spell
+        autocmd FileType mail setlocal spell
+        autocmd FileType yaml setlocal spell
+        autocmd FileType json setlocal spell
+      augroup END
       " Disable spell checking in quickfix
       augroup quickfixnospell
         autocmd!
