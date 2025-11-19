@@ -531,7 +531,9 @@ return {
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       -- Configure the dictionary plugin
-      vim.opt.spell = true
+      -- Note: spell is disabled by default in spelling.lua
+      -- and can be toggled on/off with <leader>ss as needed
+      -- vim.opt.spell = true
       vim.opt.spelllang = { 'en_us' }
       -- Configure all aspects of nvim-cmp
       cmp.setup({
