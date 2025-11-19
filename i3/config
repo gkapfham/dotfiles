@@ -125,7 +125,7 @@ exec --no-startup-id sct 6800
 # seems to reduce screen artifacts for Zathura windows.
 # Finally, see the separate picom configuration file
 # for more details about how this program works.
-exec --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id picom --config ~/.config/picom/picom.conf --realtime
 
 # Pointer highlighting that can be toggled
 set $highlight-pointer "highlight-pointer -c '#d78700' -p '#af5f00' -o 0 -r 25 --auto-hide-highlight --hide-highlight --show-cursor --key-toggle-highlight 'M-m'"
