@@ -77,9 +77,14 @@ fi
 # new panel that is of a higher resolution than the
 # stock panel that was available at laptop purchase.
 
+# xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal --output DP-1 --mode 1920x1200 --left-of eDP-1 --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal
+
+# --mode 3840x2400 --scale 0.76x0.76
+# --scale 0.76x0.76
+
 # Case 1: Set both mobile and external monitors
 if [ "$MOBILE_MONITOR" == true ] && [ "$EXTERNAL_MONITOR" == true ]; then
-  xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal --output DP-1 --mode 1920x1200 --left-of eDP-1 --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal
+ xrandr --output eDP-1 --primary --mode 2880x1920 --pos 400x2160 --rotate normal --output DP-2 --mode 2560x1600 --right-of eDP-1 --output DP-1 --off --output DP-2 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --mode 3840x2160 --pos 0x0 --rotate normal 
 # Case 2: Set only the mobile monitor
 elif [ "$MOBILE_MONITOR" == true ] && [ "$EXTERNAL_MONITOR" != true ]; then
   xrandr --output eDP-1 --primary --mode 2880x1920 --rotate normal --output DP-1 --mode 1920x1200 --left-of eDP-1 --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output DP-6 --off --output ${DISPLAY_PORT} --off
