@@ -1,7 +1,7 @@
 layout {
     cwd "."
     tab name="Edit" hide_floating_panes=true {
-        pane name="Code"
+        pane name="Neovim"
         pane size=1 borderless=true {
             plugin location="zellij:compact-bar"
         }
