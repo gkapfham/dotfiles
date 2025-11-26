@@ -515,6 +515,9 @@ session_serialization true
 // Default: true
 // 
 show_startup_tips false
+
+// Fix for NixOS wrapped neovim - replace unwrapped path and strip --cmd wrapper arguments
+post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | sed -E 's|/nix/store/[^/]*neovim[^/]*/bin/nvim|nvim|' | sed -E 's/ --cmd lua [^[:space:]]+//'"
  
 // Whether to show release notes on first version run
 // Default: true
