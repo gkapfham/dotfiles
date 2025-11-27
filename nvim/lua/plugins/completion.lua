@@ -361,6 +361,7 @@ return {
   -- LLMs through GitHub Copilot models
   {
     "olimorris/codecompanion.nvim",
+    tag = "v17.33.0",
     event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
