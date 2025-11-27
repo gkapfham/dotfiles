@@ -1,7 +1,7 @@
 layout {
     cwd "/home/gkapfham/configure/dotfiles"
     tab name="Edit" {
-        pane name="Code" focus=true
+        pane name="Neovim" focus=true
         pane size=1 borderless=true {
             plugin location="zellij:compact-bar"
         }
@@ -16,6 +16,15 @@ layout {
         pane size="50%" split_direction="vertical" {
             pane name="Commands" size="50%"
             pane name="Explore" size="50%"
+        }
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+    tab name="Agent" hide_floating_panes=true {
+        pane command="npm" name="OpenCode" {
+            args "exec" "opencode-ai@latest"
+            start_suspended true
         }
         pane size=1 borderless=true {
             plugin location="zellij:compact-bar"
