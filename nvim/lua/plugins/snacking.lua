@@ -240,4 +240,34 @@ return {
     end,
   },
 
+  -- snacks-bibtex.nvim
+  -- BibTeX citation picker for snacks.nvim
+  {
+    "krissen/snacks-bibtex.nvim",
+    event = "VeryLazy",
+    dependencies = { "folke/snacks.nvim" },
+    opts = {
+      depth = 5,
+      mappings = {
+        ["<C-p>"] = false,
+      },
+      context = {
+        enabled = true,
+        fallback = true,
+        inherit = true,
+        depth = 1,
+        max_files = 100,
+      },
+    },
+    keys = {
+      {
+        "<Space>tb",
+        function()
+          require("snacks-bibtex").bibtex()
+        end,
+        desc = "BibTeX citations (Snacks)",
+      },
+    },
+  },
+
 }
