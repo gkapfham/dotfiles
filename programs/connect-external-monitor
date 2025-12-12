@@ -43,14 +43,16 @@ if [ "$DISPLAY_HELP" == true ]; then
   exit 0
 fi
 
+COMMAND_NAME="connect-external-monitor"
+
 # Require at least one argument
 if [ "$EXTERNAL_MONITOR" == false ] && [ "$MOBILE_MONITOR" == false ] && [ "$RESET_MONITORS" == false ] && [ "$LIST_MONITORS" == false ] && [ "$DISPLAY_HELP" == false ]; then
   echo "󰇀 You must run this script with at least one command-line argument!"
-  echo "󰇀 Examples: $0 --external-monitor --mobile-monitor"
-  echo "            $0 --external-monitor"
-  echo "            $0 --mobile-monitor"
-  echo "            $0 --reset-monitors"
-  echo "󰇀 "
+  echo "󰇀 Examples: $COMMAND_NAME --external-monitor --mobile-monitor"
+  echo "            $COMMAND_NAME --external-monitor"
+  echo "            $COMMAND_NAME --mobile-monitor"
+  echo "            $COMMAND_NAME --reset-monitors"
+  echo "󰇀 Run '$COMMAND_NAME --help' for more information."
   exit 1
 fi
 
