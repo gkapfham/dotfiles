@@ -43,6 +43,8 @@ if [ "$DISPLAY_HELP" == true ]; then
   exit 0
 fi
 
+# Define the name of the command that is
+# being run (i.e., the name of this script)
 COMMAND_NAME="connect-external-monitor"
 
 # Require at least one argument
