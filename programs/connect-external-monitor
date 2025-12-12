@@ -43,6 +43,17 @@ if [ "$DISPLAY_HELP" == true ]; then
   exit 0
 fi
 
+# Require at least one argument
+if [ "$EXTERNAL_MONITOR" == false ] && [ "$MOBILE_MONITOR" == false ] && [ "$RESET_MONITORS" == false ] && [ "$LIST_MONITORS" == false ] && [ "$DISPLAY_HELP" == false ]; then
+  echo "󰇀 You must run this script with at least one command-line argument!"
+  echo "󰇀 Examples: $0 --external-monitor --mobile-monitor"
+  echo "            $0 --external-monitor"
+  echo "            $0 --mobile-monitor"
+  echo "            $0 --reset-monitors"
+  echo "󰇀 "
+  exit 1
+fi
+
 # Run the reset command if the --reset-monitors flag is set
 if [ "$RESET_MONITORS" == true ]; then
   xrandr -s 0
