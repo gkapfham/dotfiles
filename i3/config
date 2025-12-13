@@ -13,6 +13,13 @@ set $mod Mod1
 gaps inner 10
 gaps outer 1
 
+# Draw a small border around windows
+# by default (note that setting it it
+# 1 or 2 will ensure that the kitty terminal
+# windows take up the entire screen on a 16:10
+# Framework 13 laptop with higher resolution)
+default_border normal 4
+
 # Create and preview colors:
 # https://thomashunter.name/i3-configurator/
 # Note that the focused window is lighter than
@@ -21,8 +28,8 @@ gaps outer 1
 # Class                 border  bground text    indicator child_border
 # client.focused        #333333 #333333 #bcbcbc #333333   #333333
 client.focused          #333333 #333333 #d2d2d2 #333333   #333333
-client.focused_inactive #1c1c1c #1c1c1c #888888 #292D2E   #1C1C1C
-client.unfocused        #1c1c1c #1c1c1c #888888 #292D2E   #1C1C1C
+client.focused_inactive #1c1c1c #1c1c1c #888888 #1C1C1C   #1C1C1C
+client.unfocused        #1c1c1c #1c1c1c #888888 #1C1C1C   #1C1C1C
 client.urgent           #2F343A #333333 #bcbcbc #5F8700   #5F8700
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
@@ -32,11 +39,12 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
 # Font for window titles
 # font pango:Hack Nerd Font 10
-font pango: Maple Mono NF 9
+font pango:Hack Nerd Font 9
 
 # Add a single space to the left of all
 # window titles in the title bar (this would
-# displ)
+# ensure that the displayed title is not too
+# tight next to the slightly rounded border)
 for_window [class=".*"] title_format " %title"
 
 # Wallpaper that is a solid purple color
@@ -126,7 +134,7 @@ exec --no-startup-id xcape -e 'Control_L=Escape'
 exec --no-startup-id libinput-gestures
 
 # Control the temperature of the screen(s)
-exec --no-startup-id sct 6800
+exec --no-startup-id sct 6900
 
 # Run picom to provide compositing, which especially
 # seems to reduce screen artifacts for Zathura windows.
@@ -136,7 +144,7 @@ exec --no-startup-id picom --config ~/.config/picom/picom.conf --realtime
 
 # Perform automatic window tiling with a limit of four windows
 # (this makes windows go horizontal and then vertical and so on)
-exec --no-startup-id autotiling --limit 4
+exec_always --no-startup-id autotiling --limit 4
 
 # Pointer highlighting that can be toggled
 set $highlight-pointer "highlight-pointer -c '#d78700' -p '#af5f00' -o 0 -r 25 --auto-hide-highlight --hide-highlight --show-cursor --key-toggle-highlight 'M-m'"
