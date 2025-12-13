@@ -40,12 +40,17 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 # Font for window titles
 # font pango:Hack Nerd Font 10
 font pango:Hack Nerd Font 9
+# font pango: Maple Mono NF 8
 
 # Add a single space to the left of all
 # window titles in the title bar (this would
 # ensure that the displayed title is not too
 # tight next to the slightly rounded border)
 for_window [class=".*"] title_format " %title"
+
+# For kitty windows running Zellij, show static "zellij" title
+# Match on the pipe character that Zellij uses in its titles (e.g., "session | pane")
+# for_window [class="kitty" title="\|"] title_format " zellij"
 
 # Wallpaper that is a solid purple color
 # exec_always --no-startup-id hsetroot -solid "#875f87"
