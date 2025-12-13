@@ -1,4 +1,4 @@
-live_config_reload = true
+# live_config_reload = true
 
 [window]
 startup_mode = "Maximized"
@@ -41,10 +41,10 @@ unfocused_hollow = true
 TERM = "xterm-256color"
 
 [font]
-size = 11.0
+size = 12.0
 
 [font.normal]
-family = "Hack Nerd Font"
+family = "Maple Mono NF"
 style = "Regular"
 
 [scrolling]
