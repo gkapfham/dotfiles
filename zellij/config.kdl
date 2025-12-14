@@ -100,10 +100,14 @@ keybinds clear-defaults=true {
         bind "f" { Resize "Increase left"; }
         bind "g" { Resize "Increase right"; }
         bind "h" { MoveFocus "left"; SwitchToMode "normal"; }
+        bind "H" { MovePane "left"; SwitchToMode "normal"; }
         bind "i" { TogglePaneFrames; SwitchToMode "normal"; }
         bind "j" { MoveFocus "down"; SwitchToMode "normal"; }
+        bind "J" { MovePane "down"; SwitchToMode "normal"; }
         bind "k" { MoveFocus "up"; SwitchToMode "normal"; }
+        bind "K" { MovePane "up"; SwitchToMode "normal"; }
         bind "l" { MoveFocus "right"; SwitchToMode "normal"; }
+        bind "L" { MovePane "right"; SwitchToMode "normal"; }
         bind "n" { GoToNextTab; SwitchToMode "normal"; }
         bind "o" { FocusNextPane; SwitchToMode "normal"; }
         bind "p" { GoToPreviousTab; SwitchToMode "normal"; }
