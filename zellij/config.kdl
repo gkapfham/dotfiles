@@ -356,15 +356,14 @@ plugins {
         command_user_rendermode "static"
         datetime          "{format}"
         datetime_format   "%Y-%m-%d 󰅐 %H:%M"
-        datetime_timezone "Europe/Stockholm"
+        datetime_timezone "America/New_York"
     }
 }
 
 // Plugins to load in the background when a new session starts
-// eg. "file:/path/to/my-plugin.wasm"
-// eg. "https://example.com/my-plugin.wasm"
 load_plugins {
     zellij-pane-picker
+    zjstatus
 }
 web_client {
     font "monospace"
