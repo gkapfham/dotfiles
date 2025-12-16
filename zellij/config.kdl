@@ -261,8 +261,7 @@ ui {
 // changing these requires a restart to take effect
 plugins {
     about location="zellij:about"
-    // compact-bar location="zellij:compact-bar"
-    compact-bar location="zellij:compact-bar" { // replace it with these lines
+    compact-bar location="zellij:compact-bar" {
         tooltip "Ctrl h"
     }
     default_layout "compact"
@@ -275,8 +274,6 @@ plugins {
     welcome-screen location="zellij:session-manager" {
         welcome_screen false
     }
-    // room location="https://github.com/rvcas/room/releases/download/v1.2.0/room.wasm" {
-    // }
     zjpane location="https://github.com/FuriouZz/zjpane/releases/download/v0.2.0/zjpane.wasm" {
     }
     zellij-pane-picker location="https://github.com/shihanng/zellij-pane-picker/releases/download/v0.6.0/zellij-pane-picker.wasm" {
