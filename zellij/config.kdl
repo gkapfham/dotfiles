@@ -100,6 +100,8 @@ keybinds clear-defaults=true {
         bind "9" { GoToTab 9; SwitchToMode "normal"; }
         bind "B" { Resize "Increase down"; }
         bind "T" { Resize "Increase up"; }
+        bind "F" { Resize "Increase left"; }
+        bind "G" { Resize "Increase right"; }
         bind "[" { SwitchToMode "scroll"; }
         bind "Ctrl a" { Write 1; SwitchToMode "normal"; }
         // bind "b" { GoToPreviousTab; SwitchToMode "normal"; }
@@ -137,8 +139,8 @@ keybinds clear-defaults=true {
                 "new tab" "Ctrl a c"
                 "detach session" "Ctrl a d"
                 "keybinding help" "Ctrl a f"
-                "resize pane left" "Ctrl a f"
-                "resize pane right" "Ctrl a g"
+                "resize pane left" "Ctrl a F"
+                "resize pane right" "Ctrl a G"
                 "move focus left" "Ctrl a h"
                 "move pane left" "Ctrl a H"
                 "toggle pane frames" "Ctrl a i"
@@ -178,7 +180,6 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
-        bind "g" { Resize "Increase right"; }
         bind "h" { MoveFocus "left"; SwitchToMode "normal"; }
         bind "H" { MovePane "left"; SwitchToMode "normal"; }
         bind "i" { TogglePaneFrames; SwitchToMode "normal"; }
