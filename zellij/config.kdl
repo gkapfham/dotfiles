@@ -104,82 +104,9 @@ keybinds clear-defaults=true {
         bind "G" { Resize "Increase right"; }
         bind "[" { SwitchToMode "scroll"; }
         bind "Ctrl a" { Write 1; SwitchToMode "normal"; }
-        // bind "b" { GoToPreviousTab; SwitchToMode "normal"; }
         bind "b" { WriteChars "]52;c;?"; SwitchToMode "normal"; }
         bind "c" { NewTab; SwitchToMode "normal"; }
         bind "d" { Detach; }
-        bind "f" {
-            LaunchOrFocusPlugin "https://github.com/karimould/zellij-forgot/releases/download/0.4.2/zellij_forgot.wasm" {
-                "LOAD_ZELLIJ_BINDINGS" "false"
-                // Normal mode bindings
-                "enter tmux mode" "Ctrl a"
-                "edit scrollback" "Ctrl e"
-                "move focus left" "Alt h"
-                "move focus down" "Alt j"
-                "move focus up" "Alt k"
-                "move focus right" "Alt l"
-                "new pane" "Alt n"
-                "quit zellij" "Ctrl q"
-                // Locked mode
-                "unlock" "Ctrl g"
-                "lock" "Ctrl g"
-                // Session manager
-                "session manager" "Alt p"
-                "pathfinder" "Alt y"
-                // Tmux mode bindings
-                "rename tab" "Ctrl a , (comma)"
-                "split pane down" "Ctrl a -"
-                "rename pane" "Ctrl a . (period)"
-                "go to tab 1-9" "Ctrl a 1-9"
-                "resize pane down" "Ctrl a B"
-                "resize pane up" "Ctrl a T"
-                "enter scroll mode" "Ctrl a ["
-                "send Ctrl a" "Ctrl a Ctrl a"
-                "clipboard copy" "Ctrl a b"
-                "new tab" "Ctrl a c"
-                "detach session" "Ctrl a d"
-                "keybinding help" "Ctrl a f"
-                "resize pane left" "Ctrl a F"
-                "resize pane right" "Ctrl a G"
-                "move focus left" "Ctrl a h"
-                "move pane left" "Ctrl a H"
-                "toggle pane frames" "Ctrl a i"
-                "move focus down" "Ctrl a j"
-                "move pane down" "Ctrl a J"
-                "move focus up" "Ctrl a k"
-                "move pane up" "Ctrl a K"
-                "move focus right" "Ctrl a l"
-                "move pane right" "Ctrl a L"
-                "next tab" "Ctrl a n"
-                "focus next pane" "Ctrl a o"
-                "previous tab" "Ctrl a p"
-                "reload config" "Ctrl a r"
-                "dump layout" "Ctrl a w"
-                "close pane/tab" "Ctrl a x"
-                "toggle fullscreen" "Ctrl a z"
-                "split pane right" "Ctrl a |"
-                // Scroll mode bindings
-                "page down" "PageDown / Ctrl f / Ctrl n / l"
-                "page up" "PageUp / Ctrl b / Ctrl p / h"
-                "search" "/ or s"
-                "half page down" "d / Ctrl d"
-                "edit scrollback" "e"
-                "scroll down" "j"
-                "scroll up" "k"
-                "quit scroll mode" "q / esc"
-                "half page up" "u / Ctrl u"
-                "copy selection" "y"
-                // Search mode bindings
-                "search up" "N"
-                "toggle case sensitivity" "c"
-                "search down" "n"
-                "toggle whole word" "o"
-                "toggle wrap" "w"
-                "exit search" "esc"
-                floating true
-            }
-            SwitchToMode "normal"
-        }
         bind "h" { MoveFocus "left"; SwitchToMode "normal"; }
         bind "H" { MovePane "left"; SwitchToMode "normal"; }
         bind "i" { TogglePaneFrames; SwitchToMode "normal"; }
