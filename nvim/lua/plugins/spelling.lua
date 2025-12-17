@@ -29,7 +29,12 @@ return {
       augroup enablespell
         autocmd!
         autocmd FileType markdown setlocal spell
+        autocmd FileType quarto setlocal spell
         autocmd FileType mail setlocal spell
+        autocmd FileType text setlocal spell
+        autocmd FileType tex setlocal spell
+        autocmd FileType latex setlocal spell
+        autocmd FileType plaintex setlocal spell
         autocmd FileType yaml setlocal spell
         autocmd FileType json setlocal spell
       augroup END
