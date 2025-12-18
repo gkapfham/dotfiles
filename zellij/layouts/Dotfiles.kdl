@@ -3,7 +3,7 @@ layout {
     tab name="Edit" {
         pane name="Neovim" focus=true
         pane size=1 borderless=true {
-            plugin location="zellij:compact-bar"
+            plugin location="zjstatus"
         }
     }
     tab name="Process" hide_floating_panes=true {
@@ -18,7 +18,7 @@ layout {
             pane name="Explore" size="50%"
         }
         pane size=1 borderless=true {
-            plugin location="zellij:compact-bar"
+            plugin location="zjstatus"
         }
     }
     tab name="Agent" hide_floating_panes=true {
@@ -27,13 +27,13 @@ layout {
             start_suspended true
         }
         pane size=1 borderless=true {
-            plugin location="zellij:compact-bar"
+            plugin location="zjstatus"
         }
     }
     new_tab_template {
         pane cwd="/home/gkapfham/configure/dotfiles"
         pane size=1 borderless=true {
-            plugin location="zellij:compact-bar"
+            plugin location="zjstatus"
         }
     }
 }
