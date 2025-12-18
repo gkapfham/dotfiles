@@ -98,10 +98,10 @@ keybinds clear-defaults=true {
         bind "7" { GoToTab 7; SwitchToMode "normal"; }
         bind "8" { GoToTab 8; SwitchToMode "normal"; }
         bind "9" { GoToTab 9; SwitchToMode "normal"; }
-        bind "B" { Resize "Increase down"; }
-        bind "T" { Resize "Increase up"; }
         bind "F" { Resize "Increase left"; }
         bind "G" { Resize "Increase right"; }
+        bind "B" { Resize "Increase down"; }
+        bind "T" { Resize "Increase up"; }
         bind "[" { SwitchToMode "scroll"; }
         bind "Ctrl a" { Write 1; SwitchToMode "normal"; }
         bind "b" { WriteChars "]52;c;?"; SwitchToMode "normal"; }
