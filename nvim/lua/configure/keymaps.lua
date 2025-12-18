@@ -29,7 +29,7 @@ vim.keymap.set("n", "<Space>qq", "<cmd>qa!<cr>", { desc = "Custom keymap: Quit a
 
 -- }}}
 
--- Use vim.cmd
+-- Spelling key mappings {{{
 
 vim.cmd([[
 " Remove trailing blank spaces
@@ -42,3 +42,5 @@ vmap <silent> zp <Plug>(SpellRotateBackwardV)
 " Toggle the display of spelling mistakes
 nmap <leader>ss :set spell!<CR>
 ]])
+
+-- }}}
