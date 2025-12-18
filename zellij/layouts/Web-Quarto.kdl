@@ -3,7 +3,7 @@ layout {
     tab name="Edit" hide_floating_panes=true {
         pane name="Neovim"
         pane size=1 borderless=true {
-            plugin location="zellij:compact-bar"
+            plugin location="zjstatus"
         }
     }
     tab name="Process" focus=true hide_floating_panes=true {
@@ -19,13 +19,13 @@ layout {
             pane name="Explore" size="50%"
         }
         pane size=1 borderless=true {
-            plugin location="zellij:compact-bar"
+            plugin location="zjstatus"
         }
     }
     new_tab_template {
         pane cwd="."
         pane size=1 borderless=true {
-            plugin location="zellij:compact-bar"
+            plugin location="zjstatus"
         }
     }
 }
