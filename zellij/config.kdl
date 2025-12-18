@@ -337,7 +337,7 @@ plugins {
         tab_floating_indicator   ""
         notification_format_unread "#[bg=$orange,fg=$bg] 󰎜 {message} #[bg=$bg,fg=$orange]"
         notification_format_no_notifications ""
-        notification_show_interval "10"
+        notification_show_interval "20"
         datetime          "{format}"
         datetime_format   "%Y-%m-%d"
         datetime_timezone "America/New_York"
