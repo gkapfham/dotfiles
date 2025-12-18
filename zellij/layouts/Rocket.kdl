@@ -1,11 +1,11 @@
 layout {
-    tab name="Edit" {
+    tab name="Editor" {
         pane name="Neovim" focus=true
         pane size=1 borderless=true {
             plugin location="zjstatus"
         }
     }
-    tab name="Process" hide_floating_panes=true {
+    tab name="Processor" hide_floating_panes=true {
         pane size="50%" split_direction="vertical" {
             pane command="lazygit" name="GitHub" size="50%" {
                 start_suspended false
