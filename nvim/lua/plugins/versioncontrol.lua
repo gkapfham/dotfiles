@@ -47,6 +47,20 @@ return {
       "nvim-lua/plenary.nvim",
     },
     cmd = { "DiffviewOpen", "DiffviewLog" },
+    config = function()
+      require("diffview").setup {
+      use_icons = true,
+      icons = {
+        folder_closed = "",
+        folder_open = "",
+      },
+      view = {
+        default = {
+          layout = "diff2_vertical",
+        },
+      },
+      }
+    end,
   },
 
   -- git-conflict.nvim for resolving merge conflicts
