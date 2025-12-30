@@ -71,6 +71,7 @@ local kind_icons = {
   MarkupHeading4 = "",
   MarkupHeading5 = "",
   MarkupLink = "󰌷",
+  MarkupLinkLabel = "󰌷",
   MarkupList = "",
   MarkupRawBlock = "󰒔",
   MarkupStrong = "",
