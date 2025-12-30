@@ -362,3 +362,6 @@ en.utf-8.add.spl
 
 # Agents
 agent.jsonl
+
+# Backup files
+.bak*
