@@ -35,6 +35,7 @@ return {
         autocmd FileType tex setlocal spell
         autocmd FileType latex setlocal spell
         autocmd FileType plaintex setlocal spell
+        autocmd FileType gitcommit setlocal spell
         autocmd FileType yaml setlocal spell
         autocmd FileType json setlocal spell
       augroup END
