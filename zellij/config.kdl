@@ -335,7 +335,7 @@ plugins {
         tab_sync_indicator       ""
         tab_fullscreen_indicator ""
         tab_floating_indicator   ""
-        notification_format_unread "#[bg=$orange,fg=$bg] 󰎜 {message}#[bg=$bg,fg=$orange]"
+        notification_format_unread "#[bg=$orange,fg=$bg] 󰎜 {message}#[bg=$bg,fg=$orange] "
         notification_format_no_notifications ""
         notification_show_interval "20"
         datetime          "{format}"
@@ -346,7 +346,6 @@ plugins {
 
 // Plugins to load in the background when a new session starts
 load_plugins {
-    zellij-pane-picker
     zjstatus
 }
 web_client {
