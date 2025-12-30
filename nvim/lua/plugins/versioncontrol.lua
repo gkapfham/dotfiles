@@ -7,7 +7,7 @@ local is_git_ignored = function(filepath)
   return vim.v.shell_error == 0
 end
 
-local update_left_pane = function()
+local update_diffview_file_tree = function()
   pcall(function()
     local lib = require 'diffview.lib'
     local view = lib.get_current_view()
@@ -23,12 +23,12 @@ require('configure.directorywatcher').registerOnChangeHandler('diffview', functi
   local is_in_dot_git_dir = filepath:match '/%.git/' or filepath:match '^%.git/'
 
   if is_in_dot_git_dir or not is_git_ignored(filepath) then
-    update_left_pane()
+    update_diffview_file_tree()
   end
 end)
 
 vim.api.nvim_create_autocmd('FocusGained', {
-  callback = update_left_pane,
+  callback = update_diffview_file_tree,
 })
 
 vim.api.nvim_create_autocmd('User', {
@@ -93,23 +93,12 @@ return {
           folder_closed = "",
           folder_open = "",
         },
-        watch_index = true,
+        watch_index = true, -- Update views when the git index changes
         view = {
           default = {
             layout = "diff2_vertical",
           },
         },
-        keymaps = {
-          view = {
-            { 'n', 'q', '<cmd>DiffviewClose<cr>', { desc = 'Close diffview' } },
-          },
-          file_panel = {
-            { 'n', 'q', '<cmd>DiffviewClose<cr>', { desc = 'Close diffview' } },
-          },
-          file_history_panel = {
-            { 'n', 'q', '<cmd>DiffviewClose<cr>', { desc = 'Close diffview' } },
-          },
-        }
       }
     end,
   },
