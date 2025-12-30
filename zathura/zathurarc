@@ -1,4 +1,5 @@
-set font "Hack Nerd Font 12"
+# set font "Hack Nerd Font 12"
+set font "Maple Mono NF"
 
 set database "sqlite"
 
@@ -8,7 +9,8 @@ set selection-clipboard clipboard
 set default-bg "#1C1C1C"
 
 set highlight-active-color "#949494"
-set highlight-color "#D0D0D0"
+# set highlight-color "#D0D0D0"
+set highlight-color "#d2d2d2"
 
 set synctex true
 set synctex-editor-command "nvr --remote +"%line" "%file""
