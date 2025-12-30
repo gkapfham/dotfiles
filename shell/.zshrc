@@ -771,6 +771,12 @@ zvm_after_init_commands+=('bindkey "^\eg" _fun_widget')
 
 # }}}
 
+# Worktrees with worktrunk {{{
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
+# }}}
+
 # Benchmarking {{{
 
 # Uncomment to enable
