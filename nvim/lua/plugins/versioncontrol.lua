@@ -180,7 +180,6 @@ return {
         update_debounce = 100,
         status_formatter = nil,
       }
-      
       -- Safely refresh gitsigns to reload display from git status
       local function force_gitsigns_refresh()
         pcall(function()
@@ -189,10 +188,8 @@ return {
           gitsigns.refresh()
         end)
       end
-      
       -- Create an autocommand group for gitsigns refresh events
       local refresh_group = vim.api.nvim_create_augroup("GitSignsRefresh", { clear = true })
-      
       -- When commit message buffer is closed, the commit is complete
       vim.api.nvim_create_autocmd({"BufDelete", "BufUnload"}, {
         group = refresh_group,
@@ -205,7 +202,6 @@ return {
           vim.defer_fn(force_gitsigns_refresh, 600)
         end,
       })
-      
       -- After any shell command completes (catches :!git, :Git, etc.)
       vim.api.nvim_create_autocmd("ShellCmdPost", {
         group = refresh_group,
@@ -213,7 +209,6 @@ return {
           vim.defer_fn(force_gitsigns_refresh, 200)
         end,
       })
-      
       -- When focus returns to neovim (for external git commands)
       vim.api.nvim_create_autocmd("FocusGained", {
         group = refresh_group,
