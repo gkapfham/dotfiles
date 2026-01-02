@@ -112,8 +112,6 @@ return {
   },
 
   -- gitsigns.nvim for showing git diffs in the sign column
-  -- note that this plugin is prone to not having the signs
-  -- disappear immediately after the commit happens in nvim
   {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
@@ -169,20 +167,60 @@ return {
         linehl = false,
         watch_gitdir = {
           follow_files = true,
-          interval = 10
+          -- Check for git directory changes every 1 second
+          interval = 1000,
         },
-        -- diff_opts = {
-        --   internal = true
-        -- },
         preview_config = {
           border = "rounded"
         },
         attach_to_untracked = false,
         current_line_blame = false,
         sign_priority = 1,
-        update_debounce = 50,
+        -- Reduce debounce for faster updates
+        update_debounce = 100,
         status_formatter = nil,
       }
+      
+      -- Safely refresh gitsigns to reload display from git status
+      local function force_gitsigns_refresh()
+        pcall(function()
+          local gitsigns = require('gitsigns')
+          -- Only refresh - this is read-only and safe
+          gitsigns.refresh()
+        end)
+      end
+      
+      -- Create an autocommand group for gitsigns refresh events
+      local refresh_group = vim.api.nvim_create_augroup("GitSignsRefresh", { clear = true })
+      
+      -- When commit message buffer is closed, the commit is complete
+      vim.api.nvim_create_autocmd({"BufDelete", "BufUnload"}, {
+        group = refresh_group,
+        pattern = {"COMMIT_EDITMSG", "*COMMIT_EDITMSG", "*/COMMIT_EDITMSG"},
+        callback = function()
+          -- Use multiple delayed refreshes to ensure we catch the commit
+          -- The commit might take a moment to write to .git/index
+          vim.defer_fn(force_gitsigns_refresh, 100)
+          vim.defer_fn(force_gitsigns_refresh, 300)
+          vim.defer_fn(force_gitsigns_refresh, 600)
+        end,
+      })
+      
+      -- After any shell command completes (catches :!git, :Git, etc.)
+      vim.api.nvim_create_autocmd("ShellCmdPost", {
+        group = refresh_group,
+        callback = function()
+          vim.defer_fn(force_gitsigns_refresh, 200)
+        end,
+      })
+      
+      -- When focus returns to neovim (for external git commands)
+      vim.api.nvim_create_autocmd("FocusGained", {
+        group = refresh_group,
+        callback = function()
+          vim.defer_fn(force_gitsigns_refresh, 100)
+        end,
+      })
     end,
   },
 
