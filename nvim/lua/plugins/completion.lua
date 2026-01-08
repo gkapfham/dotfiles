@@ -726,7 +726,6 @@ return {
           { name = "luasnip", max_item_count = 5, priority = 5 },
           { name = "otter", max_item_count = 5, priority = 5, keyword_length = 2 },
           { name = "pandoc_references", max_item_count = 5, priority = 5, keyword_length = 2 },
-          -- { name = 'tmux',              max_item_count = 5, priority = 1, keyword_length = 2 },
           {
             name = "spell",
             option = {
