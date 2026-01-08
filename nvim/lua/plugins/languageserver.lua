@@ -10,7 +10,7 @@ return {
     event = "BufReadPost",
     config = function()
       require("neodev").setup()
-    end
+    end,
   },
 
   -- nvim-lspconfig for LSP management
@@ -23,13 +23,12 @@ return {
       "nvimtools/none-ls.nvim",
     },
     config = function()
-      -- local lspconfig = require('lspconfig')
       -- draw the border for the LSP floating window; since the
       -- window used for commands like :LSPInfo is driven by the
       -- NormalFloat which is now set to dark to make the GitHub
       -- Copilot chat look as nice as possible there is a need
       -- to make the border visible so that these menus are okay
-      require('lspconfig.ui.windows').default_options.border = 'single'
+      require("lspconfig.ui.windows").default_options.border = "single"
       -- draw the border for the LSP floating window that displays
       -- when requesting the documentation for source code; note
       -- that by default when you use <space>k it will display information
@@ -55,50 +54,50 @@ return {
       -- configure cssls for CSS LSP
       local css_capabilities = vim.lsp.protocol.make_client_capabilities()
       css_capabilities.textDocument.completion.completionItem.snippetSupport = true
-      vim.lsp.config('cssls', {
+      vim.lsp.config("cssls", {
         capabilities = css_capabilities,
       })
-      vim.lsp.enable('cssls')
+      vim.lsp.enable("cssls")
       -- configure html_ls for HTML
       local html_capabilities = vim.lsp.protocol.make_client_capabilities()
       html_capabilities.textDocument.completion.completionItem.snippetSupport = true
-      vim.lsp.config('html', {
+      vim.lsp.config("html", {
         capabilities = html_capabilities,
-        filetypes = { 'markdown', 'quarto', 'html' },
+        filetypes = { "markdown", "quarto", "html" },
       })
-      vim.lsp.enable('html')
+      vim.lsp.enable("html")
       -- configure htmx for HTML LSP
-      vim.lsp.enable('htmx')
+      vim.lsp.enable("htmx")
       -- configure gopls for Go LSP
-      vim.lsp.enable('gopls')
+      vim.lsp.enable("gopls")
       -- configure luals (with neovim support) for Lua LSP
-      vim.lsp.config('lua_ls', {
+      vim.lsp.config("lua_ls", {
         settings = {
           Lua = {
             completion = {
-              callSnippet = "Replace"
-            }
-          }
-        }
+              callSnippet = "Replace",
+            },
+          },
+        },
       })
-      vim.lsp.enable('lua_ls')
+      vim.lsp.enable("lua_ls")
       -- configure marksman for Markdown LSP
-      vim.lsp.config('marksman', {
-        filetypes = { 'markdown', 'quarto' },
+      vim.lsp.config("marksman", {
+        filetypes = { "markdown", "quarto" },
       })
-      vim.lsp.enable('marksman')
+      vim.lsp.enable("marksman")
       -- configure pyright for Python LSPs
-      vim.lsp.enable('pyright')
+      vim.lsp.enable("pyright")
       -- configure pyrefly for Python LSP
-      -- vim.lsp.enable('pyrefly')
+      vim.lsp.enable("pyrefly")
       -- configure ruff for Python LSP
-      vim.lsp.enable('ruff')
+      vim.lsp.enable("ruff")
       -- configure ty for Python LSP
-      vim.lsp.enable('ty')
+      vim.lsp.enable("ty")
       -- configure zuban for Python LSP
-      vim.lsp.enable('zuban')
+      vim.lsp.enable("zuban")
       -- configure texlab for LaTeX and BibTeX LSP
-      vim.lsp.config('texlab', {
+      vim.lsp.config("texlab", {
         settings = {
           texlab = {
             auxDirectory = ".",
@@ -107,11 +106,11 @@ return {
               args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "%f" },
               executable = "latexmk",
               forwardSearchAfter = false,
-              onSave = false
+              onSave = false,
             },
             chktex = {
               onEdit = false,
-              onOpenAndSave = false
+              onOpenAndSave = false,
             },
             diagnosticsDelay = 300,
             formatterLineLength = 0,
@@ -122,15 +121,15 @@ return {
             },
             latexFormatter = "latexindent",
             latexindent = {
-              modifyLineBreaks = false
-            }
+              modifyLineBreaks = false,
+            },
           },
-        }
+        },
       })
-      vim.lsp.enable('texlab')
+      vim.lsp.enable("texlab")
       -- configure harper_ls for writing
-      vim.lsp.config('harper_ls', {
-        filetypes = { "mail", "markdown", "quarto", "text", },
+      vim.lsp.config("harper_ls", {
+        filetypes = { "mail", "markdown", "quarto", "text" },
         settings = {
           ["harper-ls"] = {
             userDictPath = "~/.config/nvim/spell/en.utf-8.add",
@@ -147,24 +146,24 @@ return {
               matcher = true,
               correct_number_suffix = true,
               number_suffix_capitalization = true,
-            }
-          }
+            },
+          },
         },
       })
-      vim.lsp.enable('harper_ls')
+      vim.lsp.enable("harper_ls")
       -- configure yamlls for YAML LSP
-      vim.lsp.enable('yamlls')
+      vim.lsp.enable("yamlls")
       -- configure jsonls for YAML LSP
-      vim.lsp.enable('jsonls')
+      vim.lsp.enable("jsonls")
       -- configure nil_ls for Nix LSP
-      vim.lsp.enable('nil_ls')
+      vim.lsp.enable("nil_ls")
       -- configure rust_analzer for Rust LSP
-      vim.lsp.config('rust_analyzer', {
+      vim.lsp.config("rust_analyzer", {
         settings = {
-          ['rust-analyzer'] = {
+          ["rust-analyzer"] = {
             assist = {
-              importGranularity = 'module',
-              importPrefix = 'self',
+              importGranularity = "module",
+              importPrefix = "self",
             },
             diagnostics = {
               enable = true,
@@ -181,8 +180,8 @@ return {
               parameterHints = true,
               typeHints = true,
             },
-          }
-        }
+          },
+        },
       })
       -- configure copilot for Copilot LSP
       -- vim.lsp.config('copilot', {
@@ -195,14 +194,14 @@ return {
       -- Configure other aspects of the language servers
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
       -- to support the display of the diagnostics
-      require 'toggle_lsp_diagnostics'.init({ start_on = true, virtual_text = false })
+      require("toggle_lsp_diagnostics").init({ start_on = true, virtual_text = false })
       -- Define customized signs for diagnostics reported by the language server;
       -- note that this will define the signs displayed in the gutter
       local internal_signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
       -- Configure the display of diagnostics, especially to confirm
       -- that there is a rounded border around the diagnostic box
       -- that appears when you go to a line with a diagnostic
-      vim.diagnostic.config {
+      vim.diagnostic.config({
         -- signs = true,
         underline = true,
         virtual_text = false,
@@ -210,7 +209,7 @@ return {
         update_in_insert = true,
         float = {
           header = false,
-          border = 'rounded',
+          border = "rounded",
           focusable = true,
         },
         signs = {
@@ -221,65 +220,93 @@ return {
             [vim.diagnostic.severity.HINT] = internal_signs.Hint,
           },
         },
-      }
+      })
     end,
     -- Keys
     keys = {
       {
         "<Space>sv",
         "<Plug>(toggle-lsp-diag-vtext)",
-        desc =
-        "Language Server: Toggle virtual text"
+        desc = "Language Server: Toggle virtual text",
       },
       {
         "<Space>e",
         "<cmd> lua vim.diagnostic.open_float(0, {scope='line', border='rounded'})<CR>",
-        desc =
-        "Language Server: Display diagnostics"
+        desc = "Language Server: Display diagnostics",
       },
       {
         "<Space>k",
         "<cmd> lua vim.lsp.buf.hover()<CR>",
-        desc =
-        "Language Server: Symbol details"
+        desc = "Language Server: Symbol details",
       },
       {
         "<Space>ca",
         "<cmd>lua vim.lsp.buf.code_action()<CR>",
-        desc =
-        "Language Server: Perform code action"
+        desc = "Language Server: Perform code action",
       },
       {
         "<Space>rv",
         "<cmd> lua vim.lsp.buf.rename()<CR>",
-        desc =
-        "Language Server: Rename variable"
+        desc = "Language Server: Rename variable",
       },
-      { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
-    }
+      --[[       { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" }, ]]
+    },
   },
 
-  -- none-ls.nvim for LSP enhancement
-  -- through the use of tools that are not
-  -- language servers themselves but can
-  -- be made to look like one with the
-  -- support of this plugin
+  -- conform.nvim for formatting files
+  -- as a replacement for tools like null-ls.nvim
   {
-    "nvimtools/none-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      -- Configure null-ls for diagnostics and formatting
-      local null_ls = require("null-ls")
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.formatting.prettierd,
-        },
-      })
-    end,
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
     keys = {
-      -- Perform a format of the content in the buffer
-      { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" },
-    }
+      {
+        "<Space>ff",
+        function()
+          require("conform").format({ async = true })
+        end,
+        mode = "",
+        desc = "Format buffer with conform",
+      },
+    },
+    opts = {
+      -- define formatters
+      formatters_by_ft = {
+        lua = { "stylua" },
+        python = { "ruff" },
+        markdown = { "mdformat" },
+        javascript = { "prettierd" },
+      },
+      -- set default options
+      default_format_opts = {
+        lsp_format = "fallback",
+      },
+      -- set up format-on-save
+      format_on_save = { timeout_ms = 500 },
+      -- customize formatters
+      formatters = {
+        shfmt = {
+          append_args = { "-i", "2" },
+        },
+        stylua = {
+          inherit = false,
+          command = "stylua",
+          args = {
+            "--search-parent-directories",
+            "--indent-type",
+            "Spaces",
+            "--indent-width",
+            "2",
+            "--stdin-filepath",
+            "$FILENAME",
+            "-",
+          },
+        },
+      },
+    },
+    init = function()
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    end,
   },
 
   -- symbol-usage.nvim displays symbol usage information in virtual text;
@@ -287,7 +314,7 @@ return {
   -- and the most configurable and lead to the least amount of on-screen
   -- jumping when the source code and/or the references change
   {
-    'Wansmer/symbol-usage.nvim',
+    "Wansmer/symbol-usage.nvim",
     event = "LspAttach",
     config = function()
       local SymbolKind = vim.lsp.protocol.SymbolKind
@@ -328,6 +355,9 @@ return {
         return res
       end
       require("symbol-usage").setup({
+        disable = {
+          lsp = { "pyrefly", "pyright", "ty" },
+        },
         kinds = {
           SymbolKind.Function,
           SymbolKind.Method,
@@ -351,8 +381,11 @@ return {
     end,
     keys = {
       -- Toggle symbols usage
-      { "<Space>sd", "<cmd> lua require('symbol-usage').toggle() <CR>", desc = "Language Server: Disable symbols usage" },
-    }
+      {
+        "<Space>sd",
+        "<cmd> lua require('symbol-usage').toggle() <CR>",
+        desc = "Language Server: Disable symbols usage",
+      },
+    },
   },
-
 }
