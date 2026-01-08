@@ -1,6 +1,8 @@
 -- File: plugins/completion.lua
 -- Purpose: Configure the nvim-cmp plugin
 -- and all of the plugins that enhance it
+-- with additional completion sources
+-- (e.g., Supermaven, Minuet, Copilot, etc.)
 
 -- Supporting variables and functions implemented in lua {{{
 
@@ -150,25 +152,25 @@ return {
     end,
   },
 
-  -- -- supermaven-nvim
-  -- -- Use the Supermaven completion engine;
-  -- -- note that it provides built-int support
-  -- -- for nvim-cmp and thus it is easy to integrate
-  -- -- into this setup. Using free tier for now.
-  -- {
-  --   "supermaven-inc/supermaven-nvim",
-  --   event = "InsertEnter",
-  --   config = function()
-  --     require("supermaven-nvim").setup({
-  --       -- Disable the default keymaps and settings
-  --       -- that would normally make virtual text appear;
-  --       -- not using those since Supermaven integrates
-  --       -- with nvim-cmp and that is primary approach
-  --       disable_inline_completion = true,
-  --       disable_keymaps = true
-  --     })
-  --   end,
-  -- },
+  -- supermaven-nvim
+  -- Use the Supermaven completion engine;
+  -- note that it provides built-int support
+  -- for nvim-cmp and thus it is easy to integrate
+  -- into this setup. Using free tier for now.
+  {
+    "supermaven-inc/supermaven-nvim",
+    event = "InsertEnter",
+    config = function()
+      require("supermaven-nvim").setup({
+        -- Disable the default keymaps and settings
+        -- that would normally make virtual text appear;
+        -- not using those since Supermaven integrates
+        -- with nvim-cmp and that is primary approach
+        disable_inline_completion = true,
+        disable_keymaps = true,
+      })
+    end,
+  },
 
   -- minuet-ai.nvim
   -- Enable interaction with code completion
@@ -702,6 +704,7 @@ return {
           { name = "treesitter", max_item_count = 10, priority = 10 },
           { name = "nvim_lsp", max_item_count = 10, priority = 10 },
           { name = "copilot", max_item_count = 10, priority = 10 },
+          { name = "supermaven", max_item_count = 10, priority = 10 },
           { name = "minuet", max_item_count = 10, priority = 10 },
           -- { name = 'supermaven', max_item_count = 10, priority = 8 },
           -- Look at all of the open buffers
