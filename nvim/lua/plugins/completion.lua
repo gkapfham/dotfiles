@@ -536,6 +536,9 @@ return {
       "zbirenbaum/copilot-cmp",
       "tzachar/cmp-fuzzy-buffer",
       "tzachar/fuzzy.nvim",
+      -- Used so that the fuzzy completion
+      -- sources are fast, even though no longer
+      -- using the telescope plugin
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
     -- Configure the nvim-cmp plugin
