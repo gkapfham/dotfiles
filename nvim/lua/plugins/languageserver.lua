@@ -192,16 +192,10 @@ return {
       vim.lsp.enable("jsonls")
       -- configure nil_ls for Nix LSP
       vim.lsp.config("nil_ls", {
-        capabilities = (function()
-          local capabilities = vim.lsp.protocol.make_client_capabilities()
-          capabilities.textDocument.formatting = false
-          capabilities.textDocument.rangeFormatting = false
-          return capabilities
-        end)(),
         settings = {
           ["nil"] = {
             formatting = {
-              command = { "nixfmt" }, -- Set formatter command to suppress warning
+              command = { "nixfmt" },
             },
           },
         },
