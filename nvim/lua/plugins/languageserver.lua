@@ -249,11 +249,11 @@ return {
         "<cmd> lua vim.lsp.buf.rename()<CR>",
         desc = "Language Server: Rename variable",
       },
-      --[[       { "<Space>ff", "<cmd> lua vim.lsp.buf.format()<CR>", desc = "Language Server: format buffer" }, ]]
     },
   },
 
-  -- conform.nvim for formatting files
+  -- conform.nvim
+  -- Formatting files plugin that works
   -- as a replacement for tools like null-ls.nvim
   {
     "stevearc/conform.nvim",
