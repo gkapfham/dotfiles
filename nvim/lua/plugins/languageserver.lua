@@ -122,6 +122,8 @@ return {
             latexFormatter = "latexindent",
             latexindent = {
               modifyLineBreaks = false,
+              spaces = 2,
+              indent = " ",
             },
           },
         },
@@ -183,14 +185,6 @@ return {
           },
         },
       })
-      -- configure copilot for Copilot LSP
-      -- vim.lsp.config('copilot', {
-      --   cmd = { 'copilot-language-server', '--stdio', },
-      --   root_markers = { '.git' },
-      -- })
-      -- vim.lsp.enable('copilot')
-      -- vim.lsp.inline_completion.enable()
-      -- vim.lsp.enable("copilot_ls")
       -- Configure other aspects of the language servers
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
       -- to support the display of the diagnostics
@@ -272,21 +266,31 @@ return {
     opts = {
       -- define formatters
       formatters_by_ft = {
+        javascript = { "prettierd" },
+        tex = { lsp_format = "fallback", "latexindent" },
         lua = { "stylua" },
         python = { "ruff" },
         markdown = { "mdformat" },
-        javascript = { "prettierd" },
       },
       -- set default options
       default_format_opts = {
         lsp_format = "fallback",
       },
-      -- set up format-on-save
-      format_on_save = { timeout_ms = 500 },
       -- customize formatters
       formatters = {
         shfmt = {
           append_args = { "-i", "2" },
+        },
+        latexindent = {
+          inherit = false,
+          command = "latexindent",
+          -- args = {
+          --   "--lines=1",
+          --   "--quiet",
+          --   "--modify-line-breaks",
+          --   "--indent=  ",
+          --   "-",
+          -- },
         },
         stylua = {
           inherit = false,
@@ -305,7 +309,7 @@ return {
       },
     },
     init = function()
-      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr({'latexindent'})"
     end,
   },
 
