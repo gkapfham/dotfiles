@@ -20,6 +20,7 @@ local function lsp_clients()
     null_ls = "󰁨",
     otter_ls = "󰌨",
     pyrefly = "",
+    basedpyright = "󱔎",
     pyright = "󰌠",
     render_markdown = "󰍕",
     ruff = "󱝁",
@@ -59,16 +60,16 @@ local function lsp_clients()
     local abbreviation = lsp_abbreviations[base_name] or base_name
     local exists = false
     for _, name in ipairs(client_names) do
-        if name == abbreviation then
-            exists = true
-            break
-        end
+      if name == abbreviation then
+        exists = true
+        break
+      end
     end
     -- Only add the abbreviation if it does not already exist
     -- in the list of client names (this prevents an icon
     -- from being added and displayed in lualine twice)
     if not exists then
-        table.insert(client_names, abbreviation)
+      table.insert(client_names, abbreviation)
     end
   end
   -- Return the client icons as a string with spaces
@@ -85,13 +86,13 @@ local function spell_status()
   local lang = vim.o.spelllang
   local icon = lang_icons[lang] or ""
   if vim.o.spell then
-    return '󰓆 󰔡 ' .. icon
+    return "󰓆 󰔡 " .. icon
   else
-    return '󰓆 󰔢 ' .. icon
+    return "󰓆 󰔢 " .. icon
   end
 end
 
-local aerial = require('aerial')
+local aerial = require("aerial")
 local function format_status(symbols, depth, separator, icons_enabled)
   local parts = {}
   depth = depth or #symbols
@@ -126,7 +127,7 @@ local function search_count()
   if vim.api.nvim_get_vvar("hlsearch") == 1 then
     local res = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
     if res.total > 0 then
-      return string.format(" %d/%d %s", res.current, res.total, vim.fn.getreg('/'))
+      return string.format(" %d/%d %s", res.current, res.total, vim.fn.getreg("/"))
     end
   end
   return ""
@@ -141,7 +142,7 @@ local function diff_source()
     return {
       added = gitsigns.added,
       modified = gitsigns.changed,
-      removed = gitsigns.removed
+      removed = gitsigns.removed,
     }
   end
 end
@@ -153,37 +154,37 @@ end
 -- vitaminonec; see the lua/plugins/colorscheme.lua
 -- for more details about the specific colorscheme
 local colors = {
-  color2  = "#87afd7",
-  color7  = "#d75f5f",
+  color2 = "#87afd7",
+  color7 = "#d75f5f",
   color10 = "#b7b757",
-  color6  = "#626262",
-  color3  = "#a569a5",
-  color1  = "#262626",
+  color6 = "#626262",
+  color3 = "#a569a5",
+  color1 = "#262626",
   -- color0  = "#a8a8af",
-  color0  = "#c1c1c1",
+  color0 = "#c1c1c1",
 }
 local vitaminonec = {
   normal = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color2, gui = "bold", },
+    a = { fg = colors.color1, bg = colors.color2, gui = "bold" },
     c = { fg = colors.color0, bg = colors.color1 },
   },
   visual = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color3, gui = "bold", },
+    a = { fg = colors.color1, bg = colors.color3, gui = "bold" },
   },
   inactive = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color0, bg = colors.color1, gui = "none", },
+    a = { fg = colors.color0, bg = colors.color1, gui = "none" },
     c = { fg = colors.color6, bg = colors.color1 },
   },
   replace = {
     jb = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color7, gui = "bold", },
+    a = { fg = colors.color1, bg = colors.color7, gui = "bold" },
   },
   insert = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color10, gui = "bold", },
+    a = { fg = colors.color1, bg = colors.color10, gui = "bold" },
   },
 }
 
@@ -256,15 +257,15 @@ return {
     -- Configure
     config = function()
       vim.cmd([[set noshowmode]])
-      require('lualine').setup {
+      require("lualine").setup({
         -- Define the global options for lualine
         options = {
           icons_enabled = true,
           theme = vitaminonec,
-          component_separators = { left = '', right = '' },
-          section_separators = { left = '', right = '' },
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
           disabled_filetypes = {
-            winbar = { 'aerial', 'neo-tree', "snacks_terminal", "trouble", "toggleterm", "Outline", },
+            winbar = { "aerial", "neo-tree", "snacks_terminal", "trouble", "toggleterm", "Outline" },
           },
           always_divide_middle = true,
           globalstatus = true,
@@ -279,18 +280,30 @@ return {
         sections = {
           -- Bottom left display
           -- from left (far left corner) to right (middle): {a} {b} {c}
-          lualine_a = { { 'mode' } },
-          lualine_b = { { 'branch', icon = "󰘬" }, { 'diff', source = diff_source, icon = "" } },
-          lualine_c = { 'StatuslineReadonly', { 'filename', icon = "󰓈 ", path = 0, file_status = false, symbols = { unnamed = "", newfile = "" } }, { 'selectioncount', icon = "󰉄" } },
+          lualine_a = { { "mode" } },
+          lualine_b = { { "branch", icon = "󰘬" }, { "diff", source = diff_source, icon = "" } },
+          lualine_c = {
+            "StatuslineReadonly",
+            { "filename", icon = "󰓈 ", path = 0, file_status = false, symbols = { unnamed = "", newfile = "" } },
+            { "selectioncount", icon = "󰉄" },
+          },
           -- Bottom right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
-          lualine_x = { { 'lsp_progress', icon = "" } },
-          lualine_y = { search_count, { 'encoding', icon = "" }, { 'fileformat', symbols = {
-            unix = '  LF',
-            dos = '  CRLF',
-            mac = '  CR',
-          } }, { 'filesize', icon = '󰖡' }, },
-          lualine_z = { { 'filetype', colored = false } },
+          lualine_x = { { "lsp_progress", icon = "" } },
+          lualine_y = {
+            search_count,
+            { "encoding", icon = "" },
+            {
+              "fileformat",
+              symbols = {
+                unix = "  LF",
+                dos = "  CRLF",
+                mac = "  CR",
+              },
+            },
+            { "filesize", icon = "󰖡" },
+          },
+          lualine_z = { { "filetype", colored = false } },
         },
         inactive_sections = {
           lualine_a = {},
@@ -300,7 +313,19 @@ return {
           lualine_y = {},
         },
         winbar = {
-          lualine_b = { { 'filename', path = 3, file_status = false, icon = "󰉋", shorting_target = 80, symbols = { unnamed = "", newfile = "" } }, { 'progress', icon = "󰮴" }, { 'location', icon = "" }, { "aerial", colored = false }, }
+          lualine_b = {
+            {
+              "filename",
+              path = 3,
+              file_status = false,
+              icon = "󰉋",
+              shorting_target = 80,
+              symbols = { unnamed = "", newfile = "" },
+            },
+            { "progress", icon = "󰮴" },
+            { "location", icon = "" },
+            { "aerial", colored = false },
+          },
         },
         tabline = {
           -- Top left display
@@ -308,7 +333,8 @@ return {
           -- Note that {b} and {c} are currently disabled because there
           -- are normally a significant number of buffers on display in {a}
           lualine_a = {
-            { 'buffers',
+            {
+              "buffers",
               show_modified_status = true,
               -- Define a custom label for the Aerial buffer;
               -- note that other plugins seem to do this automatically
@@ -328,29 +354,28 @@ return {
               },
               -- Define symbols attached to each file in the tabline
               symbols = {
-                modified = ' ●',
-                alternate_file = ' ',
-                directory = '',
+                modified = " ●",
+                alternate_file = " ",
+                directory = "",
               },
-            }
+            },
           },
           lualine_b = {},
           lualine_c = {},
           -- Top right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
-          lualine_x = { { 'diagnostics', symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' } } },
-          lualine_y = { 'StatuslinePythonEnvironment' },
+          lualine_x = { { "diagnostics", symbols = { error = " ", warn = " ", info = " ", hint = " " } } },
+          lualine_y = { "StatuslinePythonEnvironment" },
           lualine_z = {
             function()
               return spell_status() .. " " .. lsp_clients()
             end,
-          }
+          },
         },
         -- Define the extensions which ensure that lualine
         -- makes better customized menus when they are used
-        extensions = { 'quickfix', 'aerial', 'oil' },
-      }
+        extensions = { "quickfix", "aerial", "oil" },
+      })
     end,
-  }
-
+  },
 }
