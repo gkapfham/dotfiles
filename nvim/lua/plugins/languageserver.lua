@@ -87,7 +87,40 @@ return {
       })
       vim.lsp.enable("marksman")
       -- configure pyright for Python LSPs
-      vim.lsp.enable("pyright")
+      -- configure basedpyright for Python LSP (enhanced pyright fork)
+      vim.lsp.config("basedpyright", {
+        settings = {
+          basedpyright = {
+            analysis = {
+              typeCheckingMode = "basic",
+              autoImportCompletions = true,
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticSeverityOverrides = {
+                reportUnusedImport = "information",
+                reportUnusedVariable = "information",
+              },
+            },
+          },
+        },
+      })
+      vim.lsp.enable("basedpyright")
+      -- configure pyright for Python LSP (disabled in favor of basedpyright)
+      -- vim.lsp.config("pyright", {
+      --   settings = {
+      --     python = {
+      --       analysis = {
+      --         typeCheckingMode = "basic",
+      --         autoImportCompletions = true,
+      --         diagnosticSeverityOverrides = {
+      --           reportUnusedImport = "information",
+      --           reportUnusedVariable = "information",
+      --         },
+      --       },
+      --     },
+      --   },
+      -- })
+      -- vim.lsp.enable("pyright")
       -- configure pyrefly for Python LSP
       vim.lsp.enable("pyrefly")
       -- configure ruff for Python LSP
@@ -158,6 +191,21 @@ return {
       -- configure jsonls for YAML LSP
       vim.lsp.enable("jsonls")
       -- configure nil_ls for Nix LSP
+      vim.lsp.config("nil_ls", {
+        capabilities = (function()
+          local capabilities = vim.lsp.protocol.make_client_capabilities()
+          capabilities.textDocument.formatting = false
+          capabilities.textDocument.rangeFormatting = false
+          return capabilities
+        end)(),
+        settings = {
+          ["nil"] = {
+            formatting = {
+              command = { "nixfmt" }, -- Set formatter command to suppress warning
+            },
+          },
+        },
+      })
       vim.lsp.enable("nil_ls")
       -- configure rust_analzer for Rust LSP
       vim.lsp.config("rust_analyzer", {
@@ -270,6 +318,7 @@ return {
         lua = { "stylua" },
         python = { "ruff" },
         markdown = { "mdformat" },
+        nix = { "nixfmt" },
       },
       -- set default options
       default_format_opts = {
