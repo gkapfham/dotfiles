@@ -362,7 +362,7 @@ return {
     config = function()
       require("render-markdown").setup({
         enabled = true,
-        -- disable the LSP as it seems to
+        -- Disable the LSP as it seems to
         -- crash after reloads of files
         completions = { lsp = { enabled = false } },
         file_types = { "codecompanion", "markdown", "quarto" },
@@ -433,7 +433,7 @@ return {
                       modification = "DiagnosticWarn",
                     },
                   },
-                  -- super Diff options
+                  -- Super Diff options
                   icons = {
                     accepted = " ",
                     rejected = " ",
@@ -454,21 +454,19 @@ return {
             },
           },
           chat = {
-            -- show the settings
             show_settings = false,
-            -- change the default icons
             icons = {
               buffer_pin = " ",
               buffer_watch = "󰡫 ",
             },
-            -- alter the sizing of the debug window
+            -- Alter the sizing of the debug window
             debug_window = {
               ---@return number|fun(): number
               width = vim.o.columns - 5,
               ---@return number|fun(): number
               height = vim.o.lines - 2,
             },
-            -- options to customize the UI of the chat buffer
+            -- Options to customize the UI of the chat buffer
             window = {
               layout = "float",
               position = nil,
@@ -491,7 +489,7 @@ return {
                 wrap = true,
               },
             },
-            -- customize how tokens are displayed
+            -- Customize how tokens are displayed
             token_count = function(tokens, adapter)
               return "󰣁 " .. tokens .. " tokens"
             end,
