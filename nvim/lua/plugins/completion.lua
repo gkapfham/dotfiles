@@ -82,11 +82,12 @@ local kind_icons = {
 -- Define the has_words_before function used in the
 -- integration between luasnip and nvim-cmp; note
 -- that this function must exist for other code in
--- this file to work correctly
+-- this file to work correctly (i.e., this helper
+-- function is essential to correct completion)
 local has_words_before = function()
-  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
-  -- local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  -- local line, col = (table.unpack or unpack)(vim.api.nvim_win_get_cursor(0))
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+    return false
+  end
   local cursor = vim.api.nvim_win_get_cursor(0)
   local line, col = cursor[1], cursor[2]
   return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
@@ -185,7 +186,7 @@ return {
               -- stop = { '\n\n' },
             },
           },
-        }
+        },
       })
     end,
   },
@@ -239,7 +240,7 @@ return {
       vim.cmd([[
          autocmd BufEnter copilot-chat set filetype=markdown
       ]])
-    end
+    end,
   },
 
   -- sidekick.nvim
@@ -283,54 +284,66 @@ return {
           },
           priorcode = {
             cmd = { "npx", "opencode-ai@0.15.30" },
-          }
+          },
         },
       },
       ui = {
         icons = {
-          attached          = " ",
-          started           = " ",
-          installed         = " ",
-          missing           = " ",
+          attached = " ",
+          started = " ",
+          installed = " ",
+          missing = " ",
           external_attached = "󱫄 ",
-          external_started  = "󱫁 ",
+          external_started = "󱫁 ",
           terminal_attached = " ",
-          terminal_started  = " ",
-        }
+          terminal_started = " ",
+        },
       },
     },
     keys = {
       {
         "<Space>so",
-        function() require("sidekick.cli").toggle({ filter = { installed = true } }) end,
+        function()
+          require("sidekick.cli").toggle({ filter = { installed = true } })
+        end,
         desc = "Sidekick: Toggle CLI",
       },
       {
         "<Space>ss",
-        function() require("sidekick.cli").select({ filter = { installed = true } }) end,
+        function()
+          require("sidekick.cli").select({ filter = { installed = true } })
+        end,
         desc = "Sidekick: Select CLI",
       },
       {
         "<Space>st",
-        function() require("sidekick.cli").send({ msg = "{this}" }) end,
+        function()
+          require("sidekick.cli").send({ msg = "{this}" })
+        end,
         mode = { "x", "n" },
         desc = "Sidekick: Send This Content to CLI",
       },
       {
         "<Space>sv",
-        function() require("sidekick.cli").send({ msg = "{selection}" }) end,
+        function()
+          require("sidekick.cli").send({ msg = "{selection}" })
+        end,
         mode = { "x" },
         desc = "Sidekick: Send Visual Selection to CLI",
       },
       {
         "<Space>sp",
-        function() require("sidekick.cli").prompt() end,
+        function()
+          require("sidekick.cli").prompt()
+        end,
         mode = { "n", "x" },
         desc = "Sidekick: Select Prompt for CLI",
       },
       {
         "<c-.>",
-        function() require("sidekick.cli").focus() end,
+        function()
+          require("sidekick.cli").focus()
+        end,
         mode = { "n", "x", "i", "t" },
         desc = "Sidekick Switch Focus",
       },
@@ -342,12 +355,12 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     event = "VeryLazy",
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
-      require('render-markdown').setup({
+      require("render-markdown").setup({
         enabled = true,
-        completions = { lsp = { enabled = true } },
-        file_types = { 'codecompanion', 'markdown', 'quarto', },
+        completions = { lsp = { enabled = false } },
+        file_types = { "codecompanion", "markdown", "quarto" },
         heading = {
           width = "block",
         },
@@ -355,7 +368,7 @@ return {
           enabled = true,
         },
       })
-    end
+    end,
   },
 
   -- codecompanion.nvim for chatting with
@@ -389,14 +402,14 @@ return {
             },
             opts = {
               completion_provider = "cmp",
-            }
+            },
           },
           inline = {
             adapter = "copilot",
           },
           cmd = {
             adapter = "copilot",
-          }
+          },
         },
         display = {
           diff = {
@@ -488,7 +501,6 @@ return {
         desc = "CodeCompanionChat: Toggle",
       },
     },
-
   },
 
   -- nvim-cmp
@@ -536,7 +548,7 @@ return {
       -- Note: spell is disabled by default in spelling.lua
       -- and can be toggled on/off with <leader>ss as needed
       -- vim.opt.spell = true
-      vim.opt.spelllang = { 'en_us' }
+      vim.opt.spelllang = { "en_us" }
       -- Configure all aspects of nvim-cmp
       cmp.setup({
         -- Do not preselect items
@@ -563,23 +575,23 @@ return {
           async_budget = 1,
           filtering_context_budget = 1,
           confirm_resolve_timeout = 50,
-          max_view_entries = 100
+          max_view_entries = 100,
         },
         -- Specify a snippet engine
         snippet = {
           expand = function(args)
-            require 'luasnip'.lsp_expand(args.body)
-          end
+            require("luasnip").lsp_expand(args.body)
+          end,
         },
         -- Use the custom view packaged by nvim-cmp
         view = {
-          entries = "custom"
+          entries = "custom",
         },
         -- Configure the formatting of the completion menu
         formatting = {
           format = function(entry, vim_item)
             -- Define the icons used for the completion labels
-            vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+            vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
             -- Define labels for the completion menu;
             -- these will appear to the right of a completion
             -- suggestion in the nvim-cmp menu
@@ -606,19 +618,19 @@ return {
               supermaven = " Supermaven",
             })[entry.source.name]
             return vim_item
-          end
+          end,
         },
         -- Define mappings for the keyboard commands when using completion menu
         mapping = {
-          ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-          ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-          ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-          ['<C-y>'] = cmp.config.disable,
-          ['<C-e>'] = cmp.mapping({
+          ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+          ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+          ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+          ["<C-y>"] = cmp.config.disable,
+          ["<C-e>"] = cmp.mapping({
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
           }),
-          ['<CR>'] = cmp.mapping.confirm({ select = false }),
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
           -- Define mappings for using snippets; note that luasnip
           -- works even when you have left the context of the snippet.
           -- This means that you can jump back into the snippet by
@@ -687,31 +699,31 @@ return {
         -- with a higher priority have higher weighting on priority.
         sources = cmp.config.sources({
           -- Define the first-tier of sources
-          { name = 'treesitter', max_item_count = 10, priority = 10 },
-          { name = 'nvim_lsp',   max_item_count = 10, priority = 10 },
-          { name = 'copilot',    max_item_count = 10, priority = 10 },
-          { name = 'minuet',     max_item_count = 10, priority = 10 },
+          { name = "treesitter", max_item_count = 10, priority = 10 },
+          { name = "nvim_lsp", max_item_count = 10, priority = 10 },
+          { name = "copilot", max_item_count = 10, priority = 10 },
+          { name = "minuet", max_item_count = 10, priority = 10 },
           -- { name = 'supermaven', max_item_count = 10, priority = 8 },
           -- Look at all of the open buffers
           {
-            name = 'buffer',
+            name = "buffer",
             max_item_count = 10,
             priority = 20,
             option = {
               get_bufnrs = function()
                 return vim.api.nvim_list_bufs()
-              end
-            }
+              end,
+            },
           },
-          { name = 'fuzzy_buffer',      max_item_count = 5, priority = 6 },
-          { name = 'cmp_yanky',         max_item_count = 5, priority = 6 },
-          { name = 'tags',              max_item_count = 5, priority = 5 },
-          { name = 'luasnip',           max_item_count = 5, priority = 5 },
-          { name = 'otter',             max_item_count = 5, priority = 5, keyword_length = 2 },
-          { name = 'pandoc_references', max_item_count = 5, priority = 5, keyword_length = 2 },
+          { name = "fuzzy_buffer", max_item_count = 5, priority = 6 },
+          { name = "cmp_yanky", max_item_count = 5, priority = 6 },
+          { name = "tags", max_item_count = 5, priority = 5 },
+          { name = "luasnip", max_item_count = 5, priority = 5 },
+          { name = "otter", max_item_count = 5, priority = 5, keyword_length = 2 },
+          { name = "pandoc_references", max_item_count = 5, priority = 5, keyword_length = 2 },
           -- { name = 'tmux',              max_item_count = 5, priority = 1, keyword_length = 2 },
           {
-            name = 'spell',
+            name = "spell",
             option = {
               keep_all_entries = false,
               enable_in_context = function()
@@ -720,10 +732,10 @@ return {
             },
             max_item_count = 5,
             priority = 10,
-            keyword_length = 3
+            keyword_length = 3,
           },
           {
-            name = 'path',
+            name = "path",
             option = {
               get_cwd = function()
                 return vim.fn.getcwd()
@@ -731,45 +743,45 @@ return {
             },
             max_item_count = 5,
             priority = 10,
-            keyword_length = 3
+            keyword_length = 3,
           },
-          { name = 'nerdfont',               max_item_count = 10, priority = 1, keyword_length = 3 },
-          { name = 'nvim_lsp_signature_help' },
+          { name = "nerdfont", max_item_count = 10, priority = 1, keyword_length = 3 },
+          { name = "nvim_lsp_signature_help" },
         }, {
           -- Define the second-tier of sources; these will only
           -- appear when there is no active source from the first-tier
-        })
+        }),
       })
       -- Use completion sources when forward-searching with "/"
-      cmp.setup.cmdline('/', {
+      cmp.setup.cmdline("/", {
         -- Disable all of the prior settings for nvim-cmp
         -- so that completion supported by luasnip not triggered;
         -- note that if this extra line is not added then
         -- tab completion does not work for this mode
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          { name = 'path' },
-          { name = 'buffer',       max_item_count = 15, priority = 10 },
-          { name = 'fuzzy_buffer', max_item_count = 15, priority = 5 },
+          { name = "path" },
+          { name = "buffer", max_item_count = 15, priority = 10 },
+          { name = "fuzzy_buffer", max_item_count = 15, priority = 5 },
         }, {
-          { name = 'cmdline' },
-        })
+          { name = "cmdline" },
+        }),
       })
       -- Use completion sources when backward-searching with "?"
-      cmp.setup.cmdline('?', {
+      cmp.setup.cmdline("?", {
         -- Disable all of the prior settings for nvim-cmp
         -- (see previous note for full explanation)
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          { name = 'path' },
-          { name = 'buffer',       max_item_count = 15, priority = 10 },
-          { name = 'fuzzy_buffer', max_item_count = 15, priority = 5 },
+          { name = "path" },
+          { name = "buffer", max_item_count = 15, priority = 10 },
+          { name = "fuzzy_buffer", max_item_count = 15, priority = 5 },
         }, {
-          { name = 'cmdline' },
-        })
+          { name = "cmdline" },
+        }),
       })
       -- Use completion sources when running commands with ":"
-      require 'cmp'.setup.cmdline(':', {
+      require("cmp").setup.cmdline(":", {
         -- Disable all of the prior settings for nvim-cmp
         -- (see previous note for full explanation)
         mapping = cmp.mapping.preset.cmdline(),
@@ -778,11 +790,9 @@ return {
         -- all commands previously used in command prompt)
         -- because it might break the tab completion
         sources = cmp.config.sources({
-          { name = 'cmdline', max_item_count = 25 },
-        }, {
-        })
+          { name = "cmdline", max_item_count = 25 },
+        }, {}),
       })
     end,
   },
-
 }
