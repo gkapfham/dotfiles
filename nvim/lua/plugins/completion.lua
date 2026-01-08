@@ -264,7 +264,7 @@ return {
       cli = {
         win = {
           keys = {
-            prompt = { "<Space>sp", "prompt", mode = "n", desc = "insert prompt or context" },
+            prompt = { "<Space>sp", "prompt", mode = "n", desc = "Insert prompt or context" },
           },
           wo = {},
           bo = {},
@@ -287,9 +287,6 @@ return {
           },
           toad = {
             cmd = { "toad", "acp", "npx opencode-ai@latest acp", "--project-dir", "." },
-          },
-          priorcode = {
-            cmd = { "npx", "opencode-ai@0.15.30" },
           },
         },
       },
