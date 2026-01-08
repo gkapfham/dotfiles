@@ -196,7 +196,6 @@ return {
       -- that there is a rounded border around the diagnostic box
       -- that appears when you go to a line with a diagnostic
       vim.diagnostic.config({
-        -- signs = true,
         underline = true,
         virtual_text = false,
         virtual_lines = false,
@@ -267,7 +266,7 @@ return {
       -- define formatters
       formatters_by_ft = {
         javascript = { "prettierd" },
-        tex = { lsp_format = "fallback", "latexindent" },
+        tex = { "latexindent" },
         lua = { "stylua" },
         python = { "ruff" },
         markdown = { "mdformat" },
@@ -276,21 +275,14 @@ return {
       default_format_opts = {
         lsp_format = "fallback",
       },
+      format_on_save = { timeout_ms = 500 },
       -- customize formatters
       formatters = {
         shfmt = {
           append_args = { "-i", "2" },
         },
         latexindent = {
-          inherit = false,
-          command = "latexindent",
-          -- args = {
-          --   "--lines=1",
-          --   "--quiet",
-          --   "--modify-line-breaks",
-          --   "--indent=  ",
-          --   "-",
-          -- },
+          prepend_args = { "-y=defaultIndent: '  '" },
         },
         stylua = {
           inherit = false,
@@ -309,7 +301,7 @@ return {
       },
     },
     init = function()
-      vim.o.formatexpr = "v:lua.require'conform'.formatexpr({'latexindent'})"
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
   },
 
