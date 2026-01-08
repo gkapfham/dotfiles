@@ -361,6 +361,8 @@ return {
     config = function()
       require("render-markdown").setup({
         enabled = true,
+        -- disable the LSP as it seems to
+        -- crash after reloads of files
         completions = { lsp = { enabled = false } },
         file_types = { "codecompanion", "markdown", "quarto" },
         heading = {
@@ -430,7 +432,7 @@ return {
                       modification = "DiagnosticWarn",
                     },
                   },
-                  -- Super Diff options
+                  -- super Diff options
                   icons = {
                     accepted = " ",
                     rejected = " ",
@@ -514,13 +516,10 @@ return {
   -- prevent the use of <Tab> for indenting
   -- as it will be setup for accepting
   {
-    -- "hrsh7th/nvim-cmp",
     "hrsh7th/nvim-cmp",
-    -- url = "https://github.com/iguanacucumber/magazine.nvim",
     event = "InsertEnter",
     dependencies = {
       -- Stand-alone cmp plugins
-      -- "andersevenrud/cmp-tmux",
       "chrisgrieser/cmp-nerdfont",
       "chrisgrieser/cmp_yanky",
       "f3fora/cmp-spell",
