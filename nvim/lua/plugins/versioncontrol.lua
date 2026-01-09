@@ -3,13 +3,13 @@
 -- integrate with the Git version control system
 
 local is_git_ignored = function(filepath)
-  vim.fn.system('git check-ignore -q ' .. vim.fn.shellescape(filepath))
+  vim.fn.system("git check-ignore -q " .. vim.fn.shellescape(filepath))
   return vim.v.shell_error == 0
 end
 
 local update_diffview_file_tree = function()
   pcall(function()
-    local lib = require 'diffview.lib'
+    local lib = require("diffview.lib")
     local view = lib.get_current_view()
     if view then
       -- This updates the left panel with all the files
@@ -19,22 +19,22 @@ local update_diffview_file_tree = function()
 end
 
 -- Register handler for file changes in watched directory
-require('configure.directorywatcher').registerOnChangeHandler('diffview', function(filepath, events)
-  local is_in_dot_git_dir = filepath:match '/%.git/' or filepath:match '^%.git/'
+require("configure.directorywatcher").registerOnChangeHandler("diffview", function(filepath, events)
+  local is_in_dot_git_dir = filepath:match("/%.git/") or filepath:match("^%.git/")
 
   if is_in_dot_git_dir or not is_git_ignored(filepath) then
     update_diffview_file_tree()
   end
 end)
 
-vim.api.nvim_create_autocmd('FocusGained', {
+vim.api.nvim_create_autocmd("FocusGained", {
   callback = update_diffview_file_tree,
 })
 
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'DiffviewViewLeave',
+vim.api.nvim_create_autocmd("User", {
+  pattern = "DiffviewViewLeave",
   callback = function()
-    vim.cmd ':DiffviewClose'
+    vim.cmd(":DiffviewClose")
   end,
 })
 
@@ -61,19 +61,25 @@ return {
     cmd = { "G", "Git", "Gwrite" },
     keys = {
       -- Keys: git status
-      { "<Space>gg",   ":call ToggleGstatus() <CR>", desc = "Fugitive: Git status toggle" },
-      { "<leader>gg",  ":call ToggleGstatus() <CR>", desc = "Fugitive: Git status toggle" },
+      { "<Space>gg", ":call ToggleGstatus() <CR>", desc = "Fugitive: Git status toggle" },
+      { "<leader>gg", ":call ToggleGstatus() <CR>", desc = "Fugitive: Git status toggle" },
       -- Keys: git write
-      { "<Space>gw",   ":Gwrite <CR>",               desc = "Fugitive: Git write to add file" },
-      { "<leader>gw",  ":Gwrite <CR>",               desc = "Fugitive: Git write to add file" },
+      { "<Space>gw", ":Gwrite <CR>", desc = "Fugitive: Git write to add file" },
+      { "<leader>gw", ":Gwrite <CR>", desc = "Fugitive: Git write to add file" },
       -- Keys: git commit
-      { "<Space>gcc",  ":Git commit <CR>",           desc = "Fugitive: Commit current hunk" },
-      { "<leader>gcc", ":Git commit <CR>",           desc = "Fugitive: Commit current hunk" },
-      { "<Space>gcf",  ":Git commit %<CR>",          desc = "Fugitive: Commit current file" },
-      { "<leader>gcf", ":Git commit %<CR>",          desc = "Fugitive: Commit current file" },
-      { "<Space>gca",  ":Git commit -a<CR>",         desc = "Fugitive: Commit all files" },
-      { "<leader>gca", ":Git commit -a<CR>",         desc = "Fugitive: Commit all files" },
-    }
+      { "<Space>gcc", ":Git commit <CR>", desc = "Fugitive: Commit current hunk" },
+      { "<leader>gcc", ":Git commit <CR>", desc = "Fugitive: Commit current hunk" },
+      { "<Space>gcf", ":Git commit %<CR>", desc = "Fugitive: Commit current file" },
+      { "<leader>gcf", ":Git commit %<CR>", desc = "Fugitive: Commit current file" },
+      { "<Space>gca", ":Git commit -a<CR>", desc = "Fugitive: Commit all files" },
+      { "<leader>gca", ":Git commit -a<CR>", desc = "Fugitive: Commit all files" },
+    },
+  },
+
+  {
+    "esmuellert/codediff.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    cmd = "CodeDiff",
   },
 
   -- diffview.nvim for viewing diffs
@@ -87,7 +93,7 @@ return {
       { "<Space>do", "<cmd>DiffviewOpen HEAD -- %<cr>", desc = "Open diffview for current file" },
     },
     config = function()
-      require("diffview").setup {
+      require("diffview").setup({
         use_icons = true,
         icons = {
           folder_closed = "",
@@ -99,7 +105,7 @@ return {
             layout = "diff2_vertical",
           },
         },
-      }
+      })
     end,
   },
 
@@ -107,7 +113,7 @@ return {
   {
     "akinsho/git-conflict.nvim",
     event = "VeryLazy",
-    tag = 'v2.1.0',
+    tag = "v2.1.0",
     config = true,
   },
 
@@ -116,7 +122,7 @@ return {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
     config = function()
-      require('gitsigns').setup {
+      require("gitsigns").setup({
         on_attach = function(bufnr)
           local gs = package.loaded.gitsigns
           local function map(mode, l, r, opts)
@@ -125,43 +131,59 @@ return {
             vim.keymap.set(mode, l, r, opts)
           end
           -- Navigation
-          map('n', ']c', function()
-            if vim.wo.diff then return ']c' end
-            vim.schedule(function() gs.next_hunk() end)
-            return '<Ignore>'
+          map("n", "]c", function()
+            if vim.wo.diff then
+              return "]c"
+            end
+            vim.schedule(function()
+              gs.next_hunk()
+            end)
+            return "<Ignore>"
           end, { expr = true })
-          map('n', '[c', function()
-            if vim.wo.diff then return '[c' end
-            vim.schedule(function() gs.prev_hunk() end)
-            return '<Ignore>'
+          map("n", "[c", function()
+            if vim.wo.diff then
+              return "[c"
+            end
+            vim.schedule(function()
+              gs.prev_hunk()
+            end)
+            return "<Ignore>"
           end, { expr = true })
           -- Actions
-          map('n', '<leader>hs', gs.stage_hunk)
-          map('n', '<leader>hr', gs.reset_hunk)
-          map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
-          map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end)
-          map('n', '<leader>hS', gs.stage_buffer)
-          map('n', '<leader>hu', gs.undo_stage_hunk)
-          map('n', '<leader>hR', gs.reset_buffer)
-          map('n', '<leader>hp', gs.preview_hunk)
-          map('n', '<leader>hb', function() gs.blame_line { full = true } end)
-          map('n', '<leader>tb', gs.toggle_current_line_blame)
-          map('n', '<leader>hd', gs.diffthis)
-          map('n', '<leader>hD', function() gs.diffthis('~') end)
-          map('n', '<leader>td', gs.toggle_deleted)
+          map("n", "<leader>hs", gs.stage_hunk)
+          map("n", "<leader>hr", gs.reset_hunk)
+          map("v", "<leader>hs", function()
+            gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+          end)
+          map("v", "<leader>hr", function()
+            gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+          end)
+          map("n", "<leader>hS", gs.stage_buffer)
+          map("n", "<leader>hu", gs.undo_stage_hunk)
+          map("n", "<leader>hR", gs.reset_buffer)
+          map("n", "<leader>hp", gs.preview_hunk)
+          map("n", "<leader>hb", function()
+            gs.blame_line({ full = true })
+          end)
+          map("n", "<leader>tb", gs.toggle_current_line_blame)
+          map("n", "<leader>hd", gs.diffthis)
+          map("n", "<leader>hD", function()
+            gs.diffthis("~")
+          end)
+          map("n", "<leader>td", gs.toggle_deleted)
           -- Text object
-          map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+          map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
         end,
         -- Define the signs; note that the color scheme is
         -- now defined in the colorscheme file called
         -- colorscheme.lua in the same directory as this file
         signs = {
-          add          = { text = '+', },
-          change       = { text = '~', },
-          delete       = { text = '-', },
-          topdelete    = { text = '^', },
-          changedelete = { text = '~', },
-          untracked    = { text = '?', },
+          add = { text = "+" },
+          change = { text = "~" },
+          delete = { text = "-" },
+          topdelete = { text = "^" },
+          changedelete = { text = "~" },
+          untracked = { text = "?" },
         },
         numhl = false,
         linehl = false,
@@ -171,7 +193,7 @@ return {
           interval = 1000,
         },
         preview_config = {
-          border = "rounded"
+          border = "rounded",
         },
         attach_to_untracked = false,
         current_line_blame = false,
@@ -179,11 +201,11 @@ return {
         -- Reduce debounce for faster updates
         update_debounce = 100,
         status_formatter = nil,
-      }
+      })
       -- Safely refresh gitsigns to reload display from git status
       local function force_gitsigns_refresh()
         pcall(function()
-          local gitsigns = require('gitsigns')
+          local gitsigns = require("gitsigns")
           -- Only refresh - this is read-only and safe
           gitsigns.refresh()
         end)
@@ -191,9 +213,9 @@ return {
       -- Create an autocommand group for gitsigns refresh events
       local refresh_group = vim.api.nvim_create_augroup("GitSignsRefresh", { clear = true })
       -- When commit message buffer is closed, the commit is complete
-      vim.api.nvim_create_autocmd({"BufDelete", "BufUnload"}, {
+      vim.api.nvim_create_autocmd({ "BufDelete", "BufUnload" }, {
         group = refresh_group,
-        pattern = {"COMMIT_EDITMSG", "*COMMIT_EDITMSG", "*/COMMIT_EDITMSG"},
+        pattern = { "COMMIT_EDITMSG", "*COMMIT_EDITMSG", "*/COMMIT_EDITMSG" },
         callback = function()
           -- Use multiple delayed refreshes to ensure we catch the commit
           -- The commit might take a moment to write to .git/index
@@ -243,5 +265,4 @@ return {
       { "<space>gm", "<cmd>MessengerShow<cr>", desc = "Git Messenger" },
     },
   },
-
 }
