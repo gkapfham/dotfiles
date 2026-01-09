@@ -27,9 +27,9 @@ return {
         -- Only add closing pair if the next character is whitespace or a closing bracket
         -- This prevents unwanted pairs in the middle of words
         ignored_next_char = "[%w%.]", -- will ignore alphanumeric and `.` symbol
-        -- Enable fast wrap feature (Space+fp to move closing pair)
+        -- Enable fast wrap feature (Alt+g to move closing pair)
         fast_wrap = {
-          map = "<Space>fp",
+          map = "<M-g>",
           chars = { "{", "[", "(", '"', "'" },
           pattern = [=[[%'%"%>%]%)%}%,]]=],
           end_key = "$",
@@ -49,13 +49,11 @@ return {
       if backtick_rule and backtick_rule[1] then
         backtick_rule[1].not_filetypes = { "markdown", "quarto", "tex" }
       end
-
       -- Add rule to not pair single quotes in tex (for linguistic examples)
       local quote_rule = npairs.get_rule("'")
       if quote_rule and quote_rule[1] then
         quote_rule[1].not_filetypes = { "tex" }
       end
-
       -- Special rule for triple backticks in markdown/quarto (fenced code blocks)
       npairs.add_rules({
         Rule("```", "```", { "markdown", "quarto" })
@@ -65,7 +63,6 @@ return {
             return true
           end),
       })
-
       -- Add smarter spacing rules for brackets
       -- Automatically add space between brackets in functions: func(|) -> func( | )
       local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
@@ -92,13 +89,9 @@ return {
           end),
       })
 
-      -- Python-specific rules for better autopairs
-      npairs.add_rules({
-        -- Triple quotes for docstrings
-        Rule('"""', '"""', "python"):with_move(cond.none()),
-
-        Rule("'''", "'''", "python"):with_move(cond.none()),
-      })
+      -- Python-specific rules removed
+      -- Triple quote rules were causing typing delays, so we rely on
+      -- standard quote pairing instead. Type """ manually for docstrings.
 
       -- LaTeX-specific rules for better autopairs
       npairs.add_rules({
@@ -112,7 +105,6 @@ return {
         -- Double dollar signs for display math mode: $$...$$
         Rule("$$", "$$", "tex"):with_pair(cond.not_after_regex("%$%$")):with_move(cond.none()),
       })
-
       -- Arrow key rules for JavaScript/TypeScript arrow functions
       npairs.add_rules({
         Rule("%(.*%)%s*%=>$", " {  }", { "typescript", "typescriptreact", "javascript", "javascriptreact" })
