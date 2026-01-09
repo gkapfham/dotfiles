@@ -15,5 +15,4 @@ return {
       comment.setup()
     end,
   },
-
 }
