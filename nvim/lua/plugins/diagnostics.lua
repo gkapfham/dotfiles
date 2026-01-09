@@ -17,5 +17,4 @@ return {
   -- Provide user interface support
   -- for other neovim plugins
   "nvim-lua/plenary.nvim",
-
 }
