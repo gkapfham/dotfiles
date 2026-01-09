@@ -27,7 +27,8 @@ return {
         -- Only add closing pair if the next character is whitespace or a closing bracket
         -- This prevents unwanted pairs in the middle of words
         ignored_next_char = "[%w%.]", -- will ignore alphanumeric and `.` symbol
-        -- Enable fast wrap feature (Alt+g to move closing pair)
+        -- Enable fast wrap feature (Alt+g to move closing pair); remember
+        -- that Alt in the meta key which is why I used M-g for the mapping
         fast_wrap = {
           map = "<M-g>",
           chars = { "{", "[", "(", '"', "'" },
