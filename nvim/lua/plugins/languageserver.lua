@@ -303,6 +303,19 @@ return {
         mode = "",
         desc = "Format buffer with conform",
       },
+      {
+        "<Space>ft",
+        function()
+          vim.b.disable_autoformat = not vim.b.disable_autoformat
+          if vim.b.disable_autoformat then
+            vim.notify("Disabled format-on-save for this buffer", vim.log.levels.INFO)
+          else
+            vim.notify("Enabled format-on-save for this buffer", vim.log.levels.INFO)
+          end
+        end,
+        mode = "n",
+        desc = "Toggle format-on-save for buffer",
+      },
     },
     opts = {
       -- define formatters
