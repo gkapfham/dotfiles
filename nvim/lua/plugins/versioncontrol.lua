@@ -74,7 +74,8 @@ vim.api.nvim_create_autocmd("TabClosed", {
         if not is_modified then
           local is_empty = vim.api.nvim_buf_line_count(bufnr) == 1
             and vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)[1] == ""
-          -- Check that the empty buffer is not shown in any window and therefore can be deleted
+          -- Check that the empty buffer is not shown in any window
+          -- and therefore can be deleted
           local windows = vim.fn.win_findbuf(bufnr)
           if is_empty and #windows == 0 then
             pcall(vim.api.nvim_buf_delete, bufnr, { force = true })
@@ -190,32 +191,32 @@ return {
     end,
   },
 
-  -- diffview.nvim for viewing diffs
-  {
-    "sindrets/diffview.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    cmd = { "DiffviewOpen", "DiffviewLog" },
-    keys = {
-      { "<Space>do", "<cmd>DiffviewOpen HEAD -- %<cr>", desc = "Open diffview for current file" },
-    },
-    config = function()
-      require("diffview").setup({
-        use_icons = true,
-        icons = {
-          folder_closed = "",
-          folder_open = "",
-        },
-        watch_index = true, -- Update views when the git index changes
-        view = {
-          default = {
-            layout = "diff2_vertical",
-          },
-        },
-      })
-    end,
-  },
+  -- -- diffview.nvim for viewing diffs
+  -- {
+  --   "sindrets/diffview.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   cmd = { "DiffviewOpen", "DiffviewLog" },
+  --   keys = {
+  --     { "<Space>do", "<cmd>DiffviewOpen HEAD -- %<cr>", desc = "Open diffview for current file" },
+  --   },
+  --   config = function()
+  --     require("diffview").setup({
+  --       use_icons = true,
+  --       icons = {
+  --         folder_closed = "",
+  --         folder_open = "",
+  --       },
+  --       watch_index = true, -- Update views when the git index changes
+  --       view = {
+  --         default = {
+  --           layout = "diff2_vertical",
+  --         },
+  --       },
+  --     })
+  --   end,
+  -- },
 
   -- git-conflict.nvim for resolving merge conflicts
   {
