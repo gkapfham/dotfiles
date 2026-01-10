@@ -131,4 +131,7 @@ if [ -n "$EXTERNAL_MONITOR_NAME" ] || [ -n "$MOBILE_MONITOR_NAME" ]; then
 fi
 
 # Set the root color of the desktop
-hsetroot -solid "#a569a5"
+# hsetroot -solid "#a569a5"
+
+# Set the root background image of the desktop
+feh --bg-fill ~/media/images/wallpaper/Honeycomb_Mac.png
