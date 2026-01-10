@@ -125,10 +125,14 @@ return {
           -- nil = auto-detect based on background (1.4 for dark, 0.92 for light)
           char_brightness = nil, -- Auto-adjust based on your colorscheme
           -- nil = use default fallback chain
-          conflict_sign = nil, -- Unresolved: DiagnosticSignWarn -> #f0883e
-          conflict_sign_resolved = nil, -- Resolved: Comment -> #6e7681
-          conflict_sign_accepted = nil, -- Accepted: GitSignsAdd -> DiagnosticSignOk -> #3fb950
-          conflict_sign_rejected = nil, -- Rejected: GitSignsDelete -> DiagnosticSignError -> #f85149
+          -- Unresolved: DiagnosticSignWarn
+          conflict_sign = nil,
+          -- Resolved: Comment
+          conflict_sign_resolved = nil,
+          -- Accepted: GitSignsAdd -> DiagnosticSignOk
+          conflict_sign_accepted = nil,
+          -- Rejected: GitSignsDelete -> DiagnosticSignError
+          conflict_sign_rejected = nil,
         },
         -- Diff view behavior
         diff = {
@@ -291,10 +295,10 @@ return {
         },
         signs_staged = {
           add = { text = "󰐖" },
-          change = { text = "󰦓" },
+          change = { text = "󰑕" },
           delete = { text = "󰍵" },
           topdelete = { text = "" },
-          changedelete = { text = "~" },
+          changedelete = { text = "󰦓" },
           untracked = { text = "" },
         },
         numhl = false,
