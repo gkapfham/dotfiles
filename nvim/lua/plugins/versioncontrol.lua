@@ -2,11 +2,13 @@
 -- Purpose: load and configure all plugins that
 -- integrate with the Git version control system
 
+-- Update the diffview file tree
 local is_git_ignored = function(filepath)
   vim.fn.system("git check-ignore -q " .. vim.fn.shellescape(filepath))
   return vim.v.shell_error == 0
 end
 
+-- Function to update the diffview file tree
 local update_diffview_file_tree = function()
   pcall(function()
     local lib = require("diffview.lib")
