@@ -257,6 +257,13 @@ return {
             end)
             return "<Ignore>"
           end, { expr = true })
+          -- Staged hunk navigation
+          map("n", "]h", function()
+            gs.nav_hunk("next", { target = "staged" })
+          end)
+          map("n", "[h", function()
+            gs.nav_hunk("prev", { target = "staged" })
+          end)
           -- Actions
           map("n", "<leader>hs", gs.stage_hunk)
           map("n", "<leader>hr", gs.reset_hunk)
