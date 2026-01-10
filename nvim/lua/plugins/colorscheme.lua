@@ -99,10 +99,13 @@ return {
           GitConflictCurrentLabel = { fg = "${fg}", bg = "${darkmenu}", bold = true },
           GitConflictIncomingLabel = { fg = "${fg}", bg = "${darkmenu}", bold = true },
           GitSignsAdd = { fg = "${green}" },
+          GitSignsStagedAdd = { fg = "${green}" },
           GitSignsAddPreview = { fg = "${fg}", bg = "${deepgreen}" },
           GitSignsChange = { fg = "${blue}" },
+          GitSignsStagedChange = { fg = "${blue}" },
           GitSignsChangeDelete = { fg = "${yellow}" },
           GitSignsDelete = { fg = "${red}" },
+          GitSignsStagedDelete = { fg = "${red}" },
           GitSignsDeletePreview = { fg = "${fg}", bg = "${deepred}" },
           GitSignsUntracked = { fg = "${orange}" },
           IncSearch = { fg = "NONE", bg = "NONE", bold = true, undercurl = true },
@@ -204,7 +207,7 @@ return {
           ["@number.python"] = { fg = "${magenta}" },
           ["@property"] = { fg = "${blue}" },
           ["@label.markdown"] = { fg = "${cyan}", italic = true },
-        }
+        },
       })
       -- select the color scheme and set the termguicolors
       vim.cmd([[colorscheme onedark_dark]])
@@ -242,5 +245,4 @@ return {
       })
     end,
   },
-
 }
