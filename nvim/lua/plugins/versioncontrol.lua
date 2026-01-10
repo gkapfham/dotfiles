@@ -76,10 +76,82 @@ return {
     },
   },
 
+  -- codediff.nvim for side-by-side code diffs
+  -- that seems eaiser to use than diffview.nvim
   {
     "esmuellert/codediff.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
     cmd = "CodeDiff",
+    config = function()
+      require("codediff").setup({
+        highlights = {
+          line_insert = "DiffAdd",
+          line_delete = "DiffDelete",
+          char_insert = nil,
+          char_delete = nil,
+          -- Brightness multiplier (only used when char_insert/char_delete are nil)
+          -- nil = auto-detect based on background (1.4 for dark, 0.92 for light)
+          char_brightness = nil, -- Auto-adjust based on your colorscheme
+          -- nil = use default fallback chain
+          conflict_sign = nil, -- Unresolved: DiagnosticSignWarn -> #f0883e
+          conflict_sign_resolved = nil, -- Resolved: Comment -> #6e7681
+          conflict_sign_accepted = nil, -- Accepted: GitSignsAdd -> DiagnosticSignOk -> #3fb950
+          conflict_sign_rejected = nil, -- Rejected: GitSignsDelete -> DiagnosticSignError -> #f85149
+        },
+        -- Diff view behavior
+        diff = {
+          disable_inlay_hints = true,
+          max_computation_time_ms = 5000,
+          hide_merge_artifacts = true,
+        },
+        -- Explorer panel configuration
+        explorer = {
+          position = "bottom",
+          width = 40,
+          height = 8,
+          indent_markers = true,
+          icons = {
+            folder_closed = "",
+            folder_open = "",
+          },
+          view_mode = "list",
+          file_filter = {
+            ignore = {},
+          },
+        },
+        keymaps = {
+          view = {
+            quit = "q",
+            toggle_explorer = "<leader>b",
+            -- not needed because I use another plugin
+            -- next_hunk = "]c", -- Jump to next change
+            -- prev_hunk = "[c", -- Jump to previous change
+            -- next_file = "]f", -- Next file in explorer mode
+            -- prev_file = "[f", -- Previous file in explorer mode
+            diff_get = "do",
+            diff_put = "dp",
+          },
+          explorer = {
+            select = "<CR>",
+            hover = "K",
+            refresh = "R",
+            toggle_view_mode = "i",
+          },
+          -- Comments provide reminders about the meaning of
+          -- the keymaps; helpful when resolving a merge conflict
+          conflict = {
+            accept_incoming = "<leader>ct", -- Accept incoming (theirs/left) change
+            accept_current = "<leader>co", -- Accept current (ours/right) change
+            accept_both = "<leader>cb", -- Accept both changes (incoming first)
+            discard = "<leader>cx", -- Discard both, keep base
+            next_conflict = "]x", -- Jump to next conflict
+            prev_conflict = "[x", -- Jump to previous conflict
+            diffget_incoming = "2do", -- Get hunk from incoming (left/theirs) buffer
+            diffget_current = "3do", -- Get hunk from current (right/ours) buffer
+          },
+        },
+      })
+    end,
   },
 
   -- diffview.nvim for viewing diffs
