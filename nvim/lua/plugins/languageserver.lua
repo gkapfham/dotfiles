@@ -331,7 +331,13 @@ return {
       default_format_opts = {
         lsp_format = "fallback",
       },
-      format_on_save = { timeout_ms = 500 },
+      format_on_save = function(bufnr)
+        -- Disable with a buffer-local variable
+        if vim.b[bufnr].disable_autoformat then
+          return
+        end
+        return { timeout_ms = 500 }
+      end,
       -- customize formatters
       formatters = {
         shfmt = {
