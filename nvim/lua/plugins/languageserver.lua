@@ -376,9 +376,6 @@ return {
     event = "LspAttach",
     config = function()
       local SymbolKind = vim.lsp.protocol.SymbolKind
-      -- local function h(name)
-      --   return vim.api.nvim_get_hl(0, { name = name })
-      -- end
       local function text_format(symbol)
         local res = {}
         -- Indicator that shows if there are any other symbols in the same line
@@ -414,7 +411,10 @@ return {
       end
       require("symbol-usage").setup({
         disable = {
-          lsp = { "pyrefly", "pyright", "ty" },
+          -- lsp = { "pyrefly", "pyright", "ty" },
+          -- lsp = { "basedpyright", "ty", "zuban" },
+          -- lsp = { "pyrefly", "ty", "zuban" },
+          lsp = { "pyrefly", "basedpyright", "zuban" },
         },
         kinds = {
           SymbolKind.Function,
