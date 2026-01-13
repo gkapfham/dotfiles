@@ -313,55 +313,103 @@ return {
         linehl = false,
         watch_gitdir = {
           follow_files = true,
-          -- Check for git directory changes every 1 second
-          interval = 1000,
+          -- Check for git directory changes every 500ms for faster detection
+          interval = 500,
         },
         preview_config = {
           border = "rounded",
         },
         attach_to_untracked = false,
         current_line_blame = false,
-        sign_priority = 1,
-        -- Reduce debounce for faster updates
-        update_debounce = 100,
+        -- Higher priority ensures gitsigns are visible above other signs
+        -- Default is 6; setting to 10 ensures it's above diagnostics and other plugins
+        sign_priority = 10,
+        -- Minimal debounce for near-instant updates after file changes
+        update_debounce = 50,
         status_formatter = nil,
+        -- Always refresh staged state on every update for faster response to commits
+        -- Default is false; enabling ensures signs update immediately after staging/committing
+        _refresh_staged_on_update = true,
       })
-      -- Safely refresh gitsigns to reload display from git status
-      local function force_gitsigns_refresh()
-        pcall(function()
-          local gitsigns = require("gitsigns")
-          -- Only refresh - this is read-only and safe
-          gitsigns.refresh()
+      -- Comprehensive refresh strategy to ensure signs always update correctly
+      local function force_gitsigns_refresh_all_buffers()
+        vim.schedule(function()
+          pcall(function()
+            local gitsigns = require("gitsigns")
+            -- Refresh all attached buffers, not just current
+            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+              if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].buftype == "" then
+                gitsigns.refresh()
+              end
+            end
+          end)
+        end)
+      end
+      -- Targeted refresh for current buffer only (faster)
+      local function force_gitsigns_refresh_current()
+        vim.schedule(function()
+          pcall(function()
+            require("gitsigns").refresh()
+          end)
         end)
       end
       -- Create an autocommand group for gitsigns refresh events
       local refresh_group = vim.api.nvim_create_augroup("GitSignsRefresh", { clear = true })
+      -- Critical: Refresh immediately after writing any file to disk
+      -- This ensures signs update when you save files that were just staged/committed
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        group = refresh_group,
+        callback = function()
+          -- Immediate refresh plus a delayed one to catch async git operations
+          force_gitsigns_refresh_current()
+          vim.defer_fn(force_gitsigns_refresh_current, 100)
+        end,
+      })
       -- When commit message buffer is closed, the commit is complete
       vim.api.nvim_create_autocmd({ "BufDelete", "BufUnload" }, {
         group = refresh_group,
         pattern = { "COMMIT_EDITMSG", "*COMMIT_EDITMSG", "*/COMMIT_EDITMSG" },
         callback = function()
-          -- Use multiple delayed refreshes to ensure we catch the commit
-          -- The commit might take a moment to write to .git/index
-          vim.defer_fn(force_gitsigns_refresh, 100)
-          vim.defer_fn(force_gitsigns_refresh, 300)
-          vim.defer_fn(force_gitsigns_refresh, 600)
+          -- After commit completes, refresh all buffers since multiple files may be affected
+          -- Use staggered refreshes to ensure we catch the git state changes
+          vim.defer_fn(force_gitsigns_refresh_all_buffers, 50)
+          vim.defer_fn(force_gitsigns_refresh_all_buffers, 200)
+          vim.defer_fn(force_gitsigns_refresh_all_buffers, 500)
         end,
       })
       -- After any shell command completes (catches :!git, :Git, etc.)
       vim.api.nvim_create_autocmd("ShellCmdPost", {
         group = refresh_group,
         callback = function()
-          vim.defer_fn(force_gitsigns_refresh, 200)
+          -- Shell commands may affect multiple files, refresh all
+          vim.defer_fn(force_gitsigns_refresh_all_buffers, 100)
+          vim.defer_fn(force_gitsigns_refresh_all_buffers, 300)
         end,
       })
       -- When focus returns to neovim (for external git commands)
       vim.api.nvim_create_autocmd("FocusGained", {
         group = refresh_group,
         callback = function()
-          vim.defer_fn(force_gitsigns_refresh, 100)
+          -- External commands may have changed multiple files
+          force_gitsigns_refresh_all_buffers()
+          vim.defer_fn(force_gitsigns_refresh_all_buffers, 200)
         end,
       })
+      -- When entering a buffer, refresh to ensure signs are current
+      vim.api.nvim_create_autocmd("BufEnter", {
+        group = refresh_group,
+        callback = function()
+          -- Only refresh if it's a normal file buffer
+          if vim.bo.buftype == "" then
+            force_gitsigns_refresh_current()
+          end
+        end,
+      })
+      -- User command for manual refresh when needed
+      vim.api.nvim_create_user_command("GitSignsRefresh", function()
+        force_gitsigns_refresh_all_buffers()
+        vim.notify("GitSigns refreshed", vim.log.levels.INFO)
+      end, { desc = "Manually refresh GitSigns for all buffers" })
     end,
   },
 
