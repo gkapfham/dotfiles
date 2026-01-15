@@ -160,7 +160,6 @@ local colors = {
   color6 = "#626262",
   color3 = "#a569a5",
   color1 = "#262626",
-  -- color0  = "#a8a8af",
   color0 = "#c1c1c1",
 }
 local vitaminonec = {
@@ -272,9 +271,9 @@ return {
         },
         -- Define how quickly the lualine must update
         refresh = {
-          statusline = 500,
-          tabline = 500,
-          winbar = 500,
+          statusline = 200,
+          tabline = 200,
+          winbar = 200,
         },
         -- Bottom section of status line
         sections = {
@@ -289,7 +288,9 @@ return {
           },
           -- Bottom right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
-          lualine_x = { { "lsp_progress", icon = "" } },
+          lualine_x = {
+            { "lsp_progress", icon = "" },
+          },
           lualine_y = {
             search_count,
             { "encoding", icon = "" },
