@@ -627,7 +627,15 @@ return {
         mapping = {
           ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
           ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-          ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+          -- Original mapping:
+          -- ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+          ["<C-Space>"] = cmp.mapping(function()
+            local ok, copilot = pcall(require, "copilot.suggestion")
+            if ok and copilot.is_visible() then
+              copilot.dismiss()
+            end
+            cmp.complete({ reason = cmp.ContextReason.Manual })
+          end, { "i", "c" }),
           ["<C-y>"] = cmp.config.disable,
           ["<C-e>"] = cmp.mapping({
             i = cmp.mapping.abort(),
@@ -707,7 +715,7 @@ return {
           { name = "copilot", max_item_count = 10, priority = 10 },
           { name = "supermaven", max_item_count = 10, priority = 10 },
           { name = "minuet", max_item_count = 10, priority = 10 },
-          -- { name = 'supermaven', max_item_count = 10, priority = 8 },
+          { name = "supermaven", max_item_count = 10, priority = 8 },
           -- Look at all of the open buffers
           {
             name = "buffer",
