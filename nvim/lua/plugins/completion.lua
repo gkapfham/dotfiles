@@ -37,6 +37,7 @@ local kind_icons = {
   KeywordException = "󰌋",
   KeywordImport = "󰌋",
   KeywordOperator = "󰌋",
+  KeywordRepeat = "",
   Snippet = "",
   Color = "󰏘",
   File = "󰈙",
@@ -44,6 +45,7 @@ local kind_icons = {
   Folder = "󰉋",
   EnumMember = "",
   Constant = "󰏿",
+  ConstantBuiltin = "󰏿",
   Struct = "󰙅",
   Event = "",
   Operator = "󰆕",
@@ -573,11 +575,11 @@ return {
         -- Favor the quick delivery of a minimal number of completions
         performance = {
           throttle = 0,
-          fetching_timeout = 50,
+          fetching_timeout = 30,
           debounce = 10,
           async_budget = 1,
           filtering_context_budget = 1,
-          confirm_resolve_timeout = 50,
+          confirm_resolve_timeout = 30,
           max_view_entries = 100,
         },
         -- Specify a snippet engine
@@ -593,8 +595,18 @@ return {
         -- Configure the formatting of the completion menu
         formatting = {
           format = function(entry, vim_item)
-            -- Define the icons used for the completion labels
-            vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
+            -- Define the icons used for the completion labels;
+            -- note that specifically I want to have some capitalized
+            -- names for certain completion sources when they are
+            -- by default lowercase due to the name of a model
+            local kind_key = vim_item.kind
+            local kind_label = kind_key
+            if kind_label == "codestral" then
+              kind_label = "Codestral"
+            elseif kind_label == "gemini" then
+              kind_label = "Gemini"
+            end
+            vim_item.kind = string.format("%s %s", kind_icons[kind_key], kind_label)
             -- Define labels for the completion menu;
             -- these will appear to the right of a completion
             -- suggestion in the nvim-cmp menu
@@ -710,29 +722,33 @@ return {
         -- with a higher priority have higher weighting on priority.
         sources = cmp.config.sources({
           -- Define the first-tier of sources
-          { name = "treesitter", max_item_count = 10, priority = 10 },
-          { name = "nvim_lsp", max_item_count = 10, priority = 10 },
-          { name = "copilot", max_item_count = 10, priority = 10 },
-          { name = "supermaven", max_item_count = 10, priority = 10 },
-          { name = "minuet", max_item_count = 10, priority = 10 },
-          { name = "supermaven", max_item_count = 10, priority = 8 },
-          -- Look at all of the open buffers
+          { name = "treesitter", max_item_count = 10, priority = 10, keyword_length = 1 },
+          { name = "nvim_lsp", max_item_count = 10, priority = 10, keyword_length = 1 },
+          { name = "copilot", max_item_count = 10, priority = 10, keyword_length = 1 },
+          { name = "supermaven", max_item_count = 10, priority = 10, keyword_length = 1 },
+          { name = "minuet", max_item_count = 10, priority = 10, keyword_length = 2 },
+          -- Keep alternative supermaven priority example commented for reference
+          -- { name = "supermaven", max_item_count = 10, priority = 8 },
+          -- Look at all of the open buffers as the second-tier of sources
           {
             name = "buffer",
             max_item_count = 10,
             priority = 20,
+            keyword_length = 3,
             option = {
               get_bufnrs = function()
                 return vim.api.nvim_list_bufs()
               end,
             },
           },
-          { name = "fuzzy_buffer", max_item_count = 5, priority = 6 },
-          { name = "cmp_yanky", max_item_count = 5, priority = 6 },
-          { name = "tags", max_item_count = 5, priority = 5 },
-          { name = "luasnip", max_item_count = 5, priority = 5 },
+          -- Define all of the third-tier of sources
+          { name = "fuzzy_buffer", max_item_count = 5, priority = 6, keyword_length = 4 },
+          { name = "cmp_yanky", max_item_count = 5, priority = 6, keyword_length = 4 },
+          { name = "tags", max_item_count = 5, priority = 5, keyword_length = 2 },
+          { name = "luasnip", max_item_count = 5, priority = 5, keyword_length = 2 },
           { name = "otter", max_item_count = 5, priority = 5, keyword_length = 2 },
           { name = "pandoc_references", max_item_count = 5, priority = 5, keyword_length = 2 },
+          -- Define additional sources with various options and priorities
           {
             name = "spell",
             option = {
@@ -801,7 +817,7 @@ return {
         -- all commands previously used in command prompt)
         -- because it might break the tab completion
         sources = cmp.config.sources({
-          { name = "cmdline", max_item_count = 25 },
+          { name = "cmdline", max_item_count = 30 },
         }, {}),
       })
     end,
