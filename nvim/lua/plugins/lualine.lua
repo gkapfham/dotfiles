@@ -187,58 +187,36 @@ local vitaminonec = {
   },
 }
 
---- Define functions in vimscript using vim.cmd {{{
+local function statusline_python_env()
+  local venv = vim.env.VIRTUAL_ENV
+  if venv and venv ~= "" then
+    local name = venv:match("([^/]+)$")
+    if name then
+      return " " .. name
+    end
+  end
+  return ""
+end
 
--- Define a vimscript function to support lualine
-vim.cmd([[
-function! StatuslineGutentags()
-return gutentags#statusline() !=# '' ? ' Tags' : ' Tags'
-endfunction
-]])
+local function statusline_readonly()
+  return vim.bo.readonly and "" or ""
+end
 
--- Define a vimscript function to support lualine
-vim.cmd([[
-function! StatuslinePythonEnvironment()
-" Extract only the name of the virtual environment from the
-" VIRTUAL_ENV variable; note that it also includes the full
-" directory to the virtual environment that is not suitable
-" for including in a section of a status line.
-let l:venv = $VIRTUAL_ENV
-return l:venv !=# '' ? ' '.split(l:venv, '/')[-1] : ''
-endfunction
-]])
+-- local function statusline_spell()
+--   return vim.wo.spell and "A-Z " or "A-Z "
+-- end
 
--- Define a vimscript function to support lualine
-vim.cmd([[
-function! StatuslineReadonly()
-return &readonly ? '' : ''
-endfunction
-]])
+-- local function file_tree()
+--   return ""
+-- end
 
--- Define a vimscript function to support lualine
-vim.cmd([[
-function! StatuslineSpell()
-" Use a different configuration to show whether
-" or not spell checking is currently running
-return &spell ? 'A-Z ' : 'A-Z '
-endfunction
-]])
-
--- " Display a file tree symbol
-vim.cmd([[
-function! FileTree()
-return ''
-endfunction
-]])
-
--- " Display a file tree symbol
-vim.cmd([[
-function! TreeSitterContext()
-return nvim_treesitter#statusline(90)
-endfunction
-]])
-
---- }}}
+-- local function treesitter_context()
+--   local ok, ts_status = pcall(vim.fn.nvim_treesitter_statusline, 90)
+--   if ok then
+--     return ts_status
+--   end
+--   return ""
+-- end
 
 return {
 
@@ -282,14 +260,20 @@ return {
           lualine_a = { { "mode" } },
           lualine_b = { { "branch", icon = "󰘬" }, { "diff", source = diff_source, icon = "" } },
           lualine_c = {
-            "StatuslineReadonly",
+            statusline_readonly,
             { "filename", icon = "󰓈 ", path = 0, file_status = false, symbols = { unnamed = "", newfile = "" } },
             { "selectioncount", icon = "󰉄" },
           },
           -- Bottom right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
           lualine_x = {
-            { "lsp_progress", icon = "" },
+            {
+              "lsp_progress",
+              icon = "",
+              cond = function()
+                return vim.tbl_count(vim.lsp.get_clients({ bufnr = 0 })) > 0
+              end,
+            },
           },
           lualine_y = {
             search_count,
@@ -325,7 +309,13 @@ return {
             },
             { "progress", icon = "󰮴" },
             { "location", icon = "" },
-            { "aerial", colored = false },
+            {
+              "aerial",
+              colored = false,
+              cond = function()
+                return vim.fn.exists("*aerial#statusline") == 1 or package.loaded["aerial"] ~= nil
+              end,
+            },
           },
         },
         tabline = {
@@ -365,8 +355,12 @@ return {
           lualine_c = {},
           -- Top right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
-          lualine_x = { { "diagnostics", symbols = { error = " ", warn = " ", info = " ", hint = " " } } },
-          lualine_y = { "StatuslinePythonEnvironment" },
+          lualine_x = {
+            { "diagnostics", symbols = { error = " ", warn = " ", info = " ", hint = " " } },
+          },
+          lualine_y = {
+            statusline_python_env,
+          },
           lualine_z = {
             function()
               return spell_status() .. " " .. lsp_clients()
