@@ -54,6 +54,7 @@ return {
           "rust",
           "svelte",
           "scss",
+          "toml",
           "tmux",
           "tsx",
           "typescript",
@@ -64,41 +65,41 @@ return {
           "yaml",
         },
         -- highlighting
-        highlight = { enable = true, },
+        highlight = { enable = true, disable = { "toml" } },
         -- indenting
-        indent = { enable = true, },
+        indent = { enable = true },
         -- commenting
         context_commentstring = { enable = true, enable_autocmd = false },
-        require "nvim-treesitter.configs".setup {
+        require("nvim-treesitter.configs").setup({
           playground = {
             enable = true,
             disable = {},
             updatetime = 25,
             persist_queries = false,
             keybindings = {
-              toggle_query_editor = 'o',
-              toggle_hl_groups = 'i',
-              toggle_injected_languages = 't',
-              toggle_anonymous_nodes = 'a',
-              toggle_language_display = 'I',
-              focus_language = 'f',
-              unfocus_language = 'F',
-              update = 'R',
-              goto_node = '<cr>',
-              show_help = '?',
+              toggle_query_editor = "o",
+              toggle_hl_groups = "i",
+              toggle_injected_languages = "t",
+              toggle_anonymous_nodes = "a",
+              toggle_language_display = "I",
+              focus_language = "f",
+              unfocus_language = "F",
+              update = "R",
+              goto_node = "<cr>",
+              show_help = "?",
             },
-          }
-        },
+          },
+        }),
       })
-      vim.cmd [[
+      vim.cmd([[
         autocmd VimEnter * TSEnable highlight
-      ]]
+      ]])
       -- make sure that quarto files use the markdown
       -- parser for treesitter (there is no parser for quarto);
       -- note that this is important to set because, without
       -- it, the preview feature in Snacks.nvim's pickers for
       -- .qmd files will not display syntax highlighting correctly
-      vim.treesitter.language.register('markdown', 'quarto')
+      vim.treesitter.language.register("markdown", "quarto")
     end,
   },
 
@@ -110,7 +111,7 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     event = "VeryLazy",
     config = function()
-      require 'nvim-treesitter.configs'.setup {
+      require("nvim-treesitter.configs").setup({
         textobjects = {
           select = {
             enable = true,
@@ -138,7 +139,7 @@ return {
             },
           },
         },
-      }
+      })
     end,
   },
 
@@ -148,19 +149,19 @@ return {
     "monkoose/matchparen.nvim",
     event = "VeryLazy",
     config = function()
-      require('matchparen').setup({
-          -- Set to `false` to disable at matchpren at startup
-          -- Enable matchparen manually with `:MatchParenEnable`
-          enabled = true,
-          -- Highlight group of the matched brackets
-          -- Change it to any other or adjust colors of "MathParen" highlight group
-          -- in your colorscheme to your liking
-          hl_group = 'MatchParen',
-          -- Debounce time in milliseconds for rehighlighting brackets
-          -- Set to 0 to disable debouncing
-          debounce_time = 60,
+      require("matchparen").setup({
+        -- Set to `false` to disable at matchpren at startup
+        -- Enable matchparen manually with `:MatchParenEnable`
+        enabled = true,
+        -- Highlight group of the matched brackets
+        -- Change it to any other or adjust colors of "MathParen" highlight group
+        -- in your colorscheme to your liking
+        hl_group = "MatchParen",
+        -- Debounce time in milliseconds for rehighlighting brackets
+        -- Set to 0 to disable debouncing
+        debounce_time = 60,
       })
-    end
+    end,
   },
 
   -- targets.vim
@@ -172,5 +173,4 @@ return {
     "wellle/targets.vim",
     event = "VeryLazy",
   },
-
 }
