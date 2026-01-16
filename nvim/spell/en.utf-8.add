@@ -3896,3 +3896,9 @@ autosel
 secho
 ExitCode
 BaseModels
+ok
+pcall
+statusline
+
+
+
