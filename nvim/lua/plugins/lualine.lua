@@ -211,22 +211,6 @@ local function treesitter_attached()
   return "󱥑 TSP"
 end
 
--- local function statusline_spell()
---   return vim.wo.spell and "A-Z " or "A-Z "
--- end
-
--- local function file_tree()
---   return ""
--- end
-
--- local function treesitter_context()
---   local ok, ts_status = pcall(vim.fn.nvim_treesitter_statusline, 90)
---   if ok then
---     return ts_status
---   end
---   return ""
--- end
-
 return {
 
   -- lualine.nvim
