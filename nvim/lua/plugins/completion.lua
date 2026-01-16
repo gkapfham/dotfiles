@@ -79,6 +79,7 @@ local kind_icons = {
   MarkupList = "",
   MarkupRawBlock = "󰒔",
   MarkupStrong = "",
+  OdpPunctuationBracket = "󰅪",
   PunctuationSpecial = "",
   VariableMember = "󰫧",
 }
