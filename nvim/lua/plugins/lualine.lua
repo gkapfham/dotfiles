@@ -202,6 +202,15 @@ local function statusline_readonly()
   return vim.bo.readonly and "" or ""
 end
 
+local function treesitter_attached()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local ok, parser = pcall(vim.treesitter.get_parser, bufnr)
+  if ok and parser then
+    return "󰙅"
+  end
+  return "󱥑 TSP"
+end
+
 -- local function statusline_spell()
 --   return vim.wo.spell and "A-Z " or "A-Z "
 -- end
@@ -249,9 +258,9 @@ return {
         },
         -- Define how quickly the lualine must update
         refresh = {
-          statusline = 200,
-          tabline = 200,
-          winbar = 200,
+          statusline = 500,
+          tabline = 500,
+          winbar = 500,
         },
         -- Bottom section of status line
         sections = {
@@ -363,7 +372,7 @@ return {
           },
           lualine_z = {
             function()
-              return spell_status() .. " " .. lsp_clients()
+              return spell_status() .. " " .. lsp_clients() .. " " .. treesitter_attached()
             end,
           },
         },
