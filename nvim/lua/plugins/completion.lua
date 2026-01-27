@@ -21,6 +21,7 @@ local kind_icons = {
   Text = "󰉿",
   Method = "󰆧",
   Function = "󰊕",
+  FunctionMacro = "󰊕",
   Constructor = "",
   Field = "󰜢",
   Variable = "󰀫",
@@ -80,6 +81,7 @@ local kind_icons = {
   MarkupRawBlock = "󰒔",
   MarkupStrong = "",
   OdpPunctuationBracket = "󰅪",
+  OdpCurly_Group_Word = "",
   PunctuationSpecial = "",
   VariableMember = "󰫧",
 }
