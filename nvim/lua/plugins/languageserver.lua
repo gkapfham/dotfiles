@@ -155,8 +155,8 @@ return {
             latexFormatter = "latexindent",
             latexindent = {
               modifyLineBreaks = false,
-              spaces = 2,
-              indent = " ",
+              spaces = 4,
+              indent = "  ",
             },
           },
         },
