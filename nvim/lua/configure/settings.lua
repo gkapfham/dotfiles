@@ -81,10 +81,11 @@ vim.cmd([[
   set tabstop=4
 ]])
 
--- Separate linebreaks and tabs for Golang
+-- Separate linebreaks and tabs for Golang and LaTeX
 vim.cmd([[
   au Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
   au Filetype go setlocal listchars+=tab:\ \
+  au Filetype tex setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
 ]])
 
 -- Insert spaces for a tab
