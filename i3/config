@@ -611,3 +611,11 @@ bindsym Control+Print exec "exec maim -i $(xdotool getactivewindow) | xclip -sel
 bindsym Shift+Print exec "exec maim -s | xclip -selection clipboard -t image/png"
 
 # }}}
+
+# Mouse Workspace Navigation {{{
+
+# Navigate workspaces with Super + scroll anywhere on window
+bindsym --whole-window Mod4+button4 workspace prev_on_output
+bindsym --whole-window Mod4+button5 workspace next_on_output
+
+# }}}
