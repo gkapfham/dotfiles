@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-kitty "$@" --single-instance 
+# kitty "$@" --single-instance 
+ghostty
