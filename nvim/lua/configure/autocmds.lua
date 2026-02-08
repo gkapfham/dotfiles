@@ -7,7 +7,6 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, { comma
 -- Set COLORTERM to truecolor for Neovim's terminal
 vim.api.nvim_create_autocmd("TermOpen", {
   callback = function()
-    vim.env.COLORTERM = 'truecolor'
     vim.cmd("let g:terminal_color_0 = '#767676'")
     vim.cmd("let g:terminal_color_1 = '#d78700'")
     vim.cmd("let g:terminal_color_2 = '#6f9500'")
