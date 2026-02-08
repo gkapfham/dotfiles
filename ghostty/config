@@ -1,0 +1,78 @@
+# Ghostty Terminal Configuration
+# Converted from kitty configuration
+
+# Font Configuration
+# Using Maple Mono NF to match kitty setup
+font-family = "Maple Mono NF"
+font-size = 13
+
+# Font features - enable ligatures
+font-feature = +calt
+font-feature = +liga
+font-feature = +dlig
+
+# Background and Foreground Colors
+background = 1c1c1c
+foreground = d2d2d2
+
+# Color Palette (16 colors)
+# Black
+palette = 0=#767676
+palette = 8=#767676
+
+# Red
+palette = 1=#d78700
+palette = 9=#d78700
+
+# Green
+palette = 2=#6f9500
+palette = 10=#6f9500
+
+# Yellow
+palette = 3=#b7b757
+palette = 11=#b7b757
+
+# Blue
+palette = 4=#87afd7
+palette = 12=#87afd7
+
+# Magenta
+palette = 5=#a569a5
+palette = 13=#a569a5
+
+# Cyan
+palette = 6=#d75f5f
+palette = 14=#d75f5f
+
+# White
+palette = 7=#b2b2b2
+palette = 15=#b2b2b2
+
+# Cursor Configuration
+cursor-color = b2b2b2
+
+# Shell Integration
+# Ghostty has shell integration on by default, disable to match kitty
+shell-integration = none
+
+# Window Settings
+window-decoration = true
+# Enable menu bar at the top
+gtk-titlebar = true
+# Set titlebar colors explicitly so they're visible
+window-theme = ghostty
+window-titlebar-background = #2d2d2d
+window-titlebar-foreground = #ffffff
+window-padding-x = 0
+window-padding-y = 0
+window-padding-balance = true
+
+# Performance Settings
+# Ghostty is optimized by default, these match kitty's performance tuning
+# (ghostty doesn't have direct equivalents but is already highly performant)
+
+# Window Close Behavior
+# Ghostty doesn't prompt by default when closing, similar to your kitty setup
+quit-after-last-window-closed = true
+
+# Audio/Visual Bell (ghostty has no bell by default)
