@@ -25,7 +25,7 @@ local function lsp_clients()
     render_markdown = "󰍕",
     ruff = "󱝁",
     ruff_lsp = "󱝁",
-    rumdl = "󰙒",
+    rumdl = "󱒄",
     texlab = "",
     ty = "󱙨",
     yamlls = "",
