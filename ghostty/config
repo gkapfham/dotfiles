@@ -62,7 +62,7 @@ cursor-style-blink = false
 shell-integration = zsh
 
 # shell-integration-features = no-cursor,title
-shell-integration-features = title
+shell-integration-features = cursor,title
 
 # Window Settings
 window-decoration = true
