@@ -61,8 +61,12 @@ cursor-style-blink = false
 # Enable shell integration
 shell-integration = zsh
 
-# shell-integration-features = no-cursor,title
-shell-integration-features = cursor,title
+# Configure shell integration features,
+# using no-cursor confirms use of the block
+# cursor shape by default and title makes
+# sure that the titlebar is shown at the
+# top of the window and it updates dynamically
+shell-integration-features = no-cursor,title
 
 # Window Settings
 window-decoration = true
