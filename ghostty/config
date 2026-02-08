@@ -51,14 +51,23 @@ palette = 15=#b2b2b2
 # Cursor Configuration
 cursor-color = b2b2b2
 
+# Always use block cursor
+cursor-style = block
+
+# Prevent cursor from changing styles
+cursor-style-blink = false
+
 # Shell Integration
-# Ghostty has shell integration on by default, disable to match kitty
-shell-integration = none
+# Enable shell integration but disable cursor shape changes
+shell-integration = zsh
+shell-integration-features = no-cursor,title
 
 # Window Settings
 window-decoration = true
+
 # Enable menu bar at the top
 gtk-titlebar = true
+
 # Set titlebar colors explicitly so they're visible
 window-theme = ghostty
 window-titlebar-background = #2d2d2d
@@ -72,7 +81,42 @@ window-padding-balance = true
 # (ghostty doesn't have direct equivalents but is already highly performant)
 
 # Window Close Behavior
-# Ghostty doesn't prompt by default when closing, similar to your kitty setup
-quit-after-last-window-closed = true
+quit-after-last-window-closed = false
 
 # Audio/Visual Bell (ghostty has no bell by default)
+
+# Clipboard Settings
+# Copy to clipboard on selection (like many terminal emulators)
+clipboard-read = allow
+clipboard-write = allow
+# Optionally: copy on select without needing Ctrl+Shift+C
+# clipboard-paste-protection = false
+
+# Mouse Settings
+# Allow clicking URLs to open them
+link-url = true
+
+# Tab Settings
+# Show tab bar when there are multiple tabs
+window-show-tab-bar = auto
+
+# Scrollback
+# Number of lines to keep in scrollback buffer (default is 10000)
+scrollback-limit = 10000
+
+# Confirm before closing window with running processes
+confirm-close-surface = true
+
+# Working Directory
+# When opening new tabs/splits, inherit the working directory
+working-directory = inherit
+
+# Keybindings
+# Note: Many useful keybindings are already set by default
+# These are some additional or customized ones
+# Navigate between tabs (these are already default but shown for reference)
+# keybind = ctrl+page_down=next_tab
+# keybind = ctrl+page_up=previous_tab
+# Split window
+keybind = ctrl+shift+d=new_split:right
+keybind = ctrl+shift+e=new_split:down
