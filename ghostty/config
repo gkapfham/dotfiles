@@ -1,5 +1,4 @@
 # Ghostty Terminal Configuration
-# Converted from kitty configuration
 
 # Font Configuration
 # Using Maple Mono NF to match kitty setup
@@ -58,9 +57,12 @@ cursor-style = block
 cursor-style-blink = false
 
 # Shell Integration
-# Enable shell integration but disable cursor shape changes
+
+# Enable shell integration
 shell-integration = zsh
-shell-integration-features = no-cursor,title
+
+# shell-integration-features = no-cursor,title
+shell-integration-features = title
 
 # Window Settings
 window-decoration = true
