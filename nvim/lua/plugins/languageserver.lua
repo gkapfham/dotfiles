@@ -86,6 +86,13 @@ return {
         filetypes = { "markdown", "quarto" },
       })
       vim.lsp.enable("marksman")
+      -- configure rumdl for Markdown LSP;
+      -- it performs linting and language server tasks
+      -- and is fast because it is implemented in rust
+      vim.lsp.config("rumdl", {
+        filetypes = { "markdown", "quarto" },
+      })
+      vim.lsp.enable("rumdl")
       -- configure pyright for Python LSPs
       -- configure basedpyright for Python LSP (enhanced pyright fork)
       vim.lsp.config("basedpyright", {
