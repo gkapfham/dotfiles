@@ -1,8 +1,16 @@
 # Ghostty Terminal Configuration
 
 # Font Configuration
-# Using Maple Mono NF to match kitty setup
+# 1) Using Maple Mono NF where "NF" stands
+# for "Nerd Font" giving cool glyphs and icons
+# 2) SemiBold and ExtraBold styles for better readability
+# 3) Font size 13 for comfortable reading
 font-family = "Maple Mono NF"
+font-family-bold = "Maple Mono NF"
+font-style = "SemiBold"
+font-style-bold = "ExtraBold"
+font-family-italic = "Maple Mono NF"
+font-style-italic = "SemiBold Italic"
 font-size = 13
 
 # Font features - enable ligatures
