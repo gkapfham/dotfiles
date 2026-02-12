@@ -349,7 +349,7 @@ load_plugins {
     zjstatus
 }
 web_client {
-    font "monospace"
+    font "Maple Mono NF"
 }
  
 // Use a simplified UI without special fonts (arrow glyphs)
@@ -557,15 +557,15 @@ scrollback_lines_to_serialize 0
 // - "disabled" (do not allow web sharing and do not permit sessions started in the terminal to opt-in to it)
 // Default: "off"
 // 
-// web_sharing "off"
+web_sharing "on"
 // A path to a certificate file to be used when setting up the web client to serve the
 // connection over HTTPs
 // 
-// web_server_cert "/path/to/cert.pem"
+web_server_cert "/home/gkapfham/.config/zellij/certs/zellij.pem"
 // A path to a key file to be used when setting up the web client to serve the
 // connection over HTTPs
 // 
-// web_server_key "/path/to/key.pem"
+web_server_key "/home/gkapfham/.config/zellij/certs/zellij-key.pem"
 /// Whether to enforce https connections to the web server when it is bound to localhost
 /// (127.0.0.0/8)
 ///
@@ -582,7 +582,6 @@ scrollback_lines_to_serialize 0
  
 // Whether to show tips on startup
 // Default: true
-// 
 show_startup_tips false
 
 // Fix for NixOS wrapped neovim - replace unwrapped path and strip --cmd wrapper arguments
@@ -596,16 +595,23 @@ post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | sed -E 's|/nix/store/
 // Whether to enable mouse hover effects and pane grouping functionality
 // default is true
 // advanced_mouse_actions false
+
+// Do not start the web server by default;
+// note that opt-in is still possible
+web_server false
+
+// Require https connections to the web server
+enforce_https_on_localhost true
  
 // The ip address the web server should listen on when it starts
 // Default: "127.0.0.1"
 // (Requires restart)
-// web_server_ip "127.0.0.1"
+web_server_ip "0.0.0.0"
  
 // The port the web server should listen on when it starts
 // Default: 8082
 // (Requires restart)
-// web_server_port 8082
+web_server_port 5590
  
 // A command to run (will be wrapped with sh -c and provided the RESURRECT_COMMAND env variable) 
 // after Zellij attempts to discover a command inside a pane when resurrecting sessions, the STDOUT
