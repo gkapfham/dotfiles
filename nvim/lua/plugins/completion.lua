@@ -285,13 +285,13 @@ return {
         },
         tools = {
           opencode = {
-            cmd = { "npx", "opencode-ai@latest" },
+            cmd = { "bunx", "opencode-ai@latest" },
           },
           amp = {
-            cmd = { "amp" },
+            cmd = { "bunx", "@sourcegraph/amp@latest" },
           },
           toad = {
-            cmd = { "toad", "acp", "npx opencode-ai@latest acp", "--project-dir", "." },
+            cmd = { "toad", "acp", "bunx opencode-ai@latest acp", "--project-dir", "." },
           },
         },
       },
