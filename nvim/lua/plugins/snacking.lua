@@ -448,6 +448,21 @@ return {
         desc = "Find Files: Smart",
       },
       {
+        "<Space>si",
+        function()
+          require("similar").pick()
+        end,
+        desc = "Similar Files",
+      },
+      {
+        "<Space>si",
+        function()
+          require("similar").pick_visual()
+        end,
+        mode = "v",
+        desc = "Similar Files (selection)",
+      },
+      {
         "<Space>ta",
         function()
           require("aerial").snacks_picker()
