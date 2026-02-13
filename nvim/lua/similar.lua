@@ -1,7 +1,8 @@
 -- File: similar.lua
 -- Purpose: compression-based text similarity search as a snacks picker.
--- Works like live grep but ranks files by how well their content
--- compresses the query, using zstd dictionary compression via LuaJIT FFI.
+-- Works like live grep but ranks files by semantic similarity.
+-- Uses a two-phase approach: fast token cosine pre-filter, then
+-- zstd dictionary compression re-ranking on top candidates.
 
 local ffi = require("ffi")
 
@@ -46,31 +47,28 @@ end
 
 local zstd = load_zstd()
 
-local function compress_with_dict(cctx, query, dict)
-  local bound = zstd.ZSTD_compressBound(#query)
-  local dst = ffi.new("char[?]", bound)
-  local result = zstd.ZSTD_compress_usingDict(cctx, dst, bound, query, #query, dict, #dict, 1)
-  if zstd.ZSTD_isError(result) ~= 0 then
-    return #query
+local function tokenize(text)
+  local tokens = {}
+  for word in text:gmatch("[%w_]+") do
+    local lw = word:lower()
+    tokens[lw] = (tokens[lw] or 0) + 1
   end
-  return tonumber(result)
+  return tokens
 end
 
-local function compress_baseline(query)
-  local bound = zstd.ZSTD_compressBound(#query)
-  local dst = ffi.new("char[?]", bound)
-  local result = zstd.ZSTD_compress(dst, bound, query, #query, 1)
-  if zstd.ZSTD_isError(result) ~= 0 then
-    return #query
+local function token_norm(tokens)
+  local sum = 0
+  for _, c in pairs(tokens) do
+    sum = sum + c * c
   end
-  return tonumber(result)
+  return math.sqrt(sum)
 end
 
---- Read all text files under cwd into memory.
+--- Scan files and pre-compute token vectors for fast filtering.
 --- Must be called in normal context (not async).
 ---@param cwd string
----@return { path: string, rel: string, content: string }[]
-local function scan_files(cwd)
+---@return table[]
+local function scan_and_index(cwd)
   local max_size = 512 * 1024
   local paths = vim.fn.globpath(cwd, "**/*", false, true)
   local files = {}
@@ -83,10 +81,13 @@ local function scan_files(cwd)
           local data = vim.uv.fs_read(fd, stat.size, 0)
           vim.uv.fs_close(fd)
           if data and #data > 0 and not data:sub(1, 512):find("\0") then
+            local tokens = tokenize(data)
             files[#files + 1] = {
               path = filepath,
               rel = filepath:sub(#cwd + 2),
               content = data,
+              tokens = tokens,
+              norm = token_norm(tokens),
             }
           end
         end
@@ -96,32 +97,80 @@ local function scan_files(cwd)
   return files
 end
 
+--- Two-phase similarity scoring:
+--- 1. Token cosine similarity to find candidates (instant)
+--- 2. Zstd dictionary compression to re-rank top candidates
+---@param query string
+---@param files table[]
+---@param top_n number
+---@return table[]
+local function score(query, files, top_n)
+  local qtokens = tokenize(query)
+  local qnorm = token_norm(qtokens)
+  if qnorm == 0 then
+    return {}
+  end
+  local candidates = {}
+  for _, f in ipairs(files) do
+    local dot = 0
+    for word, qcount in pairs(qtokens) do
+      local fcount = f.tokens[word]
+      if fcount then
+        dot = dot + qcount * fcount
+      end
+    end
+    if dot > 0 then
+      candidates[#candidates + 1] = {
+        file = f,
+        token_sim = dot / (qnorm * f.norm),
+      }
+    end
+  end
+  table.sort(candidates, function(a, b)
+    return a.token_sim > b.token_sim
+  end)
+  local n = math.min(top_n, #candidates)
+  local cctx = zstd.ZSTD_createCCtx()
+  local bound = zstd.ZSTD_compressBound(#query)
+  local dst = ffi.new("char[?]", bound)
+  local baseline = tonumber(
+    zstd.ZSTD_compress(dst, bound, query, #query, 1)
+  )
+  local ranked = {}
+  for i = 1, n do
+    local c = candidates[i]
+    local size = tonumber(zstd.ZSTD_compress_usingDict(
+      cctx, dst, bound,
+      query, #query,
+      c.file.content, #c.file.content,
+      1
+    ))
+    local sim = math.max(0, 1 - size / baseline)
+    ranked[#ranked + 1] = {
+      rel = c.file.rel,
+      path = c.file.path,
+      sim = sim,
+    }
+  end
+  zstd.ZSTD_freeCCtx(cctx)
+  table.sort(ranked, function(a, b)
+    return a.sim > b.sim
+  end)
+  return ranked
+end
+
 --- Open the similarity picker, optionally with initial search text.
 ---@param initial_search? string
 function M.pick(initial_search)
   local cwd = vim.uv.cwd() or "."
-  local files = scan_files(cwd)
+  local files = scan_and_index(cwd)
   Snacks.picker({
     title = string.format("Similar Files (%d files)", #files),
     finder = function(_, ctx)
       if ctx.filter.search == "" then
         return function() end
       end
-      local query = ctx.filter.search
-      local baseline = compress_baseline(query)
-      local cctx = zstd.ZSTD_createCCtx()
-      local ranked = {}
-      for _, f in ipairs(files) do
-        local size = compress_with_dict(cctx, query, f.content)
-        local sim = math.max(0, 1 - size / baseline)
-        if sim > 0 then
-          ranked[#ranked + 1] = { rel = f.rel, path = f.path, sim = sim }
-        end
-      end
-      zstd.ZSTD_freeCCtx(cctx)
-      table.sort(ranked, function(a, b)
-        return a.sim > b.sim
-      end)
+      local ranked = score(ctx.filter.search, files, 50)
       ---@async
       return function(cb)
         for _, r in ipairs(ranked) do
@@ -158,9 +207,17 @@ function M.pick(initial_search)
 end
 
 function M.pick_visual()
-  local lines = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })
+  local lines = vim.fn.getregion(
+    vim.fn.getpos("v"),
+    vim.fn.getpos("."),
+    { type = vim.fn.mode() }
+  )
   local text = table.concat(lines, " ")
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
+    "nx",
+    false
+  )
   M.pick(text)
 end
 
