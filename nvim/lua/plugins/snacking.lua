@@ -78,7 +78,7 @@ return {
           input = {
             keys = {
               -- Remap toggle_live from <C-g> to <C-f> (avoids Zellij and spelling conflicts)
-              -- <C-g> conflicts with Zellij lock, <C-l> conflicts with spell correction
+              -- <C-g> conflicts with Zellij lock
               ["<c-l>"] = { "toggle_live", mode = { "i", "n" } },
               ["<c-g>"] = false,
             },
