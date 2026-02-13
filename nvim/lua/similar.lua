@@ -8,6 +8,13 @@ local ffi = require("ffi")
 
 local M = {}
 
+-- Cache for file index to avoid rescanning on every picker open
+local file_cache = {
+  cwd = nil,
+  files = nil,
+  mtime = 0,
+}
+
 ffi.cdef([[
   typedef struct ZSTD_CCtx_s ZSTD_CCtx;
   ZSTD_CCtx* ZSTD_createCCtx(void);
@@ -71,10 +78,17 @@ local function token_norm(tokens)
 end
 
 --- Scan files and pre-compute token vectors for fast similarity.
---- Must be called in normal context (not async).
+--- Uses caching to avoid rescanning on every picker open.
 ---@param cwd string
+---@param force? boolean Force rescan even if cache is valid
 ---@return table[]
-local function scan_and_index(cwd)
+local function scan_and_index(cwd, force)
+  -- Check cache validity (same directory, less than 30 seconds old)
+  local now = vim.uv.now()
+  if not force and file_cache.cwd == cwd and file_cache.files and (now - file_cache.mtime) < 30000 then
+    return file_cache.files
+  end
+
   local max_size = 512 * 1024
   local paths = vim.fn.globpath(cwd, "**/*", false, true)
   local files = {}
@@ -100,6 +114,12 @@ local function scan_and_index(cwd)
       end
     end
   end
+
+  -- Update cache
+  file_cache.cwd = cwd
+  file_cache.files = files
+  file_cache.mtime = now
+
   return files
 end
 
@@ -116,6 +136,7 @@ local function score(query, files)
     return {}
   end
   local candidates = {}
+
   for _, f in ipairs(files) do
     local dot = 0
     for word, qcount in pairs(qtokens) do
@@ -133,13 +154,14 @@ local function score(query, files)
       }
     end
   end
+
   table.sort(candidates, function(a, b)
     return a.sim > b.sim
   end)
-  -- For longer queries, use zstd compression to re-rank
-  -- the top candidates where it can add signal
-  if #query >= 30 then
-    local top_n = math.min(50, #candidates)
+
+  -- For longer queries, use zstd compression to re-rank top candidates
+  if #query >= 30 and #candidates > 0 then
+    local top_n = math.min(20, #candidates)
     local cctx = zstd.ZSTD_createCCtx()
     local bound = zstd.ZSTD_compressBound(#query)
     local dst = ffi.new("char[?]", bound)
@@ -164,6 +186,7 @@ local function score(query, files)
       return a.sim > b.sim
     end)
   end
+
   -- Drop content references before returning
   for _, c in ipairs(candidates) do
     c.content = nil
@@ -176,16 +199,23 @@ end
 function M.pick(initial_search)
   local cwd = vim.uv.cwd() or "."
   local files = scan_and_index(cwd)
+
   Snacks.picker({
     title = string.format("Similar Files (%d files)", #files),
     finder = function(_, ctx)
       if ctx.filter.search == "" then
         return function() end
       end
-      local ranked = score(ctx.filter.search, files)
+
+      -- Return async iterator that does scoring inside it
       ---@async
       return function(cb)
-        for _, r in ipairs(ranked) do
+        local ranked = score(ctx.filter.search, files)
+
+        -- Limit to top 100 results for faster UI rendering
+        local max_results = math.min(100, #ranked)
+        for i = 1, max_results do
+          local r = ranked[i]
           local pct = string.format("%.1f%%", r.sim * 100)
           cb({
             text = pct .. " " .. r.rel,
@@ -231,6 +261,13 @@ function M.pick_visual()
     false
   )
   M.pick(text)
+end
+
+--- Clear the file cache to force a rescan on next picker open
+function M.clear_cache()
+  file_cache.cwd = nil
+  file_cache.files = nil
+  file_cache.mtime = 0
 end
 
 -- CLI mode: nvim -l similar.lua <directory> <query>
