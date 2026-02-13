@@ -1,8 +1,8 @@
 -- File: similar.lua
 -- Purpose: compression-based text similarity search as a snacks picker.
 -- Works like live grep but ranks files by semantic similarity.
--- Uses a two-phase approach: fast token cosine pre-filter, then
--- zstd dictionary compression re-ranking on top candidates.
+-- Uses token cosine similarity for scoring, with zstd dictionary
+-- compression as a re-ranking boost for longer queries.
 
 local ffi = require("ffi")
 
@@ -47,6 +47,9 @@ end
 
 local zstd = load_zstd()
 
+--- Tokenize text into lowercase word frequencies.
+---@param text string
+---@return table<string, number>
 local function tokenize(text)
   local tokens = {}
   for word in text:gmatch("[%w_]+") do
@@ -56,6 +59,9 @@ local function tokenize(text)
   return tokens
 end
 
+--- Compute the L2 norm of a token frequency vector.
+---@param tokens table<string, number>
+---@return number
 local function token_norm(tokens)
   local sum = 0
   for _, c in pairs(tokens) do
@@ -64,7 +70,7 @@ local function token_norm(tokens)
   return math.sqrt(sum)
 end
 
---- Scan files and pre-compute token vectors for fast filtering.
+--- Scan files and pre-compute token vectors for fast similarity.
 --- Must be called in normal context (not async).
 ---@param cwd string
 ---@return table[]
@@ -97,14 +103,13 @@ local function scan_and_index(cwd)
   return files
 end
 
---- Two-phase similarity scoring:
---- 1. Token cosine similarity to find candidates (instant)
---- 2. Zstd dictionary compression to re-rank top candidates
+--- Compute similarity scores for all files against a query.
+--- Uses token cosine similarity as the primary score, with
+--- optional zstd compression re-ranking for longer queries.
 ---@param query string
 ---@param files table[]
----@param top_n number
 ---@return table[]
-local function score(query, files, top_n)
+local function score(query, files)
   local qtokens = tokenize(query)
   local qnorm = token_norm(qtokens)
   if qnorm == 0 then
@@ -121,42 +126,49 @@ local function score(query, files, top_n)
     end
     if dot > 0 then
       candidates[#candidates + 1] = {
-        file = f,
-        token_sim = dot / (qnorm * f.norm),
+        rel = f.rel,
+        path = f.path,
+        sim = dot / (qnorm * f.norm),
+        content = f.content,
       }
     end
   end
   table.sort(candidates, function(a, b)
-    return a.token_sim > b.token_sim
-  end)
-  local n = math.min(top_n, #candidates)
-  local cctx = zstd.ZSTD_createCCtx()
-  local bound = zstd.ZSTD_compressBound(#query)
-  local dst = ffi.new("char[?]", bound)
-  local baseline = tonumber(
-    zstd.ZSTD_compress(dst, bound, query, #query, 1)
-  )
-  local ranked = {}
-  for i = 1, n do
-    local c = candidates[i]
-    local size = tonumber(zstd.ZSTD_compress_usingDict(
-      cctx, dst, bound,
-      query, #query,
-      c.file.content, #c.file.content,
-      1
-    ))
-    local sim = math.max(0, 1 - size / baseline)
-    ranked[#ranked + 1] = {
-      rel = c.file.rel,
-      path = c.file.path,
-      sim = sim,
-    }
-  end
-  zstd.ZSTD_freeCCtx(cctx)
-  table.sort(ranked, function(a, b)
     return a.sim > b.sim
   end)
-  return ranked
+  -- For longer queries, use zstd compression to re-rank
+  -- the top candidates where it can add signal
+  if #query >= 30 then
+    local top_n = math.min(50, #candidates)
+    local cctx = zstd.ZSTD_createCCtx()
+    local bound = zstd.ZSTD_compressBound(#query)
+    local dst = ffi.new("char[?]", bound)
+    local baseline = tonumber(
+      zstd.ZSTD_compress(dst, bound, query, #query, 1)
+    )
+    for i = 1, top_n do
+      local c = candidates[i]
+      local size = tonumber(zstd.ZSTD_compress_usingDict(
+        cctx, dst, bound,
+        query, #query,
+        c.content, #c.content,
+        1
+      ))
+      local csim = math.max(0, 1 - size / baseline)
+      if csim > 0 then
+        c.sim = c.sim * 0.5 + csim * 0.5
+      end
+    end
+    zstd.ZSTD_freeCCtx(cctx)
+    table.sort(candidates, function(a, b)
+      return a.sim > b.sim
+    end)
+  end
+  -- Drop content references before returning
+  for _, c in ipairs(candidates) do
+    c.content = nil
+  end
+  return candidates
 end
 
 --- Open the similarity picker, optionally with initial search text.
@@ -170,7 +182,7 @@ function M.pick(initial_search)
       if ctx.filter.search == "" then
         return function() end
       end
-      local ranked = score(ctx.filter.search, files, 50)
+      local ranked = score(ctx.filter.search, files)
       ---@async
       return function(cb)
         for _, r in ipairs(ranked) do
@@ -219,6 +231,35 @@ function M.pick_visual()
     false
   )
   M.pick(text)
+end
+
+-- CLI mode: nvim -l similar.lua <directory> <query>
+if _G.arg and _G.arg[1] then
+  local dir = _G.arg[1]
+  local query = _G.arg[2]
+  if not query then
+    print("Usage: nvim -l similar.lua <directory> <query>")
+    vim.cmd("cquit 1")
+    return M
+  end
+  dir = vim.fn.fnamemodify(dir, ":p"):gsub("/$", "")
+  if vim.fn.isdirectory(dir) == 0 then
+    print("Error: " .. dir .. " is not a directory")
+    vim.cmd("cquit 1")
+    return M
+  end
+  local files = scan_and_index(dir)
+  local ranked = score(query, files)
+  local show = math.min(20, #ranked)
+  print(string.format(
+    'Query: "%s" | %d files | %d matches\n', query, #files, #ranked
+  ))
+  for i = 1, show do
+    print(string.format("  %5.1f%%  %s", ranked[i].sim * 100, ranked[i].rel))
+  end
+  if #ranked > show then
+    print(string.format("\n  ... and %d more", #ranked - show))
+  end
 end
 
 return M
