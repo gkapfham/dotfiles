@@ -74,6 +74,16 @@ return {
             backdrop = false,
           },
         },
+        win = {
+          input = {
+            keys = {
+              -- Remap toggle_live from <C-g> to <C-f> (avoids Zellij and spelling conflicts)
+              -- <C-g> conflicts with Zellij lock, <C-l> conflicts with spell correction
+              ["<c-l>"] = { "toggle_live", mode = { "i", "n" } },
+              ["<c-g>"] = false,
+            },
+          },
+        },
         sources = {
           spelling = {
             layout = {
