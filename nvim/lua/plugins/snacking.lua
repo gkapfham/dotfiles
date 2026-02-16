@@ -8,16 +8,28 @@ local ck_config = {
   threshold = nil,
 }
 
+-- cache for ck index status per directory
+local ck_index_cache = {}
+
 -- check whether the ck index exists for the given directory
 local function ck_index_ready(cwd)
-  local result = vim.system({ "ck", "--status-json", cwd }, { text = true }):wait()
-  if result.code ~= 0 then
-    return false
+  local cached = ck_index_cache[cwd]
+  if cached and (vim.uv.now() - cached.time) < 60000 then
+    return cached.ready
   end
-  local ok, status = pcall(vim.json.decode, result.stdout)
-  return ok and status and status.index_exists == true
+  local result = vim.system({ "ck", "--status-json", cwd }, { text = true }):wait()
+  local ready = false
+  if result.code == 0 then
+    local ok, status = pcall(vim.json.decode, result.stdout)
+    ready = ok and status and status.index_exists == true
+  end
+  ck_index_cache[cwd] = { ready = ready, time = vim.uv.now() }
+  return ready
 end
 
+-- Define a complete implementation of the picker using the ck-tool
+-- (i.e., it is called "seek" and abbreviated "ck" and available at
+-- the following URL: https://beaconbay.github.io/ck/)
 local function ck_picker(initial_search, overrides)
   local cfg = vim.tbl_extend("force", ck_config, overrides or {})
   local cwd = vim.uv.cwd() or "."
@@ -38,7 +50,7 @@ local function ck_picker(initial_search, overrides)
       if ctx.filter.search == "" then
         return function() end
       end
-      local args = { cfg.mode, "--jsonl" }
+      local args = { cfg.mode, "--jsonl", "-q" }
       if cfg.limit then
         table.insert(args, "--limit")
         table.insert(args, tostring(cfg.limit))
@@ -71,6 +83,8 @@ local function ck_picker(initial_search, overrides)
   })
 end
 
+-- Define the visual mode function that extracts the highlighted text
+-- that the user has highlighted in visual mode and pass to the ck picker
 local function ck_picker_visual()
   local lines = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })
   local text = table.concat(lines, " ")
@@ -100,6 +114,8 @@ end, {
   desc = "Semantic search with ck (options: mode=sem|hybrid|lex limit=N threshold=N)",
 })
 
+-- Define a picker that uses the ast-grep tool to perform structural code search
+-- (see https://ast-grep.github.io/ for more details about how ast-grep works)
 local function ast_grep_picker()
   Snacks.picker.pick({
     format = "file",
