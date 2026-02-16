@@ -1,7 +1,30 @@
 -- File: plugins/snacking.lua
 -- Purpose: load and configure the snacks.nvim plugin
 
-local function ck_picker(initial_search)
+-- defaults for the ck semantic search picker
+local ck_config = {
+  mode = "--sem",
+  limit = 10,
+  threshold = nil,
+}
+
+-- check whether the ck index exists for the given directory
+local function ck_index_ready(cwd)
+  local result = vim.system({ "ck", "--status-json", cwd }, { text = true }):wait()
+  if result.code ~= 0 then
+    return false
+  end
+  local ok, status = pcall(vim.json.decode, result.stdout)
+  return ok and status and status.index_exists == true
+end
+
+local function ck_picker(initial_search, overrides)
+  local cfg = vim.tbl_extend("force", ck_config, overrides or {})
+  local cwd = vim.uv.cwd() or "."
+  if not ck_index_ready(cwd) then
+    vim.notify("ck index not found. Run `ck --index .` in this directory first.", vim.log.levels.ERROR)
+    return
+  end
   Snacks.picker.pick({
     title = "Semantic Search (ck)",
     format = "file",
@@ -15,10 +38,16 @@ local function ck_picker(initial_search)
       if ctx.filter.search == "" then
         return function() end
       end
-      local args = { "--hybrid", "--jsonl" }
-      local pattern, pargs = Snacks.picker.util.parse(ctx.filter.search)
-      table.insert(args, pattern)
-      vim.list_extend(args, pargs)
+      local args = { cfg.mode, "--jsonl" }
+      if cfg.limit then
+        table.insert(args, "--limit")
+        table.insert(args, tostring(cfg.limit))
+      end
+      if cfg.threshold then
+        table.insert(args, "--threshold")
+        table.insert(args, tostring(cfg.threshold))
+      end
+      table.insert(args, ctx.filter.search)
       return require("snacks.picker.source.proc").proc({
         cmd = "ck",
         args = args,
@@ -48,6 +77,28 @@ local function ck_picker_visual()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
   ck_picker(text)
 end
+
+-- :SemanticSearch [mode=sem|hybrid|lex] [limit=N] [threshold=N] [query]
+vim.api.nvim_create_user_command("SemanticSearch", function(cmd)
+  local overrides = {}
+  local words = {}
+  for _, token in ipairs(vim.split(cmd.args, "%s+", { trimempty = true })) do
+    local key, val = token:match("^(%w+)=(.+)$")
+    if key == "mode" then
+      overrides.mode = "--" .. val
+    elseif key == "limit" then
+      overrides.limit = tonumber(val)
+    elseif key == "threshold" then
+      overrides.threshold = tonumber(val)
+    else
+      table.insert(words, token)
+    end
+  end
+  ck_picker(table.concat(words, " "), overrides)
+end, {
+  nargs = "*",
+  desc = "Semantic search with ck (options: mode=sem|hybrid|lex limit=N threshold=N)",
+})
 
 local function ast_grep_picker()
   Snacks.picker.pick({
@@ -607,7 +658,7 @@ return {
         function()
           ck_picker()
         end,
-        desc = "Find Files: Semantic (ck)",
+        desc = "Semantic Search (ck)",
       },
       {
         "<Space>sk",
@@ -615,7 +666,7 @@ return {
           ck_picker_visual()
         end,
         mode = "v",
-        desc = "Find Files: Semantic Search (ck)",
+        desc = "Semantic Search (ck)",
       },
       {
         "<Space>sg",
