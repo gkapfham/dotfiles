@@ -117,6 +117,17 @@ destination directories. In summary, the main command to type is:
 make dotfiles
 ```
 
+## Standalone Scripts
+
+This repository includes standalone Lua scripts in `nvim/lua/` that can be run
+from the command line using Neovim's built-in LuaJIT runtime. For example, the
+`similar.lua` module provides compression-based semantic file similarity search
+and can be invoked directly from a terminal:
+
+```shell
+nvim -l nvim/lua/similar.lua /path/to/repository "search query"
+```
+
 ## Problems or Praise
 
 If you have any problems with downloading or understanding these configuration
