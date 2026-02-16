@@ -117,7 +117,7 @@ Neovim.
 - You should use both notification methods as appropriate, making sure that the
   Zellij command is always prefaced with a timeout of 2 seconds.
 
-## Lua Programming
+## Lua Programming for Scripts and Neovim
 
 ### 1. Think Before Coding
 
@@ -171,7 +171,7 @@ Transform tasks into verifiable goals:
 - "Fix the bug" → "Write a test that reproduces it, then make it pass"
 - "Refactor X" → "Ensure tests pass before and after"
 
-For multi-step tasks, state a brief plan:
+For multi-step tasks, state a brief plan and express as a TODO list:
 
 ```
 1. [Step] → verify: [check]
