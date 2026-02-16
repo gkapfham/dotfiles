@@ -8,10 +8,16 @@ local ffi = require("ffi")
 
 local M = {}
 
+-- defaults for the similarity search picker
+local similar_config = {
+  tfidf = true,
+}
+
 -- Cache for file index to avoid rescanning on every picker open
 local file_cache = {
   cwd = nil,
   files = nil,
+  idf = nil,
   mtime = 0,
 }
 
@@ -81,16 +87,28 @@ end
 --- Uses caching to avoid rescanning on every picker open.
 ---@param cwd string
 ---@param force? boolean Force rescan even if cache is valid
----@return table[]
+---@return table[], table<string, number>
 local function scan_and_index(cwd, force)
   -- Check cache validity (same directory, less than 30 seconds old)
   local now = vim.uv.now()
   if not force and file_cache.cwd == cwd and file_cache.files and (now - file_cache.mtime) < 30000 then
-    return file_cache.files
+    return file_cache.files, file_cache.idf
   end
 
   local max_size = 512 * 1024
-  local paths = vim.fn.globpath(cwd, "**/*", false, true)
+  -- use git ls-files to respect .gitignore; fall back to globpath
+  local paths
+  local git_result = vim
+    .system({ "git", "ls-files", "--cached", "--others", "--exclude-standard" }, { text = true, cwd = cwd })
+    :wait()
+  if git_result.code == 0 then
+    paths = {}
+    for line in git_result.stdout:gmatch("[^\n]+") do
+      paths[#paths + 1] = cwd .. "/" .. line
+    end
+  else
+    paths = vim.fn.globpath(cwd, "**/*", false, true)
+  end
   local files = {}
   for _, filepath in ipairs(paths) do
     if vim.fn.isdirectory(filepath) == 0 then
@@ -115,12 +133,27 @@ local function scan_and_index(cwd, force)
     end
   end
 
+  -- Compute IDF: log(N / df) for each term
+  local n = #files
+  local df = {}
+  for _, f in ipairs(files) do
+    for word in pairs(f.tokens) do
+      df[word] = (df[word] or 0) + 1
+    end
+  end
+  local idf = {}
+  local log = math.log
+  for word, count in pairs(df) do
+    idf[word] = log(n / count)
+  end
+
   -- Update cache
   file_cache.cwd = cwd
   file_cache.files = files
+  file_cache.idf = idf
   file_cache.mtime = now
 
-  return files
+  return files, idf
 end
 
 --- Compute similarity scores for all files against a query.
@@ -128,31 +161,65 @@ end
 --- optional zstd compression re-ranking for longer queries.
 ---@param query string
 ---@param files table[]
+---@param check_abort? fun(): boolean yields and returns true if aborted
+---@param idf? table<string, number> IDF weights per term
 ---@return table[]
-local function score(query, files)
+local function score(query, files, check_abort, idf)
   local qtokens = tokenize(query)
-  local qnorm = token_norm(qtokens)
-  if qnorm == 0 then
+
+  -- Pre-compute query norm (with optional IDF weighting)
+  local log = math.log
+  local qsum = 0
+  for word, qcount in pairs(qtokens) do
+    local tf = idf and (1 + log(qcount)) * (idf[word] or 0) or qcount
+    qsum = qsum + tf * tf
+  end
+  if qsum == 0 then
     return {}
   end
+  local qnorm = math.sqrt(qsum)
+
   local candidates = {}
 
   for _, f in ipairs(files) do
-    local dot = 0
-    for word, qcount in pairs(qtokens) do
-      local fcount = f.tokens[word]
-      if fcount then
-        dot = dot + qcount * fcount
+    if check_abort and check_abort() then
+      return {}
+    end
+    local dot, fnorm_sq = 0, 0
+    if idf then
+      for word, qcount in pairs(qtokens) do
+        local iw = idf[word] or 0
+        local fcount = f.tokens[word]
+        if fcount then
+          dot = dot + ((1 + log(qcount)) * iw) * ((1 + log(fcount)) * iw)
+        end
       end
+      for word, fcount in pairs(f.tokens) do
+        local iw = idf[word] or 0
+        local wf = (1 + log(fcount)) * iw
+        fnorm_sq = fnorm_sq + wf * wf
+      end
+    else
+      for word, qcount in pairs(qtokens) do
+        local fcount = f.tokens[word]
+        if fcount then
+          dot = dot + qcount * fcount
+        end
+      end
+      fnorm_sq = f.norm * f.norm
     end
     if dot > 0 then
       candidates[#candidates + 1] = {
         rel = f.rel,
         path = f.path,
-        sim = dot / (qnorm * f.norm),
+        sim = dot / (qnorm * math.sqrt(fnorm_sq)),
         content = f.content,
       }
     end
+  end
+
+  if check_abort and check_abort() then
+    return {}
   end
 
   table.sort(candidates, function(a, b)
@@ -167,6 +234,10 @@ local function score(query, files)
     local dst = ffi.new("char[?]", bound)
     local baseline = tonumber(zstd.ZSTD_compress(dst, bound, query, #query, 1))
     for i = 1, top_n do
+      if check_abort and check_abort() then
+        zstd.ZSTD_freeCCtx(cctx)
+        return {}
+      end
       local c = candidates[i]
       local size = tonumber(zstd.ZSTD_compress_usingDict(cctx, dst, bound, query, #query, c.content, #c.content, 1))
       local csim = math.max(0, 1 - size / baseline)
@@ -189,9 +260,12 @@ end
 
 --- Open the similarity picker, optionally with initial search text.
 ---@param initial_search? string
-function M.pick(initial_search)
+---@param overrides? table
+function M.pick(initial_search, overrides)
+  local cfg = vim.tbl_extend("force", similar_config, overrides or {})
   local cwd = vim.uv.cwd() or "."
-  local files = scan_and_index(cwd)
+  local files, idf = scan_and_index(cwd)
+  local use_idf = cfg.tfidf and idf or nil
 
   Snacks.picker({
     title = string.format("Similar Files (%d files)", #files),
@@ -203,7 +277,12 @@ function M.pick(initial_search)
       -- Return async iterator that does scoring inside it
       ---@async
       return function(cb)
-        local ranked = score(ctx.filter.search, files)
+        local Async = require("snacks.picker.util.async")
+        local yielder = Async.yielder(5)
+        local ranked = score(ctx.filter.search, files, function()
+          yielder()
+          return ctx.async and ctx.async:aborted()
+        end, use_idf)
 
         -- Limit to top 100 results for faster UI rendering
         local max_results = math.min(100, #ranked)
@@ -248,10 +327,29 @@ function M.pick_visual()
   M.pick(text)
 end
 
+-- :SimilarSearch [tfidf=true|false] [query]
+vim.api.nvim_create_user_command("SimilarSearch", function(cmd)
+  local overrides = {}
+  local words = {}
+  for _, token in ipairs(vim.split(cmd.args, "%s+", { trimempty = true })) do
+    local key, val = token:match("^(%w+)=(.+)$")
+    if key == "tfidf" then
+      overrides.tfidf = val == "true"
+    else
+      table.insert(words, token)
+    end
+  end
+  M.pick(table.concat(words, " "), overrides)
+end, {
+  nargs = "*",
+  desc = "Similarity search (options: tfidf=true|false)",
+})
+
 --- Clear the file cache to force a rescan on next picker open
 function M.clear_cache()
   file_cache.cwd = nil
   file_cache.files = nil
+  file_cache.idf = nil
   file_cache.mtime = 0
 end
 
@@ -270,8 +368,8 @@ if _G.arg and _G.arg[1] then
     vim.cmd("cquit 1")
     return M
   end
-  local files = scan_and_index(dir)
-  local ranked = score(query, files)
+  local files, idf = scan_and_index(dir)
+  local ranked = score(query, files, nil, similar_config.tfidf and idf or nil)
   local show = math.min(20, #ranked)
   print(string.format('Query: "%s" | %d files | %d matches\n', query, #files, #ranked))
   for i = 1, show do
