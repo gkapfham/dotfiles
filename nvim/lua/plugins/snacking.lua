@@ -1,6 +1,54 @@
 -- File: plugins/snacking.lua
 -- Purpose: load and configure the snacks.nvim plugin
 
+local function ck_picker(initial_search)
+  Snacks.picker.pick({
+    title = "Semantic Search (ck)",
+    format = "file",
+    notify = false,
+    show_empty = true,
+    live = true,
+    supports_live = true,
+    search = initial_search or "",
+    ---@param opts snacks.picker.grep.Config
+    finder = function(opts, ctx)
+      if ctx.filter.search == "" then
+        return function() end
+      end
+      local args = { "--hybrid", "--jsonl" }
+      local pattern, pargs = Snacks.picker.util.parse(ctx.filter.search)
+      table.insert(args, pattern)
+      vim.list_extend(args, pargs)
+      return require("snacks.picker.source.proc").proc({
+        cmd = "ck",
+        args = args,
+        notify = opts.notify,
+        cwd = opts.cwd,
+        transform = function(item)
+          local ok, entry = pcall(vim.json.decode, item.text)
+          if not ok or not entry or not entry.path then
+            return false
+          end
+          item.cwd = vim.fs.normalize(opts and opts.cwd or vim.uv.cwd() or ".") or nil
+          item.file = entry.path:gsub("^%./", "")
+          item.line = entry.snippet or ""
+          if entry.span then
+            item.pos = { tonumber(entry.span.line_start) or 1, 0 }
+          end
+          item.score = math.floor((entry.score or 0) * 10000)
+        end,
+      }, ctx)
+    end,
+  })
+end
+
+local function ck_picker_visual()
+  local lines = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })
+  local text = table.concat(lines, " ")
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
+  ck_picker(text)
+end
+
 local function ast_grep_picker()
   Snacks.picker.pick({
     format = "file",
@@ -553,6 +601,21 @@ return {
           Snacks.terminal()
         end,
         desc = "Terminal",
+      },
+      {
+        "<Space>sk",
+        function()
+          ck_picker()
+        end,
+        desc = "Find Files: Semantic (ck)",
+      },
+      {
+        "<Space>sk",
+        function()
+          ck_picker_visual()
+        end,
+        mode = "v",
+        desc = "Find Files: Semantic Search (ck)",
       },
       {
         "<Space>sg",
