@@ -365,3 +365,6 @@ agent.jsonl
 
 # Backup files
 .bak*
+
+# Seek (i.e., ck) directories
+.ck/
