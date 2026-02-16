@@ -76,12 +76,7 @@ return {
         },
         win = {
           input = {
-            keys = {
-              -- Remap toggle_live from <C-g> to <C-f> (avoids Zellij and spelling conflicts)
-              -- <C-g> conflicts with Zellij lock
-              ["<c-l>"] = { "toggle_live", mode = { "i", "n" } },
-              ["<c-g>"] = false,
-            },
+            keys = {},
           },
         },
         sources = {
@@ -420,7 +415,7 @@ return {
         function()
           Snacks.picker.grep()
         end,
-        desc = "Grep All",
+        desc = "Grep: All",
       },
       {
         "<Space>gr",
@@ -441,7 +436,7 @@ return {
         function()
           Snacks.picker.grep_word()
         end,
-        desc = "Grep Highlighted Word",
+        desc = "Grep: Highlighted Word",
       },
       {
         "<Space>ls",
@@ -451,18 +446,18 @@ return {
         desc = "LSP: Symbols",
       },
       {
-        "<Space>sf",
+        "<Space>su",
         function()
           Snacks.picker.smart()
         end,
-        desc = "Find Files: Smart",
+        desc = "Find Files: Universal",
       },
       {
         "<Space>si",
         function()
           require("similar").pick()
         end,
-        desc = "Similar Files",
+        desc = "Find Files: Intelligence through Similarity",
       },
       {
         "<Space>si",
@@ -470,7 +465,7 @@ return {
           require("similar").pick_visual()
         end,
         mode = "v",
-        desc = "Similar Files (selection)",
+        desc = "Find Files: Intelligence through Similarity",
       },
       {
         "<Space>ta",
