@@ -1,15 +1,13 @@
 -- File: plugins/snacking.lua
 -- Purpose: load and configure the snacks.nvim plugin
 
-vim.keymap.set("n", "<space>sg", function()
+local function ast_grep_picker()
   Snacks.picker.pick({
     format = "file",
-    notify = false, -- Also prevents error when searching with additional arguments
+    notify = false,
     show_empty = true,
     live = true,
     supports_live = true,
-    -- hidden = true,
-    -- ignored = true,
     ---@param opts snacks.picker.grep.Config
     finder = function(opts, ctx)
       local cmd = "ast-grep"
@@ -46,7 +44,7 @@ vim.keymap.set("n", "<space>sg", function()
       }, ctx)
     end,
   })
-end)
+end
 
 return {
 
@@ -555,6 +553,13 @@ return {
           Snacks.terminal()
         end,
         desc = "Terminal",
+      },
+      {
+        "<Space>sg",
+        function()
+          ast_grep_picker()
+        end,
+        desc = "Grep: AST (ast-grep)",
       },
       {
         "<Space>zz",
