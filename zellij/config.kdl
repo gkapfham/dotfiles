@@ -9,9 +9,9 @@ keybinds clear-defaults=true {
         bind "Alt n" { NewPane; }
         bind "Ctrl q" { Quit; }
     }
-    locked {
-        bind "Ctrl g" { SwitchToMode "normal"; }
-    }
+    // locked {
+    //     bind "Ctrl g" { SwitchToMode "normal"; }
+    // }
     scroll {
         bind "PageDown" { PageScrollDown; }
         bind "PageUp" { PageScrollUp; }
@@ -42,7 +42,7 @@ keybinds clear-defaults=true {
         bind "esc" { ScrollToBottom; SwitchToMode "normal"; }
     }
     shared_except "locked" {
-        bind "Ctrl g" { SwitchToMode "locked"; }
+        // bind "Ctrl g" { SwitchToMode "locked"; }
         bind "Alt p" {
             LaunchOrFocusPlugin "session-manager" {
                 floating true
