@@ -165,17 +165,10 @@ local function score(query, files)
     local cctx = zstd.ZSTD_createCCtx()
     local bound = zstd.ZSTD_compressBound(#query)
     local dst = ffi.new("char[?]", bound)
-    local baseline = tonumber(
-      zstd.ZSTD_compress(dst, bound, query, #query, 1)
-    )
+    local baseline = tonumber(zstd.ZSTD_compress(dst, bound, query, #query, 1))
     for i = 1, top_n do
       local c = candidates[i]
-      local size = tonumber(zstd.ZSTD_compress_usingDict(
-        cctx, dst, bound,
-        query, #query,
-        c.content, #c.content,
-        1
-      ))
+      local size = tonumber(zstd.ZSTD_compress_usingDict(cctx, dst, bound, query, #query, c.content, #c.content, 1))
       local csim = math.max(0, 1 - size / baseline)
       if csim > 0 then
         c.sim = c.sim * 0.5 + csim * 0.5
@@ -249,17 +242,9 @@ function M.pick(initial_search)
 end
 
 function M.pick_visual()
-  local lines = vim.fn.getregion(
-    vim.fn.getpos("v"),
-    vim.fn.getpos("."),
-    { type = vim.fn.mode() }
-  )
+  local lines = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })
   local text = table.concat(lines, " ")
-  vim.api.nvim_feedkeys(
-    vim.api.nvim_replace_termcodes("<Esc>", true, false, true),
-    "nx",
-    false
-  )
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
   M.pick(text)
 end
 
@@ -288,9 +273,7 @@ if _G.arg and _G.arg[1] then
   local files = scan_and_index(dir)
   local ranked = score(query, files)
   local show = math.min(20, #ranked)
-  print(string.format(
-    'Query: "%s" | %d files | %d matches\n', query, #files, #ranked
-  ))
+  print(string.format('Query: "%s" | %d files | %d matches\n', query, #files, #ranked))
   for i = 1, show do
     print(string.format("  %5.1f%%  %s", ranked[i].sim * 100, ranked[i].rel))
   end
