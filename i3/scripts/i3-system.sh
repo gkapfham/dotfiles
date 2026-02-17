@@ -5,6 +5,7 @@
 
 # 2016 Oliver Kraitschy - http://okraits.de
 # Script customized with special messages and icons
+# by Gregory M. Kapfhammer
 
 # Configure the options with icons and a label;
 # note that the Hibernate System is not reliable
@@ -16,9 +17,9 @@ LAUNCHER="rofi -dmenu -i -p system"
 # Always support the lock command
 USE_LOCKER="true"
 
-# use a customized i3lock command suitable only for the forked version
+# Use a customized i3lock command suitable only for the forked version
 # the customized i3lock is run through a script to promote reuse in i3 config
-LOCKER="~/.config/i3/scripts/i3-lock-screen.sh"
+LOCKER="~/.config/i3/scripts/i3-lock-screen-betterlock.sh"
 
 # Show exit wm option if exit command is provided as an argument
 if [ ${#1} -gt 0 ]; then
