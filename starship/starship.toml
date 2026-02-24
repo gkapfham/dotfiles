@@ -25,12 +25,15 @@ staged = "󰐕${count}"
 stashed = "󱗿${count}"
 untracked = "󰏢${count}"
 
+[cmd_duration]
+format = '[󰌃 $duration ](bold red)'
+
 [git_commit]
 tag_disabled = false
 tag_symbol = ''
 
 [bun]
-format = '[ $version ](bold blue)'
+format = '[󱖉 $version ](bold blue)'
 
 [golang]
 format = '[ $version ](bold blue)'
@@ -47,6 +50,9 @@ impure_msg = '[󰄶 shell](bold blue) '
 pure_msg = '[󰄸 shell](bold blue) '
 unknown_msg = '[ shell](bold blue) '
 format = '[󰜗 nix $state(\($name\))](bold blue) '
+
+[nodejs]
+format = '[󰌞 $version ](bold green)'
 
 [perl]
 format = '[ $version ](bold blue)'
@@ -70,3 +76,6 @@ powershell_indicator = '_'
 unknown_indicator = ' '
 style = 'bold green'
 disabled = true
+
+[zig]
+format = '[󰵁 $version ](bold blue)'
