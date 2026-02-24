@@ -1,0 +1,35 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "nvidia": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "NVIDIA NIM",
+      "options": {
+        "baseURL": "https://integrate.api.nvidia.com/v1",
+        "apiKey": "{env:NVIDIA_API_KEY}"
+      },
+      "models": {
+        "qwen/qwen3-235b-a22b": {
+          "name": "Qwen3 235B"
+        },
+        "mistralai/devstral-2-123b-instruct-2512": {
+          "name": "Devstral 2 123B"
+        }
+      }
+    },
+    "codestral": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Mistral Codestral",
+      "options": {
+        "baseURL": "https://codestral.mistral.ai/v1",
+        "apiKey": "{env:CODESTRAL_API_KEY}"
+      },
+      "models": {
+        "codestral-latest": {
+          "name": "Codestral"
+        }
+      }
+    }
+  },
+  "model": "nvidia/mistralai/devstral-2-123b-instruct-2512"
+}
