@@ -29,6 +29,9 @@ untracked = "󰏢${count}"
 tag_disabled = false
 tag_symbol = ''
 
+[bun]
+format = '[ $version ](bold blue)'
+
 [golang]
 format = '[ $version ](bold blue)'
 
