@@ -117,26 +117,26 @@ return {
     "lewis6991/hover.nvim",
     event = "VeryLazy",
     config = function()
-      require("hover").setup {
+      require("hover").setup({
         init = function()
           -- Require providers
           require("hover.providers.lsp")
-          require('hover.providers.gh')
-          require('hover.providers.gh_user')
-          require('hover.providers.diagnostic')
-          require('hover.providers.man')
-          require('hover.providers.dictionary')
+          require("hover.providers.gh")
+          require("hover.providers.gh_user")
+          require("hover.providers.diagnostic")
+          require("hover.providers.man")
+          require("hover.providers.dictionary")
         end,
         preview_opts = {
-          border = 'rounded'
+          border = "rounded",
         },
         preview_window = false,
         title = true,
         mouse_providers = {
-          'LSP'
+          "LSP",
         },
-        mouse_delay = 1000
-      }
+        mouse_delay = 1000,
+      })
       -- keymaps
       vim.keymap.set("n", "K", require("hover").hover, { desc = "Hover: Default view" })
       vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "Hover: Select from providers" })
@@ -165,7 +165,7 @@ return {
           override = {
             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
             ["vim.lsp.util.stylize_markdown"] = true,
-          -- requires hrsh7th/nvim-cmp
+            -- requires hrsh7th/nvim-cmp
             ["cmp.entry.get_documentation"] = true,
           },
         },
@@ -181,7 +181,7 @@ return {
           lsp_doc_border = true,
         },
       })
-    end
+    end,
   },
 
   -- edgy.nvim for controlling sidebars:
@@ -220,14 +220,11 @@ return {
         -- there are multiple types of pickers
         -- that have the same filetype
         {
-          title = 'Explorer',
-          ft = 'snacks_layout_box',
+          title = "Explorer",
+          ft = "snacks_layout_box",
           pinned = true,
           open = function()
             Snacks.explorer()
-          end,
-          filter = function(buf, win)
-            return vim.api.nvim_win_get_config(win).relative == ''
           end,
         },
         -- Trouble.nvim with diagnostics
@@ -235,7 +232,7 @@ return {
         {
           title = "Analyzer",
           pinned = true,
-          ft = "trouble"
+          ft = "trouble",
         },
         -- Aerial symbols
         {
@@ -287,51 +284,50 @@ return {
         autocmd BufNewFile,BufRead *.rasi set filetype=config
         ]])
       -- add overrides for filenames/filetypes that are not detected
-      require 'nvim-web-devicons'.setup {
+      require("nvim-web-devicons").setup({
         color_icons = false,
         strict = true,
         override_by_filename = {
           ["config"] = {
             icon = "",
-            name = "Config"
+            name = "Config",
           },
           ["Makefile"] = {
             icon = "",
-            name = "Makefile"
+            name = "Makefile",
           },
           [".zshrc"] = {
             icon = "󰿘",
-            name = "Zsh"
-          }
+            name = "Zsh",
+          },
         },
         override_by_extension = {
           ["css"] = {
             icon = "",
-            name = "CSS"
+            name = "CSS",
           },
           ["tex"] = {
             icon = "󰙩",
-            name = "TeX"
+            name = "TeX",
           },
           ["toml"] = {
             icon = "",
-            name = "Toml"
+            name = "Toml",
           },
           ["qmd"] = {
             icon = "󱨇",
-            name = "Quarto"
+            name = "Quarto",
           },
           [""] = {
             icon = "",
-            name = "None"
-          }
+            name = "None",
+          },
         },
-      }
+      })
     end,
   },
 
   -- nuim.nvim
   -- User interface components
   "MunifTanjim/nui.nvim",
-
 }

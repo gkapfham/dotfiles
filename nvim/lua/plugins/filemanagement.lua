@@ -15,7 +15,9 @@ return {
     event = "VeryLazy",
     config = function()
       require("oil").setup({
-        default_file_explorer = true,
+        -- keep oil configured but do not make it the default file explorer
+        -- since we use a snacks-based floating explorer on `-`
+        default_file_explorer = false,
         columns = {
           "icon",
           "permissions",
@@ -127,8 +129,32 @@ return {
           border = "rounded",
         },
       })
-      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+      -- open snacks file explorer in a floating window when pressing '-'
+      vim.keymap.set("n", "-", function()
+        local ok, Snacks = pcall(require, "snacks")
+        if not ok or not Snacks or not Snacks.picker or not Snacks.picker.explorer then
+          -- fallback to oil if snacks isn't available
+          vim.cmd("Oil")
+          return
+        end
+        -- request a centered floating picker with rounded border
+        -- set a custom filetype so edgy.nvim (which matches ft 'snacks_layout_box')
+        -- does not capture this picker into the right sidebar
+        -- set a sentinel so edgy won't capture the transient layout box
+        vim.g.__snacks_ignore_layout_box = true
+        Snacks.picker.explorer({
+          -- force a floating layout (use the `select` preset which is floaty)
+          layout = { preset = "select" },
+          position = "float",
+          border = "rounded",
+          width = 0.6,
+          height = 0.6,
+          backdrop = false,
+          zindex = 50,
+          ft = "snacks_float_explorer",
+          scratch_ft = "snacks_float_explorer",
+        })
+      end, { desc = "Open Snacks floating File Explorer" })
     end,
   },
-
 }
