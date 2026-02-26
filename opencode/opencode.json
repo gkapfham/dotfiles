@@ -54,7 +54,20 @@
           "name": "GPT OSS 120B"
         }
       }
+    },
+    "zen": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "OpenCode Zen",
+      "options": {
+        "baseURL": "https://opencode.ai/zen/v1",
+        "apiKey": "{env:ZEN_API_KEY}"
+      },
+      "models": {
+        "kimi-k2.5": {
+          "name": "Kimi K2.5"
+        }
+      }
     }
   },
-  "model": "cerebras/gpt-oss-120b"
+  "model": "go/kimi-k2.5"
 }
