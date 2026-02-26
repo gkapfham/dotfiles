@@ -128,6 +128,14 @@ create-atuin:
 ## Depends on the creation of the .config directory
 create-atuin: create-config
 
+## Create the needed yazi/ directory in .config/
+create-yazi:
+	rm -rf ~/.config/yazi
+	mkdir -p ~/.config/yazi
+
+## Depends on the creation of the .config directory
+create-yazi: create-config
+
 ## Create the needed bat/ directory in .config/
 create-bat:
 	rm -rf ~/.config/bat
@@ -424,6 +432,13 @@ stow-atuin:
 ## Running stow depends on the creation of the directory
 stow-atuin: create-atuin
 
+## Run stow on yazi
+stow-yazi:
+	stow -t ~/.config/yazi yazi
+
+## Running stow depends on the creation of the directory
+stow-yazi: create-yazi
+
 ## Run stow on bat
 stow-bat:
 	stow -t ~/.config/bat bat
@@ -708,10 +723,10 @@ stow-applications:
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-alacritty create-kitty create-ghostty create-rofi create-mutt create-atuin create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3status create-picom create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-zellij create-opencode create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-alacritty create-kitty create-ghostty create-rofi create-mutt create-atuin create-yazi create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3status create-picom create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-zellij create-opencode create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-kitty stow-ghostty stow-rofi stow-mutt stow-atuin stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-trippy stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-picom stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-zellij stow-opencode stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-kitty stow-ghostty stow-rofi stow-mutt stow-atuin stow-yazi stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-trippy stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-picom stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-zellij stow-opencode stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
