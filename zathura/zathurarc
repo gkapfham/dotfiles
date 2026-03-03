@@ -11,73 +11,76 @@ set synctex-editor-command "nvr --remote +"%line" "%file""
 
 set window-title-basename "true"
 
-# zathura-extract script binding
-map <C-c> exec sh -c 'zathura-extract "$1" "$2"' _ %f %p
+# Copy selected text with page number - press 'y' after selecting text with mouse
+# Format: "Page X: selected text"
+map y exec "zathura-yank $PAGE"
 
-#
+# Extract ALL text from current page - press 'Y' (capital Y)
+# Note: $FILE expands to current document path, $PAGE to page number
+map Y exec "zathura-extract-page $PAGE $FILE"
+
 # Custom color theme based on Neovim colorscheme
 # Supports both light and dark modes with seamless toggling
-#
 
 # Default to light mode (set recolor to false initially)
 # Toggle with 'i' key or set recolor to true for dark mode
 
-# Your custom colors:
+# Overview of the custom colors:
+
 # bg="#1c1c1c", fg="#d2d2d2", red="#d75347", orange="#d78700"
 # yellow="#b7b757", green="#6f9500", cyan="#00afaf", blue="#87afd7"
 # purple="#a569a5", white="#b2b2b2", black="#767676", gray="#6c6c6c"
 # highlight="#585858", comment="#808080", menu="#262626", darkmenu="#303030"
 
-#
 # LIGHT MODE (Default)
-#
 
-# Background and foreground
-set default-bg                    "#f5f5f5"     # Light background
+# Background and foreground - using softer light colors from the scheme
+set default-bg                    "#f0f0f0"     # Light gray background (easier on eyes)
 set default-fg                    "#1c1c1c"     # Dark text
 
 # Status bar (using dark menu color for contrast)
 set statusbar-bg                  "#303030"     # darkmenu
 set statusbar-fg                  "#d2d2d2"     # fg
 
-# Input bar
-set inputbar-bg                   "#ffffff"     # Pure white for input
-set inputbar-fg                   "#1c1c1c"     # Dark text
+# Input bar - using menu colors that work in both modes
+set inputbar-bg                   "#262626"     # menu (dark background)
+set inputbar-fg                   "#d2d2d2"     # fg (light text for contrast)
 
 # Notifications
-set notification-bg               "#f5f5f5"     # Light background
-set notification-fg               "#1c1c1c"     # Dark text
+set notification-bg               "#262626"     # menu (consistent dark background)
+set notification-fg               "#d2d2d2"     # fg (light text)
 set notification-error-bg         "#d75347"     # red
 set notification-error-fg         "#ffffff"     # White text on error
 set notification-warning-bg       "#d78700"     # orange
 set notification-warning-fg       "#1c1c1c"     # Dark text on warning
 
 # Completion menu
-set completion-bg                 "#ffffff"     # White
-set completion-fg                 "#1c1c1c"     # Dark text
-set completion-group-bg           "#f0f0f0"     # Slightly darker
-set completion-group-fg           "#6c6c6c"     # gray
+set completion-bg                 "#262626"     # menu
+set completion-fg                 "#d2d2d2"     # fg
+set completion-group-bg           "#303030"     # darkmenu
+set completion-group-fg           "#808080"     # comment
 set completion-highlight-bg       "#87afd7"     # blue (selection)
 set completion-highlight-fg       "#1c1c1c"     # Dark text
 
 # Index (table of contents)
-set index-bg                      "#f5f5f5"     # Light background
-set index-fg                      "#1c1c1c"     # Dark text
+set index-bg                      "#303030"     # darkmenu
+set index-fg                      "#d2d2d2"     # fg
 set index-active-bg               "#87afd7"     # blue (current item)
 set index-active-fg               "#1c1c1c"     # Dark text
 
-# Highlights
-set highlight-color               "#b7b757"     # yellow (search matches)
-set highlight-active-color        "#d78700"     # orange (current match)
+
+# Highlights - using rgba with transparency so text remains visible
+# blue with 40% transparency (search matches)
+set highlight-color               rgba(135, 175, 215, 0.4)
+# orange with 50% transparency (current match)
+set highlight-active-color        rgba(215, 135, 0, 0.5)
 
 # Render loading
 set render-loading                true
-set render-loading-bg             "#f5f5f5"     # Light background
+set render-loading-bg             "#1c1c1c"     # bg
 set render-loading-fg             "#6f9500"     # green
 
-#
 # RECOLOR MODE (Dark mode - toggle with 'i')
-#
 
 # When recolor is enabled, these swap the colors
 set recolor-lightcolor            "#1c1c1c"     # bg (dark background in recolor mode)
