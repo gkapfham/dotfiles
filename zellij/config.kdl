@@ -282,11 +282,6 @@ plugins {
     }
     zjpane location="https://github.com/FuriouZz/zjpane/releases/download/v0.2.0/zjpane.wasm" {
     }
-    zellij-pane-picker location="https://github.com/shihanng/zellij-pane-picker/releases/download/v0.6.0/zellij-pane-picker.wasm" {
-        list_panes ""
-        plugin_select_down "Ctrl n"
-        plugin_select_up "Ctrl p"
-    }
     pathfinder location="https://github.com/vdbulcke/pathfinder/releases/download/v0.2.0/pathfinder.wasm" {
         floating true
     }
