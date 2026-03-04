@@ -22,3 +22,6 @@
 [submodule "zshvimode"]
 	path = zshvimode
 	url = https://github.com/jeffreytse/zsh-vi-mode.git
+[submodule "yazi/plugins/starship.yazi"]
+	path = yazi/plugins/starship.yazi
+	url = https://github.com/Rolv-Apneseth/starship.yazi.git
