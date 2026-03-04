@@ -309,6 +309,10 @@ return {
             icon = "",
             name = "CSS",
           },
+          ["kdl"] = {
+            icon = "",
+            name = "Zellij",
+          },
           ["tex"] = {
             icon = "󰙩",
             name = "TeX",
