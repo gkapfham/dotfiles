@@ -107,17 +107,21 @@ XRANDR_CMD="xrandr"
 
 if [ -n "$EXTERNAL_MONITOR_NAME" ] && [ -n "$MOBILE_MONITOR_NAME" ]; then
   # Both external and mobile selected
-  XRANDR_CMD+=" --output $LAPTOP_DISPLAY --primary --mode 2880x1920 --pos 400x2160 --rotate normal"
-  XRANDR_CMD+=" --output $MOBILE_MONITOR_NAME --mode 2560x1600 --right-of $LAPTOP_DISPLAY --rotate normal"
-  XRANDR_CMD+=" --output $EXTERNAL_MONITOR_NAME --mode 3840x2160 --above $LAPTOP_DISPLAY --rotate normal"
+  # External (4K): 3840x2160 at position (0,0)
+  # Laptop (2880x1920): centered under external, offset = (3840-2880)/2 = 480
+  XRANDR_CMD+=" --output $EXTERNAL_MONITOR_NAME --primary --mode 3840x2160 --pos 0x0 --rotate normal"
+  XRANDR_CMD+=" --output $LAPTOP_DISPLAY --mode 2880x1920 --pos 480x2160 --rotate normal"
+  XRANDR_CMD+=" --output $MOBILE_MONITOR_NAME --mode 2560x1600 --pos 3280x2160 --rotate normal"
 elif [ -n "$EXTERNAL_MONITOR_NAME" ]; then
   # Only external selected
-  XRANDR_CMD+=" --output $LAPTOP_DISPLAY --primary --mode 2880x1920 --pos 400x2160 --rotate normal"
-  XRANDR_CMD+=" --output $EXTERNAL_MONITOR_NAME --mode 3840x2160 --above $LAPTOP_DISPLAY --rotate normal"
+  # External (4K): 3840x2160 at position (0,0)
+  # Laptop (2880x1920): centered under external, offset = (3840-2880)/2 = 480
+  XRANDR_CMD+=" --output $EXTERNAL_MONITOR_NAME --primary --mode 3840x2160 --pos 0x0 --rotate normal"
+  XRANDR_CMD+=" --output $LAPTOP_DISPLAY --mode 2880x1920 --pos 480x2160 --rotate normal"
 elif [ -n "$MOBILE_MONITOR_NAME" ]; then
   # Only mobile selected
-  XRANDR_CMD+=" --output $LAPTOP_DISPLAY --primary --mode 2880x1920 --rotate normal"
-  XRANDR_CMD+=" --output $MOBILE_MONITOR_NAME --mode 2560x1600 --right-of $LAPTOP_DISPLAY --rotate normal"
+  XRANDR_CMD+=" --output $LAPTOP_DISPLAY --primary --mode 2880x1920 --pos 0x0 --rotate normal"
+  XRANDR_CMD+=" --output $MOBILE_MONITOR_NAME --mode 2560x1600 --pos 2880x0 --rotate normal"
 fi
 
 # Turn off all other outputs
