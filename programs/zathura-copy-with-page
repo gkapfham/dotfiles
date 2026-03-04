@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# zathura-copy-with-page - Append page number to clipboard content
+# Use this after selecting text with mouse: map <C-y> exec zathura-copy-with-page %f %p
+
+set -e
+
+# Ensure DISPLAY is set for X11 clipboard access
+if [ -z "$DISPLAY" ]; then
+    export DISPLAY=:0
+fi
+
+# Also ensure XAUTHORITY is set if needed
+if [ -z "$XAUTHORITY" ] && [ -f "$HOME/.Xauthority" ]; then
+    export XAUTHORITY="$HOME/.Xauthority"
+fi
+
+PDF_FILE="$1"
+PAGE="$2"
+
+if [ -z "$PAGE" ]; then
+    notify-send "Zathura Copy" "Error: Could not determine page number"
+    exit 1
+fi
+
+# Detect display server for clipboard
+if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+    PASTE_CMD="wl-paste"
+    COPY_CMD="wl-copy"
+else
+    PASTE_CMD="xclip -selection clipboard -o"
+    COPY_CMD="xclip -selection clipboard"
+fi
+
+# Get current clipboard content (the selected text)
+SELECTED_TEXT=$($PASTE_CMD 2>/dev/null || echo "")
+
+if [ -z "$SELECTED_TEXT" ]; then
+    notify-send "Zathura Copy" "No text selected. Select text with mouse first, then press the key."
+    exit 0
+fi
+
+# Combine text with page number
+FORMATTED_TEXT="${SELECTED_TEXT} (p. ${PAGE})"
+
+# Copy back to clipboard
+if ! echo "$FORMATTED_TEXT" | $COPY_CMD 2>/tmp/zathura-copy-error.log; then
+    notify-send "Zathura Copy" "Error copying to clipboard"
+    exit 1
+fi
+
+# Truncate for notification display
+DISPLAY_TEXT=$(echo "$SELECTED_TEXT" | head -c 50)
+if [ ${#SELECTED_TEXT} -gt 50 ]; then
+    DISPLAY_TEXT="${DISPLAY_TEXT}..."
+fi
+
+notify-send "Zathura Copy" "Copied with page ${PAGE}: ${DISPLAY_TEXT}"
