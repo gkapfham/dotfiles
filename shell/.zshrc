@@ -194,6 +194,10 @@ alias ukix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/n
 # helps to interactively pick content
 alias zp="zellij -l welcome"
 
+# Run the netbird command without setting
+# and environment variable to avoid a warning
+alias netbird='NB_CONFIG= netbird'
+
 # }}}
 
 # Environment variables {{{
