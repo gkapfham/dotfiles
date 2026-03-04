@@ -26,6 +26,7 @@ local function lsp_clients()
     ruff = "󱝁",
     ruff_lsp = "󱝁",
     rumdl = "󱒄",
+    rust_analyzer = "󱘗",
     texlab = "",
     ty = "󱙨",
     yamlls = "",
