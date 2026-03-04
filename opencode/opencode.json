@@ -3,6 +3,11 @@
   "plugin": [
     "@slkiser/opencode-quota"
   ],
+  "server": {
+    "hostname": "0.0.0.0",
+    "port": 4096,
+    "mdns": true
+  },
   "provider": {
     "nvidia": {
       "npm": "@ai-sdk/openai-compatible",
@@ -19,7 +24,7 @@
           "name": "Devstral 2 123B"
         },
         "moonshotai/kimi-k2.5": {
-          "name": "Kimi K2.5"
+          "name": "Kimi K2.5 (Not OpenCode Zen)"
         }
       }
     },
@@ -69,5 +74,5 @@
       }
     }
   },
-  "model": "go/kimi-k2.5"
+  "model": "zen/kimi-k2.5"
 }
