@@ -56,6 +56,13 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
+        bind "Alt g" {
+            LaunchOrFocusPlugin "plugin-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "normal"
+        }
     }
     shared_among "scroll" "search" {
         bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
@@ -292,7 +299,8 @@ plugins {
         format_right  "#[bg=$green,fg=$bg,bold]{mode}#[bg=$green,fg=$bg,bold]  {session} #[bg=$bg,fg=$green] "
         format_space  ""
         format_hide_on_overlength "true"
-        format_precedence "lcr"
+        // format_precedence "lcr"
+        format_precedence "clr"
         border_enabled  "false"
         border_char     "─"
         border_format   "{char}"
