@@ -234,6 +234,8 @@ return {
           },
         },
       })
+      vim.lsp.enable("rust_analyzer")
+      --
       -- Configure other aspects of the language servers
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
       -- to support the display of the diagnostics
