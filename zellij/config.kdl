@@ -2,6 +2,7 @@ keybinds clear-defaults=true {
     normal {
         bind "Ctrl a" { SwitchToMode "tmux"; }
         bind "Ctrl e" { EditScrollback; }
+        bind "Ctrl `" { SwitchToMode "locked"; }
         bind "Alt h" { MoveFocus "left"; }
         bind "Alt j" { MoveFocus "down"; }
         bind "Alt k" { MoveFocus "up"; }
@@ -9,9 +10,9 @@ keybinds clear-defaults=true {
         bind "Alt n" { NewPane; }
         bind "Ctrl q" { Quit; }
     }
-    // locked {
-    //     bind "Ctrl g" { SwitchToMode "normal"; }
-    // }
+    locked {
+        bind "Ctrl `" { SwitchToMode "normal"; }
+    }
     scroll {
         bind "PageDown" { PageScrollDown; }
         bind "PageUp" { PageScrollUp; }
