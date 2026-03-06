@@ -50,7 +50,7 @@ keybinds clear-defaults=true {
             SwitchToMode "normal"
         }
         bind "Alt y" {
-            LaunchOrFocusPlugin "pathfinder" {
+            LaunchOrFocusPlugin "zigzag" {
                 floating true
                 move_to_focused_tab true
             }
@@ -281,7 +281,7 @@ plugins {
     }
     zjpane location="https://github.com/FuriouZz/zjpane/releases/download/v0.2.0/zjpane.wasm" {
     }
-    pathfinder location="file:/home/gkapfham/working/source/pathfinder/target/wasm32-wasip1/release/pathfinder.wasm" {
+    zigzag location="file:/home/gkapfham/.config/zellij/plugins/zigzag.wasm" {
         floating true
     }
     zjstatus location="https://github.com/dj95/zjstatus/releases/download/v0.21.1/zjstatus.wasm" {
@@ -299,7 +299,6 @@ plugins {
         format_right  "#[bg=$green,fg=$bg,bold]{mode}#[bg=$green,fg=$bg,bold]  {session} #[bg=$bg,fg=$green] "
         format_space  ""
         format_hide_on_overlength "true"
-        // format_precedence "lcr"
         format_precedence "crl"
         border_enabled  "false"
         border_char     "─"
@@ -336,12 +335,14 @@ plugins {
         datetime          "{format}"
         datetime_format   "%Y-%m-%d"
         datetime_timezone "America/New_York"
+        pipe_zjstatus_hints_format "{output}"
     }
 }
 
 // Plugins to load in the background when a new session starts
 load_plugins {
     zjstatus
+    zjstatus-hints
 }
 web_client {
     font "Maple Mono NF"
