@@ -20,8 +20,25 @@ layout {
             plugin location="zjstatus"
         }
     }
+    tab name="Agents" hide_floating_panes=true {
+        pane command="bunx" name="OpenCode" {
+          args "opencode-ai@latest"
+            start_suspended true
+        }
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
+    tab name="Manager" hide_floating_panes=true {
+        pane command="yazi" name="Yazi" {
+            start_suspended true
+        }
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
     new_tab_template {
-        pane cwd="."
+        pane
         pane size=1 borderless=true {
             plugin location="zjstatus"
         }
