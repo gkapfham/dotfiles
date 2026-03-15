@@ -76,7 +76,7 @@ export BROWSER=firefox
 # --> Rust with cargo
 # --> Go with .gocode
 # --> User paths before Nix paths
-export PATH="$HOME/.local/pipx/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin::$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/run/wrappers/bin:/home/gkapfham/.nix-profile/bin:/nix/profile/bin:/home/gkapfham/.local/state/nix/profile/bin:/etc/profiles/per-user/gkapfham/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
+export PATH="$HOME/.local/pipx/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/run/wrappers/bin:/home/gkapfham/.nix-profile/bin:/nix/profile/bin:/home/gkapfham/.local/state/nix/profile/bin:/etc/profiles/per-user/gkapfham/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin/bin:"
 
 # Local Poetry home
 export POETRY_HOME=$HOME/.poetry
@@ -148,6 +148,11 @@ export RUST_BACKTRACE=1
 # (note that this works even when zk is used through
 # the neovim plugin zk.nvim)
 export ZK_NOTEBOOK_DIR="/home/gkapfham/working/zk"
+
+# Make sure that the clipboard program called cb
+# only uses standard ANSI colors that are supported
+# by my terminal and not default, too-bright colors
+export CLIPBOARD_THEME=ansi
 
 # }}}
 
