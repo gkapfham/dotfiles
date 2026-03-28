@@ -173,7 +173,210 @@ return {
     lazy = false,
     opts = {
       bigfile = { enabled = true },
-      dashboard = { enabled = false },
+      dashboard = {
+        enabled = true,
+        width = 60,
+        pane_gap = 2,
+        sections = {
+          {
+            pane = 1,
+            section = "keys",
+            icon = " ",
+            title = "Launch",
+            gap = 0,
+            padding = 0,
+            enabled = function()
+              return vim.o.columns >= 120 and vim.o.lines >= 34
+            end,
+          },
+          {
+            pane = 1,
+            section = "startup",
+            icon = "󰔛 ",
+            title = "Startup",
+            padding = 1,
+            enabled = function()
+              return vim.o.columns >= 120 and vim.o.lines >= 34
+            end,
+          },
+          {
+            pane = 2,
+            section = "recent_files",
+            icon = "󰈞 ",
+            title = "Recent Files",
+            indent = 2,
+            padding = 0,
+            limit = 8,
+            enabled = function()
+              return vim.o.columns >= 120 and vim.o.lines >= 34
+            end,
+          },
+          {
+            pane = 2,
+            section = "projects",
+            icon = " ",
+            title = "Projects",
+            indent = 2,
+            padding = 1,
+            limit = 4,
+            enabled = function()
+              return vim.o.columns >= 120 and vim.o.lines >= 34
+            end,
+          },
+          {
+            pane = 2,
+            section = "terminal",
+            icon = " ",
+            title = "Git Status",
+            cmd = "git --no-pager status --short --branch --renames 2>/dev/null || printf 'No git repository in cwd'",
+            height = 3,
+            padding = 1,
+            indent = 2,
+            ttl = 120,
+            enabled = function()
+              if vim.o.columns < 120 or vim.o.lines < 34 then
+                return false
+              end
+              vim.fn.system("git rev-parse --is-inside-work-tree >/dev/null 2>&1")
+              return vim.v.shell_error == 0
+            end,
+          },
+          {
+            pane = 2,
+            section = "terminal",
+            icon = " ",
+            title = "ZK Inspiration",
+            cmd = [[sh -c 'if ! command -v zk >/dev/null 2>&1; then printf "zk not installed\n"; exit 0; fi; if [ -z "$ZK_NOTEBOOK_DIR" ] || [ ! -d "$ZK_NOTEBOOK_DIR" ]; then printf "ZK_NOTEBOOK_DIR not set\n"; exit 0; fi; printf "Recent (file | edited)\n"; zk list --working-dir "$ZK_NOTEBOOK_DIR" --sort modified --limit 5 --format "{{substring filename 0 40}} | {{format-date modified \"short\"}}" --quiet; printf "\nNeeds work (file | edited)\n"; zk list --working-dir "$ZK_NOTEBOOK_DIR" --tag "todo OR inbox OR open" --sort modified --limit 5 --format "{{substring filename 0 40}} | {{format-date modified \"short\"}}" --quiet' ]],
+            height = 9,
+            padding = 1,
+            indent = 2,
+            ttl = 120,
+            enabled = function()
+              return vim.fn.executable("zk") == 1 and vim.o.columns >= 100 and vim.o.lines >= 30
+            end,
+          },
+          {
+            section = "recent_files",
+            icon = "󰈞 ",
+            title = "Recent Files",
+            indent = 2,
+            padding = 1,
+            limit = 6,
+            enabled = function()
+              return vim.o.columns < 120 or vim.o.lines < 34
+            end,
+          },
+          {
+            section = "projects",
+            icon = " ",
+            title = "Projects",
+            indent = 2,
+            padding = 1,
+            limit = 3,
+            enabled = function()
+              return (vim.o.columns < 120 or vim.o.lines < 34) and (vim.o.columns >= 98 and vim.o.lines >= 28)
+            end,
+          },
+          {
+            section = "terminal",
+            icon = " ",
+            title = "Git Status",
+            cmd = "git --no-pager status --short --branch --renames 2>/dev/null || printf 'No git repository in cwd'",
+            height = 2,
+            padding = 1,
+            indent = 2,
+            ttl = 120,
+            enabled = function()
+              if (vim.o.columns >= 120 and vim.o.lines >= 34) or vim.o.columns < 98 or vim.o.lines < 26 then
+                return false
+              end
+              vim.fn.system("git rev-parse --is-inside-work-tree >/dev/null 2>&1")
+              return vim.v.shell_error == 0
+            end,
+          },
+          {
+            section = "keys",
+            icon = " ",
+            title = "Launch",
+            gap = 0,
+            padding = 0,
+            enabled = function()
+              return vim.o.columns < 120 or vim.o.lines < 34
+            end,
+          },
+          {
+            section = "startup",
+            icon = "󰔛 ",
+            title = "Startup",
+            padding = 1,
+            enabled = function()
+              return vim.o.columns < 120 or vim.o.lines < 34
+            end,
+          },
+        },
+        preset = {
+          keys = {
+            {
+              icon = "󰈞 ",
+              key = "f",
+              desc = "Find files",
+              action = ":lua Snacks.dashboard.pick('files')",
+            },
+            {
+              icon = "󰱼 ",
+              key = "g",
+              desc = "Live grep",
+              action = ":lua Snacks.dashboard.pick('live_grep')",
+            },
+            { icon = " ", key = "b", desc = "Buffers", action = ":lua Snacks.picker.buffers()" },
+            {
+              icon = " ",
+              key = "r",
+              desc = "Recent files",
+              action = ":lua Snacks.dashboard.pick('oldfiles')",
+            },
+            { icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.picker.projects()" },
+            {
+              icon = " ",
+              key = "z",
+              desc = "Open top ZK note",
+              action = function()
+                if vim.fn.executable("zk") == 0 then
+                  vim.notify("zk is not installed", vim.log.levels.WARN)
+                  return
+                end
+                local notebook = vim.env.ZK_NOTEBOOK_DIR
+                if not notebook or notebook == "" then
+                  vim.notify("ZK_NOTEBOOK_DIR is not set", vim.log.levels.WARN)
+                  return
+                end
+                local cmd = string.format(
+                  "zk list --working-dir %s --sort modified --limit 1 --format jsonl --quiet",
+                  vim.fn.shellescape(notebook)
+                )
+                local output = vim.fn.system(cmd)
+                if vim.v.shell_error ~= 0 or output == "" then
+                  vim.notify("No ZK notes available", vim.log.levels.WARN)
+                  return
+                end
+                local line = vim.split(output, "\n", { trimempty = true })[1]
+                if not line then
+                  vim.notify("No ZK notes available", vim.log.levels.WARN)
+                  return
+                end
+                local ok, note = pcall(vim.json.decode, line)
+                if not ok or not note or not note.absPath then
+                  vim.notify("Could not read ZK note metadata", vim.log.levels.WARN)
+                  return
+                end
+                vim.cmd.edit(vim.fn.fnameescape(note.absPath))
+              end,
+            },
+            { icon = "󰒲 ", key = "l", desc = "Plugin manager", action = ":Lazy" },
+            { icon = " ", key = "q", desc = "Quit Neovim", action = ":qa" },
+          },
+        },
+      },
       git = { enabled = false },
       gh = {
         enabled = false,
