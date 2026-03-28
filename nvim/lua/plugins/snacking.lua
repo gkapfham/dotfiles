@@ -161,6 +161,110 @@ local function ast_grep_picker()
   })
 end
 
+local function dashboard_is_small()
+  return vim.o.columns < 100 or vim.o.lines < 28
+end
+
+local git_dashboard_cache = { cwd = nil, profile = nil, at = 0, text = nil }
+
+local function shorten_text(text, max_len)
+  if #text <= max_len then
+    return text
+  end
+  return text:sub(1, max_len - 1) .. "…"
+end
+
+local function dashboard_size_profile()
+  if vim.o.columns < 120 or vim.o.lines < 30 then
+    return "compact"
+  elseif vim.o.columns < 145 or vim.o.lines < 36 then
+    return "normal"
+  end
+  return "wide"
+end
+
+local function git_dashboard_text()
+  local cwd = vim.uv.cwd() or "."
+  local now = vim.uv.now()
+  local profile = dashboard_size_profile()
+  if
+    git_dashboard_cache.cwd == cwd
+    and git_dashboard_cache.profile == profile
+    and git_dashboard_cache.text
+    and (now - git_dashboard_cache.at) < 120000
+  then
+    return git_dashboard_cache.text
+  end
+
+  if vim.fn.executable("git") == 0 then
+    return nil
+  end
+
+  local result = vim.system({ "git", "status", "--porcelain=v2", "--branch" }, { text = true, cwd = cwd }):wait()
+  if result.code ~= 0 or not result.stdout then
+    git_dashboard_cache = { cwd = cwd, at = now, text = nil }
+    return nil
+  end
+
+  local branch = "detached"
+  local ahead, behind = 0, 0
+  local staged, changed, untracked, conflicted, renamed = 0, 0, 0, 0, 0
+
+  for _, line in ipairs(vim.split(result.stdout, "\n", { trimempty = true })) do
+    if vim.startswith(line, "# branch.head ") then
+      branch = line:gsub("# branch.head ", "")
+    elseif vim.startswith(line, "# branch.ab ") then
+      local a, b = line:match("# branch%.ab %+(%d+) %-(%d+)")
+      ahead = tonumber(a) or 0
+      behind = tonumber(b) or 0
+    elseif vim.startswith(line, "1 ") or vim.startswith(line, "2 ") then
+      local xy = line:sub(3, 4)
+      if xy:sub(1, 1) ~= "." then
+        staged = staged + 1
+      end
+      if xy:sub(2, 2) ~= "." then
+        changed = changed + 1
+      end
+      if vim.startswith(line, "2 ") then
+        renamed = renamed + 1
+      end
+    elseif vim.startswith(line, "? ") then
+      untracked = untracked + 1
+    elseif vim.startswith(line, "u ") then
+      conflicted = conflicted + 1
+    end
+  end
+
+  local branch_name = branch
+  local status_line
+  if profile == "compact" then
+    branch_name = shorten_text(branch_name, 16)
+    status_line = string.format("+%d  ~%d  ?%d", staged, changed, untracked)
+  elseif profile == "normal" then
+    branch_name = shorten_text(branch_name, 24)
+    status_line = string.format("+%d  ~%d  ?%d  !%d", staged, changed, untracked, conflicted)
+  else
+    branch_name = shorten_text(branch_name, 36)
+    status_line =
+      string.format(" %d   %d  ? %d   %d  󰑕 %d", staged, changed, untracked, conflicted, renamed)
+  end
+
+  local branch_line = string.format(" %s", branch_name)
+  if ahead > 0 or behind > 0 then
+    if profile == "compact" then
+      branch_line = string.format("%s ↑%d↓%d", branch_line, ahead, behind)
+    else
+      branch_line = string.format("%s  ↑%d ↓%d", branch_line, ahead, behind)
+    end
+  end
+
+  local lines = { branch_line, status_line }
+
+  local text = table.concat(lines, "\n")
+  git_dashboard_cache = { cwd = cwd, profile = profile, at = now, text = text }
+  return text
+end
+
 return {
 
   -- snacks.nvim
@@ -173,39 +277,88 @@ return {
     lazy = false,
     opts = {
       bigfile = { enabled = true },
+      image = { enabled = false },
       dashboard = {
         enabled = true,
         width = 60,
-        pane_gap = 2,
+        pane_gap = 4,
         sections = {
-          { section = "header" },
           {
-            pane = 2,
-            section = "terminal",
-            cmd = "colorscript -e square",
-            height = 5,
-            padding = 1,
-          },
-          { section = "keys", gap = 0, padding = 1 },
-          { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-          { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-          {
-            pane = 2,
-            icon = " ",
-            title = "Git Status",
-            section = "terminal",
+            section = "header",
             enabled = function()
-              return Snacks.git.get_root() ~= nil
+              return not dashboard_is_small()
             end,
-            cmd = "git status --short --branch --renames",
-            height = 5,
-            padding = 1,
-            ttl = 5 * 60,
-            indent = 3,
           },
-          { section = "startup" },
+          {
+            section = "keys",
+            gap = 0,
+            padding = 1,
+          },
+          function()
+            if dashboard_is_small() then
+              return nil
+            end
+            local profile = dashboard_size_profile()
+            local recent_limit = profile == "compact" and 4 or (profile == "normal" and 6 or 8)
+            local project_limit = profile == "compact" and 2 or (profile == "normal" and 3 or 4)
+            return {
+              {
+                pane = 2,
+                icon = " ",
+                title = "Recent Files",
+                section = "recent_files",
+                indent = 2,
+                padding = 2,
+                limit = recent_limit,
+              },
+              {
+                pane = 2,
+                icon = " ",
+                title = "Projects",
+                section = "projects",
+                indent = 2,
+                padding = 2,
+                limit = project_limit,
+              },
+            }
+          end,
+          function()
+            if dashboard_is_small() then
+              return nil
+            end
+            local text = git_dashboard_text()
+            if not text then
+              return nil
+            end
+            return {
+              pane = 2,
+              icon = " ",
+              title = "Git Summary",
+              {
+                text = {
+                  { text, hl = "Normal" },
+                },
+              },
+              indent = 2,
+              padding = 1,
+            }
+          end,
+          {
+            section = "startup",
+            enabled = function()
+              return not dashboard_is_small()
+            end,
+          },
         },
         preset = {
+          header = table.concat({
+            [[  ___                              _       ]],
+            [[ |_ _|_ __  _ __   _____   ____ _| |_ ___ ]],
+            [[  | || '_ \| '_ \ / _ \ \ / / _` | __/ _ \]],
+            [[  | || | | | | | | (_) \ V / (_| | ||  __/]],
+            [[ |___|_| |_|_| |_|\___/ \_/ \__,_|\__\___|]],
+            [[         keep working on hard things       ]],
+          }, "\n"),
           keys = {
             {
               icon = "󰈞 ",
@@ -219,18 +372,23 @@ return {
               desc = "Live grep",
               action = ":lua Snacks.dashboard.pick('live_grep')",
             },
-            { icon = " ", key = "b", desc = "Buffers", action = ":lua Snacks.picker.buffers()" },
             {
               icon = " ",
               key = "r",
               desc = "Recent files",
               action = ":lua Snacks.dashboard.pick('oldfiles')",
             },
+            {
+              icon = "󰉖 ",
+              key = "o",
+              desc = "Special files",
+              action = ":lua Snacks.picker.files({ hidden = true })",
+            },
             { icon = " ", key = "p", desc = "Projects", action = ":lua Snacks.picker.projects()" },
             {
               icon = " ",
               key = "z",
-              desc = "Open top ZK note",
+              desc = "Open top Zk",
               action = function()
                 if vim.fn.executable("zk") == 0 then
                   vim.notify("zk is not installed", vim.log.levels.WARN)
