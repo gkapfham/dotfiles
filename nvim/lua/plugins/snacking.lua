@@ -352,12 +352,10 @@ return {
         },
         preset = {
           header = table.concat({
-            [[  ___                              _       ]],
-            [[ |_ _|_ __  _ __   _____   ____ _| |_ ___ ]],
-            [[  | || '_ \| '_ \ / _ \ \ / / _` | __/ _ \]],
-            [[  | || | | | | | | (_) \ V / (_| | ||  __/]],
-            [[ |___|_| |_|_| |_|\___/ \_/ \__,_|\__\___|]],
-            [[         keep working on hard things       ]],
+            [[ ▀█  █▀▀▄ █▀▀▄ █▀▀█ █   █ █▀▀█ ▀▀█▀▀ █▀▀]],
+            [[  █  █  █ █  █ █  █ █   █ █▄▄█   █   █▀▀]],
+            [[ ▀▀▀ ▀  ▀ ▀  ▀ ▀▀▀▀  ▀▀▀  ▀  ▀   ▀   ▀▀▀]],
+            [[        "working is relaxing for me"      ]],
           }, "\n"),
           keys = {
             {
@@ -390,7 +388,12 @@ return {
               desc = "Similar Files",
               action = ":lua require('similar').pick()",
             },
-            { icon = " ", key = "p", desc = "Browse Projects", action = ":lua Snacks.picker.projects()" },
+            {
+              icon = " ",
+              key = "p",
+              desc = "Browse Projects",
+              action = ":lua Snacks.picker.projects()",
+            },
             { icon = " ", key = "z", desc = "Search Notes", action = ":ZkNotes" },
             { icon = "󰵁 ", key = "n", desc = "Recents Notes", action = ":ZkRecents" },
             { icon = "󰊢 ", key = "s", desc = "Git Status", action = ":Git status" },
@@ -400,42 +403,6 @@ return {
               desc = "Coding Agent",
               action = ":lua require('sidekick.cli').toggle({ filter = { installed = true } })",
             },
-            -- {
-            --   icon = " ",
-            --   key = "z",
-            --   desc = "Open top Zk",
-            --   action = function()
-            --     if vim.fn.executable("zk") == 0 then
-            --       vim.notify("zk is not installed", vim.log.levels.WARN)
-            --       return
-            --     end
-            --     local notebook = vim.env.ZK_NOTEBOOK_DIR
-            --     if not notebook or notebook == "" then
-            --       vim.notify("ZK_NOTEBOOK_DIR is not set", vim.log.levels.WARN)
-            --       return
-            --     end
-            --     local cmd = string.format(
-            --       "zk list --working-dir %s --sort modified --limit 1 --format jsonl --quiet",
-            --       vim.fn.shellescape(notebook)
-            --     )
-            --     local output = vim.fn.system(cmd)
-            --     if vim.v.shell_error ~= 0 or output == "" then
-            --       vim.notify("No ZK notes available", vim.log.levels.WARN)
-            --       return
-            --     end
-            --     local line = vim.split(output, "\n", { trimempty = true })[1]
-            --     if not line then
-            --       vim.notify("No ZK notes available", vim.log.levels.WARN)
-            --       return
-            --     end
-            --     local ok, note = pcall(vim.json.decode, line)
-            --     if not ok or not note or not note.absPath then
-            --       vim.notify("Could not read ZK note metadata", vim.log.levels.WARN)
-            --       return
-            --     end
-            --     vim.cmd.edit(vim.fn.fnameescape(note.absPath))
-            --   end,
-            -- },
             { icon = "󰒲 ", key = "l", desc = "Plugin manager", action = ":Lazy" },
             { icon = " ", key = "q", desc = "Quit Neovim", action = ":qa" },
           },
