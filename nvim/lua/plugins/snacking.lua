@@ -379,7 +379,7 @@ return {
               action = ":lua Snacks.dashboard.pick('oldfiles')",
             },
             {
-              icon = "󰉖 ",
+              icon = " ",
               key = "m",
               desc = "Smart Files",
               action = ":lua Snacks.picker.smart()",
@@ -393,7 +393,7 @@ return {
             { icon = " ", key = "p", desc = "Browse Projects", action = ":lua Snacks.picker.projects()" },
             { icon = " ", key = "z", desc = "Search Notes", action = ":ZkNotes" },
             { icon = "󰵁 ", key = "n", desc = "Recents Notes", action = ":ZkRecents" },
-            { icon = "󰊢 ", key = "s", desc = "Git Status", action = ":ToggleGstatus" },
+            { icon = "󰊢 ", key = "s", desc = "Git Status", action = ":Git status" },
             {
               icon = " ",
               key = "c",
