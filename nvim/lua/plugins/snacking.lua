@@ -165,7 +165,14 @@ local function dashboard_is_small()
   return vim.o.columns < 100 or vim.o.lines < 28
 end
 
+local dashboard_keymap_reminders = {
+  { key = "<Space>ls", note = "LSP symbols" },
+  { key = "<Space>ts", note = "Treesitter symbols" },
+  { key = "<Space>wd", note = "Workspace diagnostics" },
+}
+
 local git_dashboard_cache = { cwd = nil, profile = nil, at = 0, text = nil }
+local git_commits_cache = { cwd = nil, profile = nil, at = 0, text = nil }
 
 local function shorten_text(text, max_len)
   if #text <= max_len then
@@ -181,6 +188,25 @@ local function dashboard_size_profile()
     return "normal"
   end
   return "wide"
+end
+
+local function dashboard_reminder_text()
+  local profile = dashboard_size_profile()
+  local lines = {}
+  for _, item in ipairs(dashboard_keymap_reminders) do
+    local line
+    if profile == "compact" then
+      line = string.format("%s -> %s", item.key, item.note)
+      line = shorten_text(line, 34)
+    elseif profile == "normal" then
+      line = string.format("%s -> %s", item.key, item.note)
+      line = shorten_text(line, 44)
+    else
+      line = string.format("%s -> %s", item.key, item.note)
+    end
+    table.insert(lines, line)
+  end
+  return table.concat(lines, "\n")
 end
 
 local function git_dashboard_text()
@@ -265,6 +291,45 @@ local function git_dashboard_text()
   return text
 end
 
+local function git_commits_text()
+  local cwd = vim.uv.cwd() or "."
+  local now = vim.uv.now()
+  local profile = dashboard_size_profile()
+  if
+    git_commits_cache.cwd == cwd
+    and git_commits_cache.profile == profile
+    and git_commits_cache.text
+    and (now - git_commits_cache.at) < 120000
+  then
+    return git_commits_cache.text
+  end
+
+  if vim.fn.executable("git") == 0 then
+    return nil
+  end
+
+  local limit = profile == "compact" and 3 or (profile == "normal" and 4 or 5)
+  local result = vim.system({ "git", "log", "--oneline", "--no-decorate", "-n", tostring(limit) }, { text = true, cwd = cwd }):wait()
+  if result.code ~= 0 or not result.stdout then
+    git_commits_cache = { cwd = cwd, at = now, text = nil }
+    return nil
+  end
+
+  local lines = {}
+  for _, line in ipairs(vim.split(result.stdout, "\n", { trimempty = true })) do
+    local hash, msg = line:match("^(%w+)%s+(.*)$")
+    if hash and msg then
+      local short_hash = hash:sub(1, 7)
+      local display_msg = shorten_text(msg, profile == "compact" and 24 or (profile == "normal" and 34 or 46))
+      table.insert(lines, string.format("%s %s", short_hash, display_msg))
+    end
+  end
+
+  local text = table.concat(lines, "\n")
+  git_commits_cache = { cwd = cwd, profile = profile, at = now, text = text }
+  return text
+end
+
 return {
 
   -- snacks.nvim
@@ -291,16 +356,64 @@ return {
           },
           {
             section = "keys",
+            icon = "󰌌 ",
+            title = "Dashboard Keymaps",
+            indent = 2,
             gap = 0,
             padding = 1,
           },
+          function()
+            if dashboard_is_small() or #dashboard_keymap_reminders == 0 then
+              return nil
+            end
+            return {
+              pane = 1,
+              icon = "󰌌 ",
+              title = "Keymap Reminders",
+              {
+                text = {
+                  { dashboard_reminder_text(), hl = "Normal" },
+                },
+              },
+              indent = 2,
+              padding = 1,
+            }
+          end,
+          {
+            pane = 1,
+            section = "startup",
+            enabled = function()
+              return not dashboard_is_small()
+            end,
+          },
+          function()
+            if dashboard_is_small() then
+              return nil
+            end
+            local cwd = vim.uv.cwd() or vim.fn.getcwd()
+            local profile = dashboard_size_profile()
+            local max_len = profile == "compact" and 34 or (profile == "normal" and 44 or 56)
+            local display_cwd = shorten_text(cwd, max_len)
+            return {
+              pane = 2,
+              icon = " ",
+              title = "Working Directory",
+              {
+                text = {
+                  { display_cwd, hl = "Normal" },
+                },
+              },
+              indent = 2,
+              padding = 1,
+            }
+          end,
           function()
             if dashboard_is_small() then
               return nil
             end
             local profile = dashboard_size_profile()
             local recent_limit = profile == "compact" and 4 or (profile == "normal" and 6 or 8)
-            local project_limit = profile == "compact" and 2 or (profile == "normal" and 3 or 4)
+            local project_limit = profile == "compact" and 2 or (profile == "normal" and 5 or 7)
             return {
               {
                 pane = 2,
@@ -308,7 +421,7 @@ return {
                 title = "Recent Files",
                 section = "recent_files",
                 indent = 2,
-                padding = 2,
+                padding = 1,
                 limit = recent_limit,
               },
               {
@@ -317,7 +430,7 @@ return {
                 title = "Projects",
                 section = "projects",
                 indent = 2,
-                padding = 2,
+                padding = 1,
                 limit = project_limit,
               },
             }
@@ -343,12 +456,27 @@ return {
               padding = 1,
             }
           end,
-          {
-            section = "startup",
-            enabled = function()
-              return not dashboard_is_small()
-            end,
-          },
+          function()
+            if dashboard_is_small() then
+              return nil
+            end
+            local text = git_commits_text()
+            if not text then
+              return nil
+            end
+            return {
+              pane = 2,
+              icon = " ",
+              title = "Last Commits",
+              {
+                text = {
+                  { text, hl = "Normal" },
+                },
+              },
+              indent = 2,
+              padding = 1,
+            }
+          end,
         },
         preset = {
           header = table.concat({
@@ -838,6 +966,13 @@ return {
           Snacks.picker.lsp_symbols()
         end,
         desc = "LSP: Symbols",
+      },
+      {
+        "<Space>db",
+        function()
+          Snacks.dashboard()
+        end,
+        desc = "Snacks: Dashboard",
       },
       {
         "<Space>su",
