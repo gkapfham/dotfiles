@@ -280,9 +280,13 @@ plugins {
     welcome-screen location="zellij:session-manager" {
         welcome_screen false
     }
+    // local plugin contained within the dotfiles repository,
+    // I am the creator and maintainer of this plugin
     zigzag location="file:/home/gkapfham/.config/zellij/plugins/zigzag.wasm" {
         floating true
     }
+    // remote plugin hosted on GitHub with the web assembly
+    // downloaded from the releases page on GitHub
     zjstatus location="https://github.com/dj95/zjstatus/releases/download/v0.21.1/zjstatus.wasm" {
         color_bg "#1c1c1c"
         color_green "#6f9500"
