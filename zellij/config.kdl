@@ -336,14 +336,13 @@ plugins {
         datetime          "{format}"
         datetime_format   "%Y-%m-%d"
         datetime_timezone "America/New_York"
-        pipe_zjstatus_hints_format "{output}"
     }
 }
 
 // Plugins to load in the background when a new session starts
 load_plugins {
     zjstatus
-    zjstatus-hints
+    // zjstatus-hints
 }
 web_client {
     font "Maple Mono NF"
@@ -430,7 +429,7 @@ on_force_close "detach"
 // Valid values: positive integers
 // Default value: 10000
 // 
-scroll_buffer_size 50000
+scroll_buffer_size 10000
  
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with
@@ -500,7 +499,7 @@ serialize_pane_viewport true
 // defaults to the scrollback size. If this number is higher than the scrollback size, it will
 // also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
 // 
-scrollback_lines_to_serialize 0
+scrollback_lines_to_serialize 1000
  
 // Enable or disable the rendering of styled and colored underlines (undercurl).
 // May need to be disabled for certain unsupported terminals
@@ -511,14 +510,14 @@ scrollback_lines_to_serialize 0
  
 // How often in seconds sessions are serialized
 // 
-// serialization_interval 10000
+serialization_interval 120
  
 // Enable or disable writing of session metadata to disk (if disabled, other sessions might not know
 // metadata info on this session)
 // (Requires restart)
 // Default: false
 // 
-// disable_session_metadata false
+disable_session_metadata false
  
 // Enable or disable support for the enhanced Kitty Keyboard Protocol (the host terminal must also support it)
 // (Requires restart)
