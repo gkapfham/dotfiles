@@ -280,8 +280,6 @@ plugins {
     welcome-screen location="zellij:session-manager" {
         welcome_screen false
     }
-    zjpane location="https://github.com/FuriouZz/zjpane/releases/download/v0.2.0/zjpane.wasm" {
-    }
     zigzag location="file:/home/gkapfham/.config/zellij/plugins/zigzag.wasm" {
         floating true
     }
