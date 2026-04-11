@@ -222,7 +222,7 @@ return {
   {
     "akinsho/git-conflict.nvim",
     event = "VeryLazy",
-    tag = "v2.1.0",
+    -- tag = "v2.1.0",
     config = true,
   },
 
