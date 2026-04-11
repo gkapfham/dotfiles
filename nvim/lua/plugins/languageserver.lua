@@ -19,7 +19,7 @@ return {
     event = "BufReadPost",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      "nvimtools/none-ls.nvim",
+      -- "nvimtools/none-ls.nvim",
     },
     config = function()
       -- draw the border for the LSP floating window; since the
