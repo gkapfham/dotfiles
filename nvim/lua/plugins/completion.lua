@@ -309,11 +309,14 @@ return {
           enabled = true,
         },
         tools = {
-          opencode = {
-            cmd = { "bunx", "opencode-ai@latest" },
-          },
           amp = {
             cmd = { "bunx", "@sourcegraph/amp@latest" },
+          },
+          copilot = {
+            cmd = { "bunx", "@github/copilot@latest" },
+          },
+          opencode = {
+            cmd = { "bunx", "opencode-ai@latest" },
           },
           toad = {
             cmd = { "toad", "acp", "bunx opencode-ai@latest acp", "--project-dir", "." },
