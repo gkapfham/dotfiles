@@ -112,22 +112,6 @@ return {
         },
       })
       vim.lsp.enable("basedpyright")
-      -- configure pyright for Python LSP (disabled in favor of basedpyright)
-      -- vim.lsp.config("pyright", {
-      --   settings = {
-      --     python = {
-      --       analysis = {
-      --         typeCheckingMode = "basic",
-      --         autoImportCompletions = true,
-      --         diagnosticSeverityOverrides = {
-      --           reportUnusedImport = "information",
-      --           reportUnusedVariable = "information",
-      --         },
-      --       },
-      --     },
-      --   },
-      -- })
-      -- vim.lsp.enable("pyright")
       -- configure pyrefly for Python LSP
       vim.lsp.enable("pyrefly")
       -- configure ruff for Python LSP
