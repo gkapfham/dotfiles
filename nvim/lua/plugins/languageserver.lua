@@ -19,7 +19,7 @@ return {
     event = "BufReadPost",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+      -- "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
       "nvimtools/none-ls.nvim",
     },
     config = function()
@@ -35,9 +35,9 @@ return {
       -- about the source code under the cursor but do so without the box
       -- and this makes it difficult to see the information since the background
       -- is the same color and the diagnostic information
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "rounded",
-      })
+      -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+      --   border = "rounded",
+      -- })
       -- Setup LSP servers:
       -- 1) CSS
       -- 2) HTML
@@ -66,8 +66,8 @@ return {
         filetypes = { "markdown", "quarto", "html" },
       })
       vim.lsp.enable("html")
-      -- configure htmx for HTML LSP
-      vim.lsp.enable("htmx")
+      -- -- configure htmx for HTML LSP
+      -- vim.lsp.enable("htmx")
       -- configure gopls for Go LSP
       vim.lsp.enable("gopls")
       -- configure luals (with neovim support) for Lua LSP
@@ -239,7 +239,7 @@ return {
       -- Configure other aspects of the language servers
       -- Use toggle_lsp_diagnostics to disable the virtual_text and then
       -- to support the display of the diagnostics
-      require("toggle_lsp_diagnostics").init({ start_on = true, virtual_text = false })
+      -- require("toggle_lsp_diagnostics").init({ start_on = true, virtual_text = false })
       -- Define customized signs for diagnostics reported by the language server;
       -- note that this will define the signs displayed in the gutter
       local internal_signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
