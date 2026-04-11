@@ -117,9 +117,6 @@ return {
         buffer = { suffix = "b", options = {} },
         comment = { suffix = "e", options = {} },
         conflict = { suffix = "x", options = {} },
-        -- this default now creates lua errors every
-        -- time I try to use it; instead, making the
-        -- mappings inside of this config function
         diagnostic = { suffix = "d", options = {} },
         file = { suffix = "f", options = {} },
         indent = { suffix = "i", options = {} },
@@ -127,6 +124,8 @@ return {
         location = { suffix = "l", options = {} },
         oldfile = { suffix = "o", options = {} },
         quickfix = { suffix = "q", options = {} },
+        -- do not use since I am trying a separate
+        -- pluging for treesitter-based movements
         -- treesitter = { suffix = "t", options = {} },
         undo = { suffix = "u", options = {} },
         window = { suffix = "w", options = {} },
@@ -141,8 +140,6 @@ return {
   {
     "aaronik/treewalker.nvim",
     event = "VeryLazy",
-    -- optional (see options below)
-    -- opts = { ... },
   },
 
   -- marks.nvim
