@@ -244,9 +244,34 @@ return {
 
   -- copilot-cmp
   -- Integrate the copilot with nvim-cmp
+  -- confirm that the copilot source is only available when the
+  -- copilot plugin is active
   {
     "zbirenbaum/copilot-cmp",
     config = function()
+      local source = require("copilot_cmp.source")
+      -- add a patch to confirm that the copilot source completion
+      -- engine uses the newest nvim 0.12 API that this plugin does
+      -- not use automatically and thus leads to warning errors about
+      -- the use of deprecated APIs; note that this patch is needed to
+      source.is_available = function(self)
+        if self.client:is_stopped() or self.client.name ~= "copilot" then
+          return false
+        end
+        local get_source_client = function()
+          if vim.lsp.get_clients == nil then
+            return vim.lsp.get_active_clients({
+              bufnr = vim.api.nvim_get_current_buf(),
+              id = self.client.id,
+            })
+          end
+          return vim.lsp.get_clients({
+            bufnr = vim.api.nvim_get_current_buf(),
+            id = self.client.id,
+          })
+        end
+        return next(get_source_client()) ~= nil
+      end
       require("copilot_cmp").setup()
       vim.cmd([[
          autocmd BufEnter copilot-chat set filetype=markdown
