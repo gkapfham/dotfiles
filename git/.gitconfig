@@ -83,7 +83,6 @@
     line-numbers-minus-style = yellow
     whitespace-error-style = magenta
     navigate = true
-    true-color = true
     hyperlinks = true
 [maintenance]
 	repo = /home/gkapfham/.zsh/zsh-snap
