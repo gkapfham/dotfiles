@@ -45,7 +45,6 @@ local function ck_picker(initial_search, overrides)
     live = true,
     supports_live = true,
     search = initial_search or "",
-    ---@param opts snacks.picker.grep.Config
     finder = function(opts, ctx)
       if ctx.filter.search == "" then
         return function() end
@@ -166,8 +165,10 @@ local function dashboard_is_small()
 end
 
 local dashboard_keymap_reminders = {
+  { key = "<Space>gr", note = "LSP references" },
   { key = "<Space>ls", note = "LSP symbols" },
   { key = "<Space>ts", note = "Treesitter symbols" },
+  { key = "<Space>dd", note = "Document diagnostics" },
   { key = "<Space>wd", note = "Workspace diagnostics" },
 }
 
@@ -295,11 +296,12 @@ local function git_commits_text()
   local cwd = vim.uv.cwd() or "."
   local now = vim.uv.now()
   local profile = dashboard_size_profile()
+  -- Extended cache to 1 hour (3600000ms) for better performance
   if
     git_commits_cache.cwd == cwd
     and git_commits_cache.profile == profile
     and git_commits_cache.text
-    and (now - git_commits_cache.at) < 120000
+    and (now - git_commits_cache.at) < 3600000
   then
     return git_commits_cache.text
   end
@@ -309,19 +311,22 @@ local function git_commits_text()
   end
 
   local limit = profile == "compact" and 3 or (profile == "normal" and 4 or 5)
-  local result = vim.system({ "git", "log", "--oneline", "--no-decorate", "-n", tostring(limit) }, { text = true, cwd = cwd }):wait()
+  local max_len = profile == "compact" and 24 or (profile == "normal" and 34 or 46)
+  -- Use --format for faster parsing and skip merges for performance
+  local result = vim
+    .system({ "git", "log", "--no-merges", "--format=%h %s", "-n", tostring(limit) }, { text = true, cwd = cwd })
+    :wait()
   if result.code ~= 0 or not result.stdout then
     git_commits_cache = { cwd = cwd, at = now, text = nil }
     return nil
   end
 
+  -- Faster string processing using gmatch instead of vim.split
   local lines = {}
-  for _, line in ipairs(vim.split(result.stdout, "\n", { trimempty = true })) do
+  for line in result.stdout:gmatch("[^\r\n]+") do
     local hash, msg = line:match("^(%w+)%s+(.*)$")
     if hash and msg then
-      local short_hash = hash:sub(1, 7)
-      local display_msg = shorten_text(msg, profile == "compact" and 24 or (profile == "normal" and 34 or 46))
-      table.insert(lines, string.format("%s %s", short_hash, display_msg))
+      table.insert(lines, hash .. " " .. shorten_text(msg, max_len))
     end
   end
 
@@ -350,6 +355,7 @@ return {
         sections = {
           {
             section = "header",
+            padding = 1,
             enabled = function()
               return not dashboard_is_small()
             end,
