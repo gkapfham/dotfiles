@@ -50,6 +50,16 @@ return {
         autocmd FileType git setlocal nospell
       augroup END
       ]])
+      -- Enable spell checking immediately if the current buffer matches
+      -- one of the filetypes (needed because this plugin is lazy-loaded)
+      local spell_filetypes = { "markdown", "quarto", "mail", "text", "tex", "latex", "plaintex", "gitcommit", "yaml", "json" }
+      local current_ft = vim.bo.filetype
+      for _, ft in ipairs(spell_filetypes) do
+        if current_ft == ft then
+          vim.opt_local.spell = true
+          break
+        end
+      end
     end,
   },
 
