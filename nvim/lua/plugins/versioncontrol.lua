@@ -191,33 +191,6 @@ return {
     end,
   },
 
-  -- -- diffview.nvim for viewing diffs
-  -- {
-  --   "sindrets/diffview.nvim",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --   },
-  --   cmd = { "DiffviewOpen", "DiffviewLog" },
-  --   keys = {
-  --     { "<Space>do", "<cmd>DiffviewOpen HEAD -- %<cr>", desc = "Open diffview for current file" },
-  --   },
-  --   config = function()
-  --     require("diffview").setup({
-  --       use_icons = true,
-  --       icons = {
-  --         folder_closed = "",
-  --         folder_open = "",
-  --       },
-  --       watch_index = true, -- Update views when the git index changes
-  --       view = {
-  --         default = {
-  --           layout = "diff2_vertical",
-  --         },
-  --       },
-  --     })
-  --   end,
-  -- },
-
   -- git-conflict.nvim for resolving merge conflicts
   {
     "akinsho/git-conflict.nvim",
