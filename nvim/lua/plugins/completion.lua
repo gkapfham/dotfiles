@@ -84,6 +84,7 @@ local kind_icons = {
   OdpCurly_Group_Word = "",
   PunctuationSpecial = "",
   VariableMember = "󰫧",
+  VariableParameter = "󰕫",
 }
 
 -- Define the has_words_before function used in the
@@ -137,7 +138,7 @@ return {
         },
         highlight = {
           on_put = false,
-          on_yank = true,
+          on_yank = false,
           timer = 100,
         },
         preserve_cursor_position = {
@@ -192,6 +193,7 @@ return {
         provider = "codestral",
         provider_options = {
           codestral = {
+            end_point = "https://codestral.mistral.ai/v1/fim/completions",
             optional = {
               max_tokens = 256,
               -- stop = { '\n\n' },
@@ -413,7 +415,7 @@ return {
   -- LLMs through GitHub Copilot models
   {
     "olimorris/codecompanion.nvim",
-    tag = "v17.33.0",
+    -- tag = "v17.33.0",
     event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
