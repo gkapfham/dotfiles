@@ -19,7 +19,6 @@ return {
     event = "BufReadPost",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      -- "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
       "nvimtools/none-ls.nvim",
     },
     config = function()
@@ -216,11 +215,6 @@ return {
         },
       })
       vim.lsp.enable("rust_analyzer")
-      --
-      -- Configure other aspects of the language servers
-      -- Use toggle_lsp_diagnostics to disable the virtual_text and then
-      -- to support the display of the diagnostics
-      -- require("toggle_lsp_diagnostics").init({ start_on = true, virtual_text = false })
       -- Define customized signs for diagnostics reported by the language server;
       -- note that this will define the signs displayed in the gutter
       local internal_signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
@@ -249,11 +243,6 @@ return {
     end,
     -- Keys
     keys = {
-      {
-        "<Space>sv",
-        "<Plug>(toggle-lsp-diag-vtext)",
-        desc = "Language Server: Toggle virtual text",
-      },
       {
         "<Space>e",
         "<cmd> lua vim.diagnostic.open_float(0, {scope='line', border='rounded'})<CR>",
