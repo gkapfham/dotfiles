@@ -131,12 +131,10 @@ return {
         window = { suffix = "w", options = {} },
         yank = { suffix = "y", options = {} },
       })
-      -- redefine the mappings for diagnostics to avoid lua errors
-      -- vim.keymap.set({ "n" }, "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
-      -- vim.keymap.set({ "n" }, "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
     end,
   },
 
+  -- treewalker.nvim
   {
     "aaronik/treewalker.nvim",
     event = "VeryLazy",
