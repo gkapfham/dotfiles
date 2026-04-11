@@ -1,6 +1,23 @@
 -- File: plugins/movement.lua
 -- Purpose: load and configure movement plugins
 
+-- Specialized treesitter movement, note that this
+-- assumes that treesitter is enabled and working {{{
+
+-- movement
+vim.keymap.set({ "n", "v" }, "<C-k>", "<cmd>Treewalker Up<cr>", { silent = true })
+vim.keymap.set({ "n", "v" }, "<C-j>", "<cmd>Treewalker Down<cr>", { silent = true })
+vim.keymap.set({ "n", "v" }, "<C-h>", "<cmd>Treewalker Left<cr>", { silent = true })
+vim.keymap.set({ "n", "v" }, "<C-l>", "<cmd>Treewalker Right<cr>", { silent = true })
+
+-- swapping
+vim.keymap.set("n", "<C-S-k>", "<cmd>Treewalker SwapUp<cr>", { silent = true })
+vim.keymap.set("n", "<C-S-j>", "<cmd>Treewalker SwapDown<cr>", { silent = true })
+vim.keymap.set("n", "<C-S-h>", "<cmd>Treewalker SwapLeft<cr>", { silent = true })
+vim.keymap.set("n", "<C-S-l>", "<cmd>Treewalker SwapRight<cr>", { silent = true })
+
+-- }}}
+
 return {
 
   -- flash.nvim
@@ -103,22 +120,29 @@ return {
         -- this default now creates lua errors every
         -- time I try to use it; instead, making the
         -- mappings inside of this config function
-        -- diagnostic = { suffix = 'd', options = {} },
+        diagnostic = { suffix = "d", options = {} },
         file = { suffix = "f", options = {} },
         indent = { suffix = "i", options = {} },
         jump = { suffix = "j", options = {} },
         location = { suffix = "l", options = {} },
         oldfile = { suffix = "o", options = {} },
         quickfix = { suffix = "q", options = {} },
-        treesitter = { suffix = "t", options = {} },
+        -- treesitter = { suffix = "t", options = {} },
         undo = { suffix = "u", options = {} },
         window = { suffix = "w", options = {} },
         yank = { suffix = "y", options = {} },
       })
       -- redefine the mappings for diagnostics to avoid lua errors
-      vim.keymap.set({ "n" }, "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
-      vim.keymap.set({ "n" }, "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+      -- vim.keymap.set({ "n" }, "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
+      -- vim.keymap.set({ "n" }, "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
     end,
+  },
+
+  {
+    "aaronik/treewalker.nvim",
+    event = "VeryLazy",
+    -- optional (see options below)
+    -- opts = { ... },
   },
 
   -- marks.nvim
