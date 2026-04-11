@@ -34,10 +34,7 @@ return {
       -- that by default when you use <space>k it will display information
       -- about the source code under the cursor but do so without the box
       -- and this makes it difficult to see the information since the background
-      -- is the same color and the diagnostic information
-      -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-      --   border = "rounded",
-      -- })
+      -- is the same color and the diagnostic information.
       -- Setup LSP servers:
       -- 1) CSS
       -- 2) HTML
