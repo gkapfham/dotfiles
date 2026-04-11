@@ -134,3 +134,8 @@ working-directory = inherit
 # Split window
 keybind = ctrl+shift+d=new_split:right
 keybind = ctrl+shift+e=new_split:down
+
+# Change backend for Linux as this seems to avoid
+# a certain kind of busy-wait for writing that
+# leads to consumption of the CPU with an idle terminal
+async-backend = epoll
