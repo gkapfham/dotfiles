@@ -26,13 +26,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
--- -- Highlight on yank
--- vim.api.nvim_create_autocmd("TextYankPost", {
---   callback = function()
---     vim.highlight.on_yank({ higroup = "Visual", timeout = 150 })
---   end,
--- })
-
 -- Close some filetypes with <q>
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = {
