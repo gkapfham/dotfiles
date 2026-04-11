@@ -138,8 +138,18 @@ return {
         mouse_delay = 1000,
       })
       -- keymaps
-      vim.keymap.set("n", "K", require("hover").hover, { desc = "Hover: Default view" })
-      vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "Hover: Select from providers" })
+      vim.keymap.set("n", "K", function()
+        require("hover").open()
+      end, { desc = "hover.nvim (open)" })
+      vim.keymap.set("n", "gK", function()
+        require("hover").enter()
+      end, { desc = "hover.nvim (enter)" })
+      vim.keymap.set("n", "<Space>sp", function()
+        require("hover").switch("previous")
+      end, { desc = "hover.nvim (previous source)" })
+      vim.keymap.set("n", "<Space>sn", function()
+        require("hover").switch("next")
+      end, { desc = "hover.nvim (next source)" })
     end,
   },
 
@@ -331,6 +341,18 @@ return {
           },
         },
       })
+    end,
+  },
+
+  -- tiny-glimmer.nvim
+  -- A minimalist way to highlight text,
+  -- mostly for text that is yanked or pasted
+  {
+    "rachartier/tiny-glimmer.nvim",
+    event = "VeryLazy",
+    priority = 10, -- Low priority to catch other plugins' keybindings
+    config = function()
+      require("tiny-glimmer").setup()
     end,
   },
 
