@@ -111,7 +111,7 @@ return {
   -- with the completion engine, and telescope integration
   {
     "gbprod/yanky.nvim",
-    event = "VeryLazy",
+    event = "BufReadPost",
     config = function()
       require("yanky").setup({
         ring = {
@@ -250,6 +250,7 @@ return {
   -- copilot plugin is active
   {
     "zbirenbaum/copilot-cmp",
+    event = "InsertEnter",
     config = function()
       local source = require("copilot_cmp.source")
       -- add a patch to confirm that the copilot source completion
@@ -287,6 +288,7 @@ return {
   -- that provided coding agents
   {
     "folke/sidekick.nvim",
+    event = "VeryLazy",
     opts = {
       nes = { enabled = false },
       signs = {
@@ -311,9 +313,6 @@ return {
           enabled = true,
         },
         tools = {
-          amp = {
-            cmd = { "bunx", "@sourcegraph/amp@latest" },
-          },
           copilot = {
             cmd = { "bunx", "@github/copilot@latest" },
           },
@@ -415,8 +414,7 @@ return {
   -- LLMs through GitHub Copilot models
   {
     "olimorris/codecompanion.nvim",
-    -- tag = "v17.33.0",
-    event = "VeryLazy",
+    cmd = "CodeCompanion",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MeanderingProgrammer/render-markdown.nvim",
