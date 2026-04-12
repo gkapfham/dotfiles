@@ -76,7 +76,7 @@ export BROWSER=firefox
 # --> Rust with cargo
 # --> Go with .gocode
 # --> User paths before Nix paths
-export PATH="$HOME/.local/pipx/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/run/wrappers/bin:/home/gkapfham/.nix-profile/bin:/nix/profile/bin:/home/gkapfham/.local/state/nix/profile/bin:/etc/profiles/per-user/gkapfham/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin/bin:"
+export PATH="$HOME/.atuin/bin:$HOME/.local/pipx/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/run/wrappers/bin:$HOME/.nix-profile/bin:/nix/profile/bin:/home/gkapfham/.local/state/nix/profile/bin:/etc/profiles/per-user/gkapfham/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin/bin:"
 
 # Local Poetry home
 export POETRY_HOME=$HOME/.poetry
@@ -463,74 +463,74 @@ ZVM_CURSOR_STYLE_ENABLED=false
 
 # Tmux {{{
 
-# Display all of the open tmux sessions with fzf
-tms() {
-  local session
-  newsession=${1:-Work}
-  session=$(tmux list-sessions -F "#{session_name}" | \
-    fzf --query="$1" --select-1 --exit-0 --cycle --no-separator) &&
-    tmux attach-session -t "$session" || tmux new-session -s $newsession
-}
-
-# Display all of the possible tmuxinators with fzf and preview with bat;
-# make sure that when no tmux session has yet been selected that there
-# is a message that indicates that the user should select a session
-tm() {
-  # NOTE: Use the absolute Nix-based ls command since "ls" is now aliased to use "eza" command
-  session=$( /run/current-system/sw/bin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
-    fzf --query="$1" --select-1 --exit-0 --cycle --no-separator --prompt " " \
-    --preview '[[ -n {} ]] && bat --style=numbers --color=always ~/.tmuxinator/{}.yml || echo "󰮊 Select a Tmux Session"') &&
-    tmuxinator "$session"
-}
-alias tmm="tm"
-
-# Define the name of a tmux workspace, helping with many splits
-function workspace {
-  local -A prefix_map=(
-    ["Code"]=""
-    ["Command"]="󰘳"
-    ["Develop"]=""
-    ["Edit"]=""
-    ["File"]=""
-    ["Gemini"]="󰵰"
-    ["GitHub"]=""
-    ["OpenCode"]="󰵰"
-    ["Program"]=""
-    ["Preview"]="󰒋"
-    ["Server"]="󰒋"
-    ["Solution"]="󰄲"
-    ["Starter"]="󰋮"
-    ["Testing"]="󰇉"
-    ["Trying"]=""
-  )
-  readonly name=${1:?"Specify the name of the workspace."}
-  local prefix=""
-  for key in "${(@k)prefix_map}"; do
-    if [[ $name == *"$key"* ]]; then
-      prefix=${prefix_map[$key]}
-      break
-    fi
-  done
-  tmux select-pane -T "${prefix} ${name}"
-}
-
-# Define the name of a tmux window, helping with many splits
-function window {
-  readonly name=${1:?"Specify the name of the window."}
-  tmux rename-window "${prefix} ${name}"
-}
-
-# Use fzf and sesh to connect to existing tmux session
-# or start tmux in a commonly used directory
-tt() {
-  sesh connect $(sesh list --tmux --zoxide --icons | fzf --no-sort --select-1 --exit-0 --cycle --no-separator --ansi --prompt " " | awk '{print substr($0, 2)}')
-}
-
-# Use fzf and fd to create a tmux session based
-# on the directory that is selected through using fd
-td() {
-  sesh connect $(fd -H -d 2 -t d -E .Trash . ~ | fzf --no-sort --select-1 --exit-0 --cycle --no-separator --ansi --prompt " ")
-}
+# # Display all of the open tmux sessions with fzf
+# tms() {
+#   local session
+#   newsession=${1:-Work}
+#   session=$(tmux list-sessions -F "#{session_name}" | \
+#     fzf --query="$1" --select-1 --exit-0 --cycle --no-separator) &&
+#     tmux attach-session -t "$session" || tmux new-session -s $newsession
+# }
+#
+# # Display all of the possible tmuxinators with fzf and preview with bat;
+# # make sure that when no tmux session has yet been selected that there
+# # is a message that indicates that the user should select a session
+# tm() {
+#   # NOTE: Use the absolute Nix-based ls command since "ls" is now aliased to use "eza" command
+#   session=$( /run/current-system/sw/bin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
+#     fzf --query="$1" --select-1 --exit-0 --cycle --no-separator --prompt " " \
+#     --preview '[[ -n {} ]] && bat --style=numbers --color=always ~/.tmuxinator/{}.yml || echo "󰮊 Select a Tmux Session"') &&
+#     tmuxinator "$session"
+# }
+# alias tmm="tm"
+#
+# # Define the name of a tmux workspace, helping with many splits
+# function workspace {
+#   local -A prefix_map=(
+#     ["Code"]=""
+#     ["Command"]="󰘳"
+#     ["Develop"]=""
+#     ["Edit"]=""
+#     ["File"]=""
+#     ["Gemini"]="󰵰"
+#     ["GitHub"]=""
+#     ["OpenCode"]="󰵰"
+#     ["Program"]=""
+#     ["Preview"]="󰒋"
+#     ["Server"]="󰒋"
+#     ["Solution"]="󰄲"
+#     ["Starter"]="󰋮"
+#     ["Testing"]="󰇉"
+#     ["Trying"]=""
+#   )
+#   readonly name=${1:?"Specify the name of the workspace."}
+#   local prefix=""
+#   for key in "${(@k)prefix_map}"; do
+#     if [[ $name == *"$key"* ]]; then
+#       prefix=${prefix_map[$key]}
+#       break
+#     fi
+#   done
+#   tmux select-pane -T "${prefix} ${name}"
+# }
+#
+# # Define the name of a tmux window, helping with many splits
+# function window {
+#   readonly name=${1:?"Specify the name of the window."}
+#   tmux rename-window "${prefix} ${name}"
+# }
+#
+# # Use fzf and sesh to connect to existing tmux session
+# # or start tmux in a commonly used directory
+# tt() {
+#   sesh connect $(sesh list --tmux --zoxide --icons | fzf --no-sort --select-1 --exit-0 --cycle --no-separator --ansi --prompt " " | awk '{print substr($0, 2)}')
+# }
+#
+# # Use fzf and fd to create a tmux session based
+# # on the directory that is selected through using fd
+# td() {
+#   sesh connect $(fd -H -d 2 -t d -E .Trash . ~ | fzf --no-sort --select-1 --exit-0 --cycle --no-separator --ansi --prompt " ")
+# }
 
 # }}}
 
@@ -673,7 +673,9 @@ znap prompt
 # History source and keybindings;
 # note using znap is not possible and
 # a standard source is also not possible.
-zvm_after_init_commands+=(eval "$(atuin init zsh)")
+# zvm_after_init_commands+=(eval "$(atuin init zsh)")
+zvm_after_init_commands+=(eval "$(atuin hex init zsh)")
+# znap eval atuin 'atuin hex init zsh'
 
 # }}}
 
@@ -796,6 +798,13 @@ y() {
 	fi
 	rm -f -- "$tmp"
 }
+
+# }}}
+
+# Try {{{
+
+# eval "$(try init ~/working/tries)"
+# znap eval try 'try init ~/working/tries'
 
 # }}}
 
