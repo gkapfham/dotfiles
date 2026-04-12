@@ -1,5 +1,14 @@
 # ~/.config/starship.toml
 
+[bun]
+format = '[󱖉 $version ](bold blue)'
+
+[c]
+format = '[ $version ](bold red)'
+
+[cmd_duration]
+format = '[󰌃 $duration ](bold #00afaf)'
+
 [directory]
 format = '[ $path](bold green)[$read_only]($read_only_style) '
 truncation_length = 5
@@ -25,21 +34,18 @@ staged = "󰐕${count}"
 stashed = "󱗿${count}"
 untracked = "󰏢${count}"
 
-[cmd_duration]
-format = '[󰌃 $duration ](bold #00afaf)'
-
 [git_commit]
 tag_disabled = false
 tag_symbol = ''
 
-[bun]
-format = '[󱖉 $version ](bold blue)'
+[gcloud]
+disabled = true
 
 [golang]
 format = '[ $version ](bold blue)'
 
 [java]
-format = '[󰅶 $version ](bold blue)'
+format = '[󰅶 $version ](bold purple)'
 
 [lua]
 format = '[ $version ](bold blue)'
@@ -67,7 +73,10 @@ format = '[ $version (\($virtualenv\) )](bold yellow)'
 format = '[󱨇 $version ](bold blue)'
 
 [rust]
-format = '[ $version ](bold blue)'
+format = '[ $version ](bold cyan)'
+
+[zig]
+format = '[ $version ](bold yellow)'
 
 [shell]
 zsh_indicator = '󱓞 '
