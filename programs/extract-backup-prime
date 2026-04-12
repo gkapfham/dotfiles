@@ -1,0 +1,185 @@
+#!/usr/bin/env bash
+# NixOS-compatible extraction script for borgmatic
+# Usage: ./extract-backup.sh [archive-name] [--list] [--help]
+
+set -euo pipefail
+
+# Configuration
+CONFIG_FILE="${BORG_CONFIG:-$HOME/.config/borgmatic/remote.yaml}"
+DEFAULT_DEST="$HOME/restore"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Functions
+show_help() {
+    cat << EOF
+Usage: $0 [OPTIONS] [ARCHIVE-NAME]
+
+Extract files from borgmatic backup archives.
+
+OPTIONS:
+    --list, -l          List available archives
+    --latest            Use the most recent archive
+    --path PATH         Extract specific file/directory (default: everything)
+    --dest DIR          Destination directory (default: ~/restore)
+    --strip N           Strip N leading path components
+    --dry-run           Show what would be extracted
+    --help, -h          Show this help message
+
+EXAMPLES:
+    # List all backups
+    $0 --list
+
+    # Extract latest backup to default location
+    $0 --latest
+
+    # Extract specific archive
+    $0 diameno-home-2026-03-08T20:34:36
+
+    # Extract specific file from latest backup
+    $0 --latest --path home/gkapfham/documents/thesis.pdf
+
+    # Extract to specific directory
+    $0 --latest --dest /tmp/myrestore
+
+EOF
+}
+
+list_archives() {
+    echo -e "${YELLOW}Available archives:${NC}"
+    echo ""
+    borgmatic --config "$CONFIG_FILE" list --verbosity 0
+}
+
+get_latest_archive() {
+    borgmatic --config "$CONFIG_FILE" list --verbosity 0 2>&1 | tail -1 | awk '{print $1}'
+}
+
+# Default values
+ARCHIVE=""
+EXTRACT_PATH=""
+DESTINATION="$DEFAULT_DEST"
+STRIP_COMPONENTS=""
+DRY_RUN=""
+LIST_MODE=false
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --list|-l)
+            list_archives
+            exit 0
+            ;;
+        --latest)
+            ARCHIVE=$(get_latest_archive)
+            echo -e "${BLUE}Using latest archive: $ARCHIVE${NC}"
+            shift
+            ;;
+        --path)
+            EXTRACT_PATH="$2"
+            shift 2
+            ;;
+        --dest|-d)
+            DESTINATION="$2"
+            shift 2
+            ;;
+        --strip|-s)
+            STRIP_COMPONENTS="--strip-components $2"
+            shift 2
+            ;;
+        --dry-run)
+            DRY_RUN="--dry-run"
+            echo -e "${YELLOW}DRY RUN: No files will be extracted${NC}"
+            shift
+            ;;
+        --help|-h)
+            show_help
+            exit 0
+            ;;
+        -*)
+            echo -e "${RED}Unknown option: $1${NC}"
+            show_help
+            exit 1
+            ;;
+        *)
+            if [[ -z "$ARCHIVE" ]]; then
+                ARCHIVE="$1"
+            else
+                echo -e "${RED}Error: Unknown argument: $1${NC}"
+                exit 1
+            fi
+            shift
+            ;;
+    esac
+done
+
+# Validation
+if [[ -z "$ARCHIVE" ]]; then
+    echo -e "${RED}Error: No archive specified${NC}"
+    echo "Use --latest for the most recent backup, or --list to see available archives"
+    exit 1
+fi
+
+if [[ ! -f "$CONFIG_FILE" ]]; then
+    echo -e "${RED}Error: Config file not found: $CONFIG_FILE${NC}"
+    exit 1
+fi
+
+# Create destination directory
+mkdir -p "$DESTINATION"
+
+# Build extract command
+EXTRACT_CMD="borgmatic --config $CONFIG_FILE extract --archive $ARCHIVE --destination $DESTINATION"
+
+if [[ -n "$EXTRACT_PATH" ]]; then
+    EXTRACT_CMD="$EXTRACT_CMD --path $EXTRACT_PATH"
+fi
+
+if [[ -n "$STRIP_COMPONENTS" ]]; then
+    EXTRACT_CMD="$EXTRACT_CMD $STRIP_COMPONENTS"
+fi
+
+if [[ -n "$DRY_RUN" ]]; then
+    EXTRACT_CMD="$EXTRACT_CMD --dry-run"
+fi
+
+# Show extraction info
+echo -e "${YELLOW}Extraction Details:${NC}"
+echo "Archive: $ARCHIVE"
+echo "Destination: $DESTINATION"
+if [[ -n "$EXTRACT_PATH" ]]; then
+    echo "Path: $EXTRACT_PATH"
+else
+    echo "Path: (entire archive)"
+fi
+if [[ -n "$STRIP_COMPONENTS" ]]; then
+    echo "Strip components: $STRIP_COMPONENTS"
+fi
+echo ""
+echo -e "${YELLOW}Starting extraction...${NC}"
+echo "Command: $EXTRACT_CMD"
+echo ""
+
+# Run extraction
+if eval "$EXTRACT_CMD"; then
+    echo ""
+    echo -e "${GREEN}Extraction completed successfully!${NC}"
+    echo ""
+    echo "Files extracted to: $DESTINATION"
+    
+    # Show top-level contents
+    if [[ -d "$DESTINATION" ]]; then
+        echo ""
+        echo "Top-level contents:"
+        ls -la "$DESTINATION" | head -20
+    fi
+else
+    echo ""
+    echo -e "${RED}Extraction failed!${NC}"
+    exit 1
+fi
