@@ -707,7 +707,8 @@ stow-tpm:
 ## Running stow on tpm depends on creating tpm directory
 stow-tpm: create-tpm
 
-## Run stow on bin
+## Run stow on bin (which are saved in the directory 
+## called programs in the dotfiles directory)
 stow-bin:
 	stow -t ~/.local/bin programs
 

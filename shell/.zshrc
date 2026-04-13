@@ -386,7 +386,7 @@ export FZF_DEFAULT_OPTS='
   --no-scrollbar
   --bind tab:down,shift-tab:up
   --bind ctrl-f:page-down,ctrl-b:page-up
-  --color=fg:#b2b2b2,bg:#1c1c1c,hl:#5f8700
+  --color=fg:#d2d2d2,bg:#1c1c1c,hl:#5f8700
   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
   --color=marker:#d78700,spinner:#875f87,header:#875f87,border:#c1c1c1'
