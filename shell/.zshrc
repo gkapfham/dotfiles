@@ -801,13 +801,6 @@ y() {
 
 # }}}
 
-# Try {{{
-
-# eval "$(try init ~/working/tries)"
-# znap eval try 'try init ~/working/tries'
-
-# }}}
-
 # Benchmarking {{{
 
 # Uncomment to enable
