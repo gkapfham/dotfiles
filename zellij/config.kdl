@@ -85,6 +85,30 @@ keybinds clear-defaults=true {
     renamepane {
         bind "esc" { UndoRenamePane; SwitchToMode "normal"; }
     }
+    pane {
+        bind "h" { MoveFocus "left"; }
+        bind "j" { MoveFocus "down"; }
+        bind "k" { MoveFocus "up"; }
+        bind "l" { MoveFocus "right"; }
+        bind "left" { MoveFocus "left"; }
+        bind "down" { MoveFocus "down"; }
+        bind "up" { MoveFocus "up"; }
+        bind "right" { MoveFocus "right"; }
+        bind "H" { MovePane "left"; }
+        bind "J" { MovePane "down"; }
+        bind "K" { MovePane "up"; }
+        bind "L" { MovePane "right"; }
+        bind "n" { NewPane; SwitchToMode "normal"; }
+        bind "d" { NewPane "down"; SwitchToMode "normal"; }
+        bind "r" { NewPane "right"; SwitchToMode "normal"; }
+        bind "x" { CloseFocus; SwitchToMode "normal"; }
+        bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
+        bind "z" { TogglePaneFrames; SwitchToMode "normal"; }
+        bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
+        bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
+        bind "c" { SwitchToMode "renamepane"; PaneNameInput 0; }
+        bind "esc" { SwitchToMode "normal"; }
+    }
     tmux {
         bind "," { SwitchToMode "renametab"; TabNameInput 0; }
         bind "-" { NewPane "down"; SwitchToMode "normal"; }
@@ -301,7 +325,7 @@ plugins {
         color_yellow "#b7b757"
         format_left   " {tabs} "
         format_center "{notifications}"
-        format_right  "#[bg=$green,fg=$bg,bold]{mode}#[bg=$green,fg=$bg,bold]  {session} #[bg=$bg,fg=$green] "
+        format_right  "#[bg=$green,fg=$bg,bold]{mode}#[bg=$green,fg=$bg,bold]  {session} #[bg=$bg,fg=$green,bold] "
         format_space  ""
         format_hide_on_overlength "true"
         format_precedence "crl"
