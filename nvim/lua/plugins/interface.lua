@@ -117,6 +117,7 @@ return {
     "lewis6991/hover.nvim",
     event = "VeryLazy",
     config = function()
+      local language_servers = require("configure.languageservers")
       require("hover").setup({
         init = function()
           -- Require providers
@@ -136,6 +137,11 @@ return {
           "LSP",
         },
         mouse_delay = 1000,
+      })
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function()
+          vim.schedule(language_servers.refresh_hover)
+        end,
       })
       -- keymaps
       vim.keymap.set("n", "K", function()
