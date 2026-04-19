@@ -36,6 +36,7 @@ local kind_icons = {
   KeywordConditional = "󰌋",
   KeywordDirective = "󰌋",
   KeywordException = "󰌋",
+  KeywordFunction = "󰌋",
   KeywordImport = "󰌋",
   KeywordOperator = "󰌋",
   KeywordRepeat = "",
@@ -580,277 +581,213 @@ return {
       vim.cmd([[set completeopt=menu,menuone,noselect,noinsert,popup]])
       local cmp = require("cmp")
       local luasnip = require("luasnip")
+      -- load in all of the completion sources
+      local completion_sources = require("configure.completionsources")
       -- Configure the dictionary plugin
       -- Note: spell is disabled by default in spelling.lua
       -- and can be toggled on/off with <leader>ss as needed
       -- vim.opt.spell = true
       vim.opt.spelllang = { "en_us" }
-      -- Configure all aspects of nvim-cmp
-      cmp.setup({
-        -- Do not preselect items
-        preselect = cmp.PreselectMode.None,
-        -- Configure the completion menu that appears
-        -- to show a preview of the documentation (i.e.,
-        -- this is the color scheme for the menu that
-        -- appears when you select a completion suggestion
-        -- and it has additional context information).
-        -- Note that this needs to be changed because the
-        -- default color scheme uses NormalFloat with a
-        -- background that works better for GitHub
-        -- Copilot chat and that does not match PMenu.
-        window = {
-          completion = cmp.config.window.bordered({ max_height = 100 }),
-          documentation = cmp.config.window.bordered(),
-        },
-        -- Define the performance characteristics for nvim-cmp
-        -- Favor the quick delivery of a minimal number of completions
-        performance = {
-          throttle = 0,
-          fetching_timeout = 30,
-          debounce = 10,
-          async_budget = 1,
-          filtering_context_budget = 1,
-          confirm_resolve_timeout = 30,
-          max_view_entries = 100,
-        },
-        -- Specify a snippet engine
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
-        -- Use the custom view packaged by nvim-cmp
-        view = {
-          entries = "custom",
-        },
-        -- Configure the formatting of the completion menu
-        formatting = {
-          format = function(entry, vim_item)
-            -- Define the icons used for the completion labels;
-            -- note that specifically I want to have some capitalized
-            -- names for certain completion sources when they are
-            -- by default lowercase due to the name of a model
-            local kind_key = vim_item.kind
-            local kind_label = kind_key
-            if kind_label == "codestral" then
-              kind_label = "Codestral"
-            elseif kind_label == "gemini" then
-              kind_label = "Gemini"
-            end
-            vim_item.kind = string.format("%s %s", kind_icons[kind_key], kind_label)
-            -- Define labels for the completion menu;
-            -- these will appear to the right of a completion
-            -- suggestion in the nvim-cmp menu
-            vim_item.menu = ({
-              buffer = " Buffer",
-              cmdline = " Command",
-              cmp_yanky = " Clipboard",
-              fuzzy_buffer = "󰓐 Fuzzy",
-              nvim_lsp = " LSP",
-              nvim_lsp_document_symbol = " LSP",
-              path = " Path",
-              nerdfont = " Font",
-              otter = "󰌨 Otter",
-              pandoc_references = " Pandoc",
-              rg = " Filter",
-              tags = " Tags",
-              treesitter = " Tree",
-              tmux = " Tmux",
-              luasnip = " Snippet",
-              look = " Spell",
-              spell = " Spell",
-              copilot = " Copilot",
-              minuet = " Minuet",
-              supermaven = " Supermaven",
-            })[entry.source.name]
-            return vim_item
-          end,
-        },
-        -- Define mappings for the keyboard commands when using completion menu
-        mapping = {
-          ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-          ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-          -- Original mapping:
-          -- ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-          ["<C-Space>"] = cmp.mapping(function()
-            local ok, copilot = pcall(require, "copilot.suggestion")
-            if ok and copilot.is_visible() then
-              copilot.dismiss()
-            end
-            cmp.complete({ reason = cmp.ContextReason.Manual })
-          end, { "i", "c" }),
-          ["<C-y>"] = cmp.config.disable,
-          ["<C-e>"] = cmp.mapping({
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
-          }),
-          ["<CR>"] = cmp.mapping.confirm({ select = false }),
-          -- Define mappings for using snippets; note that luasnip
-          -- works even when you have left the context of the snippet.
-          -- This means that you can jump back into the snippet by
-          -- using <S-Tab> even after going through every field.
-          -- Go forward in the template holes for the snippet
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if require("copilot.suggestion").is_visible() then
-              require("copilot.suggestion").accept()
-            elseif cmp.visible() then
-              -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-              cmp.select_next_item()
-            elseif luasnip.expandable() then
-              luasnip.expand()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, {
-            "i",
-            "s",
-          }),
-          -- Define the same <Tab> mapping but also for
-          -- <C-n> so that this also advances forward
-          ["<C-n>"] = cmp.mapping(function(fallback)
-            if require("copilot.suggestion").is_visible() then
-              require("copilot.suggestion").accept()
-            elseif cmp.visible() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-            elseif luasnip.expandable() then
-              luasnip.expand()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, {
-            "i",
-            "s",
-          }),
-          -- Go back in the template holes in the snippet
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          -- Define the same <S-Tab> mapping but also for
-          -- <C-p> so that this also advances backward
-          ["<C-p>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-        },
-        -- Define the sources for the completions;
-        -- note that sources that appear earlier in the
-        -- list have higher priority. Also note that sources
-        -- with a higher priority have higher weighting on priority.
-        sources = cmp.config.sources({
-          -- Define the first-tier of sources
-          { name = "treesitter", max_item_count = 10, priority = 10, keyword_length = 1 },
-          { name = "nvim_lsp", max_item_count = 10, priority = 10, keyword_length = 1 },
-          { name = "copilot", max_item_count = 10, priority = 10, keyword_length = 1 },
-          { name = "supermaven", max_item_count = 10, priority = 10, keyword_length = 1 },
-          { name = "minuet", max_item_count = 10, priority = 10, keyword_length = 2 },
-          -- Keep alternative supermaven priority example commented for reference
-          -- { name = "supermaven", max_item_count = 10, priority = 8 },
-          -- Look at all of the open buffers as the second-tier of sources
-          {
-            name = "buffer",
-            max_item_count = 10,
-            priority = 20,
-            keyword_length = 3,
-            option = {
-              get_bufnrs = function()
-                return vim.api.nvim_list_bufs()
-              end,
-            },
+      -- Rebuild the source list so that commands can enable
+      -- or disable individual completion sources at runtime.
+      local function apply_cmp_setup()
+        cmp.setup({
+          -- Do not preselect items
+          preselect = cmp.PreselectMode.None,
+          -- Configure the completion menu that appears
+          -- to show a preview of the documentation (i.e.,
+          -- this is the color scheme for the menu that
+          -- appears when you select a completion suggestion
+          -- and it has additional context information).
+          -- Note that this needs to be changed because the
+          -- default color scheme uses NormalFloat with a
+          -- background that works better for GitHub
+          -- Copilot chat and that does not match PMenu.
+          window = {
+            completion = cmp.config.window.bordered({ max_height = 100 }),
+            documentation = cmp.config.window.bordered(),
           },
-          -- Define all of the third-tier of sources
-          { name = "fuzzy_buffer", max_item_count = 5, priority = 6, keyword_length = 4 },
-          { name = "cmp_yanky", max_item_count = 5, priority = 6, keyword_length = 4 },
-          { name = "tags", max_item_count = 5, priority = 5, keyword_length = 2 },
-          { name = "luasnip", max_item_count = 5, priority = 5, keyword_length = 2 },
-          { name = "otter", max_item_count = 5, priority = 5, keyword_length = 2 },
-          { name = "pandoc_references", max_item_count = 5, priority = 5, keyword_length = 2 },
-          -- Define additional sources with various options and priorities
-          {
-            name = "spell",
-            option = {
-              keep_all_entries = false,
-              enable_in_context = function()
-                return true
-              end,
-            },
-            max_item_count = 5,
-            priority = 10,
-            keyword_length = 3,
+          -- Define the performance characteristics for nvim-cmp
+          -- Favor the quick delivery of a minimal number of completions
+          performance = {
+            throttle = 0,
+            fetching_timeout = 30,
+            debounce = 10,
+            async_budget = 1,
+            filtering_context_budget = 1,
+            confirm_resolve_timeout = 30,
+            max_view_entries = 100,
           },
-          {
-            name = "path",
-            option = {
-              get_cwd = function()
-                return vim.fn.getcwd()
-              end,
-            },
-            max_item_count = 5,
-            priority = 10,
-            keyword_length = 3,
+          -- Specify a snippet engine
+          snippet = {
+            expand = function(args)
+              require("luasnip").lsp_expand(args.body)
+            end,
           },
-          { name = "nerdfont", max_item_count = 10, priority = 1, keyword_length = 3 },
-          { name = "nvim_lsp_signature_help" },
-        }, {
-          -- Define the second-tier of sources; these will only
-          -- appear when there is no active source from the first-tier
-        }),
-      })
-      -- Use completion sources when forward-searching with "/"
-      cmp.setup.cmdline("/", {
-        -- Disable all of the prior settings for nvim-cmp
-        -- so that completion supported by luasnip not triggered;
-        -- note that if this extra line is not added then
-        -- tab completion does not work for this mode
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = "path" },
-          { name = "buffer", max_item_count = 15, priority = 10 },
-          { name = "fuzzy_buffer", max_item_count = 15, priority = 5 },
-        }, {
-          { name = "cmdline" },
-        }),
-      })
-      -- Use completion sources when backward-searching with "?"
-      cmp.setup.cmdline("?", {
-        -- Disable all of the prior settings for nvim-cmp
-        -- (see previous note for full explanation)
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = "path" },
-          { name = "buffer", max_item_count = 15, priority = 10 },
-          { name = "fuzzy_buffer", max_item_count = 15, priority = 5 },
-        }, {
-          { name = "cmdline" },
-        }),
-      })
-      -- Use completion sources when running commands with ":"
-      require("cmp").setup.cmdline(":", {
-        -- Disable all of the prior settings for nvim-cmp
-        -- (see previous note for full explanation)
-        mapping = cmp.mapping.preset.cmdline(),
-        -- Use the cmdline source (i.e., all valid
-        -- commands); disable the cmdline_history source (i.e.,
-        -- all commands previously used in command prompt)
-        -- because it might break the tab completion
-        sources = cmp.config.sources({
-          { name = "cmdline", max_item_count = 30 },
-        }, {}),
-      })
+          -- Use the custom view packaged by nvim-cmp
+          view = {
+            entries = "custom",
+          },
+          -- Configure the formatting of the completion menu
+          formatting = {
+            format = function(entry, vim_item)
+              -- Define the icons used for the completion labels;
+              -- note that specifically I want to have some capitalized
+              -- names for certain completion sources when they are
+              -- by default lowercase due to the name of a model
+              local kind_key = vim_item.kind
+              local kind_label = kind_key
+              if kind_label == "codestral" then
+                kind_label = "Codestral"
+              elseif kind_label == "gemini" then
+                kind_label = "Gemini"
+              end
+              vim_item.kind = string.format("%s %s", kind_icons[kind_key], kind_label)
+              -- Define labels for the completion menu;
+              -- these will appear to the right of a completion
+              -- suggestion in the nvim-cmp menu
+              vim_item.menu = ({
+                buffer = " Buffer",
+                cmdline = " Command",
+                cmp_yanky = " Clipboard",
+                fuzzy_buffer = "󰓐 Fuzzy",
+                nvim_lsp = " LSP",
+                nvim_lsp_document_symbol = " LSP",
+                path = " Path",
+                nerdfont = " Font",
+                otter = "󰌨 Otter",
+                pandoc_references = " Pandoc",
+                rg = " Filter",
+                tags = " Tags",
+                treesitter = " Tree",
+                tmux = " Tmux",
+                luasnip = " Snippet",
+                look = " Spell",
+                spell = " Spell",
+                copilot = " Copilot",
+                minuet = " Minuet",
+                supermaven = " Supermaven",
+              })[entry.source.name]
+              return vim_item
+            end,
+          },
+          -- Define mappings for the keyboard commands when using completion menu
+          mapping = {
+            ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+            ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+            -- Original mapping:
+            -- ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+            ["<C-Space>"] = cmp.mapping(function()
+              local ok, copilot = pcall(require, "copilot.suggestion")
+              if ok and copilot.is_visible() then
+                copilot.dismiss()
+              end
+              cmp.complete({ reason = cmp.ContextReason.Manual })
+            end, { "i", "c" }),
+            ["<C-y>"] = cmp.config.disable,
+            ["<C-e>"] = cmp.mapping({
+              i = cmp.mapping.abort(),
+              c = cmp.mapping.close(),
+            }),
+            ["<CR>"] = cmp.mapping.confirm({ select = false }),
+            -- Define mappings for using snippets; note that luasnip
+            -- works even when you have left the context of the snippet.
+            -- This means that you can jump back into the snippet by
+            -- using <S-Tab> even after going through every field.
+            -- Go forward in the template holes for the snippet
+            ["<Tab>"] = cmp.mapping(function(fallback)
+              if require("copilot.suggestion").is_visible() then
+                require("copilot.suggestion").accept()
+              elseif cmp.visible() then
+                -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+                cmp.select_next_item()
+              elseif luasnip.expandable() then
+                luasnip.expand()
+              elseif has_words_before() then
+                cmp.complete()
+              else
+                fallback()
+              end
+            end, {
+              "i",
+              "s",
+            }),
+            -- Define the same <Tab> mapping but also for
+            -- <C-n> so that this also advances forward
+            ["<C-n>"] = cmp.mapping(function(fallback)
+              if require("copilot.suggestion").is_visible() then
+                require("copilot.suggestion").accept()
+              elseif cmp.visible() then
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+              elseif luasnip.expandable() then
+                luasnip.expand()
+              elseif has_words_before() then
+                cmp.complete()
+              else
+                fallback()
+              end
+            end, {
+              "i",
+              "s",
+            }),
+            -- Go back in the template holes in the snippet
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item()
+              elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
+            -- Define the same <S-Tab> mapping but also for
+            -- <C-p> so that this also advances backward
+            ["<C-p>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item()
+              elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
+          },
+          -- Define the sources for the completions;
+          -- note that sources that appear earlier in the
+          -- list have higher priority. Also note that sources
+          -- with a higher priority have higher weighting on priority.
+          sources = completion_sources.get_insert_sources(cmp),
+        })
+        -- Use completion sources when forward-searching with "/"
+        cmp.setup.cmdline("/", {
+          -- Disable all of the prior settings for nvim-cmp
+          -- so that completion supported by luasnip not triggered;
+          -- note that if this extra line is not added then
+          -- tab completion does not work for this mode
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = completion_sources.get_cmdline_sources(cmp, "/"),
+        })
+        -- Use completion sources when backward-searching with "?"
+        cmp.setup.cmdline("?", {
+          -- Disable all of the prior settings for nvim-cmp
+          -- (see previous note for full explanation)
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = completion_sources.get_cmdline_sources(cmp, "?"),
+        })
+        -- Use completion sources when running commands with ":"
+        require("cmp").setup.cmdline(":", {
+          -- Disable all of the prior settings for nvim-cmp
+          -- (see previous note for full explanation)
+          mapping = cmp.mapping.preset.cmdline(),
+          -- Use the cmdline source (i.e., all valid
+          -- commands); disable the cmdline_history source (i.e.,
+          -- all commands previously used in command prompt)
+          -- because it might break the tab completion
+          sources = completion_sources.get_cmdline_sources(cmp, ":"),
+        })
+      end
+      completion_sources.register(apply_cmp_setup)
+      apply_cmp_setup()
     end,
   },
 }
