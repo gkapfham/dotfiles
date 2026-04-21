@@ -23,6 +23,11 @@ local managed_servers = {
   "rust_analyzer",
 }
 
+local managed_server_lookup = {}
+for _, name in ipairs(managed_servers) do
+  managed_server_lookup[name] = true
+end
+
 local disabled_servers = {}
 local lsp_ready = false
 
@@ -51,13 +56,17 @@ local function refresh_hover_providers()
 end
 
 local function ensure_valid_server(name)
-  if not vim.tbl_contains(managed_servers, name) then
+  if not managed_server_lookup[name] then
     error("Unknown language server: " .. name)
   end
 end
 
 function M.list()
   return vim.deepcopy(managed_servers)
+end
+
+function M.managed(name)
+  return managed_server_lookup[name] == true
 end
 
 function M.is_enabled(name)
