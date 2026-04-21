@@ -11,6 +11,7 @@
 
     accent: #87afd7;
     urgent: #d75347;
+    border: #333333;
 
     background-color:   transparent;
     text-color:         @fg0;
@@ -22,6 +23,8 @@
 
 window {
     background-color:   @bg0;
+    border:             0px;
+    border-color:       @bg0;
     location:       center;
     width:          1600;
     height:         900;
@@ -58,7 +61,6 @@ textbox {
 listview {
     lines:      10;
     columns:    1;
-
     fixed-height:   false;
     border:         1px 0 0;
     border-color:   @bg1;
