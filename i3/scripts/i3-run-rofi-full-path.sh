@@ -7,6 +7,13 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# run the rofi command to pickup everything, including
-# those scripts that are defined in the ~/.local/bin/ directory
-rofi -show combi -modes combi -combi-modes 'run,window,drun'
+# Path to the custom run-icons modi script
+ROFI_RUN_SCRIPT="$HOME/.config/i3/scripts/i3-rofi-run-icons.sh"
+
+# Use the custom nerd-font icon modi if available;
+# otherwise fall back to the native run mode unchanged
+if [ -x "$ROFI_RUN_SCRIPT" ]; then
+    rofi -show combi -modes "combi,run-icons:$ROFI_RUN_SCRIPT" -combi-modes 'run-icons,window,drun'
+else
+    rofi -show combi -modes combi -combi-modes 'run,window,drun'
+fi
