@@ -1,13 +1,16 @@
 * {
     font:   "Maple Mono Normal NF 30";
 
-    bg0:    #262626;
-    bg1:    #7E7E7E80;
-    bg2:    #444444;
+    bg0:    #1c1c1c;
+    bg1:    #58585880;
+    bg2:    #303030;
 
-    fg0:    #c1c1c1;
-    fg1:    #c1c1c1;
+    fg0:    #d2d2d2;
+    fg1:    #d78700;
     fg2:    #8a8a8a;
+
+    accent: #87afd7;
+    urgent: #d75347;
 
     background-color:   transparent;
     text-color:         @fg0;
@@ -29,22 +32,16 @@ inputbar {
     font:       "Maple Mono Normal NF 30";
     padding:    12px;
     spacing:    12px;
-    children:   [ icon-search, entry ];
+    children:   [ entry ];
 }
 
-icon-search {
-    expand:     false;
-    filename:   " search";
-    size: 28px;
-}
-
-icon-search, entry, element-icon, element-text {
+entry, element-icon, element-text {
     vertical-align: 0.5;
 }
 
 entry {
     font:   inherit;
-    placeholder         : "  ";
+    placeholder         : "";
     placeholder-color   : @fg2;
 }
 
@@ -74,12 +71,21 @@ element {
 }
 
 element normal active {
-    text-color: @fg2;
+    text-color: @accent;
+}
+
+element normal urgent {
+    text-color: @urgent;
 }
 
 element selected normal, element selected active {
     background-color:   @bg2;
     text-color:         @fg1;
+}
+
+element selected urgent {
+    background-color:   @bg2;
+    text-color:         @urgent;
 }
 
 element-icon {
