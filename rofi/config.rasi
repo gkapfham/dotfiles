@@ -8,8 +8,8 @@ configuration {
 	line-margin: 10;
 	separator-style: "none";
 	hide-scrollbar: true;
-	color-urgent: "#121212, #5f8700, #121212, #5f8700, #121212";
-	color-active: "#121212, #767676, #121212, #767676, #121212";
-	color-window: "#121212, #767676, #767676";
+	show-icons: false;
+	drun-display-format: " {name}";
+	window-format: " {t}";
 }
 @theme "/home/gkapfham/.config/rofi/themes/Minimal.rasi"
