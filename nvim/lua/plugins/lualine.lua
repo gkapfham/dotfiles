@@ -4,35 +4,11 @@
 
 -- Define functions in lua {{{
 
+-- load the icons table to use the icons
+-- for LSP clients in the lualine display
+local icons = require("configure.icons")
+
 local function lsp_clients()
-  -- Define a lookup table for LSP client abbreviations
-  local lsp_abbreviations = {
-    cssls = "",
-    copilot = "󰊤",
-    harper_ls = "󰈙",
-    html = "",
-    htmx = "",
-    jsonls = "",
-    lua_ls = "󰢱",
-    gopls = "",
-    marksman = "",
-    nil_ls = "",
-    null_ls = "󰁨",
-    otter_ls = "󰌨",
-    pyrefly = "",
-    basedpyright = "󱔎",
-    pyright = "󰌠",
-    render_markdown = "󰍕",
-    ruff = "󱝁",
-    ruff_lsp = "󱝁",
-    rumdl = "󱒄",
-    rust_analyzer = "󱘗",
-    texlab = "",
-    ty = "󱙨",
-    yamlls = "",
-    zk = "",
-    zuban = "",
-  }
   -- Get the active LSP clients
   -- and return the client names
   -- local clients = vim.lsp.get_active_clients()
@@ -42,16 +18,10 @@ local function lsp_clients()
   end
   local client_names = {}
   for _, client in ipairs(clients) do
-    -- Get the base name of the client
-    -- and replace any dashes with underscores
-    local base_name = client.name:match("^[^%[]+")
-    base_name = base_name:gsub("-", "_")
     -- Get the abbreviation for the client
     -- and append it to the list of client names;
     -- note that the abbreviation is an icon
-    -- defined in the lsp_abbreviations table;
-    -- note that the abbreviation is an icon
-    -- defined in the lsp_abbreviations table;
+    -- defined in the shared icons table;
     -- Make sure that the abbreviation is not
     -- already in the list of client names
     -- (this can take place because of the fact
@@ -59,7 +29,7 @@ local function lsp_clients()
     -- has numbers in its name inside of brackets.
     -- But, there should only be a single icon
     -- to indicate that the client is active)
-    local abbreviation = lsp_abbreviations[base_name] or base_name
+    local abbreviation = icons.lsp(client.name)
     local exists = false
     for _, name in ipairs(client_names) do
       if name == abbreviation then
