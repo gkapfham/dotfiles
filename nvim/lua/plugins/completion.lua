@@ -590,6 +590,31 @@ return {
       vim.opt.spelllang = { "en_us" }
       -- Rebuild the source list so that commands can enable
       -- or disable individual completion sources at runtime.
+      -- Define labels for the completion menu;
+      -- these will appear to the right of a completion
+      -- suggestion in the nvim-cmp menu
+      local menu_labels = {
+        buffer = " Buffer",
+        cmdline = " Command",
+        cmp_yanky = " Clipboard",
+        fuzzy_buffer = "󰓐 Fuzzy",
+        nvim_lsp = " LSP",
+        nvim_lsp_document_symbol = " LSP",
+        path = " Path",
+        nerdfont = " Font",
+        otter = "󰌨 Otter",
+        pandoc_references = " Pandoc",
+        rg = " Filter",
+        tags = " Tags",
+        treesitter = " Tree",
+        tmux = " Tmux",
+        luasnip = " Snippet",
+        look = " Spell",
+        spell = " Spell",
+        copilot = " Copilot",
+        minuet = " Minuet",
+        supermaven = " Supermaven",
+      }
       local function apply_cmp_setup()
         cmp.setup({
           -- Do not preselect items
@@ -643,31 +668,7 @@ return {
                 kind_label = "Gemini"
               end
               vim_item.kind = string.format("%s %s", kind_icons[kind_key], kind_label)
-              -- Define labels for the completion menu;
-              -- these will appear to the right of a completion
-              -- suggestion in the nvim-cmp menu
-              vim_item.menu = ({
-                buffer = " Buffer",
-                cmdline = " Command",
-                cmp_yanky = " Clipboard",
-                fuzzy_buffer = "󰓐 Fuzzy",
-                nvim_lsp = " LSP",
-                nvim_lsp_document_symbol = " LSP",
-                path = " Path",
-                nerdfont = " Font",
-                otter = "󰌨 Otter",
-                pandoc_references = " Pandoc",
-                rg = " Filter",
-                tags = " Tags",
-                treesitter = " Tree",
-                tmux = " Tmux",
-                luasnip = " Snippet",
-                look = " Spell",
-                spell = " Spell",
-                copilot = " Copilot",
-                minuet = " Minuet",
-                supermaven = " Supermaven",
-              })[entry.source.name]
+              vim_item.menu = menu_labels[entry.source.name]
               return vim_item
             end,
           },
