@@ -636,12 +636,12 @@ return {
           -- Favor the quick delivery of a minimal number of completions
           performance = {
             throttle = 0,
-            fetching_timeout = 30,
+            fetching_timeout = 80,
             debounce = 10,
             async_budget = 1,
             filtering_context_budget = 1,
             confirm_resolve_timeout = 30,
-            max_view_entries = 100,
+            max_view_entries = 50,
           },
           -- Specify a snippet engine
           snippet = {
