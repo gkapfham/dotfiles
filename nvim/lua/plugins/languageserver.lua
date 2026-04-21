@@ -19,9 +19,9 @@ return {
     event = "BufReadPost",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      -- "nvimtools/none-ls.nvim",
     },
     config = function()
+      local language_servers = require("configure.languageservers")
       -- draw the border for the LSP floating window; since the
       -- window used for commands like :LSPInfo is driven by the
       -- NormalFloat which is now set to dark to make the GitHub
@@ -53,7 +53,6 @@ return {
       vim.lsp.config("cssls", {
         capabilities = css_capabilities,
       })
-      vim.lsp.enable("cssls")
       -- configure html_ls for HTML
       local html_capabilities = vim.lsp.protocol.make_client_capabilities()
       html_capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -61,11 +60,9 @@ return {
         capabilities = html_capabilities,
         filetypes = { "markdown", "quarto", "html" },
       })
-      vim.lsp.enable("html")
       -- -- configure htmx for HTML LSP
       -- vim.lsp.enable("htmx")
       -- configure gopls for Go LSP
-      vim.lsp.enable("gopls")
       -- configure luals (with neovim support) for Lua LSP
       vim.lsp.config("lua_ls", {
         settings = {
@@ -76,19 +73,16 @@ return {
           },
         },
       })
-      vim.lsp.enable("lua_ls")
       -- configure marksman for Markdown LSP
       vim.lsp.config("marksman", {
         filetypes = { "markdown", "quarto" },
       })
-      vim.lsp.enable("marksman")
       -- configure rumdl for Markdown LSP;
       -- it performs linting and language server tasks
       -- and is fast because it is implemented in rust
       vim.lsp.config("rumdl", {
         filetypes = { "markdown", "quarto" },
       })
-      vim.lsp.enable("rumdl")
       -- configure pyright for Python LSPs
       -- configure basedpyright for Python LSP (enhanced pyright fork)
       vim.lsp.config("basedpyright", {
@@ -107,15 +101,10 @@ return {
           },
         },
       })
-      vim.lsp.enable("basedpyright")
       -- configure pyrefly for Python LSP
-      vim.lsp.enable("pyrefly")
       -- configure ruff for Python LSP
-      vim.lsp.enable("ruff")
       -- configure ty for Python LSP
-      vim.lsp.enable("ty")
       -- configure zuban for Python LSP
-      vim.lsp.enable("zuban")
       -- configure texlab for LaTeX and BibTeX LSP
       vim.lsp.config("texlab", {
         settings = {
@@ -148,7 +137,6 @@ return {
           },
         },
       })
-      vim.lsp.enable("texlab")
       -- configure harper_ls for writing
       vim.lsp.config("harper_ls", {
         filetypes = { "mail", "markdown", "quarto", "text" },
@@ -172,11 +160,8 @@ return {
           },
         },
       })
-      vim.lsp.enable("harper_ls")
       -- configure yamlls for YAML LSP
-      vim.lsp.enable("yamlls")
       -- configure jsonls for YAML LSP
-      vim.lsp.enable("jsonls")
       -- configure nil_ls for Nix LSP
       vim.lsp.config("nil_ls", {
         settings = {
@@ -187,7 +172,6 @@ return {
           },
         },
       })
-      vim.lsp.enable("nil_ls")
       -- configure rust_analzer for Rust LSP
       vim.lsp.config("rust_analyzer", {
         settings = {
@@ -214,7 +198,9 @@ return {
           },
         },
       })
-      vim.lsp.enable("rust_analyzer")
+      -- Apply the startup LSP state after all configs exist so that
+      -- runtime enable/disable commands can reuse the same server list.
+      language_servers.apply()
       -- Define customized signs for diagnostics reported by the language server;
       -- note that this will define the signs displayed in the gutter
       local internal_signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
