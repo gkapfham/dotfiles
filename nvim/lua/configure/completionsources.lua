@@ -4,7 +4,12 @@
 local M = {}
 
 local insert_primary_sources = {
-  { name = "treesitter", max_item_count = 10, priority = 10, keyword_length = 1 },
+  {
+    name = "treesitter",
+    max_item_count = 10,
+    priority = 10,
+    keyword_length = 2,
+  },
   { name = "nvim_lsp", max_item_count = 10, priority = 10, keyword_length = 1 },
   { name = "copilot", max_item_count = 10, priority = 10, keyword_length = 1 },
   { name = "supermaven", max_item_count = 10, priority = 10, keyword_length = 1 },
@@ -16,7 +21,11 @@ local insert_primary_sources = {
     keyword_length = 3,
     option = {
       get_bufnrs = function()
-        return vim.api.nvim_list_bufs()
+        local bufs = {}
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+          bufs[vim.api.nvim_win_get_buf(win)] = true
+        end
+        return vim.tbl_keys(bufs)
       end,
     },
   },
