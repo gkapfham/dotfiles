@@ -633,13 +633,17 @@ return {
             documentation = cmp.config.window.bordered(),
           },
           -- Define the performance characteristics for nvim-cmp
-          -- Favor the quick delivery of a minimal number of completions
+          -- Favor the quick delivery of a minimal number of completions;
+          -- note that this has been tweaked several times and it
+          -- may be the case that different settings are better as
+          -- the performance of the completion sources changes
+          -- or the set of sources themselves changes
           performance = {
             throttle = 0,
-            fetching_timeout = 80,
+            fetching_timeout = 150,
             debounce = 10,
-            async_budget = 1,
-            filtering_context_budget = 1,
+            async_budget = 5,
+            filtering_context_budget = 5,
             confirm_resolve_timeout = 30,
             max_view_entries = 50,
           },
