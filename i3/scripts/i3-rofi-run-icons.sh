@@ -39,7 +39,16 @@ compiled_cache_is_current() {
     
     # On non-NixOS: also check if PATH directories were modified
     # Skip this on NixOS since store paths never change (new ones are added instead)
-    if [[ ! "$PATH" =~ /nix/store ]]; then
+    # Detect NixOS by checking for nix command or nix-specific paths
+    if [[ -z "$IS_NIXOS" ]]; then
+        if command -v nix >/dev/null 2>&1 || [[ "$PATH" == *"/nix"* ]] || [[ -d /nix ]]; then
+            IS_NIXOS=1
+        else
+            IS_NIXOS=0
+        fi
+    fi
+    
+    if [[ "$IS_NIXOS" == "0" ]]; then
         local dir
         local IFS=':'
         for dir in $PATH; do
