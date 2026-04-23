@@ -14,5 +14,12 @@ configuration {
     sort: false;
 	case-sensitive: false;
     smart-case: true;
+    display-dmenu: " ";
+    display-drun: " ";
+    display-run: " ";
+    display-window: " ";
+    display-combi: " ";
+    display-ssh: "󰣀 ";
+    display-filebrowser: " ";
 }
 @theme "/home/gkapfham/.config/rofi/themes/Minimal.rasi"
