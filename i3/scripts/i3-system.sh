@@ -12,7 +12,7 @@
 OPTIONS=" Lock System\n Restart System\n Shutdown System\n󰒲 Suspend System"
 
 # Configure rofi's launcher commands
-LAUNCHER="rofi -dmenu -i -p system"
+LAUNCHER="rofi -dmenu -i -p 󰑣"
 
 # Always support the lock command
 USE_LOCKER="true"
