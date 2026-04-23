@@ -179,7 +179,8 @@ bindsym Control+$mod+p exec $rofi-full-program
 bindsym Control+$mod+w exec i3-msg rename workspace to $(rofi -dmenu -lines 0)
 
 # Rofi for .desktop files
-set $rofi-desktop "j4-dmenu-desktop --dmenu='rofi -p 'dmenu' -dmenu -i'"
+# set $rofi-desktop "j4-dmenu-desktop --dmenu='rofi -p 'dmenu' -dmenu -i'"
+set $rofi-desktop "rofi -modi 'drun' -show drun -width 70"
 bindsym Control+$mod+n exec $rofi-desktop
 
 # Rofi for windows
@@ -187,7 +188,7 @@ set $rofi-windows "rofi -modi 'window' -show window -width 70"
 bindsym Control+$mod+m exec $rofi-windows
 
 # Rofi for combination
-set $rofi-combo "rofi -combi-modi window#run#drun -show combi -width 70"
+set $rofi-combo "~/.config/i3/scripts/i3-run-rofi-full-path.sh 'run-icons,windowcd,drun'"
 bindsym Control+$mod+o exec $rofi-combo
 
 # Rofi for workspaces
