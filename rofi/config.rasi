@@ -7,12 +7,11 @@ configuration {
 	matching: "fuzzy";
 	line-margin: 10;
 	separator-style: "none";
-	hide-scrollbar: true;
+	hide-scrollbar: false;
 	show-icons: false;
 	window-format: "  {t}";
 	drun-display-format: "  {name}";
     sort: false;
-    sorting-method: "fzf";
 	case-sensitive: false;
     smart-case: true;
 }
