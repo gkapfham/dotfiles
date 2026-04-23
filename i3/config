@@ -15,7 +15,7 @@ gaps outer 1
 
 # Draw a small border around windows
 # by default (note that setting it it
-# 1 or 2 will ensure that the kitty terminal
+# 1 or 2 will ensure that the ghostty terminal
 # windows take up the entire screen on a 16:10
 # Framework 13 laptop with higher resolution)
 default_border normal 4
@@ -48,9 +48,9 @@ font pango:Hack Nerd Font 9
 # tight next to the slightly rounded border)
 for_window [class=".*"] title_format " %title"
 
-# For all kitty windows, show only a fixed as the title
+# For all ghostty windows, show only a fixed as the title
 # This prevents lag from Zellij's dynamic title updates
-for_window [class="kitty"] title_format "  Terminal"
+for_window [class="ghostty"] title_format "  Terminal"
 
 # Wallpaper that is a solid purple color
 # exec_always --no-startup-id hsetroot -solid "#875f87"
@@ -187,9 +187,10 @@ bindsym Control+$mod+n exec $rofi-desktop
 set $rofi-windows "rofi -modi 'window' -show window -width 70"
 bindsym Control+$mod+m exec $rofi-windows
 
-# Rofi for combination
-set $rofi-combo "~/.config/i3/scripts/i3-run-rofi-full-path.sh 'run-icons,windowcd,drun'"
-bindsym Control+$mod+o exec $rofi-combo
+# Rofi for quick directory jumping with zoxide
+# Shows frequently visited directories and opens ghostty terminal there
+set $rofi-zoxide "~/.config/i3/scripts/i3-rofi-zoxide.sh"
+bindsym Control+$mod+o exec $rofi-zoxide
 
 # Rofi for workspaces
 set $rofi-switch-workspace "~/.config/i3/scripts/i3-switch-workspace.sh"
@@ -205,7 +206,7 @@ bindsym Control+$mod+r exec $rofi-reminder
 
 # Rofi for the display and insertion of an emoji
 # Only show the five most recent icons in the menu bar
-bindsym Control+$mod+y exec "rofimoji --max-recent 10"
+bindsym Control+$mod+y exec "rofimoji --max-recent 10 --prompt '󰏜 ' --selector-args '-width 1600 -height 875'"
 
 # Rofi for the display and copying of content to the clipboard
 set $rofi-copy-to-clipboard "~/.config/i3/scripts/i3-copy-to-clipboard.sh"
@@ -231,7 +232,7 @@ floating_modifier $mod
 # Programs {{{
 
 # Terminal
-bindsym Control+$mod+Return exec kitty
+bindsym Control+$mod+Return exec ghostty
 
 # }}}
 
