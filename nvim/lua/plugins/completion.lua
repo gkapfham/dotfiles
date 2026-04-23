@@ -21,6 +21,7 @@ local kind_icons = {
   Text = "󰉿",
   Method = "󰆧",
   Function = "󰊕",
+  FunctionCall = "󰊕",
   FunctionMacro = "󰊕",
   Constructor = "",
   Field = "󰜢",
