@@ -9,7 +9,11 @@ configuration {
 	separator-style: "none";
 	hide-scrollbar: true;
 	show-icons: false;
-	drun-display-format: " {name}";
-	window-format: " {t}";
+	window-format: "  {t}";
+	drun-display-format: "  {name}";
+    sort: false;
+    sorting-method: "fzf";
+	case-sensitive: false;
+    smart-case: true;
 }
 @theme "/home/gkapfham/.config/rofi/themes/Minimal.rasi"
