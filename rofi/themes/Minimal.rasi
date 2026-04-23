@@ -4,6 +4,7 @@
     bg0:    #1c1c1c;
     bg1:    #58585880;
     bg2:    #303030;
+    bg3:    #262626;
 
     fg0:    #d2d2d2;
     fg1:    #d78700;
@@ -35,6 +36,7 @@ inputbar {
     font:       "Maple Mono Normal NF 30";
     padding:    12px;
     spacing:    12px;
+    margin:     0 0 6px 0;
     children:   [ entry ];
 }
 
@@ -44,8 +46,8 @@ entry, element-icon, element-text {
 
 entry {
     font:   inherit;
-    placeholder         : "";
-    placeholder-color   : @fg2;
+    placplaceholder: "";
+    placeholder-color: @fg2;
 }
 
 message {
@@ -64,6 +66,7 @@ listview {
     fixed-height:   false;
     border:         1px 0 0;
     border-color:   @bg1;
+    padding:        8px 0 0;
 }
 
 element {
@@ -83,6 +86,8 @@ element normal urgent {
 element selected normal, element selected active {
     background-color:   @bg2;
     text-color:         @fg1;
+    border:             0 0 0 4px;
+    border-color:       @fg1;
 }
 
 element selected urgent {
