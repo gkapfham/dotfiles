@@ -185,20 +185,9 @@ return {
     end,
   },
 
-  -- provider = "codestral",
-  -- provider_options = {
-  --   codestral = {
-  --     end_point = "https://codestral.mistral.ai/v1/fim/completions",
-  --     optional = {
-  --       max_tokens = 256,
-  --       -- stop = { '\n\n' },
-  --     },
-  --   },
-  -- },
-
   -- minuet-ai.nvim
   -- Enable interaction with code completion
-  -- models like Codestral and Gemini
+  -- models like Codestral and Deepseek
   {
     "milanglacier/minuet-ai.nvim",
     event = "InsertEnter",
