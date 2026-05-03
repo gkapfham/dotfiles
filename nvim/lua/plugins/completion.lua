@@ -52,6 +52,7 @@ local kind_icons = {
   Struct = "󰙅",
   Event = "",
   Operator = "󰆕",
+  Opencode = "",
   TypeParameter = "𝙏",
   Nospell = "",
   None = "󰋶",
@@ -184,6 +185,17 @@ return {
     end,
   },
 
+  -- provider = "codestral",
+  -- provider_options = {
+  --   codestral = {
+  --     end_point = "https://codestral.mistral.ai/v1/fim/completions",
+  --     optional = {
+  --       max_tokens = 256,
+  --       -- stop = { '\n\n' },
+  --     },
+  --   },
+  -- },
+
   -- minuet-ai.nvim
   -- Enable interaction with code completion
   -- models like Codestral and Gemini
@@ -192,13 +204,21 @@ return {
     event = "InsertEnter",
     config = function()
       require("minuet").setup({
-        provider = "codestral",
+        provider = "openai_compatible",
+        request_timeout = 2.5,
+        throttle = 500,
+        debounce = 100,
         provider_options = {
-          codestral = {
-            end_point = "https://codestral.mistral.ai/v1/fim/completions",
+          openai_compatible = {
+            api_key = "OPENCODE_GO_API_KEY",
+            end_point = "https://opencode.ai/zen/go/v1/chat/completions",
+            model = "deepseek-v4-flash",
+            name = "Opencode",
             optional = {
-              max_tokens = 256,
-              -- stop = { '\n\n' },
+              max_tokens = 56,
+              top_p = 0.9,
+              -- disable thinking to avoid first token latency
+              thinking = { type = "disabled" },
             },
           },
         },
