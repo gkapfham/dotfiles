@@ -204,25 +204,43 @@ return {
     event = "InsertEnter",
     config = function()
       require("minuet").setup({
-        provider = "openai_compatible",
+        provider = "codestral",
         request_timeout = 2.5,
         throttle = 500,
         debounce = 100,
         provider_options = {
-          openai_compatible = {
-            api_key = "OPENCODE_GO_API_KEY",
-            end_point = "https://opencode.ai/zen/go/v1/chat/completions",
-            model = "deepseek-v4-flash",
-            name = "Opencode",
+          codestral = {
+            api_key = "CODESTRAL_API_KEY",
+            end_point = "https://codestral.mistral.ai/v1/fim/completions",
             optional = {
-              max_tokens = 56,
-              top_p = 0.9,
-              -- disable thinking to avoid first token latency
-              thinking = { type = "disabled" },
+              max_tokens = 256,
+            },
+          },
+        },
+        duet = {
+          provider = "openai_compatible",
+          request_timeout = 15,
+          provider_options = {
+            openai_compatible = {
+              api_key = "OPENCODE_GO_API_KEY",
+              end_point = "https://opencode.ai/zen/go/v1/chat/completions",
+              model = "deepseek-v4-flash",
+              name = "Opencode",
+              optional = {
+                top_p = 0.9,
+                -- Disable thinking to avoid first token latency.
+                thinking = { type = "disabled" },
+              },
             },
           },
         },
       })
+      vim.keymap.set("n", "<leader>mp", "<cmd>Minuet duet predict<CR>", { desc = "Minuet duet predict" })
+      vim.keymap.set("n", "<leader>ma", "<cmd>Minuet duet apply<CR>", { desc = "Minuet duet apply" })
+      vim.keymap.set("n", "<leader>md", "<cmd>Minuet duet dismiss<CR>", { desc = "Minuet duet dismiss" })
+      vim.keymap.set("i", "<A-z>", "<cmd>Minuet duet predict<CR>", { desc = "Minuet duet predict" })
+      vim.keymap.set("i", "<A-a>", "<cmd>Minuet duet apply<CR>", { desc = "Minuet duet apply" })
+      vim.keymap.set("i", "<A-x>", "<cmd>Minuet duet dismiss<CR>", { desc = "Minuet duet dismiss" })
     end,
   },
 
