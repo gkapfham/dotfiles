@@ -211,25 +211,62 @@ return {
           request_timeout = 15,
           provider_options = {
             openai_compatible = {
-              api_key = "OPENCODE_GO_API_KEY",
-              end_point = "https://opencode.ai/zen/go/v1/chat/completions",
-              model = "deepseek-v4-flash",
-              name = "Opencode",
+              api_key = "CODESTRAL_API_KEY",
+              end_point = "https://codestral.mistral.ai/v1/chat/completions",
+              model = "codestral-latest",
+              name = "Codestral",
               optional = {
                 top_p = 0.9,
-                -- Disable thinking to avoid first token latency.
-                thinking = { type = "disabled" },
               },
             },
           },
         },
       })
+      -- Use leader keybindings for discoverability
       vim.keymap.set("n", "<leader>mp", "<cmd>Minuet duet predict<CR>", { desc = "Minuet duet predict" })
       vim.keymap.set("n", "<leader>ma", "<cmd>Minuet duet apply<CR>", { desc = "Minuet duet apply" })
       vim.keymap.set("n", "<leader>md", "<cmd>Minuet duet dismiss<CR>", { desc = "Minuet duet dismiss" })
-      vim.keymap.set("i", "<A-z>", "<cmd>Minuet duet predict<CR>", { desc = "Minuet duet predict" })
-      vim.keymap.set("i", "<A-a>", "<cmd>Minuet duet apply<CR>", { desc = "Minuet duet apply" })
-      vim.keymap.set("i", "<A-x>", "<cmd>Minuet duet dismiss<CR>", { desc = "Minuet duet dismiss" })
+      -- Insert mode keybindings
+      -- <C-l>: predict (mnemonic: "line" - get a line prediction)
+      -- <C-y>: apply (mnemonic: "yes" - accept the prediction)
+      -- <C-]>: dismiss (clear without leaving insert mode)
+      vim.keymap.set("i", "<C-l>", "<cmd>Minuet duet predict<CR>", { desc = "Minuet duet predict" })
+      vim.keymap.set("i", "<C-y>", "<cmd>Minuet duet apply<CR>", { desc = "Minuet duet apply" })
+      vim.keymap.set("i", "<C-]>", "<cmd>Minuet duet dismiss<CR>", { desc = "Minuet duet dismiss" })
+      -- Set up minimal autocommands for lualine status integration
+      local minuet_augroup = vim.api.nvim_create_augroup("MinuetStatus", { clear = true })
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "MinuetDuetRequestStarted",
+        group = minuet_augroup,
+        callback = function()
+          vim.g.minuet_duet_status = "󱓞 Minuet request"
+          vim.g.minuet_duet_processing = true
+        end,
+      })
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "MinuetDuetRequestFinished",
+        group = minuet_augroup,
+        callback = function()
+          vim.g.minuet_duet_status = "󱓞 Minuet ready"
+          vim.g.minuet_duet_processing = false
+        end,
+      })
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "MinuetDuetRequestFailed",
+        group = minuet_augroup,
+        callback = function()
+          vim.g.minuet_duet_status = "󱓞 Minuet failed"
+          vim.g.minuet_duet_processing = false
+        end,
+      })
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "MinuetDuetRequestCancelled",
+        group = minuet_augroup,
+        callback = function()
+          vim.g.minuet_duet_status = "󱓞 Minuet cancelled"
+          vim.g.minuet_duet_processing = false
+        end,
+      })
     end,
   },
 
