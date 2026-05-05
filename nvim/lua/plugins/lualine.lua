@@ -183,6 +183,15 @@ local function treesitter_attached()
   return "󱥑 TSP"
 end
 
+-- Minuet duet status indicator
+local function minuet_duet_status()
+  local status = vim.g.minuet_duet_status
+  if status and vim.g.minuet_duet_processing then
+    return status
+  end
+  return ""
+end
+
 return {
 
   -- lualine.nvim
@@ -232,6 +241,12 @@ return {
           -- Bottom right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
           lualine_x = {
+            {
+              minuet_duet_status,
+              cond = function()
+                return vim.g.minuet_duet_processing == true
+              end,
+            },
             {
               "lsp_progress",
               icon = "",
