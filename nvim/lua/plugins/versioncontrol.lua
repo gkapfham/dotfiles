@@ -209,6 +209,7 @@ return {
     end,
   },
 
+  -- code-review.nvim for code review
   {
     "choplin/code-review.nvim",
     event = "VeryLazy",
