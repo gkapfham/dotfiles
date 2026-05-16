@@ -86,6 +86,24 @@ vim.api.nvim_create_autocmd("TabClosed", {
   end,
 })
 
+-- Comment input buffer keymaps for the code review plugin
+vim.api.nvim_create_autocmd("User", {
+  pattern = "CodeReviewInputEnter",
+  -- Confirm that the code review plugin was loaded
+  callback = function(ev)
+    local buf = ev.data.buf
+    local cr = require("code-review")
+    local funcs = cr.get_input_buffer_functions(buf)
+    -- Submit with C-CR in both insert and normal mode
+    -- (do not use the default of CTRL-<CR> is this is
+    -- used by ghostty to go into full screen mode)
+    vim.keymap.set({ "i", "n" }, "<CR>", funcs.submit, { buffer = buf })
+    -- Cancel with Esc or q in normal mode
+    vim.keymap.set("n", "<Esc>", funcs.cancel, { buffer = buf })
+    vim.keymap.set("n", "q", funcs.cancel, { buffer = buf })
+  end,
+})
+
 return {
 
   -- vim-fugitive for git integration
