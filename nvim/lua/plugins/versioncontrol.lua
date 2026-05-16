@@ -209,11 +209,95 @@ return {
     end,
   },
 
+  {
+    "choplin/code-review.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("code-review").setup({
+        ui = {
+          -- Input window
+          input_window = {
+            width = 60,
+            height = 2,
+            max_height = 20,
+            border = "rounded",
+            title = " Add Comment (Enter to submit) ",
+            title_pos = "center",
+          },
+          -- Preview window
+          preview = {
+            split = "float", -- 'vertical', 'horizontal', or 'float'
+            vertical_width = 80,
+            horizontal_height = 20,
+            float = {
+              width = 0.8,
+              height = 0.8,
+              border = "rounded",
+              title = " Review Preview ",
+              title_pos = "center",
+            },
+          },
+          -- Sign column indicators
+          signs = {
+            enabled = true,
+            text = "󰅺",
+            texthl = "CodeReviewSign",
+          },
+          -- Virtual text indicators
+          virtual_text = {
+            enabled = true,
+            prefix = " 󰆉 ",
+            hl = "CodeReviewVirtualText",
+          },
+        },
+        -- Output settings
+        output = {
+          date_format = "%Y-%m-%d %H:%M:%S",
+          save_dir = nil, -- nil = current directory
+          format = "detailed", -- 'detailed' or 'minimal' (flat, for AI)
+        },
+        -- Comment settings
+        comment = {
+          -- Storage configuration
+          storage = {
+            backend = "file", -- 'memory' or 'file'
+            memory = {}, -- No memory-specific settings yet
+            file = {
+              -- Directory for file storage
+              -- Relative paths: resolved from project root (git root or cwd)
+              -- Absolute paths: used as-is
+              dir = ".code-review",
+            },
+          },
+          auto_copy_on_add = false, -- Automatically copy each new comment to clipboard when added
+          -- Author name used by Claude Code (for automatic status management)
+          -- Comments from this author trigger "waiting-review" status
+          -- Comments from other authors trigger "action-required" status
+          claude_code_author = "Claude Code",
+          -- Enable filename-based status management (only works with file storage backend)
+          -- When enabled, review files are prefixed with status (action-required_, waiting-review_, resolved_)
+          status_management = false,
+        },
+        -- Keymaps (note that there are also keymaps for Quarto
+        -- that start with the <localleader>r<other letters>)
+        keymaps = {
+          clear = "<leader>rx",
+          add_comment = "<leader>rc",
+          preview = "<leader>rp",
+          save = "<leader>rw",
+          copy = "<leader>ry",
+          show_comment = "<leader>rs",
+          list_comments = "<leader>rl",
+          delete_comment = "<leader>rd",
+        },
+      })
+    end,
+  },
+
   -- git-conflict.nvim for resolving merge conflicts
   {
     "akinsho/git-conflict.nvim",
     event = "VeryLazy",
-    -- tag = "v2.1.0",
     config = true,
   },
 
