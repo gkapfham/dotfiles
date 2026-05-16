@@ -368,3 +368,6 @@ agent.jsonl
 
 # Seek (i.e., ck) directories
 .ck/
+
+# Code review directories
+.code-review/
