@@ -239,7 +239,7 @@ return {
         pattern = "MinuetDuetRequestStarted",
         group = minuet_augroup,
         callback = function()
-          vim.g.minuet_duet_status = "󱓞 Minuet request"
+          vim.g.minuet_duet_status = "󱓞 Minuet requesting"
           vim.g.minuet_duet_processing = true
         end,
       })
