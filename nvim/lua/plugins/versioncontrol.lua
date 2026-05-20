@@ -295,12 +295,12 @@ return {
     end,
   },
 
-  -- git-conflict.nvim for resolving merge conflicts
-  {
-    "akinsho/git-conflict.nvim",
-    event = "VeryLazy",
-    config = true,
-  },
+  -- -- git-conflict.nvim for resolving merge conflicts
+  -- {
+  --   "akinsho/git-conflict.nvim",
+  --   event = "VeryLazy",
+  --   config = true,
+  -- },
 
   -- gitsigns.nvim for showing git diffs in the sign column
   {
