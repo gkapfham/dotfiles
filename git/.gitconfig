@@ -95,3 +95,7 @@
 	repo = /home/gkapfham/.zsh/ohmyzsh/ohmyzsh
 	repo = /home/gkapfham/.zsh/zsh-users/zsh-autosuggestions
 	repo = /home/gkapfham/.zsh/zsh-users/zsh-completions
+[diff]
+	tool = codediff
+[difftool "codediff"]
+	cmd = nvim \"$LOCAL\" \"$REMOTE\" +\"CodeDiff file $LOCAL $REMOTE\"
