@@ -12,13 +12,12 @@ Carefully Curated Dotfiles for Popular Linux Programs
 
 This repository contains the configuration files (i.e., "dotfiles") used to
 configure the programs regularly used by me, [Gregory M.
-Kapfhammer](https://www.gregorykapfhammer.com/). Please note that the dotfiles
-in this repository are, at least to some extent, "hard-coded" to work for my
-development environment and projects. For instance, I created these
-configuration files under the assumption that a developer will use Arch Linux.
-Even though they are heavily customized, my hope is that they are largely
-reusable and, additionally, will give examples of how to configure various
-programs such as `i3`, `mutt`, `nvim`, `polybar`, `tmux`, `vim`, and `zsh`.
+Kapfhammer](https://www.gregorykapfhammer.com/). While heavily customized for my
+personal workflow and computers, these dotfiles serve as practical examples of
+how to configure a wide variety of development tools and system utilities. The
+configurations span terminal multiplexers, window managers, text editors, email
+clients, and desktop environments, providing a foundation for building your own
+efficient development setup on Linux and MacOS.
 
 This is a summary of some of the dotfiles and program configurations that I
 created and actively maintain:
