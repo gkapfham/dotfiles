@@ -297,7 +297,7 @@ return {
         lsp_format = "fallback",
       },
       format_on_save = function(bufnr)
-        -- Disable with a buffer-local variable
+        -- disable with a buffer-local variable
         if vim.b[bufnr].disable_autoformat then
           return
         end
