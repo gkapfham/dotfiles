@@ -288,7 +288,7 @@ return {
         javascript = { "prettierd" },
         tex = { "latexindent" },
         lua = { "stylua" },
-        python = { "ruff" },
+        python = { "ruff_format", "ruff_fix", "ruff_organize_imports" },
         markdown = { "mdformat" },
         nix = { "nixfmt" },
       },
