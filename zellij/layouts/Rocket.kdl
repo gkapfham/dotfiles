@@ -30,7 +30,7 @@ layout {
         }
     }
     tab name="Manager" hide_floating_panes=true {
-        pane command="yazi" name="Yazi" {
+        pane command="elio" name="Elio" {
             start_suspended true
         }
         pane size=1 borderless=true {
