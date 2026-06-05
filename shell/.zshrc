@@ -539,7 +539,7 @@ ZVM_CURSOR_STYLE_ENABLED=false
 # Ensure that Pipenv can find the version of Python
 # that is managed by the Pyenv tool; note that
 # this is used infrequently for Python development
-export PIPENV_PYTHON="$HOME/.pyenv/shims/python"
+# export PIPENV_PYTHON="$HOME/.pyenv/shims/python"
 
 # }}}
 
@@ -547,9 +547,9 @@ export PIPENV_PYTHON="$HOME/.pyenv/shims/python"
 
 # Ensure that the user-install version of cpanm is
 # available to neovim, enabling health checks to pass
-if (command -v perl && command -v cpanm) >/dev/null 2>&1; then
-  test -d "$HOME/perl5/lib/perl5" && eval $(perl -I "$HOME/perl5/lib/perl5" -Mlocal::lib)
-fi
+# if (command -v perl && command -v cpanm) >/dev/null 2>&1; then
+#  test -d "$HOME/perl5/lib/perl5" && eval $(perl -I "$HOME/perl5/lib/perl5" -Mlocal::lib)
+#fi
 
 # }}}
 
@@ -684,8 +684,8 @@ zvm_after_init_commands+=(eval "$(atuin hex init zsh)")
 # Use znap source to start plugins from oh-my-zsh
 znap source ohmyzsh/ohmyzsh \
   plugins/git \
-  plugins/tmux \
-  plugins/tmuxinator
+  # plugins/tmux \
+  # plugins/tmuxinator
 
 # Use znap source to start plugins
 znap source chisui/zsh-nix-shell
@@ -784,20 +784,20 @@ zvm_after_init_commands+=('bindkey "^\eg" _fun_widget')
 
 # Worktrees with worktrunk {{{
 
-if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+# if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
 
 # }}}
 
 # Yazi {{{
 
-y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
+# y() {
+# 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+# 	yazi "$@" --cwd-file="$tmp"
+# 	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+# 		builtin cd -- "$cwd"
+# 	fi
+# 	rm -f -- "$tmp"
+# }
 
 # }}}
 
