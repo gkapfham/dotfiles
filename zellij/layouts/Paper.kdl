@@ -1,6 +1,6 @@
 layout {
     tab name="Editor" hide_floating_panes=true {
-        pane name="Neovim"
+        pane name="Neovim" focus=true
         pane size=1 borderless=true {
             plugin location="zjstatus"
         }
@@ -30,7 +30,7 @@ layout {
         }
     }
     tab name="Manager" hide_floating_panes=true {
-        pane command="yazi" name="Yazi" {
+        pane command="elio" name="Elio" {
             start_suspended true
         }
         pane size=1 borderless=true {
@@ -44,4 +44,3 @@ layout {
         }
     }
 }
-
