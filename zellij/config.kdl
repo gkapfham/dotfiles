@@ -295,7 +295,6 @@ plugins {
     compact-bar location="zellij:compact-bar" {
         tooltip "Ctrl h"
     }
-    default_layout "compact"
     configuration location="zellij:configuration"
     plugin-manager location="zellij:plugin-manager"
     session-manager location="zellij:session-manager"
@@ -404,7 +403,7 @@ default_shell "/run/current-system/sw/bin/zsh"
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-default_layout "compact"
+default_layout "Rocket"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
@@ -414,7 +413,7 @@ layout_dir "/home/gkapfham/.config/zellij/layouts"
 // The folder in which Zellij will look for themes
 // (Requires restart)
 // 
-// theme_dir "/tmp"
+theme_dir "/tmp"
  
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
