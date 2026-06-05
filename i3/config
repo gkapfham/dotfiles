@@ -591,8 +591,9 @@ bindsym XF86MonBrightnessUp exec "brightnessctl set 5%+"
 # bindsym XF86MonBrightnessDown exec "light -U 5"
 bindsym XF86MonBrightnessDown exec "brightnessctl set 5%-"
 
-# Set to maximum brightness
-bindsym $mod+Shift+b exec "light -S 100"
+# Set to maximum brightness (need to lookup this value
+# of 65535 with the brightnessctl info command)
+bindsym $mod+Shift+b exec "brightnessctl set 65535"
 
 # }}}
 
