@@ -13,7 +13,7 @@ layout {
         }
         pane size="50%" split_direction="vertical" {
             pane command="lazygit" name="GitHub" size="50%" {
-                start_suspended true
+                start_suspended false
             }
             pane name="Explore" size="50%"
         }
