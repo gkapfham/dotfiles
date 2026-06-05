@@ -42,6 +42,7 @@ local parsers = {
   "vimdoc",
   "vue",
   "yaml",
+  "zsh",
 }
 
 local function select_textobject(query)
