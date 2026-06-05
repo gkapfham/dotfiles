@@ -21,9 +21,9 @@ layout {
             plugin location="zjstatus"
         }
     }
-    tab name="Agent" hide_floating_panes=true {
-        pane command="npm" name="OpenCode" {
-            args "exec" "opencode-ai@latest"
+    tab name="Agents" hide_floating_panes=true {
+        pane command="dx" name="OpenCode" {
+            args "opencode-ai@latest"
             start_suspended true
         }
         pane size=1 borderless=true {
