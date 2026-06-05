@@ -21,7 +21,7 @@ layout {
         }
     }
     tab name="Agents" hide_floating_panes=true {
-        pane command="bunx" name="OpenCode" {
+        pane command="dx" name="OpenCode" {
           args "opencode-ai@latest"
             start_suspended true
         }
