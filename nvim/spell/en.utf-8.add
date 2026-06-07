@@ -4694,3 +4694,6 @@ timesyncd
 elio
 dx
 kix
+mlx
+vLLM
+LiteLLM
