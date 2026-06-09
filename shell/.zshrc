@@ -679,7 +679,6 @@ znap prompt
 # a standard source is also not possible.
 # zvm_after_init_commands+=(eval "$(atuin init zsh)")
 zvm_after_init_commands+=(eval "$(atuin hex init zsh)")
-# znap eval atuin 'atuin hex init zsh'
 
 # }}}
 
@@ -688,8 +687,6 @@ zvm_after_init_commands+=(eval "$(atuin hex init zsh)")
 # Use znap source to start plugins from oh-my-zsh
 znap source ohmyzsh/ohmyzsh \
   plugins/git \
-  # plugins/tmux \
-  # plugins/tmuxinator
 
 # Use znap source to start plugins
 znap source chisui/zsh-nix-shell
