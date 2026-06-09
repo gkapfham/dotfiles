@@ -194,9 +194,10 @@ alias kix="nh os switch -f '<nixpkgs/nixos>' -- -I nixos-config=/home/gkapfham/c
 
 # alias kix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
 
-# Use nix-rebuild switch with a configuration in user account
+# Use nix-rebuild switch with a configuration in user account,
+# relying on a specialized program for better visual diagnostics
 # and also perform an upgrade of the system
-alias ukix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix --upgrade"
+alias ukix="nh os switch --update -f '<nixpkgs/nixos>' -- -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
 
 # Run the welcome session for zellij,
 # helps to interactively pick content
