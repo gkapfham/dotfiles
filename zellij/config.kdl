@@ -455,7 +455,8 @@ on_force_close "detach"
 // Valid values: positive integers
 // Default value: 10000
 // 
-scroll_buffer_size 10000
+// scroll_buffer_size 10000
+scroll_buffer_size 5000
  
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with
@@ -519,13 +520,13 @@ session_serialization true
 //   - true
 //   - false (default)
 // 
-serialize_pane_viewport true
+serialize_pane_viewport false
  
 // Scrollback lines to serialize along with the pane viewport when serializing sessions, 0
 // defaults to the scrollback size. If this number is higher than the scrollback size, it will
 // also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
 // 
-scrollback_lines_to_serialize 1000
+// scrollback_lines_to_serialize 100
  
 // Enable or disable the rendering of styled and colored underlines (undercurl).
 // May need to be disabled for certain unsupported terminals
@@ -628,12 +629,12 @@ enforce_https_on_localhost true
 // The ip address the web server should listen on when it starts
 // Default: "127.0.0.1"
 // (Requires restart)
-web_server_ip "0.0.0.0"
+// web_server_ip "0.0.0.0"
  
 // The port the web server should listen on when it starts
 // Default: 8082
 // (Requires restart)
-web_server_port 5590
+// web_server_port 5590
  
 // A command to run (will be wrapped with sh -c and provided the RESURRECT_COMMAND env variable) 
 // after Zellij attempts to discover a command inside a pane when resurrecting sessions, the STDOUT
