@@ -293,11 +293,21 @@ bindsym Control+$mod+b workspace back_and_forth
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 
-# Move window to the scratchpad
-bindsym Control+Shift+s move scratchpad
+# Scratchpad: a hidden collection of floating windows
+# A window in the scratchpad does not appear on any workspace until summoned.
+# The scratchpad can hold multiple windows at once; each invocation of
+# `scratchpad show` pulls out the most recently moved-into-scratchpad window,
+# cycling through them one by one.
+#
+# Workflow:
+#   1) Hide a window in the scratchpad — Ctrl+Shift+s
+#      (any floating window will move into the hidden scratchpad pool)
+#   2) Show a window   — Ctrl+Alt+s   (pops the next window out; repeat to
+#      rotate through all windows currently in the scratchpad)
+#   3) Remove from scratchpad and tile it — once the desired window is visible,
+#      press Ctrl+Alt+f to toggle floating off, returning it to normal tiling
 
-# Take window from the scratchpad as a float
-# This is a toggle-able command; returns to scratchpad
+bindsym Control+Shift+s move scratchpad
 bindsym Control+$mod+s scratchpad show
 
 # Switch to a specified workspace
