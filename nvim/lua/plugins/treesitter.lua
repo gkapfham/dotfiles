@@ -185,9 +185,10 @@ return {
         -- Change it to any other or adjust colors of "MathParen" highlight group
         -- in your colorscheme to your liking
         hl_group = "MatchParen",
+        skip_folds = true,
         -- Debounce time in milliseconds for rehighlighting brackets
         -- Set to 0 to disable debouncing
-        debounce_time = 60,
+        -- debounce_time = 60,
       })
     end,
   },
