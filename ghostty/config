@@ -116,10 +116,10 @@ window-show-tab-bar = auto
 
 # Scrollback
 # Number of lines to keep in scrollback buffer (default is 10000)
-scrollback-limit = 10000
+scrollback-limit = 5000
 
 # Confirm before closing window with running processes
-confirm-close-surface = true
+confirm-close-surface = false
 
 # Working Directory
 # When opening new tabs/splits, inherit the working directory
