@@ -783,25 +783,6 @@ zvm_after_init_commands+=('bindkey "^\eg" _fun_widget')
 
 # }}}
 
-# Worktrees with worktrunk {{{
-
-# if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
-
-# }}}
-
-# Yazi {{{
-
-# y() {
-# 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-# 	yazi "$@" --cwd-file="$tmp"
-# 	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-# 		builtin cd -- "$cwd"
-# 	fi
-# 	rm -f -- "$tmp"
-# }
-
-# }}}
-
 # Benchmarking {{{
 
 # Uncomment to enable
