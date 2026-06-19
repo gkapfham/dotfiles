@@ -21,6 +21,7 @@ font-feature = +dlig
 # Background and Foreground Colors
 background = 1c1c1c
 foreground = d2d2d2
+background-opacity = 1
 
 # Color Palette (16 colors)
 # Black
@@ -82,6 +83,10 @@ window-decoration = true
 # Enable menu bar at the top
 gtk-titlebar = true
 
+# Always run a single instance of ghostty,
+# thereby improving startup performance
+gtk-single-instance = true
+
 # Set titlebar colors explicitly so they're visible
 window-theme = ghostty
 window-titlebar-background = #2d2d2d
@@ -116,7 +121,7 @@ window-show-tab-bar = auto
 
 # Scrollback
 # Number of lines to keep in scrollback buffer (default is 10000)
-scrollback-limit = 5000
+scrollback-limit = 2000
 
 # Confirm before closing window with running processes
 confirm-close-surface = false
