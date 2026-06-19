@@ -709,24 +709,23 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585858"
 # Ssh Agent {{{
 
 # ssh-agent setup
-if [ -f ~/.ssh/agent.env ] ; then
+if [ -n "$SSH_AUTH_SOCK" ] && [ -S "$SSH_AUTH_SOCK" ]; then
+  : # agent already running (e.g., from systemd)
+elif [ -f ~/.ssh/agent.env ]; then
   . ~/.ssh/agent.env > /dev/null
   if ! kill -0 $SSH_AGENT_PID > /dev/null 2>&1; then
-    # stale agent, start a new one
-    eval `ssh-agent | tee ~/.ssh/agent.env` > /dev/null 2>&1
+    eval $(ssh-agent | tee ~/.ssh/agent.env) > /dev/null 2>&1
   fi
 else
-  # start an agent
-  eval `ssh-agent | tee ~/.ssh/agent.env` > /dev/null 2>&1
+  eval $(ssh-agent | tee ~/.ssh/agent.env) > /dev/null 2>&1
 fi
 
-# add all private keys found in ~/.ssh
-for filename in ~/.ssh/*; do
-  type=`file "$filename" | awk -F ": " '{print $2}'`
-  if [[ $type == "PEM RSA private key" ]]; then
-    ssh-add $filename >/dev/null 2>&1
-  fi
-done
+# load keys into agent if not already cached
+if ! ssh-add -l >/dev/null 2>&1; then
+  for key in ~/.ssh/id_*; do
+    [ -f "$key" ] && [[ "$key" != *.pub ]] && ssh-add "$key" 2>/dev/null
+  done
+fi
 
 # }}}
 
