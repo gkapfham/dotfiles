@@ -146,7 +146,8 @@ exec --no-startup-id sct 6900
 # seems to reduce screen artifacts for Zathura windows.
 # Finally, see the separate picom configuration file
 # for more details about how this program works.
-exec --no-startup-id picom --config ~/.config/picom/picom.conf --realtime
+# exec --no-startup-id picom --config ~/.config/picom/picom.conf --realtime
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # Perform automatic window tiling with a limit of four windows
 # (this makes windows go horizontal and then vertical and so on)
