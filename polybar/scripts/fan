@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+cat /sys/class/hwmon/hwmon7/fan1_input
