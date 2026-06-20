@@ -312,7 +312,7 @@ plugins {
     // remote plugins hosted on GitHub with the web assembly
     // available in and downloaded from the releases page on GitHub
     // --> zjstatus
-    zjstatus location="https://github.com/dj95/zjstatus/releases/download/v0.22.0/zjstatus.wasm" {
+    zjstatus location="https://github.com/dj95/zjstatus/releases/download/v0.23.0/zjstatus.wasm" {
         color_bg "#1c1c1c"
         color_green "#6f9500"
         color_orange "#d78700"
