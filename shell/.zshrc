@@ -708,24 +708,36 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585858"
 
 # Ssh Agent {{{
 
-# ssh-agent setup
-if [ -n "$SSH_AUTH_SOCK" ] && [ -S "$SSH_AUTH_SOCK" ]; then
-  : # agent already running (e.g., from systemd)
-elif [ -f ~/.ssh/agent.env ]; then
-  . ~/.ssh/agent.env > /dev/null
-  if ! kill -0 $SSH_AGENT_PID > /dev/null 2>&1; then
-    eval $(ssh-agent | tee ~/.ssh/agent.env) > /dev/null 2>&1
+# Suppress the x11-ssh-askpass GUI that NixOS wires into the systemd user
+# environment. SSH_ASKPASS_REQUIRE=never tells openssh (>= 8.4) to NEVER invoke
+# $SSH_ASKPASS, even when no tty is attached — so background jobs (git-maintenance,
+# remote git invocations, etc.) fail silently instead of spawning a popup. This
+# is more robust than `unset SSH_ASKPASS`, which only affects this shell.
+unset SSH_ASKPASS
+export SSH_ASKPASS_REQUIRE=never
+
+# Prefer the socket provided by the systemd user ssh-agent service
+# (programs.ssh.agent in NixOS). Fall back to a per-user spawned agent only if
+# that socket is missing, so we never start a second, competing agent.
+if [ -z "$SSH_AUTH_SOCK" ] || [ ! -S "$SSH_AUTH_SOCK" ]; then
+  _systemd_sock="${XDG_RUNTIME_DIR:-/run/user/$UID}/ssh-agent"
+  if [ -S "$_systemd_sock" ]; then
+    export SSH_AUTH_SOCK="$_systemd_sock"
+  elif [ -f ~/.ssh/agent.env ]; then
+    . ~/.ssh/agent.env > /dev/null
+    if [ -z "$SSH_AGENT_PID" ] || ! kill -0 "$SSH_AGENT_PID" > /dev/null 2>&1; then
+      eval "$(ssh-agent | tee ~/.ssh/agent.env)" > /dev/null 2>&1
+    fi
+  else
+    eval "$(ssh-agent | tee ~/.ssh/agent.env)" > /dev/null 2>&1
   fi
-else
-  eval $(ssh-agent | tee ~/.ssh/agent.env) > /dev/null 2>&1
+  unset _systemd_sock
 fi
 
-# load keys into agent if not already cached
-if ! ssh-add -l >/dev/null 2>&1; then
-  for key in ~/.ssh/id_*; do
-    [ -f "$key" ] && [[ "$key" != *.pub ]] && ssh-add "$key" 2>/dev/null
-  done
-fi
+# Do NOT bulk-load keys at startup — that is the slow part and the thing that
+# triggered the askpass GUI (a passphrase-protected key + no tty => GUI popup).
+# Keys load lazily on first ssh/git use, or run `secure` to add them with a
+# passphrase prompt in the terminal.
 
 # }}}
 
