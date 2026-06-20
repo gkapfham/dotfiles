@@ -127,6 +127,53 @@ and can be invoked directly from a terminal:
 nvim -l nvim/lua/similar.lua /path/to/repository "search query"
 ```
 
+## Pi Coding Agent (pi)
+
+This repository includes configurations for the [Pi Coding Agent](https://pi.dev)
+(`pi`), an extensible terminal coding harness. Pi is run via `bunx` without a
+global installation:
+
+```shell
+bunx @earendil-works/pi-coding-agent
+```
+
+### Package Management
+
+Pi extensions, skills, and themes are distributed as npm packages. Install and
+remove them using the `pi` CLI through `bunx`:
+
+| Command | Purpose |
+|---------|---------|
+| `bunx @earendil-works/pi-coding-agent install npm:<package>` | Install a package |
+| `bunx @earendil-works/pi-coding-agent remove npm:<package>` | Remove a package |
+| `bunx @earendil-works/pi-coding-agent list` | List installed packages |
+| `bunx @earendil-works/pi-coding-agent update --all` | Update pi and all packages |
+
+For example, to install and then remove the `pi-vim` modal editing extension:
+
+```shell
+bunx @earendil-works/pi-coding-agent install npm:pi-vim
+bunx @earendil-works/pi-coding-agent remove npm:pi-vim
+```
+
+> **Note:** After installing or removing a package, restart Pi for the changes
+> to take effect.
+
+### Web Search Configuration
+
+The `pi-web-access` package provides web search, content extraction, and video
+understanding capabilities. The curator workflow (which opens a browser for
+summary review) can be disabled by creating `~/.pi/web-search.json`:
+
+```json
+{
+  "workflow": "none"
+}
+```
+
+See the [pi-web-access README](https://pi.dev/packages/pi-web-access) for full
+configuration options.
+
 ## Problems or Praise
 
 If you have any problems with downloading or understanding these configuration
