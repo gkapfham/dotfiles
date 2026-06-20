@@ -103,7 +103,7 @@ directory containing this repository.
 ln -s ~/configure/dotfiles/.bibtoolrsc .bibtoolrsc
 ```
 
-As an alternative to manually creating all of the symbolic links in the
+As an alternative to manually creating all the symbolic links in the
 aforementioned fashion, this repository has a `Makefile` with rules that use
 `stow` to create these symbolic links automatically. If a system already
 contains dotfiles that you no longer needed and you want to remove them from the
