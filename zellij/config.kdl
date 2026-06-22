@@ -359,7 +359,7 @@ plugins {
         tab_floating_indicator   ""
         notification_format_unread "#[bg=$orange,fg=$bg] 󰎜 {message}#[bg=$bg,fg=$orange] "
         notification_format_no_notifications ""
-        notification_show_interval "5"
+        notification_show_interval "1"
         datetime          "{format}"
         datetime_format   "%Y-%m-%d"
         datetime_timezone "America/New_York"
@@ -508,12 +508,13 @@ copy_on_select true
 // 
 auto_layout true
  
-// Whether sessions should be serialized to the cache folder (including their tabs/panes, cwds and running commands) so that they can later be resurrected
+// Whether sessions should be serialized to the cache folder (including their tabs/panes, cwds and running commands)
+// so that they can later be resurrected
 // Options:
 //   - true (default)
 //   - false
 // 
-session_serialization true
+session_serialization false
  
 // Whether pane viewports are serialized along with the session, default is false
 // Options:
@@ -521,6 +522,7 @@ session_serialization true
 //   - false (default)
 // 
 serialize_pane_viewport false
+pane_viewport_serialization false
  
 // Scrollback lines to serialize along with the pane viewport when serializing sessions, 0
 // defaults to the scrollback size. If this number is higher than the scrollback size, it will
@@ -537,7 +539,7 @@ serialize_pane_viewport false
  
 // How often in seconds sessions are serialized
 // 
-serialization_interval 120
+serialization_interval 300
  
 // Enable or disable writing of session metadata to disk (if disabled, other sessions might not know
 // metadata info on this session)
@@ -580,7 +582,7 @@ disable_session_metadata false
 // - "disabled" (do not allow web sharing and do not permit sessions started in the terminal to opt-in to it)
 // Default: "off"
 // 
-web_sharing "on"
+web_sharing "off"
 // A path to a certificate file to be used when setting up the web client to serve the
 // connection over HTTPs
 // 
