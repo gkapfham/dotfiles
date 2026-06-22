@@ -159,12 +159,24 @@ The user's NetBird IP can be found with `netbird status`. Their NetBird FQDN
 - The user wants a `notify-send` notification whenever I ask a question.
 - Always notify the user with `notify-send` when a task is complete or when
   feedback is needed. You have standing permission to use the notification tool.
-- You should also use the following command to notify the user when you are
-  finished with a task or need further help: `timeout 2 zellij pipe -- "zjstatus::notify::󰵰 Agent finished. <Summarize task description>. This is fun. "`
-- Note that this command will only display in the current Zellij session.
-  Please also note that you need to add a space at the end of the notification.
-- You should use both notification methods as appropriate, making sure that the
-  Zellij command is always prefaced with a timeout of 2 seconds.
+- You should also notify the user within the current Zellij session using the
+  following two-step pattern, which sends a notification and then auto-clears it
+  after a brief delay:
+
+  ```bash
+  timeout 2 zellij pipe -- "zjstatus::notify::󰵰 Agent finished. <Summarize task description>." 2>/dev/null && \
+      timeout 4 bash -c "sleep 2 && zellij pipe -- 'zjstatus::rerun::dummy_clear'" 2>/dev/null || true
+  ```
+
+  **How it works:** The `notify` command displays the message. After 2 seconds,
+  the `rerun::dummy_clear` command triggers a plugin re-render without modifying
+  the notification state. The notification widget then checks its timer, finds
+  the interval has expired (configured as 1s in `config.kdl`), and switches to
+  the empty "no notifications" format.
+- Note that this will only display in the current Zellij session.
+- You should use both `notify-send` and the Zellij notification as appropriate.
+- If the `rerun` approach doesn't work (e.g., older zjstatus version), fall back
+  to the raw pipe: `timeout 2 zellij pipe -- "zjstatus::notify::󰵰 Agent finished. <Summarize task description>. "`
 
 ## Lua Programming for Scripts and Neovim
 
