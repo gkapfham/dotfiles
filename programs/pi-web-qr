@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Generate a QR code for one-scan pi-web access.
+# Usage: pi-web-qr [netbird-fqdn]
+# If no FQDN given, extracts it from `netbird status` automatically.
+
+set -euo pipefail
+
+TOKEN=$(grep PI_WEB_TOKEN ~/.config/pi-web/env 2>/dev/null | cut -d= -f2)
+if [ -z "$TOKEN" ]; then
+  echo "Error: PI_WEB_TOKEN not found in ~/.config/pi-web/env" >&2
+  exit 1
+fi
+
+if [ $# -ge 1 ]; then
+  FQDN="$1"
+else
+  FQDN=$(netbird status 2>/dev/null | grep "FQDN" | awk '{print $2}')
+  if [ -z "$FQDN" ]; then
+    echo "Error: Could not determine NetBird FQDN. Pass it as an argument." >&2
+    echo "Usage: $0 <netbird-fqdn-or-ip>" >&2
+    exit 1
+  fi
+fi
+
+URL="http://${FQDN}:31415/?token=${TOKEN}"
+echo "URL: $URL"
+echo ""
+qrencode -t UTF8 "$URL"
+echo ""
+echo "Scan the QR code above from your phone."
