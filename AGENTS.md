@@ -103,6 +103,55 @@ Neovim.
 
 - Do not commit files.
 
+## Pi Coding Agent (pi) Notes
+
+### pi-web Token Retrieval
+
+When the user needs the pi-web auth token on a remote device (phone, tablet):
+
+The easiest method — one QR scan with the token embedded in the URL:
+
+```bash
+qrencode -t UTF8 "http://<netbird-fqdn>:31415/?token=$(grep PI_WEB_TOKEN ~/.config/pi-web/env | cut -d= -f2)"
+```
+
+pi-web accepts `?token=` as a query parameter, sets a cookie, and redirects —
+single scan, no typing needed.
+
+Alternatively, serve the token via a temporary HTTP server:
+
+```bash
+kill $(lsof -ti :3333) 2>/dev/null
+cd /tmp
+echo "Token: $(grep PI_WEB_TOKEN ~/.config/pi-web/env | cut -d= -f2)" > index.html
+nohup python3 -m http.server 3333 --bind 0.0.0.0 &>/tmp/token-server.log &
+disown
+```
+
+Then open `http://<netbird-ip>:3333` on the remote device.
+
+The user's NetBird IP can be found with `netbird status`. Their NetBird FQDN
+(typically `<hostname>.netbird.cloud`) works in place of the IP.
+
+### Remote Access Setup
+
+- **pi-web** runs as a systemd service on `0.0.0.0:31415` with auth.
+- Accessed over NetBird at `http://<netbird-ip>:31415`.
+- Token stored in `~/.config/pi-web/env`.
+
+### Paseo Daemon
+
+- **Paseo** is an Android/iOS app for controlling Pi from your phone.
+- Start the daemon:
+  ```bash
+  bunx @getpaseo/cli start --listen 0.0.0.0:6767 --hostnames "diameno.netbird.cloud,.netbird.cloud" --no-relay
+  ```
+- Stop: `bunx @getpaseo/cli daemon stop`
+- Status: `bunx @getpaseo/cli status`
+- Paseo discovers Pi via the `pi` command in PATH. On NixOS, the system `pi`
+  binary is used automatically; all commands are run through `bunx` directly,
+  no wrapper scripts.
+
 ## Notification Instructions
 
 - The user has given permission to use the `notify-send` command to signal task
