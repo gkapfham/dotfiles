@@ -174,6 +174,66 @@ summary review) can be disabled by creating `~/.pi/web-search.json`:
 See the [pi-web-access README](https://pi.dev/packages/pi-web-access) for full
 configuration options.
 
+### Remote Access (pi-web)
+
+[pi-web](https://github.com/ygncode/pi-web) provides a web UI for browsing Pi
+sessions and chatting from any device on your network. It runs as a systemd
+service and is accessible over [NetBird](https://netbird.io/) (or Tailscale,
+WireGuard, etc.).
+
+```shell
+bunx @earendil-works/pi-coding-agent install git:github.com/ygncode/pi-web
+```
+
+The service listens on `0.0.0.0:31415` with auth enabled. To access from
+a phone or another device over NetBird:
+
+1. Find your NetBird IP: `netbird status`
+1. Open `http://<netbird-ip>:31415` in the remote browser
+1. Enter the auth token (displayed during install, stored in
+   `~/.config/pi-web/env`)
+
+If you need to retrieve the token again, start a temporary HTTP server:
+
+```shell
+kill $(lsof -ti :3333) 2>/dev/null
+cd /tmp
+echo "Token: $(grep PI_WEB_TOKEN ~/.config/pi-web/env | cut -d= -f2)" > index.html
+nohup python3 -m http.server 3333 --bind 0.0.0.0 &>/tmp/token-server.log &
+disown
+```
+
+Then open `http://<netbird-ip>:3333` on your remote device to view the token.
+The same token can also be used with `pi-web` on port 31415.
+
+### Remote Access (Paseo)
+
+[Paseo](https://paseo.sh) is an Android/iOS app for controlling Pi (and other
+coding agents) from your phone. It runs as a daemon on your laptop and connects
+to the phone over [NetBird](https://netbird.io/) (or Tailscale, etc.).
+
+Start the daemon:
+
+```shell
+bunx @getpaseo/cli start --listen 0.0.0.0:6767 --hostnames "diameno.netbird.cloud,.netbird.cloud" --no-relay
+```
+
+Stop the daemon:
+
+```shell
+bunx @getpaseo/cli daemon stop
+```
+
+Check status:
+
+```shell
+bunx @getpaseo/cli status
+```
+
+The Paseo Android app connects to `http://diameno.netbird.cloud:6767` over
+NetBird. Paseo discovers Pi through the `pi` command in PATH. On NixOS, the
+system `pi` binary is used automatically; there is no wrapper script.
+
 ## Problems or Praise
 
 If you have any problems with downloading or understanding these configuration
