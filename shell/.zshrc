@@ -76,7 +76,24 @@ export BROWSER=firefox
 # --> Rust with cargo
 # --> Go with .gocode
 # --> User paths before Nix paths
-export PATH="$HOME/.atuin/bin:$HOME/.local/pipx/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/run/wrappers/bin:$HOME/.nix-profile/bin:/nix/profile/bin:/home/gkapfham/.local/state/nix/profile/bin:/etc/profiles/per-user/gkapfham/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin/bin:"
+
+# Removed dead paths (don't exist on NixOS, each adds a stat during lookup):
+#   $HOME/.fzf/bin
+#   $HOME/bin
+#   $HOME/.gocode/bin
+#   $HOME/.poetry/bin
+#   /nix/profile/bin
+#   $HOME/.local/state/nix/profile/bin
+#   /nix/var/nix/profiles/default/bin
+#   /usr/bin/vendor_perl/
+#   /usr/lib/lightdm/lightdm
+#   /usr/local/go/bin
+#   /usr/local/sbin
+#   /usr/local/bin
+#   /usr/sbin
+#   /sbin/bin
+#   <trailing colon (current dir in PATH, security concern)>
+export PATH="$HOME/.atuin/bin:$HOME/.local/pipx/bin:$HOME/.local/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:/run/wrappers/bin:$HOME/.nix-profile/bin:/etc/profiles/per-user/gkapfham/bin:/run/current-system/sw/bin:/usr/bin"
 
 # Local Poetry home
 export POETRY_HOME=$HOME/.poetry
