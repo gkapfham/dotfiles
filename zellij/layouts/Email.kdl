@@ -13,6 +13,15 @@ layout {
             plugin location="zjstatus"
         }
     }
+    tab name="Agents" hide_floating_panes=true {
+        pane command="bunx" name="Pi" {
+            args "@earendil-works/pi-coding-agent"
+            start_suspended false
+        }
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
     tab name="Manager" hide_floating_panes=true {
         pane command="elio" name="Elio"
         pane size=1 borderless=true {
