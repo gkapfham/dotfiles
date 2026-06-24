@@ -371,3 +371,6 @@ agent.jsonl
 
 # Code review directories
 .code-review/
+
+# Local pi directories
+.pi/
