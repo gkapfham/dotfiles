@@ -32,7 +32,7 @@ entry=$(i3-msg -t get_tree | jq -r '
     | .[]
     | "󰍹  \(.[0].output)",
       ( .[]
-        | "\(.name)\(if .apps != "" then "  󱥸 \(.apps)" else "" end)\(if .focused then "  ◂" else "" end)"
+        | "\(.name)\(if .apps != "" then "   \(.apps)" else "" end)\(if .focused then "  ◂" else "" end)"
       )
 ')
 
