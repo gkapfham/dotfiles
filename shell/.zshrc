@@ -714,6 +714,9 @@ znap source chisui/zsh-nix-shell
 znap source zsh-users/zsh-completions
 znap source jeffreytse/zsh-vi-mode
 znap source Aloxaf/fzf-tab
+znap source wfxr/forgit
+znap source MichaelAquilina/zsh-you-should-use
+znap source zdharma-continuum/fast-syntax-highlighting
 
 # }}}
 
