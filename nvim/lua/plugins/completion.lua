@@ -745,14 +745,22 @@ return {
           mapping = {
             ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
             ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-            -- Original mapping:
-            -- ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+            -- Force a full refresh of the completion menu.
+            -- When Copilot or Supermaven populate the menu first,
+            -- cmp.complete() may not re-trigger other sources. This
+            -- closes any existing menu and then re-opens it fresh.
             ["<C-Space>"] = cmp.mapping(function()
+              -- Dismiss any visible Copilot inline ghost text
               local ok, copilot = pcall(require, "copilot.suggestion")
               if ok and copilot.is_visible() then
                 copilot.dismiss()
               end
-              cmp.complete({ reason = cmp.ContextReason.Manual })
+              -- Close the current completion menu first, then
+              -- re-trigger it so all sources re-evaluate from scratch.
+              cmp.close()
+              vim.schedule(function()
+                cmp.complete({ reason = cmp.ContextReason.Manual })
+              end)
             end, { "i", "c" }),
             ["<C-y>"] = cmp.config.disable,
             ["<C-e>"] = cmp.mapping({
