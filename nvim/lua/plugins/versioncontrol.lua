@@ -209,6 +209,12 @@ return {
     end,
   },
 
+  -- guh.nvim for GitHub interaction
+  {
+    "justinmk/guh.nvim",
+    cmd = "Guh",
+  },
+
   -- code-review.nvim for code review
   {
     "choplin/code-review.nvim",
