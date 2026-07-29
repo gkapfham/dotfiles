@@ -23,20 +23,28 @@ Usage: $0 [OPTIONS] [ARCHIVE-NAME]
 Extract files from borgmatic backup archives.
 
 OPTIONS:
-    --list, -l          List available archives
-    --latest            Use the most recent archive
-    --path PATH         Extract specific file/directory (default: everything)
-    --dest DIR          Destination directory (default: ~/restore)
-    --strip N           Strip N leading path components
-    --dry-run           Show what would be extracted
-    --help, -h          Show this help message
+    --list, -l               List available archives
+    --latest                 Use the most recent archive
+    --repository LABEL       Target a specific repository label
+                             (e.g., latent-remote or paragon-remote)
+    --path PATH              Extract specific file/directory (default: everything)
+    --dest DIR               Destination directory (default: ~/restore)
+    --strip N                Strip N leading path components
+    --dry-run                Show what would be extracted
+    --help, -h               Show this help message
 
 EXAMPLES:
     # List all backups
     $0 --list
 
+    # List backups on a specific repo
+    $0 --list --repository latent-remote
+
     # Extract latest backup to default location
     $0 --latest
+
+    # Extract latest from a specific repo
+    $0 --latest --repository latent-remote
 
     # Extract specific archive
     $0 diameno-home-2026-03-08T20:34:36
@@ -53,11 +61,19 @@ EOF
 list_archives() {
     echo -e "${YELLOW}Available archives:${NC}"
     echo ""
-    borgmatic --config "$CONFIG_FILE" list --verbosity 0
+    LIST_ARGS=(--config "$CONFIG_FILE" list --verbosity 0)
+    if [[ -n "$REPOSITORY" ]]; then
+        LIST_ARGS+=(--repository "$REPOSITORY")
+    fi
+    borgmatic "${LIST_ARGS[@]}"
 }
 
 get_latest_archive() {
-    borgmatic --config "$CONFIG_FILE" list --verbosity 0 2>&1 | tail -1 | awk '{print $1}'
+    LIST_ARGS=(--config "$CONFIG_FILE" list --verbosity 0)
+    if [[ -n "$REPOSITORY" ]]; then
+        LIST_ARGS+=(--repository "$REPOSITORY")
+    fi
+    borgmatic "${LIST_ARGS[@]}" 2>&1 | tail -1 | awk '{print $1}'
 }
 
 # Default values
@@ -67,8 +83,27 @@ DESTINATION="$DEFAULT_DEST"
 STRIP_COMPONENTS=""
 DRY_RUN=""
 LIST_MODE=false
+REPOSITORY=""
+USE_LATEST=false
 
-# Parse arguments
+# First pass: collect --repository before anything else
+# (so get_latest_archive can use it later)
+FIRST_PASS_ARGS=("$@")
+set -- "${FIRST_PASS_ARGS[@]}"
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --repository)
+            REPOSITORY="$2"
+            shift 2
+            ;;
+        *)
+            shift
+            ;;
+    esac
+done
+
+# Second pass: normal argument parsing
+set -- "${FIRST_PASS_ARGS[@]}"
 while [[ $# -gt 0 ]]; do
     case $1 in
         --list|-l)
@@ -76,8 +111,7 @@ while [[ $# -gt 0 ]]; do
             exit 0
             ;;
         --latest)
-            ARCHIVE=$(get_latest_archive)
-            echo -e "${BLUE}Using latest archive: $ARCHIVE${NC}"
+            USE_LATEST=true
             shift
             ;;
         --path)
@@ -90,6 +124,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --strip|-s)
             STRIP_COMPONENTS="--strip-components $2"
+            shift 2
+            ;;
+        --repository)
+            # Already parsed in first pass, just consume the argument
             shift 2
             ;;
         --dry-run)
@@ -118,6 +156,12 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+# Resolve --latest now that all arguments (including --repository) are parsed
+if $USE_LATEST; then
+    ARCHIVE=$(get_latest_archive)
+    echo -e "${BLUE}Using latest archive: $ARCHIVE${NC}"
+fi
+
 # Validation
 if [[ -z "$ARCHIVE" ]]; then
     echo -e "${RED}Error: No archive specified${NC}"
@@ -135,6 +179,10 @@ mkdir -p "$DESTINATION"
 
 # Build extract command
 EXTRACT_CMD="borgmatic --config $CONFIG_FILE extract --archive $ARCHIVE --destination $DESTINATION"
+
+if [[ -n "$REPOSITORY" ]]; then
+    EXTRACT_CMD="$EXTRACT_CMD --repository $REPOSITORY"
+fi
 
 if [[ -n "$EXTRACT_PATH" ]]; then
     EXTRACT_CMD="$EXTRACT_CMD --path $EXTRACT_PATH"
