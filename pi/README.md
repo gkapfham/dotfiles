@@ -19,10 +19,10 @@ any plugins listed in `settings.json` on its next startup.
 bash pi/apply-config.sh          # copies settings.json, extensions/, skills/ -> ~/.pi/agent
 cd ~/.pi/agent/skills/google-workspace && npm install   # only for the google-workspace skill
 cp pi/repos.json ~/.config/pi/repos.json                # pi's repo list
-cd pi/pi-msg && cp config.env.example config.env && bash scripts/setup.sh   # XMPP bridge
+cd pi/pi-msg && cp config.env.example config.env && bash scripts/setup-ubuntu.sh   # XMPP bridge
 ```
 
-## What's tracked here vs. what's ephemeral
+## What's tracked here versus what's ephemeral
 
 This directory version-controls the pi configuration — not plugin content.
 The boundary:
