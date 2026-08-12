@@ -137,9 +137,9 @@ global installation:
 bunx @earendil-works/pi-coding-agent
 ```
 
-### Version-controlling your pi config
+### Version-controlling the pi config
 
-Your pi configuration lives in `pi/` (settings manifest, extensions, skills,
+The pi configuration lives in `pi/` (settings manifest, extensions, skills,
 and the `pi-msg` XMPP bridge kit). The repo copy is a **snapshot** — pi only
 reads the live files under `~/.pi/agent/` — so the workflow is: make changes,
 run `bash pi/sync-config.sh`, then `git add pi/ && git commit`. See

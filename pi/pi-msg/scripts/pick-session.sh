@@ -3,8 +3,8 @@
 # Pick which pi session the XMPP bot (pi-msg) should work in.
 #
 # The bot resumes the session whose path is stored in
-# ~/.config/pi-msg/default.session. This script lists your recent sessions,
-# lets you choose one, updates that file, and restarts the bridge.
+# ~/.config/pi-msg/default.session. This script lists recent sessions,
+# lets one be chosen, updates that file, and restarts the bridge.
 #
 # IMPORTANT: do NOT pick a session that is currently open in a terminal.
 # One session = one writer at a time.

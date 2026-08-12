@@ -1,7 +1,7 @@
 # pi-msg + XMPP — portable setup
 
-Drive the [pi coding agent](https://pi.dev) from your phone via XMPP.
-This directory contains everything you need to set up:
+Drive the [pi coding agent](https://pi.dev) from a phone via XMPP.
+This directory contains everything needed to set up:
 
 - **an XMPP server** (`ejabberd`) with TLS,
 - **pi-msg** (the bridge that runs `pi --mode rpc` and relays it to chat),
@@ -9,16 +9,17 @@ This directory contains everything you need to set up:
 - **Conversations** (Android) or any XMPP client as the remote control.
 
 It is tested on NixOS (this laptop) and targets Debian/Ubuntu for other
-machines. Everything is template-based: **you edit one file** (`config.env`).
+machines. Everything is template-based: **one file is edited** (`config.env`).
 
 ## What's in here
 
 | File | Purpose |
 |---|---|
-| `config.env.example` | the single config you edit (domain, accounts, passwords, model, workdir) |
+| `config.env.example` | the single config to edit (domain, accounts, passwords, model, workdir) |
 | `ejabberd.yml.template` | server config; `__DOMAIN__` is substituted by setup |
 | `pi-msg.service` | systemd user unit (portable, uses `%h`) |
 | `scripts/setup.sh` | one-command setup on Debian/Ubuntu |
+| `scripts/setup-nixos.sh` | one-command setup on NixOS |
 | `scripts/pick-session.sh` | choose which pi session the bot works in |
 | `scripts/pi` | stable launcher for `pi` (npx cache → system) |
 | `.gitignore` | keeps secrets out of git |
@@ -32,12 +33,12 @@ anything from `~/.config/pi-msg`.
 
 ```bash
 # 0. prerequisites: pi must be installed and logged in (npx @earendil-works/pi-coding-agent)
-#    and your phone must be able to reach this machine (same LAN or a VPN like NetBird).
+#    and the phone must be able to reach this machine (same LAN or a VPN like NetBird).
 
-# 1. clone your dotfiles repo, then:
+# 1. clone the dotfiles repo, then:
 cd pi/pi-msg
 cp config.env.example config.env
-# 2. edit config.env — set DOMAIN (e.g. your VPN hostname), accounts, MODEL, WORKDIR
+# 2. edit config.env — set DOMAIN (e.g. the VPN hostname), accounts, MODEL, WORKDIR
 #    (passwords can stay empty: they are auto-generated)
 bash scripts/setup.sh
 ```
@@ -52,14 +53,14 @@ bridge as a user service.
 
 ## Setup on NixOS
 
-On the laptop, the same components are wired into the system config:
+1. Add the server to the NixOS config: `services.ejabberd = { enable = true; configFile = ./ejabberd.yml; }`
+   with `ejabberd.yml` from this directory (see the laptop's `~/configure/nixos/` repo).
+2. Then run the NixOS setup script (it installs the cert, rebuilds with
+   `nh os switch`, registers the accounts, and starts the bridge):
 
-- `~/configure/nixos/ejabberd.yml` (server) + `services.ejabberd` in
-  `configuration.nix` (NixOS module),
-- `~/configure/nixos/` is its own git repo; the `pi-msg` config is in
-  `~/.config/pi-msg/` (mode 600),
-- rebuild with the usual `kix` / `nh os switch`, then run the finish script
-  printed during setup.
+```bash
+bash scripts/setup-nixos.sh
+```
 
 ## Phone (Conversations)
 
@@ -73,7 +74,7 @@ On the laptop, the same components are wired into the system config:
 
 ## Chat commands
 
-| You type | Becomes |
+| Message | Becomes |
 |---|---|
 | plain text | a prompt to the agent |
 | `/new` | fresh session (resets context) |
@@ -88,7 +89,7 @@ On the laptop, the same components are wired into the system config:
 
 The bot always continues **one** pi session (stored in
 `~/.config/pi-msg/default.session`, updated automatically). To point it at a
-different session — e.g. a conversation you had in a terminal — run:
+different session — e.g. a conversation had in a terminal — run:
 
 ```bash
 bash scripts/pick-session.sh

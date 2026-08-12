@@ -2,7 +2,7 @@
 # ---------------------------------------------------------------------------
 # One-command setup for pi-msg (+ optional XMPP server) on Debian/Ubuntu.
 #
-#   cd pi-msg        # this directory (inside your dotfiles checkout)
+#   cd pi-msg        # this directory (inside the dotfiles checkout)
 #   cp config.env.example config.env
 #   # edit config.env  (domain, accounts, passwords, model, workdir)
 #   bash scripts/setup.sh
@@ -164,14 +164,14 @@ echo
 echo "Done!"
 echo "  pi-msg service: $(systemctl --user is-active pi-msg)"
 echo
-echo "Your XMPP accounts:"
+echo "XMPP accounts:"
 echo "  bot : $PI_USER@$DOMAIN      password: $PI_PASSWORD"
-echo "  you : $OWNER_USER@$DOMAIN   password: $OWNER_PASSWORD"
+echo "  owner : $OWNER_USER@$DOMAIN   password: $OWNER_PASSWORD"
 echo
-echo "Save these (also in $CONFIG_DIR/passwords? no - printed once here;"
+echo "Save these (also in $CONFIG_DIR/passwords.txt? no - printed once here;"
 echo "the bot password is in $CONFIG_DIR/config.json, mode 600)."
 echo
 echo "Next steps:"
-echo "  1. On your phone (Conversations): add account $OWNER_USER / $DOMAIN / password above"
+echo "  1. On the phone (Conversations): add account $OWNER_USER / $DOMAIN / password above"
 echo "  2. Add contact $PI_USER@$DOMAIN and send a message"
 echo "  3. Pick which pi session the bot works in: bash scripts/pick-session.sh"

@@ -12,3 +12,7 @@
 ^\.gitignore$
 ^sync-config\.sh$
 ^apply-config\.sh$
+^AGENTS\.md$
+^bin$
+^prompts$
+^themes$

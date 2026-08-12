@@ -1,22 +1,18 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# Sync YOUR pi configuration from the live install into this repo, ready to
-# commit.
+# Sync the pi configuration from the live install (~/.pi/agent) into this
+# repo, ready to commit.
 #
-#   bash pi/sync-config.sh      # then: git add pi && git commit
+#   bash pi/sync-config.sh      # then: git add pi/ && git commit
 #
-# What it copies (your owned config):
-#   ~/.pi/agent/settings.json     -> pi/settings.json   (the plugin manifest)
-#   ~/.pi/agent/extensions/*.ts   -> pi/extensions/     (hand-written extensions)
-#   ~/.pi/agent/skills/*          -> pi/skills/         (your skills, no node_modules)
+# Copies everything user-authored under ~/.pi/agent:
+#   settings.json, AGENTS.md, extensions/, skills/, bin/, prompts/, themes/
 #
-# What it deliberately does NOT touch (plugin/ephemeral content):
-#   ~/.pi/agent/npm/          installed plugin packages (auto-installed from
-#                             the settings.json manifest by pi itself)
-#   ~/.pi/agent/sessions/     session transcripts
-#   ~/.pi/agent/tau-instances/ tau mirror state
-#   ~/.pi/agent/auth.json     credentials (never commit)
-#   ~/.config/pi/...          live state (web-search-cache, etc.)
+# Deliberately excluded (generated or secret, never committed):
+#   npm/ (installed packages - auto-installed from the settings.json manifest)
+#   sessions/, tau-instances/, analytics/, git/, session-status/
+#   auth.json, gateway.*, models*.json, zentui.json, *.log, *.sqlite*
+#   node_modules, files larger than 1MB, symlinks (package links like pi-tracker)
 # ---------------------------------------------------------------------------
 set -euo pipefail
 
@@ -27,29 +23,24 @@ AGENT_DIR="$HOME/.pi/agent"
 
 echo "==> Syncing pi config from $AGENT_DIR into $PI_DIR"
 
-# 1. settings.json — the manifest (contains the packages pi auto-installs).
-#    It holds no secrets; pi rewrites it on install/config changes, so we
-#    copy it in deliberately rather than symlinking it.
-cp "$AGENT_DIR/settings.json" "$PI_DIR/settings.json"
-chmod 600 "$PI_DIR/settings.json"
-echo "  settings.json"
+# Top-level user-authored files.
+cp -f "$AGENT_DIR/settings.json" "$PI_DIR/settings.json"
+cp -f "$AGENT_DIR/AGENTS.md" "$PI_DIR/AGENTS.md"
+chmod 600 "$PI_DIR/settings.json" "$PI_DIR/AGENTS.md"
+echo "  settings.json, AGENTS.md"
 
-# 2. Hand-written extensions (.ts and .disabled variants) + pi-tracker.
-rm -rf "$PI_DIR/extensions"
-mkdir -p "$PI_DIR/extensions"
-cp "$AGENT_DIR"/extensions/*.ts "$PI_DIR/extensions/" 2>/dev/null || true
-cp "$AGENT_DIR"/extensions/*.disabled "$PI_DIR/extensions/" 2>/dev/null || true
-echo "  extensions/"
-
-# 3. Skills — copy everything except node_modules (never bloat the repo).
-rm -rf "$PI_DIR/skills"
-mkdir -p "$PI_DIR/skills"
-for s in "$AGENT_DIR"/skills/*/; do
-  name="$(basename "$s")"
-  cp -r "$s" "$PI_DIR/skills/"
-  rm -rf "$PI_DIR/skills/$name/node_modules"
-  echo "  skills/$name"
+# User-authored directories (symlinks preserved during copy, pruned after).
+for d in extensions skills bin prompts themes; do
+  [ -e "$AGENT_DIR/$d" ] || continue
+  mkdir -p "$PI_DIR/$d"
+  rsync -a --exclude='node_modules' "$AGENT_DIR/$d/" "$PI_DIR/$d/"
+  echo "  $d/"
 done
+
+# Prune anything that must not be committed.
+find "$PI_DIR/extensions" "$PI_DIR/skills" "$PI_DIR/bin" "$PI_DIR/prompts" "$PI_DIR/themes" \
+  -type l -delete 2>/dev/null || true                     # package symlinks (e.g. pi-tracker)
+find "$PI_DIR" -type f -size +1M -delete 2>/dev/null || true   # binaries / artifacts
 
 echo
 echo "Done. Review and commit:"
