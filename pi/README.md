@@ -61,7 +61,7 @@ The pi config lives in two places, and nothing syncs automatically:
 | Direction | Command | When to use it |
 |---|---|---|
 | **Live → repo** (snapshot) | `bash pi/sync-config.sh` | after changing/installing things on this machine — before committing |
-| **Repo → live** (apply/seed/restore) | `bash pi/apply-config.sh` | on a new machine after cloning, or to restore this laptop from a commit |
+| **Repo → live** (apply/seed/restore) | `bash pi/apply-config.sh` | on a new machine after cloning, or to restore this laptop from a commit — **backs up `~/.pi` first** to `~/.pi-backups/` (see `--list`) |
 
 **Save changes (this laptop):**
 
@@ -82,7 +82,8 @@ git commit -m "Update pi config"
 **Apply the repo (another machine / restore):**
 
 ```bash
-bash pi/apply-config.sh      # copies repo -> ~/.pi/agent (settings.json, extensions, skills)
+bash pi/apply-config.sh      # backs up ~/.pi first, then copies repo -> ~/.pi/agent
+bash pi/apply-config.sh --list   # show backups + the revert command
 ```
 
 Notes:
