@@ -4917,3 +4917,6 @@ autofreq
 ppd
 OpenGL
 repos
+symlinked
+Symlinking
+WORKDIR
