@@ -41,7 +41,6 @@ echo "  settings.json"
 mkdir -p "$AGENT_DIR/extensions"
 cp "$PI_DIR"/extensions/*.ts "$AGENT_DIR/extensions/" 2>/dev/null || true
 cp "$PI_DIR"/extensions/*.disabled "$AGENT_DIR/extensions/" 2>/dev/null || true
-[ -d "$PI_DIR/extensions/pi-tracker" ] && cp -r "$PI_DIR/extensions/pi-tracker" "$AGENT_DIR/extensions/"
 echo "  extensions/"
 
 mkdir -p "$AGENT_DIR/skills"

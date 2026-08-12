@@ -1,0 +1,14 @@
+# pi/.stow-local-ignore
+#
+# `make stow-pi` links ONLY repos.json into ~/.config/pi.
+# Everything else in this directory is either synced deliberately
+# (settings.json, extensions/, skills/ -> ~/.pi/agent) or is a source
+# kit (pi-msg/, README, scripts) — never stowed.
+^settings\.json$
+^extensions$
+^skills$
+^pi-msg$
+^README\.md$
+^\.gitignore$
+^sync-config\.sh$
+^apply-config\.sh$

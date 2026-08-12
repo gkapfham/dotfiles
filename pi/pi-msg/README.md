@@ -1,0 +1,107 @@
+# pi-msg + XMPP — portable setup
+
+Drive the [pi coding agent](https://pi.dev) from your phone via XMPP.
+This directory contains everything you need to set up:
+
+- **an XMPP server** (`ejabberd`) with TLS,
+- **pi-msg** (the bridge that runs `pi --mode rpc` and relays it to chat),
+- a **systemd service** that keeps it running,
+- **Conversations** (Android) or any XMPP client as the remote control.
+
+It is tested on NixOS (this laptop) and targets Debian/Ubuntu for other
+machines. Everything is template-based: **you edit one file** (`config.env`).
+
+## What's in here
+
+| File | Purpose |
+|---|---|
+| `config.env.example` | the single config you edit (domain, accounts, passwords, model, workdir) |
+| `ejabberd.yml.template` | server config; `__DOMAIN__` is substituted by setup |
+| `pi-msg.service` | systemd user unit (portable, uses `%h`) |
+| `scripts/setup.sh` | one-command setup on Debian/Ubuntu |
+| `scripts/pick-session.sh` | choose which pi session the bot works in |
+| `scripts/pi` | stable launcher for `pi` (npx cache → system) |
+| `.gitignore` | keeps secrets out of git |
+
+**No secrets live in this directory.** Passwords, API keys, and the TLS
+private key are generated into `~/.config/pi-msg/` (mode 600) at setup time.
+Commit this directory as-is; never commit `config.env`, `certs/`, or
+anything from `~/.config/pi-msg`.
+
+## Setup on Ubuntu (or any Debian-like machine)
+
+```bash
+# 0. prerequisites: pi must be installed and logged in (npx @earendil-works/pi-coding-agent)
+#    and your phone must be able to reach this machine (same LAN or a VPN like NetBird).
+
+# 1. clone your dotfiles repo, then:
+cd pi/pi-msg
+cp config.env.example config.env
+# 2. edit config.env — set DOMAIN (e.g. your VPN hostname), accounts, MODEL, WORKDIR
+#    (passwords can stay empty: they are auto-generated)
+bash scripts/setup.sh
+```
+
+The script installs ejabberd + mkcert (sudo), generates the TLS certificate,
+writes `/etc/ejabberd/ejabberd.yml`, registers the two accounts, builds
+pi-msg (a private Go 1.26+ is installed only if needed), and starts the
+bridge as a user service.
+
+> Bridge-only mode: set `ENABLE_SERVER="no"` and `SERVICE="<server>:5222"`
+> to attach another machine's pi to an existing XMPP server — no root needed.
+
+## Setup on NixOS
+
+On the laptop, the same components are wired into the system config:
+
+- `~/configure/nixos/ejabberd.yml` (server) + `services.ejabberd` in
+  `configuration.nix` (NixOS module),
+- `~/configure/nixos/` is its own git repo; the `pi-msg` config is in
+  `~/.config/pi-msg/` (mode 600),
+- rebuild with the usual `kix` / `nh os switch`, then run the finish script
+  printed during setup.
+
+## Phone (Conversations)
+
+1. **Add account** (not "register" — accounts are pre-created):
+   `username / domain / password` from the setup output.
+2. On the certificate warning tap **Trust** (one time).
+3. If the domain doesn't resolve on the phone, set the **server host** to
+   the machine's VPN/LAN IP (the certificate covers both).
+4. **Add contact** `pi@<DOMAIN>` and send a message. The bot shows
+   `listening` / `thinking…` / `dnd` while working.
+
+## Chat commands
+
+| You type | Becomes |
+|---|---|
+| plain text | a prompt to the agent |
+| `/new` | fresh session (resets context) |
+| `/compact` | compact context |
+| `/model <pattern>` | switch model |
+| `/think <level>` | set thinking level |
+| `/abort` / `/stop` | stop the current run |
+| `/dump` | send the session transcript |
+| `/quit` | stop the bridge |
+
+## Session picking
+
+The bot always continues **one** pi session (stored in
+`~/.config/pi-msg/default.session`, updated automatically). To point it at a
+different session — e.g. a conversation you had in a terminal — run:
+
+```bash
+bash scripts/pick-session.sh
+```
+
+Only pick sessions that are not open in a terminal right now (one writer at
+a time).
+
+## Troubleshooting
+
+- `systemctl --user status pi-msg` and `journalctl --user -u pi-msg -f`
+- `sudo systemctl status ejabberd`
+- Certificate problems: `echo | openssl s_client -connect 127.0.0.1:5222 -starttls xmpp -CAfile ~/.config/pi-msg/certs/ca-bundle.pem`
+  should end with `Verify return code: 0 (ok)`.
+- "Registration is not supported by server" on the phone is **normal** —
+  in-band registration is off by design; log in with the existing account.

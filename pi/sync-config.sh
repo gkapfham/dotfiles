@@ -39,7 +39,6 @@ rm -rf "$PI_DIR/extensions"
 mkdir -p "$PI_DIR/extensions"
 cp "$AGENT_DIR"/extensions/*.ts "$PI_DIR/extensions/" 2>/dev/null || true
 cp "$AGENT_DIR"/extensions/*.disabled "$PI_DIR/extensions/" 2>/dev/null || true
-[ -d "$AGENT_DIR/extensions/pi-tracker" ] && cp -r "$AGENT_DIR/extensions/pi-tracker" "$PI_DIR/extensions/"
 echo "  extensions/"
 
 # 3. Skills — copy everything except node_modules (never bloat the repo).
