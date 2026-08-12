@@ -122,8 +122,12 @@ sleep 5
 
 echo
 echo "Done! pi-msg service: $(systemctl --user is-active pi-msg)"
-echo "  bot : $PI_USER@$DOMAIN      password: $PI_PASSWORD"
-echo "  owner : $OWNER_USER@$DOMAIN   password: $OWNER_PASSWORD"
+echo "  bot : $PI_USER@$DOMAIN        password: $PI_PASSWORD"
+echo "  you : $OWNER_USER@$DOMAIN  password: $OWNER_PASSWORD"
 echo
-echo "Next: add the account to Conversations on the phone (username $OWNER_USER,"
-echo "domain $DOMAIN, password above), then message $PI_USER@$DOMAIN."
+echo "Connect Conversations on the phone:"
+echo "  1. NetBird must be connected on the phone"
+echo "  2. Add account (NOT 'register'): username $OWNER_USER, domain $DOMAIN,"
+echo "     password above — on the certificate warning tap Trust (once)"
+echo "  3. If it cannot connect, set the server host to the machine's VPN/LAN IP"
+echo "  4. Add contact $PI_USER@$DOMAIN and send a message"
