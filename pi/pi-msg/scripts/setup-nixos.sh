@@ -10,7 +10,7 @@
 #   cp config.env.example config.env   # optional: set DOMAIN, accounts, CERT_HOSTS
 #   bash scripts/setup-nixos.sh
 #
-# This is the NixOS counterpart of scripts/setup.sh (Debian/Ubuntu).
+# This is the NixOS counterpart of scripts/setup-ubuntu.sh (Debian/Ubuntu).
 # ---------------------------------------------------------------------------
 set -euo pipefail
 
