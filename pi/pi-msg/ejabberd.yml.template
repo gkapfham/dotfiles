@@ -1,6 +1,6 @@
 # ejabberd configuration for pi-msg
 #
-# Template: setup.sh replaces __DOMAIN__ with your domain, installs the TLS
+# Template: setup-ubuntu.sh replaces __DOMAIN__ with your domain, installs the TLS
 # certificate, and writes this to /etc/ejabberd/ejabberd.yml (Debian/Ubuntu)
 # or into the NixOS config (see the repo README).
 #
