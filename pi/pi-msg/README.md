@@ -18,7 +18,7 @@ machines. Everything is template-based: **one file is edited** (`config.env`).
 | `config.env.example` | the single config to edit (domain, accounts, passwords, model, workdir) |
 | `ejabberd.yml.template` | server config; `__DOMAIN__` is substituted by setup |
 | `pi-msg.service` | systemd user unit (portable, uses `%h`) |
-| `scripts/setup.sh` | one-command setup on Debian/Ubuntu |
+| `scripts/setup-ubuntu.sh` | one-command setup on Debian/Ubuntu |
 | `scripts/setup-nixos.sh` | one-command setup on NixOS |
 | `scripts/pick-session.sh` | choose which pi session the bot works in |
 | `scripts/pi` | stable launcher for `pi` (npx cache → system) |
@@ -32,15 +32,15 @@ anything from `~/.config/pi-msg`.
 ## Setup on Ubuntu (or any Debian-like machine)
 
 ```bash
-# 0. prerequisites: pi must be installed and logged in (npx @earendil-works/pi-coding-agent)
+# 0. Prerequisites: pi must be installed and logged in (npx @earendil-works/pi-coding-agent)
 #    and the phone must be able to reach this machine (same LAN or a VPN like NetBird).
 
-# 1. clone the dotfiles repo, then:
+# 1. Clone the dotfiles repo, then:
 cd pi/pi-msg
 cp config.env.example config.env
-# 2. edit config.env — set DOMAIN (e.g. the VPN hostname), accounts, MODEL, WORKDIR
+# 2. Edit config.env — set DOMAIN (e.g., the VPN hostname), accounts, MODEL, WORKDIR
 #    (passwords can stay empty: they are auto-generated)
-bash scripts/setup.sh
+bash scripts/setup-ubuntu.sh
 ```
 
 The script installs ejabberd + mkcert (sudo), generates the TLS certificate,
@@ -55,7 +55,7 @@ bridge as a user service.
 
 1. Add the server to the NixOS config: `services.ejabberd = { enable = true; configFile = ./ejabberd.yml; }`
    with `ejabberd.yml` from this directory (see the laptop's `~/configure/nixos/` repo).
-2. Then run the NixOS setup script (it installs the cert, rebuilds with
+1. Then run the NixOS setup script (it installs the cert, rebuilds with
    `nh os switch`, registers the accounts, and starts the bridge):
 
 ```bash
@@ -66,10 +66,10 @@ bash scripts/setup-nixos.sh
 
 1. **Add account** (not "register" — accounts are pre-created):
    `username / domain / password` from the setup output.
-2. On the certificate warning tap **Trust** (one time).
-3. If the domain doesn't resolve on the phone, set the **server host** to
+1. On the certificate warning tap **Trust** (one time).
+1. If the domain doesn't resolve on the phone, set the **server host** to
    the machine's VPN/LAN IP (the certificate covers both).
-4. **Add contact** `pi@<DOMAIN>` and send a message. The bot shows
+1. **Add contact** `pi@<DOMAIN>` and send a message. The bot shows
    `listening` / `thinking…` / `dnd` while working.
 
 ## Chat commands
