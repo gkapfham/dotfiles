@@ -6,6 +6,11 @@
 #
 # Reads: $HOME/.config/pi/repos.json
 #
+# SYNC_REPOS_BASE (optional): directory where NEW clones land instead of
+# their manifest path. Repos already cloned at their manifest path are
+# still pulled in place; only fresh clones use the base. Example:
+#   export SYNC_REPOS_BASE="$HOME/working"
+#
 # Usage:
 #   sync-repos               # clone or pull all repos
 #   sync-repos --status      # show git status for all repos
@@ -25,17 +30,27 @@ if [[ "${1:-}" == "--status" ]]; then
   STATUS_MODE=true
 fi
 
+BASE="${SYNC_REPOS_BASE:-}"
+[[ -z "$BASE" ]] || BASE="${BASE/#\~/$HOME}"
+
 # Iterate rows line-by-line (NOT word-split): JSON values contain spaces,
 # and `for row in $(jq ...)` would fragment them mid-string.
 while IFS= read -r row; do
   path=$(printf '%s' "$row" | jq -r '.path')
   url=$(printf '%s' "$row" | jq -r '.url')
-  expanded="${path/#\~/$HOME}"
+  manifest_dir="${path/#\~/$HOME}"
+  expanded="$manifest_dir"
+  # New clones honor SYNC_REPOS_BASE; already-cloned repos stay put.
+  if [[ -n "$BASE" && ! -d "$manifest_dir/.git" ]]; then
+    expanded="${BASE%/}/$(basename "$manifest_dir")"
+  fi
 
   if [[ "$STATUS_MODE" == "true" ]]; then
     if [[ -d "$expanded/.git" ]]; then
       echo " $path"
       git -C "$expanded" status --short
+    elif [[ "$expanded" != "$manifest_dir" ]]; then
+      echo " $path → $expanded — not cloned"
     else
       echo " $path — not cloned"
     fi
