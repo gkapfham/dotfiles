@@ -7,8 +7,12 @@ keybinds clear-defaults=true {
         bind "Alt j" { MoveFocus "down"; }
         bind "Alt k" { MoveFocus "up"; }
         bind "Alt l" { MoveFocus "right"; }
+        // NOTE: Ctrl-q (Quit) has been deliberately unbound here. With the
+        // default binding, an accidental Ctrl-q kills the whole session (the
+        // server exits when the last client quits), so the session never
+        // appears again in `zp`. Detach (Ctrl-a d) keeps the session alive.
+        // To quit deliberately, press Ctrl-a then Ctrl-q (see the tmux mode).
         bind "Alt n" { NewPane; }
-        bind "Ctrl q" { Quit; }
     }
     locked {
         bind "Ctrl `" { SwitchToMode "normal"; }
@@ -131,6 +135,10 @@ keybinds clear-defaults=true {
         bind "b" { WriteChars "]52;c;?"; SwitchToMode "normal"; }
         bind "c" { NewTab; SwitchToMode "normal"; }
         bind "d" { Detach; }
+        // Deliberate quit: Ctrl-a then Ctrl-q. Cannot be pressed by accident.
+        // Even after quitting, the session is serialized and can be resurrected
+        // from `zp` (EXITED section) or `zellij attach <name>`.
+        bind "Ctrl q" { Quit; }
         bind "h" { MoveFocus "left"; SwitchToMode "normal"; }
         bind "H" { MovePane "left"; SwitchToMode "normal"; }
         bind "i" { TogglePaneFrames; SwitchToMode "normal"; }
@@ -513,16 +521,25 @@ auto_layout true
 // Options:
 //   - true (default)
 //   - false
+//
+// Re-enabled so that sessions survive a forced quit, crash, or reboot and can
+// be brought back from `zp` (welcome screen -> EXITED section) or
+// `zellij attach <name>`. Only the session *structure* is saved (see
+// `serialize_pane_viewport` below), so this stays cheap even while an agent
+// like pi scrolls heavily.
 // 
-session_serialization false
+session_serialization true
  
 // Whether pane viewports are serialized along with the session, default is false
 // Options:
 //   - true
 //   - false (default)
 // 
+// Do NOT serialize pane contents/scrollback: this is the expensive part when a
+// pane scrolls a lot (e.g. a coding agent). Keep it off even though session
+// serialization above is enabled. (`pane_viewport_serialization` was removed:
+// it is not a valid option in zellij 0.43.1 and was silently ignored.)
 serialize_pane_viewport false
-pane_viewport_serialization false
  
 // Scrollback lines to serialize along with the pane viewport when serializing sessions, 0
 // defaults to the scrollback size. If this number is higher than the scrollback size, it will
@@ -538,8 +555,10 @@ pane_viewport_serialization false
 // styled_underlines false
  
 // How often in seconds sessions are serialized
+// (lower = fresher state after a kill/crash; the cost is negligible because
+// pane contents are not serialized)
 // 
-serialization_interval 300
+serialization_interval 120
  
 // Enable or disable writing of session metadata to disk (if disabled, other sessions might not know
 // metadata info on this session)
