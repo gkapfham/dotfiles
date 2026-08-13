@@ -25,9 +25,11 @@ if [[ "${1:-}" == "--status" ]]; then
   STATUS_MODE=true
 fi
 
-for row in $(jq -c '.repos[]' "$MANIFEST"); do
-  path=$(echo "$row" | jq -r '.path')
-  url=$(echo "$row" | jq -r '.url')
+# Iterate rows line-by-line (NOT word-split): JSON values contain spaces,
+# and `for row in $(jq ...)` would fragment them mid-string.
+while IFS= read -r row; do
+  path=$(printf '%s' "$row" | jq -r '.path')
+  url=$(printf '%s' "$row" | jq -r '.url')
   expanded="${path/#\~/$HOME}"
 
   if [[ "$STATUS_MODE" == "true" ]]; then
@@ -48,4 +50,4 @@ for row in $(jq -c '.repos[]' "$MANIFEST"); do
     mkdir -p "$(dirname "$expanded")"
     git clone "$url" "$expanded" 2>&1 | sed 's/^/  /'
   fi
-done
+done < <(jq -c '.repos[]' "$MANIFEST")
