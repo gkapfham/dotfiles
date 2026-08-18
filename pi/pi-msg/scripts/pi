@@ -4,6 +4,8 @@
 # then falls back to a system-installed pi (npm global /usr/local/bin).
 # Copy/install to ~/.local/bin/pi.
 pi_bin="$(ls -dt "$HOME"/.npm/_npx/*/node_modules/.bin/pi 2>/dev/null | head -1)"
+[ -x "$pi_bin" ] || pi_bin="$HOME/.bun/bin/pi"
 [ -x "$pi_bin" ] || pi_bin=/usr/local/bin/pi
 [ -x "$pi_bin" ] || pi_bin=/usr/bin/pi
+[ -x "$pi_bin" ] || { echo "pi: no pi binary found (install via 'npm install -g @earendil-works/pi-coding-agent' or 'bun add -g @earendil-works/pi-coding-agent')" >&2; exit 1; }
 exec "$pi_bin" "$@"
