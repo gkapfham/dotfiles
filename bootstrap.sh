@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
+
 # bootstrap.sh — One-time setup for a new machine.
 #
 # Usage:
-#   bash <(curl -fsSL https://raw.githubusercontent.com/gkapfham/configure-dotfiles/main/bootstrap.sh)
+#   bash <(curl -fsSL https://raw.githubusercontent.com/gkapfham/dotfiles/framework/bootstrap.sh)
 #
 # Or if you've already cloned the repo:
 #   cd ~/configure/dotfiles && ./bootstrap.sh
