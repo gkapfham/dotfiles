@@ -56,58 +56,21 @@ return {
     },
   },
 
-  -- -- nvim-notify
-  -- -- Notifications
+  -- -- dressing.nvim
+  -- -- User interface enhancements
   -- {
-  --   "rcarriga/nvim-notify",
-  --   event = "BufReadPre",
-  --   keys = {
-  --     {
-  --       "<Space>dn",
-  --       function()
-  --         require("notify").dismiss({ silent = true, pending = true })
-  --       end,
-  --       desc = "Delete all Notifications",
-  --     },
-  --   },
-  --   config = function()
-  --     local customized_notify = require("notify")
-  --     vim.notify = customized_notify
-  --     customized_notify.setup({
-  --       background_colour = "#1c1c1c",
-  --       fps = 30,
-  --       icons = {
-  --         DEBUG = "",
-  --         ERROR = "",
-  --         INFO = "",
-  --         TRACE = "✎",
-  --         WARN = ""
-  --       },
-  --       level = 2,
-  --       minimum_width = 50,
-  --       render = "wrapped-compact",
-  --       stages = "static",
-  --       timeout = 1000,
-  --       top_down = true
-  --     })
-  --   end
+  --   "stevearc/dressing.nvim",
+  --   init = function()
+  --     vim.ui.select = function(...)
+  --       require("lazy").load({ plugins = { "dressing.nvim" } })
+  --       return vim.ui.select(...)
+  --     end
+  --     vim.ui.input = function(...)
+  --       require("lazy").load({ plugins = { "dressing.nvim" } })
+  --       return vim.ui.input(...)
+  --     end
+  --   end,
   -- },
-
-  -- dressing.nvim
-  -- User interface enhancements
-  {
-    "stevearc/dressing.nvim",
-    init = function()
-      vim.ui.select = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
-        return vim.ui.select(...)
-      end
-      vim.ui.input = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
-        return vim.ui.input(...)
-      end
-    end,
-  },
 
   -- hover.nvim
   -- Hover information for LSP
@@ -172,7 +135,6 @@ return {
     },
     dependencies = {
       "MunifTanjim/nui.nvim",
-      -- "rcarriga/nvim-notify",
     },
     config = function()
       require("noice").setup({
@@ -195,6 +157,29 @@ return {
           long_message_to_split = true,
           inc_rename = false,
           lsp_doc_border = true,
+        },
+        views = {
+          -- move the command palette a little lower on the
+          -- screen; the command_palette preset places it at
+          -- row 3 (near the very top) and this override wins
+          -- because noice merges the user options after the
+          -- presets; tune the row percentage to taste
+          cmdline_popup = {
+            position = {
+              row = "12.5%",
+            },
+            -- make the cmdline/search popup narrower: the noice
+            -- default floor is 60 columns (min_width), so even a
+            -- short ":w" or "/foo" stretches to 60 columns;
+            -- lower the minimum and optionally cap the width
+            -- (a number is columns, a string like "40%" is a
+            -- percentage of the editor width)
+            size = {
+              min_width = 40,
+              width = "auto",
+              height = "auto",
+            },
+          },
         },
       })
     end,
