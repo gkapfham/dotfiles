@@ -44,6 +44,12 @@ BIN_DIR="$HOME/.local/bin"
 mkdir -p "$CONFIG_DIR/certs" "$BIN_DIR"
 
 # --- defaults ---------------------------------------------------------------
+# Reuse passwords from a previous run when config.env left them empty,
+# so re-running setup never silently changes the accounts.
+if [ -f "$CONFIG_DIR/passwords.txt" ]; then
+  # shellcheck disable=SC1090
+  source "$CONFIG_DIR/passwords.txt"
+fi
 [ -z "${SERVICE:-}" ] && SERVICE=$([ "${ENABLE_SERVER:-yes}" = "no" ] && echo "$DOMAIN:5222" || echo "127.0.0.1:5222")
 [ -z "${PI_PASSWORD:-}" ] && PI_PASSWORD="$(openssl rand -base64 12 | tr '+/' '-_' | tr -d '=')"
 [ -z "${OWNER_PASSWORD:-}" ] && OWNER_PASSWORD="$(openssl rand -base64 12 | tr '+/' '-_' | tr -d '=')"
@@ -86,9 +92,13 @@ if [ "${ENABLE_SERVER:-yes}" = "yes" ]; then
   done
   [ -n "$ready" ] || { echo "ERROR: ejabberd did not become ready (sudo systemctl status ejabberd)"; exit 1; }
 
-  echo "    Registering $PI_USER@$DOMAIN and $OWNER_USER@$DOMAIN"
-  sudo -u ejabberd ejabberdctl register "$PI_USER" "$DOMAIN" "$PI_PASSWORD"
-  sudo -u ejabberd ejabberdctl register "$OWNER_USER" "$DOMAIN" "$OWNER_PASSWORD"
+  echo "    Registering (or updating) $PI_USER@$DOMAIN and $OWNER_USER@$DOMAIN"
+  # Idempotent: register fresh accounts, update existing ones (so re-runs
+  # never require purging ejabberd). Mirrors scripts/setup-nixos.sh.
+  sudo -u ejabberd ejabberdctl register "$PI_USER" "$DOMAIN" "$PI_PASSWORD" 2>/dev/null || \
+    sudo -u ejabberd ejabberdctl change_password "$PI_USER" "$DOMAIN" "$PI_PASSWORD"
+  sudo -u ejabberd ejabberdctl register "$OWNER_USER" "$DOMAIN" "$OWNER_PASSWORD" 2>/dev/null || \
+    sudo -u ejabberd ejabberdctl change_password "$OWNER_USER" "$DOMAIN" "$OWNER_PASSWORD"
 else
   echo "[1/5] Skipping server install (ENABLE_SERVER=no; connecting to $SERVICE)"
 fi
@@ -132,10 +142,15 @@ with open(out, "w") as f:
 os.chmod(out, 0o600)
 PYEOF
 
+# Keep the passwords recoverable (mode 600), so they are never "printed once".
+printf 'PI_PASSWORD=%s\nOWNER_PASSWORD=%s\n' "$PI_PASSWORD" "$OWNER_PASSWORD" \
+  > "$CONFIG_DIR/passwords.txt"
+chmod 600 "$CONFIG_DIR/passwords.txt"
+
 {
   echo "PI_PROVIDER=${PI_PROVIDER:-}"
   echo "PI_MODEL=${PI_MODEL:-}"
-  echo "OPENCODE_GO_API_KEY=${OPENCODE_GO_API_KEY:-}"
+  echo "OPENCODE_API_KEY=${OPENCODE_API_KEY:-}"
   echo "SSL_CERT_FILE=$CONFIG_DIR/certs/ca-bundle.pem"
 } > "$CONFIG_DIR/env"
 chmod 600 "$CONFIG_DIR/env"
@@ -144,9 +159,10 @@ chmod 600 "$CONFIG_DIR/env"
 cat /etc/ssl/certs/ca-certificates.crt "$CAROOT/rootCA.pem" \
   > "$CONFIG_DIR/certs/ca-bundle.pem" 2>/dev/null || true
 
-if [ -z "${OPENCODE_GO_API_KEY:-}" ]; then
-  echo "    NOTE: OPENCODE_GO_API_KEY is not set in this shell."
-  echo "    Make sure pi is logged in on this machine before chatting (pi auth check --provider opencode-go)."
+if [ -z "${OPENCODE_API_KEY:-}" ]; then
+  echo "    NOTE: OPENCODE_API_KEY is not set in this shell."
+  echo "    Make sure pi is logged in on this machine before chatting (pi auth check --provider opencode-go),"
+  echo "    or store the key under \"opencode-go\" in ~/.pi/agent/auth.json (the auth file takes priority)."
 fi
 
 # --- 5. systemd user service ------------------------------------------------------
@@ -168,8 +184,9 @@ echo "XMPP accounts:"
 echo "  bot : $PI_USER@$DOMAIN      password: $PI_PASSWORD"
 echo "  owner : $OWNER_USER@$DOMAIN   password: $OWNER_PASSWORD"
 echo
-echo "Save these (also in $CONFIG_DIR/passwords.txt? no - printed once here;"
-echo "the bot password is in $CONFIG_DIR/config.json, mode 600)."
+echo "Passwords saved to $CONFIG_DIR/passwords.txt (mode 600; the bot password"
+echo "also lives in $CONFIG_DIR/config.json). Change them later with:"
+echo "  bash scripts/change-password.sh"
 echo
 echo "Next steps:"
 echo "  1. On the phone (Conversations): add account $OWNER_USER / $DOMAIN / password above"
