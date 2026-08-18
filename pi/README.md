@@ -22,6 +22,16 @@ cp pi/repos.json ~/.config/pi/repos.json                # pi's repo list
 cd pi/pi-msg && cp config.env.example config.env && bash scripts/setup-ubuntu.sh   # XMPP bridge
 ```
 
+**Before you start** (avoids the two classic stalls):
+
+- Install `pi` so the bridge can find it: `npm install -g @earendil-works/pi-coding-agent`
+  (or `bun add -g ...`) — the `~/.local/bin/pi` launcher checks the npx cache,
+  `~/.bun/bin`, `/usr/local/bin`, `/usr/bin`, in that order.
+- Run `eval "$(ssh-agent)" && ssh-add` (or install `keychain`, or connect with
+  `ssh -A` from a machine that already has the key loaded) **before** running
+  `bootstrap.sh`/`sync-repos` — otherwise every `git clone` in `repos.json`
+  prompts for your SSH key passphrase.
+
 ## What's tracked here versus what's ephemeral
 
 This directory version-controls the pi configuration — not plugin content.
