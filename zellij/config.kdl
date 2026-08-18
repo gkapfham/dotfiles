@@ -135,9 +135,11 @@ keybinds clear-defaults=true {
         bind "b" { WriteChars "]52;c;?"; SwitchToMode "normal"; }
         bind "c" { NewTab; SwitchToMode "normal"; }
         bind "d" { Detach; }
-        // Deliberate quit: Ctrl-a then Ctrl-q. Cannot be pressed by accident.
-        // Even after quitting, the session is serialized and can be resurrected
-        // from `zp` (EXITED section) or `zellij attach <name>`.
+        // Deliberate quit: Ctrl-a then q (or Ctrl-a then Ctrl-q).
+        // Cannot be pressed by accident. Even after quitting, the session
+        // is serialized and can be resurrected from `zp` (EXITED section)
+        // or `zellij attach <name>`.
+        bind "q" { Quit; }
         bind "Ctrl q" { Quit; }
         bind "h" { MoveFocus "left"; SwitchToMode "normal"; }
         bind "H" { MovePane "left"; SwitchToMode "normal"; }
