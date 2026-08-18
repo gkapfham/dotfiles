@@ -580,11 +580,11 @@ return {
           underline = false,
         },
       },
-      input = { enabled = false },
+      input = { enabled = true },
       notifier = {
         enabled = true,
         margin = { top = 1, right = 1, bottom = 0 },
-        style = "fancy",
+        style = "compact",
       },
       picker = {
         enabled = true,
