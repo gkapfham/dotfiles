@@ -136,6 +136,14 @@ return {
           NoiceCmdlinePopupTitleInput = { fg = "${blue}", bg = "${bg}" },
           NoiceCmdlinePopupTitleFilter = { fg = "${blue}", bg = "${bg}" },
           NoiceCmdlinePopupTitleLua = { fg = "${blue}", bg = "${bg}" },
+          -- snacks.nvim input box: match the noice cmdline
+          -- popup look (border = highlight, title/icon = blue,
+          -- interior = normal fg on the theme background)
+          SnacksInputNormal = { fg = "${fg}", bg = "${bg}" },
+          SnacksInputBorder = { fg = "${highlight}", bg = "${bg}" },
+          SnacksInputTitle = { fg = "${blue}", bg = "${bg}" },
+          SnacksInputIcon = { fg = "${blue}", bg = "${bg}" },
+          SnacksInputPrompt = { fg = "${blue}", bg = "${bg}" },
           NonText = { fg = "${fg}" },
           NormalFloat = { fg = "${fg}", bg = "NONE" },
           Number = { fg = "${magenta}" },
