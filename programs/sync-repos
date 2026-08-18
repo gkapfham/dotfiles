@@ -61,6 +61,14 @@ while IFS= read -r row; do
     echo " Pulling $path"
     git -C "$expanded" pull --ff-only --autostash 2>&1 | sed 's/^/  /'
   else
+    # A partial/interrupted clone (or a stray dir) would make `git clone`
+    # fail; never auto-delete — report it clearly and move on. Empty dirs
+    # are fine (git clone happily uses them).
+    if [[ -e "$expanded" && -n "$(ls -A "$expanded" 2>/dev/null)" ]]; then
+      echo " $path: target exists but is not a git repo ($expanded)."
+      echo "   Remove it manually (rm -rf \"$expanded\"), then re-run sync-repos."
+      continue
+    fi
     echo " Cloning $path"
     mkdir -p "$(dirname "$expanded")"
     git clone "$url" "$expanded" 2>&1 | sed 's/^/  /'
