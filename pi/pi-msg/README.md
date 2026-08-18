@@ -48,6 +48,10 @@ writes `/etc/ejabberd/ejabberd.yml`, registers the two accounts, builds
 pi-msg (a private Go 1.26+ is installed only if needed), and starts the
 bridge as a user service.
 
+> **Re-running setup is safe.** Account registration is idempotent (new
+> accounts are created, existing ones updated), and passwords are saved to
+> `~/.config/pi-msg/passwords.txt` and reused on re-runs — no purge needed.
+
 > Bridge-only mode: set `ENABLE_SERVER="no"` and `SERVICE="<server>:5222"`
 > to attach another machine's pi to an existing XMPP server — no root needed.
 
@@ -98,6 +102,15 @@ bash scripts/pick-session.sh
 Only pick sessions that are not open in a terminal right now (one writer at
 a time).
 
+## Changing the passwords
+
+Run `bash scripts/change-password.sh` — it updates the ejabberd accounts, the
+bridge config, the saved copy (`~/.config/pi-msg/passwords.txt`), and restarts
+the service in one step, so the bot stays reachable. Manual recipe: `sudo -u
+ejabberd ejabberdctl change_password <user> <DOMAIN> <new>`, then update
+`accounts.default.password` in `~/.config/pi-msg/config.json`, then
+`systemctl --user restart pi-msg`.
+
 ## Troubleshooting
 
 - `systemctl --user status pi-msg` and `journalctl --user -u pi-msg -f`
@@ -106,3 +119,13 @@ a time).
   should end with `Verify return code: 0 (ok)`.
 - "Registration is not supported by server" on the phone is **normal** —
   in-band registration is off by design; log in with the existing account.
+- **Messages to the bot fail (red "!" in Conversations)** — usually the
+  bridge's stored bot password no longer matches the server (e.g. after
+  `change_password`). Verify with `sudo -u ejabberd ejabberdctl check_account
+  pi <DOMAIN>; echo $?` (the result is the **exit code**: 0 = account exists,
+  1 = not found) and `check_password pi <DOMAIN> '<pw in config.json>'`; if
+  they disagree, run `bash scripts/change-password.sh`.
+- **Phone can't resolve the domain** — if `netbird status` shows
+  `Nameservers: 0/0`, NetBird DNS is off; set the account's server host to
+  the machine's NetBird IP **and** add that IP to `CERT_HOSTS` in
+  `config.env` so the certificate covers it.
