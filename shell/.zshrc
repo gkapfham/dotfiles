@@ -307,10 +307,14 @@ alias ffgbd='fzf-git-branch-diff'
 
 # Znap Setup {{{
 
-# Download znap, if it's not there yet
+# Download znap, if it's not there yet.
+# NOTE: the clone must go to ~/.zsh/zsh-snap so that it matches BOTH the
+# existence check above AND the `source` path below. Previously it cloned
+# to ~/Repos/znap, which would leave znap permanently uninstallable if the
+# check ever failed on a fresh machine.
 [[ -r ~/.zsh/zsh-snap/znap.zsh ]] ||
     git clone --depth 1 -- \
-        https://github.com/marlonrichert/zsh-snap.git ~/Repos/znap
+        https://github.com/marlonrichert/zsh-snap.git ~/.zsh/zsh-snap
 # Start znap so that it can later install plugins
 source ~/.zsh/zsh-snap/znap.zsh
 
@@ -589,9 +593,16 @@ usage() {
         sed "s:$HOME:~:"
 }
 
-# Run a benchmark for zsh startup time
+# Run a benchmark for zsh startup time.
+# Uses `date +%s%N` because /usr/bin/time is not present on NixOS.
 benchmark() {
-    for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done
+    local start_ms end_ms
+    for _ in {1..10}; do
+        start_ms=$(( $(date +%s%N) / 1000000 ))
+        zsh -i -c exit >/dev/null 2>&1
+        end_ms=$(( $(date +%s%N) / 1000000 ))
+        printf '%d ms\n' $(( end_ms - start_ms ))
+    done
 }
 
 # Store the ssh passphrase for easy git use
@@ -717,16 +728,6 @@ znap source Aloxaf/fzf-tab
 znap source wfxr/forgit
 znap source MichaelAquilina/zsh-you-should-use
 znap source zdharma-continuum/fast-syntax-highlighting
-
-# }}}
-
-# Zsh-Autosuggestions {{{
-
-# Configure the zsh-autosuggestions plugin
-ZSH_AUTOSUGGEST_STRATEGY=( history completion match_prev_cmd )
-znap source zsh-users/zsh-autosuggestions
-zvm_after_init_commands+=(eval "bindkey '^ ' autosuggest-accept")
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585858"
 
 # }}}
 
