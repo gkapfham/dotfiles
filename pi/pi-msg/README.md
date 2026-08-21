@@ -111,6 +111,57 @@ ejabberd ejabberdctl change_password <user> <DOMAIN> <new>`, then update
 `accounts.default.password` in `~/.config/pi-msg/config.json`, then
 `systemctl --user restart pi-msg`.
 
+## Starting, stopping & debugging (day to day)
+
+The bridge runs as a **systemd user service** — every command below needs
+no `sudo`. If you forgot these, this is the short version.
+
+| Action | Command |
+|---|---|
+| Start | `systemctl --user start pi-msg` |
+| Stop | `systemctl --user stop pi-msg` |
+| Restart (pick up new config/session) | `systemctl --user restart pi-msg` |
+| Status | `systemctl --user status pi-msg` |
+| Live logs | `journalctl --user -u pi-msg -f` |
+| Enable on boot | `systemctl --user enable pi-msg` |
+| Disable on boot | `systemctl --user disable pi-msg` |
+
+The bridge only relays chat — the XMPP **server** (ejabberd) runs
+separately. If the bot won't come back online, also check the server:
+`sudo systemctl status ejabberd`.
+
+### Crash-looping (restart counter climbing)
+
+If `systemctl --user status pi-msg` shows the restart counter ratcheting
+up every few seconds, read the logs:
+
+```bash
+journalctl --user -u pi-msg -f
+```
+
+The classic cause is a **stale session whose working directory no longer
+exists** (you renamed/deleted the project after the bridge saved the
+session). The log shows:
+
+```
+Stored session working directory does not exist: /home/.../<project>
+pi exited: exit status 1
+```
+
+This also chews CPU: every 5s restart spawns a `pi --mode rpc` that
+initializes the model stack and then dies. Fix by pointing the bridge at
+a session in a **live** directory:
+
+```bash
+cd ~/configure/dotfiles/pi/pi-msg
+bash scripts/pick-session.sh     # choose a session in an existing dir
+systemctl --user start pi-msg
+```
+
+Confirm it stays up: `systemctl --user status pi-msg` should show
+`Active: active (running)` with a stable uptime, not a rising restart
+counter.
+
 ## Troubleshooting
 
 - `systemctl --user status pi-msg` and `journalctl --user -u pi-msg -f`
