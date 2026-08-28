@@ -383,6 +383,8 @@ load_plugins {
 web_client {
     font "Maple Mono NF"
 }
+
+pane_frame_style "full"
  
 // Use a simplified UI without special fonts (arrow glyphs)
 // Options:
