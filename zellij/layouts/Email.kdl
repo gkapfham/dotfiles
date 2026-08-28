@@ -1,12 +1,12 @@
 layout {
-    cwd "/home/gkapfham"
+    // cwd "/home/gkapfham"
     tab name="Email" hide_floating_panes=true {
         pane command="/etc/profiles/per-user/gkapfham/bin/neomutt" name="Neomutt"
         pane size=1 borderless=true {
             plugin location="zjstatus"
         }
     }
-    tab name="Commands" focus=true hide_floating_panes=true {
+    tab name="Processor" focus=true hide_floating_panes=true {
         pane name="Commands" size="50%"
         pane command="mailsync" name="Mailsync" focus=true size="50%"
         pane size=1 borderless=true {
@@ -29,7 +29,7 @@ layout {
         }
     }
     new_tab_template {
-        pane cwd="/home/gkapfham"
+        // pane cwd="/home/gkapfham"
         pane size=1 borderless=true {
             plugin location="zjstatus"
         }
