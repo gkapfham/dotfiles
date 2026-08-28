@@ -289,7 +289,8 @@ return {
         tex = { "latexindent" },
         lua = { "stylua" },
         python = { "ruff_format", "ruff_fix", "ruff_organize_imports" },
-        markdown = { "mdformat" },
+        markdown = { "rumdl" },
+        quarto = { "rumdl" },
         nix = { "nixfmt" },
       },
       -- set default options
