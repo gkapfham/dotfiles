@@ -583,7 +583,10 @@ return {
       input = { enabled = true },
       notifier = {
         enabled = true,
-        margin = { top = 1, right = 1, bottom = 0 },
+        -- align with noice cmdline_popup at row = "12.5%"; previous
+        -- math.floor(vim.o.lines * 0.125) placed it a touch too low,
+        -- so nudge it up ~2 rows (tune the -2 to -1/-3 to taste)
+        margin = { top = math.max(1, math.floor(vim.o.lines * 0.125) - 2), right = 1, bottom = 0 },
         style = "compact",
       },
       picker = {
