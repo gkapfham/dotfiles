@@ -136,6 +136,7 @@ fi
 
 # Set the root color of the desktop
 # hsetroot -solid "#a569a5"
+hsetroot -solid "#6E466E"
 
 # Set the root background image of the desktop
-feh --bg-fill ~/media/images/wallpaper/Honeycomb_Mac.png
+# feh --bg-fill ~/media/images/wallpaper/Honeycomb_Mac.png
