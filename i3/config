@@ -55,7 +55,10 @@ for_window [class="ghostty"] title_format "  Terminal"
 # Wallpaper that is a solid purple color
 # exec_always --no-startup-id hsetroot -solid "#875f87"
 # exec_always --no-startup-id hsetroot -solid "#a569a5"
-exec_always --no-startup-id feh --bg-fill ~/media/images/wallpaper/Honeycomb_Mac.png &
+exec_always --no-startup-id hsetroot -solid "#6E466E"
+
+# Alternative, a wallpaper that uses a custom image
+# exec_always --no-startup-id feh --bg-fill ~/media/images/wallpaper/Honeycomb_Mac.png &
 
 # Define the color scheme for the i3bar
 # set $bg     #1C1C1C
