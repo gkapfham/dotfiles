@@ -8,8 +8,6 @@ Carefully Curated Dotfiles for Popular Linux Programs
 </b>
 </p>
 
-[![Build Status](https://travis-ci.org/gkapfham/dotfiles.svg?branch=master)](https://travis-ci.org/gkapfham/dotfiles)
-
 This repository contains the configuration files (i.e., "dotfiles") used to
 configure the programs regularly used by me, [Gregory M.
 Kapfhammer](https://www.gregorykapfhammer.com/). While heavily customized for my
@@ -55,7 +53,7 @@ created and actively maintain:
 - `.config/i3`: configuration and scripts for the `i3` window manager
 - `.config/polybar`: configuration and scripts for the `polybar` used with `i3`
 - `.config/termite`: configuration and color scheme for the `termite` terminal window
-- `.config/zathura`: configuration for the `zathura ` PDF viewer
+- `.config/zathura`: configuration for the `zathura` PDF viewer
 - `.local/bin`: scripts for regular use through the terminal window and `rofi`
 
 Are you looking for some neat configurations to improved your own dotfiles? If
