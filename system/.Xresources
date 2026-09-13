@@ -9,7 +9,5 @@ Xft.hintstyle:  hintfull
 Xft.hinting:    1
 Xft.antialias:  1
 
-! Display scaling
-
-Xcursor.theme: Adwaita
-Xcursor.size: 64
+Xcursor.theme: phinger-cursors-dark
+Xcursor.size: 48

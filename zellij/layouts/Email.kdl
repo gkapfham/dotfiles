@@ -1,0 +1,37 @@
+layout {
+    // cwd "/home/gkapfham"
+    tab name="Email" hide_floating_panes=true {
+        pane command="/etc/profiles/per-user/gkapfham/bin/neomutt" name="Neomutt"
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
+    tab name="Processor" focus=true hide_floating_panes=true {
+        pane name="Commands" size="50%"
+        pane command="mailsync" name="Mailsync" focus=true size="50%"
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
+    tab name="Agents" hide_floating_panes=true {
+        pane command="bunx" name="Pi" {
+            args "@earendil-works/pi-coding-agent"
+            start_suspended false
+        }
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
+    tab name="Manager" hide_floating_panes=true {
+        pane command="elio" name="Elio"
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
+    new_tab_template {
+        // pane cwd="/home/gkapfham"
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
+}

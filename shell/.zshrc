@@ -12,57 +12,36 @@
 # cd <ctrl>-t        means "change to directory resulting from ...
 #                           search from HOME directory using fd and fzf"
 #
-# cd **; <tab>       means "change to directory resulting from ...
+# cd ** <tab>       means "change to directory resulting from ...
 #                           search from CURRENT directory using only fzf"
 #
 # <alt>-c            means "change to directory resulting from ...
 #                           search from CURRENT directory with fzf"
 #
-# cd ,paper <ctrl>-b means "change to directory resulting from ...
-#                           search through recent directories with fzf and fasd"
-#
 # }}}
-
-# External Plugins {{{
-
-# ﰌ gkapfham  ~/.zsh exa --long --header --git --classify --all
-# Permissions Size User     Date Modified Name
-# drwxrwxr-x     - gkapfham  8 Mar 20:20  fast-syntax-highlighting/
-# drwxrwxr-x     - gkapfham  8 Mar 20:20  fzf-tab/
-# drwxrwxr-x     - gkapfham  8 Mar 20:20  gitstatus/
-# drwxrwxr-x     - gkapfham  8 Mar 20:20  zsh-autosuggestions/
-# drwxrwxr-x     - gkapfham  8 Mar 20:20  zsh-git-prompt/
-# drwxrwxr-x     - gkapfham  8 Mar 20:20  zsh-syntax-highlighting/
-
-# NOTES:
-# -- forked zsh-git-prompt is heavily modified
-# -- forked gitstatus is heavily modified
-# -- zsh-git-prompt is deprecated for gitstatus
-# -- both fast-syntax-highlighting and zsh-syntax-highlighting
-# are currently available, but the former is in current use
 
 # Exports {{{
 
 # Define the shell to always be zsh
-export SHELL="/usr/sbin/zsh"
+export SHELL="zsh"
 
 # Redefine the LS_COLORS so that:
 # --> directories are not displayed as bold
 export LS_COLORS="rs=0:di=0;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:"
 
-# Define the EXA_COLORS so that:
+# Define the EZA_COLORS so that:
 # --> user name is not displayed as bold
 # --> group name is not displayed as bold
 # --> read bit for user is not displayed as bold
 # --> write bit for user is not displayed as bold
-export EXA_COLORS="uu=0;33:gu=0;33:ur=0;33:uw=0;31"
+export EZA_COLORS="uu=0;33:gu=0;33:ur=0;33:uw=0;31"
 
 # 256 color mode with bold and italics
 # NOTE: Use of tmux-256color does not
 # correctly set the title of terminal
 export TERM="xterm-256color"
 
-# indicate support for 24-bit true-color
+# Indicate support for 24-bit true-color
 # which is supported by neovim and pastel
 export COLORTERM='truecolor'
 
@@ -84,8 +63,8 @@ export BIBINPUTS=.
 # Shell title
 export DISABLE_AUTO_TITLE=true
 
-# Set the browser to Brave
-export BROWSER=/usr/sbin/brave
+# Set the browser to Firefox
+export BROWSER=firefox
 
 # Path
 # Strategy: place user-local binaries before system ones
@@ -96,13 +75,25 @@ export BROWSER=/usr/sbin/brave
 # --> JavaScript npm
 # --> Rust with cargo
 # --> Go with .gocode
-export PATH="$HOME/.local/pipx/bin:$HOME/.fzf/bin:$HOME/.local/bin:$HOME/bin:$HOME/.npm-global/bin::$HOME/.cargo/bin:$HOME/.gocode/bin:$HOME/.poetry/bin:/usr/bin/vendor_perl/:/usr/lib/lightdm/lightdm:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
+# --> User paths before Nix paths
 
-# Add the bin directory for Ruby gems to the Path
-# --> Ruby gems as managed by Ruby installed by operating system
-export PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
-# --> Ruby gems as managed by Ruby installed by asdf-vm
-export PATH="$HOME/.gem/bin:$PATH"
+# Removed dead paths (don't exist on NixOS, each adds a stat during lookup):
+#   $HOME/.fzf/bin
+#   $HOME/bin
+#   $HOME/.gocode/bin
+#   $HOME/.poetry/bin
+#   /nix/profile/bin
+#   $HOME/.local/state/nix/profile/bin
+#   /nix/var/nix/profiles/default/bin
+#   /usr/bin/vendor_perl/
+#   /usr/lib/lightdm/lightdm
+#   /usr/local/go/bin
+#   /usr/local/sbin
+#   /usr/local/bin
+#   /usr/sbin
+#   /sbin/bin
+#   <trailing colon (current dir in PATH, security concern)>
+export PATH="$HOME/.local/pipx/bin:$HOME/.local/bin:$HOME/.npm-global/bin:$HOME/.cargo/bin:/run/wrappers/bin:$HOME/.nix-profile/bin:/etc/profiles/per-user/gkapfham/bin:/run/current-system/sw/bin:/usr/bin"
 
 # Local Poetry home
 export POETRY_HOME=$HOME/.poetry
@@ -128,11 +119,11 @@ export ZSH_THEME_VIRTUALENV_SUFFIX="] "
 # Define a marker to display of a "partial line"
 # Normally shown as a "%"
 # May appear when using Tmuxinator to start tmux
-export PROMPT_EOL_MARK='    '
+export PROMPT_EOL_MARK=' 󰜎   '
 
 # Define the TERMINAL variable for i3 window manager,
 # which consults this for running the i3-sensible-terminal
-export TERMINAL='alacritty'
+export TERMINAL='ghostty'
 
 # Define the pager used for manual pages to be Neovim,
 # making it possible to then use "gO" to populate and load the
@@ -141,12 +132,15 @@ export TERMINAL='alacritty'
 # to view sections again by using <Leader>c instead of "gO".
 export MANPAGER='nvim +Man!'
 
-# Configure bat to use a matching theme
+# Configure bat to use a matching theme;
+# note that there are times when this theme
+# may need to be reintroduced to bat by
+# using the command "bat cache --build"
 export BAT_THEME='Vitamin-Onec'
 
 # Configure less to use lesspipe.sh so that it is possible
 # to perform conversion of files to plaintext. For instance,
-# using "less file.pdf" will now file.pdf's text in the terminal
+# using "less file.pdf" will now show file.pdf's text in the terminal
 export LESSOPEN="|lesspipe.sh %s"
 
 # Configure pipx to install itself and other managed
@@ -161,10 +155,28 @@ export PIPX_BIN_DIR="$HOME/.local/pipx/bin"
 # that setting this variable makes the default explicit.
 export PIPX_HOME="$HOME/.local/pipx"
 
+# Set the environment variable that ensure that Rust will
+# display backtraces when an error occurs
+export RUST_BACKTRACE=1
+
+# Set the environment variable that ensure that the
+# zk command can be used to interact with the default
+# zettelkasten notebook in the specified directory
+# (note that this works even when zk is used through
+# the neovim plugin zk.nvim)
+export ZK_NOTEBOOK_DIR="/home/gkapfham/working/zk"
+
+# Make sure that the clipboard program called cb
+# only uses standard ANSI colors that are supported
+# by my terminal and not default, too-bright colors
+export CLIPBOARD_THEME=ansi
+
 # }}}
 
 # System Aliases {{{
 
+# Run kitty in a single instance;
+# may reduce startup time
 alias kitty="kitty --single-instance"
 
 # MuPDF resolution
@@ -181,36 +193,52 @@ alias more="bat"
 alias cat="bat"
 
 # Directory listing with a simple command
-alias ka="exa --group-directories-first --grid --long --sort=name"
+alias ka="ls -al --git"
 
-# Use the exa command to display a tree,
+# Use the eza command to display a tree,
 # ensuring better color scheme
-alias tree="exa --tree --level=2 --long --icons"
+alias tree="eza --tree --level=2 --long --icons"
 
-# Always run pacman as root
-alias pacman="sudo pacman"
+# Show the files in a specific directory
+alias search-show="rga-fzf"
 
-# Alias to search for packages in yay (which includes non-AUR)
-# and 1) then display details about the package in an fzf preview and
-# 2) display the details about the package in shell after selection
-alias yaysearch="yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -Si"
+# Preview a markdown in stand-alone viewer
+alias mdsee="litemdview"
 
-# Alias the go-t command to t
-alias t="go-t"
+# Use nix-rebuild switch with a configuration in user account,
+# relying on a specialized program for better visual diagnostics
+alias kix="nh os switch -f '<nixpkgs/nixos>' -- -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
 
-# Alias to correct a mistaken command
-# in the .zsh_history file with hist
-alias fix="hist fix -1"
+# alias kix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
+
+# Use nix-rebuild switch with a configuration in user account,
+# relying on a specialized program for better visual diagnostics
+# and also perform an upgrade of the system
+alias ukix="nh os switch --update -f '<nixpkgs/nixos>' -- -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
+
+# Run the welcome session for zellij,
+# helps to interactively pick content
+alias zp="zellij -l welcome"
+
+# Run the netbird command without setting
+# and environment variable to avoid a warning
+alias netbird='NB_CONFIG= netbird'
+
+# }}}
+
+# Environment variables {{{
+
+# Source environment variables that
+# are stored in the ~/.env file
+if [ -f "$HOME/.env" ]; then
+  set -a
+  source "$HOME/.env"
+  set +a
+fi
 
 # }}}
 
 # Git Aliases {{{
-
-# Markdown pull request with hub
-alias hubmdpr="hub -c core.commentChar='%' pull-request"
-
-# Markdown issue with hub
-alias hubmdis="hub -c core.commentChar='%' issue create"
 
 # Reusable format strings for git aliases
 GIT_PRETTY_FORMAT_AUTHOR="--pretty=\"%C(bold green)%h%Creset %C(yellow)%an%Creset%C(auto)%d%Creset %s\""
@@ -277,61 +305,30 @@ alias ffgbd='fzf-git-branch-diff'
 
 # }}}
 
-# Oh-My-Zsh and Zsh Plugins/Scripts {{{
+# Znap Setup {{{
 
-# Save startup time by disabling
+# Download znap, if it's not there yet.
+# NOTE: the clone must go to ~/.zsh/zsh-snap so that it matches BOTH the
+# existence check above AND the `source` path below. Previously it cloned
+# to ~/Repos/znap, which would leave znap permanently uninstallable if the
+# check ever failed on a fresh machine.
+[[ -r ~/.zsh/zsh-snap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/.zsh/zsh-snap
+# Start znap so that it can later install plugins
+source ~/.zsh/zsh-snap/znap.zsh
+
+# Oh-My-Zsh and Zsh Configuration {{{
+
+# # Save startup time by disabling
 DISABLE_UPDATE_PROMPT=true
 DISABLE_AUTO_UPDATE=true
-
-# Configuration path
-ZSH=$HOME/.oh-my-zsh
 
 # Default theme
 ZSH_THEME="vitamin-onec"
 
 # Timestamps
 HIST_STAMPS="mm/dd/yyyy"
-
-# NOTE: use this plugin as a backup in case alternate is unavailable
-# Plugin: zsh-syntax-highlighting
-# source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Plugin: modify and query the zsh history
-source $HOME/.zsh/zsh-hist/zsh-hist.plugin.zsh
-
-# Plugin: fast-syntax-highlighting
-source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-
-# Plugin: zsh-vi-mode
-source $HOME/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
-# Plugin: Request all plugins from oh-my-zsh
-#
-# NOTE: these are all loaded in the .oh-my-zsh.sh script
-# and some of these could be loaded through zsh-defer.
-#
-# However, not all of them work with zsh-defer and some
-# benchmarking suggests that there is not any/much improvement
-# in performance. As such, they are all being included here!
-plugins=(git git-extras shrink-path tmux tmuxinator virtualenv)
-
-# Reload all of the completion modules before
-# sourcing the specialized Oh-My-Zsh script
-# NOTE: this is needed to avoid errors
-# shell startup and after typing each command
-autoload -Uz compinit && compinit
-
-# Load customized oh-my-zsh script
-source $HOME/.oh-my-zsh.sh
-
-# Plugin: Fast, git-stacular prompt with gitstatus
-# Note: local modifications to this plugin
-source $HOME/.zsh/gitstatus/gitstatus.prompt.zsh
-
-# Plugin: fzf-tab
-# Note: must be sourced after all other plugins to ensure
-# that tab-completion binds to it and not to oh-my-zsh method
-source $HOME/.zsh/fzf-tab/fzf-tab.plugin.zsh
 
 # Disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
@@ -342,19 +339,19 @@ zstyle ':completion:*:descriptions' format '[%d]'
 # Set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# Preview directory's content with exa when completing cd,
+# Preview directory's content with eza when completing cd,
 # thereby showing a preview window with Fzf to the right
 # of the cd command that shows the contents of current directory
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always --icons $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --level=3 --color=always --icons $realpath'
+
+# force zsh not to show completion menu, allow fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
 
 # Preview of commandline arguments when completing `kill`
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
   '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87'
-
-# Preview the status of different daemons controlled by systemctl
-zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
 
 # Preview the contents of environment variables
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
@@ -370,7 +367,6 @@ zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
 # Set the default color to be the color 245 out of
-# the 256 colors available in the terminal window the color 245 out of
 # the 256 colors available in the terminal window
 zstyle ':fzf-tab:*' default-color $'\033[38;5;245m'
 
@@ -387,76 +383,70 @@ zstyle ':fzf-tab:*' prefix ''
 # you press the '/' key to start a new completion
 zstyle ':fzf-tab:*' continuous-trigger '/'
 
+# Make sure that there is enough space to display content
+# when using fzf-tab by setting the minimum height
+zstyle ':fzf-tab:*' fzf-min-height '10'
+
 # Pass commands to the Fzf program that defines the colors. These
 # colors are the same as those used to configure Fzf when it runs
 # otherwise in the terminal window or in a text editor like Vim or Neovim
-zstyle ":fzf-tab:*" fzf-flags --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87'
-
-# Plugin: zsh-autosuggestions
-source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# Set a light grey color as the foreground color for the suggestion
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
-
-# Disable autosuggestions for buffers longer than the specified length
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-
-# Perform autosuggestions in an async fashion
-ZSH_AUTOSUGGEST_USE_ASYNC=1
-
-# First type to find a suggestion from the history and, if
-# a match is not found, suggest one from the zsh completion engine
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-
-# Use CTRL-<Space> to accept a specific auto suggestion
-bindkey '^ ' autosuggest-accept
+zstyle ":fzf-tab:*" fzf-flags --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87,border:#c1c1c1' --style full --prompt ' ' --no-scrollbar 
 
 # }}}
 
 # FZF {{{
 
 # Setup fzf, its auto-completions, and key bindings
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
+fi
 
-# Match the vim-vitamin-onec colorscheme
-# Color scheme: https://github.com/gkapfham/vim-vitamin-onec
-# 256 Color reference: https://jonasjacek.github.io/colors/
 export FZF_DEFAULT_OPTS='
+  --prompt " "
+  --style full
   --no-bold
   --cycle
   --no-separator
   --no-scrollbar
   --bind tab:down,shift-tab:up
   --bind ctrl-f:page-down,ctrl-b:page-up
-  --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700
+  --color=fg:#d2d2d2,bg:#1c1c1c,hl:#5f8700
   --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
-  --color=marker:#d78700,spinner:#875f87,header:#875f87'
-
-# Same colorscheme but in 256 colors,
-# note that this does not use the HTML color
-# codes and instead uses those available at:
-# https://jonasjacek.github.io/colors/
-#   export FZF_DEFAULT_OPTS='
-#   --no-bold
-#   --cycle
-#   --bind ctrl-f:page-down,ctrl-b:page-up
-#   --color=fg:243,bg:234,hl:64
-#   --color=fg+:143,bg+:234,hl+:172
-#   --color=info:110,prompt:110,pointer:172
-#   --color=marker:172,spinner:96,header:96'
+  --color=marker:#d78700,spinner:#875f87,header:#875f87,border:#c1c1c1'
 
 # Trigger fzf completion using the semi-colon key instead of **
 export FZF_COMPLETION_TRIGGER='**'
 
 # Configure fzf to work with fast-finder called fd
-# export FZF_DEFAULT_COMMAND="fd . $PWD"
-export FZF_DEFAULT_COMMAND="fd"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# NOTE: $PWD is expanded once at shell startup, not dynamically.
+# This means Fzf always searches from the directory where the
+# terminal was opened, NOT the current directory. To search
+# dynamically, use single quotes: FZF_DEFAULT_COMMAND='fd .'
+export FZF_DEFAULT_COMMAND="fd . $PWD"
+
+# Use zoxide for CTRL-T command with the current query;
+# this will ensure that you are only running a cd to
+# one of the frequently used directories
+export FZF_CTRL_T_COMMAND='zoxide query -l'
+
+# Directory and file preview for CTRL-T
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview '(test -d {} && eza --tree --level=3 --color=always --icons {}) || (bat -n --color=always {})'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+
+# Directory and file preview for cd completion
+# when using the **<TAB> approach
+export FZF_COMPLETION_DIR_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview '(test -d {} && eza --tree --level=3 --color=always --icons {}) || (bat -n --color=always {})'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # Use ripgrep and ripgrep-all in combination with fzf
 # to search all below directories (both text and binary files)
-search() {
+search-echo() {
 	RG_PREFIX="rga --files-with-matches"
 	local file
 	file="$(
@@ -464,101 +454,17 @@ search() {
 			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
 				--phony -q "$1" \
 				--bind "change:reload:$RG_PREFIX {q}" \
-				--preview-window="up,40%:wrap"
+				--preview-window="right,60%:wrap"
 	)" &&
-	echo "✨ $file"
-}
-
-# Search with ripgrep and get a nice bat preview, but requires
-# that you specifics the name of the pattern immediately
-searchnow() {
-	rg  \
-	--column \
-	--line-number \
-	--no-column \
-	--no-heading \
-	--fixed-strings \
-	--ignore-case \
-	--hidden \
-	--follow \
-	--glob '!.git/*' "$1" \
-	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2 " " start ":" end}' \
-	| fzf --preview 'bat --wrap character --color always {1} --highlight-line {2} --line-range {3}' --preview-window="up,40%:wrap"
+  # place the name of the file inside of the clipboard
+  echo $file | xclip -selection clipboard
+  # show the name of the file in the command-line
+	echo " $file"
 }
 
 # }}}
 
 # Zsh-Vi-Mode {{{
-
-# Run all of the code in this function after
-# initializing the zsh-vi-mode plugin. Note that
-# many of these steps are needed because of the
-# fact that the zsh-vi-mode plugin overwrites
-# keybindings, making it necessary to run again
-function zvm_after_init() {
-
-  # Re-source the use of fzf in zsh after starting zsh-vi-mode
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-  # Re-Source and configure the zsh-auto-suggestions plugin
-  source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
-  ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-  ZSH_AUTOSUGGEST_USE_ASYNC=1
-  bindkey '^ ' autosuggest-accept
-
-  # Create a binding so that you can type "cd ,pract^B"
-  # (as an example) to trigger this integrated widget
-  zle     -N   fzf-fasd-widget
-  bindkey '^B' fzf-fasd-widget
-  # Use FZF to filter the output of z.lua anywhere it is a command
-  autoload -U modify-current-argument
-  fzf-fasd-widget() {
-    # divide the commands buffer into words
-    local words i beginword start
-    i=0
-    start=1
-    beginword=0
-    words=("${(z)BUFFER}")
-    while (( beginword <= CURSOR )); do
-            (( i++ ))
-            (( beginword += ${#words[$i]}+1 ))
-    done
-    # extract the first and current words
-    # extract the first letter as a potential trigger
-    FIRSTWORD="$words[$start]"
-    CURRENTWORD="$words[$i]"
-    TRIGGERLETTER=${CURRENTWORD:0:1}
-    # the trigger of "," was used, so start
-    # the use of z.lua and FZF with this word
-    if [ "$TRIGGERLETTER" = "," ]; then
-      unset 'words[${#words[@]}]'
-      PASTWORDS=${words[@]}
-      CURRENTWORD="${CURRENTWORD:1:${#CURRENTWORD}}"
-      LBUFFER="${PASTWORDS}$(z | grep $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
-        fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
-    # the trigger of "," was not used, so
-    # search interactively based on user input
-    else
-      PASTWORDS=${words[@]}
-      CURRENTWORD=""
-      LBUFFER="${PASTWORDS}$(z -l $CURRENTWORD | cut -d' ' -f2- | sed -e 's/^[ 	]*//' | \
-        fzf --query="$CURRENTWORD" --select-1 --exit-0 --height=25% --reverse --tac --no-sort --cycle)"
-    fi
-    # update the prompt with the result of using z.lua and FZF
-    echo $BUFFER
-    local ret=$?
-    zle redisplay
-    typeset -f zle-line-init >/dev/null && zle zle-line-init
-    return $ret
-  }
-
-  # Create a binding so that you can type "cd ,pract^B"
-  # (as an example) to trigger this integrated widget
-  zle     -N   fzf-fasd-widget
-  bindkey '^B' fzf-fasd-widget
-
-}
 
 # Configure the shell so that it uses jk for escape
 # --> when currently in insert mode
@@ -582,76 +488,78 @@ ZVM_KEYTIMEOUT=0.2
 # change depending on the mode for Neovim
 ZVM_CURSOR_STYLE_ENABLED=false
 
-# Run this function every time that the
-# zsh-vi-mode plugin detects that the
-# mode changes, ultimately giving the
-# opportunity to define the right-side
-# prompt to give an indicator of the mode
-function zvm_after_select_vi_mode() {
-  case $ZVM_MODE in
-    $ZVM_MODE_NORMAL)
-     RPROMPT="%{$fg_bold[red]%}%{$reset_color%}"
-     zle reset-prompt
-    ;;
-    $ZVM_MODE_INSERT)
-     RPROMPT=""
-     zle reset-prompt
-    ;;
-    $ZVM_MODE_VISUAL)
-     RPROMPT="%{$fg_bold[red]%}%{$reset_color%}"
-     zle reset-prompt
-    ;;
-    $ZVM_MODE_VISUAL_LINE)
-     RPROMPT="%{$fg_bold[red]%}%{$reset_color%}"
-     zle reset-prompt
-    ;;
-    $ZVM_MODE_REPLACE)
-     RPROMPT="%{$fg_bold[red]%}%{$reset_color%}"
-     zle reset-prompt
-    ;;
-  esac
-}
-
 # }}}
 
 # Tmux {{{
 
-# Display all of the open tmux sessions with fzf
-tms() {
-  local session
-  newsession=${1:-Work}
-  session=$(tmux list-sessions -F "#{session_name}" | \
-    fzf --query="$1" --select-1 --exit-0 --cycle --no-separator) &&
-    tmux attach-session -t "$session" || tmux new-session -s $newsession
-}
-
-# Display all of the possible tmuxinators with fzf
-tmm() {
-  # NOTE: Use the /usr/sbin/ls command since "ls" is now aliased to use "exa" command
-  session=$( /usr/sbin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
-    fzf --query="$1" --select-1 --exit-0 --cycle --no-separator) &&
-    tmuxinator "$session"
-}
-
-# Define the name of a tmux pane, display in the status-right
-function workspace {
-  readonly name=${1:?"Specify the name of the workspace."}
-  tmux select-pane -T $name
-}
-
-# }}}
-
-# Asdf-vm {{{
-
-# Setup asdf-vm so that shims are available for all installed plugins
-# Currently using asdf-vm to manage:
-# --> Python
-# . /opt/asdf-vm/asdf.sh
-
-# Setup rtx as a drop-in replacement for asdf
-eval "$(/home/gkapfham/.local/share/rtx/bin/rtx activate -s zsh)"
-export RTX_FETCH_REMOTE_VERSIONS_TIMEOUT="1s"
-alias rtt="rtx"
+# # Display all of the open tmux sessions with fzf
+# tms() {
+#   local session
+#   newsession=${1:-Work}
+#   session=$(tmux list-sessions -F "#{session_name}" | \
+#     fzf --query="$1" --select-1 --exit-0 --cycle --no-separator) &&
+#     tmux attach-session -t "$session" || tmux new-session -s $newsession
+# }
+#
+# # Display all of the possible tmuxinators with fzf and preview with bat;
+# # make sure that when no tmux session has yet been selected that there
+# # is a message that indicates that the user should select a session
+# tm() {
+#   # NOTE: Use the absolute Nix-based ls command since "ls" is now aliased to use "eza" command
+#   session=$( /run/current-system/sw/bin/ls -alg ~/.tmuxinator | awk '{print $8}' | cut -d'.' -f1 | sed 1,2d | \
+#     fzf --query="$1" --select-1 --exit-0 --cycle --no-separator --prompt " " \
+#     --preview '[[ -n {} ]] && bat --style=numbers --color=always ~/.tmuxinator/{}.yml || echo "󰮊 Select a Tmux Session"') &&
+#     tmuxinator "$session"
+# }
+# alias tmm="tm"
+#
+# # Define the name of a tmux workspace, helping with many splits
+# function workspace {
+#   local -A prefix_map=(
+#     ["Code"]=""
+#     ["Command"]="󰘳"
+#     ["Develop"]=""
+#     ["Edit"]=""
+#     ["File"]=""
+#     ["Gemini"]="󰵰"
+#     ["GitHub"]=""
+#     ["OpenCode"]="󰵰"
+#     ["Program"]=""
+#     ["Preview"]="󰒋"
+#     ["Server"]="󰒋"
+#     ["Solution"]="󰄲"
+#     ["Starter"]="󰋮"
+#     ["Testing"]="󰇉"
+#     ["Trying"]=""
+#   )
+#   readonly name=${1:?"Specify the name of the workspace."}
+#   local prefix=""
+#   for key in "${(@k)prefix_map}"; do
+#     if [[ $name == *"$key"* ]]; then
+#       prefix=${prefix_map[$key]}
+#       break
+#     fi
+#   done
+#   tmux select-pane -T "${prefix} ${name}"
+# }
+#
+# # Define the name of a tmux window, helping with many splits
+# function window {
+#   readonly name=${1:?"Specify the name of the window."}
+#   tmux rename-window "${prefix} ${name}"
+# }
+#
+# # Use fzf and sesh to connect to existing tmux session
+# # or start tmux in a commonly used directory
+# tt() {
+#   sesh connect $(sesh list --tmux --zoxide --icons | fzf --no-sort --select-1 --exit-0 --cycle --no-separator --ansi --prompt " " | awk '{print substr($0, 2)}')
+# }
+#
+# # Use fzf and fd to create a tmux session based
+# # on the directory that is selected through using fd
+# td() {
+#   sesh connect $(fd -H -d 2 -t d -E .Trash . ~ | fzf --no-sort --select-1 --exit-0 --cycle --no-separator --ansi --prompt " ")
+# }
 
 # }}}
 
@@ -660,7 +568,7 @@ alias rtt="rtx"
 # Ensure that Pipenv can find the version of Python
 # that is managed by the Pyenv tool; note that
 # this is used infrequently for Python development
-export PIPENV_PYTHON="$HOME/.pyenv/shims/python"
+# export PIPENV_PYTHON="$HOME/.pyenv/shims/python"
 
 # }}}
 
@@ -668,9 +576,9 @@ export PIPENV_PYTHON="$HOME/.pyenv/shims/python"
 
 # Ensure that the user-install version of cpanm is
 # available to neovim, enabling health checks to pass
-if (command -v perl && command -v cpanm) >/dev/null 2>&1; then
-  test -d "$HOME/perl5/lib/perl5" && eval $(perl -I "$HOME/perl5/lib/perl5" -Mlocal::lib)
-fi
+# if (command -v perl && command -v cpanm) >/dev/null 2>&1; then
+#  test -d "$HOME/perl5/lib/perl5" && eval $(perl -I "$HOME/perl5/lib/perl5" -Mlocal::lib)
+#fi
 
 # }}}
 
@@ -685,20 +593,27 @@ usage() {
         sed "s:$HOME:~:"
 }
 
-# Run a benchmark for zsh startup time
+# Run a benchmark for zsh startup time.
+# Uses `date +%s%N` because /usr/bin/time is not present on NixOS.
 benchmark() {
-    for i in $(seq 1 10); do /usr/bin/time zsh -i -c exit; done
+    local start_ms end_ms
+    for _ in {1..10}; do
+        start_ms=$(( $(date +%s%N) / 1000000 ))
+        zsh -i -c exit >/dev/null 2>&1
+        end_ms=$(( $(date +%s%N) / 1000000 ))
+        printf '%d ms\n' $(( end_ms - start_ms ))
+    done
 }
 
 # Store the ssh passphrase for easy git use
 secure() {
-    /usr/bin/ssh-add -t 432000
+    ssh-add -t 432000
 }
 
 # Always display directory contents after a change of directory
 function chpwd() {
   emulate -L zsh
-  exa --group-directories-first --grid --long --sort=name --icons
+  eza --group-directories-first --grid --long --sort=name --icons
 }
 
 # Create a timer for work/rest sessions
@@ -763,27 +678,163 @@ fi
 
 # }}}
 
-# z.lua {{{
+# Fancy Directory Movement with Zoxide {{{
 
-# set configuration for fzf when using z -I
-export _ZL_FZF_FLAG="--no-bold --no-separator --cycle --bind ctrl-f:page-down,ctrl-b:page-up --color=fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700 --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700 --color=info:#87afd7,prompt:#87afd7,pointer:#d78700 --color=marker:#d78700,spinner:#875f87,header:#875f87"
+# Initialize zoxide
+znap eval zoxide "zoxide init zsh"
 
-# Source the z.lua plugin
-eval "$(lua /usr/share/z.lua/z.lua --init zsh enhanced once fzf)"
-source $HOME/.zsh/czmod/czmod.zsh
-
-# Create a fuzzy search alias for z.lua
-alias zz='z -I .'
-
-# Breaks the use of the fzf-tab plugin
-# alias cd="z"
+# Create a fuzzy search alias for zoxide
+alias zz='zi'
 
 # }}}
 
 # Redefine Aliases {{{
 
-# Already defined in oh-my-zsh, redefine to use exa
-alias ls="exa --color=always --icons"
+# Already defined in oh-my-zsh, redefine to use eza
+alias ls="eza --color=always --icons"
+
+# }}}
+
+# Prompt with Starship {{{
+
+# Prompt source; see the starship.toml file
+# in the ~/.config/ directory for details
+znap eval starship 'starship init zsh'
+znap prompt
+
+# }}}
+
+# History with Atuin {{{
+
+# History source and keybindings;
+# note using znap is not possible and
+# a standard source is also not possible.
+zvm_after_init_commands+=(eval "$(atuin init zsh)")
+
+# }}}
+
+# Multiple Znap Plugins {{{
+
+# Use znap source to start plugins from oh-my-zsh
+znap source ohmyzsh/ohmyzsh \
+  plugins/git \
+
+# # Use znap source to start plugins
+# znap source chisui/zsh-nix-shell
+# znap source zsh-users/zsh-completions
+# znap source jeffreytse/zsh-vi-mode
+# znap source Aloxaf/fzf-tab
+# znap source wfxr/forgit
+# znap source MichaelAquilina/zsh-you-should-use
+# znap source zdharma-continuum/fast-syntax-highlighting
+
+# Use znap source to start lightweight plugins that should be ready for the
+# first prompt and are cheap to load: the nix-shell hook, the completions
+# fpath, and vi-mode (vi-mode also owns `zvm_after_init_commands`, which later
+# parts of this file rely on, so it must load eagerly).
+znap source chisui/zsh-nix-shell
+znap source zsh-users/zsh-completions
+znap source jeffreytse/zsh-vi-mode
+
+# The remaining plugins (fzf-tab completion, forgit, you-should-use alias
+# suggestions, and fast-syntax-highlighting) are heavy and only used
+# interactively. None are needed to draw the prompt or to process the first
+# command, so they are scheduled to load a split-second AFTER the first prompt
+# renders via zsh/sched. This cuts perceived startup time by ~20-30ms while
+# keeping every feature: each plugin loads as soon as the shell is idle at the
+# prompt, normally before you begin typing. (`znap source` is still used, so
+# znap keeps managing clone/compile/update precisely as before.)
+zmodload zsh/sched 2>/dev/null
+_deferred_heavy_plugins() {
+  znap source zsh-users/zsh-autosuggestions
+  znap source Aloxaf/fzf-tab
+  znap source wfxr/forgit
+  znap source MichaelAquilina/zsh-you-should-use
+  znap source zdharma-continuum/fast-syntax-highlighting
+}
+sched +0 _deferred_heavy_plugins
+
+# }}}
+
+# Zsh-Autosuggestions {{{
+
+# Configure the zsh-autosuggestions plugin
+ZSH_AUTOSUGGEST_STRATEGY=( history completion match_prev_cmd )
+znap source zsh-users/zsh-autosuggestions
+zvm_after_init_commands+=(eval "bindkey '^ ' autosuggest-accept")
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585858"
+
+# }}}
+
+# Ssh Agent {{{
+
+# Suppress the x11-ssh-askpass GUI that NixOS wires into the systemd user
+# environment. SSH_ASKPASS_REQUIRE=never tells openssh (>= 8.4) to NEVER invoke
+# $SSH_ASKPASS, even when no tty is attached — so background jobs (git-maintenance,
+# remote git invocations, etc.) fail silently instead of spawning a popup.
+unset SSH_ASKPASS
+export SSH_ASKPASS_REQUIRE=never
+
+# NixOS programs.ssh.agent provides a systemd user socket at a fixed path.
+# Since the service is always enabled, this single export replaces the previous
+# multi-branch fallback logic and saves ~20–50ms per shell startup.
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/run/user/$UID}/ssh-agent"
+
+# Keys are added on first use via AddKeysToAgent in ~/.ssh/config, or manually
+# via the `secure` function.
+
+# }}}
+
+# Fuzzy command runner {{{
+
+fun() {
+  if ! command -v fzf >/dev/null 2>&1; then
+    echo "fun: requires fzf (https://github.com/junegunn/fzf)."
+    return 1
+  fi
+  emulate -L zsh
+  local selected
+  selected=$(
+    {
+      printf '%s\n' ${(k)aliases} ${(k)functions} ${(k)commands}
+      for dir in ${(s/:/)PATH}; do
+        [[ -d "$dir" ]] && find "$dir" -maxdepth 1 \( -type f -o -type l \) -executable -printf "%f\n" 2>/dev/null
+      done
+    } | \
+    rg -v '^[-_\.]' | \
+    rg -v '[[:space:]]' | \
+    sort -u | \
+    while IFS= read -r cmd; do
+      if command -v "$cmd" >/dev/null 2>&1; then
+        case "$(type -t -- "$cmd" 2>/dev/null)" in
+          builtin|keyword) continue ;;
+          *) printf '%s\n' "$cmd" ;;
+        esac
+      fi
+    done | \
+    fzf --ansi --prompt=' ' --preview 'type -a {} 2>/dev/null' --height=20 --layout=reverse --border --preview-window=right:60%:wrap
+  ) || return 1
+  [[ -n $selected ]] || return 1
+  printf '%s\n' "$selected"
+}
+
+# Create a widget for the fun function
+_fun_widget() {
+  local selected
+  selected=$(fun)
+  if [[ -n "$selected" ]]; then
+    BUFFER="$selected "
+    CURSOR=$#BUFFER
+  fi
+  zle reset-prompt
+}
+
+# Register the widget
+zle -N _fun_widget
+
+# Bind ALT-g to the fun widget
+bindkey '\eg' _fun_widget
+zvm_after_init_commands+=('bindkey "^\eg" _fun_widget')
 
 # }}}
 

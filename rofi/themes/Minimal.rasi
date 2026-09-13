@@ -1,0 +1,144 @@
+* {
+    font:   "Maple Mono Normal NF 30";
+
+    bg0:    #1c1c1c;
+    bg1:    #58585880;
+    bg2:    #303030;
+    bg3:    #262626;
+    bg4:    #3a3a3a;
+
+    fg0:    #d2d2d2;
+    fg1:    #d78700;
+    fg2:    #8a8a8a;
+
+    accent: #87afd7;
+    urgent: #d75347;
+    border: #333333;
+    glow:   #d7870040;
+
+    background-color:   transparent;
+    text-color:         @fg0;
+
+    margin:     0;
+    padding:    0 0 -1px 0;
+    spacing:    0;
+}
+
+window {
+    background-color:   @bg0;
+    border:             0px;
+    border-color:       @bg0;
+    location:       center;
+    width:          1600;
+    height:         875;
+    border-radius:  20;
+    padding:        20px 20px 5px 20px;
+}
+
+inputbar {
+    font:       "Maple Mono Normal NF 30";
+    padding:    16px 20px;
+    spacing:    16px;
+    margin:     0 0 12px 0;
+    children:   [ prompt, entry ];
+    background-color:   @bg3;
+    border-radius:      12px;
+    border:             1px;
+    border-color:       @border;
+}
+
+prompt {
+    text-color:     @fg1;
+    font:           "Maple Mono Normal NF 32";
+    content:        " ";
+    padding:        0 8px 0 0;
+}
+
+scrollbar {
+    width:        12px;
+    border:       0;
+    handle-color: @fg1;
+    handle-width: 12px;
+    padding:      4px;
+    background-color: @bg0;
+    border-radius: 6px;
+    margin:       0 8px 0 0;
+}
+
+entry, element-icon, element-text {
+    vertical-align: 0.5;
+}
+
+entry {
+    font:   "Maple Mono Normal NF Italic 30";
+    placeholder: " type to discover";
+    placeholder-color: @fg2;
+    cursor: text;
+}
+
+message {
+    border:             0;
+    border-radius:      12px;
+    background-color:   @bg3;
+    padding:            12px 20px;
+    margin:             0 0 12px 0;
+}
+
+textbox {
+    padding:    8px 16px;
+}
+
+listview {
+    lines:      10;
+    columns:    1;
+    fixed-height:   true;
+    border:         0;
+    padding:        4px 0 0 0;
+    scrollbar:      true;
+    spacing:        2px;
+}
+
+element {
+    padding:            10px 20px;
+    spacing:            16px;
+    background-color:   transparent;
+    border-radius:      10px;
+    margin:             0 8px 0 0;
+}
+
+element normal normal {
+    background-color:   transparent;
+}
+
+element normal active {
+    text-color: @accent;
+    background-color:   @bg3;
+}
+
+element normal urgent {
+    text-color: @urgent;
+}
+
+element selected normal, element selected active {
+    background-color:   @bg2;
+    text-color:         @fg1;
+    border:             0 0 0 6px;
+    border-color:       @fg1;
+    border-radius:      0 10px 10px 0;
+}
+
+element selected urgent {
+    background-color:   @bg2;
+    text-color:         @urgent;
+    border:             0 0 0 6px;
+    border-radius:      0 10px 10px 0;
+}
+
+element-icon {
+    size:   1.1em;
+}
+
+element-text {
+    text-color: inherit;
+    highlight:  bold underline;
+}

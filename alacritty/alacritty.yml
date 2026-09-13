@@ -10,7 +10,7 @@ env:
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  TERM: xterm-255color
+  TERM: xterm-256color
 
 bell:
   # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
@@ -97,29 +97,13 @@ font:
     style: Regular
 
   # Point size
-  size: 16.0
-
-  # Offset is the extra space around each character. `offset.y` can be thought of
-  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
-  #offset:
-  #  x: 0
-  #  y: 0
-
-  # Glyph offset determines the locations of the glyphs within their cells with
-  # the default being at the bottom. Increasing `x` moves the glyph to the right,
-  # increasing `y` moves the glyph upward.
-  #glyph_offset:
-  #  x: 0
-  #  y: 0
-
-# If `true`, bold text is drawn using the bright color variants.
-#draw_bold_text_with_bright_colors: false
+  size: 12.0
 
 colors:
   # Default colors
   primary:
     background: '0x1c1c1c'
-    foreground: '0x8a8a8a'
+    foreground: '0xa8a8a8'
 
   # Normal colors
   normal:

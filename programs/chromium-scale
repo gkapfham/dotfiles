@@ -1,4 +1,6 @@
-#!/bin/sh
-# Note that using "$@" will pass to the alacritty terminal
-# the inputs that are passed to this script
-chromium --force-device-scale-factor=2.25 "$@"
+#!/usr/bin/env bash
+
+# Note that using "$@" will pass to the chromium browser
+# the inputs that are passed to this script. Recent testing
+# reveals that chromium correct adheres to these scale factors.
+chromium --high-dpi-support=1 --force-device-scale-factor=1.5 "$@"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Reference:
 # https://blog.meain.io/2020/tmux-flating-scratch-terminal/

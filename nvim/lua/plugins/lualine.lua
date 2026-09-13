@@ -4,7 +4,67 @@
 
 -- Define functions in lua {{{
 
-local aerial = require('aerial')
+-- load the icons table to use the icons
+-- for LSP clients in the lualine display
+local icons = require("configure.icons")
+
+local function lsp_clients()
+  -- Get the active LSP clients
+  -- and return the client names
+  -- local clients = vim.lsp.get_active_clients()
+  local clients = vim.lsp.get_clients()
+  if next(clients) == nil then
+    return "󱥑 LSP"
+  end
+  local client_names = {}
+  for _, client in ipairs(clients) do
+    -- Get the abbreviation for the client
+    -- and append it to the list of client names;
+    -- note that the abbreviation is an icon
+    -- defined in the shared icons table;
+    -- Make sure that the abbreviation is not
+    -- already in the list of client names
+    -- (this can take place because of the fact
+    -- that, for instance, the Otter-ls client
+    -- has numbers in its name inside of brackets.
+    -- But, there should only be a single icon
+    -- to indicate that the client is active)
+    local abbreviation = icons.lsp(client.name)
+    local exists = false
+    for _, name in ipairs(client_names) do
+      if name == abbreviation then
+        exists = true
+        break
+      end
+    end
+    -- Only add the abbreviation if it does not already exist
+    -- in the list of client names (this prevents an icon
+    -- from being added and displayed in lualine twice)
+    if not exists then
+      table.insert(client_names, abbreviation)
+    end
+  end
+  -- Return the client icons as a string with spaces
+  return "" .. table.concat(client_names, " ")
+end
+
+local function spell_status()
+  -- Use Nerd Font icons for languages
+  local lang_icons = {
+    ["en_us"] = "",
+    ["en_gb"] = "",
+  }
+  -- Assign the icon based on the spelling language
+  local lang = vim.o.spelllang
+  local icon = lang_icons[lang] or ""
+  if vim.o.spell then
+    return "󰓆 󰔡 " .. icon
+  else
+    return "󰓆 󰔢 " .. icon
+  end
+end
+
+local aerial = require("aerial")
 local function format_status(symbols, depth, separator, icons_enabled)
   local parts = {}
   depth = depth or #symbols
@@ -22,7 +82,9 @@ local function format_status(symbols, depth, separator, icons_enabled)
   end
   return table.concat(parts, separator)
 end
+
 -- The API to output the symbols structure
+---@diagnostic disable-next-line: lowercase-global
 function output_symbols_structure(depth, separator, icons_enabled)
   local symbols = aerial.get_location(true)
   local symbols_structure = format_status(symbols, depth, separator, icons_enabled)
@@ -30,13 +92,14 @@ function output_symbols_structure(depth, separator, icons_enabled)
 end
 
 -- Define a function for displaying the current result number
--- out of total number of results when searching with / or ?
-vim.o.shortmess = vim.o.shortmess .. "S"
+-- out of total number of results when searching with / or ?.
+-- Note that this assumes that the shortmess parameter has
+-- already been set to include the S flag in configure/settings.lua.
 local function search_count()
   if vim.api.nvim_get_vvar("hlsearch") == 1 then
     local res = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
     if res.total > 0 then
-      return string.format(" %d/%d %s", res.current, res.total, vim.fn.getreg('/'))
+      return string.format(" %d/%d %s", res.current, res.total, vim.fn.getreg("/"))
     end
   end
   return ""
@@ -51,15 +114,9 @@ local function diff_source()
     return {
       added = gitsigns.added,
       modified = gitsigns.changed,
-      removed = gitsigns.removed
+      removed = gitsigns.removed,
     }
   end
-end
-
--- Define a function that will display a symbol
--- after the encoding for the current file
-local function encoding_prefix()
-  return ""
 end
 
 --- }}}
@@ -69,115 +126,98 @@ end
 -- vitaminonec; see the lua/plugins/colorscheme.lua
 -- for more details about the specific colorscheme
 local colors = {
-  color2   = "#87afd7",
-  color7   = "#e06c75",
-  color10  = "#afaf5f",
-  color6   = "#626262",
-  color3   = "#875f87",
-  color1   = "#262626",
-  color0   = "#A8A8AF",
+  color2 = "#87afd7",
+  color7 = "#d75f5f",
+  color10 = "#b7b757",
+  color6 = "#626262",
+  color3 = "#a569a5",
+  color1 = "#262626",
+  color0 = "#c1c1c1",
 }
 local vitaminonec = {
   normal = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color2 , gui = "bold", },
+    a = { fg = colors.color1, bg = colors.color2, gui = "bold" },
     c = { fg = colors.color0, bg = colors.color1 },
   },
   visual = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color3 , gui = "bold", },
+    a = { fg = colors.color1, bg = colors.color3, gui = "bold" },
   },
   inactive = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color0, bg = colors.color1 , gui = "none", },
+    a = { fg = colors.color0, bg = colors.color1, gui = "none" },
     c = { fg = colors.color6, bg = colors.color1 },
   },
   replace = {
     jb = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color7 , gui = "bold", },
+    a = { fg = colors.color1, bg = colors.color7, gui = "bold" },
   },
   insert = {
     b = { fg = colors.color0, bg = colors.color1 },
-    a = { fg = colors.color1, bg = colors.color10 , gui = "bold", },
+    a = { fg = colors.color1, bg = colors.color10, gui = "bold" },
   },
 }
 
---- Define functions in vimscript using vim.cmd {{{
+local function statusline_python_env()
+  local venv = vim.env.VIRTUAL_ENV
+  if venv and venv ~= "" then
+    local name = venv:match("([^/]+)$")
+    if name then
+      return " " .. name
+    end
+  end
+  return ""
+end
 
--- Define a vimscript function to support lualine
-vim.cmd([[
-function! StatuslineGutentags()
-return gutentags#statusline() !=# '' ? ' Tags' : ' Tags'
-endfunction
-]])
+local function statusline_readonly()
+  return vim.bo.readonly and "" or ""
+end
 
--- Define a vimscript function to support lualine
-vim.cmd([[
-function! StatuslinePythonEnvironment()
-" Extract only the name of the virtual environment from the
-" VIRTUAL_ENV variable; note that it also includes the full
-" directory to the virtual environment that is not suitable
-" for including in a section of a status line.
-let l:venv = $VIRTUAL_ENV
-return l:venv !=# '' ? ' '.split(l:venv, '/')[-1] : ''
-endfunction
-]])
+local function treesitter_attached()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local ok, parser = pcall(vim.treesitter.get_parser, bufnr)
+  if ok and parser then
+    return "󰙅"
+  end
+  return "󱥑 TSP"
+end
 
--- Define a vimscript function to support lualine
-vim.cmd([[
-function! StatuslineReadonly()
-return &readonly ? '' : ''
-endfunction
-]])
-
--- Define a vimscript function to support lualine
-vim.cmd([[
-function! StatuslineSpell()
-" Use a different configuration to show whether
-" or not spell checking is currently running
-return &spell ? 'A-Z ' : 'A-Z '
-endfunction
-]])
-
--- " Display a file tree symbol
-vim.cmd([[
-function! FileTree()
-return ''
-endfunction
-]])
-
--- " Display a file tree symbol
-vim.cmd([[
-function! TreeSitterContext()
-return nvim_treesitter#statusline(90)
-endfunction
-]])
-
---- }}}
+-- Minuet duet status indicator
+local function minuet_duet_status()
+  local status = vim.g.minuet_duet_status
+  if status and vim.g.minuet_duet_processing then
+    return status
+  end
+  return ""
+end
 
 return {
 
   -- lualine.nvim
   -- Lualine for top and bottom bars
+  -- and for the winbar
   {
     "nvim-lualine/lualine.nvim",
     lazy = false,
     priority = 1000,
     dependencies = {
       "arkav/lualine-lsp-progress",
-      "ludovicchabant/vim-gutentags",
+      "nvim-lua/plenary.nvim",
     },
     -- Configure
     config = function()
       vim.cmd([[set noshowmode]])
-      require('lualine').setup {
+      require("lualine").setup({
         -- Define the global options for lualine
         options = {
           icons_enabled = true,
           theme = vitaminonec,
-          component_separators = {left = '', right = ''},
-          section_separators = {left = '', right = ''},
-          disabled_filetypes = {},
+          component_separators = { left = "", right = "" },
+          section_separators = { left = "", right = "" },
+          disabled_filetypes = {
+            winbar = { "aerial", "neo-tree", "snacks_terminal", "trouble", "toggleterm", "Outline" },
+          },
           always_divide_middle = true,
           globalstatus = true,
         },
@@ -191,18 +231,44 @@ return {
         sections = {
           -- Bottom left display
           -- from left (far left corner) to right (middle): {a} {b} {c}
-          lualine_a = {'mode'},
-          lualine_b = {'branch', {'diff', source = diff_source}},
-          lualine_c = {'StatuslineReadonly', 'FileTree', {'filename', path=1}, {"aerial", colored=false}},
+          lualine_a = { { "mode" } },
+          lualine_b = { { "branch", icon = "󰘬" }, { "diff", source = diff_source, icon = "" } },
+          lualine_c = {
+            statusline_readonly,
+            { "filename", icon = "󰓈 ", path = 0, file_status = false, symbols = { unnamed = "", newfile = "" } },
+            { "selectioncount", icon = "󰉄" },
+          },
           -- Bottom right display
           -- from left (middle) to right (far right corner): {x} {y} {z}
-          lualine_x = {'lsp_progress', 'progress', 'location'},
-          lualine_y = {{encoding_prefix, type="lua_expr"}, 'encoding', {'fileformat', symbols = {
-            unix = 'Unix - LF',
-            dos = 'Win - CRLF',
-            mac = 'Mac - CR',
-          }}},
-          lualine_z = {'filesize', {'filetype', colored=false}}
+          lualine_x = {
+            {
+              minuet_duet_status,
+              cond = function()
+                return vim.g.minuet_duet_processing == true
+              end,
+            },
+            {
+              "lsp_progress",
+              icon = "",
+              cond = function()
+                return vim.tbl_count(vim.lsp.get_clients({ bufnr = 0 })) > 0
+              end,
+            },
+          },
+          lualine_y = {
+            search_count,
+            { "encoding", icon = "" },
+            {
+              "fileformat",
+              symbols = {
+                unix = "  LF",
+                dos = "  CRLF",
+                mac = "  CR",
+              },
+            },
+            { "filesize", icon = "󰖡" },
+          },
+          lualine_z = { { "filetype", colored = false } },
         },
         inactive_sections = {
           lualine_a = {},
@@ -210,7 +276,27 @@ return {
           lualine_c = {},
           lualine_x = {},
           lualine_y = {},
-          lualine_z = {}
+        },
+        winbar = {
+          lualine_b = {
+            {
+              "filename",
+              path = 3,
+              file_status = false,
+              icon = "󰉋",
+              shorting_target = 80,
+              symbols = { unnamed = "", newfile = "" },
+            },
+            { "progress", icon = "󰮴" },
+            { "location", icon = "" },
+            {
+              "aerial",
+              colored = false,
+              cond = function()
+                return vim.fn.exists("*aerial#statusline") == 1 or package.loaded["aerial"] ~= nil
+              end,
+            },
+          },
         },
         tabline = {
           -- Top left display
@@ -218,36 +304,53 @@ return {
           -- Note that {b} and {c} are currently disabled because there
           -- are normally a significant number of buffers on display in {a}
           lualine_a = {
-            {'buffers',
-            show_modified_status = true,
-            -- Define a custom label for the Aerial buffer;
-            -- note that other plugins seem to do this automatically
-            -- but unless it is done for Aerial it will show a "No Name"
-            -- label whenever you change into the Aerial buffer
-            filetype_names = {
-              aerial="Aerial",
+            {
+              "buffers",
+              show_modified_status = true,
+              -- Define a custom label for the Aerial buffer;
+              -- note that other plugins seem to do this automatically
+              -- but unless it is done for Aerial it will show a "No Name"
+              -- label whenever you change into the Aerial buffer
+              -- Also define a custom label for the snacks picker
+              -- and for any other components that do not feature a
+              -- default display inside of the tabline of lualine
+              filetype_names = {
+                aerial = "Aerial",
+                codecompanion = "CodeCompanion",
+                fugitive = "Fugitive",
+                snacks_picker_input = "Picker",
+                snacks_picker_list = "Explorer",
+                snacks_terminal = "Terminal",
+                sidekick_terminal = "Sidekick",
+              },
+              -- Define symbols attached to each file in the tabline
+              symbols = {
+                modified = " ●",
+                alternate_file = " ",
+                directory = "",
+              },
             },
-            -- Define symbols attached to each file in the tabline
-            symbols = {
-              modified = ' ●',
-              alternate_file = ' ',
-              directory =  '',
-            },
-          }
+          },
+          lualine_b = {},
+          lualine_c = {},
+          -- Top right display
+          -- from left (middle) to right (far right corner): {x} {y} {z}
+          lualine_x = {
+            { "diagnostics", symbols = { error = " ", warn = " ", info = " ", hint = " " } },
+          },
+          lualine_y = {
+            statusline_python_env,
+          },
+          lualine_z = {
+            function()
+              return spell_status() .. " " .. lsp_clients() .. " " .. treesitter_attached()
+            end,
+          },
         },
-        lualine_b = {},
-        lualine_c = {},
-        -- Top right display
-        -- from left (middle) to right (far right corner): {x} {y} {z}
-        lualine_x = {{'diagnostics', symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '}}},
-        lualine_y = {'StatuslinePythonEnvironment', 'StatuslineGutentags', 'StatuslineSpell'},
-        lualine_z = {}
-      },
-      -- Define the extensions which ensure that lualine
-      -- makes better customized menus when they are used
-      extensions = {'quickfix', 'aerial'},
-    }
-  end,
-  }
-
+        -- Define the extensions which ensure that lualine
+        -- makes better customized menus when they are used
+        extensions = { "quickfix", "aerial", "oil" },
+      })
+    end,
+  },
 }

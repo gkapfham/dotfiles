@@ -1,13 +1,142 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# Reminder: use the command 'xrandr' to see what
-# monitors are available.
+# Set the default values for the flags
+EXTERNAL_MONITOR=false
+MOBILE_MONITOR=false
+RESET_MONITORS=false
+LIST_MONITORS=false
+DISPLAY_HELP=false
 
-xrandr --output DP1 --above eDP1 --auto
+# Check for flags
+for arg in "$@"; do
+  case $arg in
+    --external-monitor)
+      EXTERNAL_MONITOR=true
+      ;;
+    --mobile-monitor)
+      MOBILE_MONITOR=true
+      ;;
+    --reset-monitors)
+      RESET_MONITORS=true
+      ;;
+    --list-monitors)
+      LIST_MONITORS=true
+      ;;
+    --help)
+      DISPLAY_HELP=true
+      ;;
+  esac
+done
 
-# Either command leads to connecting the
-# two displays together so that the external display
-# (display name like DP1) is above the laptop display
-# (display name: eDP1). This means that you can move
-# the cursor off the top of the laptop and onto
-# the external display.
+# Display the main help message if the --help flag is set
+if [ "$DISPLAY_HELP" == true ]; then
+  echo ""
+  echo " Usage: connect-external-monitor [options]"
+  echo "󰇀 One or both of --external-monitor or --mobile-monitor is required"
+  echo ""
+  echo " Options:"
+  echo "  --external-monitor Connect an external monitor (i.e., a 27 inch 4K screen) above the main screen"
+  echo "  --mobile-monitor   Connect a mobile monitor (i.e., a tablet or small screen) to the right of the main screen"
+  echo "  --reset-monitors   Reset the monitors to the default configuration using main screen"
+  echo "  --list-monitors    List the connected monitors and their modes"
+  echo "  --help             Display this help message"
+  exit 0
+fi
+
+# Define the name of the command that is
+# being run (i.e., the name of this script)
+COMMAND_NAME="connect-external-monitor"
+
+# Require at least one argument
+if [ "$EXTERNAL_MONITOR" == false ] && [ "$MOBILE_MONITOR" == false ] && [ "$RESET_MONITORS" == false ] && [ "$LIST_MONITORS" == false ] && [ "$DISPLAY_HELP" == false ]; then
+  echo "󰇀 You must run this script with at least one command-line argument!"
+  echo "󰇀 Examples: $COMMAND_NAME --external-monitor --mobile-monitor"
+  echo "            $COMMAND_NAME --external-monitor"
+  echo "            $COMMAND_NAME --mobile-monitor"
+  echo "            $COMMAND_NAME --reset-monitors"
+  echo "󰇀 Run '$COMMAND_NAME --help' for more information."
+  exit 1
+fi
+
+# Run the reset command if the --reset-monitors flag is set
+if [ "$RESET_MONITORS" == true ]; then
+  xrandr -s 0
+  exit 0
+fi
+
+# Run the listing command if the --list-monitors flag is set
+if [ "$LIST_MONITORS" == true ]; then
+  xrandr
+  exit 0
+fi
+
+# Get all connected displays
+CONNECTED_DISPLAYS=$(xrandr | grep ' connected' | awk '{print $1}')
+
+# Prompt for external and/or mobile monitor using FZF if requested
+EXTERNAL_MONITOR_NAME=""
+MOBILE_MONITOR_NAME=""
+
+if [ "$EXTERNAL_MONITOR" == true ]; then
+  EXTERNAL_MONITOR_NAME=$(echo "$CONNECTED_DISPLAYS" | fzf --prompt " Select external monitor (above laptop): ")
+fi
+
+if [ "$MOBILE_MONITOR" == true ]; then
+  MOBILE_MONITOR_NAME=$(echo "$CONNECTED_DISPLAYS" | fzf --prompt " Select mobile monitor (right of laptop): ")
+fi
+
+# Always keep the laptop's built-in display name (commonly eDP-1, but detect it)
+LAPTOP_DISPLAY=$(xrandr | grep ' connected' | grep -E 'eDP|LVDS' | awk '{print $1}' | head -n1)
+
+# Build a list of all outputs to turn off those not selected
+ALL_OUTPUTS=($CONNECTED_DISPLAYS)
+OUTPUTS_TO_OFF=()
+for out in "${ALL_OUTPUTS[@]}"; do
+  if [ "$out" != "$LAPTOP_DISPLAY" ] && [ "$out" != "$EXTERNAL_MONITOR_NAME" ] && [ "$out" != "$MOBILE_MONITOR_NAME" ]; then
+    OUTPUTS_TO_OFF+=("$out")
+  fi
+done
+
+# Add a mode for the mobile monitor if needed (e.g., for tablet via weylus)
+if [ "$MOBILE_MONITOR" == true ] && [ -n "$MOBILE_MONITOR_NAME" ]; then
+  xrandr --addmode "$MOBILE_MONITOR_NAME" 2560x1600
+fi
+
+# Build the xrandr command based on selection
+XRANDR_CMD="xrandr"
+
+if [ -n "$EXTERNAL_MONITOR_NAME" ] && [ -n "$MOBILE_MONITOR_NAME" ]; then
+  # Both external and mobile selected
+  # External (4K): 3840x2160 at position (0,0)
+  # Laptop (2880x1920): centered under external, offset = (3840-2880)/2 = 480
+  XRANDR_CMD+=" --output $EXTERNAL_MONITOR_NAME --primary --mode 3840x2160 --pos 0x0 --rotate normal"
+  XRANDR_CMD+=" --output $LAPTOP_DISPLAY --mode 2880x1920 --pos 480x2160 --rotate normal"
+  XRANDR_CMD+=" --output $MOBILE_MONITOR_NAME --mode 2560x1600 --pos 3280x2160 --rotate normal"
+elif [ -n "$EXTERNAL_MONITOR_NAME" ]; then
+  # Only external selected
+  # External (4K): 3840x2160 at position (0,0)
+  # Laptop (2880x1920): centered under external, offset = (3840-2880)/2 = 480
+  XRANDR_CMD+=" --output $EXTERNAL_MONITOR_NAME --primary --mode 3840x2160 --pos 0x0 --rotate normal"
+  XRANDR_CMD+=" --output $LAPTOP_DISPLAY --mode 2880x1920 --pos 480x2160 --rotate normal"
+elif [ -n "$MOBILE_MONITOR_NAME" ]; then
+  # Only mobile selected
+  XRANDR_CMD+=" --output $LAPTOP_DISPLAY --primary --mode 2880x1920 --pos 0x0 --rotate normal"
+  XRANDR_CMD+=" --output $MOBILE_MONITOR_NAME --mode 2560x1600 --pos 2880x0 --rotate normal"
+fi
+
+# Turn off all other outputs
+for out in "${OUTPUTS_TO_OFF[@]}"; do
+  XRANDR_CMD+=" --output $out --off"
+done
+
+# Run the xrandr command if any monitor was selected
+if [ -n "$EXTERNAL_MONITOR_NAME" ] || [ -n "$MOBILE_MONITOR_NAME" ]; then
+  eval "$XRANDR_CMD"
+fi
+
+# Set the root color of the desktop
+# hsetroot -solid "#a569a5"
+hsetroot -solid "#6E466E"
+
+# Set the root background image of the desktop
+# feh --bg-fill ~/media/images/wallpaper/Honeycomb_Mac.png

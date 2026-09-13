@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Reference:
 # https://unix.stackexchange.com/questions/52659/how-can-i-list-ls-colors-in-colour

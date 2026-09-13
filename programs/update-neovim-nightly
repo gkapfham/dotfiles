@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Reference:
 # https://gist.github.com/ecosse3/ab58a8577d8c69dccdf03304b720e1c8

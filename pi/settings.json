@@ -1,0 +1,29 @@
+{
+  "lastChangelogVersion": "0.84.1",
+  "theme": "ghostty-terminal",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "kimi-k2.7-code",
+  "defaultThinkingLevel": "high",
+  "enableSkillCommands": true,
+  "packages": [
+    "npm:pi-web-access",
+    "npm:pi-zentui",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@piotr-oles/pi-reflag",
+    "npm:pi-codex-goal",
+    "npm:pi-copy-message",
+    "npm:pi-interactive-shell",
+    "npm:pi-zk",
+    "npm:@tmustier/pi-usage-extension",
+    "npm:pi-overwatch",
+    "npm:pi-diff-review",
+    "npm:@heyhuynhgiabuu/pi-diff",
+    "npm:pi-gateway",
+    "npm:pi-tracker",
+    "npm:tau-mirror",
+    "npm:pi-session-search"
+  ],
+  "enabledModels": [
+    "opencode-go/deepseek-v4-flash"
+  ]
+}

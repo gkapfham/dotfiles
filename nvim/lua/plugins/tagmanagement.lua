@@ -1,22 +1,23 @@
 -- File: plugins/tagmanagement.lua
 -- Purpose: generate, save, and use tags;
 -- note that other plugins like telescope
--- use these tags automatically generated
+-- use these automatically generated tags
 
 return {
 
-  -- Gutentags
+  -- Gutentags;
+  -- This works correctly for most files;
+  -- yet, it does not work for Quarto markdown
+  -- files and other "non-standard file types";
+  -- note that it does not store the tag files
+  -- inside of a project but rather in a
+  -- system-wide directory for "cache files"
   {
     "ludovicchabant/vim-gutentags",
     event = "BufReadPre",
     config = function()
-      vim.cmd([[
-      " Specify where the tags are stored
-      set tags=./tags;/,tags;/
-      ]])
       vim.g.gutentags_ctags_exclude = {
         '*.git', '*.svg', '*.hg',
-        '*/tests/*',
         'build',
         'dist',
         '*sites/*/files/*',
@@ -29,7 +30,6 @@ return {
         'example',
         'bundle',
         'vendor',
-        '*.md',
         '*-lock.json',
         '*.lock',
         '*bundle*.js',
@@ -59,14 +59,13 @@ return {
         '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx',
       }
       vim.g.gutentags_add_default_project_roots = false
-      vim.g.gutentags_project_root = {'package.json', '.git'}
+      vim.g.gutentags_project_root = { 'package.json', '.git' }
       vim.g.gutentags_cache_dir = vim.fn.expand('~/.cache/nvim/ctags/')
       vim.g.gutentags_generate_on_new = true
       vim.g.gutentags_generate_on_missing = true
       vim.g.gutentags_generate_on_write = true
       vim.g.gutentags_generate_on_empty_buffer = true
       vim.g.gutentags_file_list_command = "rg --files"
-      -- vim.g.gutentags_ctags_extra_args = {'--tag-relative=yes', '--fields=+ailmnS', }
     end,
   },
 

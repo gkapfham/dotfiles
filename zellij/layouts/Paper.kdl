@@ -1,0 +1,46 @@
+layout {
+    tab name="Editor" {
+        pane name="Neovim" focus=true
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
+    tab name="Processor" focus=true hide_floating_panes=true {
+        pane size="50%" split_direction="vertical" {
+            pane name="Compile" size="50%"
+            pane name="Files" size="50%"
+        }
+        pane size="50%" split_direction="vertical" {
+            pane command="lazygit" name="GitHub" size="50%" {
+                start_suspended false
+            }
+            pane name="Commands" size="50%"
+        }
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
+    tab name="Agents" hide_floating_panes=true {
+        pane command="bunx" name="Pi" {
+          args "@earendil-works/pi-coding-agent"
+            start_suspended false
+        }
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
+    tab name="Manager" hide_floating_panes=true {
+        pane command="elio" name="Elio" {
+            start_suspended false
+        }
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
+    new_tab_template {
+        pane
+        pane size=1 borderless=true {
+            plugin location="zjstatus"
+        }
+    }
+}

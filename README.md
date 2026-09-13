@@ -8,17 +8,14 @@ Carefully Curated Dotfiles for Popular Linux Programs
 </b>
 </p>
 
-[![Build Status](https://travis-ci.org/gkapfham/dotfiles.svg?branch=master)](https://travis-ci.org/gkapfham/dotfiles)
-
 This repository contains the configuration files (i.e., "dotfiles") used to
 configure the programs regularly used by me, [Gregory M.
-Kapfhammer](https://www.gregorykapfhammer.com/). Please note that the dotfiles
-in this repository are, at least to some extent, "hard-coded" to work for my
-development environment and projects. For instance, I created these
-configuration files under the assumption that a developer will use Arch Linux.
-Even though they are heavily customized, my hope is that they are largely
-reusable and, additionally, will give examples of how to configure various
-programs such as `i3`, `mutt`, `nvim`, `polybar`, `tmux`, `vim`, and `zsh`.
+Kapfhammer](https://www.gregorykapfhammer.com/). While heavily customized for my
+personal workflow and computers, these dotfiles serve as practical examples of
+how to configure a wide variety of development tools and system utilities. The
+configurations span terminal multiplexers, window managers, text editors, email
+clients, and desktop environments, providing a foundation for building your own
+efficient development setup on Linux and MacOS.
 
 This is a summary of some of the dotfiles and program configurations that I
 created and actively maintain:
@@ -56,7 +53,7 @@ created and actively maintain:
 - `.config/i3`: configuration and scripts for the `i3` window manager
 - `.config/polybar`: configuration and scripts for the `polybar` used with `i3`
 - `.config/termite`: configuration and color scheme for the `termite` terminal window
-- `.config/zathura`: configuration for the `zathura ` PDF viewer
+- `.config/zathura`: configuration for the `zathura` PDF viewer
 - `.local/bin`: scripts for regular use through the terminal window and `rofi`
 
 Are you looking for some neat configurations to improved your own dotfiles? If
@@ -104,7 +101,7 @@ directory containing this repository.
 ln -s ~/configure/dotfiles/.bibtoolrsc .bibtoolrsc
 ```
 
-As an alternative to manually creating all of the symbolic links in the
+As an alternative to manually creating all the symbolic links in the
 aforementioned fashion, this repository has a `Makefile` with rules that use
 `stow` to create these symbolic links automatically. If a system already
 contains dotfiles that you no longer needed and you want to remove them from the
@@ -117,16 +114,82 @@ destination directories. In summary, the main command to type is:
 make dotfiles
 ```
 
+## Standalone Scripts
+
+This repository includes standalone Lua scripts in `nvim/lua/` that can be run
+from the command line using Neovim's built-in LuaJIT runtime. For example, the
+`similar.lua` module provides compression-based semantic file similarity search
+and can be invoked directly from a terminal:
+
+```shell
+nvim -l nvim/lua/similar.lua /path/to/repository "search query"
+```
+
+## Pi Coding Agent (pi)
+
+This repository includes configurations for the [Pi Coding Agent](https://pi.dev)
+(`pi`), an extensible terminal coding harness. Pi is run via `bunx` without a
+global installation:
+
+```shell
+bunx @earendil-works/pi-coding-agent
+```
+
+### Version-controlling the pi config
+
+The pi configuration lives in `pi/` (settings manifest, extensions, skills,
+and the `pi-msg` XMPP bridge kit). The repo copy is a **snapshot** — pi only
+reads the live files under `~/.pi/agent/` — so the workflow is: make changes,
+run `bash pi/sync-config.sh`, then `git add pi/ && git commit`. See
+[`pi/README.md`](pi/README.md) for the full boundary rules (what's tracked
+versus what's ephemeral) and the step-by-step workflow.
+
+### Package Management
+
+Pi extensions, skills, and themes are distributed as npm packages. Install and
+remove them using the `pi` CLI through `bunx`:
+
+| Command | Purpose |
+|---------|---------|
+| `bunx @earendil-works/pi-coding-agent install npm:<package>` | Install a package |
+| `bunx @earendil-works/pi-coding-agent remove npm:<package>` | Remove a package |
+| `bunx @earendil-works/pi-coding-agent list` | List installed packages |
+| `bunx @earendil-works/pi-coding-agent update --all` | Update pi and all packages |
+
+For example, to install and then remove the `pi-vim` modal editing extension:
+
+```shell
+bunx @earendil-works/pi-coding-agent install npm:pi-vim
+bunx @earendil-works/pi-coding-agent remove npm:pi-vim
+```
+
+> **Note:** After installing or removing a package, restart Pi for the changes
+> to take effect.
+
+### Web Search Configuration
+
+The `pi-web-access` package provides web search, content extraction, and video
+understanding capabilities. The curator workflow (which opens a browser for
+summary review) can be disabled by creating `~/.pi/web-search.json`:
+
+```json
+{
+  "workflow": "none"
+}
+```
+
+See the [pi-web-access README](https://pi.dev/packages/pi-web-access) for full
+configuration options.
+
 ## Problems or Praise
 
 If you have any problems with downloading or understanding these configuration
-files, then please create an issue associated with this Git repository using
-the [Issues](https://github.com/gkapfham/dotfiles/issues) link at the top of
-this repository. As the sole contributor to the `dotfiles` repository, I will
-do everything possible to resolve your issue and ensure that all the
-configurations are clear and, potentially, best suited to working in your
-development environment. Remember, this repository is being made publicly
-available to provide examples of how to write configurations for programs
-like `vim`, `nvim`, and `i3`. If you find that these files help you in
-preparing your own configurations, then I also encourage you to "star" and
-"watch" this project!
+files, then please create an issue associated with this Git repository using the
+[Issues](https://github.com/gkapfham/dotfiles/issues) link at the top of this
+repository. As the sole contributor to the `dotfiles` repository, I will do
+everything possible to resolve your issue and ensure that all the configurations
+are clear and potentially best suited to working in your development
+environment. Remember, this repository is being made publicly available to
+provide examples of how to write configurations for programs like `vim`, `nvim`,
+`i3`, and `polybar`. If you find that these files help you in preparing your own
+configurations, then I also encourage you to "star" and "watch" this project!

@@ -1,0 +1,82 @@
+{
+	"$schema": "https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
+	"name": "ghostty-terminal",
+	"vars": {
+		"bg": "#1c1c1c",
+		"fg": "#d2d2d2",
+		"black": "#767676",
+		"red": "#d78700",
+		"green": "#6f9500",
+		"yellow": "#b7b757",
+		"blue": "#87afd7",
+		"magenta": "#a569a5",
+		"cyan": "#d75f5f",
+		"white": "#b2b2b2",
+		"dimGray": "#5a5a5a",
+		"surface": "#2d2d2d"
+	},
+	"colors": {
+		"accent": "blue",
+		"border": "white",
+		"borderAccent": "cyan",
+		"borderMuted": "black",
+		"success": "green",
+		"error": "red",
+		"warning": "yellow",
+		"muted": "black",
+		"dim": "dimGray",
+		"text": "fg",
+		"thinkingText": "black",
+
+		"selectedBg": "surface",
+		"userMessageBg": "bg",
+		"userMessageText": "fg",
+		"customMessageBg": "bg",
+		"customMessageText": "fg",
+		"customMessageLabel": "blue",
+		"toolPendingBg": "#222222",
+		"toolSuccessBg": "#222222",
+		"toolErrorBg": "#2e1e1e",
+		"toolTitle": "fg",
+		"toolOutput": "white",
+
+		"mdHeading": "yellow",
+		"mdLink": "blue",
+		"mdLinkUrl": "black",
+		"mdCode": "blue",
+		"mdCodeBlock": "fg",
+		"mdCodeBlockBorder": "black",
+		"mdQuote": "white",
+		"mdQuoteBorder": "black",
+		"mdHr": "black",
+		"mdListBullet": "cyan",
+
+		"toolDiffAdded": "green",
+		"toolDiffRemoved": "red",
+		"toolDiffContext": "black",
+
+		"syntaxComment": "#767676",
+		"syntaxKeyword": "#87afd7",
+		"syntaxFunction": "#b7b757",
+		"syntaxVariable": "#d2d2d2",
+		"syntaxString": "#6f9500",
+		"syntaxNumber": "#87afd7",
+		"syntaxType": "#d75f5f",
+		"syntaxOperator": "#d2d2d2",
+		"syntaxPunctuation": "#b2b2b2",
+
+		"thinkingOff": "dimGray",
+		"thinkingMinimal": "#6e6e6e",
+		"thinkingLow": "#87afd7",
+		"thinkingMedium": "#b7b757",
+		"thinkingHigh": "#a569a5",
+		"thinkingXhigh": "#d75f5f",
+
+		"bashMode": "green"
+	},
+	"export": {
+		"pageBg": "#1c1c1c",
+		"cardBg": "#222222",
+		"infoBg": "#2d2d2d"
+	}
+}

@@ -1,0 +1,5 @@
+# Secrets / generated files — never commit these.
+config.env
+*.session
+certs/
+nohup.out
