@@ -4,6 +4,66 @@ SHELL=zsh
 
 # }}}
 
+## Every target here is a command, not a file. Without .PHONY a stray
+## file or directory named e.g. `create`, `stow`, or `help` in the
+## repository root would make make treat that target as up to date and
+## silently skip it. {{{
+
+.PHONY: check create create-alacritty create-atuin create-bat create-bin \
+        create-config create-dunst create-fast-syntax-highlighting \
+        create-firefox create-fzf-tab create-ghostty create-git-status \
+        create-gtk2 create-gtk3 create-i3 create-i3status create-i3wsr \
+        create-kitty create-mutt create-nvim create-opencode create-pi \
+        create-picom create-polybar create-rofi create-termite create-tmux \
+        create-tpm create-urlscan create-vimrc create-wezterm create-yazi \
+        create-zathura create-zellij create-zsh create-zsh-auto-suggestions \
+        create-zsh-defer create-zsh-syntax-highlighting create-zsh-vi-mode \
+        create-zshdefer create-zshtheme dotfiles help purge \
+        purge-libinput-gestures purge-mime purge-starship purge-trippy \
+        purge-trolltech stow stow-alacritty stow-applications stow-atuin \
+        stow-bat stow-bin stow-dunst stow-email stow-external \
+        stow-fast-syntax-highlighting stow-firefox stow-fzf-tab stow-ghostty \
+        stow-git stow-git-status stow-gtk2 stow-gtk3 stow-i3 stow-i3status \
+        stow-i3wsr stow-kitty stow-libinput-gestures stow-mime stow-mutt \
+        stow-nvim stow-opencode stow-pi stow-picom stow-polybar stow-rofi \
+        stow-shell stow-starship stow-system stow-termite stow-tmux \
+        stow-tool stow-tpm stow-trippy stow-trolltech stow-urlscan stow-vim \
+        stow-vimrc stow-wezterm stow-writing stow-yazi stow-zathura \
+        stow-zellij stow-zsh-auto-suggestions stow-zsh-autosuggestions \
+        stow-zsh-syntax-highlighting stow-zsh-vi-mode stow-zshdefer \
+        stow-zshtheme
+
+# }}}
+
+## Static checks {{{
+
+## Hard gates (the target exits non-zero if any of these fail):
+##   - bash -n on every tracked *.sh
+##   - zsh  -n on the zsh dotfiles (shell/.zshrc, shell/.fasd-init-zsh,
+##     and shell/.oh-my-zsh.sh, which is zsh despite carrying a .sh name)
+##   - JSON validation of the tracked configuration files
+##
+## Informational only: shellcheck. The repository has pre-existing
+## findings, so it is reported but never fails the target.
+check:
+	@fail=0; \
+	echo "==> shell syntax"; \
+	for f in $$(git ls-files '*.sh') shell/.zshrc shell/.fasd-init-zsh; do \
+	  [ -f "$$f" ] || continue; \
+	  case "$$f" in *.zshrc|*.fasd-init-zsh|*.oh-my-zsh.sh) sh=zsh ;; *) sh=bash ;; esac; \
+	  if $$sh -n "$$f" 2>/dev/null; then echo "  ok    $$f  ($$sh -n)"; else echo "  FAIL  $$f  ($$sh -n)"; fail=1; fi; \
+	done; \
+	echo "==> JSON"; \
+	for f in pi/settings.json pi/repos.json pi/extensions/quotas.json pi/themes/ghostty-terminal.json; do \
+	  [ -f "$$f" ] || continue; \
+	  if python3 -c 'import json,sys; json.load(open(sys.argv[1]))' "$$f" 2>/dev/null; then echo "  ok    $$f"; else echo "  FAIL  $$f"; fail=1; fi; \
+	done; \
+	echo "==> shellcheck (informational)"; \
+	if command -v shellcheck >/dev/null 2>&1; then shellcheck -S warning $$(git ls-files '*.sh') || true; else echo "  shellcheck not installed (skipped)"; fi; \
+	exit $$fail
+
+## }}}
+
 # NOTE: Not all of the rules in this Makefile are, within
 # their specific region, group according to the type of
 # program that they manage or in alphabetical order. This
@@ -20,37 +80,36 @@ SHELL=zsh
 # The "dotfiles" rule does not run this purge
 # command, suggesting that it is not needed
 
-## Purge all of the existing symlinks
-## that were manually created, setting the
-## stage for the use of Stow with other rules.
-## Note that this is only needed for those
-## symlinks that exist in the root of the
-## user's home directory
+## Purge the symlinks that `make stow` created in the root
+## of the user's home directory, setting the stage for the
+## use of Stow with other rules.
+##
+## Safety: ONLY symlinks are removed. A real file (for
+## example ~/.gtkrc-2.0, which this repository does not
+## manage) is reported and left untouched, so purge can
+## never destroy user data. Pass YES=1 to skip the prompt
+## (for example `make purge YES=1`).
 purge:
-	rm -f ~/.Rprofile
-	rm -f ~/.mailcap
-	rm -f ~/.msmtprc
-	rm -f ~/.mbsyncrc
-	rm -f ~/.muttprintrc
-	rm -f ~/.muttrc
-	rm -f ~/.signature
-	rm -f ~/.gitconfig
-	rm -f ~/.gitignore_global
-	rm -rf ~/.oh-my-zsh.sh
-	rm -rf ~/.zshrc
-	rm -rf ~/.compton.conf
-	rm -rf ~/.gtkrc-2.0
-	rm -rf ~/.inputrc
-	rm -rf ~/.profile
-	rm -rf ~/.Xresources
-	rm -rf ~/.tmux.conf
-	rm -rf ~/.ctags
-	rm -rf ~/.urlview
-	rm -rf ~/.gvimrc
-	rm -rf ~/.minivimrc
-	rm -rf ~/.vimrc
-	rm -rf ~/.bibtoolrsc
-	rm -rf ~/.latexmkrc
+	@if [ "$${YES:-0}" = "1" ]; then \
+	  echo "==> purge: removing stow symlinks from $$HOME (YES=1, no prompt)"; \
+	else \
+	  printf 'Remove the stow-created symlinks from %s? (y/N) ' "$$HOME"; \
+	  read ans; \
+	  [ "$$ans" = y ] || [ "$$ans" = Y ] || { echo "Aborted."; exit 1; }; \
+	fi
+	@for f in \
+	  .Rprofile .mailcap .msmtprc .mbsyncrc .muttprintrc .muttrc .signature \
+	  .gitconfig .gitignore_global .oh-my-zsh.sh .zshrc .compton.conf \
+	  .gtkrc-2.0 .inputrc .profile .Xresources .tmux.conf .ctags .urlview \
+	  .gvimrc .minivimrc .vimrc .bibtoolrsc .latexmkrc; do \
+	  p="$$HOME/$$f"; \
+	  if [ -L "$$p" ]; then \
+	    rm -f "$$p" && echo "  removed  ~/$$f"; \
+	  elif [ -e "$$p" ]; then \
+	    echo "  SKIPPED  ~/$$f (real file, not a stow symlink)"; \
+	  fi; \
+	done
+	@echo "==> purge complete"
 
 ## }}}
 
