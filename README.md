@@ -54,6 +54,10 @@ created and actively maintain:
 - `.config/polybar`: configuration and scripts for the `polybar` used with `i3`
 - `.config/termite`: configuration and color scheme for the `termite` terminal window
 - `.config/zathura`: configuration for the `zathura` PDF viewer
+- `firefox/chrome/userChrome.css`: customization of Firefox's own interface
+(e.g., the purple URL-bar focus ring matching `nvim`), controlled by this
+repository and symbolically linked into the `chrome/` directory of every
+Firefox profile by `make stow-firefox`
 - `.local/bin`: scripts for regular use through the terminal window and `rofi`
 
 Are you looking for some neat configurations to improved your own dotfiles? If
