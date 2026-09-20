@@ -2,7 +2,7 @@
 
 ## Nerd Font Icons (No Emojis)
 
-Use **Nerd Font icons** (NF set, e.g.,               󰄶                    󱥸    etc.) in all output — status indicators, TODO lists, file trees, notifications, and any UI elements.
+Use **Nerd Font icons** (NF set, e.g.,        󰄶          󱥸  etc.) in all output — status indicators, TODO lists, file trees, notifications, and any UI elements.
 
 Do **not** use Unicode emoji characters (✅ ❌ 🚀 🎉 🔧 📝 etc.) anywhere. Nerd Font alternatives should be used instead.
 
@@ -21,6 +21,14 @@ Android phone), the terminal-oriented Nerd Font conventions do not apply:
   break link detection in the Conversations app. Put the full URL alone on
   its own line so it is tappable.
 - Keep messages concise; the phone renders long blocks poorly.
+
+## TODO Ownership — Do Not Close Issues Yourself
+
+The user always wants to close TODOs/issues themselves. Never mark a TODO as
+closed/completed or call `todo update status=closed` on the user's behalf —
+even after implementing a fix and verifying it with `uv run task all`. Leave
+the TODO open for the user to review and close. Re-open immediately if you
+closed one by mistake.
 
 ## File Reading and Editing
 
@@ -53,17 +61,19 @@ in a single call. The \`sleep\` in Step 2 blocks that call while the agent
 finishes its other completion work (notify-send, final report, etc.).
 
 **How it works:**
+
 1. The `notify` command stores the message and sets `received_at = now` in
    the notification widget.
 2. After `show_interval + 1` seconds (config is `notification_show_interval "1"`
    in `config.kdl`; add 1s buffer for the strict less-than timestamp check),
-   Step 2 sends `zjstatus::pipe::clear:: ` which inserts into `state.pipe_results`
+   Step 2 sends `zjstatus::pipe::clear::` which inserts into `state.pipe_results`
    — a guaranteed state mutation — and sets `should_render = true`.
 3. Zellij re-renders the plugin. The notification widget checks
    `received_at + show_interval < now`, finds the interval has expired, and
    switches to the empty "no notifications" format.
 
 **Why this approach:**
+
 - `zjstatus::notify::` has no `clear` or `dismiss` sub-command in the pipe
   protocol. There is no native Zellij action to clear plugin notifications.
 - `zjstatus::rerun::dummy` with a non-existent command returns early without
@@ -72,6 +82,7 @@ finishes its other completion work (notify-send, final report, etc.).
   (real state mutation), reliably forcing a re-render.
 
 **Important notes:**
+
 - Do NOT use `nohup` or background processes (`&`) for the clear step —
   backgrounded processes don't survive the agent's bash tool execution.
 - The \`sleep\` duration should be at least `show_interval + 1` seconds. With
