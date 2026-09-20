@@ -30,10 +30,18 @@ the appropriate locations in the user's home directory.
 - **`make stow`**: Stows the dotfiles for the core applications and configurations.
 - **`make stow-external`**: Stows the dotfiles for the Zsh plugins that are
   included as submodules.
-- **`make clean`**: This target is not fully implemented and should be used with
-  caution. It is intended to remove generated files.
-- **`make purge`**: This target is also not fully implemented and should be used
-  with caution. It is intended to remove all stowed dotfiles.
+- **`make purge`**: Removes the symlinks that `make stow` created in the root
+  of the user's home directory. Only symlinks are removed — a real file (for
+  example `~/.gtkrc-2.0`, which this repository does not manage) is reported
+  and left untouched, so purge cannot destroy user data. It asks for
+  confirmation first; pass `YES=1` to skip the prompt. It does not yet cover
+  the `~/.config` trees that stow also creates.
+- **`make check`**: Runs static checks — shell syntax on the tracked scripts
+  (`bash -n` on `*.sh`, `zsh -n` on the zsh dotfiles under `shell/`, including
+  `.oh-my-zsh.sh` which is zsh despite its name) and JSON validation of the
+  tracked configuration files. Those are hard gates (non-zero exit on failure).
+  `shellcheck` also runs but only reports, since the repository has pre-existing
+  findings.
 - **`make help`**: Lists all available targets in the Makefile.
 
 When adding a new configuration that needs to be stowed, you will need to add a
