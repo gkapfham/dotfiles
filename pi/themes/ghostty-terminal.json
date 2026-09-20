@@ -29,7 +29,7 @@
 		"thinkingText": "black",
 
 		"selectedBg": "surface",
-		"userMessageBg": "bg",
+		"userMessageBg": "surface",
 		"userMessageText": "fg",
 		"customMessageBg": "bg",
 		"customMessageText": "fg",
