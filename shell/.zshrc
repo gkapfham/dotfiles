@@ -113,8 +113,8 @@ unset JAVA_TOOL_OPTIONS
 # No color formatting with pre-commit
 export PRE_COMMIT_COLOR='never'
 
-# Get correct spacing in python virtualenv_prompt_info
-export ZSH_THEME_VIRTUALENV_SUFFIX="] "
+# Get correct spacing in python virtualenv_prompt_info (deprecated with
+# oh-my-zsh removal; was OMZ-specific and inert under Starship)
 
 # Define a marker to display of a "partial line"
 # Normally shown as a "%"
@@ -318,17 +318,12 @@ alias ffgbd='fzf-git-branch-diff'
 # Start znap so that it can later install plugins
 source ~/.zsh/zsh-snap/znap.zsh
 
-# Oh-My-Zsh and Zsh Configuration {{{
+# Zsh Configuration {{{
 
-# # Save startup time by disabling
-DISABLE_UPDATE_PROMPT=true
-DISABLE_AUTO_UPDATE=true
-
-# Default theme
-ZSH_THEME="vitamin-onec"
-
-# Timestamps
-HIST_STAMPS="mm/dd/yyyy"
+# OMZ theme (commented out: prompt is rendered by Starship; the theme file is
+# kept at zshtheme/vitamin-onec.zsh-theme in this repo). Re-enable only if
+# oh-my-zsh framework loading is restored — see git log for the removal.
+# ZSH_THEME="vitamin-onec"
 
 # Disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
@@ -398,8 +393,9 @@ zstyle ":fzf-tab:*" fzf-flags --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color
 
 # Setup fzf, its auto-completions, and key bindings
 if [ -n "${commands[fzf-share]}" ]; then
-  source "$(fzf-share)/key-bindings.zsh"
-  source "$(fzf-share)/completion.zsh"
+  _fzf_share=$(fzf-share)
+  source "$_fzf_share/key-bindings.zsh"
+  source "$_fzf_share/completion.zsh"
 fi
 
 export FZF_DEFAULT_OPTS='
@@ -709,16 +705,21 @@ znap prompt
 # History source and keybindings;
 # note using znap is not possible and
 # a standard source is also not possible.
-zvm_after_init_commands+=(eval "$(atuin init zsh)")
+# Deferred into _deferred_heavy_plugins to take ~5ms off the startup
+# critical path (Ctrl-R becomes available right after the first prompt).
+# (was: zvm_after_init_commands+=(eval "$(atuin init zsh)"))
 
 # }}}
 
 # Multiple Znap Plugins {{{
 
-# Use znap source to start plugins from oh-my-zsh
+# oh-my-zsh git plugin: provides the g* alias family (gst, g, gco, gd, glo,
+# gp, gl, ...) that is used interactively. Kept because these aliases are
+# actively used; cost is ~2-3ms on startup (znap compiles the plugin).
 znap source ohmyzsh/ohmyzsh \
   plugins/git \
 
+# Lightweight plugins loaded on startup (see below for the deferred heavy set).
 # # Use znap source to start plugins
 # znap source chisui/zsh-nix-shell
 # znap source zsh-users/zsh-completions
@@ -747,6 +748,8 @@ znap source jeffreytse/zsh-vi-mode
 zmodload zsh/sched 2>/dev/null
 _deferred_heavy_plugins() {
   znap source zsh-users/zsh-autosuggestions
+  bindkey '^ ' autosuggest-accept
+  eval "$(atuin init zsh)"
   znap source Aloxaf/fzf-tab
   znap source wfxr/forgit
   znap source MichaelAquilina/zsh-you-should-use
@@ -758,10 +761,8 @@ sched +0 _deferred_heavy_plugins
 
 # Zsh-Autosuggestions {{{
 
-# Configure the zsh-autosuggestions plugin
+# Configure the zsh-autosuggestions plugin (loaded lazily in _deferred_heavy_plugins)
 ZSH_AUTOSUGGEST_STRATEGY=( history completion match_prev_cmd )
-znap source zsh-users/zsh-autosuggestions
-zvm_after_init_commands+=(eval "bindkey '^ ' autosuggest-accept")
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585858"
 
 # }}}
