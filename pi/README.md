@@ -109,6 +109,21 @@ Notes:
 - If `pi/pi-msg/config.env` is created locally, it is gitignored (see
   `pi-msg/.gitignore`); real secrets live in `~/.config/pi-msg/`.
 
+## Local patches (npm packages) — reapply after updates
+
+Some installed npm packages have upstream bugs we patch by editing their
+source under `~/.pi/agent/npm/node_modules/<pkg>/`. `pi install` or any
+package update **reverts these edits**, so each patch ships a reapply script
+in this repo (`bin/`) that you re-run after the package updates:
+
+| Patch | Reapply after updating | Script (`~/.pi/agent/bin/`) |
+|---|---|---|
+| Hide the Tailscale (`TS: 100.x.x.x`) IP from tau-mirror's status bar | `tau-mirror` | `bash ~/.pi/agent/bin/reapply-tau-patch.sh` |
+
+Each script is idempotent (safe to re-run — it prints "already applied" and
+exits) and backs up the file it edits before patching. Add a row here
+whenever a new package patch is introduced.
+
 ## Never commit
 
 Anything containing secrets stays out of git:
