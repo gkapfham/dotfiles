@@ -152,6 +152,26 @@ create-dunst:
 ## Depends on the creation of the .config directory
 create-bat: create-config
 
+## Create the chrome/ directory inside every Firefox profile so that
+## stow-firefox has somewhere to link userChrome.css into.
+## NOTE: unlike the other create-* rules above, this must NEVER delete
+## anything (no `rm -rf`). Firefox profiles hold history, open tabs, and
+## logins, so this only creates missing directories with `mkdir -p` and
+## leaves all existing data untouched.
+## Two profile locations are covered: Firefox uses ~/.mozilla/firefox by
+## default, while this machine keeps profiles in ~/.config/mozilla/firefox.
+## No dependency on create-config: the mozilla/ tree is created by Firefox
+## itself, and if no profiles exist yet the find below simply prints nothing.
+## `find` (rather than a shell glob) is used because this Makefile runs
+## recipes with zsh (see SHELL at the top), where a glob matching nothing
+## is a fatal error; errors such as a missing base directory are hidden
+## with 2>/dev/null. `$$HOME` is make-escaping: make collapses `$$` to
+## `$` before the shell sees it, so the shell gets a normal `$HOME`.
+create-firefox:
+	find $$HOME/.config/mozilla/firefox $$HOME/.mozilla/firefox -maxdepth 1 -type d -name '*.default*' 2>/dev/null | while read -r p; do \
+		mkdir -p "$$p/chrome"; \
+	done
+
 ## Create the needed gtk-2.0/ directory in .config/
 create-gtk2:
 	rm -rf ~/.config/gtk-2.0
@@ -467,6 +487,35 @@ stow-dunst:
 ## Running stow on dunst depends on creating dunst directory
 stow-dunst: create-dunst
 
+## Link userChrome.css into the chrome/ directory of every Firefox profile.
+## NOTE: plain `stow` cannot do this job. stow links one package directory
+## to one fixed target directory, but Firefox names each profile directory
+## randomly (e.g., gfa0n85z.default) and one machine can hold several
+## profiles at once. This shell loop finds every profile and points its
+## chrome/userChrome.css at the single copy controlled by this repository:
+## firefox/chrome/userChrome.css. The canonical file lives in the repo;
+## each profile just holds a symbolic link to it.
+## Line-by-line guide for the curious:
+## - The `find ... | while read -r p` pipeline discovers every profile in
+##   both known Firefox locations, then links the file into each one.
+##   `find` is used instead of a shell glob because recipes run under zsh
+##   here, where an unmatched glob is fatal (see create-firefox above).
+## - `$(CURDIR)` is an automatic make variable holding the repository root
+##   that make was run from, so each symlink target is absolute and valid
+##   no matter which profile directory the link lives in.
+## - `ln -sf` makes this idempotent: re-running `make stow-firefox` after
+##   a new profile appears (or on a brand-new machine) links everything
+##   up again without harming existing links.
+## After linking, fully restart Firefox (open tabs restore automatically)
+## so that it reloads userChrome.css.
+stow-firefox:
+	find $$HOME/.config/mozilla/firefox $$HOME/.mozilla/firefox -maxdepth 1 -type d -name '*.default*' 2>/dev/null | while read -r p; do \
+		ln -sf $(CURDIR)/firefox/chrome/userChrome.css "$$p/chrome/userChrome.css"; \
+	done
+
+## Running stow on firefox depends on creating the profile chrome/ directories
+stow-firefox: create-firefox
+
 ## Run stow on email
 stow-email:
 	stow -t ~/ email
@@ -750,10 +799,10 @@ stow-applications:
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-alacritty create-kitty create-ghostty create-rofi create-mutt create-atuin create-yazi create-bat create-dunst create-gtk2 create-gtk3 create-i3 create-i3status create-picom create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-zellij create-opencode create-pi create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-alacritty create-kitty create-ghostty create-rofi create-mutt create-atuin create-yazi create-bat create-dunst create-firefox create-gtk2 create-gtk3 create-i3 create-i3status create-picom create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-zellij create-opencode create-pi create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-kitty stow-ghostty stow-rofi stow-mutt stow-atuin stow-yazi stow-bat stow-dunst stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-trippy stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-picom stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-zellij stow-opencode stow-pi stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-kitty stow-ghostty stow-rofi stow-mutt stow-atuin stow-yazi stow-bat stow-dunst stow-firefox stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-trippy stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-picom stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-zellij stow-opencode stow-pi stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
