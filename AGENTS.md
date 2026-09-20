@@ -103,6 +103,53 @@ Neovim.
 
 - Do not commit files.
 
+## Pi Configuration Sync (`pi/sync-config.sh`)
+
+### Purpose of the sync command
+
+`pi/sync-config.sh` snapshots the **live** pi coding agent configuration
+(`~/.pi/agent/`) into this repository (`pi/`), so it can be version-controlled
+and restored on a new machine. It copies the user-authored pieces —
+`settings.json`, `AGENTS.md`, `extensions/`, `skills/`, `bin/`, `prompts/`,
+`themes/` — while deliberately excluding generated or secret state
+(`npm/`, `sessions/`, `auth.json`, logs, etc.).
+
+Usage (run by the **human**, not the agent):
+
+```bash
+bash pi/sync-config.sh      # snapshot live -> repo
+cd ~/configure/dotfiles && git add pi/ && git commit
+```
+
+The reverse direction is `pi/apply-config.sh` (repo -> live), used to restore
+or seed a machine; it backs up `~/.pi` first.
+
+### The agent must NOT run the sync command
+
+A coding agent must **never** run `pi/sync-config.sh` (or `pi/apply-config.sh`)
+on its own initiative. Reasons:
+
+- These scripts **write to the repository working tree**, mutating what the
+  human will review and the history they will commit. That decision belongs to
+  the human.
+- They pull **runtime-derived state** into the repo (e.g.
+  `pi/extensions/quotas.json`, a pi-quotas-generated config) that the human may
+  not want tracked at all.
+- `apply-config.sh` copies **onto the live machine** and can overwrite local
+  state — it must only ever run with explicit human approval.
+- The human owns all repo-mutating steps: syncing, staging (`git add`), and
+  committing.
+
+What the agent **may** do instead:
+
+- Read and inspect the live config (`~/.pi/agent/`) or the repo copy read-only.
+- Prepare or verify changes and report the exact command for the human to run.
+- Show what a sync *would* change (`git status --short pi/`, `git diff --stat`)
+  before the human decides.
+
+If a task genuinely requires a sync, the agent must ask the human first and
+show the expected changes before running it.
+
 ## Notification Instructions
 
 - The user has given permission to use the `notify-send` command to signal task
