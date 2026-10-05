@@ -9,12 +9,20 @@
 
     fg0:    #d2d2d2;
     fg1:    #d78700;
-    fg2:    #8a8a8a;
+    fg2:    #d2d2d2;
 
-    accent: #87afd7;
-    urgent: #d75347;
-    border: #333333;
-    glow:   #d7870040;
+    /* accent and purple are palette entries 4 and 5 of the ghostty
+       terminal and the neovim theme. They are used only for small, quiet
+       touches, so that the orange above keeps meaning "selected". */
+    accent:     #d78700;
+    purple:     #a569a5;
+    purple-dim: #a569a599;
+    urgent:     #d75347;
+    border:     #333333;
+    glow:       #d7870040;
+
+    /* the characters in the list that match what has been typed */
+    match:  bold underline #a569a5;
 
     background-color:   transparent;
     text-color:         @fg0;
@@ -48,7 +56,7 @@ inputbar {
 }
 
 prompt {
-    text-color:     @fg1;
+    text-color:     @accent;
     font:           "Maple Mono Normal NF 32";
     content:        " ";
     padding:        0 8px 0 0;
@@ -57,7 +65,7 @@ prompt {
 scrollbar {
     width:        12px;
     border:       0;
-    handle-color: @fg1;
+    handle-color: @purple-dim;
     handle-width: 12px;
     padding:      4px;
     background-color: @bg0;
@@ -140,5 +148,5 @@ element-icon {
 
 element-text {
     text-color: inherit;
-    highlight:  bold underline;
+    highlight:  @match;
 }
