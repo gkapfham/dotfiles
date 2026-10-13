@@ -2,7 +2,9 @@
 -- Purpose: Configure the nvim-cmp plugin
 -- and all of the plugins that enhance it
 -- with additional completion sources
--- (e.g., Supermaven, Minuet, Copilot, etc.)
+-- (e.g., Supermaven, Minuet, Copilot, etc.),
+-- making sure that the completions sources
+-- are registered and fast and responsive
 
 -- Supporting variables and functions implemented in lua {{{
 
@@ -625,7 +627,34 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
+      -- cmp-nvim-lsp-signature-help
+      -- Patch the completion source for LSP signature help so that it calls
+      -- Neovim 0.12's method-style `client:request` API; the upstream plugin
+      -- still uses the deprecated `client.request` (dot) form, which makes a
+      -- warning appear the first time a trigger character such as "," is
+      -- typed inside a function call (see upstream issue #55 and PR #56).
+      {
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+        config = function()
+          local source = require("cmp_nvim_lsp_signature_help")
+          local get_client = source._get_client
+          -- Return a shallow proxy so that the source's dot-style
+          -- `client.request(...)` call becomes the non-deprecated
+          -- `client:request(...)` call; every other field and method is
+          -- forwarded to the underlying LSP client.
+          source._get_client = function(self, ...)
+            local client = get_client(self, ...)
+            if client == nil then
+              return nil
+            end
+            return setmetatable({
+              request = function(method, params, handler)
+                return client:request(method, params, handler)
+              end,
+            }, { __index = client })
+          end
+        end,
+      },
       "quangnguyen30192/cmp-nvim-tags",
       "ray-x/cmp-treesitter",
       "saadparwaiz1/cmp_luasnip",
