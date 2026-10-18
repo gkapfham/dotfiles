@@ -1,0 +1,192 @@
+#!/usr/bin/env bash
+#
+# File: quickshell/scripts/pi-agents
+#
+# Lists the pi coding agents that are running right now, one per line:
+#
+#     <status><TAB><project><TAB><name><TAB><idle-seconds><TAB><source>
+#
+# where status is one of:
+#
+#     active    a run is in progress right now
+#     idle      not running a turn, and the session was touched within a day
+#     dormant   not running a turn, and nothing has happened for longer
+#     unknown   running, but no session file was found to judge by
+#
+# and source is `exact` when the session file is known rather than guessed.
+#
+# The bar runs this only while its agent popup is open, so the handful of
+# subprocesses per agent is paid on demand rather than on a timer.
+#
+# How an agent is identified. Every running `pi` process is one agent, and its
+# project is the directory it was started in, read from /proc/<pid>/cwd. The
+# session file comes from the first source that has one:
+#
+#   1. ~/.pi/agent/agent-registry/<pid>.json, written by pi/extensions/
+#      agent-registry.ts. Exact, and the only source that also reports whether
+#      the agent is mid-run. Only agents started after that extension was
+#      installed have one.
+#   2. ~/.pi/tau-instances/<pid>.json, written by the tau extension. Exact, but
+#      only agents running tau have one, and it says nothing about activity.
+#   3. Otherwise, the newest session in the project's own session directory. pi
+#      names that directory after the working directory, so /home/x/proj
+#      becomes --home-x-proj--, which makes the directory mapping exact even
+#      though picking the session inside it is a guess. For an agent actually
+#      in use the newest session is its own, because that is the file being
+#      appended to.
+#
+# Sessions are assigned in three passes, and a session is never handed to two
+# agents. Two agents can share a project -- two terminals in one repository --
+# and resolving each independently would give both the same newest session and
+# report one agent twice. The exact sources claim their sessions first, then the
+# remaining ones are handed out newest-first, which for a project with two
+# agents gives exactly the two sessions those agents have open.
+#
+# The name is the last session_info record in the session file: the name pi
+# shows for that session, either set with --name or generated from the first
+# message.
+set -u
+
+sessions_root="$HOME/.pi/agent/sessions"
+tau_root="$HOME/.pi/tau-instances"
+registry_dir="$HOME/.pi/agent/agent-registry"
+now=$(date +%s)
+
+# A top-level string field from one of the small JSON records. Both record types
+# are written as a single compact line, so a pattern match is enough and the
+# script needs no JSON tool.
+field() {
+    local file="$1" key="$2"
+    grep -o "\"$key\":\"[^\"]*\"" "$file" 2>/dev/null \
+        | head -n 1 \
+        | sed -e "s/^\"$key\":\"//" -e 's/"$//'
+}
+
+# The session's display name, with JSON escapes undone. The record is written as
+# a single line, so the last match is the current name: renaming a session
+# appends a new session_info rather than editing the old one.
+session_name() {
+    local file="$1"
+    [ -r "$file" ] || return 1
+
+    grep -o '"type":"session_info"[^}]*"name":"[^"]*"' "$file" 2>/dev/null \
+        | tail -n 1 \
+        | sed -e 's/.*"name":"//' -e 's/"$//' \
+              -e 's/\\"/"/g' -e 's/\\n/ /g' -e 's/\\\\/\\/g'
+}
+
+# The session directory pi derives from a working directory:
+# /home/x/proj -> --home-x-proj--
+session_dir_for() {
+    printf '%s\n' "$sessions_root/-${1//\//-}--"
+}
+
+# The sessions in a directory, most recent first. `ls -t` sorts by mtime, which
+# avoids stat-ing every session in a directory that can hold hundreds. The path
+# is absolute, so the leading dashes in these directory names are not mistaken
+# for options.
+sessions_by_mtime() {
+    ls -t "$1"/*.jsonl 2>/dev/null
+}
+
+# ---- collect the running agents -------------------------------------------
+pids=($(pgrep -x pi))
+count=${#pids[@]}
+
+cwds=()
+sessions=()
+states=()
+sources=()
+declare -A claimed=()
+
+for (( i = 0; i < count; i++ )); do
+    cwds[i]=$(readlink "/proc/${pids[i]}/cwd" 2>/dev/null) || cwds[i]=""
+done
+
+# ---- pass 1: the registry written by the agent-registry extension -----------
+for (( i = 0; i < count; i++ )); do
+    record="$registry_dir/${pids[i]}.json"
+    [ -r "$record" ] || continue
+
+    session=$(field "$record" sessionFile)
+    [ -n "$session" ] || continue
+    # A record whose session file is gone (a session deleted, or a path that
+    # moved) must not claim it, or a later source that could have found a real
+    # session for this agent is blocked from doing so.
+    [ -r "$session" ] || continue
+
+    claimed["$session"]=1
+    sessions[i]="$session"
+    states[i]=$(field "$record" state)
+    sources[i]=exact
+done
+
+# ---- pass 2: the exact tau sessions, so the guesses cannot steal them -------
+for (( i = 0; i < count; i++ )); do
+    [ -n "${sessions[i]:-}" ] && continue
+
+    record="$tau_root/${pids[i]}.json"
+    [ -r "$record" ] || continue
+
+    session=$(field "$record" sessionFile)
+    [ -n "$session" ] || continue
+    [ -r "$session" ] || continue
+
+    claimed["$session"]=1
+    sessions[i]="$session"
+    sources[i]=exact
+done
+
+# ---- pass 3: hand out the remaining sessions, newest first ------------------
+for (( i = 0; i < count; i++ )); do
+    [ -n "${sessions[i]:-}" ] && continue
+    [ -n "${cwds[i]}" ] || continue
+
+    while IFS= read -r candidate; do
+        [ -n "$candidate" ] || continue
+        [ -n "${claimed[$candidate]:-}" ] && continue
+        claimed["$candidate"]=1
+        sessions[i]="$candidate"
+        sources[i]=guessed
+        break
+    done < <(sessions_by_mtime "$(session_dir_for "${cwds[i]}")")
+done
+
+# ---- report ----------------------------------------------------------------
+for (( i = 0; i < count; i++ )); do
+    cwd="${cwds[i]}"
+    [ -n "$cwd" ] || continue
+
+    project=${cwd##*/}
+    [ -n "$project" ] || project="/"
+    [ "$cwd" = "$HOME" ] && project="~"
+
+    session="${sessions[i]:-}"
+
+    if [ -n "$session" ] && [ -r "$session" ]; then
+        name=$(session_name "$session")
+        [ -n "$name" ] || name="$project"
+
+        idle=$(( now - $(stat -c %Y "$session" 2>/dev/null || printf '%s' "$now") ))
+
+        # The registry reports a run in progress directly. Everything else is
+        # inferred from how long ago the session file was written, which cannot
+        # separate an agent that is thinking from one that was left behind.
+        if [ "${states[i]:-}" = "working" ]; then
+            status=active; rank=0
+        elif [ "$idle" -lt 86400 ]; then
+            status=idle; rank=2
+        else
+            status=dormant; rank=3
+        fi
+    else
+        # Running, but nothing to judge activity from.
+        name="$project"
+        idle=-1
+        status=unknown; rank=1
+        sources[i]=none
+    fi
+
+    printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
+        "$rank" "$status" "$project" "$name" "$idle" "${sources[i]:-guessed}"
+done | sort -k1,1n -k5,5n | cut -f2-
