@@ -25,5 +25,9 @@ dbus-update-activation-environment --systemd DISPLAY
 # either be inconsistent or not work correctly
 xrdb ~/.Xresources
 
+# set the QT theme to use the same one
+# as is already configured for gtk3
+export QT_QPA_PLATFORMTHEME=gtk3
+
 # startx /usr/sbin/i3
 exec i3

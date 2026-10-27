@@ -1,0 +1,15 @@
+[Unit]
+Description=pi-msg: XMPP bridge for the pi coding agent
+Documentation=https://github.com/zachpmanson/pi-msg
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/pi-msg
+Restart=on-failure
+RestartSec=5
+Environment=PI_MSG_DEBUG=1
+EnvironmentFile=%h/.config/pi-msg/env
+Environment=PATH=__PATH__
+
+[Install]
+WantedBy=default.target

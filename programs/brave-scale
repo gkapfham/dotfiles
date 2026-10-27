@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Note that using "$@" will pass to the brave browser
+# the inputs that are passed to this script. Note that
+# recent testing reveals that brave does not correctly
+# adhere to these scale factors.
+brave --high-dpi-support=1 --force-device-scale-factor=1 "$@"

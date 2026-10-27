@@ -6,6 +6,7 @@
 [core]
     excludesfile = /home/gkapfham/.gitignore_global
     pager = delta
+	pager = less
 [interactive]
     diffFilter = delta --color-only --features=interactive --navigate --hyperlinks
 [github]
@@ -82,5 +83,25 @@
     line-numbers-minus-style = yellow
     whitespace-error-style = magenta
     navigate = true
-    true-color = true
     hyperlinks = true
+[maintenance]
+	repo = /home/gkapfham/.zsh/zsh-snap
+	repo = /home/gkapfham/.zsh/Aloxaf/fzf-tab
+	repo = /home/gkapfham/.zsh/babarot/enhancd
+	repo = /home/gkapfham/.zsh/chisui/zsh-nix-shell
+	repo = /home/gkapfham/.zsh/jeffreytse/zsh-vi-mode
+	repo = /home/gkapfham/.zsh/jnooree/zoxide-zsh-completion
+	repo = /home/gkapfham/.zsh/marlonrichert/zsh-autocomplete
+	repo = /home/gkapfham/.zsh/ohmyzsh/ohmyzsh
+	repo = /home/gkapfham/.zsh/zsh-users/zsh-autosuggestions
+	repo = /home/gkapfham/.zsh/zsh-users/zsh-completions
+[diff]
+	tool = codediff
+[difftool "codediff"]
+	cmd = nvim \"$LOCAL\" \"$REMOTE\" +\"CodeDiff file $LOCAL $REMOTE\"
+[credential "https://github.com"]
+	helper = 
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !gh auth git-credential

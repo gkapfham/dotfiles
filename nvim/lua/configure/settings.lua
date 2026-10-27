@@ -28,6 +28,8 @@ vim.opt.lazyredraw = false
 vim.cmd([[
   set nocursorcolumn
   set nocursorline
+  " set guicursor=n-v-c:block,i:hor50
+  " set guicursor=n-v-c-sm:block,i-ci-ve:ver50-Cursor,r-cr-o:hor20
   set ttyfast
 ]])
 
@@ -45,10 +47,18 @@ vim.cmd([[set noshowcmd]])
 
 -- Ignorecase search: "J" and "j" are the same
 -- Smartcase search: "J" is different than "j" if capitalized used
--- Both of these variables are respected by flash.nvim
+-- Both of these variables are respected by flash.nvim; see the
+-- plugins/movement.lua file for more information about flash.nvim
 vim.cmd([[
   set ignorecase
   set smartcase
+]])
+
+-- Do not display the message that shows which
+-- match is the currently highlighted one as
+-- the lualine will display this information
+vim.cmd([[
+set shortmess +=S
 ]])
 
 -- }}}
@@ -72,16 +82,11 @@ vim.cmd([[
   set tabstop=4
 ]])
 
--- -- Separate linebreaks and tabs for Python
--- vim.cmd([[
---   autocmd Filetype python setlocal softtabstop=4
---   autocmd Filetype python setlocal shiftwidth=4
--- ]])
-
--- Separate linebreaks and tabs for Golang
+-- Separate linebreaks and tabs for Golang and LaTeX
 vim.cmd([[
   au Filetype go setlocal tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
   au Filetype go setlocal listchars+=tab:\ \
+  au Filetype tex setlocal tabstop=2 shiftwidth=2 softtabstop=2 noexpandtab
 ]])
 
 -- Insert spaces for a tab
@@ -89,6 +94,14 @@ vim.cmd([[
   set expandtab
   set smarttab
   set shiftround
+]])
+
+-- Disable linewrapping in gitcommit buffer when using fugitive
+vim.cmd([[
+  " Disable line wrapping when entering a gitcommit buffer
+  autocmd BufEnter * if &filetype == 'gitcommit' | setlocal formatoptions-=t | endif
+  " Re-enable line wrapping when leaving a gitcommit buffer
+  autocmd BufLeave * if &filetype == 'gitcommit' | setlocal formatoptions+=t | endif
 ]])
 
 -- }}}

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# updates NixOS
+
+# update channels
+sudo nix-channel --update && \
+
+# rebuild using git-managed configuration
+alias kix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
+kix
+
+# delete old generations
+sudo nix-env --delete-generations +5 && \
+
+# collect garbage
+sudo nix-store --gc
+
+# report on /boot
+df -h | grep /boot

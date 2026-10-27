@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# zathura-extract-page - Extract ALL text from current page with pdfclip cleaning
+# Called from zathura with: map Y exec "zathura-extract-page $PAGE $FILE"
+
+set -e
+
+PAGE="$1"
+PDF_FILE="$2"
+
+if [ -z "$PAGE" ]; then
+    notify-send "Zathura Extract" "Error: No page number provided"
+    exit 1
+fi
+
+if [ -z "$PDF_FILE" ] || [ ! -f "$PDF_FILE" ]; then
+    notify-send "Zathura Extract" "Error: Could not find PDF file: $PDF_FILE"
+    exit 1
+fi
+
+# Check if pdfclip exists
+if [ ! -x "$HOME/.local/bin/pdfclip" ]; then
+    notify-send "Zathura Extract" "Error: pdfclip not found in ~/.local/bin"
+    exit 1
+fi
+
+# Ensure DISPLAY is set for clipboard access
+if [ -z "$DISPLAY" ]; then
+    export DISPLAY=:0
+fi
+
+if [ -z "$XAUTHORITY" ] && [ -f "$HOME/.Xauthority" ]; then
+    export XAUTHORITY="$HOME/.Xauthority"
+fi
+
+# Use pdfclip to extract and clean the page (it copies to clipboard)
+"$HOME/.local/bin/pdfclip" --clean "$PDF_FILE" "$PAGE" >/dev/null 2>&1 || true
+
+# Get the cleaned text from clipboard
+if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+    CLEANED_TEXT=$(wl-paste 2>/dev/null || echo "")
+else
+    CLEANED_TEXT=$(xclip -selection clipboard -o 2>/dev/null || echo "")
+fi
+
+if [ -z "$CLEANED_TEXT" ]; then
+    notify-send "Zathura Extract" "No text found on page $PAGE"
+    exit 0
+fi
+
+# Format with page number prefix
+FORMATTED_TEXT="Page ${PAGE}:
+${CLEANED_TEXT}"
+
+# Copy back to clipboard with the page prefix
+if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+    echo "$FORMATTED_TEXT" | wl-copy
+else
+    echo "$FORMATTED_TEXT" | xclip -selection clipboard
+fi
+
+CHAR_COUNT=$(echo "$CLEANED_TEXT" | wc -c)
+notify-send "Zathura Extract" "Cleaned page $PAGE copied! ($CHAR_COUNT chars)"

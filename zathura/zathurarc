@@ -1,15 +1,104 @@
-set font "Hack Nerd Font 12"
+# set font "Hack Nerd Font 12"
+set font "Maple Mono NF"
 
-set default-bg "#1C1C1C"
+set database "sqlite"
 
-set highlight-active-color "#949494"
-set highlight-color "#D0D0D0"
+# copy selection to system clipboard
+set selection-clipboard clipboard
 
 set synctex true
 set synctex-editor-command "nvr --remote +"%line" "%file""
 
-set statusbar-fg "#BCBCBC"
-set statusbar-bg "#333333"
+set window-title-basename "true"
 
-set inputbar-fg "#BCBCBC"
-set inputbar-bg "#333333"
+# Copy selected text with page number - press 'y' after selecting text with mouse
+# Format: "Page X: selected text"
+map y exec "zathura-yank $PAGE"
+
+# Extract ALL text from current page - press 'Y' (capital Y)
+# Note: $FILE expands to current document path, $PAGE to page number
+map Y exec "zathura-extract-page $PAGE $FILE"
+
+# Custom color theme based on Neovim colorscheme
+# Supports both light and dark modes with seamless toggling
+
+# Default to light mode (set recolor to false initially)
+# Toggle with 'i' key or set recolor to true for dark mode
+
+# Overview of the custom colors:
+
+# bg="#1c1c1c", fg="#d2d2d2", red="#d75347", orange="#d78700"
+# yellow="#b7b757", green="#6f9500", cyan="#00afaf", blue="#87afd7"
+# purple="#a569a5", white="#b2b2b2", black="#767676", gray="#6c6c6c"
+# highlight="#585858", comment="#808080", menu="#262626", darkmenu="#303030"
+
+# LIGHT MODE (Default)
+
+# Background and foreground - using softer light colors from the scheme
+set default-bg                    "#f0f0f0"     # Light gray background (easier on eyes)
+set default-fg                    "#1c1c1c"     # Dark text
+
+# Status bar (using dark menu color for contrast)
+set statusbar-bg                  "#303030"     # darkmenu
+set statusbar-fg                  "#d2d2d2"     # fg
+
+# Input bar - using menu colors that work in both modes
+set inputbar-bg                   "#262626"     # menu (dark background)
+set inputbar-fg                   "#d2d2d2"     # fg (light text for contrast)
+
+# Notifications
+set notification-bg               "#262626"     # menu (consistent dark background)
+set notification-fg               "#d2d2d2"     # fg (light text)
+set notification-error-bg         "#d75347"     # red
+set notification-error-fg         "#ffffff"     # White text on error
+set notification-warning-bg       "#d78700"     # orange
+set notification-warning-fg       "#1c1c1c"     # Dark text on warning
+
+# Completion menu
+set completion-bg                 "#262626"     # menu
+set completion-fg                 "#d2d2d2"     # fg
+set completion-group-bg           "#303030"     # darkmenu
+set completion-group-fg           "#808080"     # comment
+set completion-highlight-bg       "#87afd7"     # blue (selection)
+set completion-highlight-fg       "#1c1c1c"     # Dark text
+
+# Index (table of contents)
+set index-bg                      "#303030"     # darkmenu
+set index-fg                      "#d2d2d2"     # fg
+set index-active-bg               "#87afd7"     # blue (current item)
+set index-active-fg               "#1c1c1c"     # Dark text
+
+
+# Highlights - using rgba with transparency so text remains visible
+# blue with 40% transparency (search matches)
+set highlight-color               rgba(135, 175, 215, 0.4)
+# orange with 50% transparency (current match)
+set highlight-active-color        rgba(215, 135, 0, 0.5)
+
+# Render loading
+set render-loading                true
+set render-loading-bg             "#1c1c1c"     # bg
+set render-loading-fg             "#6f9500"     # green
+
+# RECOLOR MODE (Dark mode - toggle with 'i')
+
+# When recolor is enabled, these swap the colors
+set recolor-lightcolor            "#1c1c1c"     # bg (dark background in recolor mode)
+set recolor-darkcolor             "#d2d2d2"     # fg (light text in recolor mode)
+
+# Startup options
+#
+set adjust-open width
+
+# Start in light mode (recolor off)
+set recolor false
+
+# Enable smooth scrolling
+set smooth-scroll true
+
+# Page padding
+set page-padding 10
+
+# Zoom settings
+set zoom-min 10
+set zoom-max 1000

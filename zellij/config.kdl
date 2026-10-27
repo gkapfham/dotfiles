@@ -1,0 +1,669 @@
+keybinds clear-defaults=true {
+    normal {
+        bind "Ctrl a" { SwitchToMode "tmux"; }
+        bind "Ctrl e" { EditScrollback; }
+        bind "Ctrl `" { SwitchToMode "locked"; }
+        bind "Alt h" { MoveFocus "left"; }
+        bind "Alt j" { MoveFocus "down"; }
+        bind "Alt k" { MoveFocus "up"; }
+        bind "Alt l" { MoveFocus "right"; }
+        // NOTE: Ctrl-q (Quit) has been deliberately unbound here. With the
+        // default binding, an accidental Ctrl-q kills the whole session (the
+        // server exits when the last client quits), so the session never
+        // appears again in `zp`. Detach (Ctrl-a d) keeps the session alive.
+        // To quit deliberately, press Ctrl-a then Ctrl-q (see the tmux mode).
+        bind "Alt n" { NewPane; }
+    }
+    locked {
+        bind "Ctrl `" { SwitchToMode "normal"; }
+    }
+    scroll {
+        bind "PageDown" { PageScrollDown; }
+        bind "PageUp" { PageScrollUp; }
+        bind "/" { SwitchToMode "entersearch"; SearchInput 0; }
+        bind "Ctrl b" { PageScrollUp; }
+        bind "d" { HalfPageScrollDown; }
+        bind "Ctrl d" { HalfPageScrollDown; }
+        bind "e" { EditScrollback; SwitchToMode "normal"; }
+        bind "Ctrl f" { PageScrollDown; }
+        bind "h" { PageScrollUp; }
+        bind "j" { ScrollDown; }
+        bind "k" { ScrollUp; }
+        bind "l" { PageScrollDown; }
+        bind "q" { SwitchToMode "normal"; }
+        bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
+        bind "u" { HalfPageScrollUp; }
+        bind "Ctrl u" { HalfPageScrollUp; }
+        bind "y" { Copy; }
+        bind "Ctrl n" { PageScrollDown; }
+        bind "Ctrl p" { PageScrollUp; }
+    }
+    search {
+        bind "N" { Search "up"; }
+        bind "c" { SearchToggleOption "CaseSensitivity"; }
+        bind "n" { Search "down"; }
+        bind "o" { SearchToggleOption "WholeWord"; }
+        bind "w" { SearchToggleOption "Wrap"; }
+        bind "esc" { ScrollToBottom; SwitchToMode "normal"; }
+    }
+    shared_except "locked" {
+        bind "Alt p" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "normal"
+        }
+        bind "Alt y" {
+            LaunchOrFocusPlugin "zigzag" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "normal"
+        }
+        bind "Alt g" {
+            LaunchOrFocusPlugin "plugin-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "normal"
+        }
+    }
+    shared_among "scroll" "search" {
+        bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
+    }
+    shared_among "scroll" "tmux" {
+        bind "esc" { SwitchToMode "normal"; }
+    }
+    entersearch {
+        bind "Ctrl c" { SwitchToMode "scroll"; }
+        bind "esc" { SwitchToMode "scroll"; }
+        bind "enter" { SwitchToMode "search"; }
+    }
+    renametab {
+        bind "esc" { UndoRenameTab; SwitchToMode "normal"; }
+    }
+    shared_among "renametab" "renamepane" {
+        bind "enter" { SwitchToMode "normal"; }
+    }
+    renamepane {
+        bind "esc" { UndoRenamePane; SwitchToMode "normal"; }
+    }
+    pane {
+        bind "h" { MoveFocus "left"; }
+        bind "j" { MoveFocus "down"; }
+        bind "k" { MoveFocus "up"; }
+        bind "l" { MoveFocus "right"; }
+        bind "left" { MoveFocus "left"; }
+        bind "down" { MoveFocus "down"; }
+        bind "up" { MoveFocus "up"; }
+        bind "right" { MoveFocus "right"; }
+        bind "H" { MovePane "left"; }
+        bind "J" { MovePane "down"; }
+        bind "K" { MovePane "up"; }
+        bind "L" { MovePane "right"; }
+        bind "n" { NewPane; SwitchToMode "normal"; }
+        bind "d" { NewPane "down"; SwitchToMode "normal"; }
+        bind "r" { NewPane "right"; SwitchToMode "normal"; }
+        bind "x" { CloseFocus; SwitchToMode "normal"; }
+        bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
+        bind "z" { TogglePaneFrames; SwitchToMode "normal"; }
+        bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
+        bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
+        bind "c" { SwitchToMode "renamepane"; PaneNameInput 0; }
+        bind "esc" { SwitchToMode "normal"; }
+    }
+    tmux {
+        bind "," { SwitchToMode "renametab"; TabNameInput 0; }
+        bind "-" { NewPane "down"; SwitchToMode "normal"; }
+        bind "." { SwitchToMode "renamepane"; PaneNameInput 0; }
+        bind "1" { GoToTab 1; SwitchToMode "normal"; }
+        bind "2" { GoToTab 2; SwitchToMode "normal"; }
+        bind "3" { GoToTab 3; SwitchToMode "normal"; }
+        bind "4" { GoToTab 4; SwitchToMode "normal"; }
+        bind "5" { GoToTab 5; SwitchToMode "normal"; }
+        bind "6" { GoToTab 6; SwitchToMode "normal"; }
+        bind "7" { GoToTab 7; SwitchToMode "normal"; }
+        bind "8" { GoToTab 8; SwitchToMode "normal"; }
+        bind "9" { GoToTab 9; SwitchToMode "normal"; }
+        bind "F" { Resize "Increase left"; }
+        bind "G" { Resize "Increase right"; }
+        bind "B" { Resize "Increase down"; }
+        bind "T" { Resize "Increase up"; }
+        bind "[" { SwitchToMode "scroll"; }
+        bind "Ctrl a" { Write 1; SwitchToMode "normal"; }
+        bind "b" { WriteChars "]52;c;?"; SwitchToMode "normal"; }
+        bind "c" { NewTab; SwitchToMode "normal"; }
+        bind "d" { Detach; }
+        // Deliberate quit: Ctrl-a then q (or Ctrl-a then Ctrl-q).
+        // Cannot be pressed by accident. Even after quitting, the session
+        // is serialized and can be resurrected from `zp` (EXITED section)
+        // or `zellij attach <name>`.
+        bind "q" { Quit; }
+        bind "Ctrl q" { Quit; }
+        bind "h" { MoveFocus "left"; SwitchToMode "normal"; }
+        bind "H" { MovePane "left"; SwitchToMode "normal"; }
+        bind "i" { TogglePaneFrames; SwitchToMode "normal"; }
+        bind "j" { MoveFocus "down"; SwitchToMode "normal"; }
+        bind "J" { MovePane "down"; SwitchToMode "normal"; }
+        bind "k" { MoveFocus "up"; SwitchToMode "normal"; }
+        bind "K" { MovePane "up"; SwitchToMode "normal"; }
+        bind "l" { MoveFocus "right"; SwitchToMode "normal"; }
+        bind "L" { MovePane "right"; SwitchToMode "normal"; }
+        bind "n" { GoToNextTab; SwitchToMode "normal"; }
+        bind "o" { FocusNextPane; SwitchToMode "normal"; }
+        bind "p" { GoToPreviousTab; SwitchToMode "normal"; }
+        bind "r" {
+            MessagePlugin "configuration" {
+                name "reload_config"
+                floating false
+            }
+            SwitchToMode "normal"
+        }
+        bind "w" {
+            WriteChars "zellij action dump-layout > ~/.config/zellij/layouts/"
+            SwitchToMode "normal"
+        }
+        bind "x" { CloseFocus; SwitchToMode "normal"; }
+        bind "z" { ToggleFocusFullscreen; SwitchToMode "normal"; }
+        bind "|" { NewPane "right"; SwitchToMode "normal"; }
+    }
+}
+themes {
+    custom-tmux {
+        text_unselected {
+            base 178 178 178
+            background 28 28 28
+            emphasis_0 215 135 0
+            emphasis_1 215 95 95
+            emphasis_2 111 149 0
+            emphasis_3 165 105 165
+        }
+        text_selected {
+            base 178 178 178
+            background 28 28 28
+            emphasis_0 215 135 0
+            emphasis_1 215 95 95
+            emphasis_2 111 149 0
+            emphasis_3 165 105 165
+        }
+        ribbon_selected {
+            base 111 149 0
+            background 28 28 28
+            emphasis_0 28 28 28
+            emphasis_1 28 28 28
+            emphasis_2 28 28 28
+            emphasis_3 28 28 28
+        }
+        ribbon_unselected {
+            base 178 178 178
+            background 28 28 28
+            emphasis_0 28 28 28
+            emphasis_1 28 28 28
+            emphasis_2 28 28 28
+            emphasis_3 28 28 28
+        }
+        table_title {
+            base 111 149 0
+            background 28 28 28
+            emphasis_0 215 135 0
+            emphasis_1 215 95 95
+            emphasis_2 111 149 0
+            emphasis_3 165 105 165
+        }
+        table_cell_selected {
+            base 215 135 0
+            background 28 28 28
+            emphasis_0 215 135 0
+            emphasis_1 215 135 0
+            emphasis_2 215 135 0
+            emphasis_3 215 135 0
+        }
+        table_cell_unselected {
+            base 178 178 178
+            background 28 28 28
+            emphasis_0 210 210 210
+            emphasis_1 210 210 210
+            emphasis_2 210 210 210
+            emphasis_3 210 210 210
+        }
+        list_selected {
+            base 215 135 0
+            background 28 28 28
+            emphasis_0 215 135 0
+            emphasis_1 215 135 0
+            emphasis_2 215 135 0
+            emphasis_3 215 135 0
+        }
+        list_unselected {
+            base 210 210 210
+            background 28 28 28
+            emphasis_0 210 210 210
+            emphasis_1 210 210 210
+            emphasis_2 210 210 210
+            emphasis_3 210 210 210
+        }
+        frame_selected {
+            base 111 149 0
+            background 0
+            emphasis_0 215 135 0
+            emphasis_1 215 95 95
+            emphasis_2 165 105 165
+            emphasis_3 0
+        }
+        frame_highlight {
+            base 215 135 0
+            background 0
+            emphasis_0 165 105 165
+            emphasis_1 0
+            emphasis_2 215 135 0
+            emphasis_3 215 135 0
+        }
+        exit_code_success {
+            base 111 149 0
+            background 0
+            emphasis_0 215 95 95
+            emphasis_1 118 118 118
+            emphasis_2 165 105 165
+            emphasis_3 135 175 215
+        }
+        exit_code_error {
+            base 215 135 0
+            background 0
+            emphasis_0 183 183 87
+            emphasis_1 0
+            emphasis_2 0
+            emphasis_3 0
+        }
+        multiplayer_user_colors {
+            player_1 165 105 165
+            player_2 135 175 215
+            player_3 0
+            player_4 183 183 87
+            player_5 215 95 95
+            player_6 0
+            player_7 215 135 0
+            player_8 0
+            player_9 0
+            player_10 0
+        }
+    }
+}
+
+// Make pane frames have rounded corners
+ui {
+    pane_frames {
+        rounded_corners true
+    }
+}
+
+// Plugin aliases - can be used to change the implementation of Zellij
+// changing these requires a restart to take effect
+plugins {
+    // built in plugins provided by zellij
+    about location="zellij:about"
+    compact-bar location="zellij:compact-bar" {
+        tooltip "Ctrl h"
+    }
+    configuration location="zellij:configuration"
+    plugin-manager location="zellij:plugin-manager"
+    session-manager location="zellij:session-manager"
+    status-bar location="zellij:status-bar"
+    strider location="zellij:strider"
+    tab-bar location="zellij:tab-bar"
+    welcome-screen location="zellij:session-manager" {
+        welcome_screen false
+    }
+    // local plugin contained within the dotfiles repository,
+    // I am the creator and maintainer of this plugin
+    zigzag location="file:/home/gkapfham/.config/zellij/plugins/zigzag.wasm" {
+        floating true
+    }
+    // remote plugins hosted on GitHub with the web assembly
+    // available in and downloaded from the releases page on GitHub
+    // --> zjstatus
+    zjstatus location="https://github.com/dj95/zjstatus/releases/download/v0.23.0/zjstatus.wasm" {
+        color_bg "#1c1c1c"
+        color_green "#6f9500"
+        color_orange "#d78700"
+        color_red "#d75f5f"
+        color_purple "#a569a5"
+        color_text "#b2b2b2"
+        color_text_light "#d2d2d2"
+        color_sky "#87afd7"
+        color_yellow "#b7b757"
+        format_left   " {tabs} "
+        format_center "{notifications}"
+        format_right  "#[bg=$green,fg=$bg,bold]{mode}#[bg=$green,fg=$bg,bold]  {session} #[bg=$bg,fg=$green,bold] "
+        format_space  ""
+        format_hide_on_overlength "true"
+        format_precedence "crl"
+        border_enabled  "false"
+        border_char     "─"
+        border_format   "{char}"
+        border_position "top"
+        hide_frame_for_single_pane "false"
+        mode_normal        "#[bg=$green,fg=$bg,bold] 󰿋 NORMAL #[bg=$bg,fg=$green] "
+        mode_tmux          "#[bg=$orange,fg=$bg,bold]  TMUX #[bg=$bg,fg=$orange] "
+        mode_locked        "#[bg=$red,fg=$bg,bold]  LOCKED #[bg=$bg,fg=$red] "
+        mode_pane          "#[bg=$sky,fg=$bg,bold]   PANE #[bg=$bg,fg=$sky] "
+        mode_tab           "#[bg=$sky,fg=$bg,bold] 󰓩 TAB #[bg=$bg,fg=$sky] "
+        mode_scroll        "#[bg=$orange,fg=$bg,bold]  SCROLL #[bg=$bg,fg=$orange] "
+        mode_enter_search  "#[bg=$orange,fg=$bg,bold]  SEARCH #[bg=$bg,fg=$orange] "
+        mode_search        "#[bg=$orange,fg=$bg,bold]  SEARCH #[bg=$bg,fg=$orange] "
+        mode_resize        "#[bg=$orange,fg=$bg,bold] 󰩨 RESIZE #[bg=$bg,fg=$orange] "
+        mode_rename_tab    "#[bg=$orange,fg=$bg,bold] 󰑕 RENAME-TAB #[bg=$bg,fg=$orange] "
+        mode_rename_pane   "#[bg=$orange,fg=$bg,bold] 󰑕 RENAME-PANE #[bg=$bg,fg=$orange] "
+        mode_move          "#[bg=$yellow,fg=$bg,bold] 󱀅 MOVE #[bg=$bg,fg=$yellow] "
+        mode_session       "#[bg=$green,fg=$bg,bold]  SESSION #[bg=$bg,fg=$yellow] "
+        mode_prompt        "#[bg=$yellow,fg=$bg,bold] 󰹙 PROMPT #[bg=$bg,fg=$yellow] "
+        tab_normal              "#[bg=$green,fg=$bg,bold] 󰓩 {name} "
+        tab_normal_fullscreen   "#[bg=$green,fg=$bg,bold] 󰝜 {name} "
+        tab_normal_sync         "#[bg=$green,fg=$bg,bold] 󱏂 {name} "
+        tab_active              "#[bg=$purple,fg=$bg,bold] 󰓩 {name} "
+        tab_active_fullscreen   "#[bg=$purple,fg=$bg,bold] 󰝜 {name} "
+        tab_active_sync         "#[bg=$purple,fg=$bg,bold] 󱏂 {name} "
+        tab_separator           " "
+        tab_sync_indicator       ""
+        tab_fullscreen_indicator ""
+        tab_floating_indicator   ""
+        notification_format_unread "#[bg=$orange,fg=$bg] 󰎜 {message}#[bg=$bg,fg=$orange] "
+        notification_format_no_notifications ""
+        notification_show_interval "1"
+        datetime          "{format}"
+        datetime_format   "%Y-%m-%d"
+        datetime_timezone "America/New_York"
+    }
+}
+
+// Plugins to load in the background when a new session starts
+load_plugins {
+    zjstatus
+}
+web_client {
+    font "Maple Mono NF"
+}
+
+pane_frame_style "full"
+ 
+// Use a simplified UI without special fonts (arrow glyphs)
+// Options:
+//   - true
+//   - false (Default)
+// 
+simplified_ui true
+ 
+// Choose the theme that is specified in the themes section.
+// Default: default
+// 
+theme "custom-tmux"
+ 
+// Choose the base input mode of zellij.
+// Default: normal
+// 
+default_mode "normal"
+ 
+// Choose the path to the default shell that zellij will use for opening new panes
+// Default: $SHELL
+// 
+default_shell "/run/current-system/sw/bin/zsh"
+ 
+// Choose the path to override cwd that zellij will use for opening new panes
+// 
+// default_cwd "/tmp"
+ 
+// The name of the default layout to load on startup
+// Default: "default"
+// 
+default_layout "Rocket"
+ 
+// The folder in which Zellij will look for layouts
+// (Requires restart)
+// 
+layout_dir "/home/gkapfham/.config/zellij/layouts"
+ 
+// The folder in which Zellij will look for themes
+// (Requires restart)
+// 
+theme_dir "/tmp"
+ 
+// Toggle enabling the mouse mode.
+// On certain configurations, or terminals this could
+// potentially interfere with copying text.
+// Options:
+//   - true (default)
+//   - false
+// 
+mouse_mode true
+ 
+// Toggle having pane frames around the panes
+// Options:
+//   - true (default, enabled)
+//   - false
+// 
+pane_frames true
+ 
+// When attaching to an existing session with other users,
+// should the session be mirrored (true)
+// or should each user have their own cursor (false)
+// (Requires restart)
+// Default: false
+// 
+// mirror_session true
+ 
+// Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
+// eg. when terminal window with an active zellij session is closed
+// (Requires restart)
+// Options:
+//   - detach (Default)
+//   - quit
+// 
+on_force_close "detach"
+ 
+// Configure the scroll back buffer size
+// This is the number of lines zellij stores for each pane in the scroll back
+// buffer. Excess number of lines are discarded in a FIFO fashion.
+// (Requires restart)
+// Valid values: positive integers
+// Default value: 10000
+// 
+// scroll_buffer_size 10000
+scroll_buffer_size 5000
+ 
+// Provide a command to execute when copying text. The text will be piped to
+// the stdin of the program to perform the copy. This can be used with
+// terminal emulators which do not support the OSC 52 ANSI control sequence
+// that will be used by default if this option is not set.
+// Examples:
+//
+// copy_command "xclip -selection clipboard" // x11
+// copy_command "wl-copy"                    // wayland
+// copy_command "pbcopy"                     // osx
+// 
+copy_command "xsel --input --clipboard"
+ 
+// Choose the destination for copied text
+// Allows using the primary selection buffer (on x11/wayland) instead of the system clipboard.
+// Does not apply when using copy_command.
+// Options:
+//   - system (default)
+//   - primary
+// 
+// copy_clipboard "primary"
+ 
+// Enable automatic copying (and clearing) of selection when releasing mouse
+// Default: true
+// 
+copy_on_select true
+ 
+// Path to the default editor to use to edit pane scrollbuffer
+// Default: $EDITOR or $VISUAL
+// scrollback_editor "/usr/bin/vim"
+ 
+// A fixed name to always give the Zellij session.
+// Consider also setting `attach_to_session true,`
+// otherwise this will error if such a session exists.
+// Default: <RANDOM>
+// 
+// session_name "My singleton session"
+ 
+// When `session_name` is provided, attaches to that session
+// if it is already running or creates it otherwise.
+// Default: false
+// 
+// attach_to_session true
+ 
+// Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
+// Options:
+//   - true (default)
+//   - false
+// 
+auto_layout true
+ 
+// Whether sessions should be serialized to the cache folder (including their tabs/panes, cwds and running commands)
+// so that they can later be resurrected
+// Options:
+//   - true (default)
+//   - false
+//
+// Re-enabled so that sessions survive a forced quit, crash, or reboot and can
+// be brought back from `zp` (welcome screen -> EXITED section) or
+// `zellij attach <name>`. Only the session *structure* is saved (see
+// `serialize_pane_viewport` below), so this stays cheap even while an agent
+// like pi scrolls heavily.
+// 
+session_serialization true
+ 
+// Whether pane viewports are serialized along with the session, default is false
+// Options:
+//   - true
+//   - false (default)
+// 
+// Do NOT serialize pane contents/scrollback: this is the expensive part when a
+// pane scrolls a lot (e.g. a coding agent). Keep it off even though session
+// serialization above is enabled. (`pane_viewport_serialization` was removed:
+// it is not a valid option in zellij 0.43.1 and was silently ignored.)
+serialize_pane_viewport false
+ 
+// Scrollback lines to serialize along with the pane viewport when serializing sessions, 0
+// defaults to the scrollback size. If this number is higher than the scrollback size, it will
+// also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
+// 
+// scrollback_lines_to_serialize 100
+ 
+// Enable or disable the rendering of styled and colored underlines (undercurl).
+// May need to be disabled for certain unsupported terminals
+// (Requires restart)
+// Default: true
+// 
+// styled_underlines false
+ 
+// How often in seconds sessions are serialized
+// (lower = fresher state after a kill/crash; the cost is negligible because
+// pane contents are not serialized)
+// 
+serialization_interval 120
+ 
+// Enable or disable writing of session metadata to disk (if disabled, other sessions might not know
+// metadata info on this session)
+// (Requires restart)
+// Default: false
+// 
+disable_session_metadata false
+ 
+// Enable or disable support for the enhanced Kitty Keyboard Protocol (the host terminal must also support it)
+// (Requires restart)
+// Default: true (if the host terminal supports it)
+// 
+// support_kitty_keyboard_protocol false
+// Whether to make sure a local web server is running when a new Zellij session starts.
+// This web server will allow creating new sessions and attaching to existing ones that have
+// opted in to being shared in the browser.
+// When enabled, navigate to http://127.0.0.1:8082
+// (Requires restart)
+// 
+// Note: a local web server can still be manually started from within a Zellij session or from the CLI.
+// If this is not desired, one can use a version of Zellij compiled without
+// `web_server_capability`
+// 
+// Possible values:
+// - true
+// - false
+// Default: false
+// 
+// web_server false
+// Whether to allow sessions started in the terminal to be shared through a local web server, assuming one is
+// running (see the `web_server` option for more details).
+// (Requires restart)
+// 
+// Note: This is an administrative separation and not intended as a security measure.
+// 
+// Possible values:
+// - "on" (allow web sharing through the local web server if it
+// is online)
+// - "off" (do not allow web sharing unless sessions explicitly opt-in to it)
+// - "disabled" (do not allow web sharing and do not permit sessions started in the terminal to opt-in to it)
+// Default: "off"
+// 
+web_sharing "off"
+// A path to a certificate file to be used when setting up the web client to serve the
+// connection over HTTPs
+// 
+web_server_cert "/home/gkapfham/.config/zellij/certs/zellij.pem"
+// A path to a key file to be used when setting up the web client to serve the
+// connection over HTTPs
+// 
+web_server_key "/home/gkapfham/.config/zellij/certs/zellij-key.pem"
+/// Whether to enforce https connections to the web server when it is bound to localhost
+/// (127.0.0.0/8)
+///
+/// Note: https is ALWAYS enforced when bound to non-local interfaces
+///
+/// Default: false
+// 
+// enforce_https_for_localhost false
+ 
+// Whether to stack panes when resizing beyond a certain size
+// Default: true
+// 
+// stacked_resize false
+ 
+// Whether to show tips on startup
+// Default: true
+show_startup_tips false
+
+// Fix for NixOS wrapped neovim - replace unwrapped path and strip --cmd wrapper arguments
+post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | sed -E 's|/nix/store/[^/]*neovim[^/]*/bin/nvim|nvim|' | sed -E 's/ --cmd lua [^[:space:]]+//'"
+ 
+// Whether to show release notes on first version run
+// Default: true
+// 
+// show_release_notes false
+ 
+// Whether to enable mouse hover effects and pane grouping functionality
+// default is true
+// advanced_mouse_actions false
+
+// Do not start the web server by default;
+// note that opt-in is still possible
+web_server false
+
+// Require https connections to the web server
+enforce_https_on_localhost true
+ 
+// The ip address the web server should listen on when it starts
+// Default: "127.0.0.1"
+// (Requires restart)
+// web_server_ip "0.0.0.0"
+ 
+// The port the web server should listen on when it starts
+// Default: 8082
+// (Requires restart)
+// web_server_port 5590
+ 
+// A command to run (will be wrapped with sh -c and provided the RESURRECT_COMMAND env variable) 
+// after Zellij attempts to discover a command inside a pane when resurrecting sessions, the STDOUT
+// of this command will be used instead of the discovered RESURRECT_COMMAND
+// can be useful for removing wrappers around commands
+// Note: be sure to escape backslashes and similar characters properly
+// post_command_discovery_hook "echo $RESURRECT_COMMAND | sed <your_regex_here>"

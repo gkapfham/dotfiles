@@ -1,0 +1,146 @@
+# Ghostty Terminal Configuration
+
+# Font Configuration
+# 1) Using Maple Mono NF where "NF" stands
+# for "Nerd Font" giving cool glyphs and icons
+# 2) SemiBold and ExtraBold styles for better readability
+# 3) Font size 13 for comfortable reading
+font-family = "Maple Mono NF"
+font-family-bold = "Maple Mono NF"
+font-style = "SemiBold"
+font-style-bold = "ExtraBold"
+font-family-italic = "Maple Mono NF"
+font-style-italic = "SemiBold Italic"
+font-size = 13
+
+# Font features - enable ligatures
+font-feature = +calt
+font-feature = +liga
+font-feature = +dlig
+
+# Background and Foreground Colors
+background = 1c1c1c
+foreground = d2d2d2
+background-opacity = 1
+
+# Color Palette (16 colors)
+# Black
+palette = 0=#767676
+palette = 8=#767676
+
+# Red
+palette = 1=#d78700
+palette = 9=#d78700
+
+# Green
+palette = 2=#6f9500
+palette = 10=#6f9500
+
+# Yellow
+palette = 3=#b7b757
+palette = 11=#b7b757
+
+# Blue
+palette = 4=#87afd7
+palette = 12=#87afd7
+
+# Magenta
+palette = 5=#a569a5
+palette = 13=#a569a5
+
+# Cyan
+palette = 6=#d75f5f
+palette = 14=#d75f5f
+
+# White
+palette = 7=#b2b2b2
+palette = 15=#b2b2b2
+
+# Cursor Configuration
+cursor-color = b2b2b2
+
+# Always use block cursor
+cursor-style = block
+
+# Prevent cursor from changing styles
+cursor-style-blink = false
+
+# Shell Integration
+
+# Enable shell integration
+shell-integration = zsh
+
+# Configure shell integration features,
+# using no-cursor confirms use of the block
+# cursor shape by default and title makes
+# sure that the titlebar is shown at the
+# top of the window and it updates dynamically
+shell-integration-features = no-cursor,title
+
+# Window Settings
+window-decoration = true
+
+# Enable menu bar at the top
+gtk-titlebar = true
+
+# Always run a single instance of ghostty,
+# thereby improving startup performance
+gtk-single-instance = true
+
+# Set titlebar colors explicitly so they're visible
+window-theme = ghostty
+window-titlebar-background = #2d2d2d
+window-titlebar-foreground = #ffffff
+window-padding-x = 0
+window-padding-y = 0
+window-padding-balance = true
+
+# Performance Settings
+# Ghostty is optimized by default, these match kitty's performance tuning
+# (ghostty doesn't have direct equivalents but is already highly performant)
+
+# Window Close Behavior
+quit-after-last-window-closed = false
+
+# Audio/Visual Bell (ghostty has no bell by default)
+
+# Clipboard Settings
+# Copy to clipboard on selection (like many terminal emulators)
+clipboard-read = allow
+clipboard-write = allow
+# Optionally: copy on select without needing Ctrl+Shift+C
+# clipboard-paste-protection = false
+
+# Mouse Settings
+# Allow clicking URLs to open them
+link-url = true
+
+# Tab Settings
+# Show tab bar when there are multiple tabs
+window-show-tab-bar = auto
+
+# Scrollback
+# Number of lines to keep in scrollback buffer (default is 10000)
+scrollback-limit = 2000
+
+# Confirm before closing window with running processes
+confirm-close-surface = false
+
+# Working Directory
+# When opening new tabs/splits, inherit the working directory
+working-directory = inherit
+
+# Keybindings
+# Note: Many useful keybindings are already set by default
+# These are some additional or customized ones
+# Navigate between tabs (these are already default but shown for reference)
+# keybind = ctrl+page_down=next_tab
+# keybind = ctrl+page_up=previous_tab
+# Split window
+keybind = ctrl+shift+d=new_split:right
+keybind = ctrl+shift+e=new_split:down
+
+# Change backend for Linux as this seems to avoid
+# a certain kind of busy-wait for writing that
+# leads to consumption of the CPU with an idle terminal
+async-backend = epoll

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# cb-restore: Restore a specific entry from clipboard history
+# Usage: cb-restore <clipboard_number> <history_index>
+# Example: cb-restore 0 25
+
+set -e
+
+if [ $# -ne 2 ]; then
+    echo "Usage: cb-restore <clipboard_number> <history_index>"
+    echo "Example: cb-restore 0 25"
+    echo ""
+    echo "Note: Index 0 = most recent, 1 = older, etc."
+    exit 1
+fi
+
+clipboard=$1
+index=$2
+
+# Extract content from cb history JSON using jq
+# Handle both text content and binary content (which has a path field)
+content=$(cb history "$clipboard" 2>&1 | jq -r --arg idx "$index" '
+    .[$idx].content | 
+    if type == "string" then 
+        . 
+    elif .path then 
+        @sh "cat \(.path)"
+    else 
+        empty 
+    end
+')
+
+if [ -z "$content" ]; then
+    echo "Error: History entry ${index} not found in clipboard ${clipboard}"
+    exit 1
+fi
+
+# Check if content is a command (for binary files)
+if [[ "$content" == cat* ]]; then
+    eval "$content"
+else
+    echo "$content"
+fi | cb cp"$clipboard"
+
+echo "✓ Restored entry ${index} to clipboard ${clipboard}"

@@ -1,0 +1,52 @@
+/**
+ * LeftBar Editor - replaces full-width borders with an indented purple left bar
+ *
+ * Before:  ────────────────────
+ *          type here
+ *          ────────────────────
+ *
+ * After:    │
+ *           │ type here
+ *           │
+ *
+ * To enable: rename from leftbar-editor.ts.disabled to leftbar-editor.ts
+ * (or save directly as leftbar-editor.ts) then run /reload
+ */
+
+import { CustomEditor, type ExtensionAPI } from "@earendil-works/pi-coding-agent";
+
+class LeftBarEditor extends CustomEditor {
+  render(width: number): string[] {
+    const lines = super.render(width);
+    if (lines.length <= 1) return lines;
+
+    const barIndent = "  ";
+    const leftBar = this.borderColor("│");
+
+    for (let i = 0; i < lines.length; i++) {
+      const isScrollIndicator =
+        lines[i].includes("\u2191") || lines[i].includes("\u2193");
+
+      if (isScrollIndicator) {
+        // Leave scroll indicators ("↑ N more" / "↓ N more") untouched
+        continue;
+      } else if (i === 0 || i === lines.length - 1) {
+        // Replace top and bottom borders with just the left bar
+        lines[i] = barIndent + leftBar;
+      } else {
+        // Prepend left bar to content lines
+        lines[i] = barIndent + leftBar + " " + lines[i];
+      }
+    }
+
+    return lines;
+  }
+}
+
+export default function (pi: ExtensionAPI) {
+  pi.on("session_start", (_event, ctx) => {
+    ctx.ui.setEditorComponent(
+      (tui, theme, kb) => new LeftBarEditor(tui, theme, kb),
+    );
+  });
+}

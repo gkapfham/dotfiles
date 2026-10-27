@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# Send a notification to zjstatus and auto-clear it after a delay.
+#
+# Intended for interactive use (run from a terminal). Pi agents should use
+# the two-command pattern from AGENTS.md instead of this script, because
+# backgrounded processes don't survive the agent's execution environment.
+#
+# Uses zjstatus's notification widget combined with a scheduled re-render
+# trigger to make notifications auto-dismiss without requiring a pane switch.
+#
+# Usage:
+#   zellij-notify "<message>" [display_seconds]
+#
+# Examples:
+#   zellij-notify "󰵰 Finished the task."
+#   zellij-notify "󰵰 Build complete." 5
+
+set -eu
+
+MESSAGE="${1:-}"
+DISPLAY_SECONDS="${2:-3}"
+
+if [ -z "$MESSAGE" ]; then
+    echo "Usage: zellij-notify <message> [display_seconds]" >&2
+    exit 1
+fi
+
+# Send the notification via zjstatus pipe
+if ! zellij pipe -- "zjstatus::notify::${MESSAGE}" 2>/dev/null; then
+    # Not inside a zellij session -- silently do nothing
+    exit 0
+fi
+
+# Background a process to auto-clear the notification after the display time.
+#
+# We use 'zjstatus::rerun::dummy_clear' which triggers a plugin re-render
+# (all pipe commands set should_render=true internally) WITHOUT modifying
+# the notification state. When the notification widget re-renders, it checks
+# whether received_at + show_interval < now. With show_interval set to "1"
+# in the config, this check passes and the widget switches to the empty
+# "no notifications" format, making the notification disappear.
+#
+# Note: nohup backgrounding works reliably from an interactive shell but
+# NOT from the pi agent's bash tool. Agents should use the explicit
+# two-command pattern documented in AGENTS.md instead.
+nohup bash -c "
+    sleep ${DISPLAY_SECONDS}
+    zellij pipe -- 'zjstatus::rerun::dummy_clear' 2>/dev/null || true
+" &>/dev/null &

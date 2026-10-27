@@ -1,0 +1,322 @@
+#!/usr/bin/env bash
+# Start a local LLM server on kairos via podman.
+# Replaces the long Strix-Halo toolbox TUI-generated commands with a simple
+# model-name selector. Backend (ROCm/Vulkan) is configurable.
+#
+# Usage:
+#   kairos-llm qwen-3.6-35b-a3b
+#   kairos-llm qwen-3.6-35b-a3b 8090
+#   kairos-llm --backend vulkan-radv qwen-3.6-35b-a3b 8090
+#   kairos-llm --list
+#   kairos-llm --dry-run qwen-3.6-27b
+#
+# Environment:
+#   MODELS_DIR  Path to host models directory (default: /home/gkapfham/models)
+#   LLM_PORT    Override the listen port
+#   LLM_BACKEND Override the backend (rocm-6.4.4, vulkan-radv, rocm-7.2.4-rocmfp4)
+
+set -euo pipefail
+
+MODELS=(qwen-3.6-35b-a3b qwen-3.6-27b lfm2-24b-a2b north-mini-code)
+BACKENDS=(rocm-6.4.4 vulkan-radv rocm-7.2.4-rocmfp4)
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") [OPTIONS] MODEL [PORT]
+
+Available models and default ports:
+  qwen-3.6-35b-a3b   Qwen 3.6 35B A3B MTP (default port 8080)
+  qwen-3.6-27b       Qwen 3.6 27B MTP (default port 8081)
+  lfm2-24b-a2b       Liquid AI LFM2 24B A2B (default port 8082)
+  north-mini-code    Cohere North Mini Code (default port 8083)
+
+Available backends:
+  vulkan-radv        Vulkan/RADV backend (default for qwen/north models)
+  rocm-6.4.4         ROCm 6.4.4 backend
+  rocm-7.2.4-rocmfp4 ROCm 7.2.4 with ROCmFP4 support
+
+Options:
+  -b, --backend BACKEND   GPU backend to use
+  -p, --port PORT         Listen port
+  -n, --dry-run           Print the podman command instead of running it
+  -l, --list              List available models
+  -h, --help              Show this help message
+
+Environment:
+  MODELS_DIR              Path to host models directory (default: /home/gkapfham/models)
+  LLM_PORT                Default port override
+  LLM_BACKEND             Default backend override
+
+Examples:
+  $(basename "$0") qwen-3.6-35b-a3b
+  $(basename "$0") --backend vulkan-radv qwen-3.6-35b-a3b 8090
+  LLM_BACKEND=vulkan-radv $(basename "$0") qwen-3.6-27b
+EOF
+}
+
+list_models() {
+  printf '%s\n' "${MODELS[@]}"
+}
+
+run_model() {
+  local model="$1"
+  local port="$2"
+  local backend="$3"
+  local dry_run="$4"
+  local models_dir="${MODELS_DIR:-/home/gkapfham/models}"
+
+  local default_port
+  local default_backend
+  local bind_host
+
+  case "${model}" in
+    qwen-3.6-35b-a3b)
+      default_port=8080
+      default_backend=vulkan-radv
+      bind_host=""
+      ;;
+    qwen-3.6-27b)
+      default_port=8081
+      default_backend=vulkan-radv
+      bind_host=""
+      ;;
+    lfm2-24b-a2b)
+      default_port=8082
+      default_backend=vulkan-radv
+      bind_host=""
+      ;;
+    north-mini-code)
+      default_port=8083
+      default_backend=vulkan-radv
+      bind_host=""
+      ;;
+    *)
+      echo "Unknown model: ${model}" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+
+  if [[ -z "${port}" ]]; then
+    port="${default_port}"
+  fi
+
+  if [[ -z "${backend}" ]]; then
+    backend="${default_backend}"
+  fi
+
+  if [[ ! " ${BACKENDS[*]} " =~ [[:space:]]${backend}[[:space:]] ]]; then
+    echo "Error: unknown backend: ${backend}" >&2
+    echo "Valid backends: ${BACKENDS[*]}" >&2
+    exit 1
+  fi
+
+  local image="docker.io/kyuz0/amd-strix-halo-toolboxes:${backend}"
+
+  local -a podman_args=(
+    run --rm -it
+    --device /dev/dri
+    --group-add video
+    --security-opt seccomp=unconfined
+    --security-opt label=disable
+    --userns=keep-id
+    -v "${models_dir}:/models:ro"
+  )
+
+  # ROCm backends need /dev/kfd and the render group; Vulkan does not.
+  if [[ "${backend}" == rocm-* ]]; then
+    podman_args+=(--device /dev/kfd)
+    podman_args+=(--group-add render)
+  fi
+
+  if [[ -n "${bind_host}" ]]; then
+    podman_args+=(-p "${bind_host}:${port}:${port}")
+  else
+    podman_args+=(-p "${port}:${port}")
+  fi
+
+  local -a llama_args=()
+  case "${model}" in
+    qwen-3.6-35b-a3b)
+      llama_args=(
+        llama-server
+        -m /models/Qwen3.6-35B-A3B-MTP-GGUF/Qwen3.6-35B-A3B-UD-Q8_K_XL.gguf
+        -c 126976
+        -ngl 999
+        --host 0.0.0.0
+        --port "${port}"
+        --no-mmap
+        -fa 1
+        --cache-type-k q8_0
+        --cache-type-v q8_0
+        --jinja
+        --temp 1.0
+        --top-p 0.95
+        --top-k 20
+        --min-p 0.0
+        --presence-penalty 1.5
+        --repeat-penalty 1.0
+        --spec-type draft-mtp
+        --spec-draft-n-max 2
+        -np 1
+      )
+      ;;
+    qwen-3.6-27b)
+      llama_args=(
+        llama-server
+        -m /models/Qwen3.6-27B-MTP-GGUF/Qwen3.6-27B-UD-Q4_K_XL.gguf
+        -c 126976
+        -ngl 999
+        --host 0.0.0.0
+        --port "${port}"
+        --no-mmap
+        -fa 1
+        --cache-type-k q8_0
+        --cache-type-v q8_0
+        --jinja
+        --temp 1.0
+        --top-p 0.95
+        --top-k 20
+        --min-p 0.0
+        --presence-penalty 1.5
+        --repeat-penalty 1.0
+        --spec-type draft-mtp
+        --spec-draft-n-max 2
+        -np 1
+      )
+      ;;
+    lfm2-24b-a2b)
+      llama_args=(
+        llama-server
+        -m /models/LFM2-24B-A2B-GGUF/LFM2-24B-A2B-Q8_0.gguf
+        -c 128000
+        -ngl 999
+        --host 0.0.0.0
+        --port "${port}"
+        --no-mmap
+        -fa 1
+        --cache-type-k q8_0
+        --cache-type-v q8_0
+        --jinja
+        --temp 0.7
+        --top-p 0.9
+        --top-k 40
+        -np 1
+      )
+      ;;
+    north-mini-code)
+      llama_args=(
+        llama-server
+        -m /models/North-Mini-Code-1.0-GGUF/North-Mini-Code-1.0-UD-Q8_K_XL.gguf
+        -c 128000
+        -ngl 999
+        --host 0.0.0.0
+        --port "${port}"
+        --no-mmap
+        -fa 1
+        --cache-type-k q8_0
+        --cache-type-v q8_0
+        --jinja
+        --temp 0.7
+        --top-p 0.9
+        --top-k 40
+        -np 1
+      )
+      ;;
+  esac
+
+  if [[ "${dry_run}" == "yes" ]]; then
+    printf 'podman'
+    for arg in "${podman_args[@]}"; do printf ' %s' "$arg"; done
+    printf ' %s' "${image}"
+    for arg in "${llama_args[@]}"; do printf ' %s' "$arg"; done
+    printf '\n'
+    return 0
+  fi
+
+  exec podman "${podman_args[@]}" "${image}" "${llama_args[@]}"
+}
+
+pick_model() {
+  echo "Select a model to run:"
+  PS3="Model: "
+  select model in "${MODELS[@]}" quit; do
+    case "${model}" in
+      quit)
+        exit 0
+        ;;
+      "")
+        echo "Invalid choice. Try again." >&2
+        ;;
+      *)
+        echo "${model}"
+        return 0
+        ;;
+    esac
+  done
+}
+
+main() {
+  local model=""
+  local port="${LLM_PORT:-}"
+  local backend="${LLM_BACKEND:-}"
+  local dry_run="no"
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -h|--help)
+        usage
+        exit 0
+        ;;
+      --list|-l)
+        list_models
+        exit 0
+        ;;
+      -n|--dry-run)
+        dry_run="yes"
+        shift
+        ;;
+      -b|--backend)
+        if [[ -z "${2:-}" ]]; then
+          echo "Error: --backend requires a value." >&2
+          exit 1
+        fi
+        backend="$2"
+        shift 2
+        ;;
+      -p|--port)
+        if [[ -z "${2:-}" ]]; then
+          echo "Error: --port requires a value." >&2
+          exit 1
+        fi
+        port="$2"
+        shift 2
+        ;;
+      -*)
+        echo "Unknown option: $1" >&2
+        usage >&2
+        exit 1
+        ;;
+      *)
+        if [[ -z "${model}" ]]; then
+          model="$1"
+        elif [[ -z "${port}" && "$1" =~ ^[0-9]+$ ]]; then
+          port="$1"
+        else
+          echo "Too many arguments: $1" >&2
+          usage >&2
+          exit 1
+        fi
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "${model}" ]]; then
+    model="$(pick_model)"
+  fi
+
+  run_model "${model}" "${port}" "${backend}" "${dry_run}"
+}
+
+main "$@"

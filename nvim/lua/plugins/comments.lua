@@ -4,15 +4,14 @@
 
 return {
 
-  -- Comments plugin
+  -- mini.comment
+  -- Comment source code and other
+  -- files in an automatic way
   {
-    "numToStr/Comment.nvim",
+    "echasnovski/mini.comment",
     event = "VeryLazy",
     config = function()
-      local comment = require("Comment")
-      comment.setup()
-      vim.cmd([[nmap <Space>cc :execute "normal! i" . split(&commentstring, '%s')[0]<CR>]])
+      require("mini.comment").setup({})
     end,
   },
-
 }

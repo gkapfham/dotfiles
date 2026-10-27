@@ -1,0 +1,43 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio",
+      "options": {
+        "baseURL": "{env:LMSTUDIO_BASE_URL}"
+      },
+      "models": {
+        "google/gemma-4-e4b": {
+          "name": "Gemma 4-E4B (LM Studio)"
+        }
+      }
+    },
+    "exo": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "exo",
+      "options": {
+        "baseURL": "{env:EXO_BASE_URL}",
+        "apiKey": "x"
+      },
+      "models": {
+        "mlx-community/gemma-4-e4b-it-6bit": {
+          "name": "Gemma 4-E4B IT 6-bit (Exo)",
+          "limit": {
+            "context": 131072,
+            "output": 16384
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        }
+      }
+    }
+  },
+}

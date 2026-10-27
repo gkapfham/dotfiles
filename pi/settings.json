@@ -1,0 +1,27 @@
+{
+  "lastChangelogVersion": "0.86.0",
+  "theme": "ghostty-terminal",
+  "defaultProvider": "github-copilot",
+  "defaultModel": "gpt-5.6-luna",
+  "defaultThinkingLevel": "high",
+  "enableSkillCommands": true,
+  "packages": [
+    "npm:pi-web-access",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@piotr-oles/pi-reflag",
+    "npm:pi-codex-goal",
+    "npm:pi-copy-message",
+    "npm:pi-interactive-shell",
+    "npm:pi-zk",
+    "npm:pi-diff-review",
+    "npm:@heyhuynhgiabuu/pi-diff",
+    "npm:pi-gateway",
+    "npm:tau-mirror",
+    "npm:pi-session-search",
+    "npm:@latentminds/pi-quotas",
+    "npm:pi-open-tui"
+  ],
+  "enabledModels": [
+    "opencode-go/deepseek-v4-flash"
+  ]
+}

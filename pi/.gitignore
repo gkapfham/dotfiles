@@ -1,0 +1,4 @@
+# pi/bin holds user scripts (e.g. send-scheduled-email.js).
+# The global core.excludesFile ignores "bin/" directories; re-include this one.
+!bin/
+!bin/*

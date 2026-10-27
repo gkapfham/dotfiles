@@ -1,2 +1,8 @@
-#!/bin/sh
-maim -i $(xdotool getactivewindow) ~/working/media/screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
+#!/usr/bin/env bash
+
+# create the screenshots directory if
+# it does not already exist
+mkdir -p ~/.config
+
+# take and save a screenshot and save it in the directory
+maim -i $(xdotool getactivewindow) ~/media/screenshots/`date +%Y-%m-%d_%H:%M:%S`.png

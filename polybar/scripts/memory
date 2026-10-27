@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+free -g | awk 'NR==2 {printf "󱙋 %d of %d GiB", $3, $2}'

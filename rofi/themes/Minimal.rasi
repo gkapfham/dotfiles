@@ -1,0 +1,214 @@
+* {
+    font:   "Maple Mono Normal NF 30";
+
+    bg0:    #1c1c1c;
+    bg1:    #58585880;
+    bg2:    #303030;
+    bg3:    #262626;
+    bg4:    #3a3a3a;
+
+    fg0:    #d2d2d2;
+    fg1:    #d78700;
+    fg2:    #808080;   /* placeholder + quiet hint text — palette `comment` */
+
+    /* accent, purple and blue come from the shared terminal palette and are
+       used only for small, quiet touches, so that the orange above keeps
+       meaning "selected": blue marks the active mode tab in the combi
+       launcher, purple the matched characters and the scrollbar handle. */
+    accent:     #d78700;
+    signaccent: #87afd7;
+    purple:     #a569a5;
+    purple-dim: #a569a599;
+    blue:       #87afd7;
+    urgent:     #d75347;
+    border:     #333333;
+    glow:       #d7870040;
+
+    /* the characters in the list that match what has been typed */
+    match:  bold underline #a569a5;
+
+    background-color:   transparent;
+    text-color:         @fg0;
+
+    margin:     0;
+    padding:    0 0 -1px 0;
+    spacing:    0;
+}
+
+window {
+    background-color:   @bg0;
+    /* same frame colour i3 draws around the focused window */
+    border:             1px;
+    border-color:       @border;
+    location:       center;
+    width:          1600;
+    height:         875;
+    border-radius:  20;
+    padding:        20px 20px 5px 20px;
+}
+
+inputbar {
+    font:       "Maple Mono Normal NF 36";
+    padding:    16px 20px;
+    spacing:    16px;
+    margin:     0 0 12px 0;
+    children:   [ prompt, entry ];
+    /* same surface as the selected element, so the input reads as the */
+    /* focused part of the window instead of receding into it        */
+    background-color:   @bg2;
+    border-radius:      12px;
+    border:             1px;
+    border-color:       @bg4;
+}
+
+prompt {
+    text-color:     @accent;
+    font:           "Maple Mono Normal NF 36";
+    content:        "󰕮";
+    padding:        0 8px 0 0;
+}
+
+/* the mode buttons under the input bar (the combi launcher, Control+Mod+P).
+   rofi's own default theme does not style these, so they used to fall back
+   to the bare global rule while everything around them was styled. */
+mode-switcher {
+    background-color:   @bg3;
+    border-radius:      12px;
+    /* left/right inset matches the inputbar's 20px so the first icon lines up
+       under the prompt glyph, with breathing room before the first tab */
+    padding:            10px 20px;
+    spacing:            14px;
+    margin:             0 0 12px 0;
+}
+
+/* Active tab, and how to go back:
+   now    — the current mode is simply the blue icon (@blue) on the darker
+            strip; there is no tile behind it, so the glyphs' slight ink
+            offset is no longer visible and the padding can stay symmetric.
+   before — the current mode sat on a medium-grey tile:
+                button selected normal {
+    background-color:   transparent;
+    text-color:         @blue;
+}
+                button { padding: 6px 20px 6px 10px; text-color: @fg0; }
+            (that asymmetric right padding was cancelling the ink offset) */
+button {
+    /* rofi stretches mode buttons across the whole bar by default */
+    expand:             false;
+    /* every tab is exactly the same box with the icon centred inside it, so
+       the icon size and the left/right padding around each icon are identical
+       whatever the glyph's own ink width is. All tab icons come from the
+       Material Design set (display-* in rofi/config.rasi), so they share one
+       design grid and one drawn size. */
+    width:              68px;
+    /* no tile behind the icons any more, so an equal, plain inset is all that
+       is needed -- and the glyphs' small ink offset stops being visible */
+    padding:            6px 10px;
+    horizontal-align:   0.500;
+    vertical-align:     0.5;
+    font:               "Maple Mono Normal NF 38";
+    background-color:   transparent;
+    border-radius:      8px;
+    /* inactive tabs are dim; the active one is the blue icon, with no tile
+       behind it (see the note above for the previous pill look) */
+    text-color:         @fg2;
+}
+
+/* the mode you are currently in — the same blue as the hovered row, so the
+   orange above stays reserved for the selected entry */
+button selected normal {
+    background-color:   transparent;
+    text-color:         @blue;
+}
+
+scrollbar {
+    width:        12px;
+    border:       0;
+    handle-color: @purple-dim;
+    handle-width: 12px;
+    padding:      4px;
+    background-color: @bg0;
+    border-radius: 6px;
+    margin:       0 8px 0 0;
+}
+
+entry, element-icon, element-text {
+    vertical-align: 0.5;
+}
+
+entry {
+    font:   "Maple Mono Normal NF Italic 36";
+    placeholder: " type to discover";
+    placeholder-color: @fg2;
+    cursor: text;
+}
+
+message {
+    border:             0;
+    border-radius:      12px;
+    background-color:   @bg3;
+    padding:            12px 20px;
+    margin:             0 0 12px 0;
+}
+
+textbox {
+    padding:    8px 16px;
+}
+
+listview {
+    lines:      10;
+    columns:    1;
+    fixed-height:   true;
+    border:         0;
+    padding:        4px 0 0 0;
+    scrollbar:      true;
+    spacing:        2px;
+}
+
+element {
+    padding:            10px 20px;
+    spacing:            16px;
+    background-color:   transparent;
+    border-radius:      10px;
+    margin:             0 8px 0 0;
+}
+
+element normal normal {
+    background-color:   transparent;
+}
+
+/* mouse hover */
+element normal active {
+    text-color: @accent;
+    background-color:   @bg3;
+}
+
+element normal urgent {
+    text-color: @urgent;
+}
+
+element selected normal, element selected active {
+    background-color:   @bg2;
+    text-color:         @fg1;
+    border:             0 0 0 6px;
+    border-color:       @fg1;
+    border-radius:      0 10px 10px 0;
+}
+
+element selected urgent {
+    background-color:   @bg2;
+    text-color:         @urgent;
+    border:             0 0 0 6px;
+    border-color:       @urgent;
+    border-radius:      0 10px 10px 0;
+}
+
+element-icon {
+    size:   1.1em;
+}
+
+element-text {
+    font:               "Maple Mono Normal NF 36";
+    text-color: inherit;
+    highlight:  @match;
+}
