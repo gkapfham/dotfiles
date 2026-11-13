@@ -1076,6 +1076,43 @@ return {
         end,
         desc = "Spelling Suggestions",
       },
+      {
+        "<leader>sL",
+        function()
+          Snacks.picker.lsp_config({ attached = 0 })
+        end,
+        desc = "LSP: Config for Current Buffer",
+      },
+      {
+        "<leader>sB",
+        function()
+          Snacks.picker.grep_buffers()
+        end,
+        desc = "Grep: Open Buffers",
+      },
+      {
+        "<leader>sP",
+        function()
+          Snacks.picker.pickers()
+        end,
+        desc = "Snacks: All Pickers",
+      },
+      {
+        -- Compare the current branch against the framework mainline;
+        -- change the base if the mainline branch is renamed.
+        "<leader>gv",
+        function()
+          Snacks.picker.git_diff({ base = "framework" })
+        end,
+        desc = "Git Diff vs framework",
+      },
+      {
+        "<leader>gV",
+        function()
+          Snacks.picker.git_diff({ staged = true })
+        end,
+        desc = "Git Diff: Staged",
+      },
     },
     init = function()
       local nvim_web_devicons = require("nvim-web-devicons")
