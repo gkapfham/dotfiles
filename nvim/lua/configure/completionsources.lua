@@ -12,8 +12,8 @@ local insert_primary_sources = {
   },
   { name = "nvim_lsp", max_item_count = 10, priority = 10, keyword_length = 1 },
   { name = "copilot", max_item_count = 10, priority = 10, keyword_length = 1 },
-  { name = "supermaven", max_item_count = 10, priority = 10, keyword_length = 1 },
-  { name = "minuet", max_item_count = 10, priority = 10, keyword_length = 2 },
+  -- { name = "supermaven", max_item_count = 10, priority = 10, keyword_length = 1 },
+  -- { name = "minuet", max_item_count = 10, priority = 10, keyword_length = 2 },
   {
     name = "buffer",
     max_item_count = 10,
