@@ -29,7 +29,7 @@ local insert_primary_sources = {
       end,
     },
   },
-  { name = "fuzzy_buffer", max_item_count = 10, priority = 6, keyword_length = 4 },
+  { name = "fuzzy_buffer", max_item_count = 7, priority = 6, keyword_length = 4 },
   { name = "cmp_yanky", max_item_count = 5, priority = 6, keyword_length = 4 },
   { name = "tags", max_item_count = 5, priority = 5, keyword_length = 2 },
   { name = "luasnip", max_item_count = 5, priority = 5, keyword_length = 2 },
