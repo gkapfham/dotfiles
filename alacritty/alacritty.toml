@@ -9,29 +9,27 @@ dynamic_padding = false
 black = "0x767676"
 blue = "0x87afd7"
 cyan = "0xd75f5f"
-green = "0x5f8700"
-magenta = "0x875f87"
+green = "0x6f9500"
+magenta = "0xa569a5"
 red = "0xd78700"
 # white = "0xb2b2b2"
-white = "0xbcbcbc"
-yellow = "0xafaf5f"
+white = "0xb2b2b2"
+yellow = "0xb7b757"
 
 [colors.normal]
 black = "0x767676"
 blue = "0x87afd7"
 cyan = "0xd75f5f"
-green = "0x5f8700"
-magenta = "0x875f87"
+green = "0x6f9500"
+magenta = "0xa569a5"
 red = "0xd78700"
 # white = "0xb2b2b2"
-white = "0xbcbcbc"
-yellow = "0xafaf5f"
+white = "0xb2b2b2"
+yellow = "0xb7b757"
 
 [colors.primary]
 background = "0x1c1c1c"
-# foreground = "0xa8a8a8"
-# foreground = "0xbcbcbc"
-foreground = "0xb2b2b2"
+foreground = "0xe0e0e0"
 
 [cursor]
 style = "Block"
