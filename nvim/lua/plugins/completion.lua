@@ -65,7 +65,7 @@ local kind_icons = {
   StringSpecialUrl = "󰌷",
   String = "",
   Copilot = "",
-  Supermaven = "",
+  -- Supermaven = "",
   Comment = "",
   Label = "󰜢",
   TextTitle1 = "",
@@ -163,114 +163,114 @@ return {
     end,
   },
 
-  -- supermaven-nvim
-  -- Use the Supermaven completion engine;
-  -- note that it provides built-in support
-  -- for nvim-cmp and thus it is easy to integrate
-  -- into this setup. Using free tier for now.
-  -- Even though it is currently sunset, it
-  -- seems to be working correctly still.
-  -- Reference:
-  -- https://supermaven.com/blog/sunsetting-supermaven
-  {
-    "supermaven-inc/supermaven-nvim",
-    event = "InsertEnter",
-    config = function()
-      require("supermaven-nvim").setup({
-        -- Disable the default keymaps and settings
-        -- that would normally make virtual text appear;
-        -- not using those since Supermaven integrates
-        -- with nvim-cmp and that is primary approach
-        disable_inline_completion = true,
-        disable_keymaps = true,
-      })
-    end,
-  },
+  -- -- supermaven-nvim
+  -- -- Use the Supermaven completion engine;
+  -- -- note that it provides built-in support
+  -- -- for nvim-cmp and thus it is easy to integrate
+  -- -- into this setup. Using free tier for now.
+  -- -- Even though it is currently sunset, it
+  -- -- seems to be working correctly still.
+  -- -- Reference:
+  -- -- https://supermaven.com/blog/sunsetting-supermaven
+  -- {
+  --   "supermaven-inc/supermaven-nvim",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("supermaven-nvim").setup({
+  --       -- Disable the default keymaps and settings
+  --       -- that would normally make virtual text appear;
+  --       -- not using those since Supermaven integrates
+  --       -- with nvim-cmp and that is primary approach
+  --       disable_inline_completion = true,
+  --       disable_keymaps = true,
+  --     })
+  --   end,
+  -- },
 
-  -- minuet-ai.nvim
-  -- Enable interaction with code completion
-  -- models like Codestral and Deepseek
-  {
-    "milanglacier/minuet-ai.nvim",
-    event = "InsertEnter",
-    config = function()
-      require("minuet").setup({
-        provider = "codestral",
-        request_timeout = 2.5,
-        throttle = 500,
-        debounce = 100,
-        provider_options = {
-          codestral = {
-            api_key = "CODESTRAL_API_KEY",
-            end_point = "https://codestral.mistral.ai/v1/fim/completions",
-            optional = {
-              max_tokens = 256,
-            },
-          },
-        },
-        duet = {
-          provider = "openai_compatible",
-          request_timeout = 15,
-          provider_options = {
-            openai_compatible = {
-              api_key = "CODESTRAL_API_KEY",
-              end_point = "https://codestral.mistral.ai/v1/chat/completions",
-              model = "codestral-latest",
-              name = "Codestral",
-              optional = {
-                top_p = 0.9,
-              },
-            },
-          },
-        },
-      })
-      -- Use leader keybindings for discoverability
-      vim.keymap.set("n", "<leader>mp", "<cmd>Minuet duet predict<CR>", { desc = "Minuet duet predict" })
-      vim.keymap.set("n", "<leader>ma", "<cmd>Minuet duet apply<CR>", { desc = "Minuet duet apply" })
-      vim.keymap.set("n", "<leader>md", "<cmd>Minuet duet dismiss<CR>", { desc = "Minuet duet dismiss" })
-      -- Insert mode keybindings
-      -- <C-l>: predict (mnemonic: "line" - get a line prediction)
-      -- <C-y>: apply (mnemonic: "yes" - accept the prediction)
-      -- <C-]>: dismiss (clear without leaving insert mode)
-      vim.keymap.set("i", "<C-l>", "<cmd>Minuet duet predict<CR>", { desc = "Minuet duet predict" })
-      vim.keymap.set("i", "<C-y>", "<cmd>Minuet duet apply<CR>", { desc = "Minuet duet apply" })
-      vim.keymap.set("i", "<C-]>", "<cmd>Minuet duet dismiss<CR>", { desc = "Minuet duet dismiss" })
-      -- Set up minimal autocommands for lualine status integration
-      local minuet_augroup = vim.api.nvim_create_augroup("MinuetStatus", { clear = true })
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "MinuetDuetRequestStarted",
-        group = minuet_augroup,
-        callback = function()
-          vim.g.minuet_duet_status = "󱓞 Minuet requesting"
-          vim.g.minuet_duet_processing = true
-        end,
-      })
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "MinuetDuetRequestFinished",
-        group = minuet_augroup,
-        callback = function()
-          vim.g.minuet_duet_status = "󱓞 Minuet ready"
-          vim.g.minuet_duet_processing = false
-        end,
-      })
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "MinuetDuetRequestFailed",
-        group = minuet_augroup,
-        callback = function()
-          vim.g.minuet_duet_status = "󱓞 Minuet failed"
-          vim.g.minuet_duet_processing = false
-        end,
-      })
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "MinuetDuetRequestCancelled",
-        group = minuet_augroup,
-        callback = function()
-          vim.g.minuet_duet_status = "󱓞 Minuet cancelled"
-          vim.g.minuet_duet_processing = false
-        end,
-      })
-    end,
-  },
+  -- -- minuet-ai.nvim
+  -- -- Enable interaction with code completion
+  -- -- models like Codestral and Deepseek
+  -- {
+  --   "milanglacier/minuet-ai.nvim",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("minuet").setup({
+  --       provider = "codestral",
+  --       request_timeout = 2.5,
+  --       throttle = 500,
+  --       debounce = 100,
+  --       provider_options = {
+  --         codestral = {
+  --           api_key = "CODESTRAL_API_KEY",
+  --           end_point = "https://codestral.mistral.ai/v1/fim/completions",
+  --           optional = {
+  --             max_tokens = 256,
+  --           },
+  --         },
+  --       },
+  --       duet = {
+  --         provider = "openai_compatible",
+  --         request_timeout = 15,
+  --         provider_options = {
+  --           openai_compatible = {
+  --             api_key = "CODESTRAL_API_KEY",
+  --             end_point = "https://codestral.mistral.ai/v1/chat/completions",
+  --             model = "codestral-latest",
+  --             name = "Codestral",
+  --             optional = {
+  --               top_p = 0.9,
+  --             },
+  --           },
+  --         },
+  --       },
+  --     })
+  --     -- Use leader keybindings for discoverability
+  --     vim.keymap.set("n", "<leader>mp", "<cmd>Minuet duet predict<CR>", { desc = "Minuet duet predict" })
+  --     vim.keymap.set("n", "<leader>ma", "<cmd>Minuet duet apply<CR>", { desc = "Minuet duet apply" })
+  --     vim.keymap.set("n", "<leader>md", "<cmd>Minuet duet dismiss<CR>", { desc = "Minuet duet dismiss" })
+  --     -- Insert mode keybindings
+  --     -- <C-l>: predict (mnemonic: "line" - get a line prediction)
+  --     -- <C-y>: apply (mnemonic: "yes" - accept the prediction)
+  --     -- <C-]>: dismiss (clear without leaving insert mode)
+  --     vim.keymap.set("i", "<C-l>", "<cmd>Minuet duet predict<CR>", { desc = "Minuet duet predict" })
+  --     vim.keymap.set("i", "<C-y>", "<cmd>Minuet duet apply<CR>", { desc = "Minuet duet apply" })
+  --     vim.keymap.set("i", "<C-]>", "<cmd>Minuet duet dismiss<CR>", { desc = "Minuet duet dismiss" })
+  --     -- Set up minimal autocommands for lualine status integration
+  --     local minuet_augroup = vim.api.nvim_create_augroup("MinuetStatus", { clear = true })
+  --     vim.api.nvim_create_autocmd("User", {
+  --       pattern = "MinuetDuetRequestStarted",
+  --       group = minuet_augroup,
+  --       callback = function()
+  --         vim.g.minuet_duet_status = "󱓞 Minuet requesting"
+  --         vim.g.minuet_duet_processing = true
+  --       end,
+  --     })
+  --     vim.api.nvim_create_autocmd("User", {
+  --       pattern = "MinuetDuetRequestFinished",
+  --       group = minuet_augroup,
+  --       callback = function()
+  --         vim.g.minuet_duet_status = "󱓞 Minuet ready"
+  --         vim.g.minuet_duet_processing = false
+  --       end,
+  --     })
+  --     vim.api.nvim_create_autocmd("User", {
+  --       pattern = "MinuetDuetRequestFailed",
+  --       group = minuet_augroup,
+  --       callback = function()
+  --         vim.g.minuet_duet_status = "󱓞 Minuet failed"
+  --         vim.g.minuet_duet_processing = false
+  --       end,
+  --     })
+  --     vim.api.nvim_create_autocmd("User", {
+  --       pattern = "MinuetDuetRequestCancelled",
+  --       group = minuet_augroup,
+  --       callback = function()
+  --         vim.g.minuet_duet_status = "󱓞 Minuet cancelled"
+  --         vim.g.minuet_duet_processing = false
+  --       end,
+  --     })
+  --   end,
+  -- },
 
   -- copilot.lua
   -- Use the GitHub copilot plugin
@@ -706,8 +706,8 @@ return {
         look = " Spell",
         spell = " Spell",
         copilot = " Copilot",
-        minuet = " Minuet",
-        supermaven = " Supermaven",
+        -- minuet = " Minuet",
+        -- supermaven = " Supermaven",
       }
       local function apply_cmp_setup()
         cmp.setup({
