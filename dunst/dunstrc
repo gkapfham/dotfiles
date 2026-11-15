@@ -2,6 +2,12 @@
     ### Display ###
 
     # Which monitor should the notifications be displayed on.
+    #
+    # NOTE: this is only a fallback, because `follow` below now decides in
+    # practice. It used to be the whole story, and index 0 is the external
+    # panel: when that panel is unplugged, X keeps reporting it as the
+    # disconnected primary and still reserves its 3840x2160 at +0+0, so
+    # notifications were being drawn onto a screen that is not there.
     monitor = 0
 
     # Display notification on focused monitor.  Possible modes are:
@@ -15,7 +21,12 @@
     #
     # If this option is set to mouse or keyboard, the monitor option
     # will be ignored.
-    follow = none
+    #
+    # Set to mouse so notifications land on whichever screen the pointer is
+    # on. With an external panel attached and then unplugged, "none" left them
+    # pinned to the phantom monitor above and invisible. "keyboard" is the
+    # alternative if you would rather they followed the focused window.
+    follow = mouse
 
     width  = 500
     height = 200
@@ -235,7 +246,7 @@
     # background = "#585858"
     # foreground = "#2E3440"
     background = "#1C1C1C"
-    foreground = "#d2d2d2"
+    foreground = "#e0e0e0"
     frame_color = "#87afd7"
     timeout = 20
     # Icon for notifications with low urgency, uncomment to enable
@@ -244,7 +255,7 @@
 [urgency_normal]
     # background = "#A3BE8C"
     background = "#1C1C1C"
-    foreground = "#d2d2d2"
+    foreground = "#e0e0e0"
     frame_color = "#87afd7"
     timeout = 20
     # Icon for notifications with normal urgency, uncomment to enable
@@ -254,7 +265,7 @@
     # background = "#EBCB8B"
     # foreground = "#2E3440"
     background = "#1C1C1C"
-    foreground = "#d2d2d2"
+    foreground = "#e0e0e0"
     frame_color = "#D78700"
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
