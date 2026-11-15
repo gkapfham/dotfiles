@@ -20,7 +20,7 @@ font-feature = +dlig
 
 # Background and Foreground Colors
 background = 1c1c1c
-foreground = d2d2d2
+foreground = e0e0e0
 background-opacity = 1
 
 # Color Palette (16 colors)
