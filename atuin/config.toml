@@ -147,11 +147,15 @@ ctrl_n_shortcuts = true
 # Disable secrets filter to save commands that might match secret patterns but aren't actually secrets
 secrets_filter = false
 
-# Consider using the daemon mode as it may be faster,
-# but disable it for now as not proving absolutely needed.
+# Use the daemon mode as it may be faster
 [daemon]
 enabled = true
 autostart = true
 
+# Use ai to explain commands
 [ai]
 enabled = true
+
+# Use threads to search coding agent sessions
+[threads]
+capture = true
