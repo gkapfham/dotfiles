@@ -197,7 +197,7 @@ alias ka="ls -al --git"
 
 # Use the eza command to display a tree,
 # ensuring better color scheme
-alias tree="eza --tree --level=2 --long --icons"
+alias tree="eza --tree --level=2 --long --icons always"
 
 # Show the files in a specific directory
 alias search-show="rga-fzf"
@@ -205,16 +205,33 @@ alias search-show="rga-fzf"
 # Preview a markdown in stand-alone viewer
 alias mdsee="litemdview"
 
+# Locate the aliases file that neomutt actually loads;
+# this wraps the otherwise hard-to-remember neomutt query
+# (the aliases themselves live in ~/.abook/aliases.txt)
+alias muttaliases='neomutt -D | grep -i "^set alias_file"'
+
 # Use nix-rebuild switch with a configuration in user account,
-# relying on a specialized program for better visual diagnostics
+# relying on a specialized program for better visual diagnostics.
+# This is a plain rebuild: it does NOT fetch newer channel packages,
+# use `ukix` for that.
 alias kix="nh os switch -f '<nixpkgs/nixos>' -- -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
 
 # alias kix="sudo nixos-rebuild switch -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
 
 # Use nix-rebuild switch with a configuration in user account,
 # relying on a specialized program for better visual diagnostics
-# and also perform an upgrade of the system
-alias ukix="nh os switch --update -f '<nixpkgs/nixos>' -- -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
+# and also perform an upgrade of the system.
+#
+# NOTE: nh's `--update` flag only updates *flake* inputs, and this
+# configuration is channel-based (no flake), so it silently does
+# nothing but warn:
+#   ! Only flake installables can be updated, file is not supported
+#   (nh/crates/nh-core/src/update.rs)
+# Refresh the channels explicitly first, then rebuild. The `sudo`
+# matters: NIX_PATH points at root's channel profile
+# (/nix/var/nix/profiles/per-user/root/channels), exactly the set that
+# <nixpkgs> and <nixos-unstable> resolve to in configuration.nix.
+alias ukix="sudo nix-channel --update && nh os switch -f '<nixpkgs/nixos>' -- -I nixos-config=/home/gkapfham/configure/nixos/configuration.nix"
 
 # Run the welcome session for zellij,
 # helps to interactively pick content
@@ -337,7 +354,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Preview directory's content with eza when completing cd,
 # thereby showing a preview window with Fzf to the right
 # of the cd command that shows the contents of current directory
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --level=3 --color=always --icons $realpath'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --level=3 --color=always --icons always $realpath'
 
 # force zsh not to show completion menu, allow fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
@@ -346,7 +363,7 @@ zstyle ':completion:*' menu no
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
   '[[ $group == "[process ID]" ]] && ps --pid=$word -o cmd --no-headers -w -w'
-zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87'
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags --preview-window=down:3:wrap --color='fg:#e0e0e0,bg:#1c1c1c,hl:#6f9500' --color='fg+:#b7b757,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#a569a5,header:#a569a5'
 
 # Preview the contents of environment variables
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
@@ -354,7 +371,7 @@ zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|
 
 # Preview the search for commands or use information for commands
 zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
-  ¦ '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
+  '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
 
 # Switch group using `,` and `.` (note that different
 # groups might include different types of branches when
@@ -385,7 +402,7 @@ zstyle ':fzf-tab:*' fzf-min-height '10'
 # Pass commands to the Fzf program that defines the colors. These
 # colors are the same as those used to configure Fzf when it runs
 # otherwise in the terminal window or in a text editor like Vim or Neovim
-zstyle ":fzf-tab:*" fzf-flags --color='fg:#8a8a8a,bg:#1c1c1c,hl:#5f8700' --color='fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#875f87,header:#875f87,border:#c1c1c1' --style full --prompt ' ' --no-scrollbar 
+zstyle ":fzf-tab:*" fzf-flags --color='fg:#e0e0e0,bg:#1c1c1c,hl:#6f9500' --color='fg+:#b7b757,bg+:#1c1c1c,hl+:#d78700' --color='info:#87afd7,prompt:#87afd7,pointer:#d78700' --color='marker:#d78700,spinner:#a569a5,header:#a569a5,border:#e0e0e0' --style full --prompt ' ' --no-scrollbar 
 
 # }}}
 
@@ -407,10 +424,10 @@ export FZF_DEFAULT_OPTS='
   --no-scrollbar
   --bind tab:down,shift-tab:up
   --bind ctrl-f:page-down,ctrl-b:page-up
-  --color=fg:#d2d2d2,bg:#1c1c1c,hl:#5f8700
-  --color=fg+:#afaf5f,bg+:#1c1c1c,hl+:#d78700
+  --color=fg:#e0e0e0,bg:#1c1c1c,hl:#6f9500
+  --color=fg+:#b7b757,bg+:#1c1c1c,hl+:#d78700
   --color=info:#87afd7,prompt:#87afd7,pointer:#d78700
-  --color=marker:#d78700,spinner:#875f87,header:#875f87,border:#c1c1c1'
+  --color=marker:#d78700,spinner:#a569a5,header:#a569a5,border:#e0e0e0'
 
 # Trigger fzf completion using the semi-colon key instead of **
 export FZF_COMPLETION_TRIGGER='**'
@@ -430,14 +447,14 @@ export FZF_CTRL_T_COMMAND='zoxide query -l'
 # Directory and file preview for CTRL-T
 export FZF_CTRL_T_OPTS="
   --walker-skip .git,node_modules,target
-  --preview '(test -d {} && eza --tree --level=3 --color=always --icons {}) || (bat -n --color=always {})'
+  --preview '(test -d {} && eza --tree --level=3 --color=always --icons always {}) || (bat -n --color=always {})'
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # Directory and file preview for cd completion
 # when using the **<TAB> approach
 export FZF_COMPLETION_DIR_OPTS="
   --walker-skip .git,node_modules,target
-  --preview '(test -d {} && eza --tree --level=3 --color=always --icons {}) || (bat -n --color=always {})'
+  --preview '(test -d {} && eza --tree --level=3 --color=always --icons always {}) || (bat -n --color=always {})'
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # Use ripgrep and ripgrep-all in combination with fzf
@@ -609,7 +626,7 @@ secure() {
 # Always display directory contents after a change of directory
 function chpwd() {
   emulate -L zsh
-  eza --group-directories-first --grid --long --sort=name --icons
+  eza --group-directories-first --grid --long --sort=name --icons always
 }
 
 # Create a timer for work/rest sessions
@@ -696,7 +713,13 @@ alias ls="eza --color=always --icons"
 # Prompt source; see the starship.toml file
 # in the ~/.config/ directory for details
 znap eval starship 'starship init zsh'
-znap prompt
+
+# `znap prompt` with no theme argument only prints the prompt a few ms early
+# via three external `tput` calls (civis/sc/cnorm); it cost ~28ms of startup
+# and added ~10ms of variance. Starship already installs the prompt through
+# the eval above, and the heavy plugins are deferred, so the early print is
+# not needed. Measure with: hyperfine --warmup 3 --runs 40 'zsh -i -c exit'
+# znap prompt
 
 # }}}
 
@@ -713,40 +736,48 @@ znap prompt
 
 # Multiple Znap Plugins {{{
 
-# oh-my-zsh git plugin: provides the g* alias family (gst, g, gco, gd, glo,
-# gp, gl, ...) that is used interactively. Kept because these aliases are
-# actively used; cost is ~2-3ms on startup (znap compiles the plugin).
-znap source ohmyzsh/ohmyzsh \
-  plugins/git \
+# Which plugins stay on the startup path is decided by one thing: `znap`
+# stubs `compinit` and runs the real one from a `precmd` hook, i.e. right
+# before the first prompt, once the whole rc file has been sourced. Anything
+# that has to be in `fpath` for compinit to see it must therefore be sourced
+# eagerly, below.
+znap source zsh-users/zsh-completions
 
-# Lightweight plugins loaded on startup (see below for the deferred heavy set).
+# vi-mode stays eager as well, and deliberately. It is worth only +2.1ms, but it
+# owns the ZLE keymaps: deferring it put the keymap switch in the same queue as
+# `bindkey '^ ' autosuggest-accept` and autosuggestions, and in practice the
+# editor was briefly left without those bindings right after the prompt. Plugin
+# load order for anything touching keymaps is not worth 2ms.
+znap source jeffreytse/zsh-vi-mode
+
+# The two deferred plugins below are pure alias/hook work: no ZLE widgets, no
+# keymaps, nothing the first prompt needs. Measured cost: oh-my-zsh git plugin
+# +3.8ms (g* aliases: gst, gco, gd, ...), chisui/zsh-nix-shell +2.5ms (the
+# `nix-shell` / `nix develop` hook). The cost of deferring them is that those
+# aliases and that hook become live a few milliseconds after the first prompt.
+#
 # # Use znap source to start plugins
-# znap source chisui/zsh-nix-shell
-# znap source zsh-users/zsh-completions
-# znap source jeffreytse/zsh-vi-mode
 # znap source Aloxaf/fzf-tab
 # znap source wfxr/forgit
 # znap source MichaelAquilina/zsh-you-should-use
 # znap source zdharma-continuum/fast-syntax-highlighting
 
-# Use znap source to start lightweight plugins that should be ready for the
-# first prompt and are cheap to load: the nix-shell hook, the completions
-# fpath, and vi-mode (vi-mode also owns `zvm_after_init_commands`, which later
-# parts of this file rely on, so it must load eagerly).
-znap source chisui/zsh-nix-shell
-znap source zsh-users/zsh-completions
-znap source jeffreytse/zsh-vi-mode
+# zsh-defer queues work that runs when zle is idle -- right after the first
+# prompt is drawn -- and then refreshes the prompt and autosuggestion state.
+# (zsh/sched could not do this: its callback does not run while zle is active,
+# which is why the deferred plugins, autosuggestions included, only appeared
+# after pressing Enter.)
+source ~/.zsh/zsh-defer/zsh-defer.plugin.zsh
 
-# The remaining plugins (fzf-tab completion, forgit, you-should-use alias
-# suggestions, and fast-syntax-highlighting) are heavy and only used
-# interactively. None are needed to draw the prompt or to process the first
-# command, so they are scheduled to load a split-second AFTER the first prompt
-# renders via zsh/sched. This cuts perceived startup time by ~20-30ms while
-# keeping every feature: each plugin loads as soon as the shell is idle at the
-# prompt, normally before you begin typing. (`znap source` is still used, so
-# znap keeps managing clone/compile/update precisely as before.)
-zmodload zsh/sched 2>/dev/null
+# The remaining plugins (autosuggestions, atuin history, fzf-tab completion,
+# forgit, you-should-use alias suggestions, and fast-syntax-highlighting) are
+# heavy and only used interactively. None are needed to draw the prompt or to
+# process the first command, so they are deferred until the first prompt is
+# idle. This keeps startup fast while every feature is ready on the first line.
+# (`znap source` is still used, so znap keeps managing clone/compile/update.)
 _deferred_heavy_plugins() {
+  znap source ohmyzsh/ohmyzsh plugins/git
+  znap source chisui/zsh-nix-shell
   znap source zsh-users/zsh-autosuggestions
   bindkey '^ ' autosuggest-accept
   eval "$(atuin init zsh)"
@@ -755,7 +786,7 @@ _deferred_heavy_plugins() {
   znap source MichaelAquilina/zsh-you-should-use
   znap source zdharma-continuum/fast-syntax-highlighting
 }
-sched +0 _deferred_heavy_plugins
+zsh-defer _deferred_heavy_plugins
 
 # }}}
 
