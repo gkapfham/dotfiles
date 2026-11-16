@@ -52,10 +52,16 @@ for_window [class=".*"] title_format " %title"
 # This prevents lag from Zellij's dynamic title updates
 for_window [class="ghostty"] title_format "  Terminal"
 
-# Wallpaper that is a solid purple color
+# Wallpaper, published by ~/configure/wallpaper/bin/wallpaper (see that
+# repository's README).  The pointer at /var/lib/wallpaper is mutable, so a new
+# wallpaper appears at login without a rebuild; the script falls back to a solid
+# colour until one has been chosen, which is what a fresh machine shows.
+exec_always --no-startup-id ~/.config/i3/scripts/i3-wallpaper.sh
+
+# Previous solid-only backgrounds, kept for reference
 # exec_always --no-startup-id hsetroot -solid "#875f87"
 # exec_always --no-startup-id hsetroot -solid "#a569a5"
-exec_always --no-startup-id hsetroot -solid "#6E466E"
+# exec_always --no-startup-id hsetroot -solid "#6E466E"
 
 # Alternative, a wallpaper that uses a custom image
 # exec_always --no-startup-id feh --bg-fill ~/media/images/wallpaper/Honeycomb_Mac.png &
@@ -108,12 +114,37 @@ set $ce     #CEECEE
 
 # Startup {{{
 
-# Run polybar to display the bar at the top of the screen;
-# note that this option is not better than using i3bar and i3status
-# because i3status does not allow the movement of the workspace
-# buttons to be slightly to the right, allowing for the curved
-# border at the top of the framework laptop screen to be visible
-exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
+# Run quickshell to display the bar at the top of the screen.
+#
+# This replaced polybar: the quickshell bar in ~/.config/quickshell is a port
+# of the polybar bar in polybar/config.ini (same height, fonts, colors and
+# modules), with one improvement -- the center block now shrinks and then
+# drops its least important modules instead of pushing the clock off screen.
+#
+# It is started through i3/scripts/quickshell-launch.sh rather than
+# `quickshell -n` directly. `-n` refuses a second copy but cannot replace a
+# broken one, and i3 re-runs exec_always on every reload, so the launcher is
+# what makes this line idempotent. It also repairs the two failures that made
+# the bar look wrong on 2026-10-21: a stale xrandr entry for the output the 4K
+# panel had moved off (three bars for two screens), and a bar whose i3 IPC
+# socket had gone stale because i3 restarted in place (blank workspace rows in
+# every bar). While the bar is healthy the launcher changes nothing, so a
+# reload stays a no-op. The bar reloads its own config when the files change,
+# so a reload of i3 is not needed to pick up an edit.
+#
+# `quickshell-launch.sh status` reports the pid, its health and the bar count;
+# `restart` stops and starts it; `stop` stops it.
+#
+# TO GO BACK TO POLYBAR: comment the quickshell line below, uncomment the
+# polybar line under it, run `quickshell kill`, and reload i3 with
+# `i3-msg reload`.
+#
+# Note on stopping either bar by hand: the Nix wrappers rename the processes,
+# so an exact-name match silently fails. Stop this bar with `quickshell kill`
+# (not `pkill -x quickshell`) and polybar with `pkill polybar` (not
+# `pkill -x polybar`); both `-x` forms exit 1 without saying anything.
+exec_always --no-startup-id ~/.config/i3/scripts/quickshell-launch.sh
+# exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
 
 # Run numlockx to turn off numlock by default
 # This prevents numlock from displaying in i3lock-color
@@ -164,13 +195,24 @@ exec --no-startup-id $highlight-pointer
 
 # Rofi {{{
 
+# Note: for now, I have setup the Control-Alt-o to be
+# the standard launcher and the Control-Alt-p to be
+# the omni launcher.  This is because I have been using
+# Control-Alt-p for so long that I cannot stop typing it!
+
 # Rofi for programs and windows and more;
 # Note that this can access the programs installed
 # in the ~/.local/bin directory while also running
-# installed programs and switching between both
-# windows and workspaces
+# Standard launcher (Control+Alt+P): one merged list of installed programs
+# and windows, no mode tabs — the plain launcher it has always been
 set $rofi-full-program "~/.config/i3/scripts/i3-run-rofi-full-path.sh"
-bindsym Control+$mod+p exec $rofi-full-program
+bindsym Control+$mod+o exec $rofi-full-program
+
+# Omni launcher (Control+Alt+O): the same merged list plus a tab per mode
+# (combi / run-icons / window / drun / run / file browser). Control+Tab or
+# Shift+Right switches tabs and the active tab is blue
+set $rofi-omni "env ROFI_TABS=1 ~/.config/i3/scripts/i3-run-rofi-full-path.sh"
+bindsym Control+$mod+p exec $rofi-omni
 
 # Rofi for listing workspaces and their numbers for each connected monitor
 set $rofi-workspace-list "~/.config/i3/scripts/i3-workspace-list.sh"
@@ -184,7 +226,7 @@ bindsym Control+$mod+w exec $rofi-workspace-list
 # --> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10a, 10b, 10c, 11, 12, 13, 14, 15.
 # Finally, workspaces that are only words are going to appear after any
 # of those that start with a number like the ones listed previously.
-bindsym Control+$mod+a exec i3-msg rename workspace to $(rofi -dmenu -lines 0)
+bindsym Control+$mod+a exec ~/.config/i3/scripts/i3-rofi-rename-workspace.sh
 
 # Rofi for .desktop files
 # set $rofi-desktop "j4-dmenu-desktop --dmenu='rofi -p 'dmenu' -dmenu -i'"
@@ -197,8 +239,9 @@ bindsym Control+$mod+m exec $rofi-windows
 
 # Rofi for quick directory jumping with zoxide
 # Shows frequently visited directories and opens ghostty terminal there
+# (Control+Alt+Z — Control+Alt+O now opens the omni launcher)
 set $rofi-zoxide "~/.config/i3/scripts/i3-rofi-zoxide.sh"
-bindsym Control+$mod+o exec $rofi-zoxide
+bindsym Control+$mod+z exec $rofi-zoxide
 
 # Rofi for workspaces
 set $rofi-switch-workspace "~/.config/i3/scripts/i3-switch-workspace.sh"
@@ -214,7 +257,7 @@ bindsym Control+$mod+r exec $rofi-reminder
 
 # Rofi for the display and insertion of an emoji
 # Only show the five most recent icons in the menu bar
-bindsym Control+$mod+y exec "rofimoji --max-recent 10 --prompt '󰏜 ' --selector-args '-width 1600 -height 875'"
+bindsym Control+$mod+y exec "rofimoji --max-recent 10 --prompt '󰏘' --selector-args '-width 1600 -height 875'"
 
 # Rofi for the display and copying of content to the clipboard
 set $rofi-copy-to-clipboard "~/.config/i3/scripts/i3-copy-to-clipboard.sh"
@@ -227,6 +270,13 @@ bindsym Control+$mod+g exec $rofi-insert-from-clipboard
 # Rofi for fuzzy searching and inserting Nerd Font icons
 set $rofi-nerd-font-picker "~/.config/i3/scripts/i3-nerd-font-picker.sh"
 bindsym Control+$mod+e exec $rofi-nerd-font-picker
+
+# Rofi to choose the wallpaper, with the images shown as thumbnails.  The
+# choice is published to /var/lib/wallpaper, so it applies to the desktop, the
+# lock screen and the login screen with no rebuild -- see
+# ~/configure/wallpaper/README.md.  Free keys are c d j k q x z if this clashes.
+set $rofi-wallpaper-picker "~/.config/i3/scripts/i3-wallpaper-picker.sh"
+bindsym Control+$mod+c exec $rofi-wallpaper-picker
 
 # }}}
 
@@ -642,3 +692,4 @@ bindsym --whole-window Mod4+button4 workspace prev_on_output
 bindsym --whole-window Mod4+button5 workspace next_on_output
 
 # }}}
+
