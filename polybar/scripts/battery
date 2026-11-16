@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+#
+# Shared battery label for every polybar instance.
+#
+# Both bars run this as a custom/script module, so they always show exactly
+# the same numbers: the first call in each TTL window reads the battery and
+# caches the result, and every later call (from either bar) reuses that same
+# string. The work is a handful of sysfs reads plus one awk call -- a few
+# milliseconds -- and at most once per TTL window.
+set -euo pipefail
+
+DIR="/sys/class/power_supply/${BATTERY:-BAT1}"
+CACHE="${XDG_RUNTIME_DIR:-/tmp}/polybar-battery-${UID}.cache"
+TTL="${BATTERY_TTL:-6}"
+
+# Icons are written as byte escapes so the glyphs cannot be mangled by an
+# editor or a copy/paste; the bytes match the originals in config.ini.
+BAT=$(printf '\xf3\xb0\x81\xb9')   # battery body
+UP=$(printf '\xef\x8b\xba')        # charging arrow
+DOWN=$(printf '\xef\x8b\xb8')      # discharging arrow
+FULL=$(printf '\xee\xb8\xa9')      # full marker
+CLOCK=$(printf '\xf3\xb0\xa5\x94') # clock
+BOLT=$(printf '\xef\x83\xa7')      # bolt
+
+now=${EPOCHSECONDS:-0}
+if [ -r "$CACHE" ]; then
+  read -r ts cached <"$CACHE" || true
+  if [ -n "${ts:-}" ] && [ -n "${cached:-}" ] && [ "$((now - ts))" -lt "$TTL" ]; then
+    printf '%s\n' "$cached"
+    exit 0
+  fi
+fi
+
+status=Unknown
+[ -r "$DIR/status" ] && read -r status <"$DIR/status"
+capacity=0
+[ -r "$DIR/capacity" ] && read -r capacity <"$DIR/capacity"
+
+case "$status" in
+  Charging) prefix="${BAT}${UP}" ; charging=1 ;;
+  Full) prefix="${BAT}${FULL} " ; charging=0 ;;
+  *) prefix="${BAT}${DOWN}" ; charging=0 ;;
+esac
+
+label="${prefix} ${capacity}%"
+
+if [ "$status" = Charging ] || [ "$status" = Discharging ]; then
+  charge_now=""
+  charge_full=""
+  current_now=""
+  voltage_now=""
+  [ -r "$DIR/charge_now" ] && read -r charge_now <"$DIR/charge_now"
+  [ -r "$DIR/charge_full" ] && read -r charge_full <"$DIR/charge_full"
+  [ -r "$DIR/current_now" ] && read -r current_now <"$DIR/current_now"
+  [ -r "$DIR/voltage_now" ] && read -r voltage_now <"$DIR/voltage_now"
+  if [ -n "$charge_now" ] && [ -n "$current_now" ] && [ "$current_now" -ne 0 ]; then
+    vals=$(awk -v v="${voltage_now:-0}" -v i="$current_now" -v c="$charge_now" \
+      -v f="${charge_full:-$charge_now}" -v ch="$charging" '
+      BEGIN {
+        if (i < 0) i = -i;
+        cons = (v / 1000) * (i / 1000) / 1e6;   # watts
+        rate = (ch ? f - c : c) / i;            # hours remaining / to full
+        if (rate < 0) rate = 0;
+        h = int(rate); m = int((rate - h) * 60);
+        if (h > 0) printf "%.2f %dh%02d", cons, h, m;
+        else printf "%.2f %dm", cons, m;
+      }')
+    cons=${vals%% *}
+    time=${vals##* }
+    label="${prefix} ${capacity}% ${CLOCK} ${time:0:5} ${BOLT} ${cons:0:5}"
+  fi
+fi
+
+printf '%s %s\n' "$now" "$label" >"$CACHE"
+printf '%s\n' "$label"
