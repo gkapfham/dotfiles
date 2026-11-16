@@ -1,0 +1,770 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# hunk/config.toml — hunk diff viewer (https://hunk.dev), stowed to
+# ~/.config/hunk/config.toml. Run `hunk` however you like (bunx, npx, brew):
+# it always reads this file, so `bunx hunkdiff diff` gets the theme too.
+#
+# NOTE: hunk rewrites this file when it persists view preferences (S = save
+# view preferences, or picking a theme with `t`). Because the path is a stow
+# symlink, such a write lands in this repository: check
+# `git -C ~/configure/dotfiles status hunk/` if the theme ever changes itself.
+#
+# THEME "vitaminonec"
+#   Built from theme/palette.toml — the same orange/blue palette used by
+#   ghostty, onedarkpro (nvim), pi and opencode — so a diff looks like the
+#   rest of the desktop:
+#       background #1c1c1c   text #e0e0e0   accent orange #d78700
+#       comments #808080     keywords/functions purple #a569a5
+#       strings yellow       types/constants orange     variables blue
+#       operators cyan       tags red                  added green
+#
+#   Numeric choices come from two rules of thumb:
+#   · Hunk draws syntax over tinted diff rows, so a row is the background
+#     blended only 12% toward its role and a changed span 18%; that keeps the
+#     dimmest syntax roles (purple, comment grey) above 3.3:1 contrast.
+#   · Chrome text (muted, badges) needs 4.5:1 against panel and panel-alt,
+#     so "muted" is the palette white rather than the comment grey.
+#
+#   The syntax table below re-maps every scope selector that the base theme
+#   (github-dark) styles, plus the roles neovim paints via treesitter, plus the
+#   grammar-specific selectors that would otherwise fall back to plain text
+#   (555 scopes). No base-theme hue (GitHub green/blue/pink) can leak through in
+#   a language nobody remembered to check: anything still unmatched falls back
+#   to the "source" default #e0e0e0.
+#
+#   Background: transparent_background = true below, so hunk's chrome and the
+#   empty parts of the review stream show the terminal's own #1c1c1c (ghostty
+#   and zellij both use #1c1c1c). Grey (#2d2d2d / #262626) is reserved for
+#   accents: separators, the selected row or menu entry, and note cards.
+# ─────────────────────────────────────────────────────────────────────────────
+
+theme = "vitaminonec"
+
+# Let the terminal background show through hunk's chrome. Ghostty, zellij and
+# the palette all use #1c1c1c, so this is what makes hunk sit on the same black
+# as the rest of the desktop instead of a grey #262626 panel.
+transparent_background = true
+
+# The preferences hunk had already persisted in ~/.config/hunk/config.toml
+# before this file was stowed, carried over unchanged. Hunk rewrites these
+# lines when you save view preferences; the theme table below is preserved.
+mode = "auto"
+line_numbers = true
+wrap_lines = false
+hunk_headers = true
+menu_bar = true
+agent_notes = true
+copy_decorations = false
+cursor_line = "row"
+
+[themes.vitaminonec]
+base = "github-dark"
+label = "Vitaminonec"
+
+# chrome. With transparent_background above, the terminal's own #1c1c1c shows
+# through panel/panelAlt; the values here are the fallback if it is turned off.
+# Grey is an accent (separators, selection, note cards), never a large fill.
+background = "#1c1c1c"
+panel = "#1c1c1c" # files pane / review stream
+panelAlt = "#1c1c1c" # menu bar / status line
+border = "#2d2d2d" # separators: dim, so the full-width rule stays quiet
+text = "#e0e0e0"
+muted = "#b2b2b2" # secondary labels (needs 4.5:1 on panelAlt)
+accent = "#d78700" # active controls, focus
+accentMuted = "#2d2d2d" # selected row / menu entry: grey accent
+
+# diff rows and changed spans
+contextBg = "#1c1c1c"
+contextContentBg = "#1c1c1c"
+addedBg = "#262b19"
+removedBg = "#322321"
+addedContentBg = "#2b3217"
+removedContentBg = "#3e2624"
+movedAddedBg = "#2f2f23"
+movedRemovedBg = "#2f2f23"
+addedSignColor = "#6f9500"
+removedSignColor = "#d75347"
+
+# gutters and hunk selection
+lineNumberBg = "#1c1c1c"
+lineNumberFg = "#808080"
+selectedHunk = "#4b3715"
+
+# badges and file status
+badgeAdded = "#6f9500"
+badgeRemoved = "#d75347"
+badgeNeutral = "#b2b2b2"
+fileNew = "#6f9500"
+fileDeleted = "#d75347"
+fileRenamed = "#a569a5"
+fileModified = "#d78700"
+fileUntracked = "#00afaf"
+
+# agent note cards
+noteBorder = "#a569a5"
+noteBackground = "#262626"
+noteTitleBackground = "#2d2d2d"
+noteTitleText = "#d78700"
+
+[themes.vitaminonec.syntax_scopes]
+
+# ·· default foreground
+"source" = "#e0e0e0"
+"entity" = "#e0e0e0"
+"entity.name" = "#e0e0e0"
+"markup.strikethrough" = "#e0e0e0"
+"meta.embedded" = "#e0e0e0"
+"meta.jsx.children" = "#e0e0e0"
+"meta.output" = "#e0e0e0"
+
+# ·· comments
+"comment" = "#808080"
+"comment.block.documentation" = "#808080"
+"markup.fenced_code.block.markdown" = "#808080"
+"markup.ignored" = "#808080"
+"markup.quote" = "#808080"
+"markup.untracked" = "#808080"
+"meta.diff.header" = "#808080"
+"meta.diff.range" = "#808080"
+"punctuation.definition.comment" = "#808080"
+"string.comment" = "#808080"
+
+# ·· keywords, statements, storage
+"keyword" = "#a569a5"
+"keyword.control" = "#a569a5"
+"keyword.other" = "#a569a5"
+"keyword.type.go" = "#a569a5"
+"storage" = "#a569a5"
+"storage.modifier" = "#a569a5"
+"storage.modifier.import" = "#a569a5"
+"storage.modifier.package" = "#a569a5"
+"storage.type" = "#a569a5"
+"storage.type.java" = "#a569a5"
+"support.variable.magic" = "#a569a5"
+"variable.other.builtin" = "#a569a5"
+
+# ·· builtin variables (this / self / super)
+"variable.language" = "#b7b757"
+
+# ·· operators
+"keyword.operator" = "#00afaf"
+
+# ·· strings
+"punctuation.definition.string" = "#b7b757"
+"punctuation.definition.string.begin.markdown" = "#b7b757"
+"punctuation.definition.string.end.markdown" = "#b7b757"
+"string" = "#b7b757"
+"string punctuation.section.embedded source" = "#b7b757"
+"string variable" = "#b7b757"
+"string.quoted" = "#b7b757"
+"string.template" = "#b7b757"
+"string.unquoted.heredoc.shell" = "#b7b757"
+
+# ·· regular expressions
+"source.regexp" = "#6f9500"
+"string.regexp" = "#6f9500"
+"string.regexp constant.character.escape" = "#6f9500"
+"string.regexp source.ruby.embedded" = "#6f9500"
+"string.regexp string.regexp.arbitrary-repitition" = "#6f9500"
+"string.regexp.character-class" = "#6f9500"
+
+# ·· string escapes
+"constant.character.escape" = "#00afaf"
+
+# ·· numbers
+"constant.numeric" = "#d75f87"
+"keyword.other.unit" = "#d75f87"
+
+# ·· constants, booleans, enum members
+"constant" = "#d78700"
+"constant.language" = "#d78700"
+"constant.language.json" = "#d78700"
+"constant.language.python" = "#d78700"
+"entity.name.constant" = "#d78700"
+"support.constant" = "#d78700"
+"support.variable" = "#d78700"
+"variable.other.enummember" = "#d78700"
+
+# ·· functions and methods
+"entity.name.function" = "#a569a5"
+"entity.name.scope-resolution.function.call" = "#a569a5"
+"meta.function-call" = "#a569a5"
+"meta.require" = "#a569a5"
+"support" = "#a569a5"
+"support.function" = "#a569a5"
+"support.function.builtin.python" = "#a569a5"
+"variable.function" = "#a569a5"
+
+# ·· types, classes, interfaces
+"entity.name.class" = "#d78700"
+"entity.name.type" = "#d78700"
+"entity.name.type.enum.rust" = "#d78700"
+"entity.name.type.go" = "#d78700"
+"entity.name.type.struct.rust" = "#d78700"
+"entity.name.type.trait.rust" = "#d78700"
+"entity.other.inherited-class" = "#d78700"
+"storage.type.primitive" = "#d78700"
+"support.class" = "#d78700"
+"support.class.component" = "#d78700"
+"support.type" = "#d78700"
+"support.type.builtin" = "#d78700"
+"support.type.primitive.rust" = "#d78700"
+
+# ·· modules and namespaces
+"entity.name.namespace" = "#b7b757"
+"entity.name.type.module" = "#b7b757"
+"meta.module-reference" = "#b7b757"
+"support.module" = "#b7b757"
+
+# ·· variables
+"punctuation.definition.variable.shell" = "#87afd7"
+"variable" = "#87afd7"
+"variable.other" = "#87afd7"
+"variable.other.assignment.go" = "#87afd7"
+"variable.other.class" = "#87afd7"
+"variable.other.constant" = "#87afd7"
+"variable.other.normal.shell" = "#87afd7"
+"variable.other.object" = "#87afd7"
+"variable.other.positional.shell" = "#87afd7"
+"variable.other.readwrite" = "#87afd7"
+"variable.other.special.shell" = "#87afd7"
+
+# ·· properties, members, object keys
+"entity.name.tag.yaml" = "#87afd7"
+"meta.object-literal.key" = "#87afd7"
+"meta.property-name" = "#87afd7"
+"support.type.property-name" = "#87afd7"
+"support.type.property-name.array.toml" = "#87afd7"
+"support.type.property-name.json" = "#87afd7"
+"support.type.property-name.table.toml" = "#87afd7"
+"support.type.vendored.property-name.css" = "#87afd7"
+"support.variable.property" = "#87afd7"
+"variable.other.member" = "#87afd7"
+"variable.other.property" = "#87afd7"
+
+# ·· function parameters
+"variable.parameter" = "#6f9500"
+"variable.parameter.function" = "#6f9500"
+
+# ·· decorators, annotations, attributes
+"entity.other.attribute-name" = "#a569a5"
+"entity.other.attribute-name.class.css" = "#a569a5"
+"entity.other.attribute-name.id" = "#a569a5"
+"entity.other.attribute-name.pseudo-class" = "#a569a5"
+"entity.other.attribute-name.pseudo-element" = "#a569a5"
+"meta.attribute" = "#a569a5"
+"meta.attribute.rust" = "#a569a5"
+"meta.function.decorator.python" = "#a569a5"
+"punctuation.definition.annotation" = "#a569a5"
+
+# ·· tags, JSX elements, CSS selectors
+"entity.name.tag" = "#d75347"
+"meta.selector" = "#d75347"
+"meta.tag" = "#d75347"
+"punctuation.definition.tag" = "#d75347"
+
+# ·· template interpolation
+"meta.template.expression" = "#d78700"
+"punctuation.definition.template-expression.begin" = "#d78700"
+"punctuation.definition.template-expression.end" = "#d78700"
+"punctuation.quasi.element" = "#d78700"
+"punctuation.section.embedded" = "#d78700"
+"variable.interpolation" = "#d78700"
+
+# ·· brackets, separators, delimiters
+"brackethighlighter.angle" = "#b2b2b2"
+"brackethighlighter.curly" = "#b2b2b2"
+"brackethighlighter.quote" = "#b2b2b2"
+"brackethighlighter.round" = "#b2b2b2"
+"brackethighlighter.square" = "#b2b2b2"
+"brackethighlighter.tag" = "#b2b2b2"
+"meta.brace" = "#b2b2b2"
+"meta.separator" = "#b2b2b2"
+"punctuation" = "#b2b2b2"
+"punctuation.definition.block" = "#b2b2b2"
+"punctuation.definition.block.sequence.item.yaml" = "#b2b2b2"
+"punctuation.definition.metadata.markdown" = "#b2b2b2"
+"punctuation.separator" = "#b2b2b2"
+"punctuation.terminator" = "#b2b2b2"
+
+# ·· markdown headings h1
+"markup.heading" = "#d78700"
+"markup.heading entity.name" = "#d78700"
+"markup.heading.1.markdown" = "#d78700"
+"punctuation.definition.heading.markdown" = "#d78700"
+
+# ·· markdown headings h2
+"markup.heading.2.markdown" = "#6f9500"
+
+# ·· markdown headings h3
+"markup.heading.3.markdown" = "#a569a5"
+
+# ·· markdown headings h4
+"markup.heading.4.markdown" = "#00afaf"
+
+# ·· markdown headings h5
+"markup.heading.5.markdown" = "#87afd7"
+
+# ·· markdown headings h6
+"markup.heading.6.markdown" = "#b7b757"
+
+# ·· markdown bold
+"markup.bold" = "#b7b757"
+
+# ·· markdown italic
+"markup.italic" = "#e0e0e0"
+
+# ·· markdown links
+"constant.other.reference.link" = "#87afd7"
+"markup.underline" = "#87afd7"
+"markup.underline.link" = "#87afd7"
+"string.other.link" = "#87afd7"
+
+# ·· inline code and raw markup
+"markup.inline.raw" = "#e0e0e0"
+"markup.raw" = "#e0e0e0"
+
+# ·· markdown list markers
+"markup.list" = "#d78700"
+"punctuation.definition.list.begin.markdown" = "#d78700"
+"punctuation.definition.list.markdown" = "#d78700"
+
+# ·· added lines in diff-as-text
+"markup.inserted" = "#6f9500"
+"meta.diff.header.to-file" = "#6f9500"
+"punctuation.definition.inserted" = "#6f9500"
+
+# ·· removed lines in diff-as-text
+"markup.deleted" = "#d75347"
+"meta.diff.header.from-file" = "#d75347"
+"punctuation.definition.deleted" = "#d75347"
+
+# ·· changed lines in diff-as-text
+"markup.changed" = "#b7b757"
+"punctuation.definition.changed" = "#b7b757"
+
+# ·· invalid or illegal syntax
+"brackethighlighter.unmatched" = "#d75347"
+"carriage-return" = "#d75347"
+"invalid" = "#d75347"
+"invalid.broken" = "#d75347"
+"invalid.deprecated" = "#d75347"
+"invalid.illegal" = "#d75347"
+"invalid.unimplemented" = "#d75347"
+"message.error" = "#d75347"
+
+# ·· warnings
+"log.warning" = "#b7b757"
+"token.warn-token" = "#b7b757"
+
+# ·· informational output
+"log.info" = "#87afd7"
+"token.info-token" = "#87afd7"
+
+# ·· errors and debug output
+"log.error" = "#a569a5"
+"token.debug-token" = "#a569a5"
+"token.error-token" = "#a569a5"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Additional grammar coverage
+#
+# The blocks above are the roles neovim paints; this block covers the rest of
+# the base theme's scope inventory (grammar-specific selectors such as
+# meta.scope.prerequisites.makefile or support.type.property-name.json) so that
+# ordinary files get colour instead of falling back to plain #e0e0e0.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ·· default foreground
+"accent.xi" = "#e0e0e0"
+"beginning.punctuation.definition.list.markdown" = "#e0e0e0"
+"beginning.punctuation.definition.list.markdown.xi" = "#e0e0e0"
+"beginning.punctuation.definition.quote.markdown.xi" = "#e0e0e0"
+"control.elements" = "#e0e0e0"
+"emphasis md" = "#e0e0e0"
+"entity.global.clojure" = "#e0e0e0"
+"entity.name.goto-label.php" = "#e0e0e0"
+"entity.name.label" = "#e0e0e0"
+"entity.name.label.cs" = "#e0e0e0"
+"entity.name.lifetime.rust" = "#e0e0e0"
+"entity.name.package.go" = "#e0e0e0"
+"entity.name.section.markdown" = "#e0e0e0"
+"entity.name.variable.field.cs" = "#e0e0e0"
+"entity.name.variable.local.cs" = "#e0e0e0"
+"entity.name.variable.parameter.cs" = "#e0e0e0"
+"entity.name.variable.parameter.php" = "#e0e0e0"
+"entity.other.alias.php" = "#e0e0e0"
+"import.storage.java" = "#e0e0e0"
+"inline-color-decoration rgb-value" = "#e0e0e0"
+"less rgb-value" = "#e0e0e0"
+"markup.inline.raw.markdown" = "#e0e0e0"
+"markup.inline.raw.string.markdown" = "#e0e0e0"
+"markup.italic.markdown" = "#e0e0e0"
+"markup.raw.monospace.asciidoc" = "#e0e0e0"
+"meta.arguments.coffee" = "#e0e0e0"
+"meta.brace.square" = "#e0e0e0"
+"meta.definition.class.inherited.classes.groovy" = "#e0e0e0"
+"meta.definition.variable.name.groovy" = "#e0e0e0"
+"meta.definition.variable.name.java" = "#e0e0e0"
+"meta.interface.php" = "#e0e0e0"
+"meta.other.type.phpdoc.php" = "#e0e0e0"
+"meta.symbol.clojure" = "#e0e0e0"
+"punctuation.definition.italic" = "#e0e0e0"
+"rgb-value" = "#e0e0e0"
+"selector.sass" = "#e0e0e0"
+"source.ini" = "#e0e0e0"
+"source.java" = "#e0e0e0"
+"source.json meta.structure.array.json > constant.language.json" = "#e0e0e0"
+"source.json meta.structure.array.json > value.json > string.quoted.json" = "#e0e0e0"
+"source.json meta.structure.array.json > value.json > string.quoted.json > punctuation" = "#e0e0e0"
+"source.json meta.structure.dictionary.json > constant.language.json" = "#e0e0e0"
+"source.json meta.structure.dictionary.json > string.quoted.json" = "#e0e0e0"
+"source.json meta.structure.dictionary.json > string.quoted.json > punctuation.string" = "#e0e0e0"
+"source.json meta.structure.dictionary.json > value.json > string.quoted.json" = "#e0e0e0"
+"source.json meta.structure.dictionary.json > value.json > string.quoted.json > punctuation" = "#e0e0e0"
+"source.makefile" = "#e0e0e0"
+"support.constant.color.w3c-standard-color-name.css" = "#e0e0e0"
+"support.constant.color.w3c-standard-color-name.scss" = "#e0e0e0"
+"support.constant.core.php" = "#e0e0e0"
+"support.constant.core.rust" = "#e0e0e0"
+"support.constant.edge" = "#e0e0e0"
+"support.constant.elm" = "#e0e0e0"
+"support.constant.ext.php" = "#e0e0e0"
+"support.constant.font-name" = "#e0e0e0"
+"support.constant.json" = "#e0e0e0"
+"support.constant.math" = "#e0e0e0"
+"support.constant.parser-token.php" = "#e0e0e0"
+"support.constant.property.math" = "#e0e0e0"
+"support.constant.std.php" = "#e0e0e0"
+"support.other.namespace.php" = "#e0e0e0"
+"support.other.namespace.use-as.php" = "#e0e0e0"
+"support.other.namespace.use.php" = "#e0e0e0"
+"support.other.parenthesis.regexp" = "#e0e0e0"
+"support.other.php" = "#e0e0e0"
+"support.token.decorator.python" = "#e0e0e0"
+"text.bracketed" = "#e0e0e0"
+"text.html.laravel-blade source.php.embedded.line.html entity.name.tag.laravel-blade" = "#e0e0e0"
+"text.html.laravel-blade source.php.embedded.line.html support.constant.laravel-blade" = "#e0e0e0"
+"text.variable" = "#e0e0e0"
+"todo.emphasis" = "#e0e0e0"
+"token.package" = "#e0e0e0"
+"token.package.keyword" = "#e0e0e0"
+"token.storage" = "#e0e0e0"
+"token.storage.type.java" = "#e0e0e0"
+"token.variable.parameter.java" = "#e0e0e0"
+"wikiword.xi" = "#e0e0e0"
+
+# ·· comments
+"comment markup.link" = "#808080"
+"comment.line.double-slash" = "#808080"
+"markup.quote.markdown" = "#808080"
+
+# ·· keywords / functions / decorators
+"entity.name.function.target.makefile" = "#a569a5"
+"entity.name.function.xi" = "#a569a5"
+"entity.name.scope-resolution.function.definition" = "#a569a5"
+"keyword.control.xi" = "#a569a5"
+"keyword.other.array.phpdoc.php" = "#a569a5"
+"keyword.other.special-method" = "#a569a5"
+"keyword.other.type.php" = "#a569a5"
+"meta.function-call.generic.python" = "#a569a5"
+"meta.function-call.object.php" = "#a569a5"
+"meta.function-call.php" = "#a569a5"
+"meta.function-call.static.php" = "#a569a5"
+"meta.function.c" = "#a569a5"
+"meta.function.cpp" = "#a569a5"
+"meta.function.decorator.identifier.python" = "#a569a5"
+"meta.method-call.java" = "#a569a5"
+"meta.method.body.java" = "#a569a5"
+"meta.method.groovy" = "#a569a5"
+"meta.method.identifier.java" = "#a569a5"
+"meta.method.java" = "#a569a5"
+"meta.scope.function-call.makefile" = "#a569a5"
+"storage.modifier.import.groovy" = "#a569a5"
+"storage.modifier.import.java" = "#a569a5"
+"storage.modifier.lifetime.rust" = "#a569a5"
+"storage.type.haskell" = "#a569a5"
+"support.function.any-method" = "#a569a5"
+"support.function.console" = "#a569a5"
+"support.function.std.rust" = "#a569a5"
+
+# ·· operators / escapes
+"constant.character.escape.continuation.makefile" = "#00afaf"
+"keyword.operator.address.go" = "#00afaf"
+"keyword.operator.arithmetic" = "#00afaf"
+"keyword.operator.arithmetic.c" = "#00afaf"
+"keyword.operator.arithmetic.cpp" = "#00afaf"
+"keyword.operator.arithmetic.go" = "#00afaf"
+"keyword.operator.arithmetic.php" = "#00afaf"
+"keyword.operator.assignment" = "#00afaf"
+"keyword.operator.assignment.c" = "#00afaf"
+"keyword.operator.assignment.compound" = "#00afaf"
+"keyword.operator.assignment.compound.js" = "#00afaf"
+"keyword.operator.assignment.compound.ts" = "#00afaf"
+"keyword.operator.assignment.cpp" = "#00afaf"
+"keyword.operator.assignment.go" = "#00afaf"
+"keyword.operator.bitwise" = "#00afaf"
+"keyword.operator.bitwise.php" = "#00afaf"
+"keyword.operator.bitwise.shift.c" = "#00afaf"
+"keyword.operator.bitwise.shift.cpp" = "#00afaf"
+"keyword.operator.c" = "#00afaf"
+"keyword.operator.channel" = "#00afaf"
+"keyword.operator.comparison" = "#00afaf"
+"keyword.operator.comparison.c" = "#00afaf"
+"keyword.operator.comparison.cpp" = "#00afaf"
+"keyword.operator.comparison.php" = "#00afaf"
+"keyword.operator.cpp" = "#00afaf"
+"keyword.operator.css" = "#00afaf"
+"keyword.operator.decrement" = "#00afaf"
+"keyword.operator.decrement.c" = "#00afaf"
+"keyword.operator.decrement.cpp" = "#00afaf"
+"keyword.operator.delete" = "#00afaf"
+"keyword.operator.error-control.php" = "#00afaf"
+"keyword.operator.expression.delete" = "#00afaf"
+"keyword.operator.expression.import" = "#00afaf"
+"keyword.operator.expression.in" = "#00afaf"
+"keyword.operator.expression.instanceof" = "#00afaf"
+"keyword.operator.expression.is" = "#00afaf"
+"keyword.operator.expression.keyof" = "#00afaf"
+"keyword.operator.expression.of" = "#00afaf"
+"keyword.operator.expression.typeof" = "#00afaf"
+"keyword.operator.expression.void" = "#00afaf"
+"keyword.operator.heredoc.php" = "#00afaf"
+"keyword.operator.increment" = "#00afaf"
+"keyword.operator.increment.c" = "#00afaf"
+"keyword.operator.increment.cpp" = "#00afaf"
+"keyword.operator.instanceof.java" = "#00afaf"
+"keyword.operator.less" = "#00afaf"
+"keyword.operator.logical" = "#00afaf"
+"keyword.operator.logical.php" = "#00afaf"
+"keyword.operator.logical.python" = "#00afaf"
+"keyword.operator.misc.rust" = "#00afaf"
+"keyword.operator.module" = "#00afaf"
+"keyword.operator.new" = "#00afaf"
+"keyword.operator.nowdoc.php" = "#00afaf"
+"keyword.operator.optional" = "#00afaf"
+"keyword.operator.quantifier.regexp" = "#00afaf"
+"keyword.operator.regexp.php" = "#00afaf"
+"keyword.operator.relational" = "#00afaf"
+"keyword.operator.scss" = "#00afaf"
+"keyword.operator.sigil.rust" = "#00afaf"
+"keyword.operator.sizeof.c" = "#00afaf"
+"keyword.operator.sizeof.cpp" = "#00afaf"
+"keyword.operator.ternary" = "#00afaf"
+"keyword.operator.type.php" = "#00afaf"
+"keyword.operator.word" = "#00afaf"
+
+# ·· strings / modules / builtins
+"markup.changed.diff" = "#b7b757"
+"punctuation.definition.bold" = "#b7b757"
+"punctuation.definition.bold.markdown" = "#b7b757"
+"string.interpolated.makefile" = "#b7b757"
+"string.unquoted.asciidoc" = "#b7b757"
+"support.module.node" = "#b7b757"
+"todo.bold" = "#b7b757"
+"variable.language.makefile" = "#b7b757"
+"variable.language.rust" = "#b7b757"
+"variable.language.super" = "#b7b757"
+
+# ·· regex / parameters
+"function.parameter" = "#6f9500"
+"function.parameter.cs" = "#6f9500"
+"function.parameter.ruby" = "#6f9500"
+"markup.inserted.diff" = "#6f9500"
+"variable.parameter.function.coffee" = "#6f9500"
+"variable.parameter.function.js" = "#6f9500"
+"variable.parameter.function.language.python" = "#6f9500"
+"variable.parameter.function.language.special.cls.python" = "#6f9500"
+"variable.parameter.function.language.special.self.python" = "#6f9500"
+"variable.parameter.function.latex" = "#6f9500"
+"variable.parameter.function.python" = "#6f9500"
+
+# ·· numbers
+"constant.numeric.decimal.asm.x86_64" = "#d75f87"
+
+# ·· constants / types / markup headings
+"constant.character.character-class.regexp.xi" = "#d78700"
+"constant.character.entity" = "#d78700"
+"constant.character.format.placeholder.other.python" = "#d78700"
+"constant.character.math.tex" = "#d78700"
+"constant.character.xi" = "#d78700"
+"constant.keyword.clojure" = "#d78700"
+"constant.language.symbol.double-quoted.elixir" = "#d78700"
+"constant.language.symbol.elixir" = "#d78700"
+"constant.language.symbol.hashkey.ruby" = "#d78700"
+"constant.language.symbol.ruby" = "#d78700"
+"constant.other.character-class.regexp" = "#d78700"
+"constant.other.color.rgb-value.xi" = "#d78700"
+"constant.other.general.math.tex" = "#d78700"
+"constant.other.php" = "#d78700"
+"constant.other.symbol" = "#d78700"
+"constant.regexp.xi" = "#d78700"
+"entity.name.class.identifier.namespace.type" = "#d78700"
+"entity.name.class.xi" = "#d78700"
+"entity.name.section" = "#d78700"
+"entity.name.type.class" = "#d78700"
+"entity.name.type.namespace" = "#d78700"
+"keyword.other.substitution.begin" = "#d78700"
+"keyword.other.substitution.end" = "#d78700"
+"keyword.other.template.begin" = "#d78700"
+"keyword.other.template.end" = "#d78700"
+"markup.heading punctuation.definition.heading" = "#d78700"
+"markup.heading.setext" = "#d78700"
+"markup.heading.setext.1.markdown" = "#d78700"
+"markup.heading.setext.2.markdown" = "#d78700"
+"markup.list.asciidoc" = "#d78700"
+"punctuation.definition.list.begin.python" = "#d78700"
+"punctuation.definition.list.begin.unison" = "#d78700"
+"punctuation.definition.list.end.python" = "#d78700"
+"punctuation.definition.list.end.unison" = "#d78700"
+"punctuation.definition.raw.markdown" = "#d78700"
+"punctuation.section.embedded.begin" = "#d78700"
+"punctuation.section.embedded.begin.php" = "#d78700"
+"punctuation.section.embedded.end" = "#d78700"
+"punctuation.section.embedded.end.php" = "#d78700"
+"storage.type.annotation.java" = "#d78700"
+"storage.type.cs" = "#d78700"
+"storage.type.generic.java" = "#d78700"
+"storage.type.object.array.java" = "#d78700"
+"storage.type.php" = "#d78700"
+"support.class.math.block.environment.latex" = "#d78700"
+"support.type.builtin.ts" = "#d78700"
+"support.type.builtin.tsx" = "#d78700"
+"support.type.fx.hlsl" = "#d78700"
+"support.type.object.console" = "#d78700"
+"support.type.object.dom" = "#d78700"
+"support.type.object.hlsl" = "#d78700"
+"support.type.object.module" = "#d78700"
+"support.type.object.rw.hlsl" = "#d78700"
+"support.type.posix-reserved.c" = "#d78700"
+"support.type.posix-reserved.cpp" = "#d78700"
+"support.type.prelude.elm" = "#d78700"
+"support.type.primitive" = "#d78700"
+"support.type.primitive.ts" = "#d78700"
+"support.type.primitive.tsx" = "#d78700"
+"support.type.property-name.json punctuation" = "#d78700"
+"support.type.property-name.toml" = "#d78700"
+"support.type.python" = "#d78700"
+"support.type.sampler.hlsl" = "#d78700"
+"support.type.swift" = "#d78700"
+"support.type.texture.hlsl" = "#d78700"
+"support.type.type.flowtype" = "#d78700"
+"support.type.vb.asp" = "#d78700"
+"variable.other.constant.property" = "#d78700"
+
+# ·· variables / properties
+"block.scope.begin" = "#87afd7"
+"block.scope.end" = "#87afd7"
+"entity.other.attribute-name.js" = "#87afd7"
+"entity.other.attribute-name.jsx" = "#87afd7"
+"entity.other.attribute-name.ts" = "#87afd7"
+"entity.other.attribute-name.tsx" = "#87afd7"
+"function.brace" = "#87afd7"
+"markup.link.asciidoc" = "#87afd7"
+"markup.other.url.asciidoc" = "#87afd7"
+"markup.underline.link.image.markdown" = "#87afd7"
+"markup.underline.link.markdown" = "#87afd7"
+"meta.property.object" = "#87afd7"
+"meta.scope.prerequisites.makefile" = "#87afd7"
+"string.other.link.description.markdown" = "#87afd7"
+"string.other.link.title.markdown" = "#87afd7"
+"support.constant.property-value" = "#87afd7"
+"support.constant.property-value.css" = "#87afd7"
+"support.constant.property-value.scss" = "#87afd7"
+"support.variable.dom" = "#87afd7"
+"support.variable.magic.python" = "#87afd7"
+"support.variable.object.node" = "#87afd7"
+"support.variable.object.process" = "#87afd7"
+"support.variable.property.dom" = "#87afd7"
+"support.variable.property.process" = "#87afd7"
+"support.variable.semantic.hlsl" = "#87afd7"
+"variable.c" = "#87afd7"
+"variable.other.class.js" = "#87afd7"
+"variable.other.class.php" = "#87afd7"
+"variable.other.class.ts" = "#87afd7"
+"variable.other.generic-type.haskell" = "#87afd7"
+"variable.other.makefile" = "#87afd7"
+"variable.other.readwrite.c" = "#87afd7"
+
+# ·· tags / removed text
+"invalid.deprecated.entity.other.attribute-name.html" = "#d75347"
+"invalid.illegal.bad-ampersand.html" = "#d75347"
+"invalid.illegal.non-null-typehinted.php" = "#d75347"
+"invalid.illegal.unrecognized-tag.html" = "#d75347"
+"invalid.xi" = "#d75347"
+"markup.deleted.diff" = "#d75347"
+
+# ·· punctuation
+"punctuation.bracket.angle.java" = "#b2b2b2"
+"punctuation.definition.ability.begin.unison" = "#b2b2b2"
+"punctuation.definition.ability.end.unison" = "#b2b2b2"
+"punctuation.definition.annotation.java" = "#b2b2b2"
+"punctuation.definition.arguments.begin.bracket.round.php" = "#b2b2b2"
+"punctuation.definition.arguments.begin.python" = "#b2b2b2"
+"punctuation.definition.arguments.end.bracket.round.php" = "#b2b2b2"
+"punctuation.definition.arguments.end.python" = "#b2b2b2"
+"punctuation.definition.array.begin.bracket.round.php" = "#b2b2b2"
+"punctuation.definition.array.end.bracket.round.php" = "#b2b2b2"
+"punctuation.definition.asciidoc" = "#b2b2b2"
+"punctuation.definition.begin.bracket.curly.php" = "#b2b2b2"
+"punctuation.definition.begin.bracket.round.php" = "#b2b2b2"
+"punctuation.definition.constant" = "#b2b2b2"
+"punctuation.definition.delayed.unison" = "#b2b2b2"
+"punctuation.definition.end.bracket.curly.php" = "#b2b2b2"
+"punctuation.definition.end.bracket.round.php" = "#b2b2b2"
+"punctuation.definition.from-file.diff" = "#b2b2b2"
+"punctuation.definition.hash.unison" = "#b2b2b2"
+"punctuation.definition.method-parameters.begin.java" = "#b2b2b2"
+"punctuation.definition.method-parameters.end.java" = "#b2b2b2"
+"punctuation.definition.parameters.begin.bracket.round.php" = "#b2b2b2"
+"punctuation.definition.parameters.end.bracket.round.php" = "#b2b2b2"
+"punctuation.definition.section.switch-block.begin.bracket.curly.php" = "#b2b2b2"
+"punctuation.definition.section.switch-block.end.bracket.curly.php" = "#b2b2b2"
+"punctuation.definition.section.switch-block.start.bracket.curly.php" = "#b2b2b2"
+"punctuation.definition.storage-type.begin.bracket.round.php" = "#b2b2b2"
+"punctuation.definition.storage-type.end.bracket.round.php" = "#b2b2b2"
+"punctuation.definition.tag.xi" = "#b2b2b2"
+"punctuation.definition.to-file.diff" = "#b2b2b2"
+"punctuation.operator.assignment.as.unison" = "#b2b2b2"
+"punctuation.parenthesis.begin.python" = "#b2b2b2"
+"punctuation.parenthesis.end.python" = "#b2b2b2"
+"punctuation.section.array.begin.php" = "#b2b2b2"
+"punctuation.section.array.end.php" = "#b2b2b2"
+"punctuation.section.block.begin.bracket.curly.c" = "#b2b2b2"
+"punctuation.section.block.begin.bracket.curly.cpp" = "#b2b2b2"
+"punctuation.section.block.begin.java" = "#b2b2b2"
+"punctuation.section.block.end.bracket.curly.c" = "#b2b2b2"
+"punctuation.section.block.end.bracket.curly.cpp" = "#b2b2b2"
+"punctuation.section.block.end.java" = "#b2b2b2"
+"punctuation.section.class.begin.bracket.curly.java" = "#b2b2b2"
+"punctuation.section.class.begin.java" = "#b2b2b2"
+"punctuation.section.class.end.bracket.curly.java" = "#b2b2b2"
+"punctuation.section.class.end.java" = "#b2b2b2"
+"punctuation.section.inner-class.begin.java" = "#b2b2b2"
+"punctuation.section.inner-class.end.java" = "#b2b2b2"
+"punctuation.section.method.begin.bracket.curly.java" = "#b2b2b2"
+"punctuation.section.method.begin.java" = "#b2b2b2"
+"punctuation.section.method.end.bracket.curly.java" = "#b2b2b2"
+"punctuation.section.method.end.java" = "#b2b2b2"
+"punctuation.section.parameters.begin.bracket.round.c" = "#b2b2b2"
+"punctuation.section.parameters.end.bracket.round.c" = "#b2b2b2"
+"punctuation.section.parens.begin.bracket.round.c" = "#b2b2b2"
+"punctuation.section.parens.end.bracket.round.c" = "#b2b2b2"
+"punctuation.section.scope.begin.php" = "#b2b2b2"
+"punctuation.section.scope.end.php" = "#b2b2b2"
+"punctuation.separator.arguments.python" = "#b2b2b2"
+"punctuation.separator.c" = "#b2b2b2"
+"punctuation.separator.colon.php" = "#b2b2b2"
+"punctuation.separator.cpp" = "#b2b2b2"
+"punctuation.separator.delimiter" = "#b2b2b2"
+"punctuation.separator.delimiter.php" = "#b2b2b2"
+"punctuation.separator.delimiter.unison" = "#b2b2b2"
+"punctuation.separator.element.python" = "#b2b2b2"
+"punctuation.separator.key-value" = "#b2b2b2"
+"punctuation.separator.key-value.makefile" = "#b2b2b2"
+"punctuation.separator.list.comma.css" = "#b2b2b2"
+"punctuation.separator.period.java" = "#b2b2b2"
+"punctuation.separator.period.python" = "#b2b2b2"
+"punctuation.separator.pipe.unison" = "#b2b2b2"
+"punctuation.terminator.expression.php" = "#b2b2b2"
+"punctuation.terminator.java" = "#b2b2b2"
+"punctuation.terminator.statement.c" = "#b2b2b2"
