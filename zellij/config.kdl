@@ -329,7 +329,7 @@ plugins {
         color_red "#d75f5f"
         color_purple "#a569a5"
         color_text "#b2b2b2"
-        color_text_light "#d2d2d2"
+        color_text_light "#e0e0e0"
         color_sky "#87afd7"
         color_yellow "#b7b757"
         format_left   " {tabs} "
