@@ -132,7 +132,7 @@ local colors = {
   color6 = "#626262",
   color3 = "#a569a5",
   color1 = "#262626",
-  color0 = "#c1c1c1",
+  color0 = "#e0e0e0",
 }
 local vitaminonec = {
   normal = {

@@ -12,20 +12,22 @@ SHELL=zsh
 .PHONY: check create create-alacritty create-atuin create-bat create-bin \
         create-config create-dunst create-fast-syntax-highlighting \
         create-firefox create-fzf-tab create-ghostty create-git-status \
-        create-gtk2 create-gtk3 create-i3 create-i3status create-i3wsr \
+        create-gtk2 create-gtk3 create-hunk create-i3 create-i3status create-i3wsr \
         create-kitty create-mutt create-nvim create-opencode create-pi \
-        create-picom create-polybar create-rofi create-termite create-tmux \
+        create-picom create-polybar create-quickshell create-rofi \
+        create-termite create-tmux \
         create-tpm create-urlscan create-vimrc create-wezterm create-yazi \
         create-zathura create-zellij create-zsh create-zsh-auto-suggestions \
         create-zsh-defer create-zsh-syntax-highlighting create-zsh-vi-mode \
         create-zshdefer create-zshtheme dotfiles help purge \
-        purge-libinput-gestures purge-mime purge-starship purge-trippy \
+        prune purge-libinput-gestures purge-mime purge-starship purge-trippy \
         purge-trolltech stow stow-alacritty stow-applications stow-atuin \
         stow-bat stow-bin stow-dunst stow-email stow-external \
         stow-fast-syntax-highlighting stow-firefox stow-fzf-tab stow-ghostty \
-        stow-git stow-git-status stow-gtk2 stow-gtk3 stow-i3 stow-i3status \
+        stow-git stow-git-status stow-gtk2 stow-gtk3 stow-hunk stow-i3 stow-i3status \
         stow-i3wsr stow-kitty stow-libinput-gestures stow-mime stow-mutt \
-        stow-nvim stow-opencode stow-pi stow-picom stow-polybar stow-rofi \
+        stow-nvim stow-opencode stow-pi stow-picom stow-polybar \
+        stow-quickshell stow-rofi \
         stow-shell stow-starship stow-system stow-termite stow-tmux \
         stow-tool stow-tpm stow-trippy stow-trolltech stow-urlscan stow-vim \
         stow-vimrc stow-wezterm stow-writing stow-yazi stow-zathura \
@@ -42,6 +44,7 @@ SHELL=zsh
 ##   - zsh  -n on the zsh dotfiles (shell/.zshrc, shell/.fasd-init-zsh,
 ##     and shell/.oh-my-zsh.sh, which is zsh despite carrying a .sh name)
 ##   - JSON validation of the tracked configuration files
+##   - palette drift vs theme/palette.toml (theme/sync_palette.py --check)
 ##
 ## Informational only: shellcheck. The repository has pre-existing
 ## findings, so it is reported but never fails the target.
@@ -54,10 +57,12 @@ check:
 	  if $$sh -n "$$f" 2>/dev/null; then echo "  ok    $$f  ($$sh -n)"; else echo "  FAIL  $$f  ($$sh -n)"; fail=1; fi; \
 	done; \
 	echo "==> JSON"; \
-	for f in pi/settings.json pi/repos.json pi/extensions/quotas.json pi/themes/ghostty-terminal.json; do \
+	for f in pi/settings.json pi/repos.json pi/themes/ghostty-terminal.json; do \
 	  [ -f "$$f" ] || continue; \
 	  if python3 -c 'import json,sys; json.load(open(sys.argv[1]))' "$$f" 2>/dev/null; then echo "  ok    $$f"; else echo "  FAIL  $$f"; fail=1; fi; \
 	done; \
+	echo "==> palette"; \
+	uv run --quiet theme/sync_palette.py --check || fail=1; \
 	echo "==> shellcheck (informational)"; \
 	if command -v shellcheck >/dev/null 2>&1; then shellcheck -S warning $$(git ls-files '*.sh') || true; else echo "  shellcheck not installed (skipped)"; fi; \
 	exit $$fail
@@ -139,9 +144,39 @@ purge-trippy:
 purge-libinput-gestures:
 	rm -f ~/.config/libinput-gestures.conf
 
+## NOTE ON THE create-* TARGETS BELOW
+##
+## They create directories; they do not delete anything.  They used to start
+## with `rm -rf <dir>` so that stow would have a clean target, but that is not
+## what stow needs and it destroys state silently:
+##
+##   * stow only needs the directory to exist -- `mkdir -p` is enough.  With
+##     the directory already populated, stow happily relinks its own symlinks
+##     (measured: zero conflicts across every stow-* target).
+##   * Deleting also removes stow SYMLINKS, and nothing in a create-* target
+##     recreates them (the matching stow-* target is separate), so running one
+##     create-* target on its own leaves that program with no configuration at
+##     all.  That is how ~/.config/nvim/init.lua was lost once.
+##   * Deleting also destroys real files that stow does not manage -- a
+##     lockfile, a plugin directory, a downloaded binary.  Now such a file
+##     makes stow stop and report a conflict instead, which is what you want.
+##
+## Stale symlinks (pointing at repo files you have since renamed or deleted)
+## are cleaned by `make prune`, which can only remove a link that points into
+## this repository and is already broken.
+
+## Remove links into this repository whose target no longer exists.
+##
+## The safe replacement for the `rm -rf` that used to be in create-*: it can
+## only ever delete a symlink that points into this repository AND is already
+## broken.  Real files, and links that still resolve, are never touched.
+prune:
+	@echo "==> removing dangling links into this repository"
+	@find $$HOME/.config $$HOME/.local/bin $$HOME/.zsh $$HOME/.tmux $$HOME/.vim \
+	   -xtype l -lname '*/configure/dotfiles/*' -print -delete 2>/dev/null || true
+
 ## Create the needed alacritty/ directory in .config/
 create-alacritty:
-	rm -rf ~/.config/alacritty
 	mkdir -p ~/.config/alacritty
 
 ## Depends on the creation of the .config directory
@@ -149,7 +184,6 @@ create-alacritty: create-config
 
 ## Create the needed kitty/ directory in .config/
 create-kitty:
-	rm -rf ~/.config/kitty
 	mkdir -p ~/.config/kitty
 
 ## Depends on the creation of the .config directory
@@ -157,7 +191,6 @@ create-kitty: create-config
 
 ## Create the needed ghostty/ directory in .config/
 create-ghostty:
-	rm -rf ~/.config/ghostty
 	mkdir -p ~/.config/ghostty
 
 ## Depends on the creation of the .config directory
@@ -165,7 +198,6 @@ create-ghostty: create-config
 
 ## Create the needed rofi/ directory in .config/
 create-rofi:
-	rm -rf ~/.config/rofi
 	mkdir -p ~/.config/rofi
 
 ## Depends on the creation of the .config directory
@@ -173,7 +205,7 @@ create-rofi: create-config
 
 ## Create the needed mutt/ directory in .config/
 create-mutt:
-	rm -rf ~/.config/mutt
+	@# No `rm -rf` here: mutt writes .mailsynclastrun into this directory.
 	mkdir -p ~/.config/mutt
 
 ## Depends on the creation of the .config directory
@@ -181,7 +213,6 @@ create-mutt: create-config
 
 ## Create the needed atuin/ directory in .config/
 create-atuin:
-	rm -rf ~/.config/atuin
 	mkdir -p ~/.config/atuin
 
 ## Depends on the creation of the .config directory
@@ -189,7 +220,6 @@ create-atuin: create-config
 
 ## Create the needed yazi/ directory in .config/
 create-yazi:
-	rm -rf ~/.config/yazi
 	mkdir -p ~/.config/yazi
 
 ## Depends on the creation of the .config directory
@@ -197,7 +227,6 @@ create-yazi: create-config
 
 ## Create the needed bat/ directory in .config/
 create-bat:
-	rm -rf ~/.config/bat
 	mkdir -p ~/.config/bat
 
 ## Depends on the creation of the .config directory
@@ -205,7 +234,6 @@ create-bat: create-config
 
 ## Create the needed dunst/ directory in .config/
 create-dunst:
-	rm -rf ~/.config/dunst
 	mkdir -p ~/.config/dunst
 
 ## Depends on the creation of the .config directory
@@ -233,7 +261,6 @@ create-firefox:
 
 ## Create the needed gtk-2.0/ directory in .config/
 create-gtk2:
-	rm -rf ~/.config/gtk-2.0
 	mkdir -p ~/.config/gtk-2.0
 
 ## Depends on the creation of the .config directory
@@ -241,7 +268,6 @@ create-gtk2: create-config
 
 ## Create the needed gtk-3.0/ directory in .config/
 create-gtk3:
-	rm -rf ~/.config/gtk-3.0
 	mkdir -p ~/.config/gtk-3.0
 
 ## Depends on the creation of the .config directory
@@ -249,7 +275,6 @@ create-gtk3: create-config
 
 ## Create the needed i3/ directory in .config/
 create-i3:
-	rm -rf ~/.config/i3
 	mkdir -p ~/.config/i3
 
 ## Depends on the creation of the .config directory
@@ -257,7 +282,6 @@ create-i3: create-config
 
 ## Create the needed picom/ directory in .config/
 create-picom:
-	rm -rf ~/.config/picom
 	mkdir -p ~/.config/picom
 
 ## Depends on the creation of the .config directory
@@ -265,7 +289,6 @@ create-picom: create-config
 
 ## Create the needed i3status/ directory in .config/
 create-i3status:
-	rm -rf ~/.config/i3status
 	mkdir -p ~/.config/i3status
 
 ## Depends on the creation of the .config directory
@@ -273,7 +296,6 @@ create-i3status: create-config
 
 ## Create the needed i3wsr/ directory in .config/
 create-i3wsr:
-	rm -rf ~/.config/i3wsr
 	mkdir -p ~/.config/i3wsr
 
 ## Depends on the creation of the .config directory
@@ -281,15 +303,25 @@ create-i3: create-config
 
 ## Create the needed polybar/ directory in .config/
 create-polybar:
-	rm -rf ~/.config/polybar
 	mkdir -p ~/.config/polybar
 
 ## Depends on the creation of the .config directory
 create-polybar: create-config
 
+## Create the needed quickshell/ directory in .config/
+##
+## quickshell reads its default config from ~/.config/quickshell/shell.qml,
+## so the stow target links the package's shell.qml and modules/ straight into
+## that directory.
+create-quickshell:
+	mkdir -p ~/.config/quickshell
+
+## Depends on the creation of the .config directory
+create-quickshell: create-config
+
 ## Create the needed .tmux/ directory in home directory
 create-tmux:
-	rm -rf ~/.tmux
+	@# No `rm -rf` here: tpm's plugins/ checkout lives in this directory.
 	mkdir -p ~/.tmux
 	mkdir -p ~/.tmux/plugins
 	mkdir -p ~/.tmux/plugins/tpm
@@ -299,7 +331,6 @@ create-tmux: create-config
 
 ## Create the needed termite/ directory in .config/
 create-termite:
-	rm -rf ~/.config/termite
 	mkdir -p ~/.config/termite
 
 ## Depends on the creation of the .config directory
@@ -307,7 +338,6 @@ create-termite: create-config
 
 ## Create the needed urlscan/ directory in .config/
 create-urlscan:
-	rm -rf ~/.config/urlscan
 	mkdir -p ~/.config/urlscan
 
 ## Depends on the creation of the .config directory
@@ -315,15 +345,21 @@ create-urlscan: create-config
 
 ## Create the needed wezterm/ directory in .config/
 create-wezterm:
-	rm -rf ~/.config/wezterm
 	mkdir -p ~/.config/wezterm
 
 ## Depends on the creation of the .config directory
 create-wezterm: create-config
 
+## Create the needed hunk/ directory in .config/
+create-hunk:
+	mkdir -p ~/.config/hunk
+
+## Depends on the creation of the .config directory
+create-hunk: create-config
+
 ## Create the needed opencode/ directory in .config/
 create-opencode:
-	rm -rf ~/.config/opencode
+	@# No `rm -rf` here: herdr writes plugins/, tui.jsonc and session files.
 	mkdir -p ~/.config/opencode
 
 ## Depends on the creation of the .config directory
@@ -331,7 +367,6 @@ create-opencode: create-config
 
 ## Create the needed zathura/ directory in .config/
 create-zathura:
-	rm -rf ~/.config/zathura
 	mkdir -p ~/.config/zathura
 
 ## Depends on the creation of the .config directory
@@ -339,7 +374,6 @@ create-zathura: create-config
 
 ## Create the needed zellij/ directory in .config/
 create-zellij:
-	rm -rf ~/.config/zellij
 	mkdir -p ~/.config/zellij
 
 ## Depends on the creation of the .config directory
@@ -351,27 +385,24 @@ create-zshtheme:
 
 ## Create the needed nvim directory and link in .config/
 create-nvim:
-	@# Since the nvim directory links to .vim/
-	@# (thereby supporting both Vim and Neovim), then
-	@# remove the symbolic link to the nvim/ directory
-	rm -rf ~/.config/nvim
-	@# Re-create the symbolic link to the nvim/ directory,
-	@# now with no error since it was previously deleted
-	@# This assumes that the .vim/ directory was already
-	@# create by external step not connect to this Makefile
-	# ln -s ~/.vim ~/.config/nvim
-	@# Delete the init.vim file as it will later be stowed
-	@# rm -rf ~/.config/nvim/init.vim
-	@# Delete the init.lua file as it will later be stowed
-	rm -rf ~/.config/nvim/init.lua
+	@# No `rm -rf` here.  This target used to delete the directory and
+	@# init.lua "as it will later be stowed", but neither deletion is what stow
+	@# needs and both destroy state silently:
+	@#   - nvim keeps lazy-lock.json in this directory, unmanaged by this repo
+	@#   - init.lua is a stow SYMLINK, and nothing in this target recreates it
+	@#     (stow-nvim is a separate target), so deleting it leaves nvim with
+	@#     no configuration loaded at all
+	@# `mkdir -p` below is all stow needs; a conflicting real file now fails
+	@# loudly instead of being deleted silently.
+	@# (the nvim directory may link to .vim/, supporting both Vim and Neovim:
+	@# ln -s ~/.vim ~/.config/nvim)
 	mkdir -p ~/.config/nvim
-	@# Delete the cache directory for nvim ctags
+	@# Create the cache directory for nvim ctags
 	mkdir -p ~/.cache/nvim/ctags/
 
 ## Create the ~/.vim/rc directory that contains .vim files
 ## that contain components of the .vimrc file
 create-vimrc:
-	rm -rf ~/.vim/rc
 	mkdir -p ~/.vim/rc
 
 ## }}}
@@ -380,14 +411,17 @@ create-vimrc:
 
 ## Create the needed .tmux/ directory in home
 create-tpm:
-	rm -rf ~/.tmux
+	@# No `rm -rf` here: this target exists precisely to *create* plugins/tpm.
 	mkdir -p ~/.tmux
 	mkdir -p ~/.tmux/plugins
 	mkdir -p ~/.tmux/plugins/tpm
 
 ## Create the needed .local/bin directory in home
 create-bin:
-	rm -rf ~/.local/bin
+	@# No `rm -rf` here.  This directory holds unmanaged binaries that stow
+	@# does not own (bitbang, msgvault, terminal-browser), so deleting it loses
+	@# them; `mkdir -p` is all stow actually needs.  If stow reports a conflict,
+	@# resolve it by hand rather than by deleting the directory.
 	mkdir -p ~/.local/bin
 
 ## Create the needed pi directory in .config/
@@ -416,7 +450,6 @@ create-zsh:
 
 ## Create the needed fast-syntax-highlighting/ directory in .zsh/
 create-fast-syntax-highlighting:
-	rm -rf ~/.zsh/fast-syntax-highlighting
 	mkdir -p ~/.zsh/fast-syntax-highlighting
 
 ## Depends on the creation of the .zsh directory
@@ -424,7 +457,6 @@ create-fast-syntax-highlighting: create-zsh
 
 ## Create the needed zsh-syntax-highlighting/ directory in .zsh/
 create-zsh-syntax-highlighting:
-	rm -rf ~/.zsh/zsh-syntax-highlighting
 	mkdir -p ~/.zsh/zsh-syntax-highlighting
 
 ## Depends on the creation of the .zsh directory
@@ -432,7 +464,6 @@ create-zsh-syntax-highlighting: create-zsh
 
 ## Create the needed fzf-tab/ directory in .zsh/
 create-fzf-tab:
-	rm -rf ~/.zsh/fzf-tab
 	mkdir -p ~/.zsh/fzf-tab
 
 ## Depends on the creation of the .zsh directory
@@ -440,7 +471,6 @@ create-fzf-tab: create-zsh
 
 ## Create the needed zsh-auto-suggestions/ directory in .zsh/
 create-zsh-auto-suggestions:
-	rm -rf ~/.zsh/zsh-autosuggestions
 	mkdir -p ~/.zsh/zsh-autosuggestions
 
 ## Depends on the creation of the .zsh directory
@@ -448,7 +478,7 @@ create-zsh-auto-suggestions: create-zsh
 
 ## Create the needed zsh-defer/ directory in .zsh/
 create-zshdefer:
-	rm -rf ~/.zsh/zsh-defer
+	@# No `rm -rf` here: zsh-defer compiles a .zwc file into this directory.
 	mkdir -p ~/.zsh/zsh-defer
 
 ## Depends on the creation of the .zsh directory
@@ -456,7 +486,6 @@ create-zsh-defer: create-zsh
 
 ## Create the needed gitstatus/ directory in .zsh/
 create-git-status:
-	rm -rf ~/.zsh/gitstatus
 	mkdir -p ~/.zsh/gitstatus
 
 ## Depends on the creation of the .zsh directory
@@ -464,7 +493,6 @@ create-git-status: create-zsh
 
 ## Create the needed gitstatus/ directory in .zsh/
 create-zsh-vi-mode:
-	rm -rf ~/.zsh/zsh-vi-mode
 	mkdir -p ~/.zsh/zsh-vi-mode
 
 ## Depends on the creation of the .zsh directory
@@ -641,6 +669,13 @@ stow-trolltech:
 ## not being currently in existence, so purge it first
 stow-trolltech: purge-trolltech
 
+## Run stow on hunk (diff viewer theme)
+stow-hunk:
+	stow -t ~/.config/hunk hunk
+
+## Running stow depends on the creation of the directory
+stow-hunk: create-hunk
+
 ## Run stow on opencode
 stow-opencode:
 	stow -t ~/.config/opencode opencode
@@ -692,6 +727,16 @@ stow-polybar:
 
 ## Running stow on polybar depends on creating polybar directory
 stow-polybar: create-polybar
+
+## Run stow on quickshell
+##
+## This is the bar that i3 now starts (see i3/config); polybar is kept
+## stowed as well so that reverting is one line in the i3 config.
+stow-quickshell:
+	stow -t ~/.config/quickshell quickshell
+
+## Running stow on quickshell depends on creating quickshell directory
+stow-quickshell: create-quickshell
 
 ## Run stow on termite
 stow-termite:
@@ -858,10 +903,10 @@ stow-applications:
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-alacritty create-kitty create-ghostty create-rofi create-mutt create-atuin create-yazi create-bat create-dunst create-firefox create-gtk2 create-gtk3 create-i3 create-i3status create-picom create-i3wsr create-polybar create-termite create-tmux create-urlscan create-wezterm create-zathura create-zellij create-opencode create-pi create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-alacritty create-kitty create-ghostty create-rofi create-mutt create-atuin create-yazi create-bat create-dunst create-firefox create-gtk2 create-gtk3 create-i3 create-i3status create-picom create-i3wsr create-polybar create-quickshell create-termite create-tmux create-urlscan create-wezterm create-zathura create-zellij create-opencode create-pi create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-kitty stow-ghostty stow-rofi stow-mutt stow-atuin stow-yazi stow-bat stow-dunst stow-firefox stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-trippy stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-picom stow-email stow-git stow-nvim stow-polybar stow-termite stow-urlscan stow-wezterm stow-zathura stow-zellij stow-opencode stow-pi stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-kitty stow-ghostty stow-rofi stow-mutt stow-atuin stow-yazi stow-bat stow-dunst stow-firefox stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-trippy stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-picom stow-email stow-git stow-nvim stow-polybar stow-quickshell stow-termite stow-urlscan stow-wezterm stow-zathura stow-zellij stow-hunk stow-opencode stow-pi stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions

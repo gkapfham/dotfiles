@@ -7,5 +7,5 @@ function gen_workspaces()
 }
 
 # use rofi to filter workspaces in a case-insensitive fashion
-WORKSPACE=$( (gen_workspaces) | rofi -dmenu -i -p "workspace")
+WORKSPACE=$( (gen_workspaces) | rofi -dmenu -i -p "󰕰 " )
 i3-msg workspace "${WORKSPACE}"

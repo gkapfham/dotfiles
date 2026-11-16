@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 
-maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
-echo "󰹑 Screenshot Taken and Copied to Clipboard" | rofi -width 75 -dmenu -i
+# i3-take-screenshot.sh — screenshot menu, opened directly on that level of the
+# power menu (four-finger swipe up, see libinput-gestures.conf).
+
+set -euo pipefail
+
+exec env ROFI_SCREENSHOT=1 rofi -modes "power:$HOME/.config/i3/scripts/i3-rofi-system.sh" -show power

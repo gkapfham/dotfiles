@@ -1082,11 +1082,11 @@ return {
       local current_icons = nvim_web_devicons.get_icons()
       local new_icons = {}
       for key, icon in pairs(current_icons) do
-        icon.color = "#d2d2d2"
+        icon.color = "#e0e0e0"
         new_icons[key] = icon
       end
       nvim_web_devicons.set_icon(new_icons)
-      nvim_web_devicons.set_default_icon("", "#d2d2d2")
+      nvim_web_devicons.set_default_icon("", "#e0e0e0")
       function _G.set_terminal_keymaps()
         local opts = { buffer = 0 }
         vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)

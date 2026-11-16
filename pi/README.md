@@ -119,6 +119,7 @@ in this repo (`bin/`) that you re-run after the package updates:
 | Patch | Reapply after updating | Script (`~/.pi/agent/bin/`) |
 |---|---|---|
 | Hide the Tailscale (`TS: 100.x.x.x`) IP from tau-mirror's status bar | `tau-mirror` | `bash ~/.pi/agent/bin/reapply-tau-patch.sh` |
+| Keep pi-open-tui's footer off the orange `accent` (context bar, input tokens, working timer, TPS use `mdLink`) so orange is reserved for cwd + the `/` menu | `pi-open-tui` | `bash ~/.pi/agent/bin/reapply-open-tui-footer-colors.sh` |
 
 Each script is idempotent (safe to re-run — it prints "already applied" and
 exits) and backs up the file it edits before patching. Add a row here

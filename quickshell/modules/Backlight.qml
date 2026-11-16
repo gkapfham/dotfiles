@@ -22,7 +22,14 @@ Text {
 
     // polybar: format = <ramp> <label>, format-prefix = " ",
     //          label = %percentage:3%%
-    text: " " + ramp(percent) + " " + String(percent).padStart(3, " ") + "%"
+    //
+    // The format-prefix space is deliberately dropped here. In polybar it
+    // separated the module from whatever sat to its left; inside a plate that
+    // gap is the plate's own padding, so keeping the space made the brightness
+    // sit further from its plate edge than every other module in a plate. The
+    // padStart below is a different space, after the glyph, which keeps "55%"
+    // aligned under "100%" and does not move the left inset.
+    text: ramp(percent) + " " + String(percent).padStart(3, " ") + "%"
 
     verticalAlignment: Text.AlignVCenter
     // CurveRendering is grayscale antialiasing, which is what polybar's

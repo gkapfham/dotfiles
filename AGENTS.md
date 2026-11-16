@@ -141,8 +141,8 @@ on its own initiative. Reasons:
   human will review and the history they will commit. That decision belongs to
   the human.
 - They pull **runtime-derived state** into the repo (e.g.
-  `pi/extensions/quotas.json`, a pi-quotas-generated config) that the human may
-  not want tracked at all.
+  `pi/settings.json`, which carries `lastChangelogVersion` and
+  `extensionChangelogVersions` that the human may not want tracked at all).
 - `apply-config.sh` copies **onto the live machine** and can overwrite local
   state — it must only ever run with explicit human approval.
 - The human owns all repo-mutating steps: syncing, staging (`git add`), and

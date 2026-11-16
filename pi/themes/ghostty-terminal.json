@@ -3,7 +3,7 @@
 	"name": "ghostty-terminal",
 	"vars": {
 		"bg": "#1c1c1c",
-		"fg": "#d2d2d2",
+		"fg": "#e0e0e0",
 		"black": "#767676",
 		"red": "#d78700",
 		"green": "#6f9500",
@@ -16,7 +16,7 @@
 		"surface": "#2d2d2d"
 	},
 	"colors": {
-		"accent": "blue",
+		"accent": "red",
 		"border": "white",
 		"borderAccent": "cyan",
 		"borderMuted": "black",
@@ -58,11 +58,11 @@
 		"syntaxComment": "#767676",
 		"syntaxKeyword": "#87afd7",
 		"syntaxFunction": "#b7b757",
-		"syntaxVariable": "#d2d2d2",
+		"syntaxVariable": "#e0e0e0",
 		"syntaxString": "#6f9500",
 		"syntaxNumber": "#87afd7",
 		"syntaxType": "#d75f5f",
-		"syntaxOperator": "#d2d2d2",
+		"syntaxOperator": "#e0e0e0",
 		"syntaxPunctuation": "#b2b2b2",
 
 		"thinkingOff": "dimGray",

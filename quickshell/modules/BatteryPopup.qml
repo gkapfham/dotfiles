@@ -27,10 +27,24 @@ InfoPopup {
 
     readonly property bool healthKnown: pack !== null && pack.healthSupported
 
+    // Set by the bar from the battery module, so the popup's Source row and the
+    // icon can never disagree about whether the machine is on the pack. This is
+    // deliberately not UPower.onBattery read directly: see the note in
+    // Battery.qml for why that signal cannot be trusted on its own here. It was
+    // that disagreement -- Source reading "AC power" while State read
+    // "Discharging" -- that made the popup look broken.
+    property bool onBattery: false
+
+    // The same threshold the module uses, for the same reason: below it the
+    // rate is sensor noise, and a time estimate built on sensor noise is how
+    // UPower's 138-day runtime used to reach the screen.
+    readonly property real minRate: 1.0
+    readonly property real rate: ready ? Math.abs(device.changeRate) : 0
+
     title: "Battery"
 
     rows: [
-        { label: "Source", value: UPower.onBattery ? "Battery" : "AC power" },
+        { label: "Source", value: popup.onBattery ? "Battery" : "AC power" },
         { label: "State", value: popup.stateLabel() },
         { label: "Charge", value: popup.ready
                                   ? Math.round(popup.device.percentage * 100) + "%" : "\u2014" },
@@ -41,12 +55,18 @@ InfoPopup {
                                   ? popup.pack.healthPercentage.toFixed(1) + "%" : "\u2014" },
         { label: "Power", value: popup.ready
                                  ? Math.abs(popup.device.changeRate).toFixed(2) + " W" : "\u2014" },
-        { label: "Remaining", value: popup.ready
-                                     ? popup.duration(popup.device.state
-                                                      === UPowerDeviceState.Charging
-                                                      ? popup.device.timeToFull
-                                                      : popup.device.timeToEmpty) : "\u2014" }
+        { label: "Remaining", value: popup.estimate() }
     ]
+
+    // No estimate without a rate that means something. UPower will happily
+    // return a figure for a pack that is not really moving power, which is
+    // where the 138-day runtime came from.
+    function estimate() {
+        if (!popup.ready || popup.rate < popup.minRate) return "\u2014";
+        return popup.duration(popup.device.state === UPowerDeviceState.Charging
+                              ? popup.device.timeToFull
+                              : popup.device.timeToEmpty);
+    }
 
     function stateLabel() {
         if (!ready) return "\u2014";

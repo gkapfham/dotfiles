@@ -24,6 +24,11 @@ PanelWindow {
     // The shared palette from Colors.qml.
     required property QtObject colors
 
+    // Emitted by the toggle icon in the status plate. shell.qml owns the actual
+    // visibility state, because every screen's bar hides and shows together; this
+    // bar only reports the request.
+    signal toggleRequested()
+
     // ---- geometry, from [bar/mybar] -----------------------------------
     //
     // polybar drew a 60px tall bar. Quickshell works in logical coordinates
@@ -49,6 +54,23 @@ PanelWindow {
     readonly property string fontFamily: "Maple Mono NF"
     readonly property int fontSize: 13
     readonly property bool fontBold: true
+
+    // The fill for every plate on the bar: wifi, battery, cpu, storage, the
+    // status icons and the device controls.
+    //
+    // Drawn at 75% over the bar background rather than as a solid primary. Two
+    // reasons, both measured. Legibility: a solid #444444 leaves the dim state
+    // (foregroundAlt, used for an off bluetooth and a dimmed agent icon) at
+    // 4.1:1, below the WCAG AA threshold of 4.5, where the same glyph on plain
+    // background sits at 7.2:1. At 75% the effective fill is about #3a3a3a, the
+    // dim state reaches 4.8:1 and the foreground 8.6:1. Weight: a solid plate
+    // this wide dominated the bar it was meant to group.
+    //
+    // The focused-workspace label is deliberately NOT this colour. It is a
+    // selection indicator rather than a grouping plate, and it keeps polybar's
+    // solid primary.
+    readonly property color plateColor:
+        Qt.rgba(colors.primary.r, colors.primary.g, colors.primary.b, 0.75)
 
     // polybar: module-margin-left = 12px, module-margin-right = 8px, so
     // neighbouring modules are 20 physical px (10 logical) apart.
@@ -100,6 +122,7 @@ PanelWindow {
         wifiPopup.visible = false;
         workspacePopup.visible = false;
         agentsPopup.visible = false;
+        zellijPopup.visible = false;
     }
 
     // The workspace popup cannot use togglePopup above, because unlike the
@@ -172,62 +195,188 @@ PanelWindow {
         height: bar.height
         spacing: bar.moduleSpacing
 
-        Backlight {
-            height: bar.height
-            interval: 15
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-            color: bar.colors.foreground
+        // The status icons sit on their own plate: a filled rounded rectangle
+        // behind all of them. The bar already draws a filled plate behind
+        // the focused workspace label, so this is a second use of the same idea
+        // rather than a new visual language, and it groups the icons without a
+        // divider glyph and without spending part of the bar on whitespace.
+        //
+        // None of them is a polybar module: polybar had no bluetooth
+        // indicator, no notification history, no notion of an agent and no
+        // notion of a multiplexer session.
+        Rectangle {
+            id: statusPlate
+
+            anchors.verticalCenter: parent.verticalCenter
+            // Hugs the glyphs: the row's own width plus 8px of padding on each
+            // side, the same padding the workspace label uses.
+            implicitWidth: statusRow.implicitWidth + 16
+            height: 18
+            radius: 4
+            color: bar.plateColor
+
+            Row {
+                id: statusRow
+
+                anchors.centerIn: parent
+                // Optical centring: the text is centred by its line box, which
+                // includes descent room that these icons never use, so the ink
+                // sat ~1px high inside the plate. Half a logical pixel -- one
+                // physical pixel at this 2x scale -- centres the ink.
+                anchors.verticalCenterOffset: 0.5
+                // Set explicitly: the children take `height: statusRow.height`,
+                // and a Row's own height is derived from its children, so
+                // leaving it out is a binding loop that collapses the row -- and
+                // with it every glyph on the plate -- to zero.
+                height: parent.height
+                spacing: bar.moduleSpacing
+
+                Bluetooth {
+                    id: bluetooth
+                    height: statusRow.height
+                    color: bar.colors.foreground
+                    dimColor: bar.colors.foregroundAlt
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                }
+
+                // The NetBird tunnel switch, beside the bluetooth one and for
+                // the same reason: the icon is the switch. Unlike bluetooth it
+                // has no quickshell service behind it, so the state and the
+                // toggle both go through the netbird CLI -- see
+                // modules/Netbird.qml for why the bar is allowed to call it.
+                Netbird {
+                    id: netbird
+                    height: statusRow.height
+                    // Not `color`: the module binds `color` itself to pick
+                    // between these two, and an assignment here would replace
+                    // that binding.
+                    activeColor: bar.colors.foreground
+                    dimColor: bar.colors.foregroundAlt
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                }
+
+                // Hides the bar. The way back is the reveal strip at the top edge
+                // of the screen (shell.qml), not this icon: hiding the bar unmaps
+                // the icon with it.
+                BarToggle {
+                    id: barToggle
+                    height: statusRow.height
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                    color: bar.colors.foreground
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: bar.toggleRequested()
+                    }
+                }
+
+                // A bell for dunst's notification history.
+                Notifications {
+                    id: notifications
+                    height: statusRow.height
+                    color: bar.colors.foreground
+                    dimColor: bar.colors.foregroundAlt
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                }
+
+                // A robot for the pi coding agents running on this machine. It
+                // carries no count by design: the number is in the popup, one
+                // click away.
+                PiAgents {
+                    id: agents
+                    height: statusRow.height
+                    color: bar.colors.foreground
+                    dimColor: bar.colors.foregroundAlt
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: bar.togglePopup(agentsPopup)
+                    }
+                }
+
+                // A list glyph for zellij sessions, and how many agents live in
+                // each.
+                ZellijSessions {
+                    id: zellij
+                    height: statusRow.height
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                    color: bar.colors.foreground
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: bar.togglePopup(zellijPopup)
+                    }
+                }
+            }
         }
 
-        Volume {
-            height: bar.height
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-            color: bar.colors.foreground
+        // A wider gap separates the plate from the device controls, so the plate
+        // reads as its own region rather than as the first of five modules.
+        Item {
+            id: statusSpacer
+
+            width: bar.moduleSpacing
         }
 
-        // Not a polybar module: polybar had no bluetooth indicator at all.
-        // Sits after the volume, before the date.
-        Bluetooth {
-            id: bluetooth
-            height: bar.height
-            color: bar.colors.foreground
-            dimColor: bar.colors.foregroundAlt
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-        }
+        // Brightness and volume on one plate: the two things you adjust while
+        // working. The clock stays outside it deliberately -- it is the one
+        // reading that is never a knob, and it is unchanged.
+        Rectangle {
+            id: devicePlate
 
-        // Not a polybar module either: a bell for dunst's notification
-        // history, before the date.
-        Notifications {
-            id: notifications
-            height: bar.height
-            color: bar.colors.foreground
-            dimColor: bar.colors.foregroundAlt
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-        }
+            anchors.verticalCenter: parent.verticalCenter
+            implicitWidth: deviceRow.implicitWidth + 16
+            height: 18
+            radius: 4
+            color: bar.plateColor
 
-        // Not a polybar module either: a robot for the pi coding agents
-        // running on this machine, after the notification bell.
-        PiAgents {
-            id: agents
-            height: bar.height
-            color: bar.colors.foreground
-            dimColor: bar.colors.foregroundAlt
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
+            Row {
+                id: deviceRow
 
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: bar.togglePopup(agentsPopup)
+                // Optical centring: the text is centred by its line box, which
+                // includes descent room that digits, caps and icons do not use,
+                // so the visible ink sat ~1px high inside the plate (measured:
+                // top padding 5px, bottom 7px). Half a logical pixel -- one
+                // physical pixel at this 2x scale -- puts the ink in the middle.
+                anchors.verticalCenterOffset: 0.5
+                anchors.centerIn: parent
+                height: parent.height
+                spacing: bar.moduleSpacing
+
+                // polybar [module/backlight]
+                Backlight {
+                    height: deviceRow.height
+                    interval: 15
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                    color: bar.colors.foreground
+                }
+
+                // polybar [module/pulseaudio]
+                Volume {
+                    height: deviceRow.height
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                    color: bar.colors.foreground
+                }
             }
         }
 
@@ -283,7 +432,19 @@ PanelWindow {
     PiAgentsPopup {
         id: agentsPopup
         anchorWindow: bar
-        anchorX: agents.x + rightGroup.x
+        anchorX: agents.x + agents.parent.x + statusPlate.x + rightGroup.x
+        colors: bar.colors
+        fontSize: bar.fontSize
+        fontFamily: bar.fontFamily
+        fontBold: bar.fontBold
+    }
+
+    // Opened by clicking the tab glyph. A child of this window because it
+    // anchors to it.
+    ZellijSessionsPopup {
+        id: zellijPopup
+        anchorWindow: bar
+        anchorX: zellij.x + zellij.parent.x + statusPlate.x + rightGroup.x
         colors: bar.colors
         fontSize: bar.fontSize
         fontFamily: bar.fontFamily
@@ -320,7 +481,10 @@ PanelWindow {
     BatteryPopup {
         id: batteryPopup
         anchorWindow: bar
-        anchorX: battery.x + centerRow.x
+        anchorX: batteryPlate.x + battery.x + centerRow.x
+        // Taken from the module rather than from UPower directly, so the popup's
+        // Source row always matches the icon in the bar.
+        onBattery: battery.onBattery
         colors: bar.colors
         fontSize: bar.fontSize
         fontFamily: bar.fontFamily
@@ -330,7 +494,7 @@ PanelWindow {
     CpuPopup {
         id: cpuPopup
         anchorWindow: bar
-        anchorX: cpu.x + centerRow.x
+        anchorX: cpuPlate.x + cpuRow.x + cpu.x + centerRow.x
         colors: bar.colors
         fontSize: bar.fontSize
         fontFamily: bar.fontFamily
@@ -340,7 +504,7 @@ PanelWindow {
     FilesystemPopup {
         id: filesystemPopup
         anchorWindow: bar
-        anchorX: filesystem.x + centerRow.x
+        anchorX: storagePlate.x + storageRow.x + filesystem.x + centerRow.x
         colors: bar.colors
         fontSize: bar.fontSize
         fontFamily: bar.fontFamily
@@ -350,7 +514,7 @@ PanelWindow {
     MemoryPopup {
         id: memoryPopup
         anchorWindow: bar
-        anchorX: memory.x + centerRow.x
+        anchorX: storagePlate.x + storageRow.x + memory.x + centerRow.x
         colors: bar.colors
         fontSize: bar.fontSize
         fontFamily: bar.fontFamily
@@ -360,7 +524,7 @@ PanelWindow {
     WifiPopup {
         id: wifiPopup
         anchorWindow: bar
-        anchorX: wifi.x + centerRow.x
+        anchorX: wifiPlate.x + wifi.x + centerRow.x
         colors: bar.colors
         fontSize: bar.fontSize
         fontFamily: bar.fontFamily
@@ -378,204 +542,291 @@ PanelWindow {
         // would push it into a neighbour it slides instead, which polybar
         // would simply have overlapped.
         y: (bar.height - height) / 2
+        // Centred in the space *between* the side blocks, not on the bar.
+        //
+        // polybar centred the block on the bar, and that was copied here, but it
+        // only looks balanced while the two side blocks are the same width. The
+        // right block is now ~150px wider than the left (four status icons plus
+        // backlight, volume and the clock), so bar-centring left 107 logical px
+        // on one side and 21 on the other and the block read as pushed right.
+        //
+        // Everything here is derived from the actual block geometry, so it holds
+        // on any screen size: minX and maxX are the real limits the block may
+        // occupy, and the midpoint between them gives equal gaps. When there is
+        // no room at all the clamps collapse to minX, which is where the sliding
+        // behaviour already put it.
         x: {
-            var ideal = (bar.width - width) / 2;
             var minX = leftGroup.x + leftGroup.width + bar.groupGap;
             var maxX = rightGroup.x - width - bar.groupGap;
+            var ideal = minX + (maxX - minX) / 2;
             return Math.max(minX, Math.min(ideal, maxX));
         }
         spacing: bar.moduleSpacing
 
-        // polybar [module/wireless-network]
-        Wifi {
-            id: wifi
-            height: bar.height
-            visible: bar.layout.shown[0]
-            compact: bar.layout.compact
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-            color: bar.colors.foreground
+        // The two readings that matter most on a laptop -- the network it is on
+        // and the power it is running from -- sit on plates: the same filled
+        // rounded rectangle the focused workspace and the status icons use. The
+        // rest of the block stays plain glyphs, so a plate here marks importance
+        // rather than grouping for its own sake.
+        //
+        // Each plate forwards its child's full and compact widths to the layout's
+        // width budget, plus the 8px of padding on each side, and takes the same
+        // width from that budget, so the block still sizes itself from real
+        // content and the budget matches what is on screen.
+        Rectangle {
+            id: wifiPlate
 
+            readonly property real fullWidth: wifi.fullWidth + 16
+            readonly property real compactWidth: wifi.compactWidth + 16
+
+            anchors.verticalCenter: parent.verticalCenter
+            implicitWidth: bar.layout.compact ? compactWidth : fullWidth
+            height: 18
+            radius: 4
+            color: bar.plateColor
+            visible: bar.layout.shown[0]
+
+            // The whole plate is the click target, not just the text inside it:
+            // the plate is 8px wider than its module on each side, and clicks in
+            // that padding used to fall through to nothing.
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 onClicked: bar.togglePopup(wifiPopup)
             }
+
+            // polybar [module/wireless-network]
+            Wifi {
+                id: wifi
+                anchors.centerIn: parent
+                anchors.verticalCenterOffset: 0.5
+                height: parent.height
+                compact: bar.layout.compact
+                fontSize: bar.fontSize
+                fontFamily: bar.fontFamily
+                fontBold: bar.fontBold
+                color: bar.colors.foreground
+            }
         }
 
-        // polybar [module/battery], on the native UPower service
-        Battery {
-            id: battery
-            height: bar.height
-            visible: bar.layout.shown[1]
-            compact: bar.layout.compact
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-            color: bar.colors.foreground
+        Rectangle {
+            id: batteryPlate
 
+            readonly property real fullWidth: battery.fullWidth + 16
+            readonly property real compactWidth: battery.compactWidth + 16
+
+            anchors.verticalCenter: parent.verticalCenter
+            implicitWidth: bar.layout.compact ? compactWidth : fullWidth
+            height: 18
+            radius: 4
+            color: bar.plateColor
+            visible: bar.layout.shown[1]
+
+            // The whole plate is the click target; see the note on wifiPlate.
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 onClicked: bar.togglePopup(batteryPopup)
             }
+
+            // polybar [module/battery], on the native UPower service
+            Battery {
+                id: battery
+                anchors.centerIn: parent
+                anchors.verticalCenterOffset: 0.5
+                height: parent.height
+                compact: bar.layout.compact
+                fontSize: bar.fontSize
+                fontFamily: bar.fontFamily
+                fontBold: bar.fontBold
+                color: bar.colors.foreground
+            }
         }
 
-        // polybar [module/sep]
-        Text {
-            id: sepA
-            height: bar.height
+        // CPU usage, every temperature reading and the fan share a plate. They
+        // are all readings of the same silicon -- package, GPU and NVMe -- and
+        // the fan is what cools them, so together they answer one question: how
+        // hard is this machine working and how well is it coping.
+        Rectangle {
+            id: cpuPlate
+
+            readonly property real fullWidth: cpu.fullWidth + tempCpu.fullWidth
+                                               + tempGpu.fullWidth + tempSsd.fullWidth
+                                               + fan.fullWidth + 4 * bar.moduleSpacing + 16
+            readonly property real compactWidth: cpu.compactWidth + tempCpu.compactWidth
+                                                  + tempGpu.compactWidth + tempSsd.compactWidth
+                                                  + fan.compactWidth + 4 * bar.moduleSpacing + 16
+
+            anchors.verticalCenter: parent.verticalCenter
+            implicitWidth: bar.layout.compact ? compactWidth : fullWidth
+            height: 18
+            radius: 4
+            color: bar.plateColor
             visible: bar.layout.shown[2]
-            verticalAlignment: Text.AlignVCenter
-            text: " \u2503"
-            // Counted in the width budget like everything else; see the layout
-            // block at the bottom of this file.
-            readonly property real fullWidth: implicitWidth
-            readonly property real compactWidth: implicitWidth
-            color: bar.colors.sepBright
-            // CurveRendering is grayscale antialiasing, which is what polybar's
-            // Xft rendering produced. Qt's default adds colour fringes that make
-            // the text look a size thinner than polybar's.
-            renderType: Text.CurveRendering
-            font.family: bar.fontFamily
-            font.pixelSize: bar.fontSize
-            font.bold: bar.fontBold
-        }
 
-        // polybar [module/cpu]
-        Cpu {
-            id: cpu
-            height: bar.height
-            visible: bar.layout.shown[3]
-            interval: 10
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-            color: bar.colors.foreground
-
+            // The whole plate is the click target, not just the CPU text inside
+            // it. The plate is 8px wider than its contents on each side, and the
+            // temperatures and fan sit beside the usage, so clicks used to fall
+            // through to nothing unless they landed on the CPU number itself.
+            // Same treatment as wifi, battery and the status icons.
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 onClicked: bar.togglePopup(cpuPopup)
             }
-        }
 
-        // polybar [module/temperature] (CPU, cros_ec)
-        Temperature {
-            id: tempCpu
-            height: bar.height
-            visible: bar.layout.shown[4]
-            path: "/sys/class/hwmon/hwmon3/temp2_input"
-            prefix: "\uf4bc "
-            interval: 10
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-            color: bar.colors.foreground
-        }
+            Row {
+                id: cpuRow
 
-        // polybar [module/temperature-gpu] (amdgpu)
-        Temperature {
-            id: tempGpu
-            height: bar.height
-            visible: bar.layout.shown[5]
-            path: "/sys/class/hwmon/hwmon1/temp1_input"
-            prefix: "\u{f0aa4} "
-            interval: 10
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-            color: bar.colors.foreground
-        }
+                // Optical centring: the text is centred by its line box, which
+                // includes descent room that digits, caps and icons do not use,
+                // so the visible ink sat ~1px high inside the plate (measured:
+                // top padding 5px, bottom 7px). Half a logical pixel -- one
+                // physical pixel at this 2x scale -- puts the ink in the middle.
+                anchors.verticalCenterOffset: 0.5
+                anchors.centerIn: parent
+                height: parent.height
+                spacing: bar.moduleSpacing
 
-        // polybar [module/temperature-ssd] (nvme)
-        Temperature {
-            id: tempSsd
-            height: bar.height
-            visible: bar.layout.shown[6]
-            path: "/sys/class/hwmon/hwmon0/temp1_input"
-            prefix: "\u{f02ca} "
-            interval: 10
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-            color: bar.colors.foreground
-        }
+                // polybar [module/cpu]
+                Cpu {
+                    id: cpu
+                    height: cpuRow.height
+                    interval: 10
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                    color: bar.colors.foreground
+                }
 
-        // polybar [module/fan] (custom/script -> polybar/scripts/fan)
-        ScriptModule {
-            id: fan
-            height: bar.height
-            visible: bar.layout.shown[7]
-            command: [bar.scriptDir + "/fan"]
-            interval: 10
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-            color: bar.colors.foreground
-            prefix: "\uefa7 "
-        }
+                // polybar [module/temperature] (CPU, cros_ec)
+                Temperature {
+                    id: tempCpu
+                    height: cpuRow.height
+                    path: "/sys/class/hwmon/hwmon3/temp2_input"
+                    prefix: "\uf4bc "
+                    interval: 10
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                    color: bar.colors.foreground
+                }
 
-        // polybar [module/sep]
-        Text {
-            id: sepB
-            height: bar.height
-            visible: bar.layout.shown[8]
-            verticalAlignment: Text.AlignVCenter
-            text: " \u2503"
-            readonly property real fullWidth: implicitWidth
-            readonly property real compactWidth: implicitWidth
-            color: bar.colors.sepBright
-            // CurveRendering is grayscale antialiasing, which is what polybar's
-            // Xft rendering produced. Qt's default adds colour fringes that make
-            // the text look a size thinner than polybar's.
-            renderType: Text.CurveRendering
-            font.family: bar.fontFamily
-            font.pixelSize: bar.fontSize
-            font.bold: bar.fontBold
-        }
+                // polybar [module/temperature-gpu] (amdgpu)
+                Temperature {
+                    id: tempGpu
+                    height: cpuRow.height
+                    path: "/sys/class/hwmon/hwmon1/temp1_input"
+                    prefix: "\u{f0aa4} "
+                    interval: 10
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                    color: bar.colors.foreground
+                }
 
-        // polybar [module/memory] (custom/script -> polybar/scripts/memory)
-        ScriptModule {
-            id: memory
-            height: bar.height
-            visible: bar.layout.shown[9]
-            command: [bar.scriptDir + "/memory"]
-            compactCommand: [bar.scriptDir + "/memory", "short"]
-            compact: bar.layout.compact
-            interval: 10
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-            color: bar.colors.foreground
-            prefix: " "
+                // polybar [module/temperature-ssd] (nvme)
+                Temperature {
+                    id: tempSsd
+                    height: cpuRow.height
+                    path: "/sys/class/hwmon/hwmon0/temp1_input"
+                    prefix: "\u{f02ca} "
+                    interval: 10
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                    color: bar.colors.foreground
+                }
 
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: bar.togglePopup(memoryPopup)
+                // polybar [module/fan] (custom/script -> polybar/scripts/fan)
+                ScriptModule {
+                    id: fan
+                    height: cpuRow.height
+                    command: [bar.scriptDir + "/fan"]
+                    interval: 10
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                    color: bar.colors.foreground
+                    prefix: "\uefa7 "
+                }
             }
         }
 
-        // polybar [module/filesystem] (custom/script -> polybar/scripts/filesystem)
-        ScriptModule {
-            id: filesystem
-            height: bar.height
-            visible: bar.layout.shown[10]
-            command: [bar.scriptDir + "/filesystem"]
-            compactCommand: [bar.scriptDir + "/filesystem", "short"]
-            compact: bar.layout.compact
-            interval: 10
-            fontSize: bar.fontSize
-            fontFamily: bar.fontFamily
-            fontBold: bar.fontBold
-            color: bar.colors.foreground
+        // Memory and disk on one plate: both are storage, and the two together
+        // answer "have I run out of room".
+        Rectangle {
+            id: storagePlate
 
-            MouseArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                onClicked: bar.togglePopup(filesystemPopup)
+            readonly property real fullWidth: memory.fullWidth + filesystem.fullWidth
+                                               + bar.moduleSpacing + 16
+            readonly property real compactWidth: memory.compactWidth + filesystem.compactWidth
+                                                  + bar.moduleSpacing + 16
+
+            anchors.verticalCenter: parent.verticalCenter
+            implicitWidth: bar.layout.compact ? compactWidth : fullWidth
+            height: 18
+            radius: 4
+            color: bar.plateColor
+            visible: bar.layout.shown[3]
+
+            Row {
+                id: storageRow
+
+                // Optical centring: the text is centred by its line box, which
+                // includes descent room that digits, caps and icons do not use,
+                // so the visible ink sat ~1px high inside the plate (measured:
+                // top padding 5px, bottom 7px). Half a logical pixel -- one
+                // physical pixel at this 2x scale -- puts the ink in the middle.
+                anchors.verticalCenterOffset: 0.5
+                anchors.centerIn: parent
+                height: parent.height
+                spacing: bar.moduleSpacing
+
+                // polybar [module/memory] (custom/script -> polybar/scripts/memory)
+                ScriptModule {
+                    id: memory
+                    height: storageRow.height
+                    command: [bar.scriptDir + "/memory"]
+                    compactCommand: [bar.scriptDir + "/memory", "short"]
+                    compact: bar.layout.compact
+                    interval: 10
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                    color: bar.colors.foreground
+                    // polybar's format-prefix was " ". Inside the storage plate
+                    // that gap is the plate's padding, and keeping it made the
+                    // memory module sit further from its plate edge than the
+                    // filesystem module beside it.
+                    prefix: ""
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: bar.togglePopup(memoryPopup)
+                    }
+                }
+
+                // polybar [module/filesystem] (custom/script -> polybar/scripts/filesystem)
+                ScriptModule {
+                    id: filesystem
+                    height: storageRow.height
+                    command: [bar.scriptDir + "/filesystem"]
+                    compactCommand: [bar.scriptDir + "/filesystem", "short"]
+                    compact: bar.layout.compact
+                    interval: 10
+                    fontSize: bar.fontSize
+                    fontFamily: bar.fontFamily
+                    fontBold: bar.fontBold
+                    color: bar.colors.foreground
+
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: bar.togglePopup(filesystemPopup)
+                    }
+                }
             }
         }
     }
@@ -600,17 +851,10 @@ PanelWindow {
     // thing to go; on top of that a separator is only drawn when a module is
     // visible on both sides of it.
     readonly property var centerEntries: [
-        { item: wifi, prio: 1, sep: false },
-        { item: battery, prio: 1, sep: false },
-        { item: sepA, prio: 100, sep: true },
-        { item: cpu, prio: 2, sep: false },
-        { item: tempCpu, prio: 2, sep: false },
-        { item: tempGpu, prio: 5, sep: false },
-        { item: tempSsd, prio: 6, sep: false },
-        { item: fan, prio: 8, sep: false },
-        { item: sepB, prio: 100, sep: true },
-        { item: memory, prio: 3, sep: false },
-        { item: filesystem, prio: 7, sep: false }
+        { item: wifiPlate, prio: 1, sep: false },
+        { item: batteryPlate, prio: 1, sep: false },
+        { item: cpuPlate, prio: 2, sep: false },
+        { item: storagePlate, prio: 3, sep: false }
     ]
 
     // Room left for the center block once the other two have taken theirs.

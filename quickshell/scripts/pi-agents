@@ -4,7 +4,7 @@
 #
 # Lists the pi coding agents that are running right now, one per line:
 #
-#     <status><TAB><project><TAB><name><TAB><idle-seconds><TAB><source>
+#     <status><TAB><project><TAB><name><TAB><idle-seconds><TAB><source><TAB><pid>
 #
 # where status is one of:
 #
@@ -187,6 +187,6 @@ for (( i = 0; i < count; i++ )); do
         sources[i]=none
     fi
 
-    printf '%s\t%s\t%s\t%s\t%s\t%s\n' \
-        "$rank" "$status" "$project" "$name" "$idle" "${sources[i]:-guessed}"
+    printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+        "$rank" "$status" "$project" "$name" "$idle" "${sources[i]:-guessed}" "${pids[i]}"
 done | sort -k1,1n -k5,5n | cut -f2-

@@ -42,13 +42,26 @@ Text {
     readonly property int percent: ready ? Math.round(device.percentage * 100) : 0
     readonly property int state: ready ? device.state : UPowerDeviceState.Unknown
 
-    // UPower.onBattery is the reliable "am I on wall power" signal, and the
-    // battery's own state is not. This Framework's EC reports the pack as
-    // `Discharging` even while the adapter is connected (current_now sits at
-    // about 1 mA and the adapter is online), and UPower passes that state
-    // through unchanged. Trusting `state` alone is what put a discharge arrow
-    // on a plugged-in laptop.
+    // Whether the machine is running on the pack. Neither signal is
+    // trustworthy on its own on this Framework, and they have failed in
+    // opposite directions:
+    //
+    //   - the pack has reported `Discharging` while the adapter was connected
+    //     (current sitting near 1 mA, rate near 0.02 W), which put a discharge
+    //     arrow and no runtime on a plugged-in laptop;
+    //   - and the adapter has reported `online` while the machine was
+    //     unplugged, which left the bar claiming AC power and hiding the drain
+    //     numbers entirely while the pack was really discharging at 33 W.
+    //
+    // The rate settles it. A pack that is draining moves watts; one that is not
+    // sits at sensor noise. So a discharge only counts as running on the pack
+    // when the pack is actually delivering power. UPower's own answer is still
+    // honoured when it says "on battery", which costs nothing in the stale
+    // direction: a time estimate with no real rate behind it is suppressed by
+    // `showEstimate` below rather than printed.
     readonly property bool onBattery: UPower.onBattery
+                                      || (state === UPowerDeviceState.Discharging
+                                          && rate >= minRate)
     readonly property bool charging: state === UPowerDeviceState.Charging
     readonly property bool discharging: onBattery
     readonly property bool full: !onBattery && !charging
@@ -87,7 +100,13 @@ Text {
     readonly property string rateText:
         showEstimate ? (rate.toFixed(2) + "").substring(0, 5) : ""
 
+    // The compact form keeps the runtime. On a laptop the remaining time is the
+    // one figure worth the room -- it is what this module is for -- so only the
+    // wattage is dropped when the block is tight. This does widen the compact
+    // form, so a module at the bottom of the keep priority can now be the one
+    // that hides when space runs out.
     readonly property string shortText: prefix + " " + percent + "%"
+                                        + (timeText !== "" ? " " + clockIcon + " " + timeText : "")
 
     readonly property string longText: {
         var label = shortText;

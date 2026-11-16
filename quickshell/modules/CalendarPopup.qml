@@ -28,7 +28,12 @@ PopupWindow {
     visible: false
 
     implicitWidth: 232
-    implicitHeight: 196
+    // Sized from the content rather than a fixed 196. At 196 the content was
+    // centred and left visibly more space below it than above -- the grid ends
+    // on a short trailing row, so the block's optical centre sits high.
+    implicitHeight: content.implicitHeight + padding * 2
+    // Space between the border and the grid, equal on all four sides.
+    property int padding: 12
     color: colors.background
 
     // Which month is on screen; 0 is the current one.
@@ -69,6 +74,7 @@ PopupWindow {
     }
 
     Column {
+        id: content
         anchors.centerIn: parent
         spacing: 6
 

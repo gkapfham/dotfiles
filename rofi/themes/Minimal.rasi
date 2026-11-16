@@ -7,7 +7,7 @@
     bg3:    #262626;
     bg4:    #3a3a3a;
 
-    fg0:    #d2d2d2;
+    fg0:    #e0e0e0;
     fg1:    #d78700;
     fg2:    #808080;   /* placeholder + quiet hint text — palette `comment` */
 

@@ -90,7 +90,12 @@ Row {
         }
         if (current < 0) return;
 
-        var target = current + (delta > 0 ? 1 : -1);
+        // A positive angleDelta.y is a scroll *up*, and scrolling up steps back
+        // through the workspaces: up goes to the previous one, down to the next.
+        // A wheel is read as a list, so scrolling down moves forward through it.
+        // The original port had this the other way round, which made the row
+        // appear to move backwards under the wheel.
+        var target = current + (delta > 0 ? -1 : 1);
         if (target < 0) target = list.length - 1;
         if (target >= list.length) target = 0;
 
@@ -156,6 +161,18 @@ Row {
                 // horizontal padding at this font size (8 logical).
                 implicitWidth: label.implicitWidth + 16
                 height: 18
+                // Radius 4, matching every plate on the bar (wifi, battery, cpu,
+                // storage, status, devices). Same height and same palette colour,
+                // so the same corner treatment keeps them one shape family. A
+                // full pill radius (height/2 = 9) was considered and rejected: on
+                // a single-digit workspace the box is only ~24 logical wide, so it
+                // would round into a lozenge and compete with the plates rather
+                // than sit among them.
+                //
+                // The emphasis stays in the fill: plates draw primary at 75%,
+                // while this indicator stays solid, so "selected" still reads
+                // differently from "grouped" without changing the shape.
+                radius: 4
 
                 // Focused = the workspace on the focused monitor;
                 // Visible = active on a monitor that is not focused;
@@ -170,6 +187,10 @@ Row {
                     id: label
 
                     anchors.centerIn: parent
+                    // Same optical nudge as the modules inside the bar's plates:
+                    // the ink sits high in the line box, so the label is half a
+                    // logical pixel lower than a geometric centre puts it.
+                    anchors.verticalCenterOffset: 0.5
                     text: modelData.name
                     color: modelData.urgent
                            ? "#1c1c1c"

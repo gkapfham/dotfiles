@@ -31,7 +31,64 @@ InfoPopup {
         { label: "Load", value: popup.load },
         { label: "Processes", value: popup.processes },
         { label: "Frequency", value: popup.frequency }
-    ]
+    ].concat(popup.topProcs)
+
+    // The three busiest processes, appended to the rows above. Deliberately taken
+    // from top's second sample rather than from ps: ps reports %CPU as a lifetime
+    // average (cputime / elapsed), which for an agent that has been idle for days
+    // reads near zero while it is in fact busy right now. Measured on this
+    // machine, ps put the busiest process at 2.9% where top showed 12%.
+    //
+    // The first top sample is always meaningless, so -n2 with a short delay is
+    // the smallest invocation that gives a real reading.
+    property var topProcs: []
+
+    Process {
+        id: procReader
+
+        stdout: StdioCollector {
+            onStreamFinished: popup.parseTop(text)
+        }
+    }
+
+    // Slower than the other readings on purpose: the pipeline below runs top
+    // twice with a delay, so it costs about half a second each time it runs.
+    Timer {
+        interval: 6000
+        repeat: true
+        running: popup.visible
+        triggeredOnStart: true
+
+        onTriggered: procReader.exec([
+            "bash", "-c",
+            "top -bn2 -d 0.4 -o %CPU | awk '/^top -/{n++} n==2' | tail -n +8 | head -3"
+        ])
+    }
+
+    function parseTop(text) {
+        var out = [];
+        var lines = text.split("\n");
+
+        for (var i = 0; i < lines.length; i++) {
+            var field = lines[i].trim().split(/\s+/);
+            // pid user pri ni virt res shr S %cpu %mem time+ command...
+            if (field.length < 12) continue;
+
+            var cpu = parseFloat(field[8]);
+            if (isNaN(cpu)) continue;
+
+            out.push({
+                // The command is the dim label, the percentage the bright value,
+                // matching how every other row in these popups reads.
+                label: field.slice(11).join(" "),
+                value: cpu.toFixed(1) + "%"
+            });
+
+            if (out.length === 3) break;
+        }
+
+        if (out.length > 0) popup.topProcs = out;
+    }
 
     FileView {
         id: stat

@@ -1,18 +1,20 @@
 // File: quickshell/modules/PiAgents.qml
 //
-// A robot for the pi coding agents running on this machine: how many there are,
-// and, on click, a popup listing them by project, name and state.
+// A robot for the pi coding agents running on this machine: clicking it lists
+// them by project, name and state.
 //
 // Not a polybar module -- polybar had no notion of an agent.
 //
-// The count is a bare `pgrep -x pi` on a timer, counted in QML rather than
-// piped through `wc` so no shell is needed. The expensive half -- reading each
-// agent's session file for its name -- is quickshell/scripts/pi-agents, which
-// only the popup runs, so that cost is paid while the list is open instead of
-// every ten seconds.
+// The glyph carries no count. It used to, and the number sat oddly among the
+// bar's other modules, where every value belongs to the glyph beside it; the
+// count lives in the popup instead, one click away.
 //
-// The icon is dimmed when nothing is running, the same way the notification
-// bell is dimmed when its history is empty.
+// The icon is still dimmed when nothing is running, which needs the count
+// underneath but not on screen. That count is a bare `pgrep -x pi` on a slow
+// timer, counted in QML rather than piped through `wc` so no shell is needed.
+// The expensive half -- reading each agent's session file for its name -- is
+// quickshell/scripts/pi-agents, which only the popup runs, so that cost is paid
+// while the list is open instead of every minute.
 import Quickshell.Io
 import QtQuick
 
@@ -30,7 +32,9 @@ Text {
     // pgrep has actually answered.
     property int agentCount: -1
 
-    text: robotIcon + (root.agentCount > 0 ? " " + root.agentCount : "")
+    // No count shown: it is in the popup, and `agentCount` is kept only to dim
+    // the glyph when nothing is running.
+    text: robotIcon
     color: root.agentCount === 0 ? root.dimColor : root.color
 
     verticalAlignment: Text.AlignVCenter

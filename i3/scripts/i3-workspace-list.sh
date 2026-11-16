@@ -30,13 +30,21 @@ entry=$(i3-msg -t get_tree | jq -r '
     | sort_by(.output, (.name | tonumber? // 9999999))
     | group_by(.output)
     | .[]
-    | "󰍹  \(.[0].output)",
+    | "󱡶  \(.[0].output)",
       ( .[]
-        | "\(.name)\(if .apps != "" then "   \(.apps)" else "" end)\(if .focused then "  ◂" else "" end)"
+        | "\(.name)\(if .apps != "" then "  󰵆 \(.apps)" else "" end)\(if .focused then "  ◂" else "" end)"
       )
 ')
 
-selected=$(echo "$entry" | rofi -dmenu -p " " -i -no-custom -width 120)
+# --print lets the omni launcher use this list as a rofi mode, so the
+# standalone menu and the omni tab can never drift apart
+if [ "${1:-}" = "--print" ]; then
+    printf '%s
+' "$entry"
+    exit 0
+fi
+
+selected=$(echo "$entry" | rofi -dmenu -p "󰕰 " -i -no-custom -width 120)
 
 # Switch to the selected workspace (skip separators and empty selections)
 if [ -n "$selected" ]; then
