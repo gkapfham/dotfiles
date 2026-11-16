@@ -1,0 +1,101 @@
+# ---------------------------------------------------------------------------
+# palette.toml — the single source of truth for the dotfiles color palette.
+#
+# The colors below are pushed into the tool configs by
+# theme/sync_palette.py, which replaces known palette values in place
+# (preserving each file's own formatting) and reports anything off-palette.
+#
+#   uv run theme/sync_palette.py --report            # audit every hex value
+#   uv run theme/sync_palette.py --check             # fail on palette drift
+#   uv run theme/sync_palette.py --write             # migrate legacy values
+#   uv run theme/sync_palette.py --write --review    # also apply suggestions
+#
+# Sections
+#   [app]      semantic roles   — nvim, opencode, rofi, starship, yazi, ...
+#   [ansi]     terminal 0..15   — kitty, ghostty, termite, alacritty, wezterm
+#   [aliases]  retired values   — auto-migrated; add one whenever you change
+#                                 a role so old copies are rewritten
+#   [review]   off-palette      — reported but only applied with --review,
+#                                 because the right target is a judgement call
+# ---------------------------------------------------------------------------
+
+[meta]
+name = "vitaminonec"
+description = "Shared orange/blue palette for terminals, editor, agents and desktop tools."
+
+# Semantic roles. This block is mirrored (by hand or by hand-checked copy)
+# in nvim/lua/plugins/colorscheme.lua and opencode/themes/vitaminonec.json.
+[app]
+bg = "#1c1c1c"
+fg = "#e0e0e0"
+red = "#d75347"
+subdued_red = "#d75f5f"
+coral = "#d7636b"
+deep_red = "#813939"
+orange = "#d78700"
+deep_orange = "#af5f00"
+yellow = "#b7b757"
+green = "#6f9500"
+deep_green = "#4c6c00"
+cyan = "#00afaf"
+teal = "#00af87"
+blue = "#87afd7"
+purple = "#a569a5"
+magenta = "#d75f87"
+white = "#b2b2b2"
+black = "#767676"
+gray = "#6c6c6c"
+highlight = "#585858"
+comment = "#808080"
+menu = "#262626"
+surface = "#2d2d2d"
+dim_gray = "#5a5a5a"
+
+# Terminal ANSI palette 0..15. Slot 1 is deliberately the orange (not a
+# true red) so terminals and the pi theme share one look; the app palette
+# above keeps a separate semantic red.
+[ansi]
+0 = "#767676"
+1 = "#d78700"
+2 = "#6f9500"
+3 = "#b7b757"
+4 = "#87afd7"
+5 = "#a569a5"
+6 = "#d75f5f"
+7 = "#b2b2b2"
+8 = "#767676"
+9 = "#d78700"
+10 = "#6f9500"
+11 = "#b7b757"
+12 = "#87afd7"
+13 = "#a569a5"
+14 = "#d75f5f"
+15 = "#b2b2b2"
+
+# Retired palette values. Auto-migrated by --write. Add an entry here (new
+# value on the right) whenever you change an [app]/[ansi] role, so stale
+# copies elsewhere are rewritten too.
+[aliases]
+"#5f8700" = "#6f9500" # old green  — termite, alacritty, wezterm, fzf
+"#afaf5f" = "#b7b757" # old yellow — termite, alacritty, wezterm, fzf
+"#875f87" = "#a569a5" # old purple — termite, alacritty, wezterm, fzf
+"#a3abb3" = "#b2b2b2" # old white  — termite
+"#bcbcbc" = "#b2b2b2" # old white  — alacritty
+"#8a8a8a" = "#e0e0e0" # stale foreground/cursor — termite, wezterm, kitty, rofi, zsh
+"#a8a8a8" = "#e0e0e0" # stale foreground — dunst, alacritty.yml, bat
+"#c1c1c1" = "#e0e0e0" # stale foreground — polybar, kitty, zsh
+"#d2d2d2" = "#e0e0e0" # previous foreground (2026-10)
+"#5e81ac" = "#87afd7" # Nord-blue dunst frame -> palette blue
+
+# Off-palette values that need a human decision. --report lists them and
+# --write --review applies them; the defaults below are the obvious mapping
+# back to the palette.
+[review]
+"#009300" = "#6f9500" # polybar green
+"#e95420" = "#b7b757" # polybar "yellow" was Ubuntu orange
+"#f90000" = "#d75347" # polybar red
+"#0a6cf5" = "#87afd7" # polybar blue
+"#e60053" = "#d75f87" # polybar secondary
+"#616161" = "#6c6c6c" # polybar alert
+"#c6c6c6" = "#b2b2b2" # polybar background-alt
+"#a8a8af" = "#b2b2b2" # polybar foreground-alt
