@@ -123,6 +123,7 @@ PanelWindow {
         workspacePopup.visible = false;
         agentsPopup.visible = false;
         zellijPopup.visible = false;
+        notificationList.visible = false;
     }
 
     // The workspace popup cannot use togglePopup above, because unlike the
@@ -286,6 +287,9 @@ PanelWindow {
                     fontSize: bar.fontSize
                     fontFamily: bar.fontFamily
                     fontBold: bar.fontBold
+                    // Same toggle path as the calendar, wifi and agent panels:
+                    // open it, close it, or switch away from whichever is open.
+                    onListRequested: bar.togglePopup(notificationList)
                 }
 
                 // A robot for the pi coding agents running on this machine. It
@@ -519,6 +523,20 @@ PanelWindow {
         fontSize: bar.fontSize
         fontFamily: bar.fontFamily
         fontBold: bar.fontBold
+    }
+
+    // The scrollable, source-grouped notification history. A PopupWindow, like
+    // every other panel here, so mapping it never changes i3's layout.
+    NotificationList {
+        id: notificationList
+        anchorWindow: bar
+        anchorX: rightGroup.x + statusPlate.x + statusRow.x + notifications.x
+        colors: bar.colors
+        fontSize: bar.fontSize
+        fontFamily: bar.fontFamily
+        fontBold: bar.fontBold
+
+        onChanged: notifications.refreshNow()
     }
 
     WifiPopup {
