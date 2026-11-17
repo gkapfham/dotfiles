@@ -28,6 +28,9 @@ Text {
 
     readonly property string bellIcon: "\u{f009a}"
 
+    // Asks the bar to open the full history list.
+    signal listRequested()
+
     // -1 until the first reading, so an empty history is not assumed before
     // dunstctl has actually answered.
     property int historyCount: -1
@@ -75,18 +78,17 @@ Text {
 
         onClicked: function (mouse) {
             if (mouse.button === Qt.RightButton) {
-                // Dismiss what is on screen. The history is left alone, so
-                // anything closed by mistake can still be brought back with a
-                // left click.
-                dunstCtl.exec(["dunstctl", "close-all"]);
+                if (mouse.modifiers & Qt.ShiftModifier) {
+                    // Shift+right: dismiss everything on screen in one go.
+                    root.closeAllNow();
+                } else {
+                    // Right: keep the original one-at-a-time behaviour.
+                    root.restoreLatest();
+                }
             } else {
-                // history-pop puts the most recent entry back on screen and
-                // takes it out of the history.
-                dunstCtl.exec(["dunstctl", "history-pop"]);
+                // Left: the full, scrollable, source-grouped list.
+                root.listRequested();
             }
-
-            // Refresh straight away rather than waiting for the next poll.
-            refresh.restart();
         }
     }
 
@@ -94,5 +96,21 @@ Text {
         id: refresh
         interval: 300
         onTriggered: counter.exec(["dunstctl", "count", "history"])
+    }
+
+    function restoreLatest() {
+        dunstCtl.exec(["dunstctl", "history-pop"]);
+        refreshNow();
+    }
+
+    function closeAllNow() {
+        dunstCtl.exec(["dunstctl", "close-all"]);
+        refreshNow();
+    }
+
+    // Called by the list after it changes the history, so the bell's count is
+    // right immediately.
+    function refreshNow() {
+        refresh.restart();
     }
 }
