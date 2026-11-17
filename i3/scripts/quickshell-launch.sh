@@ -65,7 +65,19 @@ bar_pids() {
 
 start_bar() {
     log "starting quickshell"
-    setsid --fork quickshell -n >/dev/null 2>&1 < /dev/null
+
+    # Keep the bar's own stdout/stderr. They used to go to /dev/null, which meant
+    # a QML error, a failed binding or a crash left nothing behind to read: the
+    # only evidence was a binary qslog with "Crash handler initialized" in it.
+    # The file is capped so it cannot grow without bound.
+    local bar_log="$state_dir/bar.log"
+    mkdir -p "$state_dir" 2>/dev/null
+    : >>"$bar_log" 2>/dev/null
+    if [ "$(stat -c %s "$bar_log" 2>/dev/null || echo 0)" -gt 1048576 ]; then
+        mv -f "$bar_log" "$bar_log.1" 2>/dev/null
+    fi
+
+    setsid --fork quickshell -n >>"$bar_log" 2>&1 < /dev/null
 }
 
 stop_bars() {
@@ -162,6 +174,10 @@ verify() {
 mode="${1:-ensure}"
 
 case "$mode" in
+    logs)
+        # The bar's own output, not this script's log (launch.log).
+        exec tail -n "${2:-200}" "$state_dir/bar.log"
+        ;;
     stop)
         stop_bars
         ;;
