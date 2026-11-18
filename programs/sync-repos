@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# sync-repos — Clone or pull every repo in the Pi project manifest.
+#
+# Idempotent: on a fresh machine it clones everything;
+# on an existing machine it pulls the latest.
+#
+# Reads: $HOME/.config/pi/repos.json
+#
+# SYNC_REPOS_BASE (optional): directory where NEW clones land instead of
+# their manifest path. Repos already cloned at their manifest path are
+# still pulled in place; only fresh clones use the base. Example:
+#   export SYNC_REPOS_BASE="$HOME/working"
+#
+# Usage:
+#   sync-repos               # clone or pull all repos
+#   sync-repos --status      # show git status for all repos
+
+set -euo pipefail
+
+MANIFEST="$HOME/.config/pi/repos.json"
+
+if [[ ! -f "$MANIFEST" ]]; then
+  echo " Manifest not found: $MANIFEST"
+  echo "  Create it or run 'stow pi' from your dotfiles."
+  exit 1
+fi
+
+STATUS_MODE=false
+if [[ "${1:-}" == "--status" ]]; then
+  STATUS_MODE=true
+fi
+
+BASE="${SYNC_REPOS_BASE:-}"
+[[ -z "$BASE" ]] || BASE="${BASE/#\~/$HOME}"
+
+# Iterate rows line-by-line (NOT word-split): JSON values contain spaces,
+# and `for row in $(jq ...)` would fragment them mid-string.
+while IFS= read -r row; do
+  path=$(printf '%s' "$row" | jq -r '.path')
+  url=$(printf '%s' "$row" | jq -r '.url')
+  manifest_dir="${path/#\~/$HOME}"
+  expanded="$manifest_dir"
+  # New clones honor SYNC_REPOS_BASE; already-cloned repos stay put.
+  if [[ -n "$BASE" && ! -d "$manifest_dir/.git" ]]; then
+    expanded="${BASE%/}/$(basename "$manifest_dir")"
+  fi
+
+  if [[ "$STATUS_MODE" == "true" ]]; then
+    if [[ -d "$expanded/.git" ]]; then
+      echo " $path"
+      git -C "$expanded" status --short
+    elif [[ "$expanded" != "$manifest_dir" ]]; then
+      echo " $path → $expanded — not cloned"
+    else
+      echo " $path — not cloned"
+    fi
+    continue
+  fi
+
+  if [[ -d "$expanded/.git" ]]; then
+    echo " Pulling $path"
+    git -C "$expanded" pull --ff-only --autostash 2>&1 | sed 's/^/  /'
+  else
+    # A partial/interrupted clone (or a stray dir) would make `git clone`
+    # fail; never auto-delete — report it clearly and move on. Empty dirs
+    # are fine (git clone happily uses them).
+    if [[ -e "$expanded" && -n "$(ls -A "$expanded" 2>/dev/null)" ]]; then
+      echo " $path: target exists but is not a git repo ($expanded)."
+      echo "   Remove it manually (rm -rf \"$expanded\"), then re-run sync-repos."
+      continue
+    fi
+    echo " Cloning $path"
+    mkdir -p "$(dirname "$expanded")"
+    git clone "$url" "$expanded" 2>&1 | sed 's/^/  /'
+  fi
+done < <(jq -c '.repos[]' "$MANIFEST")

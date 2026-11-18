@@ -1,0 +1,403 @@
+#!/usr/bin/env bash
+#
+# hunk-notes — turn hunk review notes into JSON, Markdown, or a GitHub comment.
+#
+# Hunk keeps review notes only inside the running review session, so they are
+# lost when the window closes. This exports them while the session is alive
+# (or from an earlier JSON export), and turns them into a Markdown report that
+# is laid out like a GitHub review: a file summary table, then one block per
+# note with the file, the line, a link to that line, and the line's code.
+#
+# Usage:
+#   hunk-notes --markdown notes.md                  # report from the live session
+#   hunk-notes --json notes.json --markdown notes.md
+#   hunk-notes                                      # report on stdout
+#   hunk-notes --input notes.json --markdown r.md   # from an earlier export
+#   hunk-notes --github                             # post the report as a PR comment
+#   hunk-notes --github --pr 123 --dry-run          # show the gh command only
+#
+# Options:
+#   -s, --session ID    hunk session id (default: the live session for --repo)
+#   -r, --repo PATH     project to export (default: the enclosing git repo)
+#   -i, --input FILE    read an earlier JSON export instead of a live session
+#   -j, --json FILE     write the raw notes JSON (hunk's own export format)
+#   -m, --markdown FILE write the Markdown report
+#       --stdout        print the Markdown report to stdout
+#   -g, --github        post the Markdown report as a comment on the PR
+#       --pr NUMBER     PR to post to (default: detect from the current branch)
+#       --dry-run       with --github: print the gh command, post nothing
+#       --root PATH     tree used for code snippets and repo detection (default: .)
+#       --title TEXT    report heading (default: the review's source label)
+#   -n, --no-snippets   omit the quoted code lines
+#   -h, --help          this help
+#
+# The Markdown report is what gets posted, because a plain PR comment is the
+# format a human reviewer would paste into the GitHub text box.
+
+set -euo pipefail
+
+PROGNAME=${0##*/}
+
+usage() {
+  awk 'NR == 1 { next } /^#/ { sub(/^# ?/, ""); print; next } { exit }' "$0" >&2
+}
+
+die() {
+  printf '%s: %s\n' "$PROGNAME" "$*" >&2
+  exit 1
+}
+
+# ── options ─────────────────────────────────────────────────────────────────
+
+session_id=
+repo_given=0
+input=
+json_out=
+markdown_out=
+to_stdout=0
+github=0
+pr=
+dry_run=0
+root=.
+title=
+snippets=1
+
+while (($#)); do
+  case $1 in
+    -s | --session)
+      [[ ${2-} ]] || die "$1 needs a session id"
+      session_id=$2
+      shift 2
+      ;;
+    -r | --repo)
+      [[ ${2-} ]] || die "$1 needs a path"
+      root=$2
+      repo_given=1
+      shift 2
+      ;;
+    -i | --input)
+      [[ ${2-} ]] || die "$1 needs a file"
+      input=$2
+      shift 2
+      ;;
+    -j | --json)
+      [[ ${2-} ]] || die "$1 needs an output file"
+      json_out=$2
+      shift 2
+      ;;
+    -m | --markdown)
+      [[ ${2-} ]] || die "$1 needs an output file"
+      markdown_out=$2
+      shift 2
+      ;;
+    --stdout)
+      to_stdout=1
+      shift
+      ;;
+    -g | --github)
+      github=1
+      shift
+      ;;
+    --pr)
+      [[ ${2-} ]] || die "$1 needs a PR number"
+      pr=$2
+      shift 2
+      ;;
+    --dry-run)
+      dry_run=1
+      shift
+      ;;
+    --root)
+      [[ ${2-} ]] || die "$1 needs a path"
+      root=$2
+      shift 2
+      ;;
+    --title)
+      [[ ${2-} ]] || die "$1 needs a title"
+      title=$2
+      shift 2
+      ;;
+    -n | --no-snippets)
+      snippets=0
+      shift
+      ;;
+    -h | --help)
+      usage
+      exit 0
+      ;;
+    *)
+      die "unknown option: $1 (try --help)"
+      ;;
+  esac
+done
+
+# Default to the whole project, so running from a subdirectory still finds the
+# review session for its repository root.
+if ((repo_given == 0)); then
+  root=$(git -C "$root" rev-parse --show-toplevel 2>/dev/null || printf '%s' "$root")
+fi
+
+# ── dependencies ────────────────────────────────────────────────────────────
+
+command -v jq >/dev/null 2>&1 || die "jq is required"
+
+if command -v hunk >/dev/null 2>&1; then
+  HUNK=(hunk)
+elif command -v bunx >/dev/null 2>&1; then
+  HUNK=(bunx hunkdiff)
+elif command -v npx >/dev/null 2>&1; then
+  HUNK=(npx -y hunkdiff)
+else
+  die "install hunk (or bunx/npx) first"
+fi
+
+# A JSON export is all we need for Markdown and GitHub, but the raw export is
+# the only input that carries the note bodies, so always collect that first.
+tmpdir=$(mktemp -d)
+trap 'rm -rf "$tmpdir"' EXIT
+notes_json=$tmpdir/notes.json
+
+if [[ -n $input ]]; then
+  if [[ $input == - ]]; then
+    cat >"$notes_json"
+  else
+    [[ -f $input ]] || die "no such file: $input"
+    cp "$input" "$notes_json"
+  fi
+else
+  [[ -d $root ]] || die "no such directory: $root"
+
+  if [[ -z $session_id ]]; then
+    sessions=$(
+      cd "$root" && "${HUNK[@]}" session list --json 2>/dev/null |
+        jq -r '(.sessions // .)[] | [.sessionId, .repoRoot, .title] | @tsv' || true
+    )
+    [[ -n $sessions ]] || die "no live hunk session. Start one with: hunk diff (or pass --input FILE)"
+    root_abs=$(cd "$root" && pwd)
+    count=$(printf '%s\n' "$sessions" | wc -l | tr -d ' ')
+    matches=$(printf '%s\n' "$sessions" | awk -F'\t' -v r="$root_abs" '$2 == r' | wc -l | tr -d ' ')
+    if ((matches == 1)); then
+      session_id=$(printf '%s\n' "$sessions" | awk -F'\t' -v r="$root_abs" '$2 == r { print $1 }')
+    elif ((count == 1)); then
+      session_id=$(printf '%s\n' "$sessions" | cut -f1)
+      other_root=$(printf '%s\n' "$sessions" | cut -f2)
+      if [[ $other_root != "$root_abs" ]]; then
+        printf '%s: using the only live session (repo %s), not %s\n' "$PROGNAME" "$other_root" "$root_abs" >&2
+      fi
+    else
+      printf '%s: no live hunk session for %s. Live sessions:\n' "$PROGNAME" "$root_abs" >&2
+      printf '%s\n' "$sessions" | awk -F'\t' '{ printf "  %s  %s  %s\n", $1, $3, $2 }' >&2
+      printf 'Pass one with --session, or read an earlier export with --input FILE.\n' >&2
+      exit 1
+    fi
+  fi
+
+  "${HUNK[@]}" session comment list "$session_id" --type all --json >"$notes_json" 2>/dev/null ||
+    die "could not read notes from session $session_id"
+fi
+
+jq -e 'type == "object" and (.comments | type) == "array"' "$notes_json" >/dev/null 2>&1 ||
+  die "$notes_json does not look like a hunk notes export"
+jq -e 'type == "object" and has("comments")' "$notes_json" >/dev/null ||
+  die "no .comments array in $notes_json"
+
+note_count=$(jq '.comments | length' "$notes_json")
+
+# The title belongs with the export: a later `--input notes.json` run cannot
+# ask hunk for the session label any more.
+if [[ -z $title ]]; then
+  if [[ -n $session_id ]]; then
+    title=$("${HUNK[@]}" session get "$session_id" --json 2>/dev/null |
+      jq -r '.session.title // .session.sourceLabel // empty' || true)
+  fi
+  [[ -n $title ]] || title=$(jq -r '.title // empty' "$notes_json" || true)
+fi
+
+if [[ -n $json_out ]]; then
+  jq --arg t "$title" --arg sid "$session_id" --arg at "$(date -Iseconds)" \
+    '. + {title: $t, sessionId: $sid, exportedAt: $at}' "$notes_json" >"$json_out"
+fi
+
+# ── GitHub context (links and the PR to comment on) ─────────────────────────
+#
+# A report that is going to be pasted into GitHub should link to the line it
+# talks about, so build blob permalinks when the tree has a GitHub remote.
+
+owner_repo=
+if git -C "$root" rev-parse --git-dir >/dev/null 2>&1; then
+  owner_repo=$(git -C "$root" config --get remote.origin.url 2>/dev/null |
+    sed -e 's#^git@github.com:##' -e 's#^https://github.com/##' -e 's#\.git$##' || true)
+fi
+
+commit=
+if [[ -n $owner_repo ]]; then
+  if command -v gh >/dev/null 2>&1 && [[ $github == 1 || -n $pr ]]; then
+    commit=$(cd "$root" && gh pr view "${pr:-}" --json headRefOid -q .headRefOid 2>/dev/null || true)
+  fi
+  [[ -n $commit ]] || commit=$(git -C "$root" rev-parse HEAD 2>/dev/null || true)
+fi
+
+permalink_base=
+if [[ -n $owner_repo && -n $commit ]]; then
+  permalink_base="https://github.com/$owner_repo/blob/$commit"
+fi
+
+# ── Markdown report ─────────────────────────────────────────────────────────
+
+[[ -n $title ]] || title="hunk review"
+
+language_of() {
+  case ${1##*/} in
+    Makefile | makefile | *.mk) printf 'make' ;;
+    *.lua) printf 'lua' ;;
+    *.ts) printf 'ts' ;;
+    *.tsx) printf 'tsx' ;;
+    *.js | *.mjs | *.cjs) printf 'js' ;;
+    *.jsx) printf 'jsx' ;;
+    *.py) printf 'python' ;;
+    *.rs) printf 'rust' ;;
+    *.go) printf 'go' ;;
+    *.c | *.h) printf 'c' ;;
+    *.cc | *.cpp | *.hpp) printf 'cpp' ;;
+    *.java) printf 'java' ;;
+    *.cs) printf 'csharp' ;;
+    *.rb) printf 'ruby' ;;
+    *.php) printf 'php' ;;
+    *.sh | *.bash | *.zsh) printf 'bash' ;;
+    *.json) printf 'json' ;;
+    *.toml) printf 'toml' ;;
+    *.yaml | *.yml) printf 'yaml' ;;
+    *.ini | *.conf) printf 'ini' ;;
+    *.kdl) printf 'kdl' ;;
+    *.qml) printf 'qml' ;;
+    *.css) printf 'css' ;;
+    *.scss) printf 'scss' ;;
+    *.html | *.htm) printf 'html' ;;
+    *.md | *.markdown) printf 'markdown' ;;
+    *.nix) printf 'nix' ;;
+    *.sql) printf 'sql' ;;
+    *.zig) printf 'zig' ;;
+    *.tex) printf 'latex' ;;
+    *) printf '' ;;
+  esac
+}
+
+markdown=$tmpdir/notes.md
+{
+  printf '## Code review notes — %s\n\n' "$title"
+  if ((note_count == 0)); then
+    printf '_No notes were recorded in this review._\n'
+  else
+    files=$(jq -r '[.comments[].filePath] | unique | length' "$notes_json")
+    printf '%s note%s across %s file%s.\n\n' \
+      "$note_count" "$([[ $note_count == 1 ]] || echo s)" \
+      "$files" "$([[ $files == 1 ]] || echo s)"
+
+    # summary table: one row per file, with the noted lines
+    printf '| File | Notes | Lines |\n| --- | ---: | --- |\n'
+    jq -r '
+      .comments
+      | group_by(.filePath)
+      | .[]
+      | [
+          .[0].filePath,
+          (length | tostring),
+          ([.[] | (.newRange[0] // .oldRange[0]) | tostring]
+             | join(", "))
+        ]
+      | @tsv
+    ' "$notes_json" |
+      while IFS=$'\t' read -r file n lines; do
+        # shellcheck disable=SC2016  # literal markdown backticks
+        printf '| `%s` | %s | %s |\n' "$file" "$n" "$lines"
+      done
+    printf '\n---\n'
+  fi
+} >"$markdown"
+
+last_file=
+if ((note_count > 0)); then
+  # one block per note, grouped by file in review order
+  jq -r '
+    .comments
+    | to_entries
+    | sort_by(.value.filePath | ascii_downcase)
+    | group_by(.value.filePath)
+    | .[][]
+    | [
+        .value.filePath,
+        (if .value.newRange then "new" else "old" end),
+        ((.value.newRange[0] // .value.oldRange[0]) | tostring),
+        (.value.body | @base64)
+      ]
+    | @tsv
+  ' "$notes_json" |
+    while IFS=$'\t' read -r file side line body64; do
+      body=$(printf '%s' "$body64" | base64 -d)
+
+      if [[ $file != "$last_file" ]]; then
+        # shellcheck disable=SC2016  # literal markdown backticks
+        printf '\n## `%s`\n' "$file" >>"$markdown"
+        last_file=$file
+      fi
+
+      if [[ $side == new ]]; then
+        if [[ -n $permalink_base ]]; then
+          anchor="**[$file:$line]($permalink_base/$file#L$line)**"
+        else
+          anchor="**$file:$line**"
+        fi
+      else
+        anchor="**$file:$line (deleted line)**"
+      fi
+
+      printf '\n%s\n' "$anchor" >>"$markdown"
+
+      if ((snippets == 1)) && [[ $side == new ]]; then
+        source_file=$root/$file
+        if [[ -f $source_file ]]; then
+          text=$(sed -n "${line}p" "$source_file" | sed -e 's/[[:space:]]*$//')
+          if [[ -n $text ]]; then
+            fence='```'
+            [[ $text == *'```'* ]] && fence='~~~'
+            lang=$(language_of "$file")
+            printf '\n%s%s\n%s\n%s\n' "$fence" "$lang" "$text" "$fence" >>"$markdown"
+          fi
+        fi
+      fi
+
+      # body: paragraphs are separated by blank lines already
+      printf '\n%s\n' "$body" >>"$markdown"
+    done
+fi
+
+if [[ -n $markdown_out ]]; then
+  cp "$markdown" "$markdown_out"
+fi
+
+if ((to_stdout == 1)); then
+  cat "$markdown"
+fi
+
+# ── GitHub ──────────────────────────────────────────────────────────────────
+
+if ((github == 1)); then
+  command -v gh >/dev/null 2>&1 || die "gh is required for --github"
+  (cd "$root" && gh auth status >/dev/null 2>&1) || die "gh is not authenticated"
+
+  if [[ -z $pr ]]; then
+    pr=$(cd "$root" && gh pr view --json number -q .number 2>/dev/null || true)
+    [[ -n $pr ]] || die "no PR for the current branch; pass --pr NUMBER"
+  fi
+
+  if ((dry_run == 1)); then
+    printf 'would run: gh pr comment %s --body-file %s\n\n' "$pr" "${markdown_out:-<temporary report>}" >&2
+    cat "$markdown"
+  else
+    (cd "$root" && gh pr comment "$pr" --body-file "$markdown")
+  fi
+fi
+
+if [[ -z $json_out && -z $markdown_out && $to_stdout == 0 && $github == 0 ]]; then
+  cat "$markdown"
+fi

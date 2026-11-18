@@ -1,6 +1,3 @@
-[submodule "zshgitprompt"]
-	path = zshgitprompt
-	url = https://github.com/gkapfham/zsh-git-prompt.git
 [submodule "fzftab"]
 	path = fzftab
 	url = https://github.com/Aloxaf/fzf-tab.git
@@ -25,3 +22,6 @@
 [submodule "zshvimode"]
 	path = zshvimode
 	url = https://github.com/jeffreytse/zsh-vi-mode.git
+[submodule "yazi/plugins/starship.yazi"]
+	path = yazi/plugins/starship.yazi
+	url = https://github.com/Rolv-Apneseth/starship.yazi.git

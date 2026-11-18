@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# This script reads the current working directory from a temp file
+# and formats it for display in zjstatus
+
+# Get the temp file path based on the parent shell's PID
+# We use PPID to get the shell that's running inside Zellij
+CWD_FILE="/tmp/zellij-cwd-${PPID}"
+
+# Read the CWD from the temp file, or fall back to pwd
+if [ -f "$CWD_FILE" ]; then
+    CWD=$(cat "$CWD_FILE")
+else
+    CWD=$(pwd)
+fi
+
+# Replace home directory with tilde
+CWD="${CWD/#$HOME/\~}"
+
+# Truncate to last 3 directories if path is too long
+IFS='/' read -ra PARTS <<< "$CWD"
+NUM_PARTS=${#PARTS[@]}
+
+if [ "$NUM_PARTS" -gt 3 ]; then
+    echo ".../${PARTS[$NUM_PARTS-3]}/${PARTS[$NUM_PARTS-2]}/${PARTS[$NUM_PARTS-1]}"
+else
+    echo "$CWD"
+fi

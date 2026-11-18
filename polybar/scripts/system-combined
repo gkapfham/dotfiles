@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Combined system monitor for polybar
+# CPU% + CPU temp + GPU temp + SSD temp + fan speed
+# All reads use kernel interfaces (works on NixOS)
+
+# CPU usage from /proc/stat (two quick samples)
+read _ cpu1_u cpu1_n cpu1_s cpu1_i _ < <(grep -m1 '^cpu ' /proc/stat)
+sleep 0.15
+read _ cpu2_u cpu2_n cpu2_s cpu2_i _ < <(grep -m1 '^cpu ' /proc/stat)
+
+idle1=$cpu1_i total1=$((cpu1_u + cpu1_n + cpu1_s + cpu1_i))
+idle2=$cpu2_i total2=$((cpu2_u + cpu2_n + cpu2_s + cpu2_i))
+
+cpu_pct=$(( (100 * (total2 - total1 - idle2 + idle1)) / (total2 - total1) ))
+
+# Temperatures (millidegrees ÷ 1000 = °C)
+read temp_cpu < /sys/class/hwmon/hwmon3/temp2_input
+read temp_gpu < /sys/class/hwmon/hwmon1/temp1_input
+read temp_ssd < /sys/class/hwmon/hwmon0/temp1_input
+
+# Fan speed (RPM)
+read fan_rpm < /sys/class/hwmon/hwmon7/fan1_input
+
+printf "  %2d%% %2d°C󰪤 %2d°C󰋊 %2d°C %s" \
+  "$cpu_pct" "$((temp_cpu / 1000))" "$((temp_gpu / 1000))" \
+  "$((temp_ssd / 1000))" "$fan_rpm"

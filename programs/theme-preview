@@ -1,0 +1,363 @@
+#!/usr/bin/env bash
+#
+# theme-preview — preview and compare color schemes in the terminal.
+#
+# With no arguments it renders the shared palette (theme/palette.toml) that
+# every tool in this repo is synced from. Given arguments it renders Ghostty
+# themes or config files instead, so candidate schemes can be compared.
+#
+# For every scheme it renders, with truecolor ANSI:
+#   * a small filled box and the hex for each of the 16 ANSI colors,
+#   * the base colors (background, foreground, cursor, selection),
+#   * representative elements: text styles, a shell session and a
+#     syntax-highlighted code sample.
+#
+# Schemes are printed one after another so they can be compared in the
+# scrollback, followed by a compact strip that lines the 16 colors up.
+#
+# Usage:
+#   theme-preview                 preview theme/palette.toml (the shared theme)
+#   theme-preview FILE [FILE...]  preview TOML or Ghostty config/theme files
+#   theme-preview NAME [NAME...]  preview bundled Ghostty themes by name
+#   theme-preview --list          list available bundled Ghostty themes
+#   theme-preview --help          show this help
+#
+# A NAME is resolved against ~/.config/ghostty/themes and
+# $GHOSTTY_RESOURCES_DIR/themes, falling back to `ghostty +list-themes`.
+#
+# Colors are parsed straight out of the files, so this stays dependency free
+# beyond coreutils. A `theme = <name>` line in a Ghostty config is resolved
+# and applied before any later overrides in the same file.
+
+set -euo pipefail
+
+readonly PROG=${0##*/}
+readonly SCRIPT_PATH=$(readlink -f "${BASH_SOURCE[0]}")
+readonly SCRIPT_DIR=${SCRIPT_PATH%/*}
+readonly REPO_ROOT=${SCRIPT_DIR%/*}
+readonly SHARED_PALETTE="$REPO_ROOT/theme/palette.toml"
+readonly CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ghostty/config"
+readonly USER_THEMES="${XDG_CONFIG_HOME:-$HOME/.config}/ghostty/themes"
+readonly RESET=$'\e[0m'
+
+declare -A P=()   # ANSI palette: index -> hex
+declare -A C=()   # background, foreground, cursor-color, selection-*
+declare -a STRIP_LABELS=()
+declare -a STRIP_LINES=()
+
+usage() {
+  cat <<'EOF'
+theme-preview — preview and compare color schemes
+
+Usage:
+  theme-preview                 preview theme/palette.toml (the shared theme)
+  theme-preview FILE [FILE...]  preview TOML or Ghostty config/theme files
+  theme-preview NAME [NAME...]  preview bundled Ghostty themes by name
+  theme-preview --list          list available bundled Ghostty themes
+  theme-preview --help          show this help
+
+For every scheme the tool prints the 16 ANSI colors and the base colors as
+truecolor swatches, then representative elements (text styles, a shell
+session, a code sample) so schemes can be compared in the scrollback.
+EOF
+}
+
+die() { printf '%s: %s\n' "$PROG" "$*" >&2; exit 1; }
+
+# --- color helpers ----------------------------------------------------------
+
+# Normalise "#RRGGBB" / "0xRRGGBB" / "RRGGBB" to lowercase "rrggbb".
+norm_hex() {
+  local h=${1//[[:space:]]/}
+  h=${h#\#}; h=${h#0x}
+  [[ $h =~ ^[0-9a-fA-F]{6}$ ]] || return 1
+  printf '%s' "${h,,}"
+}
+
+# "rrggbb" -> "R;G;B" for a 24-bit SGR sequence.
+rgb() {
+  local h=${1#\#}
+  printf '%d;%d;%d' "$((16#${h:0:2}))" "$((16#${h:2:2}))" "$((16#${h:4:2}))"
+}
+
+bold() { printf '\e[1m%s%s' "$*" "$RESET"; }
+dim() { printf '\e[2m%s%s' "$*" "$RESET"; }
+
+# paint FG TEXT...  — foreground FG on the scheme's background.
+paint() {
+  local fg=$1; shift
+  if [[ -n ${C[background]:-} ]]; then
+    printf '\e[48;2;%s;38;2;%sm%s%s' "$(rgb "${C[background]}")" "$(rgb "$fg")" "$*" "$RESET"
+  else
+    printf '\e[38;2;%sm%s%s' "$(rgb "$fg")" "$*" "$RESET"
+  fi
+}
+
+# on_bg TEXT...  — default foreground on the scheme's background.
+on_bg() {
+  if [[ -n ${C[foreground]:-} ]]; then
+    paint "${C[foreground]}" "$*"
+  else
+    printf '%s' "$*"
+  fi
+}
+
+# ansi INDEX TEXT...  — ANSI color INDEX (truecolor when the scheme has it,
+# otherwise the terminal's own palette so nothing disappears).
+ansi() {
+  local i=$1; shift
+  if [[ -n ${P[$i]:-} ]]; then
+    paint "${P[$i]}" "$*"
+  else
+    printf '\e[%sm%s%s' "$((i < 8 ? 30 + i : 82 + i))" "$*" "$RESET"
+  fi
+}
+
+# style CODE TEXT  — TEXT with an SGR attribute, on the scheme's background.
+style() {
+  local code=$1; shift
+  printf '\e[%sm' "$code"
+  [[ -n ${C[background]:-} ]] && printf '\e[48;2;%sm' "$(rgb "${C[background]}")"
+  [[ -n ${C[foreground]:-} ]] && printf '\e[38;2;%sm' "$(rgb "${C[foreground]}")"
+  printf '%s%s' "$*" "$RESET"
+}
+
+# swatch HEX  — a small filled box.
+swatch() { printf '\e[48;2;%sm    %s' "$(rgb "$1")" "$RESET"; }
+
+# swatch_index INDEX  — box for palette entry INDEX.
+swatch_index() {
+  local i=$1
+  if [[ -n ${P[$i]:-} ]]; then swatch "${P[$i]}"; else printf '\e[48;5;%sm    %s' "$i" "$RESET"; fi
+}
+
+# --- config parsing ---------------------------------------------------------
+
+# Resolve a bare theme name to a file path.
+resolve_theme() {
+  local name=$1 line
+  [[ -f $USER_THEMES/$name ]] && { printf '%s' "$USER_THEMES/$name"; return 0; }
+  if [[ -n ${GHOSTTY_RESOURCES_DIR:-} && -f $GHOSTTY_RESOURCES_DIR/themes/$name ]]; then
+    printf '%s' "$GHOSTTY_RESOURCES_DIR/themes/$name"; return 0
+  fi
+  if command -v ghostty >/dev/null 2>&1; then
+    line=$(ghostty +list-themes --path --plain 2>/dev/null | grep -F -- "$name (" | head -n 1) || true
+    [[ -n $line ]] && { printf '%s' "${line#*) }"; return 0; }
+  fi
+  return 1
+}
+
+# Read theme/palette.toml ([app] + [ansi]) into P and C.
+parse_toml() {
+  local file=$1 line section='' key val h
+  while IFS= read -r line || [[ -n $line ]]; do
+    line=${line#"${line%%[![:space:]]*}"}
+    line=${line%"${line##*[![:space:]]}"}
+    [[ -z $line || ${line:0:1} == '#' ]] && continue
+    if [[ $line == \[*\] ]]; then
+      section=${line:1:${#line}-2}
+      continue
+    fi
+    [[ $line != *=* ]] && continue
+    key=${line%%=*}; val=${line#*=}
+    key=${key%"${key##*[![:space:]]}"}
+    val=${val#"${val%%[![:space:]]*}"}
+    val=${val%%[[:space:]]#*} # drop a trailing inline comment
+    val=${val%"${val##*[![:space:]]}"}
+    val=${val#\"}; val=${val%\"}
+    case $section in
+      ansi)
+        [[ $key =~ ^[0-9]+$ ]] || continue
+        if h=$(norm_hex "$val"); then P[$key]=$h; fi
+        ;;
+      app)
+        case $key in
+          bg) if h=$(norm_hex "$val"); then C[background]=$h; fi ;;
+          fg) if h=$(norm_hex "$val"); then C[foreground]=$h; fi ;;
+          white) if h=$(norm_hex "$val"); then C[cursor-color]=$h; fi ;;
+        esac
+        ;;
+    esac
+  done <"$file"
+}
+
+# Dispatch on file type: TOML palettes vs Ghostty config/theme files.
+parse_source() {
+  case $1 in
+    *.toml) parse_toml "$1" ;;
+    *) parse_file "$1" ;;
+  esac
+}
+
+# Read a Ghostty config/theme file into P and C.
+parse_file() {
+  local file=$1 line key val idx col tf
+  while IFS= read -r line || [[ -n $line ]]; do
+    line=${line#"${line%%[![:space:]]*}"}
+    line=${line%"${line##*[![:space:]]}"}
+    [[ -z $line || ${line:0:1} == '#' || $line != *=* ]] && continue
+    key=${line%%=*}; val=${line#*=}
+    key=${key%"${key##*[![:space:]]}"}
+    val=${val#"${val%%[![:space:]]*}"}
+    val=${val%"${val##*[![:space:]]}"}
+    val=${val#\"}; val=${val%\"}
+    case $key in
+      palette)
+        idx=${val%%=*}; col=${val#*=}
+        idx=${idx//[[:space:]]/}; col=${col//[[:space:]]/}
+        [[ $idx =~ ^[0-9]+$ ]] || continue
+        if col=$(norm_hex "$col"); then P[$idx]=$col; fi
+        ;;
+      background | foreground | cursor-color | cursor-text | selection-background | selection-foreground)
+        if col=$(norm_hex "$val"); then C[$key]=$col; fi
+        ;;
+      theme)
+        # A plain name only; "light:/dark:" prefixes and multi-theme lists
+        # are simplified to the first name.
+        val=${val#light:}; val=${val#dark:}; val=${val%%,*}
+        if tf=$(resolve_theme "$val"); then parse_file "$tf"; fi
+        ;;
+    esac
+  done <"$file"
+}
+
+# --- rendering --------------------------------------------------------------
+
+render_swatches() {
+  printf '\n  %s\n' "$(bold 'ANSI palette')"
+  local line k i col label
+  for line in 0 1 2 3; do
+    printf '  '
+    for k in 0 1 2 3; do
+      i=$((line + 4 * k))
+      col=${P[$i]:-}
+      if [[ -n $col ]]; then label="#$col"; else label='#??????'; fi
+      printf '%2d ' "$i"
+      swatch_index "$i"
+      printf ' %s  ' "$label"
+    done
+    printf '\n'
+  done
+}
+
+render_base() {
+  printf '\n  %s\n' "$(bold 'base colors')"
+  local key
+  for key in background foreground cursor-color cursor-text selection-background selection-foreground; do
+    [[ -n ${C[$key]:-} ]] || continue
+    printf '  %-21s ' "$key"
+    swatch "${C[$key]}"
+    printf ' #%s\n' "${C[$key]}"
+  done
+  printf '  %-21s ' 'sample text'
+  on_bg 'The quick brown fox jumps over the lazy dog.'
+  printf '\n'
+}
+
+render_styles() {
+  printf '\n  %s\n' "$(bold 'text styles')"
+  printf '  %s  %s  %s  %s  %s  %s\n' \
+    "$(style 0 normal)" "$(style 1 bold)" "$(style 3 italic)" \
+    "$(style 4 underline)" "$(style 2 faint)" "$(style 7 reverse)"
+  printf '\n  %s\n' "$(bold 'ANSI colors')"
+  local i names=(black red green yellow blue magenta cyan white)
+  printf '  '
+  for i in {0..7}; do printf '%s ' "$(ansi "$i" "${names[$i]}")"; done
+  printf '\n  '
+  for i in {8..15}; do printf '%s ' "$(ansi "$i" "bright-${names[$((i - 8))]}")"; done
+  printf '\n'
+}
+
+render_shell() {
+  printf '\n  %s\n' "$(bold 'shell session')"
+  printf '  %s %s %s\n' "$(ansi 2 'user@host')" "$(ansi 4 '~/src/project')" "$(ansi 5 'main')"
+  printf '  %s %s\n' "$(ansi 5 '$')" "$(on_bg 'ls -la --color=auto')"
+  printf '  %s %s %s\n' "$(ansi 4 'drwxr-xr-x')" "$(on_bg '1 user user 4096')" "$(ansi 4 'Documents/')"
+  printf '  %s %s %s\n' "$(ansi 2 '-rwxr-xr-x')" "$(on_bg '1 user user 5678')" "$(ansi 2 'build.sh*')"
+  printf '  %s %s %s\n' "$(on_bg '-rw-r--r--')" "$(on_bg '1 user user 1234')" "$(ansi 6 'link -> target')"
+  printf '  %s %s %s\n' "$(on_bg '-rw-r--r--')" "$(on_bg '1 user user 1234')" "$(ansi 1 'error.log')"
+}
+
+render_code() {
+  printf '\n  %s\n' "$(bold 'code sample')"
+  printf '  %s %s%s\n' "$(ansi 5 'def')" "$(ansi 4 'greet')" "$(on_bg '(name):')"
+  printf '      %s\n' "$(ansi 2 '"""Say hello."""')"
+  printf '      %s%s%s%s%s%s\n' \
+    "$(on_bg 'msg = ')" "$(ansi 2 'f"Hello, ')" "$(on_bg '{')" \
+    "$(ansi 3 'name')" "$(on_bg '}!')" "$(ansi 8 '  # greet the user')"
+  printf '      %s %s\n' "$(ansi 5 'return')" "$(on_bg 'msg')"
+}
+
+render() {
+  local label=$1 file=$2 rule
+  rule=$(printf '─%.0s' {1..68})
+  printf '%s\n' "$rule"
+  printf '  󰏘 %s  %s\n' "$(bold "$label")" "$(dim "$file")"
+  printf '%s\n' "$rule"
+  render_swatches
+  render_base
+  render_styles
+  render_shell
+  render_code
+}
+
+# One compact line with the 16 colors, for lining schemes up.
+strip() {
+  local i out=''
+  for i in {0..15}; do
+    if [[ -n ${P[$i]:-} ]]; then
+      out+=$(printf '\e[48;2;%sm  %s' "$(rgb "${P[$i]}")" "$RESET")
+    else
+      out+=$(printf '\e[48;5;%sm  %s' "$i" "$RESET")
+    fi
+  done
+  printf '%s' "$out"
+}
+
+# --- main -------------------------------------------------------------------
+
+main() {
+  local -a schemes=()
+  case ${1:-} in
+    -h | --help) usage; return 0 ;;
+    --list)
+      command -v ghostty >/dev/null 2>&1 || die 'ghostty not found'
+      ghostty +list-themes --plain 2>/dev/null | sed 's/ ([^)]*)$//'
+      return 0
+      ;;
+    '') schemes=("$SHARED_PALETTE") ;;
+    *) schemes=("$@") ;;
+  esac
+
+  local arg file first=1 rendered=0
+  for arg in "${schemes[@]}"; do
+    P=(); C=()
+    if [[ -f $arg ]]; then
+      file=$arg
+    elif file=$(resolve_theme "$arg"); then
+      :
+    else
+      printf '%s: no such config file or theme: %s\n' "$PROG" "$arg" >&2
+      continue
+    fi
+    parse_source "$file"
+    rendered=$((rendered + 1))
+    ((first)) || printf '\n'
+    first=0
+    render "$arg" "$file"
+    STRIP_LABELS+=("$arg")
+    STRIP_LINES+=("$(strip)")
+  done
+
+  ((rendered > 0)) || return 1
+
+  if ((${#STRIP_LINES[@]} > 1)); then
+    printf '\n  %s\n' "$(bold 'comparison strip')"
+    local i
+    for i in "${!STRIP_LINES[@]}"; do
+      printf '  %-24s %s\n' "${STRIP_LABELS[$i]}" "${STRIP_LINES[$i]}"
+    done
+  fi
+}
+
+main "$@"

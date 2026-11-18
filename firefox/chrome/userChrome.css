@@ -1,0 +1,40 @@
+/* MANAGED BY DOTFILES: this is the canonical copy, controlled by the
+ * dotfiles repository (configure/dotfiles/firefox/chrome/userChrome.css).
+ * Edit it HERE, then run `make stow-firefox` from the repository root.
+ * Do NOT edit the copy inside the Firefox profile directly -- that file
+ * is only a symbolic link pointing back to this one.
+ *
+ * Firefox also needs `toolkit.legacyUserProfileCustomizations.stylesheets`
+ * set to true in about:config, otherwise this file is ignored entirely.
+ *
+ * Recolor the URL bar focus ring from the default teal to the
+ * Neovim onedarkpro purple (#a569a5, see nvim/lua/plugins/colorscheme.lua).
+ *
+ * Verified against the Firefox 154 built-in stylesheet
+ * (urlbar-searchbar.css in browser/omni.ja). Three things had changed
+ * since the older docs, which is why the previous version did nothing:
+ *  1. #urlbar-background (ID) no longer exists; it is now
+ *     .urlbar-background (class).
+ *  2. [focused] is a presence attribute; focused="true" no longer matches.
+ *  3. The variable --toolbar-field-focus-border-color is gone. With Nova
+ *     enabled (browser.nova.enabled=true), the focused border resolves
+ *     through --focus-outline-color; without Nova it uses
+ *     --toolbar-field-border-color-focus.
+ *
+ * Overriding the urlbar-scoped custom properties recolors only the
+ * address/search bar, leaving every other UI focus ring untouched.
+ *
+ * MAINTENANCE: userChrome.css is brittle across Firefox updates. If the
+ * teal ring ever returns after an upgrade, re-derive the current
+ * selectors with:
+ *   unzip -p <firefox>/lib/firefox/browser/omni.ja \
+ *     chrome/browser/skin/classic/browser/urlbar-searchbar.css \
+ *     | grep -n -B3 -A8 "focused"
+ * and update the three custom properties below to match. */
+
+.urlbar,
+#searchbar {
+  --urlbar-background-border-focused: var(--urlbar-input-container-border-width-breakout) solid #a569a5 !important;
+  --urlbar-background-outline-focused: var(--focus-outline-width) solid #a569a5 !important;
+  --urlbar-input-container-outline-breakout-focused: var(--urlbar-input-container-border-width-breakout) solid #a569a5 !important;
+}

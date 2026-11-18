@@ -1,0 +1,173 @@
+#!/usr/bin/env bash
+#
+# File: quickshell/scripts/zellij-sessions
+#
+# Lists the zellij sessions on this machine, with the pi coding agents in each:
+#
+#     <working><TAB><agents><TAB><attached><TAB><live><TAB><session><TAB><age>
+#
+# where
+#
+#     working    how many of those agents are mid-run right now (see below)
+#     agents     how many pi processes live in the session
+#     attached   1 when at least one zellij client is attached to the session
+#     live       1 for a running session, 0 for one zellij kept (EXITED)
+#     age        zellij's own "how long ago it was created" string
+#
+# Rows come out busiest first -- most working agents, then most agents, then
+# attached before detached, then live before exited, then by name -- so the
+# popup can draw them in order without sorting again.
+#
+# The bar runs this only while its session popup is open, so the process-table
+# walk below is paid on demand rather than on a timer.
+#
+# ---------------------------------------------------------------------------
+# Why this does not use zellij's "(current)" marker
+# ---------------------------------------------------------------------------
+# `zellij ls` marks a session "(current)" from the ZELLIJ_SESSION_NAME in its
+# environment, not from any attachment state. With the variable unset it marks
+# nothing at all; with it set to X it marks X. The bar is started from a zellij
+# pane, so quickshell inherits that variable once, at launch, and every run of
+# this script after that reported the same session as current for the rest of
+# the process's life -- the popup highlighted Dotfiles forever because the bar
+# happened to be first started inside Dotfiles, no matter where the user was
+# actually attached.
+#
+# Attachment is read from /proc/net/unix instead. Every live session has a
+# listening socket at $XDG_RUNTIME_DIR/zellij/<contract>/<session>, and a
+# session with a client attached has an additional connected (state 03) entry
+# with the same path. On this machine that is one entry per attached session,
+# and the same number of sessions as there are `zellij` client processes. It is
+# one file read, no subprocess, and it cannot go stale.
+#
+# ---------------------------------------------------------------------------
+# How an agent is placed in its session
+# ---------------------------------------------------------------------------
+# Every running pi is walked up its parent chain until it reaches a zellij
+# *server* process (`zellij --server .../<session>`), whose argument after
+# --server is the session socket path, so the session is that path's basename.
+# pi records nothing about its terminal and zellij's own pane list does not say
+# which process is which, so the walk is the only reliable way to place an
+# agent in a session.
+#
+# "working" comes from ~/.pi/agent/agent-registry/<pid>.json, the record pi's
+# agent-registry extension writes: state is "working" while a run is in
+# progress and "idle" once it has settled. An agent started before that
+# extension was installed has no record, so its activity is simply unknown: it
+# is counted in `agents` but not in `working`. That is an undercount by
+# construction -- activity is never inferred from a session file's mtime, which
+# cannot tell an agent that is thinking from one that was abandoned.
+#
+# Everything below is a bash builtin read or a single fork, because a `read`
+# loop over a /proc file is byte-at-a-time (the earlier version forked tr and
+# awk twice per parent-chain hop and cost ~510ms for 17 agents; this costs
+# ~130ms, of which ~85ms is `zellij ls` itself).
+set -u
+
+runtime=${XDG_RUNTIME_DIR:-/run/user/$(id -u)}
+registry_dir="$HOME/.pi/agent/agent-registry"
+
+# ---- attached clients: one read of the socket table ------------------------
+#
+# Field 6 of /proc/net/unix is the socket state (03 = connected, 01 = the
+# listening socket every live session has) and field 8 is its path. mapfile
+# rather than a `read` loop: reading this file a line at a time costs ~450ms,
+# reading it whole costs ~9ms.
+declare -A is_attached=()
+socket_lines=()
+
+mapfile -t socket_lines 2>/dev/null < /proc/net/unix
+for line in "${socket_lines[@]}"; do
+    case "$line" in
+        *" 03 "*"$runtime"/zellij/*/*) is_attached[${line##*/}]=1 ;;
+    esac
+done
+
+# ---- the zellij session a pid belongs to ----------------------------------
+#
+# Sets found_session instead of printing it, so the caller needs no command
+# substitution: 17 forks for 17 agents was most of the remaining cost.
+found_session=""
+
+session_of_pid() {
+    local pid="$1" depth=0 parts stat rest i
+
+    while [ "$pid" -gt 1 ] && [ "$depth" -lt 15 ]; do
+        parts=()
+        mapfile -d '' -t parts 2>/dev/null < "/proc/$pid/cmdline"
+
+        for (( i = 0; i < ${#parts[@]} - 1; i++ )); do
+            if [ "${parts[i]}" = "--server" ]; then
+                found_session=${parts[i + 1]##*/}
+                return 0
+            fi
+        done
+
+        # The parent pid is field 4 of /proc/<pid>/stat, but the command name
+        # in field 2 is wrapped in parentheses and can itself contain spaces
+        # ("Isolated Web Co"), so the fields after it are only in the right
+        # place once everything up to the last ')' is dropped.
+        stat=""
+        read -r stat 2>/dev/null < "/proc/$pid/stat"
+        [ -n "$stat" ] || return 1
+        rest=${stat##*)}
+        # Word splitting is the point: field 1 is the state, field 2 the ppid.
+        # shellcheck disable=SC2086
+        set -- $rest
+        [ -n "${2:-}" ] || return 1
+        pid="$2"
+        depth=$((depth + 1))
+    done
+
+    return 1
+}
+
+# ---- count the agents in each session -------------------------------------
+declare -A agents_in=()
+declare -A working_in=()
+
+for pid in $(pgrep -x pi); do
+    session_of_pid "$pid" || continue
+    session=$found_session
+
+    agents_in["$session"]=$(( ${agents_in["$session"]:-0} + 1 ))
+
+    record=""
+    read -r record 2>/dev/null < "$registry_dir/$pid.json"
+    case "$record" in
+        *'"state":"working"'*)
+            working_in["$session"]=$(( ${working_in["$session"]:-0} + 1 ))
+            ;;
+    esac
+done
+
+# ---- the session list, joined with the counts -----------------------------
+zellij ls 2>/dev/null \
+    | sed -e 's/\x1b\[[0-9;]*m//g' \
+    | while IFS= read -r line; do
+        [ -n "$line" ] || continue
+
+        session=${line%% *}
+        [ -n "$session" ] || continue
+
+        # "Name [Created 8days 18h 59m 52s ago] (current)" -> "8days 18h ...".
+        age="?"
+        case "$line" in
+            *"Created "*" ago]"*)
+                age=${line#*Created }
+                age=${age%% ago]*}
+                ;;
+        esac
+
+        case "$line" in
+            *EXITED*) live=0 ;;
+            *)        live=1 ;;
+        esac
+
+        printf '%d\t%d\t%d\t%d\t%s\t%s\n' \
+            "${working_in["$session"]:-0}" \
+            "${agents_in["$session"]:-0}" \
+            "${is_attached["$session"]:-0}" \
+            "$live" "$session" "$age"
+    done \
+    | sort -t $'\t' -k1,1nr -k2,2nr -k3,3nr -k4,4nr -k5,5

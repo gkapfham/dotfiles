@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # use rofi to select from the clipboard using the clipmenu program
 
@@ -13,4 +13,4 @@ export CM_HISTLENGTH=12
 # note that you need to paste with a
 # <CTRL-v> in order to insert the
 # content into the selected area
-clipmenu
+clipmenu -p '󰅎 '

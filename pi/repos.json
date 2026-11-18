@@ -1,0 +1,84 @@
+{
+  "repos": [
+    {
+      "path": "~/configure/dotfiles",
+      "url": "git@github.com:gkapfham/dotfiles.git",
+      "note": "Stowed dotfiles for all programs"
+    },
+    {
+      "path": "~/configure/nixos",
+      "url": "git@github.com:gkapfham/nixos.git",
+      "note": "NixOS configuration for Framework 13 AMD laptop"
+    },
+    {
+      "path": "~/working/zk",
+      "url": "https://github.com/gkapfham/zk.git",
+      "note": "Zettelkasten notebook"
+    },
+    {
+      "path": "~/working/tries",
+      "url": "git@github.com:gkapfham/tries.git",
+      "note": "Experiments and tries"
+    },
+    {
+      "path": "~/working/scripts",
+      "url": "git@github.com:gkapfham/scripts.git",
+      "note": "Scripts for teaching and research"
+    },
+    {
+      "path": "~/working/www.gregorykapfhammer.com",
+      "url": "git@github.com:gkapfham/www.gregorykapfhammer.com.git",
+      "note": "Quarto-based personal website"
+    },
+    {
+      "path": "~/working/paperreviews",
+      "url": "git@github.com:gkapfham/paperreviews.git",
+      "note": "Finished paper reviews"
+    },
+    {
+      "path": "~/working/research-bibliography",
+      "url": "git@github.com:gkapfham/research-bibliography.git",
+      "note": "BibTeX files"
+    },
+    {
+      "path": "~/working/feedback",
+      "url": "git@github.com:gkapfham/feedback.git",
+      "note": "Feedback repository"
+    },
+    {
+      "path": "~/working/curriculum-vitae",
+      "url": "git@github.com:gkapfham/curriculum-vitae.git",
+      "note": "Academic CV"
+    },
+    {
+      "path": "~/working/memorandums",
+      "url": "git@github.com:gkapfham/memorandums.git",
+      "note": "Memorandums"
+    },
+    {
+      "path": "~/working/gatorgrade",
+      "url": "git@github.com:GatorEducator/gatorgrade.git",
+      "note": "GatorGrade — automated grading toolkit"
+    },
+    {
+      "path": "~/working/gatoreducator",
+      "url": "git@github.com:GatorEducator/gatorgrader.git",
+      "note": "GatorGrader — automated grading"
+    },
+    {
+      "path": "~/working/rollcall",
+      "url": "git@github.com:GatorEducator/rollcall.git",
+      "note": "RollCall — attendance tracking"
+    },
+    {
+      "path": "~/working/www.proofgrammers.com",
+      "url": "git@github.com:proofgrammers/www.proofgrammers.com.git",
+      "note": "ProofGrammers website"
+    },
+    {
+      "path": "~/working/www.prosegrammers.com",
+      "url": "git@github.com:prosegrammers/www.prosegrammers.com.git",
+      "note": "ProseGrammers website"
+    }
+  ]
+}

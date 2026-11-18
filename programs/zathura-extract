@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# zathura-extract - Extract text from current Zathura page and copy to clipboard
+# Add this to your zathurarc: map <C-c> exec zathura-extract
+
+set -e
+
+# Ensure DISPLAY is set for X11 clipboard access
+if [ -z "$DISPLAY" ]; then
+    export DISPLAY=:0
+fi
+
+# Also ensure XAUTHORITY is set if needed
+if [ -z "$XAUTHORITY" ] && [ -f "$HOME/.Xauthority" ]; then
+    export XAUTHORITY="$HOME/.Xauthority"
+fi
+
+# Get the PDF file path from Zathura's environment
+PDF_FILE="$1"
+PAGE="$2"
+
+if [ -z "$PDF_FILE" ] || [ -z "$PAGE" ]; then
+    # Try to get from parent process environment
+    PDF_FILE=$(cat /proc/$PPID/environ 2>/dev/null | tr '\0' '\n' | grep -o 'FILE=.*' | cut -d= -f2- || echo "")
+fi
+
+if [ -z "$PDF_FILE" ] || [ ! -f "$PDF_FILE" ]; then
+    notify-send "Zathura Extract" "Error: Could not determine PDF file"
+    exit 1
+fi
+
+# Detect display server for clipboard
+if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+    COPY_CMD="wl-copy"
+else
+    COPY_CMD="xclip -selection clipboard"
+fi
+
+# Extract current page
+TEXT=$(pdftotext -f "$PAGE" -l "$PAGE" -layout "$PDF_FILE" - 2>/dev/null)
+notify-send "Zathura Extract" "Extracting text from page $PAGE"
+
+if [ -z "$TEXT" ]; then
+    notify-send "Zathura Extract" "No text found on page $PAGE"
+    exit 0
+fi
+
+# Copy to clipboard with explicit error handling
+if ! echo "$TEXT" | $COPY_CMD 2>/tmp/zathura-extract-error.log; then
+    notify-send "Zathura Extract" "Error copying to clipboard. Check /tmp/zathura-extract-error.log"
+    exit 1
+fi
+
+CHAR_COUNT=$(echo "$TEXT" | wc -c)
+notify-send "Zathura Extract" "Page $PAGE copied! ($CHAR_COUNT chars)"

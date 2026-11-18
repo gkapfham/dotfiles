@@ -9,38 +9,146 @@ set $mod Mod1
 
 # Looks {{{
 
+# Define the gaps between windows
+gaps inner 10
+gaps outer 1
+
+# Draw a small border around windows
+# by default (note that setting it it
+# 1 or 2 will ensure that the ghostty terminal
+# windows take up the entire screen on a 16:10
+# Framework 13 laptop with higher resolution)
+default_border normal 4
+
 # Create and preview colors:
 # https://thomashunter.name/i3-configurator/
+# Note that the focused window is lighter than
+# the unfocused and inactive windows
 
 # Class                 border  bground text    indicator child_border
-client.focused          #333333 #333333 #bcbcbc #333333   #333333
-client.focused_inactive #404040 #404040 #dfdfdf #484E50   #5F676A
-client.unfocused        #404040 #404040 #888888 #292D2E   #222222
+# client.focused        #333333 #333333 #bcbcbc #333333   #333333
+client.focused          #333333 #333333 #d2d2d2 #333333   #333333
+client.focused_inactive #1c1c1c #1c1c1c #888888 #1C1C1C   #1C1C1C
+client.unfocused        #1c1c1c #1c1c1c #888888 #1C1C1C   #1C1C1C
 client.urgent           #2F343A #333333 #bcbcbc #5F8700   #5F8700
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
-# Font for window titles
-font pango:Hack Nerd Font Regular 12
+# Deprecated:
+# Causes the focused window to be darker than focused inactive
+# client.focused_inactive #404040 #404040 #dfdfdf #484E50   #5F676A
 
-# Wallpaper that is a solid grey color
-exec_always --no-startup-id hsetroot -solid "#1C1C1C"
+# Font for window titles
+# font pango:Hack Nerd Font 10
+font pango:Hack Nerd Font 9
+# font pango: Maple Mono NF 8
+
+# Add a single space to the left of all
+# window titles in the title bar (this would
+# ensure that the displayed title is not too
+# tight next to the slightly rounded border)
+for_window [class=".*"] title_format " %title"
+
+# For all ghostty windows, show only a fixed as the title
+# This prevents lag from Zellij's dynamic title updates
+for_window [class="ghostty"] title_format "  Terminal"
+
+# Wallpaper, published by ~/configure/wallpaper/bin/wallpaper (see that
+# repository's README).  The pointer at /var/lib/wallpaper is mutable, so a new
+# wallpaper appears at login without a rebuild; the script falls back to a solid
+# colour until one has been chosen, which is what a fresh machine shows.
+exec_always --no-startup-id ~/.config/i3/scripts/i3-wallpaper.sh
+
+# Previous solid-only backgrounds, kept for reference
+# exec_always --no-startup-id hsetroot -solid "#875f87"
+# exec_always --no-startup-id hsetroot -solid "#a569a5"
+# exec_always --no-startup-id hsetroot -solid "#6E466E"
+
+# Alternative, a wallpaper that uses a custom image
+# exec_always --no-startup-id feh --bg-fill ~/media/images/wallpaper/Honeycomb_Mac.png &
+
+# Define the color scheme for the i3bar
+# set $bg     #1C1C1C
+set $bg     #262626
+set $fg     #3A3A3A
+set $hi     #FCE94F
+set $ac     #D78700
+set $tx     #5f8700
+set $ia     #9E9E9E
+set $be     #8FAF9F
+set $yw     #F8F893
+set $gn     #81C181
+set $rd     #BF9B76
+set $id     #F9F8FF
+set $ce     #CEECEE
+
+# Deprecated: No longer use i3status and i3bar
+# in favor of using polybar (see polybar/config.ini
+# and the scripts in ~/.config/polybar/scripts)
+
+# # Define the bar configuration;
+# # note that this runs i3status
+# # and that program has a separate configuration
+# bar {
+#   position bottom
+#   font pango:Hack Nerd Font Bold 9
+#   strip_workspace_numbers yes
+#   workspace_buttons yes
+#   workspace_min_width 20
+#   separator_symbol " "
+#     colors {
+#         background          $bg
+#         statusline          $sl
+#         separator           $ce
+#         focused_workspace   $ia        $ia        $bg
+#         active_workspace    $tx        $tx        $bg
+#         inactive_workspace  $bg        $fg        $ia
+#         urgent_workspace    $ac        $ac        $bg
+#     }
+#   # run the i3status command that is configured
+#   # through a separate file stored in ~/.config/i3status/config
+#   # workspace_command ~/.local/bin/i3status.sh
+#   status_command i3status
+# }
 
 # }}}
 
 # Startup {{{
 
-# Run polybar to display the fully configured status bar
-exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
-
-# Run the dynamic workspace renaming program
-exec_always --no-startup-id exec i3wsr --config ~/.config/i3wsr/config.yml
+# Run quickshell to display the bar at the top of the screen.
+#
+# This replaced polybar: the quickshell bar in ~/.config/quickshell is a port
+# of the polybar bar in polybar/config.ini (same height, fonts, colors and
+# modules), with one improvement -- the center block now shrinks and then
+# drops its least important modules instead of pushing the clock off screen.
+#
+# It is started through i3/scripts/quickshell-launch.sh rather than
+# `quickshell -n` directly. `-n` refuses a second copy but cannot replace a
+# broken one, and i3 re-runs exec_always on every reload, so the launcher is
+# what makes this line idempotent. It also repairs the two failures that made
+# the bar look wrong on 2026-10-21: a stale xrandr entry for the output the 4K
+# panel had moved off (three bars for two screens), and a bar whose i3 IPC
+# socket had gone stale because i3 restarted in place (blank workspace rows in
+# every bar). While the bar is healthy the launcher changes nothing, so a
+# reload stays a no-op. The bar reloads its own config when the files change,
+# so a reload of i3 is not needed to pick up an edit.
+#
+# `quickshell-launch.sh status` reports the pid, its health and the bar count;
+# `restart` stops and starts it; `stop` stops it.
+#
+# TO GO BACK TO POLYBAR: comment the quickshell line below, uncomment the
+# polybar line under it, run `quickshell kill`, and reload i3 with
+# `i3-msg reload`.
+#
+# Note on stopping either bar by hand: the Nix wrappers rename the processes,
+# so an exact-name match silently fails. Stop this bar with `quickshell kill`
+# (not `pkill -x quickshell`) and polybar with `pkill polybar` (not
+# `pkill -x polybar`); both `-x` forms exit 1 without saying anything.
+exec_always --no-startup-id ~/.config/i3/scripts/quickshell-launch.sh
+# exec_always --no-startup-id ~/.config/polybar/scripts/polybar-launch.sh
 
 # Run numlockx to turn off numlock by default
 # This prevents numlock from displaying in i3lock-color
 exec_always --no-startup-id numlockx off
-
-# Do not use Ubuntu's standard notification
-exec --no-startup-id killall -q notify-osd
 
 # Run dunst to display the notifications
 exec_always --no-startup-id ~/.config/dunst/scripts/dunst-launch.sh
@@ -56,32 +164,84 @@ exec --no-startup-id xbindkeys -f ~/.xbindkeysrc
 # Run clipmenud to support capturing of the clipboard
 exec --no-startup-id clipmenud
 
+# Make Caps Lock behave like Ctrl:
+exec --no-startup-id setxkbmap -option ctrl:nocaps
+
+# Make short-pressed Ctrl behave like Escape:
+exec --no-startup-id xcape -e 'Control_L=Escape'
+
+# Use the gesture capabilities of the touchpad
+exec --no-startup-id libinput-gestures
+
+# Control the temperature of the screen(s)
+exec --no-startup-id sct 6900
+
 # Run picom to provide compositing, which especially
-# seems to reduce screen artifacts for Zathura windows
-# Do not use by default because it slows down screen redraws
-# exec --no-startup-id picom -CGb
+# seems to reduce screen artifacts for Zathura windows.
+# Finally, see the separate picom configuration file
+# for more details about how this program works.
+# exec --no-startup-id picom --config ~/.config/picom/picom.conf --realtime
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
+
+# Perform automatic window tiling with a limit of four windows
+# (this makes windows go horizontal and then vertical and so on)
+exec_always --no-startup-id autotiling --limit 4
+
+# Pointer highlighting that can be toggled
+set $highlight-pointer "highlight-pointer -c '#d78700' -p '#af5f00' -o 0 -r 25 --auto-hide-highlight --hide-highlight --show-cursor --key-toggle-highlight 'M-m'"
+exec --no-startup-id $highlight-pointer
 
 # }}}
 
 # Rofi {{{
 
-# Rofi for programs
+# Note: for now, I have setup the Control-Alt-o to be
+# the standard launcher and the Control-Alt-p to be
+# the omni launcher.  This is because I have been using
+# Control-Alt-p for so long that I cannot stop typing it!
+
+# Rofi for programs and windows and more;
 # Note that this can access the programs installed
-# in the ~/.local/bin directory
-set $rofi-program "rofi -modi 'run' -show run"
-bindsym Control+$mod+p exec $rofi-program
+# in the ~/.local/bin directory while also running
+# Standard launcher (Control+Alt+P): one merged list of installed programs
+# and windows, no mode tabs — the plain launcher it has always been
+set $rofi-full-program "~/.config/i3/scripts/i3-run-rofi-full-path.sh"
+bindsym Control+$mod+o exec $rofi-full-program
+
+# Omni launcher (Control+Alt+O): the same merged list plus a tab per mode
+# (combi / run-icons / window / drun / run / file browser). Control+Tab or
+# Shift+Right switches tabs and the active tab is blue
+set $rofi-omni "env ROFI_TABS=1 ~/.config/i3/scripts/i3-run-rofi-full-path.sh"
+bindsym Control+$mod+p exec $rofi-omni
+
+# Rofi for listing workspaces and their numbers for each connected monitor
+set $rofi-workspace-list "~/.config/i3/scripts/i3-workspace-list.sh"
+bindsym Control+$mod+w exec $rofi-workspace-list
+
+# Rofi for renaming a specific workspace; note that workspace
+# names are organized in the i3 bar listing in an alpha-numerical
+# fashion. This means that workspaces with only a number will
+# come before workspaces with a number and a letter. For example,
+# the workspaces will be listed as follows:
+# --> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10a, 10b, 10c, 11, 12, 13, 14, 15.
+# Finally, workspaces that are only words are going to appear after any
+# of those that start with a number like the ones listed previously.
+bindsym Control+$mod+a exec ~/.config/i3/scripts/i3-rofi-rename-workspace.sh
 
 # Rofi for .desktop files
-set $rofi-desktop "j4-dmenu-desktop --dmenu='rofi -p 'dmenu' -dmenu -i'"
+# set $rofi-desktop "j4-dmenu-desktop --dmenu='rofi -p 'dmenu' -dmenu -i'"
+set $rofi-desktop "rofi -modi 'drun' -show drun -width 70"
 bindsym Control+$mod+n exec $rofi-desktop
 
 # Rofi for windows
 set $rofi-windows "rofi -modi 'window' -show window -width 70"
 bindsym Control+$mod+m exec $rofi-windows
 
-# Rofi for combination
-set $rofi-combo "rofi -combi-modi window#run#drun -show combi -width 70"
-bindsym Control+$mod+o exec $rofi-combo
+# Rofi for quick directory jumping with zoxide
+# Shows frequently visited directories and opens ghostty terminal there
+# (Control+Alt+Z — Control+Alt+O now opens the omni launcher)
+set $rofi-zoxide "~/.config/i3/scripts/i3-rofi-zoxide.sh"
+bindsym Control+$mod+z exec $rofi-zoxide
 
 # Rofi for workspaces
 set $rofi-switch-workspace "~/.config/i3/scripts/i3-switch-workspace.sh"
@@ -97,7 +257,7 @@ bindsym Control+$mod+r exec $rofi-reminder
 
 # Rofi for the display and insertion of an emoji
 # Only show the five most recent icons in the menu bar
-bindsym Control+$mod+y exec "rofimoji --max-recent 5"
+bindsym Control+$mod+y exec "rofimoji --max-recent 10 --prompt '󰏘' --selector-args '-width 1600 -height 875'"
 
 # Rofi for the display and copying of content to the clipboard
 set $rofi-copy-to-clipboard "~/.config/i3/scripts/i3-copy-to-clipboard.sh"
@@ -106,6 +266,17 @@ bindsym Control+$mod+t exec $rofi-copy-to-clipboard
 # Rofi for the display and insertion of content to the clipboard
 set $rofi-insert-from-clipboard "~/.config/i3/scripts/i3-insert-from-clipboard.sh"
 bindsym Control+$mod+g exec $rofi-insert-from-clipboard
+
+# Rofi for fuzzy searching and inserting Nerd Font icons
+set $rofi-nerd-font-picker "~/.config/i3/scripts/i3-nerd-font-picker.sh"
+bindsym Control+$mod+e exec $rofi-nerd-font-picker
+
+# Rofi to choose the wallpaper, with the images shown as thumbnails.  The
+# choice is published to /var/lib/wallpaper, so it applies to the desktop, the
+# lock screen and the login screen with no rebuild -- see
+# ~/configure/wallpaper/README.md.  Free keys are c d j k q x z if this clashes.
+set $rofi-wallpaper-picker "~/.config/i3/scripts/i3-wallpaper-picker.sh"
+bindsym Control+$mod+c exec $rofi-wallpaper-picker
 
 # }}}
 
@@ -119,14 +290,11 @@ floating_modifier $mod
 # Programs {{{
 
 # Terminal
-bindsym $mod+Return exec alacrity
+bindsym Control+$mod+Return exec ghostty
 
 # }}}
 
 # Workspaces {{{
-
-# Define names for default workspaces
-# Note that these are not numbers
 
 # 1 through 10
 set $ws1 "1"
@@ -152,6 +320,18 @@ set $ws18 "18"
 set $ws19 "19"
 set $ws20 "20"
 
+# 21 through 30
+set $ws21 "21"
+set $ws22 "22"
+set $ws23 "23"
+set $ws24 "24"
+set $ws25 "25"
+set $ws26 "26"
+set $ws27 "27"
+set $ws28 "28"
+set $ws29 "29"
+set $ws30 "30"
+
 # Go to the left workspace on the same monitor
 bindsym Control+$mod+h workspace prev_on_output
 
@@ -167,11 +347,25 @@ bindsym Control+Shift+l move to workspace next
 # Move to the previously focused workspace
 bindsym Control+$mod+b workspace back_and_forth
 
-# Move window to the scratchpad
-bindsym Control+Shift+s move scratchpad
+# Switch between workspaces
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 
-# Take window from the scratchpad as a float
-# This is a toggle-able command; returns to scratchpad
+# Scratchpad: a hidden collection of floating windows
+# A window in the scratchpad does not appear on any workspace until summoned.
+# The scratchpad can hold multiple windows at once; each invocation of
+# `scratchpad show` pulls out the most recently moved-into-scratchpad window,
+# cycling through them one by one.
+#
+# Workflow:
+#   1) Hide a window in the scratchpad — Ctrl+Shift+s
+#      (any floating window will move into the hidden scratchpad pool)
+#   2) Show a window   — Ctrl+Alt+s   (pops the next window out; repeat to
+#      rotate through all windows currently in the scratchpad)
+#   3) Remove from scratchpad and tile it — once the desired window is visible,
+#      press Ctrl+Alt+f to toggle floating off, returning it to normal tiling
+
+bindsym Control+Shift+s move scratchpad
 bindsym Control+$mod+s scratchpad show
 
 # Switch to a specified workspace
@@ -229,31 +423,31 @@ bindsym $mod+Shift+w mode $mode_switch_workspace_super_extended
 
 # Move focused container to workspace
 # --> 1 through 10
-bindsym Control+$mod+1 move container to workspace number 1
-bindsym Control+$mod+2 move container to workspace number 2
-bindsym Control+$mod+3 move container to workspace number 3
-bindsym Control+$mod+4 move container to workspace number 4
-bindsym Control+$mod+5 move container to workspace number 5
-bindsym Control+$mod+6 move container to workspace number 6
-bindsym Control+$mod+7 move container to workspace number 7
-bindsym Control+$mod+8 move container to workspace number 8
-bindsym Control+$mod+9 move container to workspace number 9
-bindsym Control+$mod+0 move container to workspace number 10
+bindsym Control+$mod+1 move container to workspace number $ws1
+bindsym Control+$mod+2 move container to workspace number $ws2
+bindsym Control+$mod+3 move container to workspace number $ws3
+bindsym Control+$mod+4 move container to workspace number $ws4
+bindsym Control+$mod+5 move container to workspace number $ws5
+bindsym Control+$mod+6 move container to workspace number $ws6
+bindsym Control+$mod+7 move container to workspace number $ws7
+bindsym Control+$mod+8 move container to workspace number $ws8
+bindsym Control+$mod+9 move container to workspace number $ws9
+bindsym Control+$mod+0 move container to workspace number $ws10
 
 # Move to a specified (extended) workspace
 # --> 11 through 20
-set $mode_move_workspace " Workspace Move 11-20"
+set $mode_move_workspace " Workspace Move 11-20"
 mode $mode_move_workspace {
-    bindsym Control+$mod+1 move container to workspace number 11; mode "default"
-    bindsym Control+$mod+2 move container to workspace number 12; mode "default"
-    bindsym Control+$mod+3 move container to workspace number 13; mode "default"
-    bindsym Control+$mod+4 move container to workspace number 14; mode "default"
-    bindsym Control+$mod+5 move container to workspace number 15; mode "default"
-    bindsym Control+$mod+6 move container to workspace number 16; mode "default"
-    bindsym Control+$mod+7 move container to workspace number 17; mode "default"
-    bindsym Control+$mod+8 move container to workspace number 18; mode "default"
-    bindsym Control+$mod+9 move container to workspace number 19; mode "default"
-    bindsym Control+$mod+0 move container to workspace number 20; mode "default"
+    bindsym Control+$mod+1 move container to workspace number $ws11; mode "default"
+    bindsym Control+$mod+2 move container to workspace number $ws12; mode "default"
+    bindsym Control+$mod+3 move container to workspace number $ws13; mode "default"
+    bindsym Control+$mod+4 move container to workspace number $ws14; mode "default"
+    bindsym Control+$mod+5 move container to workspace number $ws15; mode "default"
+    bindsym Control+$mod+6 move container to workspace number $ws16; mode "default"
+    bindsym Control+$mod+7 move container to workspace number $ws17; mode "default"
+    bindsym Control+$mod+8 move container to workspace number $ws18; mode "default"
+    bindsym Control+$mod+9 move container to workspace number $ws19; mode "default"
+    bindsym Control+$mod+0 move container to workspace number $ws20; mode "default"
     bindsym Escape mode "default"
 }
 
@@ -262,18 +456,18 @@ bindsym $mod+e mode $mode_move_workspace
 
 # Move to a specified (super-extended) workspace
 # --> 21 through 30
-set $mode_move_workspace_super_extended " Workspace Move 21-30"
+set $mode_move_workspace_super_extended " Workspace Move 21-30"
 mode $mode_move_workspace_super_extended {
-    bindsym Control+$mod+1 move container to workspace number 21; mode "default"
-    bindsym Control+$mod+2 move container to workspace number 22; mode "default"
-    bindsym Control+$mod+3 move container to workspace number 23; mode "default"
-    bindsym Control+$mod+4 move container to workspace number 24; mode "default"
-    bindsym Control+$mod+5 move container to workspace number 25; mode "default"
-    bindsym Control+$mod+6 move container to workspace number 26; mode "default"
-    bindsym Control+$mod+7 move container to workspace number 27; mode "default"
-    bindsym Control+$mod+8 move container to workspace number 28; mode "default"
-    bindsym Control+$mod+9 move container to workspace number 29; mode "default"
-    bindsym Control+$mod+0 move container to workspace number 30; mode "default"
+    bindsym Control+$mod+1 move container to workspace number $ws21; mode "default"
+    bindsym Control+$mod+2 move container to workspace number $ws22; mode "default"
+    bindsym Control+$mod+3 move container to workspace number $ws23; mode "default"
+    bindsym Control+$mod+4 move container to workspace number $ws24; mode "default"
+    bindsym Control+$mod+5 move container to workspace number $ws25; mode "default"
+    bindsym Control+$mod+6 move container to workspace number $ws26; mode "default"
+    bindsym Control+$mod+7 move container to workspace number $ws27; mode "default"
+    bindsym Control+$mod+8 move container to workspace number $ws28; mode "default"
+    bindsym Control+$mod+9 move container to workspace number $ws29; mode "default"
+    bindsym Control+$mod+0 move container to workspace number $ws30; mode "default"
     bindsym Escape mode "default"
 }
 
@@ -311,11 +505,10 @@ bindsym $mod+Right focus right
 # Move focus to the:
 
 # --> top (i.e., external) monitor and wrap around
-# ** --> Using the keyboard
 bindsym Control+$mod+u focus output up
 
-# ** --> Using the key-command generated by the mouse
-bindsym Control+$mod+Tab focus output up
+# --> left (i.e., external) monitor and wrap around
+bindsym Control+$mod+Tab focus output left
 
 # Move container to the:
 
@@ -336,6 +529,9 @@ bindsym Control+$mod+less move workspace to output up
 # --> bottom (i.e., laptop) monitor
 bindsym Control+$mod+greater move workspace to output down
 
+# --> left (i.e., external) monitor
+bindsym Control+$mod+space move workspace to output left
+
 # Always move to the mouse to the newest output
 # Note that this is currently the default behavior, with
 # the other option being 'none' which will not move the
@@ -352,13 +548,13 @@ bindsym $mod+t layout tabbed
 bindsym $mod+i layout toggle split
 
 # Toggle between tiling and floating windows
-bindsym $mod+Shift+space floating toggle
+bindsym Control+$mod+f floating toggle
 
 # Change focus between tiling or floating windows
 bindsym $mod+space focus mode_toggle
 
 # Toggle fullscreen mode for focused container
-# This removes the polybar at the screen's top
+# This removes the i3bar at the screen's top
 bindsym $mod+f fullscreen toggle
 
 # Split in horizontal orientation
@@ -371,7 +567,7 @@ bindsym $mod+Shift+minus split v
 
 # }}}
 
-# Move {{{
+# Move on Specific Workspace {{{
 
 # Move focused window with vim keybindings
 bindsym $mod+Shift+h move left
@@ -399,20 +595,11 @@ bindsym $mod+Shift+q kill
 # Dim the screen after ten minutes
 exec --no-startup-id xset dpms 600
 
-# Lock the screen after sixty minutes
-# exec --no-startup-id xautolock -time 60 -locker ~/.config/i3/scripts/i3-lock-screen.sh
-
 # Reload the i3 window manager
 bindsym $mod+Shift+c reload
 
-# Reload the polybar
-bindsym $mod+Shift+p exec ~/.config/polybar/scripts/polybar-launch.sh
-
 # Restart i3 inplace
 bindsym $mod+Shift+r restart
-
-# Exit i3 without any prompt
-# bindsym $mod+Shift+e exec i3-msg exit
 
 # }}}
 
@@ -456,29 +643,39 @@ bindsym $mod+r mode "Resize a Window"
 # Media {{{
 
 # Decrease the volume
-bindsym XF86AudioLowerVolume exec "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '-5%'"
+bindsym XF86AudioLowerVolume exec "pactl set-sink-volume @DEFAULT_SINK@ '-5%'"
 
 # Increase the volume
-bindsym XF86AudioRaiseVolume exec "/usr/bin/pactl set-sink-volume @DEFAULT_SINK@ '+5%'"
+bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume @DEFAULT_SINK@ '+5%'"
 
 # Mute the audio
-bindsym XF86AudioMute exec "/usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle"
+bindsym XF86AudioMute exec "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 
 # Increase the brightness of the screen
-bindsym XF86MonBrightnessUp exec "xbacklight -inc 5"
+# bindsym XF86MonBrightnessUp exec "light -A 5"
+bindsym XF86MonBrightnessUp exec "brightnessctl set 5%+"
 
 # Decrease the brightness of the screen
-bindsym XF86MonBrightnessDown exec "xbacklight -dec 5"
+# bindsym XF86MonBrightnessDown exec "light -U 5"
+bindsym XF86MonBrightnessDown exec "brightnessctl set 5%-"
 
-# Set to maximum brightness
-bindsym $mod+Shift+b exec "xbacklight -set 100"
+# Set to maximum brightness (need to lookup this value
+# of 65535 with the brightnessctl info command)
+bindsym $mod+Shift+b exec "brightnessctl set 65535"
 
 # }}}
 
 # Screenshots {{{
 
+# Notes:
+# 1. Saving to a screenshot file is the safest approach
+# 2. Saving to the clipboard is the easiest approach
+# 3. However, using the clipboard can cause the program
+#    in which I press CTRL-v to lock, especially when
+#    the image that was screenshotted is a large one
+
 # Perform a full screen capture of the active window and save to a file
-bindsym Print exec "maim -i $(xdotool getactivewindow) ~/working/media/screenshots/`date +%Y-%m-%d_%H:%M:%S`.png"
+bindsym Print exec "exec maim -s ~/media/screenshots/`date +%Y-%m-%d_%H:%M:%S`.png"
 
 # Perform a full screen capture of the active window and copy to the clipboard
 bindsym Control+Print exec "exec maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png"
@@ -487,3 +684,12 @@ bindsym Control+Print exec "exec maim -i $(xdotool getactivewindow) | xclip -sel
 bindsym Shift+Print exec "exec maim -s | xclip -selection clipboard -t image/png"
 
 # }}}
+
+# Mouse Workspace Navigation {{{
+
+# Navigate workspaces with Super + scroll anywhere on window
+bindsym --whole-window Mod4+button4 workspace prev_on_output
+bindsym --whole-window Mod4+button5 workspace next_on_output
+
+# }}}
+

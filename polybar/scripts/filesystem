@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#
+# Print the root filesystem usage for polybar.
+#
+#   (no argument)   full:    "󰋊 25% of 2TB"
+#   short           compact: "󰋊 25%/2TB"
+#
+# Only the root filesystem is shown, so the mountpoint is not printed. df -H
+# uses decimal units (2TB, not 1.8TB) and the size is normalised to have no
+# space before the unit. The icon is a byte escape so it cannot be mangled.
+icon=$(printf '\xf3\xb0\x8b\x8a')
+df -H --output=size,pcent / 2>/dev/null | awk -v icon="$icon" -v mode="${1:-full}" '
+  NR == 2 {
+    size = $1;
+    sub(/\.0/, "", size);
+    sub(/T$/, "TB", size);
+    sub(/G$/, "GB", size);
+    sub(/M$/, "MB", size);
+    if (mode == "short") printf "%s %s/%s", icon, $2, size;
+    else printf "%s %s of %s", icon, $2, size;
+  }'

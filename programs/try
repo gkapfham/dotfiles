@@ -1,0 +1,925 @@
+#!/usr/bin/env bash
+
+# This is a bash version of the try C program, available at:
+# https://github.com/tobi/try-cli 
+
+set -euo pipefail
+
+SCRIPT_HEADER="# if you can read this, you didn't launch try from an alias. run try --help."
+DEFAULT_TRIES_PATH_SUFFIX="working/tries"
+
+SELF_PATH="$(realpath "${BASH_SOURCE[0]:-$0}")"
+SCRIPT_DIR="$(dirname "$SELF_PATH")"
+if [[ -f "$SCRIPT_DIR/VERSION" ]]; then
+  TRY_VERSION="$(tr -d '[:space:]' < "$SCRIPT_DIR/VERSION")"
+else
+  TRY_VERSION="dev"
+fi
+
+selector_action="cancel"
+selector_path=""
+selector_old_name=""
+selector_new_name=""
+selector_query=""
+selector_delete_names=()
+
+shell_escape() {
+  local value=${1-}
+  value=${value//\'/\'\"\'\"\'}
+  printf "'%s'" "$value"
+}
+
+expand_path() {
+  local path=${1-}
+  case "$path" in
+    ~)
+      printf '%s\n' "$HOME"
+      ;;
+    ~/*)
+      printf '%s/%s\n' "$HOME" "${path#~/}"
+      ;;
+    *)
+      printf '%s\n' "$path"
+      ;;
+  esac
+}
+
+abspath() {
+  local path
+  path=$(expand_path "$1")
+  if command -v realpath >/dev/null 2>&1; then
+    realpath -m -- "$path"
+  elif [[ "$path" == /* ]]; then
+    printf '%s\n' "$path"
+  else
+    printf '%s/%s\n' "$PWD" "$path"
+  fi
+}
+
+join_path() {
+  printf '%s/%s\n' "$1" "$2"
+}
+
+default_tries_path() {
+  if [[ -n "${TRY_PATH-}" ]]; then
+    abspath "$TRY_PATH"
+    return 0
+  fi
+
+  if [[ -z "${HOME-}" ]]; then
+    return 1
+  fi
+
+  abspath "$HOME/$DEFAULT_TRIES_PATH_SUFFIX"
+}
+
+ensure_tries_dir() {
+  mkdir -p -- "$1"
+}
+
+date_prefix() {
+  date +%F
+}
+
+has_date_prefix() {
+  [[ ${1-} =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}- ]]
+}
+
+is_git_url() {
+  local value=${1-}
+  [[ "$value" == https://* || "$value" == http://* || "$value" == git@* ]]
+}
+
+is_in_git_repo() {
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1
+}
+
+normalize_dir_name() {
+  local input=${1-}
+  local output=""
+  local last_was_hyphen=1
+  local i char
+
+  [[ -n "$input" ]] || return 0
+
+  for ((i = 0; i < ${#input}; i++)); do
+    char=${input:i:1}
+    if [[ "$char" =~ [[:alnum:]_.-] || "$char" =~ [[:space:]] ]]; then
+      :
+    else
+      printf '\n'
+      return 0
+    fi
+  done
+
+  for ((i = 0; i < ${#input}; i++)); do
+    char=${input:i:1}
+    if [[ "$char" =~ [[:space:]-] ]]; then
+      if (( ! last_was_hyphen )); then
+        output+="-"
+        last_was_hyphen=1
+      fi
+    else
+      output+="$char"
+      last_was_hyphen=0
+    fi
+  done
+
+  while [[ "$output" == *- ]]; do
+    output=${output%-}
+  done
+
+  printf '%s\n' "$output"
+}
+
+format_relative_time() {
+  local mtime=${1:-0}
+  local now diff
+  now=$(date +%s)
+  diff=$((now - mtime))
+
+  if (( diff < 60 )); then
+    printf 'just now\n'
+  elif (( diff < 3600 )); then
+    printf '%dm ago\n' $((diff / 60))
+  elif (( diff < 86400 )); then
+    printf '%dh ago\n' $((diff / 3600))
+  else
+    printf '%dd ago\n' $((diff / 86400))
+  fi
+}
+
+preview_tree() {
+  local path=$1
+  if command -v eza >/dev/null 2>&1; then
+    eza --tree --level=3 --color=always --icons -- "$path"
+  else
+    fd . --max-depth 3 "$path" 2>/dev/null
+  fi
+}
+
+print_help() {
+  local current_path
+  current_path=$(default_tries_path 2>/dev/null || printf '')
+
+  cat <<EOF
+try v$TRY_VERSION - ephemeral workspace manager
+
+Commands:
+  try [query|url]      Interactive selector, or clone if URL
+  try clone <url>      Clone repo into dated directory
+  try worktree <name>  Create worktree from current git repo
+  try exec [query]     Output shell script (for manual eval)
+  try --help           Show this help
+
+Defaults:
+  Path: ~/working/tries (override with --path or TRY_PATH)
+  Current: $current_path
+
+Examples:
+  try clone https://github.com/user/repo.git
+  try clone https://github.com/user/repo.git foo
+  try https://github.com/user/repo.git
+  try worktree feature
+EOF
+}
+
+print_exec_script() {
+  local script=${1-}
+  [[ -n "$script" ]] || return 1
+  printf '%s\n' "$SCRIPT_HEADER"
+  printf '%s' "$script"
+}
+
+print_cd_hint() {
+  local path=$1
+  printf 'cd %s\n' "$(shell_escape "$path")"
+  printf '%s\n' "$path"
+}
+
+emit_cd_script() {
+  local path=$1
+  printf 'touch %s && \\\n' "$(shell_escape "$path")"
+  printf '  cd %s && \\\n' "$(shell_escape "$path")"
+  printf '  printf "%%s\\n" %s\n' "$(shell_escape "$path")"
+}
+
+emit_mkdir_script() {
+  local path=$1
+  printf 'mkdir -p %s && \\\n' "$(shell_escape "$path")"
+  printf '  cd %s && \\\n' "$(shell_escape "$path")"
+  printf '  printf "%%s\\n" %s\n' "$(shell_escape "$path")"
+}
+
+emit_clone_script() {
+  local url=$1
+  local path=$2
+  printf 'git clone %s %s && \\\n' "$(shell_escape "$url")" "$(shell_escape "$path")"
+  printf '  cd %s && \\\n' "$(shell_escape "$path")"
+  printf '  printf "%%s\\n" %s\n' "$(shell_escape "$path")"
+}
+
+emit_worktree_script() {
+  local path=$1
+  printf 'git worktree add %s && \\\n' "$(shell_escape "$path")"
+  printf '  cd %s && \\\n' "$(shell_escape "$path")"
+  printf '  printf "%%s\\n" %s\n' "$(shell_escape "$path")"
+}
+
+emit_rename_script() {
+  local base_path=$1
+  local old_name=$2
+  local new_name=$3
+  local new_path
+  new_path=$(join_path "$base_path" "$new_name")
+  printf 'cd %s && \\\n' "$(shell_escape "$base_path")"
+  printf 'mv %s %s && \\\n' "$(shell_escape "$old_name")" "$(shell_escape "$new_name")"
+  printf '  cd %s && \\\n' "$(shell_escape "$new_path")"
+  printf '  printf "%%s\\n" %s\n' "$(shell_escape "$new_path")"
+}
+
+emit_delete_script() {
+  local base_path=$1
+  shift
+  local cwd=${PWD}
+  printf 'cd %s && \\\n' "$(shell_escape "$base_path")"
+  local name
+  for name in "$@"; do
+    [[ "$name" == */* ]] && return 1
+    printf '  [[ -d %s ]] && rm -rf %s && \\\n' "$(shell_escape "$name")" "$(shell_escape "$name")"
+  done
+  printf '  ( cd %s 2>/dev/null || cd "$HOME" )\n' "$(shell_escape "$cwd")"
+}
+
+execute_cd_action() {
+  local path=$1
+  touch -- "$path"
+  print_cd_hint "$path"
+}
+
+execute_mkdir_action() {
+  local path=$1
+  mkdir -p -- "$path"
+  print_cd_hint "$path"
+}
+
+execute_clone_action() {
+  local url=$1
+  local path=$2
+  git clone -- "$url" "$path"
+  print_cd_hint "$path"
+}
+
+execute_worktree_action() {
+  local path=$1
+  git worktree add -- "$path"
+  print_cd_hint "$path"
+}
+
+execute_rename_action() {
+  local base_path=$1
+  local old_name=$2
+  local new_name=$3
+  local new_path
+  new_path=$(join_path "$base_path" "$new_name")
+  (
+    cd -- "$base_path"
+    mv -- "$old_name" "$new_name"
+  )
+  print_cd_hint "$new_path"
+}
+
+execute_delete_action() {
+  local base_path=$1
+  shift
+  (
+    cd -- "$base_path"
+    local name
+    for name in "$@"; do
+      [[ "$name" == */* ]] && return 1
+      [[ -d "$name" ]] && rm -rf -- "$name"
+    done
+  )
+}
+
+make_clone_dirname() {
+  local url=$1
+  local custom_name=${2-}
+  local prefix
+  prefix=$(date_prefix)
+
+  if [[ -n "$custom_name" ]]; then
+    printf '%s-%s\n' "$prefix" "$custom_name"
+    return 0
+  fi
+
+  local uri=${url%.git}
+  local user=""
+  local repo=""
+
+  if [[ "$uri" =~ ^https?://[^/]+/([^/]+)/([^/]+)$ ]]; then
+    user=${BASH_REMATCH[1]}
+    repo=${BASH_REMATCH[2]}
+  elif [[ "$uri" =~ ^git@[^:]+:([^/]+)/([^/]+)$ ]]; then
+    user=${BASH_REMATCH[1]}
+    repo=${BASH_REMATCH[2]}
+  else
+    repo=${uri##*/}
+  fi
+
+  if [[ -n "$user" ]]; then
+    printf '%s-%s-%s\n' "$prefix" "$user" "$repo"
+  else
+    printf '%s-%s\n' "$prefix" "$repo"
+  fi
+}
+
+read_yes_confirmation() {
+  local prompt=$1
+  local reply
+  printf '%s' "$prompt" > /dev/tty
+  IFS= read -r reply < /dev/tty || return 1
+  [[ "$reply" == "YES" ]]
+}
+
+prompt_rename_name() {
+  local old_name=$1
+  local prefix old_suffix input
+
+  if [[ "$old_name" =~ ^([0-9]{4}-[0-9]{2}-[0-9]{2}-)(.*)$ ]]; then
+    prefix=${BASH_REMATCH[1]}
+    old_suffix=${BASH_REMATCH[2]}
+  else
+    prefix="$(date_prefix)-"
+    old_suffix=$old_name
+  fi
+
+  printf 'Current: %s\n' "$old_name" > /dev/tty
+  read -r -e -i "$prefix" -p 'New name: ' input < /dev/tty || return 1
+
+  [[ -n "$input" ]] || return 1
+  [[ "$input" != */* ]] || return 1
+
+  if [[ "$input" == "$prefix" && -n "$old_suffix" ]]; then
+    printf '%s%s\n' "$prefix" "$old_suffix"
+  else
+    printf '%s\n' "$input"
+  fi
+}
+
+run_selector_fzf() {
+  local base_path=$1
+  local initial_query=${2-}
+  local no_colors=${3:-0}
+  local query=$initial_query
+  local self_escaped base_escaped reload_cmd preview_cmd header
+  self_escaped=$(shell_escape "$SELF_PATH")
+  base_escaped=$(shell_escape "$base_path")
+  header='Enter: select/create  Ctrl-R: rename  Ctrl-D: delete  Tab: mark  Esc: cancel'
+
+  while true; do
+    reload_cmd="$self_escaped __candidates $base_escaped {q} $no_colors"
+    preview_cmd="$self_escaped __preview {2} {3}"
+
+    local -a output=()
+    FZF_DEFAULT_COMMAND='' mapfile -t output < <(
+      fzf \
+        --ansi \
+        --multi \
+        --phony \
+        --no-bold \
+        --cycle \
+        --no-separator \
+        --no-scrollbar \
+        --print-query \
+        --expect=ctrl-d,ctrl-r \
+        --query="$query" \
+        --delimiter=$'\t' \
+        --with-nth=5 \
+        --header="$header" \
+        --bind "start:reload:$reload_cmd" \
+        --bind "change:reload:$reload_cmd" \
+        --bind 'tab:toggle+down' \
+        --bind 'shift-tab:toggle+up' \
+        --bind 'ctrl-/:change-preview-window(down|hidden|)' \
+        --preview "$preview_cmd"
+    )
+    local status=$?
+
+    if (( status != 0 )); then
+      selector_action="cancel"
+      selector_query=$query
+      return 1
+    fi
+
+    query=${output[0]-}
+    selector_query=$query
+    local key=${output[1]-}
+    local -a lines=()
+    if (( ${#output[@]} > 2 )); then
+      lines=("${output[@]:2}")
+    fi
+
+    if [[ "$key" == "ctrl-r" ]]; then
+      if (( ${#lines[@]} == 0 )); then
+        printf 'Nothing selected to rename.\n' > /dev/tty
+        continue
+      fi
+      local score kind path name display new_name
+      IFS=$'\t' read -r score kind path name display <<< "${lines[0]}"
+      if [[ "$kind" != "DIR" ]]; then
+        printf 'Only existing tries can be renamed.\n' > /dev/tty
+        continue
+      fi
+      if ! new_name=$(prompt_rename_name "$name"); then
+        continue
+      fi
+      if [[ "$new_name" == "$name" ]]; then
+        continue
+      fi
+      selector_action="rename"
+      selector_path=$path
+      selector_old_name=$name
+      selector_new_name=$new_name
+      return 0
+    fi
+
+    if [[ "$key" == "ctrl-d" ]]; then
+      local -a delete_names=()
+      local line score kind path name display
+      if (( ${#lines[@]} == 0 )); then
+        printf 'Nothing selected to delete.\n' > /dev/tty
+        continue
+      fi
+      for line in "${lines[@]}"; do
+        IFS=$'\t' read -r score kind path name display <<< "$line"
+        [[ "$kind" == "DIR" ]] || continue
+        delete_names+=("$name")
+      done
+      if (( ${#delete_names[@]} == 0 )); then
+        printf 'Only existing tries can be deleted.\n' > /dev/tty
+        continue
+      fi
+      printf 'Delete %d director%s?\n' "${#delete_names[@]}" "$([[ ${#delete_names[@]} -eq 1 ]] && printf 'y' || printf 'ies')" > /dev/tty
+      local i max_show
+      max_show=${#delete_names[@]}
+      if (( max_show > 10 )); then
+        max_show=10
+      fi
+      for ((i = 0; i < max_show; i++)); do
+        printf '  - %s\n' "${delete_names[i]}" > /dev/tty
+      done
+      if (( ${#delete_names[@]} > 10 )); then
+        printf '  ...and %d more\n' "$(( ${#delete_names[@]} - 10 ))" > /dev/tty
+      fi
+      if ! read_yes_confirmation 'Type YES to confirm: '; then
+        continue
+      fi
+      selector_action="delete"
+      selector_delete_names=("${delete_names[@]}")
+      return 0
+    fi
+
+    if (( ${#lines[@]} > 1 )); then
+      printf 'Use Ctrl-D to delete marked tries.\n' > /dev/tty
+      continue
+    fi
+
+    if (( ${#lines[@]} == 0 )); then
+      selector_action="cancel"
+      return 1
+    fi
+
+    local score kind path name display
+    IFS=$'\t' read -r score kind path name display <<< "${lines[0]}"
+    if [[ "$kind" == "DIR" ]]; then
+      selector_action="cd"
+      selector_path=$path
+      return 0
+    fi
+
+    local normalized new_dir full_path
+    normalized=$(normalize_dir_name "$query")
+    if [[ -z "$normalized" ]]; then
+      printf 'Invalid try name: %s\n' "$query" > /dev/tty
+      continue
+    fi
+    new_dir="$(date_prefix)-$normalized"
+    full_path=$(join_path "$base_path" "$new_dir")
+    selector_action="mkdir"
+    selector_path=$full_path
+    return 0
+  done
+}
+
+selector_emit_or_execute() {
+  local exec_mode=$1
+  local base_path=$2
+
+  case "$selector_action" in
+    cd)
+      if [[ "$exec_mode" == "1" ]]; then
+        print_exec_script "$(emit_cd_script "$selector_path")"
+      else
+        execute_cd_action "$selector_path"
+      fi
+      ;;
+    mkdir)
+      if [[ "$exec_mode" == "1" ]]; then
+        print_exec_script "$(emit_mkdir_script "$selector_path")"
+      else
+        execute_mkdir_action "$selector_path"
+      fi
+      ;;
+    rename)
+      if [[ "$exec_mode" == "1" ]]; then
+        print_exec_script "$(emit_rename_script "$base_path" "$selector_old_name" "$selector_new_name")"
+      else
+        execute_rename_action "$base_path" "$selector_old_name" "$selector_new_name"
+      fi
+      ;;
+    delete)
+      if [[ "$exec_mode" == "1" ]]; then
+        print_exec_script "$(emit_delete_script "$base_path" "${selector_delete_names[@]}")"
+      else
+        execute_delete_action "$base_path" "${selector_delete_names[@]}"
+      fi
+      ;;
+    *)
+      printf 'Cancelled.\n' >&2
+      return 1
+      ;;
+  esac
+}
+
+cmd_init() {
+  local tries_path=$1
+  shift || true
+  if (( $# > 0 )) && [[ ${1-} != -* ]]; then
+    tries_path=$(abspath "$1")
+  fi
+
+  local escaped_self escaped_path shell_name
+  escaped_self=$(shell_escape "$SELF_PATH")
+  escaped_path=$(shell_escape "$tries_path")
+  shell_name=${SHELL-}
+
+  if [[ "$shell_name" == *fish* ]]; then
+    printf 'function try\n'
+    printf '  set -l out (%s exec --path %s $argv 2>/dev/tty)\n' "$escaped_self" "$escaped_path"
+    printf '  or begin; echo $out; return $status; end\n'
+    printf '  eval $out\n'
+    printf 'end\n'
+  else
+    printf 'try() {\n'
+    printf '  local out\n'
+    printf '  out=$(%s exec --path %s "$@" 2>/dev/tty) || {\n' "$escaped_self" "$escaped_path"
+    printf '    echo "$out"\n'
+    printf '    return $?\n'
+    printf '  }\n'
+    printf '  eval "$out"\n'
+    printf '}\n'
+  fi
+}
+
+cmd_clone() {
+  local exec_mode=$1
+  local tries_path=$2
+  local url=${3-}
+  local name=${4-}
+
+  if [[ -z "$url" ]]; then
+    printf 'Usage: try clone <url> [name]\n' >&2
+    return 1
+  fi
+
+  local dir_name full_path
+  dir_name=$(make_clone_dirname "$url" "$name")
+  full_path=$(join_path "$tries_path" "$dir_name")
+
+  if [[ "$exec_mode" == "1" ]]; then
+    print_exec_script "$(emit_clone_script "$url" "$full_path")"
+  else
+    execute_clone_action "$url" "$full_path"
+  fi
+}
+
+cmd_worktree() {
+  local exec_mode=$1
+  local tries_path=$2
+  local name=${3-}
+
+  if [[ -z "$name" ]]; then
+    printf 'Usage: try worktree <name>\n' >&2
+    return 1
+  fi
+
+  local full_path
+  full_path=$(join_path "$tries_path" "$(date_prefix)-$name")
+
+  if is_in_git_repo; then
+    if [[ "$exec_mode" == "1" ]]; then
+      print_exec_script "$(emit_worktree_script "$full_path")"
+    else
+      execute_worktree_action "$full_path"
+    fi
+  else
+    if [[ "$exec_mode" == "1" ]]; then
+      print_exec_script "$(emit_mkdir_script "$full_path")"
+    else
+      execute_mkdir_action "$full_path"
+    fi
+  fi
+}
+
+cmd_selector() {
+  local exec_mode=$1
+  local tries_path=$2
+  local initial_filter=${3-}
+  local no_colors=${4:-0}
+
+  run_selector_fzf "$tries_path" "$initial_filter" "$no_colors" || true
+  selector_emit_or_execute "$exec_mode" "$tries_path"
+}
+
+cmd_route() {
+  local exec_mode=$1
+  local tries_path=$2
+  local no_colors=${3:-0}
+  shift 3 || true
+
+  if (( $# == 0 )); then
+    cmd_selector "$exec_mode" "$tries_path" "" "$no_colors"
+    return $?
+  fi
+
+  local subcmd=$1
+  shift || true
+
+  case "$subcmd" in
+    --version|-v)
+      printf 'try %s\n' "$TRY_VERSION"
+      ;;
+    --help|-h)
+      return 0
+      ;;
+    --no-colors)
+      cmd_route "$exec_mode" "$tries_path" 1 "$@"
+      ;;
+    init)
+      cmd_init "$tries_path" "$@"
+      ;;
+    cd)
+      if (( $# > 0 )) && is_git_url "$1"; then
+        cmd_clone "$exec_mode" "$tries_path" "$@"
+      else
+        cmd_selector "$exec_mode" "$tries_path" "${1-}" "$no_colors"
+      fi
+      ;;
+    clone)
+      cmd_clone "$exec_mode" "$tries_path" "$@"
+      ;;
+    worktree)
+      cmd_worktree "$exec_mode" "$tries_path" "$@"
+      ;;
+    .)
+      if (( $# == 0 )); then
+        printf 'Usage: try . <name>\n' >&2
+        printf 'The name argument is required for worktree creation.\n' >&2
+        return 1
+      fi
+      cmd_worktree "$exec_mode" "$tries_path" "$@"
+      ;;
+    *)
+      if is_git_url "$subcmd"; then
+        cmd_clone "$exec_mode" "$tries_path" "$subcmd" "$@"
+      else
+        cmd_selector "$exec_mode" "$tries_path" "$subcmd" "$no_colors"
+      fi
+      ;;
+  esac
+}
+
+cmd_candidates() {
+  local base_path
+  base_path=$(abspath "$1")
+  local query=${2-}
+  local no_colors=${3:-0}
+  local now
+  now=$(date +%s)
+
+  while IFS= read -r -d '' full_path; do
+    full_path=${full_path%/}
+    [[ -n "$full_path" ]] || continue
+    local entry mtime
+    entry=${full_path##*/}
+    mtime=$(stat -c %Y -- "$full_path" 2>/dev/null || printf '0')
+    printf '%s\t%s\t%s\n' "$mtime" "$entry" "$full_path"
+  done < <(fd . "$base_path" --max-depth 1 --type d --absolute-path --print0 2>/dev/null) | \
+    awk -F '\t' -v query="$query" -v now="$now" -v no_colors="$no_colors" '
+      function lower(s,    t) { t = s; return tolower(t) }
+      function has_date(name) { return name ~ /^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-/ }
+      function reltime(mtime,    diff) {
+        diff = now - mtime
+        if (diff < 60) return "just now"
+        if (diff < 3600) return int(diff / 60) "m ago"
+        if (diff < 86400) return int(diff / 3600) "h ago"
+        return int(diff / 86400) "d ago"
+      }
+      function time_bonus(mtime,    hours) {
+        hours = (now - mtime) / 3600.0
+        return 3.0 / sqrt(hours + 1)
+      }
+      function match_and_render(name, q, mtime,    text, query_l, qlen, i, ch, prev, qi, last_pos, gap, fuzzy, score, out, date_dim, match_on, reset, prefix_end) {
+        text = lower(name)
+        query_l = lower(q)
+        qlen = length(query_l)
+        qi = 1
+        last_pos = 0
+        fuzzy = 0
+        prefix_end = has_date(name) ? 11 : 0
+        date_dim = no_colors ? "" : "\033[90m"
+        match_on = no_colors ? "" : "\033[1;33m"
+        reset = no_colors ? "" : "\033[0m"
+        delete matched
+
+        if (qlen == 0) {
+          if (prefix_end > 0 && no_colors == 0) {
+            return time_bonus(mtime) SUBSEP date_dim substr(name, 1, 11) reset substr(name, 12)
+          }
+          return time_bonus(mtime) SUBSEP name
+        }
+
+        for (i = 1; i <= length(text); i++) {
+          ch = substr(text, i, 1)
+          if (qi <= qlen && ch == substr(query_l, qi, 1)) {
+            fuzzy += 1.0
+            if (i == 1) {
+              fuzzy += 1.0
+            } else {
+              prev = substr(text, i - 1, 1)
+              if (prev !~ /[[:alnum:]]/) fuzzy += 1.0
+            }
+            if (last_pos > 0) {
+              gap = i - last_pos - 1
+              fuzzy += 2.0 / sqrt(gap + 1)
+            }
+            matched[i] = 1
+            last_pos = i
+            qi++
+          } else {
+            matched[i] = 0
+          }
+        }
+
+        if (qi <= qlen) return 0 SUBSEP ""
+
+        if (last_pos > 0) fuzzy *= (qlen / last_pos)
+        fuzzy *= (10.0 / (length(name) + 10.0))
+        score = fuzzy + time_bonus(mtime)
+        if (has_date(name)) score += 2.0
+
+        out = ""
+        for (i = 1; i <= length(name); i++) {
+          ch = substr(name, i, 1)
+          if (matched[i]) {
+            out = out match_on ch reset
+          } else if (prefix_end > 0 && i <= prefix_end && no_colors == 0) {
+            out = out date_dim ch reset
+          } else {
+            out = out ch
+          }
+        }
+        return score SUBSEP out
+      }
+      {
+        split(match_and_render($2, query, $1), parts, SUBSEP)
+        score = parts[1] + 0
+        rendered = parts[2]
+        if (length(query) > 0 && score <= 0) next
+        printf "%.6f\tDIR\t%s\t%s\tdir  %s  %s, %.1f\n", score, $3, $2, rendered, reltime($1), score
+      }
+    ' | sort -t $'\t' -k1,1gr -k4,4
+
+  if [[ -n "$query" ]]; then
+    local preview_name target_path
+    preview_name="$(date_prefix)-${query// /-}"
+    target_path=$(join_path "$base_path" "$preview_name")
+    printf '%s\tCREATE\t%s\t%s\tnew  %s\n' '-1' "$target_path" "$preview_name" "$preview_name"
+  fi
+}
+
+cmd_preview() {
+  local kind=${1-}
+  local path=${2-}
+
+  case "$kind" in
+    DIR)
+      if [[ -d "$path" ]]; then
+        preview_tree "$path"
+      else
+        printf 'Missing directory: %s\n' "$path"
+      fi
+      ;;
+    CREATE)
+      printf 'Create new try:\n\n%s\n' "$path"
+      ;;
+    *)
+      printf 'No preview available.\n'
+      ;;
+  esac
+}
+
+main() {
+  if [[ ${1-} == __candidates ]]; then
+    shift
+    cmd_candidates "$@"
+    return 0
+  fi
+
+  if [[ ${1-} == __preview ]]; then
+    shift
+    cmd_preview "$@"
+    return 0
+  fi
+
+  local tries_path=""
+  local no_colors=0
+  local -a positional=()
+
+  while (( $# > 0 )); do
+    case "$1" in
+      --help|-h)
+        print_help
+        return 0
+        ;;
+      --version|-v)
+        printf 'try %s\n' "$TRY_VERSION"
+        return 0
+        ;;
+      --no-colors)
+        no_colors=1
+        shift
+        ;;
+      --path=*)
+        tries_path=$(abspath "${1#--path=}")
+        shift
+        ;;
+      --path)
+        if (( $# < 2 )); then
+          printf 'Error: --path requires a value.\n' >&2
+          return 1
+        fi
+        tries_path=$(abspath "$2")
+        shift 2
+        ;;
+      *)
+        positional+=("$1")
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "$tries_path" ]]; then
+    tries_path=$(default_tries_path) || {
+      printf 'Error: Could not determine tries path. Set HOME, TRY_PATH, or use --path.\n' >&2
+      return 1
+    }
+  fi
+
+  ensure_tries_dir "$tries_path"
+
+  if (( ${#positional[@]} == 0 )); then
+    cmd_selector 0 "$tries_path" "" "$no_colors"
+    return $?
+  fi
+
+  local command=${positional[0]}
+
+  case "$command" in
+    init)
+      cmd_init "$tries_path" "${positional[@]:1}"
+      ;;
+    exec)
+      cmd_route 1 "$tries_path" "$no_colors" "${positional[@]:1}"
+      ;;
+    cd)
+      cmd_selector 0 "$tries_path" "${positional[1]-}" "$no_colors"
+      ;;
+    clone)
+      cmd_clone 0 "$tries_path" "${positional[@]:1}"
+      ;;
+    worktree)
+      cmd_worktree 0 "$tries_path" "${positional[@]:1}"
+      ;;
+    *)
+      if is_git_url "$command"; then
+        cmd_clone 0 "$tries_path" "${positional[@]}"
+      else
+        cmd_selector 0 "$tries_path" "$command" "$no_colors"
+      fi
+      ;;
+  esac
+}
+
+main "$@"
