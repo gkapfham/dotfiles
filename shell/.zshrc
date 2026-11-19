@@ -704,7 +704,7 @@ alias zz='zi'
 # Redefine Aliases {{{
 
 # Already defined in oh-my-zsh, redefine to use eza
-alias ls="eza --color=always --icons"
+alias ls="eza --color=always --icons always"
 
 # }}}
 
