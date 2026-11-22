@@ -1,0 +1,297 @@
+#!/usr/bin/env bash
+# pdfclip - Extract and format text from PDF for clipboard
+# Usage: pdfclip [OPTIONS] <pdf-file> [page-range]
+#
+# OPTIONS:
+#   --clean          Enable text cleaning (default)
+#   --no-clean       Disable all text cleaning
+#   --conservative   Use conservative cleaning (safer, fewer changes)
+#   --aggressive     Use aggressive cleaning (removes more artifacts)
+#   --help           Show this help message
+#
+# NOTE: --no-clean cannot be combined with --conservative or --aggressive
+#
+# EXAMPLES:
+#   pdfclip paper.pdf              # Standard cleaning
+#   pdfclip --no-clean paper.pdf   # Raw extraction
+#   pdfclip --aggressive paper.pdf # Heavy cleanup
+#   pdfclip paper.pdf 5            # Extract page 5 only
+#   pdfclip --last-accessed        # Use most recent PDF
+
+set -e
+
+# Configuration defaults
+CLEAN_MODE="standard"  # options: none, conservative, standard, aggressive
+
+# Detect display server for clipboard
+if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+    COPY_CMD="wl-copy"
+else
+    COPY_CMD="xclip -selection clipboard"
+fi
+
+# Function to format text: remove hard line breaks, preserve paragraphs
+format_text() {
+    # Steps:
+    # 1. Remove carriage returns
+    # 2. Handle hyphenation at end of lines (join words split with hyphen)
+    # 3. Join lines that end without punctuation (likely mid-paragraph)
+    # 4. Preserve paragraph breaks (double newlines or lines ending with .:!?)
+    # 5. Clean up multiple spaces
+    # 6. Wrap to 80 columns for readability
+    
+    sed 's/\r$//' | \
+    sed 's/-$//' | \
+    awk '
+        /^[[:space:]]*$/ { 
+            if (line != "") {
+                print line
+                line = ""
+            }
+            print ""
+            next
+        }
+        
+        {
+            # Remove leading/trailing whitespace
+            gsub(/^[[:space:]]+|[[:space:]]+$/, "")
+            
+            # If line ends with punctuation or is short, its a paragraph end
+            if (line != "" && ($0 ~ /[.!?:]$/ || length($0) < 30)) {
+                line = line " " $0
+                print line
+                line = ""
+            } else {
+                # Continue paragraph
+                if (line == "") {
+                    line = $0
+                } else {
+                    line = line " " $0
+                }
+            }
+        }
+        
+        END {
+            if (line != "") print line
+        }
+    ' | \
+    sed 's/  */ /g' | \
+    fold -s -w 80
+}
+
+# Function to remove line numbers - CONSERVATIVE version
+# Only removes obvious line numbers (standalone or with large gaps)
+remove_line_numbers_conservative() {
+    # Only remove if 4+ spaces after 1-4 digit number (typical line number gap)
+    sed -E 's/^[[:space:]]*[0-9]{1,4}[[:space:]]{4,}//' | \
+    sed -E '/^[[:space:]]*[0-9]{1,4}[[:space:]]*$/d'
+}
+
+# Function to remove line numbers - AGGRESSIVE version
+# Removes more patterns but risks removing actual content
+remove_line_numbers_aggressive() {
+    # Remove line numbers that appear at the beginning of lines
+    # Pattern: optional whitespace, 1-4 digit number, whitespace, then content
+    # Also removes lines that are ONLY a line number
+    sed -E 's/^[[:space:]]*[0-9]{1,4}[[:space:]]+//' | \
+    sed -E '/^[[:space:]]*[0-9]{1,4}[[:space:]]*$/d'
+}
+
+# Function to remove line numbers - STANDARD version (balanced)
+remove_line_numbers_standard() {
+    # Remove if 2+ spaces after number (moderate gap)
+    sed -E 's/^[[:space:]]*[0-9]{1,4}[[:space:]]{2,}//' | \
+    sed -E '/^[[:space:]]*[0-9]{1,4}[[:space:]]*$/d'
+}
+
+# Function to clean headers/footers - CONSERVATIVE version
+clean_headers_conservative() {
+    # Only remove standalone page numbers on their own lines
+    sed -E '/^[[:space:]]*[0-9]+[[:space:]]*$/d'
+}
+
+# Function to clean headers/footers - STANDARD version
+clean_headers_standard() {
+    # Remove page numbers and common conference/journal markers
+    sed -E '/^[[:space:]]*[0-9]+[[:space:]]*$/d' | \
+    sed -E '/^(Proceedings|ACM|IEEE)[[:space:]]/d'
+}
+
+# Function to clean headers/footers - AGGRESSIVE version
+clean_headers_aggressive() {
+    # Remove more patterns including copyright, DOI, section headers
+    sed -E '/^[[:space:]]*[0-9]+[[:space:]]*$/d' | \
+    sed -E '/^(Proceedings|ACM|IEEE|Copyright|DOI|Figure|Table)[[:space:]]/d' | \
+    sed -E '/^[[:space:]]*(ABSTRACT|INTRODUCTION|REFERENCES|CONCLUSION)[[:space:]]*$/d'
+}
+
+# Main cleaning dispatcher
+clean_text() {
+    local mode="$1"
+    
+    case "$mode" in
+        none)
+            # No cleaning, just pass through
+            cat
+            ;;
+        conservative)
+            clean_headers_conservative | remove_line_numbers_conservative
+            ;;
+        standard)
+            clean_headers_standard | remove_line_numbers_standard
+            ;;
+        aggressive)
+            clean_headers_aggressive | remove_line_numbers_aggressive
+            ;;
+        *)
+            # Default to standard
+            clean_headers_standard | remove_line_numbers_standard
+            ;;
+    esac
+}
+
+# Function to get total pages
+get_page_count() {
+    pdfinfo "$1" | grep "Pages:" | awk '{print $2}'
+}
+
+# Function to show fzf selector for pages
+select_pages() {
+    local pdf="$1"
+    local total_pages=$(get_page_count "$pdf")
+    
+    seq 1 "$total_pages" | fzf \
+        --multi \
+        --preview "pdftotext -f {} -l {} -nopgbrk -layout '$pdf' - | head -80" \
+        --preview-window=right:60%:wrap \
+        --header="Select page(s) (TAB to multi-select, ENTER to confirm)" \
+        --bind "ctrl-a:select-all" \
+        --bind "ctrl-d:deselect-all"
+}
+
+# Function to show usage
+show_usage() {
+    sed -n '2,16p' "$0" | sed 's/^# //'
+}
+
+# Parse command line arguments
+PDF_FILE=""
+PAGE_RANGE=""
+MODE="interactive"
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --help|-h)
+            show_usage
+            exit 0
+            ;;
+        --no-clean)
+            CLEAN_MODE="none"
+            shift
+            ;;
+        --clean)
+            # Explicitly set to standard (default)
+            if [ "$CLEAN_MODE" = "none" ]; then
+                echo "Error: Cannot use --clean with --no-clean"
+                exit 1
+            fi
+            CLEAN_MODE="standard"
+            shift
+            ;;
+        --conservative)
+            if [ "$CLEAN_MODE" = "none" ]; then
+                echo "Error: Cannot use --conservative with --no-clean"
+                exit 1
+            fi
+            CLEAN_MODE="conservative"
+            shift
+            ;;
+        --aggressive)
+            if [ "$CLEAN_MODE" = "none" ]; then
+                echo "Error: Cannot use --aggressive with --no-clean"
+                exit 1
+            fi
+            CLEAN_MODE="aggressive"
+            shift
+            ;;
+        --last-accessed)
+            # Find most recently accessed PDF
+            PDF_FILE=$(find ~ -name "*.pdf" -type f -atime -1 2>/dev/null | head -1)
+            if [ -z "$PDF_FILE" ]; then
+                echo "No recently accessed PDF found"
+                exit 1
+            fi
+            echo "Using: $PDF_FILE"
+            shift
+            ;;
+        -*)
+            echo "Unknown option: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+        *)
+            # This is the PDF file or page range
+            if [ -z "$PDF_FILE" ]; then
+                PDF_FILE="$1"
+            elif [ -z "$PAGE_RANGE" ]; then
+                PAGE_RANGE="$1"
+                MODE="direct"
+            else
+                echo "Error: Too many arguments"
+                exit 1
+            fi
+            shift
+            ;;
+    esac
+done
+
+# Validate we have a PDF file
+if [ -z "$PDF_FILE" ]; then
+    echo "Error: No PDF file specified"
+    echo "Use --help for usage information"
+    exit 1
+fi
+
+if [ ! -f "$PDF_FILE" ]; then
+    echo "Error: File not found: $PDF_FILE"
+    exit 1
+fi
+
+# Main execution
+if [ "$MODE" = "direct" ]; then
+    # Direct page range extraction
+    pdftotext -f "$PAGE_RANGE" -l "$PAGE_RANGE" -nopgbrk -layout "$PDF_FILE" - | \
+        clean_text "$CLEAN_MODE" | \
+        format_text | \
+        $COPY_CMD
+    echo "Page(s) $PAGE_RANGE extracted (${CLEAN_MODE} cleaning) and copied to clipboard!"
+    exit 0
+fi
+
+# Interactive mode with fzf
+echo "Select page(s) to extract... (cleaning mode: $CLEAN_MODE)"
+SELECTED=$(select_pages "$PDF_FILE")
+
+if [ -z "$SELECTED" ]; then
+    echo "No pages selected"
+    exit 0
+fi
+
+# Extract each selected page and concatenate
+TEMP_FILE=$(mktemp)
+for page in $SELECTED; do
+    {
+        echo ""
+        echo ">>> Page $page"
+        echo ""
+        pdftotext -f "$page" -l "$page" -nopgbrk -layout "$PDF_FILE" - | \
+            clean_text "$CLEAN_MODE" | \
+            format_text
+    } >> "$TEMP_FILE"
+done
+
+cat "$TEMP_FILE" | $COPY_CMD
+rm "$TEMP_FILE"
+
+PAGE_COUNT=$(echo "$SELECTED" | wc -w)
+echo "$PAGE_COUNT page(s) extracted (${CLEAN_MODE} cleaning) and copied to clipboard!"

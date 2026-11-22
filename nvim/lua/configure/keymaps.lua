@@ -29,10 +29,10 @@ vim.keymap.set("n", "<Space>qq", "<cmd>qa!<cr>", { desc = "Custom keymap: Quit a
 
 -- }}}
 
--- Use vim.cmd
+-- Spelling key mappings {{{
 
 vim.cmd([[
-" Remove trailing whitespace
+" Remove trailing blank spaces
 nnoremap <leader>rtw :%s/\s\+$//e<CR>
 " Fix a misspelling with next-best word
 nmap <silent> zn <Plug>(SpellRotateForward)
@@ -40,5 +40,21 @@ nmap <silent> zp <Plug>(SpellRotateBackward)
 vmap <silent> zn <Plug>(SpellRotateForwardV)
 vmap <silent> zp <Plug>(SpellRotateBackwardV)
 " Toggle the display of spelling mistakes
-nmap <leader>s :set spell!<CR>
+nmap <leader>ss :set spell!<CR>
 ]])
+
+-- }}}
+
+-- Yank with file paths {{{
+
+local yank = require 'configure.yank'
+
+vim.keymap.set('v', '<Space>yaa', function()
+  yank.yank_visual_with_path(yank.get_buffer_absolute(), 'absolute')
+end, { desc = '[Y]ank selection with [A]bsolute path' })
+
+vim.keymap.set('v', '<Space>yar', function()
+  yank.yank_visual_with_path(yank.get_buffer_cwd_relative(), 'relative')
+end, { desc = '[Y]ank selection with [R]elative path' })
+
+-- }}}

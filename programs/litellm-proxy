@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# Start the LiteLLM proxy for routing between local LLM backends.
+# Runs on any system with uvx installed (Ubuntu, NixOS, macOS, etc.).
+#
+# Usage:
+#   litellm-proxy
+#
+# Environment:
+#   LITELLM_CONFIG   Path to config file (default: ~/litellm/config.yml)
+#   LITELLM_HOST     Bind address (default: 0.0.0.0)
+#   LITELLM_PORT     Listen port (default: 4160)
+
+set -euo pipefail
+
+config="${LITELLM_CONFIG:-${HOME}/litellm/config.yml}"
+host="${LITELLM_HOST:-0.0.0.0}"
+port="${LITELLM_PORT:-4160}"
+
+if [[ ! -f "${config}" ]]; then
+  echo "Error: LiteLLM config not found: ${config}" >&2
+  echo "Set LITELLM_CONFIG or create the file." >&2
+  exit 1
+fi
+
+if ! command -v uvx >/dev/null 2>&1; then
+  echo "Error: uvx is not installed or not in PATH." >&2
+  exit 1
+fi
+
+exec uvx --from 'litellm[proxy]' litellm \
+  --config "${config}" \
+  --host "${host}" \
+  --port "${port}" \
+  "$@"

@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+# zathura-yank - Copy selected text with page number (formatted as "Page X: text")
+# Includes line wrapping for better pasting into text editors
+# Called from zathura with: map y exec "zathura-yank $PAGE"
+
+set -e
+
+# Ensure DISPLAY is set for X11 clipboard access
+if [ -z "$DISPLAY" ]; then
+    export DISPLAY=:0
+fi
+
+if [ -z "$XAUTHORITY" ] && [ -f "$HOME/.Xauthority" ]; then
+    export XAUTHORITY="$HOME/.Xauthority"
+fi
+
+PAGE="$1"
+
+# Function to format text: remove hard line breaks, preserve paragraphs
+format_text() {
+    # Steps:
+    # 1. Remove carriage returns
+    # 2. Handle hyphenation at end of lines (join words split with hyphen)
+    # 3. Join lines that end without punctuation (likely mid-paragraph)
+    # 4. Preserve paragraph breaks (double newlines or lines ending with .:!?)
+    # 5. Clean up multiple spaces
+    # 6. Wrap to 80 columns for readability
+    
+    sed 's/\r$//' | \
+    sed 's/-$//' | \
+    awk '
+        /^[[:space:]]*$/ { 
+            if (line != "") {
+                print line
+                line = ""
+            }
+            print ""
+            next
+        }
+        
+        {
+            # Remove leading/trailing whitespace
+            gsub(/^[[:space:]]+|[[:space:]]+$/, "")
+            
+            # If line ends with punctuation or is short, its a paragraph end
+            if (line != "" && ($0 ~ /[.!?:]$/ || length($0) < 30)) {
+                line = line " " $0
+                print line
+                line = ""
+            } else {
+                # Continue paragraph
+                if (line == "") {
+                    line = $0
+                } else {
+                    line = line " " $0
+                }
+            }
+        }
+        
+        END {
+            if (line != "") print line
+        }
+    ' | \
+    sed 's/  */ /g' | \
+    fold -s -w 80
+}
+
+# Detect display server
+if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+    PASTE_CMD="wl-paste"
+    COPY_CMD="wl-copy"
+else
+    PASTE_CMD="xclip -selection clipboard -o"
+    COPY_CMD="xclip -selection clipboard"
+fi
+
+# Get current clipboard content (text selected by mouse)
+SELECTED_TEXT=$($PASTE_CMD 2>/dev/null || echo "")
+
+if [ -z "$SELECTED_TEXT" ]; then
+    # Try using xsel as backup
+    SELECTED_TEXT=$(xsel -b 2>/dev/null || echo "")
+fi
+
+if [ -z "$SELECTED_TEXT" ]; then
+    notify-send "Zathura" "No text selected. Select text with mouse first."
+    exit 0
+fi
+
+# Format the selected text with line wrapping
+FORMATTED_CONTENT=$(echo "$SELECTED_TEXT" | format_text)
+
+# Format with page number: "Page X: wrapped text"
+FORMATTED_TEXT="Page ${PAGE}: ${FORMATTED_CONTENT}"
+
+# Copy back to clipboard
+echo "$FORMATTED_TEXT" | $COPY_CMD
+
+# Show notification with preview
+PREVIEW=$(echo "$FORMATTED_CONTENT" | head -c 40)
+if [ ${#FORMATTED_CONTENT} -gt 40 ]; then
+    PREVIEW="${PREVIEW}..."
+fi
+
+notify-send "Zathura Copy" "Page ${PAGE}: ${PREVIEW}"

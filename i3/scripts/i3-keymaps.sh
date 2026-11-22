@@ -1,7 +1,11 @@
-#!/bin/bash
-I3_CONFIG=$HOME/.config/i3/config
-mod_key=$(sed -nre 's/^set \$mod (.*)/\1/p' ${I3_CONFIG})
-grep "^bindsym" ${I3_CONFIG} \
-    | sed "s/-\(-\w\+\)\+//g;s/\$mod/${mod_key}/g;s/Mod1/Alt/g;s/exec //;s/bindsym //;s/^\s\+//;s/^\([^ ]\+\) \(.\+\)$/\2: \1/;s/^\s\+//" \
-    | tr -s ' ' \
-    | rofi -width 75 -dmenu -i -p Reminder:
+#!/usr/bin/env bash
+
+# i3-keymaps.sh — standalone reminders menu (Control+Alt+R).
+#
+# The menu is i3-rofi-keymaps.sh, a rofi script mode that is also the keymaps tab
+# of the omni launcher, so both entry points show the same list and both run the
+# keybinding you pick.
+
+set -euo pipefail
+
+exec rofi -modes "keymaps:$HOME/.config/i3/scripts/i3-rofi-keymaps.sh" -show keymaps

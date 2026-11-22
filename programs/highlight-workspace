@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# Highlight a workspace by setting the urgency hint on its window.
+#
+# Finds an X11 window by title pattern and sets the urgency hint, which
+# makes the polybar workspace pill turn vivid pink-red. The highlight
+# stays on until you focus the window (i3 clears it on focus).
+#
+# Usage:
+#   highlight-workspace <title-pattern>     # highlight matching window(s)
+#   highlight-workspace -c <title-pattern>  # clear highlight on matching window(s)
+#   highlight-workspace -l <title-pattern>  # list matching windows only
+#
+# Examples:
+#   highlight-workspace "Dotfiles | Pi"
+#   highlight-workspace -c "Dotfiles"
+#   highlight-workspace -l "Pi"
+
+set -euo pipefail
+
+MODE="highlight"
+
+usage() {
+  echo "Usage: highlight-workspace [-c|-l] <title-pattern>" >&2
+  echo "  (no flag)  highlight matching window(s) with urgency color" >&2
+  echo "  -c         clear highlight on matching window(s)" >&2
+  echo "  -l         list matching windows only" >&2
+}
+
+while getopts ":clh" opt; do
+  case "$opt" in
+    c) MODE="clear" ;;
+    l) MODE="list" ;;
+    h) usage; exit 0 ;;
+    *) usage; exit 1 ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+PATTERN="${1:-}"
+if [ -z "$PATTERN" ]; then
+  usage
+  exit 1
+fi
+
+if ! command -v xdotool >/dev/null 2>&1; then
+  echo "highlight-workspace: xdotool is required but not installed." >&2
+  exit 1
+fi
+
+# Collect windows whose title matches the pattern (substring match)
+mapfile -t WINDOWS < <(xdotool search --name "$PATTERN" 2>/dev/null || true)
+
+if [ "${#WINDOWS[@]}" -eq 0 ]; then
+  echo "highlight-workspace: no window matching '$PATTERN'" >&2
+  exit 1
+fi
+
+if [ "$MODE" = "list" ]; then
+  for w in "${WINDOWS[@]}"; do
+    printf 'win=%s name=%s\n' "$w" "$(xdotool getwindowname "$w" 2>/dev/null || echo '?')"
+  done
+  exit 0
+fi
+
+URGENT=1
+if [ "$MODE" = "clear" ]; then
+  URGENT=0
+fi
+
+for w in "${WINDOWS[@]}"; do
+  xdotool set_window --urgency "$URGENT" "$w"
+done
+
+if [ "$MODE" = "clear" ]; then
+  echo "highlight-workspace: cleared highlight on ${#WINDOWS[@]} window(s) matching '$PATTERN'"
+else
+  echo "highlight-workspace: highlighted ${#WINDOWS[@]} window(s) matching '$PATTERN'"
+fi

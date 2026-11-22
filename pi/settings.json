@@ -1,0 +1,30 @@
+{
+  "lastChangelogVersion": "0.86.0",
+  "theme": "ghostty-terminal",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "deepseek-v4.1-flash",
+  "defaultThinkingLevel": "high",
+  "enableSkillCommands": true,
+  "packages": [
+    "npm:pi-web-access",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@piotr-oles/pi-reflag",
+    "npm:pi-copy-message",
+    "npm:pi-interactive-shell",
+    "npm:pi-zk",
+    "npm:pi-diff-review",
+    "npm:@heyhuynhgiabuu/pi-diff",
+    "npm:pi-gateway",
+    "npm:tau-mirror",
+    "npm:pi-session-search",
+    "npm:pi-open-tui"
+  ],
+  "enabledModels": [
+    "opencode-go/deepseek-v4.1-flash",
+    "opencode-go/glm-5.3-flash",
+    "opencode-go/muse-spark-1.3-contributor",
+    "opencode-go/gpt-6-luna",
+    "opencode-go/qwen3.8-flash",
+    "github-copilot/gpt-6-luna"
+  ]
+}

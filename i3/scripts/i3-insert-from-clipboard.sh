@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # use rofi to select from the clipboard using the clipmenu program
 

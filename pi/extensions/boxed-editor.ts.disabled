@@ -1,0 +1,71 @@
+/**
+ * Boxed Editor - adds left/right padding and vertical borders to the input editor
+ *
+ * Transforms the full-width editor into a contained box with:
+ *   ┌─────────────────────────────────┐
+ *   │  your message here              │
+ *   │  more text...                   │
+ *   └─────────────────────────────────┘
+ *
+ * Usage:
+ * 1. Save to ~/.pi/agent/extensions/boxed-editor.ts
+ * 2. Run /reload in pi
+ * 3. The editor is now boxed with your preferred padding
+ *
+ * To disable, remove the file or run /reload after deleting it.
+ *
+ * Tip: Adjust PADDING_X below to your taste (default 4).
+ */
+
+import { CustomEditor, type ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import type { EditorTheme, KeybindingsManager, TUI } from "@earendil-works/pi-tui";
+import { visibleWidth } from "@earendil-works/pi-tui";
+
+// ── Tweak these to your liking ──────────────────────────────────────────────
+const PADDING_X = 4; // Horizontal padding between border and text (in columns)
+// ────────────────────────────────────────────────────────────────────────────
+
+class BoxedEditor extends CustomEditor {
+	constructor(tui: TUI, theme: EditorTheme, keybindings: KeybindingsManager) {
+		super(tui, theme, keybindings, { paddingX: PADDING_X });
+	}
+
+	render(width: number): string[] {
+		// Let the base Editor render with padding
+		const lines = super.render(width);
+
+		if (lines.length === 0) return lines;
+
+		// Compute the inner content width (total width minus 2 for the side borders)
+		const innerWidth = Math.max(0, width - 2);
+
+		// ── Build the border characters using the theme's borderColor ──
+		const border = (text: string) => this.borderColor(text);
+
+		// Top border: ┌──...──┐
+		lines[0] = border("┌") + border("─".repeat(innerWidth)) + border("┐");
+
+		// Middle lines: │  text...  │
+		// The base render already includes paddingX spaces on each side of the text.
+		// We just need to wrap each line with side borders.
+		for (let i = 1; i < lines.length - 1; i++) {
+			const line = lines[i]!;
+			const lineWidth = visibleWidth(line);
+			// Pad the line to exactly innerWidth so the right border aligns
+			const padded = line + " ".repeat(Math.max(0, innerWidth - lineWidth));
+			lines[i] = border("│") + padded + border("│");
+		}
+
+		// Bottom border: └──...──┘
+		const last = lines.length - 1;
+		lines[last] = border("└") + border("─".repeat(innerWidth)) + border("┘");
+
+		return lines;
+	}
+}
+
+export default function (pi: ExtensionAPI) {
+	pi.on("session_start", (_event, ctx) => {
+		ctx.ui.setEditorComponent((tui, theme, kb) => new BoxedEditor(tui, theme, kb));
+	});
+}

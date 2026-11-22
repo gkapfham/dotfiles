@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#
+# Print the memory usage for polybar.
+#
+#   (no argument)   full detail: "󱙋 26 of 54 GiB"
+#   short           compact:     "󱙋 26/54G"   (used/total, for the laptop)
+#
+# The laptop bar uses "short" so the total still fits; the icon is written as
+# a byte escape so the glyph cannot be mangled by an editor or copy/paste.
+icon=$(printf '\xf3\xb1\x99\x8b')
+free -g | awk -v icon="$icon" -v mode="${1:-full}" 'NR==2 {
+  if (mode == "short") printf "%s %d/%dG", icon, $3, $2
+  else printf "%s %d of %d GiB", icon, $3, $2
+}'

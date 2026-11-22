@@ -4,18 +4,22 @@
 return {
 
   -- undotree
+  -- Create a tree of undo branches
   {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
   },
 
   -- mini.surround
-  -- surround management
+  -- Surround management
   {
     "echasnovski/mini.surround",
     keys = { "gz" },
     config = function()
       -- Use gz mappings instead of s to prevent conflict with flash.nvim
+      -- A full example of a command to type when the cursor is on a
+      -- word would be: gzaiw". This intuitively means "surround the inner
+      -- word by adding double quotes using the mini.surround plugin"
       require("mini.surround").setup({
         mappings = {
           add = "gza",
@@ -46,10 +50,7 @@ return {
     "echasnovski/mini.trailspace",
     event = "VeryLazy",
     config = function()
-      require("mini.trailspace").setup({
-      }
-      )
+      require("mini.trailspace").setup({})
     end,
   },
-
 }

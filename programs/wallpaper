@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# wallpaper — choose a wallpaper and make every part of the session agree.
+#
+# The implementation lives with the generator, in a repository of its own, so
+# this is only a thin delegate. It exists so that ~/.local/bin stays the single
+# directory you look in for commands, and so that `stow -t ~/.local/bin
+# programs` (the `stow-bin` target) manages it like every other program here:
+#
+#   ~/configure/wallpaper/bin/wallpaper
+#
+# WALLPAPER_REPO (optional): the repository location, if not the default.
+
+set -euo pipefail
+
+repo=${WALLPAPER_REPO:-$HOME/configure/wallpaper}
+impl=$repo/bin/wallpaper
+
+if [ ! -x "$impl" ]; then
+  printf 'wallpaper: %s is missing or not executable\n' "$impl" >&2
+  printf '  the generator repository is not checked out at %s\n' "$repo" >&2
+  exit 1
+fi
+
+exec "$impl" "$@"

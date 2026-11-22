@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+# Reference:
+# https://github.com/3timeslazy/nix-search-tv/issues/20
+
+# Default to interactive mode
+interactive=true
+
+# Parse options
+while getopts ":p" opt; do
+  case ${opt} in
+    p )
+      interactive=false
+      ;;
+    \? )
+      echo "Invalid option: $OPTARG" 1>&2
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
+queries=("$@")
+
+if [ "$interactive" = false ]; then
+  # Non-interactive mode: filter and print
+  nix-search-tv print "${queries[@]}" | fzf --filter="${queries[*]}"
+  exit 0
+fi
+
+# Interactive mode
+mapfile -t selections < <(
+  nix-search-tv print "${queries[@]}" \
+    | fzf \
+        --ansi \
+        --multi \
+        --query="${queries[*]}" \
+        --prompt="❄ Query> " \
+        --scheme=history \
+        --preview-window=down:60%:wrap \
+        --preview 'nix-search-tv preview {}' \
+        --bind "enter:accept" \
+        --bind "alt-c:execute-silent(echo {} | awk -F'/ +' '{print \$2}' | tr -d ' ' | wl-copy 2>/dev/null || xclip -selection clipboard)" \
+        --bind "alt-l:toggle-preview" \
+        --header $'TAB mark • ENTER select • Alt-C copy • Alt-L toggle preview'
+)
+status=$?
+
+if [ $status -eq 130 ]; then
+  echo "Selection cancelled." >&2
+  exit 130
+elif [ ${#selections[@]} -eq 0 ]; then
+  echo "No package selected." >&2
+  exit 0
+fi
+
+pkgs=()
+for sel in "${selections[@]}"; do
+
+  attr=$(echo "$sel" | awk -F'/ +' '{print $2}' | tr -d ' ')
+  pkgs+=("$attr")
+done
+
+echo "Running: nix-shell -p ${pkgs[*]}"
+exec nix-shell -p "${pkgs[@]}"

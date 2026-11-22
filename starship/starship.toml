@@ -1,0 +1,87 @@
+# ~/.config/starship.toml
+
+[bun]
+format = '[󱖉 $version ](bold blue)'
+
+[c]
+format = '[ $version ](bold red)'
+
+[cmd_duration]
+format = '[󰌃 $duration ](bold #00afaf)'
+
+[directory]
+format = '[ $path](bold green)[$read_only]($read_only_style) '
+truncation_length = 5
+truncation_symbol = " "
+home_symbol = "~"
+read_only = " "
+
+[git_branch]
+truncation_length = 30
+symbol = ' '
+truncation_symbol = ' '
+
+[git_status]
+style = "bold #d78700"
+ahead = "󰁝${count}"
+behind = "󰁅${count}"
+conflicted = "󰃸${count}"
+deleted = "-${count}"
+diverged = "󰁁 󰁝${ahead_count}󰁅${behind_count}"
+modified = "󱗼${count}"
+renamed = "${count}"
+staged = "󰐕${count}"
+stashed = "󱗿${count}"
+untracked = "󰏢${count}"
+
+[git_commit]
+tag_disabled = false
+tag_symbol = ''
+
+[gcloud]
+disabled = true
+
+[golang]
+format = '[ $version ](bold blue)'
+
+[java]
+format = '[󰅶 $version ](bold purple)'
+
+[lua]
+format = '[ $version ](bold blue)'
+
+[nix_shell]
+disabled = false
+impure_msg = '[󰄶 shell](bold blue) '
+pure_msg = '[󰄸 shell](bold blue) '
+unknown_msg = '[ shell](bold blue) '
+format = '[󰜗 nix $state(\($name\))](bold blue) '
+
+[nodejs]
+format = '[󰌞 $version ](bold green)'
+
+[perl]
+format = '[ $version ](bold blue)'
+
+[package]
+format = '[ $version ](bold red)'
+
+[python]
+format = '[ $version (\($virtualenv\) )](bold yellow)'
+
+[quarto]
+format = '[󱨇 $version ](bold blue)'
+
+[rust]
+format = '[ $version ](bold cyan)'
+
+[zig]
+format = '[ $version ](bold yellow)'
+
+[shell]
+zsh_indicator = '󱓞 '
+fish_indicator = '󰈺 '
+powershell_indicator = '_'
+unknown_indicator = ' '
+style = 'bold green'
+disabled = true

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Report the fan speed for the Framework 13 EC.
+#
+# The hwmonN number is assigned dynamically at boot, so a hardcoded
+# path (e.g. /sys/class/hwmon/hwmon7/fan1_input) breaks as soon as the
+# numbering shifts -- which is what produced the error in the bar.
+# Resolve the device by its driver name instead.
+#
+# "framework_laptop" is the Framework-specific driver; "cros_ec" exposes
+# the same EC fan and is used as a fallback.
+for hwmon in /sys/class/hwmon/hwmon*; do
+  case "$(cat "$hwmon/name" 2>/dev/null)" in
+    framework_laptop | cros_ec)
+      if [ -r "$hwmon/fan1_input" ]; then
+        cat "$hwmon/fan1_input"
+        exit 0
+      fi
+      ;;
+  esac
+done
+
+# No fan sensor available: print a placeholder rather than an error
+printf 'N/A\n'
