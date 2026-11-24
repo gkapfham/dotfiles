@@ -16,7 +16,7 @@ SHELL=zsh
         create-kitty create-mutt create-nvim create-opencode create-pi \
         create-picom create-polybar create-quickshell create-rofi \
         create-termite create-tmux \
-        create-tpm create-urlscan create-vimrc create-wezterm create-yazi \
+        create-tpm create-treemd create-urlscan create-vimrc create-wezterm create-yazi \
         create-zathura create-zellij create-zsh create-zsh-auto-suggestions \
         create-zsh-defer create-zsh-syntax-highlighting create-zsh-vi-mode \
         create-zshdefer create-zshtheme dotfiles help purge \
@@ -29,7 +29,7 @@ SHELL=zsh
         stow-nvim stow-opencode stow-pi stow-picom stow-polybar \
         stow-quickshell stow-rofi \
         stow-shell stow-starship stow-system stow-termite stow-tmux \
-        stow-tool stow-tpm stow-trippy stow-trolltech stow-urlscan stow-vim \
+        stow-tool stow-tpm stow-treemd stow-trippy stow-trolltech stow-urlscan stow-vim \
         stow-vimrc stow-wezterm stow-writing stow-yazi stow-zathura \
         stow-zellij stow-zsh-auto-suggestions stow-zsh-autosuggestions \
         stow-zsh-syntax-highlighting stow-zsh-vi-mode stow-zshdefer \
@@ -434,6 +434,13 @@ create-pi:
 ## Depends on the creation of the .config directory
 create-pi: create-config
 
+## Create the needed treemd/ directory in .config/
+create-treemd:
+	mkdir -p ~/.config/treemd
+
+## Depends on the creation of the .config directory
+create-treemd: create-config
+
 ## }}}
 
 ## Create all required directories for external dependencies {{{
@@ -816,6 +823,13 @@ stow-pi:
 ## Running stow on pi depends on creating pi directory
 stow-pi: create-pi
 
+## Run stow on treemd
+stow-treemd:
+	stow -t ~/.config/treemd treemd
+
+## Running stow depends on the creation of the directory
+stow-treemd: create-treemd
+
 ## Run stow on zshtheme
 stow-zshtheme:
 	stow -t ~/.oh-my-zsh/custom/themes zshtheme
@@ -903,10 +917,10 @@ stow-applications:
 ## Composite rules {{{
 
 ## Create the needed directories in the .config/ and .zsh/ directories
-create: create-config create-alacritty create-kitty create-ghostty create-rofi create-mutt create-atuin create-yazi create-bat create-dunst create-firefox create-gtk2 create-gtk3 create-i3 create-i3status create-picom create-i3wsr create-polybar create-quickshell create-termite create-tmux create-urlscan create-wezterm create-zathura create-zellij create-opencode create-pi create-tpm create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
+create: create-config create-alacritty create-kitty create-ghostty create-rofi create-mutt create-atuin create-yazi create-bat create-dunst create-firefox create-gtk2 create-gtk3 create-i3 create-i3status create-picom create-i3wsr create-polybar create-quickshell create-termite create-tmux create-urlscan create-wezterm create-zathura create-zellij create-opencode create-pi create-tpm create-treemd create-bin create-nvim create-zsh create-fzf-tab create-zshtheme create-git-status create-zsh-defer create-fast-syntax-highlighting create-zsh-syntax-highlighting create-zsh-auto-suggestions
 
 ## Run stow for all rules for all subdirectories
-stow: stow-alacritty stow-kitty stow-ghostty stow-rofi stow-mutt stow-atuin stow-yazi stow-bat stow-dunst stow-firefox stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-trippy stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-picom stow-email stow-git stow-nvim stow-polybar stow-quickshell stow-termite stow-urlscan stow-wezterm stow-zathura stow-zellij stow-hunk stow-opencode stow-pi stow-tpm stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
+stow: stow-alacritty stow-kitty stow-ghostty stow-rofi stow-mutt stow-atuin stow-yazi stow-bat stow-dunst stow-firefox stow-gtk2 stow-gtk3 stow-mime stow-trolltech stow-starship stow-trippy stow-libinput-gestures stow-i3 stow-i3status stow-i3wsr stow-picom stow-email stow-git stow-nvim stow-polybar stow-quickshell stow-termite stow-urlscan stow-wezterm stow-zathura stow-zellij stow-hunk stow-opencode stow-pi stow-tpm stow-treemd stow-bin stow-shell stow-system stow-tool stow-writing stow-zshtheme stow-applications
 
 ## Run stow for all rules for the external dependencies
 stow-external: stow-fzf-tab stow-zshdefer stow-git-status stow-zsh-vi-mode stow-fast-syntax-highlighting stow-zsh-syntax-highlighting stow-zsh-auto-suggestions
