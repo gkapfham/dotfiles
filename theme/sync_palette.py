@@ -49,6 +49,8 @@ TARGETS = (
     "nvim/lua/plugins/colorscheme.lua",
     "opencode/themes/vitaminonec.json",
     "pi/themes/ghostty-terminal.json",
+    "treemd/config.toml",
+    "treemd/code-themes/vitaminonec.tmTheme",
     "shell/.zshrc",
 )
 
