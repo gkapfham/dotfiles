@@ -1,0 +1,81 @@
+# ---------------------------------------------------------------------------
+# treemd — markdown outline viewer
+#
+# The colors below are the "vitaminonec" palette used by Ghostty, Neovim
+# (onedark_dark, customized in nvim/lua/plugins/colorscheme.lua) and the pi
+# coding agent. Every value is a role from theme/palette.toml, so
+# `uv run theme/sync_palette.py --check` can audit this file.
+#
+# treemd's built-in themes cannot express these colors; the [theme] block
+# overrides every field of the base theme in the "Custom colors" style
+# documented in the treemd README. Code blocks use the matching syntect
+# theme in code-themes/vitaminonec.tmTheme.
+#
+# Note: `code_block_bg` needs treemd >= 0.7.0; older releases ignore it.
+# ---------------------------------------------------------------------------
+
+[ui]
+# Base theme. treemd 0.5.11 knows OceanDark, Nord, Dracula, Solarized,
+# Monokai, Gruvbox, TokyoNight and CatppuccinMocha (OneDark arrives in
+# 0.10); every color is overridden in [theme] below, so the base only
+# supplies a name.
+theme = "OceanDark"
+# Custom syntect theme beside this file: code-themes/vitaminonec.tmTheme
+code_theme = "vitaminonec"
+
+[theme]
+# Text
+background = { rgb = [28, 28, 28] }             # bg          #1c1c1c
+foreground = { rgb = [224, 224, 224] }          # fg          #e0e0e0
+bold_fg = { rgb = [224, 224, 224] }             # fg          #e0e0e0
+italic_fg = { rgb = [178, 178, 178] }           # white       #b2b2b2
+list_bullet = { rgb = [215, 95, 95] }           # subdued_red #d75f5f
+
+# Headings (Neovim markdown: H1 orange, H2 green, H3 purple, H4 cyan)
+heading_1 = { rgb = [215, 135, 0] }             # orange      #d78700
+heading_2 = { rgb = [111, 149, 0] }             # green       #6f9500
+heading_3 = { rgb = [165, 105, 165] }           # purple      #a569a5
+heading_4 = { rgb = [0, 175, 175] }             # cyan        #00afaf
+heading_5 = { rgb = [183, 183, 87] }            # yellow      #b7b757
+
+# Borders and selection
+border_focused = { rgb = [0, 175, 175] }        # cyan        #00afaf
+border_unfocused = { rgb = [88, 88, 88] }       # highlight   #585858
+selection_bg = { rgb = [88, 88, 88] }           # highlight   #585858
+selection_fg = { rgb = [224, 224, 224] }        # fg          #e0e0e0
+selection_indicator_fg = { rgb = [28, 28, 28] } # bg          #1c1c1c
+selection_indicator_bg = { rgb = [0, 175, 175] } # cyan       #00afaf
+scrollbar_fg = { rgb = [88, 88, 88] }           # highlight   #585858
+
+# Bars
+title_bar_fg = { rgb = [0, 175, 175] }          # cyan        #00afaf
+status_bar_bg = { rgb = [45, 45, 45] }          # surface     #2d2d2d
+status_bar_fg = { rgb = [224, 224, 224] }       # fg          #e0e0e0
+footer_bg = { rgb = [28, 28, 28] }              # bg          #1c1c1c
+
+# Code
+inline_code_fg = { rgb = [135, 175, 215] }      # blue        #87afd7
+inline_code_bg = { rgb = [38, 38, 38] }         # menu        #262626
+code_fence = { rgb = [118, 118, 118] }          # black       #767676
+code_block_bg = { rgb = [28, 28, 28] }          # bg          #1c1c1c
+
+# Quotes and tables
+blockquote_border = { rgb = [88, 88, 88] }      # highlight   #585858
+blockquote_fg = { rgb = [178, 178, 178] }       # white       #b2b2b2
+table_border = { rgb = [88, 88, 88] }           # highlight   #585858
+
+# Links
+link_fg = { rgb = [135, 175, 215] }             # blue        #87afd7
+link_selected_bg = { rgb = [0, 175, 175] }      # cyan        #00afaf
+link_selected_fg = { rgb = [28, 28, 28] }       # bg          #1c1c1c
+
+# Search
+search_match_bg = { rgb = [76, 108, 0] }        # deep_green  #4c6c00
+search_match_fg = { rgb = [224, 224, 224] }     # fg          #e0e0e0
+search_current_bg = { rgb = [183, 183, 87] }    # yellow      #b7b757
+search_current_fg = { rgb = [28, 28, 28] }      # bg          #1c1c1c
+
+# Help and popups
+help_key_bg = { rgb = [38, 38, 38] }            # menu        #262626
+help_key_fg = { rgb = [0, 175, 175] }           # cyan        #00afaf
+help_desc_fg = { rgb = [178, 178, 178] }        # white       #b2b2b2
